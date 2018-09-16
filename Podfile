@@ -25,6 +25,8 @@ target 'YZHYolo' do
 
   #网络
   pod 'AFNetworking', '3.0'
+  pod 'AFNetworking+RetryPolicy'
+  pod 'YTKNetwork'
 
   #数据
   pod 'MJExtension'

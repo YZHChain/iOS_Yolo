@@ -2,11 +2,13 @@
 //  AppDelegate.m
 //  YZHYolo
 //
-//  Created by 😘王艳 on 2018/9/10.
+//  Created by Jersey on 2018/9/10.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "YZHLaunchViewController.h"
+#import "YZHRootTabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[YZHLaunchViewController alloc] init];
+    [self.window makeKeyAndVisible];
+
+
     return YES;
 }
 

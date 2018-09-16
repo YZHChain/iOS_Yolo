@@ -8,11 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		551289D221461EE20099CC55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289D121461EE20099CC55 /* AppDelegate.m */; };
-		551289D821461EE20099CC55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289D621461EE20099CC55 /* Main.storyboard */; };
 		551289DA21461EE30099CC55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551289D921461EE30099CC55 /* Assets.xcassets */; };
 		551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289DB21461EE30099CC55 /* LaunchScreen.storyboard */; };
 		551289E021461EE30099CC55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289DF21461EE30099CC55 /* main.m */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
+		556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CD821466A4B0048171C /* YZHBaseViewController.m */; };
+		556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */; };
+		556F6CDF21466B1C0048171C /* YZHWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */; };
+		556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CEA214762190048171C /* YZHTabBarModel.m */; };
+		556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CED214766E10048171C /* NSObject+YZHExtension.m */; };
+		556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CF3214769EC0048171C /* YZHRootTabBarViewController.m */; };
+		556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CFB21476CFA0048171C /* YZHThemeManage.m */; };
+		556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CFE21476D670048171C /* YZHThemeItemModel.m */; };
+		556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D01214773470048171C /* YZHCommunityViewController.m */; };
+		556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */; };
+		556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D07214773E40048171C /* YZHAddressViewController.m */; };
+		556F6D0B214774250048171C /* YZHDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D0A214774250048171C /* YZHDiscoverViewController.m */; };
+		556F6D0E2147743E0048171C /* YZHMyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */; };
+		556F6D112147B9220048171C /* YZHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D102147B9220048171C /* YZHRouter.m */; };
+		556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D132147B97A0048171C /* YZHRouter+Skip.m */; };
+		556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D162147B9F30048171C /* YZHRouterConfig.m */; };
+		55C239DA2148E60E00200798 /* YZHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239D92148E60E00200798 /* YZHRegisterViewController.m */; };
+		55C239DD2148E62300200798 /* YZHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239DC2148E62300200798 /* YZHLoginViewController.m */; };
+		55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C239DE2148F07800200798 /* YZHAppConfig.plist */; };
+		55C239E52149122400200798 /* YZHNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E42149122400200798 /* YZHNetworkService.m */; };
+		55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E72149124E00200798 /* YZHNetworkConfig.m */; };
+		55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239EC214A5ECA00200798 /* YZHServicesConfig.m */; };
+		55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239EF214A6C0E00200798 /* YZHAPIRetryConfig.m */; };
+		55C239F5214B536000200798 /* YZHDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239F4214B536000200798 /* YZHDevice.m */; };
+		55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239F7214B54B500200798 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -21,12 +46,67 @@
 		551289CD21461EE20099CC55 /* YZHYolo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YZHYolo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551289D021461EE20099CC55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		551289D121461EE20099CC55 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		551289D721461EE20099CC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		551289D921461EE30099CC55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		551289DC21461EE30099CC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551289DE21461EE30099CC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551289DF21461EE30099CC55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHYolo-Prefix.pch"; sourceTree = "<group>"; };
+		556F6CD5214668960048171C /* YZHMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMacro.h; sourceTree = "<group>"; };
+		556F6CD6214668AB0048171C /* YZHPublic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPublic.h; sourceTree = "<group>"; };
+		556F6CD721466A4B0048171C /* YZHBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHBaseViewController.h; sourceTree = "<group>"; };
+		556F6CD821466A4B0048171C /* YZHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHBaseViewController.m; sourceTree = "<group>"; };
+		556F6CDA21466AEF0048171C /* YZHLaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLaunchViewController.h; sourceTree = "<group>"; };
+		556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLaunchViewController.m; sourceTree = "<group>"; };
+		556F6CDD21466B1C0048171C /* YZHWelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHWelcomeViewController.h; sourceTree = "<group>"; };
+		556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHWelcomeViewController.m; sourceTree = "<group>"; };
+		556F6CE9214762190048171C /* YZHTabBarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTabBarModel.h; sourceTree = "<group>"; };
+		556F6CEA214762190048171C /* YZHTabBarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTabBarModel.m; sourceTree = "<group>"; };
+		556F6CEC214766E10048171C /* NSObject+YZHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+YZHExtension.h"; sourceTree = "<group>"; };
+		556F6CED214766E10048171C /* NSObject+YZHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YZHExtension.m"; sourceTree = "<group>"; };
+		556F6CF2214769EC0048171C /* YZHRootTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRootTabBarViewController.h; sourceTree = "<group>"; };
+		556F6CF3214769EC0048171C /* YZHRootTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRootTabBarViewController.m; sourceTree = "<group>"; };
+		556F6CFA21476CFA0048171C /* YZHThemeManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHThemeManage.h; sourceTree = "<group>"; };
+		556F6CFB21476CFA0048171C /* YZHThemeManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHThemeManage.m; sourceTree = "<group>"; };
+		556F6CFD21476D670048171C /* YZHThemeItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHThemeItemModel.h; sourceTree = "<group>"; };
+		556F6CFE21476D670048171C /* YZHThemeItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHThemeItemModel.m; sourceTree = "<group>"; };
+		556F6D00214773470048171C /* YZHCommunityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommunityViewController.h; sourceTree = "<group>"; };
+		556F6D01214773470048171C /* YZHCommunityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityViewController.m; sourceTree = "<group>"; };
+		556F6D03214773700048171C /* YZHPrivatelyChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatViewController.h; sourceTree = "<group>"; };
+		556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatViewController.m; sourceTree = "<group>"; };
+		556F6D06214773E40048171C /* YZHAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressViewController.h; sourceTree = "<group>"; };
+		556F6D07214773E40048171C /* YZHAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressViewController.m; sourceTree = "<group>"; };
+		556F6D09214774250048171C /* YZHDiscoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDiscoverViewController.h; sourceTree = "<group>"; };
+		556F6D0A214774250048171C /* YZHDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDiscoverViewController.m; sourceTree = "<group>"; };
+		556F6D0C2147743E0048171C /* YZHMyCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyCenterViewController.h; sourceTree = "<group>"; };
+		556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterViewController.m; sourceTree = "<group>"; };
+		556F6D0F2147B9220048171C /* YZHRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouter.h; sourceTree = "<group>"; };
+		556F6D102147B9220048171C /* YZHRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouter.m; sourceTree = "<group>"; };
+		556F6D122147B97A0048171C /* YZHRouter+Skip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHRouter+Skip.h"; sourceTree = "<group>"; };
+		556F6D132147B97A0048171C /* YZHRouter+Skip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YZHRouter+Skip.m"; sourceTree = "<group>"; };
+		556F6D152147B9F30048171C /* YZHRouterConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouterConfig.h; sourceTree = "<group>"; };
+		556F6D162147B9F30048171C /* YZHRouterConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouterConfig.m; sourceTree = "<group>"; };
+		55C239D82148E60E00200798 /* YZHRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRegisterViewController.h; sourceTree = "<group>"; };
+		55C239D92148E60E00200798 /* YZHRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRegisterViewController.m; sourceTree = "<group>"; };
+		55C239DB2148E62300200798 /* YZHLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginViewController.h; sourceTree = "<group>"; };
+		55C239DC2148E62300200798 /* YZHLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginViewController.m; sourceTree = "<group>"; };
+		55C239DE2148F07800200798 /* YZHAppConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = YZHAppConfig.plist; sourceTree = "<group>"; };
+		55C239E02149101700200798 /* YZHConfigKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHConfigKey.h; sourceTree = "<group>"; };
+		55C239E32149122400200798 /* YZHNetworkService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHNetworkService.h; sourceTree = "<group>"; };
+		55C239E42149122400200798 /* YZHNetworkService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHNetworkService.m; sourceTree = "<group>"; };
+		55C239E62149124E00200798 /* YZHNetworkConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHNetworkConfig.h; sourceTree = "<group>"; };
+		55C239E72149124E00200798 /* YZHNetworkConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHNetworkConfig.m; sourceTree = "<group>"; };
+		55C239E92149154F00200798 /* YZHPathConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPathConst.h; sourceTree = "<group>"; };
+		55C239EB214A5ECA00200798 /* YZHServicesConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHServicesConfig.h; sourceTree = "<group>"; };
+		55C239EC214A5ECA00200798 /* YZHServicesConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHServicesConfig.m; sourceTree = "<group>"; };
+		55C239EE214A6C0E00200798 /* YZHAPIRetryConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAPIRetryConfig.h; sourceTree = "<group>"; };
+		55C239EF214A6C0E00200798 /* YZHAPIRetryConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAPIRetryConfig.m; sourceTree = "<group>"; };
+		55C239F3214B536000200798 /* YZHDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDevice.h; sourceTree = "<group>"; };
+		55C239F4214B536000200798 /* YZHDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDevice.m; sourceTree = "<group>"; };
+		55C239F7214B54B500200798 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		55C239F8214B54B500200798 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YZHTool.h"; sourceTree = "<group>"; };
+		55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YZHTool.m"; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +183,9 @@
 		55128A0321463E480099CC55 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				556F6CD5214668960048171C /* YZHMacro.h */,
+				556F6CD6214668AB0048171C /* YZHPublic.h */,
+				55C239E12149111400200798 /* NetworkServices */,
 				55128A0421463E480099CC55 /* DataServices */,
 				55128A0521463E480099CC55 /* Fundation */,
 				55128A0621463E480099CC55 /* Debug */,
@@ -121,6 +204,8 @@
 		55128A0521463E480099CC55 /* Fundation */ = {
 			isa = PBXGroup;
 			children = (
+				55C239EA214A5EA000200798 /* AppNetworkConfig */,
+				556F6CF621476C890048171C /* Theme */,
 			);
 			path = Fundation;
 			sourceTree = "<group>";
@@ -135,6 +220,12 @@
 		55128A0721463E480099CC55 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D0F2147B9220048171C /* YZHRouter.h */,
+				556F6D102147B9220048171C /* YZHRouter.m */,
+				556F6D122147B97A0048171C /* YZHRouter+Skip.h */,
+				556F6D132147B97A0048171C /* YZHRouter+Skip.m */,
+				556F6D152147B9F30048171C /* YZHRouterConfig.h */,
+				556F6D162147B9F30048171C /* YZHRouterConfig.m */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -151,6 +242,7 @@
 		55128A0921463E480099CC55 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				55C239D42148E47F00200798 /* UserAccount */,
 				553EED1C21463F66006CDD08 /* Launch */,
 				55128A0A21463E480099CC55 /* Discover */,
 				55128A0E21463E480099CC55 /* MyCenter */,
@@ -175,6 +267,8 @@
 		55128A0B21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D09214774250048171C /* YZHDiscoverViewController.h */,
+				556F6D0A214774250048171C /* YZHDiscoverViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +300,8 @@
 		55128A0F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D0C2147743E0048171C /* YZHMyCenterViewController.h */,
+				556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,6 +333,8 @@
 		55128A1321463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D03214773700048171C /* YZHPrivatelyChatViewController.h */,
+				556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,6 +366,8 @@
 		55128A1721463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D06214773E40048171C /* YZHAddressViewController.h */,
+				556F6D07214773E40048171C /* YZHAddressViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -330,6 +430,8 @@
 		55128A1F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6D00214773470048171C /* YZHCommunityViewController.h */,
+				556F6D01214773470048171C /* YZHCommunityViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -351,6 +453,7 @@
 		55128A2221463E480099CC55 /* BaseKit */ = {
 			isa = PBXGroup;
 			children = (
+				55C239F2214B50EA00200798 /* YZHDevice */,
 			);
 			path = BaseKit;
 			sourceTree = "<group>";
@@ -358,6 +461,7 @@
 		55128A2321463E480099CC55 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				55C239F1214B509E00200798 /* ViewController */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -365,6 +469,8 @@
 		55128A2421463E480099CC55 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */,
+				55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -372,10 +478,12 @@
 		553EED1B21463F05006CDD08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				551289D621461EE20099CC55 /* Main.storyboard */,
+				556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */,
 				551289D921461EE30099CC55 /* Assets.xcassets */,
 				551289DB21461EE30099CC55 /* LaunchScreen.storyboard */,
 				551289DE21461EE30099CC55 /* Info.plist */,
+				55C239DE2148F07800200798 /* YZHAppConfig.plist */,
+				55C239E02149101700200798 /* YZHConfigKey.h */,
 				551289DF21461EE30099CC55 /* main.m */,
 			);
 			path = "Supporting Files";
@@ -394,6 +502,10 @@
 		553EED1F21463F82006CDD08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				556F6CE9214762190048171C /* YZHTabBarModel.h */,
+				556F6CEA214762190048171C /* YZHTabBarModel.m */,
+				556F6CEC214766E10048171C /* NSObject+YZHExtension.h */,
+				556F6CED214766E10048171C /* NSObject+YZHExtension.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -408,8 +520,111 @@
 		556F6CD2214664710048171C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556F6CDA21466AEF0048171C /* YZHLaunchViewController.h */,
+				556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */,
+				556F6CDD21466B1C0048171C /* YZHWelcomeViewController.h */,
+				556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */,
+				556F6CF2214769EC0048171C /* YZHRootTabBarViewController.h */,
+				556F6CF3214769EC0048171C /* YZHRootTabBarViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		556F6CF621476C890048171C /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				556F6CFA21476CFA0048171C /* YZHThemeManage.h */,
+				556F6CFB21476CFA0048171C /* YZHThemeManage.m */,
+				556F6CFD21476D670048171C /* YZHThemeItemModel.h */,
+				556F6CFE21476D670048171C /* YZHThemeItemModel.m */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		55C239D42148E47F00200798 /* UserAccount */ = {
+			isa = PBXGroup;
+			children = (
+				55C239D62148E49800200798 /* Controller */,
+				55C239D52148E49800200798 /* Model */,
+				55C239D72148E49800200798 /* View */,
+			);
+			path = UserAccount;
+			sourceTree = "<group>";
+		};
+		55C239D52148E49800200798 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55C239D62148E49800200798 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55C239D82148E60E00200798 /* YZHRegisterViewController.h */,
+				55C239D92148E60E00200798 /* YZHRegisterViewController.m */,
+				55C239DB2148E62300200798 /* YZHLoginViewController.h */,
+				55C239DC2148E62300200798 /* YZHLoginViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55C239D72148E49800200798 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55C239E12149111400200798 /* NetworkServices */ = {
+			isa = PBXGroup;
+			children = (
+				55C239E92149154F00200798 /* YZHPathConst.h */,
+				55C239E32149122400200798 /* YZHNetworkService.h */,
+				55C239E42149122400200798 /* YZHNetworkService.m */,
+				55C239E62149124E00200798 /* YZHNetworkConfig.h */,
+				55C239E72149124E00200798 /* YZHNetworkConfig.m */,
+				55C239EE214A6C0E00200798 /* YZHAPIRetryConfig.h */,
+				55C239EF214A6C0E00200798 /* YZHAPIRetryConfig.m */,
+			);
+			path = NetworkServices;
+			sourceTree = "<group>";
+		};
+		55C239EA214A5EA000200798 /* AppNetworkConfig */ = {
+			isa = PBXGroup;
+			children = (
+				55C239EB214A5ECA00200798 /* YZHServicesConfig.h */,
+				55C239EC214A5ECA00200798 /* YZHServicesConfig.m */,
+			);
+			path = AppNetworkConfig;
+			sourceTree = "<group>";
+		};
+		55C239F1214B509E00200798 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				556F6CD721466A4B0048171C /* YZHBaseViewController.h */,
+				556F6CD821466A4B0048171C /* YZHBaseViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		55C239F2214B50EA00200798 /* YZHDevice */ = {
+			isa = PBXGroup;
+			children = (
+				55C239F3214B536000200798 /* YZHDevice.h */,
+				55C239F4214B536000200798 /* YZHDevice.m */,
+				55C239F6214B54B500200798 /* GenericKeychain */,
+			);
+			path = YZHDevice;
+			sourceTree = "<group>";
+		};
+		55C239F6214B54B500200798 /* GenericKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				55C239F7214B54B500200798 /* KeychainItemWrapper.m */,
+				55C239F8214B54B500200798 /* KeychainItemWrapper.h */,
+			);
+			path = GenericKeychain;
 			sourceTree = "<group>";
 		};
 		EEB8AA5BD57523A3922FA62E /* Pods */ = {
@@ -491,7 +706,7 @@
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
 				551289DA21461EE30099CC55 /* Assets.xcassets in Resources */,
-				551289D821461EE20099CC55 /* Main.storyboard in Resources */,
+				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,22 +762,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */,
+				556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */,
+				556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */,
+				55C239E52149122400200798 /* YZHNetworkService.m in Sources */,
+				556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */,
+				556F6D112147B9220048171C /* YZHRouter.m in Sources */,
+				556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */,
+				556F6CDF21466B1C0048171C /* YZHWelcomeViewController.m in Sources */,
+				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
+				556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
+				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
+				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
+				556F6D0E2147743E0048171C /* YZHMyCenterViewController.m in Sources */,
+				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
+				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
+				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
+				556F6D0B214774250048171C /* YZHDiscoverViewController.m in Sources */,
+				55C239DD2148E62300200798 /* YZHLoginViewController.m in Sources */,
+				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
+				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
+				556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */,
+				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
+				55C239DA2148E60E00200798 /* YZHRegisterViewController.m in Sources */,
+				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,
+				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		551289D621461EE20099CC55 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				551289D721461EE20099CC55 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		551289DB21461EE30099CC55 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -689,8 +921,10 @@
 			baseConfigurationReference = AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J4D5D57QCL;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -699,7 +933,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.YZHBlockChain.YZHYolo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
 		};
@@ -708,8 +945,10 @@
 			baseConfigurationReference = BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J4D5D57QCL;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -718,7 +957,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = www.YZHBlockChain.YZHYolo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Release;
 		};

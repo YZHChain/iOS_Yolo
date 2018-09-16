@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  YZHBaseViewController.h
 //  YZHYolo
 //
 //  Created by Jersey on 2018/9/10.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface YZHBaseViewController : UIViewController
 
 @end
-
