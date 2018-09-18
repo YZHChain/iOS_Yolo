@@ -9,7 +9,7 @@
 #import "YZHLaunchViewController.h"
 
 #import "YZHRootTabBarViewController.h"
-#import "YZHWelcomeViewController.h"
+#import "YZHWelcomeVC.h"
 #import "YZHPublic.h"
 @interface YZHLaunchViewController ()
 
@@ -28,6 +28,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
     
 }
 
@@ -48,9 +50,9 @@
 - (void)startConfign{
     
     UIViewController* rootViewController;
-    if ([self detectionApplicationStatus]) {
+    if (![self detectionApplicationStatus]) {
         // 引导页
-        rootViewController = [[YZHWelcomeViewController alloc] init];
+        rootViewController = [[YZHWelcomeVC alloc] init];
     } else {
         rootViewController = [[YZHRootTabBarViewController alloc] init];
     }

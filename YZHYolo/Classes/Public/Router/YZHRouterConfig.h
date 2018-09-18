@@ -35,6 +35,7 @@ extern NSString * const kYZHRouteSeguePush;
 extern NSString *const kYZHRouterWelcome;
 extern NSString *const kYZHRouterLogin;
 extern NSString *const kYZHRouterRegister;
+extern NSString *const kYZHRouterFindPassword;
 
 
 + (NSDictionary* )configInfo;

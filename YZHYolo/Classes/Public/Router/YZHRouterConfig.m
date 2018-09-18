@@ -36,6 +36,7 @@ NSString* const kYZHRouteViewControllerNeedLoginKey = @"needLogin";
 NSString* const kYZHRouterWelcome         = @"/guidePage/welcome";
 NSString* const kYZHRouterLogin           = @"/guidePage/login";
 NSString* const kYZHRouterRegister        = @"/guidePage/register";
+NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
 
 
 @implementation YZHRouterConfig
@@ -43,20 +44,26 @@ NSString* const kYZHRouterRegister        = @"/guidePage/register";
 + (NSDictionary *)configInfo{
     
     return @{kYZHRouterWelcome: @{
-                 kYZHRouteViewControllerClassKey: @"YZHWelcomeViewController",
-                 kYZHRouteViewControllerNameKey: @"name",
+                 kYZHRouteViewControllerClassKey: @"YZHWelcomeVC",
+                 kYZHRouteViewControllerNameKey: @"欢迎引导",
                  kYZHRouteViewControllerNotesKey: @"",
                  kYZHRouteViewControllerNeedLoginKey:@"0",
                      },
              kYZHRouterLogin: @{
-                     kYZHRouteViewControllerClassKey: @"YZHLoginViewController",
-                     kYZHRouteViewControllerNameKey: @"name",
+                     kYZHRouteViewControllerClassKey: @"YZHLoginVC",
+                     kYZHRouteViewControllerNameKey: @"登录",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"0",
                      },
              kYZHRouterRegister: @{
-                     kYZHRouteViewControllerClassKey: @"YZHRegisterViewController",
-                     kYZHRouteViewControllerNameKey: @"name",
+                     kYZHRouteViewControllerClassKey: @"YZHRegisterVC",
+                     kYZHRouteViewControllerNameKey: @"注册",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"0",
+                     },
+             kYZHRouterFindPassword: @{
+                     kYZHRouteViewControllerClassKey: @"YZHFindPasswordVC",
+                     kYZHRouteViewControllerNameKey: @"找回密码",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"0",
                      },

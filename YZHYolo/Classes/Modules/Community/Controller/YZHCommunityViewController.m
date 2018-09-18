@@ -64,7 +64,8 @@
 
 - (void)setupData
 {
-    [YZHRouter openURL:kYZHRouterLogin info:@{kYZHRouteSegue: @(YES), kYZHRouteAnimated: @(NO)}];
+//    [YZHRouter openURL:kYZHRouterLogin info:@{kYZHRouteSegue: kYZHRouteSegue}];
+    [YZHRouter openURL:kYZHRouterLogin info:@{@"hideNavigationBarLine": @(YES)}];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten

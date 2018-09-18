@@ -16,6 +16,7 @@ target 'YZHYolo' do
   pod 'UICollectionViewLeftAlignedLayout'
   pod 'MWPhotoBrowser'
   pod 'Masonry'
+  pod 'SDCycleScrollView'
 
   #功能
   pod 'BlocksKit'
