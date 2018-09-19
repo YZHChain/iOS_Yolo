@@ -11,5 +11,6 @@
 @interface YZHWelcomeView : UIView
 
 @property (weak, nonatomic) IBOutlet UIView *bannerView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end

@@ -10,4 +10,7 @@
 
 @interface YZHRegisterVC : YZHBaseViewController
 
+@property(nonatomic, assign)BOOL hiddenBack;
+@property(nonatomic, copy)NSString* phoneNumberString;
+
 @end

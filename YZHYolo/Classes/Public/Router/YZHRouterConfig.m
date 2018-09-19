@@ -37,6 +37,8 @@ NSString* const kYZHRouterWelcome         = @"/guidePage/welcome";
 NSString* const kYZHRouterLogin           = @"/guidePage/login";
 NSString* const kYZHRouterRegister        = @"/guidePage/register";
 NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
+NSString* const kYZHRouterSettingPassword = @"/guidePage/settingPassword";
+NSString* const kYZHRouterMyInformation   = @"/myCenter/myInformation";
 
 
 @implementation YZHRouterConfig
@@ -66,6 +68,18 @@ NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
                      kYZHRouteViewControllerNameKey: @"找回密码",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"0",
+                     },
+             kYZHRouterSettingPassword: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSettingPasswordVC",
+                     kYZHRouteViewControllerNameKey: @"设置密码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"0",
+                     },
+             kYZHRouterMyInformation: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationVC",
+                     kYZHRouteViewControllerNameKey: @"个人信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
              };
     

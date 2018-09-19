@@ -10,7 +10,9 @@
 
 #import "YZHRootTabBarViewController.h"
 #import "YZHWelcomeVC.h"
+#import "YZHLoginVC.h"
 #import "YZHPublic.h"
+#import "YZHBaseNavigationController.h"
 @interface YZHLaunchViewController ()
 
 @end
@@ -50,11 +52,24 @@
 - (void)startConfign{
     
     UIViewController* rootViewController;
-    if (![self detectionApplicationStatus]) {
+    if ([self detectionApplicationStatus]) {
         // 引导页
-        rootViewController = [[YZHWelcomeVC alloc] init];
+        YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
+        YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];
+        rootViewController = navigationController;
     } else {
-        rootViewController = [[YZHRootTabBarViewController alloc] init];
+        // 判断用户是否已登录,
+        BOOL hasLogin = YES;
+        if (hasLogin) {
+            
+            rootViewController = [[YZHRootTabBarViewController alloc] init];
+            
+        } else {
+            YZHLoginVC* loginVC = [[YZHLoginVC alloc] init];
+            YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:loginVC];
+            navigationController.navigationBar.hidden = YES;
+            rootViewController = navigationController;
+        }
     }
     [self windowReplaceRootViewController:rootViewController];
     

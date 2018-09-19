@@ -8,7 +8,8 @@
 
 #import "YZHRootTabBarViewController.h"
 #import "YZHTabBarModel.h"
-
+#import "YZHBaseNavigationController.h"
+#import "UIColor+YZHColorStyle.h"
 @interface YZHRootTabBarViewController ()<UITabBarControllerDelegate>
 
 @end
@@ -42,7 +43,8 @@
         Class clazz = NSClassFromString(itemModel.viewController);
         UIViewController *vc = [[clazz alloc] init];
         if (itemModel.hasNavigation) {
-            vc = [[UINavigationController alloc] initWithRootViewController:vc];
+            vc = [[YZHBaseNavigationController alloc] initWithRootViewController:vc];
+
         }
         [vcs addObject:vc];
     }
@@ -54,17 +56,17 @@
         tabBarItem.title = itemModel.title;
         tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -2);
         //图片
-        /*
-        UIImage *img = [[UIImage ym_imageWithString:itemModel.image] ym_imageForTabBarItem];
-        UIImage *selImg = [[UIImage ym_imageWithString:itemModel.selectedImage] ym_imageForTabBarItem];
-        tabBarItem.image = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        tabBarItem.selectedImage = [selImg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        UIImage *defaultImgge = [UIImage imageNamed:itemModel.image];
+        UIImage *selectedImgge = [UIImage imageNamed:itemModel.selectedImage];
+        tabBarItem.image = [defaultImgge imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        tabBarItem.selectedImage = [selectedImgge imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         //文字颜色
-        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor ym_colorWithHexString:itemModel.color]}
+        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yzh_colorWithHexString:itemModel.color]}
                                   forState:UIControlStateNormal];
-        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor ym_colorWithHexString:itemModel.selectedColor]}
+        [tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yzh_colorWithHexString:itemModel.selectedColor]}
                                   forState:UIControlStateSelected];
-         */
+        
     }
     
     self.delegate = self;

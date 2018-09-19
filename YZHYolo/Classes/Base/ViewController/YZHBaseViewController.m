@@ -21,16 +21,6 @@
     // 设置通知
     [self setupNotification];
     
-//    //监听textField已经开始编辑通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(textFieldTextDidBeginEditing:)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//    //监听键盘将要隐藏通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
     //监听textField已经开始编辑通知
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(textFieldTextDidBeginEditing:)
@@ -52,6 +42,9 @@
     
     [super viewWillAppear:animated];
 
+    if (self.showNavigationBar) {
+        self.navigationController.navigationBar.hidden = NO;
+    }
     if (self.hideNavigationBarLine) {
         self.navigationController.navigationBarHidden = YES;
     }
@@ -61,6 +54,9 @@
     
     [super viewWillDisappear:animated];
     
+    if (self.showNavigationBar) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
     if (self.hideNavigationBarLine) {
         self.navigationController.navigationBarHidden = NO;
     }
@@ -84,16 +80,6 @@
 }
 
 #pragma mark - 收回键盘
-
-- (void)hahaha{
-    
-    NSLog(@"键盘起来了");
-}
-
-- (void)hehehe{
-    
-    NSLog(@"键盘下落");
-}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -161,6 +147,10 @@
         _keyboardToolbar = toolBar;
     }
     return _keyboardToolbar;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 /*

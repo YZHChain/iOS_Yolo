@@ -8,7 +8,11 @@
 
 #import "YZHFindPasswordVC.h"
 
+#import "YZHFindPasswordView.h"
+#import "YZHPublic.h"
 @interface YZHFindPasswordVC ()
+
+@property(nonatomic, strong)YZHFindPasswordView* findPasswordView;
 
 @end
 
@@ -46,12 +50,17 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"群聊";
+    self.navigationItem.title = @"找回密码";
 }
 
 - (void)setupView
 {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.findPasswordView = [YZHFindPasswordView yzh_viewWithFrame:self.view.bounds];
+    self.findPasswordView.frame = self.view.bounds;
+    [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.view addSubview:self.findPasswordView];
 }
 
 - (void)reloadView
@@ -69,6 +78,13 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 #pragma mark - 5.Event Response
+
+- (void)requestRetrievePassword{
+    
+    // 请求后台 成功则跳转至设置新密码
+    [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"hasFindPassword": @(YES)}];
+    
+}
 
 #pragma mark - 6.Private Methods
 

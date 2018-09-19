@@ -10,4 +10,9 @@
 
 @interface YZHFindPasswordView : UIView
 
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
+@property (weak, nonatomic) IBOutlet UITextField *SMSCodeTextField;
+@property (weak, nonatomic) IBOutlet UIButton *getSMSCodeButton;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
 @end

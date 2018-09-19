@@ -15,8 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *findPasswrodButton;
-
-
-+ (instancetype)yzh_configXibView;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 
 @end

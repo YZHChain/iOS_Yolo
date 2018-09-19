@@ -10,6 +10,12 @@
 
 @interface YZHRegisterView : UIView
 
-+ (instancetype)yzh_configXibView;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
+@property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
+@property (weak, nonatomic) IBOutlet UIButton *backIconButton;
+@property (weak, nonatomic) IBOutlet UIButton *backTextButton;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 @end

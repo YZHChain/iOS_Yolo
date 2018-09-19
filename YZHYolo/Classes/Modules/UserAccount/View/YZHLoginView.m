@@ -24,19 +24,60 @@
 
     [super awakeFromNib];
     
-    self.accountTextField.delegate = self;
+    [self setupNotification];
 }
 
-+ (instancetype)yzh_configXibView{
-
-    return [[NSBundle mainBundle] loadNibNamed:@"YZHLoginView" owner:nil options:nil].lastObject;
+- (void)setupNotification{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 }
+
+- (void)textFieldEditChanged:(NSNotification* )notification{
+    
+    BOOL hasConform = self.accountTextField.text.length >= 1 && self.passwordTextField.text.length >= 6;
+    if (hasConform) {
+        self.confirmButton.enabled = YES;
+    } else {
+        self.confirmButton.enabled = NO;
+    }
+}
+
 - (IBAction)gotoRegisterViewController:(id)sender {
     
-//    [YZHRouter openURL:kYZHRouterRegister info:@{kYZHRouteSeguePush: @(YES)}];
-//    [YZHRouter openURL:kYZHRouterRegister];
-//    YZHLoginVC* vc = [[YZHLoginVC alloc] init];
+    [YZHRouter openURL:kYZHRouterRegister];
+}
+- (IBAction)gotoFindPasswordViewController:(UIButton *)sender {
     
+    [YZHRouter openURL:kYZHRouterFindPassword];
+}
+
+#pragma mark -- TextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([self.accountTextField isEqual:textField]) {
+        return [self checkAccountTextFieldWithinputCharacters:string];
+    } else {
+        return [self checkPasswordTextFieldWithinputCharacters:string];
+    }
+}
+
+#pragma mark -- UITextFieldInputCheck
+
+- (BOOL)checkAccountTextFieldWithinputCharacters:(NSString* )characters{
+    
+    if (self.accountTextField.text.length >= 18 && characters.length != 0) {
+        return NO;
+    }
+    return YES;
+}
+
+-(BOOL)checkPasswordTextFieldWithinputCharacters:(NSString* )characters{
+    
+    if (self.passwordTextField.text.length >= 18 && characters.length != 0) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -135,6 +135,7 @@
         view = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
     } @catch (NSException *exception) {
         
+        NSLog(@"异常捕获:%@ ---- %s",exception, __func__);
     } @finally {
         
     }

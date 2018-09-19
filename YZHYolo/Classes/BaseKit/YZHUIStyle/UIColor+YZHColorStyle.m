@@ -10,6 +10,11 @@
 
 @implementation UIColor (YZHColorStyle)
 
++ (UIColor *)yzh_backgroundDarkBlue{
+    
+    return [UIColor colorWithRed: 0.0/ 255.0f green: 19.0/ 255.0f blue: 51.0/ 255.0f alpha:1.0f];
+}
+
 //十六进制颜色转换
 + (UIColor *)yzh_colorWithHexString:(NSString *)color
 {

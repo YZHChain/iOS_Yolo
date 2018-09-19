@@ -82,7 +82,9 @@ static id instance;
     [JLRoutes addRoute:routePattern handler:handlerBlock];
 }
 
-
++ (void)configRoute:(NSString *)routePattern forScheme:(NSString *)scheme handler:(BOOL (^)(NSDictionary *))handlerBlock{
+    
+}
 
 @end
 

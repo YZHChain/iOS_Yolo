@@ -9,5 +9,7 @@
 #ifndef YZHPathConst_h
 #define YZHPathConst_h
 
+#define PATH_REGISTERED_GETSMSCODE @""
+#define PATH_REGISTERED_CONFIRM    @""
 
 #endif /* YZHPathConst_h */

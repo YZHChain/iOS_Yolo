@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		551289D221461EE20099CC55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289D121461EE20099CC55 /* AppDelegate.m */; };
-		551289DA21461EE30099CC55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 551289D921461EE30099CC55 /* Assets.xcassets */; };
 		551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289DB21461EE30099CC55 /* LaunchScreen.storyboard */; };
 		551289E021461EE30099CC55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289DF21461EE30099CC55 /* main.m */; };
-		552B9C23214F393000BDA0CF /* YZHFindPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B9C22214F392F00BDA0CF /* YZHFindPassWordViewController.m */; };
 		552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B9C2C214F41F900BDA0CF /* YZHLoginView.m */; };
 		55337DBC214F75CA00307B75 /* YZHLoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55337DBB214F75CA00307B75 /* YZHLoginView.xib */; };
 		55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DBE214F775700307B75 /* YZHLoginVC.m */; };
@@ -28,10 +26,16 @@
 		55337DE5215086E500307B75 /* YYLabel+YMTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DE4215086E500307B75 /* YYLabel+YMTool.m */; };
 		55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DEA215088C800307B75 /* UIColor+YZHColorStyle.m */; };
 		55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DED215088E300307B75 /* UIFont+YZHFontStyle.m */; };
+		55337DF12150D62B00307B75 /* YZHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF02150D62B00307B75 /* YZHBaseNavigationController.m */; };
+		55337DF42150F4DC00307B75 /* UITextField+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */; };
+		55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF62150F52E00307B75 /* NSString+YZHTool.m */; };
+		55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */; };
+		55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */; };
+		55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFF2151055500307B75 /* YZHSettingPasswordView.m */; };
+		55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55337E012151055F00307B75 /* YZHSettingPasswordView.xib */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
 		556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CD821466A4B0048171C /* YZHBaseViewController.m */; };
 		556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */; };
-		556F6CDF21466B1C0048171C /* YZHWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */; };
 		556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CEA214762190048171C /* YZHTabBarModel.m */; };
 		556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CED214766E10048171C /* NSObject+YZHExtension.m */; };
 		556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CF3214769EC0048171C /* YZHRootTabBarViewController.m */; };
@@ -41,12 +45,16 @@
 		556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */; };
 		556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D07214773E40048171C /* YZHAddressViewController.m */; };
 		556F6D0B214774250048171C /* YZHDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D0A214774250048171C /* YZHDiscoverViewController.m */; };
-		556F6D0E2147743E0048171C /* YZHMyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */; };
 		556F6D112147B9220048171C /* YZHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D102147B9220048171C /* YZHRouter.m */; };
 		556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D132147B97A0048171C /* YZHRouter+Skip.m */; };
 		556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D162147B9F30048171C /* YZHRouterConfig.m */; };
-		55C239DA2148E60E00200798 /* YZHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239D92148E60E00200798 /* YZHRegisterViewController.m */; };
-		55C239DD2148E62300200798 /* YZHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239DC2148E62300200798 /* YZHLoginViewController.m */; };
+		55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */; };
+		55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */; };
+		55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */; };
+		55B5DB85215223F1002A04A9 /* YZHAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB84215223F1002A04A9 /* YZHAddressVC.m */; };
+		55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB872152240A002A04A9 /* YZHCommunityVC.m */; };
+		55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8A215229BD002A04A9 /* YZHMyInformationVC.m */; };
+		55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB8C21523573002A04A9 /* Assets.xcassets */; };
 		55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C239DE2148F07800200798 /* YZHAppConfig.plist */; };
 		55C239E52149122400200798 /* YZHNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E42149122400200798 /* YZHNetworkService.m */; };
 		55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E72149124E00200798 /* YZHNetworkConfig.m */; };
@@ -63,12 +71,9 @@
 		551289CD21461EE20099CC55 /* YZHYolo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YZHYolo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551289D021461EE20099CC55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		551289D121461EE20099CC55 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		551289D921461EE30099CC55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		551289DC21461EE30099CC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551289DE21461EE30099CC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551289DF21461EE30099CC55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		552B9C21214F392F00BDA0CF /* YZHFindPassWordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHFindPassWordViewController.h; sourceTree = "<group>"; };
-		552B9C22214F392F00BDA0CF /* YZHFindPassWordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHFindPassWordViewController.m; sourceTree = "<group>"; };
 		552B9C2B214F41F900BDA0CF /* YZHLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginView.h; sourceTree = "<group>"; };
 		552B9C2C214F41F900BDA0CF /* YZHLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginView.m; sourceTree = "<group>"; };
 		55337DBB214F75CA00307B75 /* YZHLoginView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHLoginView.xib; sourceTree = "<group>"; };
@@ -97,6 +102,19 @@
 		55337DEA215088C800307B75 /* UIColor+YZHColorStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YZHColorStyle.m"; sourceTree = "<group>"; };
 		55337DEC215088E300307B75 /* UIFont+YZHFontStyle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+YZHFontStyle.h"; sourceTree = "<group>"; };
 		55337DED215088E300307B75 /* UIFont+YZHFontStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+YZHFontStyle.m"; sourceTree = "<group>"; };
+		55337DEF2150D62B00307B75 /* YZHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHBaseNavigationController.h; sourceTree = "<group>"; };
+		55337DF02150D62B00307B75 /* YZHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHBaseNavigationController.m; sourceTree = "<group>"; };
+		55337DF22150F4DC00307B75 /* UITextField+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+YZHTool.h"; sourceTree = "<group>"; };
+		55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+YZHTool.m"; sourceTree = "<group>"; };
+		55337DF52150F52E00307B75 /* NSString+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+YZHTool.h"; sourceTree = "<group>"; };
+		55337DF62150F52E00307B75 /* NSString+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+YZHTool.m"; sourceTree = "<group>"; };
+		55337DF82150FFCD00307B75 /* UIButton+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+YZHTool.h"; sourceTree = "<group>"; };
+		55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YZHTool.m"; sourceTree = "<group>"; };
+		55337DFB2151053900307B75 /* YZHSettingPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSettingPasswordVC.h; sourceTree = "<group>"; };
+		55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSettingPasswordVC.m; sourceTree = "<group>"; };
+		55337DFE2151055500307B75 /* YZHSettingPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSettingPasswordView.h; sourceTree = "<group>"; };
+		55337DFF2151055500307B75 /* YZHSettingPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSettingPasswordView.m; sourceTree = "<group>"; };
+		55337E012151055F00307B75 /* YZHSettingPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSettingPasswordView.xib; sourceTree = "<group>"; };
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHYolo-Prefix.pch"; sourceTree = "<group>"; };
 		556F6CD5214668960048171C /* YZHMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMacro.h; sourceTree = "<group>"; };
@@ -105,8 +123,6 @@
 		556F6CD821466A4B0048171C /* YZHBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHBaseViewController.m; sourceTree = "<group>"; };
 		556F6CDA21466AEF0048171C /* YZHLaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLaunchViewController.h; sourceTree = "<group>"; };
 		556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLaunchViewController.m; sourceTree = "<group>"; };
-		556F6CDD21466B1C0048171C /* YZHWelcomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHWelcomeViewController.h; sourceTree = "<group>"; };
-		556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHWelcomeViewController.m; sourceTree = "<group>"; };
 		556F6CE9214762190048171C /* YZHTabBarModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTabBarModel.h; sourceTree = "<group>"; };
 		556F6CEA214762190048171C /* YZHTabBarModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTabBarModel.m; sourceTree = "<group>"; };
 		556F6CEC214766E10048171C /* NSObject+YZHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+YZHExtension.h"; sourceTree = "<group>"; };
@@ -125,18 +141,25 @@
 		556F6D07214773E40048171C /* YZHAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressViewController.m; sourceTree = "<group>"; };
 		556F6D09214774250048171C /* YZHDiscoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDiscoverViewController.h; sourceTree = "<group>"; };
 		556F6D0A214774250048171C /* YZHDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDiscoverViewController.m; sourceTree = "<group>"; };
-		556F6D0C2147743E0048171C /* YZHMyCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyCenterViewController.h; sourceTree = "<group>"; };
-		556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterViewController.m; sourceTree = "<group>"; };
 		556F6D0F2147B9220048171C /* YZHRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouter.h; sourceTree = "<group>"; };
 		556F6D102147B9220048171C /* YZHRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouter.m; sourceTree = "<group>"; };
 		556F6D122147B97A0048171C /* YZHRouter+Skip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHRouter+Skip.h"; sourceTree = "<group>"; };
 		556F6D132147B97A0048171C /* YZHRouter+Skip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YZHRouter+Skip.m"; sourceTree = "<group>"; };
 		556F6D152147B9F30048171C /* YZHRouterConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouterConfig.h; sourceTree = "<group>"; };
 		556F6D162147B9F30048171C /* YZHRouterConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouterConfig.m; sourceTree = "<group>"; };
-		55C239D82148E60E00200798 /* YZHRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRegisterViewController.h; sourceTree = "<group>"; };
-		55C239D92148E60E00200798 /* YZHRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRegisterViewController.m; sourceTree = "<group>"; };
-		55C239DB2148E62300200798 /* YZHLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginViewController.h; sourceTree = "<group>"; };
-		55C239DC2148E62300200798 /* YZHLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginViewController.m; sourceTree = "<group>"; };
+		55B5DB7A2152236D002A04A9 /* YZHDiscoverVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDiscoverVC.h; sourceTree = "<group>"; };
+		55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDiscoverVC.m; sourceTree = "<group>"; };
+		55B5DB7D21522383002A04A9 /* YZHMyCenterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyCenterVC.h; sourceTree = "<group>"; };
+		55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterVC.m; sourceTree = "<group>"; };
+		55B5DB8021522398002A04A9 /* YZHPrivatelyChatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatVC.h; sourceTree = "<group>"; };
+		55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatVC.m; sourceTree = "<group>"; };
+		55B5DB83215223F1002A04A9 /* YZHAddressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressVC.h; sourceTree = "<group>"; };
+		55B5DB84215223F1002A04A9 /* YZHAddressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressVC.m; sourceTree = "<group>"; };
+		55B5DB862152240A002A04A9 /* YZHCommunityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommunityVC.h; sourceTree = "<group>"; };
+		55B5DB872152240A002A04A9 /* YZHCommunityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityVC.m; sourceTree = "<group>"; };
+		55B5DB89215229BD002A04A9 /* YZHMyInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationVC.h; sourceTree = "<group>"; };
+		55B5DB8A215229BD002A04A9 /* YZHMyInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyInformationVC.m; sourceTree = "<group>"; };
+		55B5DB8C21523573002A04A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55C239DE2148F07800200798 /* YZHAppConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = YZHAppConfig.plist; sourceTree = "<group>"; };
 		55C239E02149101700200798 /* YZHConfigKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHConfigKey.h; sourceTree = "<group>"; };
 		55C239E32149122400200798 /* YZHNetworkService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHNetworkService.h; sourceTree = "<group>"; };
@@ -316,6 +339,8 @@
 			children = (
 				556F6D09214774250048171C /* YZHDiscoverViewController.h */,
 				556F6D0A214774250048171C /* YZHDiscoverViewController.m */,
+				55B5DB7A2152236D002A04A9 /* YZHDiscoverVC.h */,
+				55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -347,8 +372,10 @@
 		55128A0F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				556F6D0C2147743E0048171C /* YZHMyCenterViewController.h */,
-				556F6D0D2147743E0048171C /* YZHMyCenterViewController.m */,
+				55B5DB7D21522383002A04A9 /* YZHMyCenterVC.h */,
+				55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */,
+				55B5DB89215229BD002A04A9 /* YZHMyInformationVC.h */,
+				55B5DB8A215229BD002A04A9 /* YZHMyInformationVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -382,6 +409,8 @@
 			children = (
 				556F6D03214773700048171C /* YZHPrivatelyChatViewController.h */,
 				556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */,
+				55B5DB8021522398002A04A9 /* YZHPrivatelyChatVC.h */,
+				55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -415,6 +444,8 @@
 			children = (
 				556F6D06214773E40048171C /* YZHAddressViewController.h */,
 				556F6D07214773E40048171C /* YZHAddressViewController.m */,
+				55B5DB83215223F1002A04A9 /* YZHAddressVC.h */,
+				55B5DB84215223F1002A04A9 /* YZHAddressVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -479,6 +510,8 @@
 			children = (
 				556F6D00214773470048171C /* YZHCommunityViewController.h */,
 				556F6D01214773470048171C /* YZHCommunityViewController.m */,
+				55B5DB862152240A002A04A9 /* YZHCommunityVC.h */,
+				55B5DB872152240A002A04A9 /* YZHCommunityVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -524,6 +557,12 @@
 				55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */,
 				55337DDF215085C900307B75 /* UIView+YZHTool.h */,
 				55337DE0215085C900307B75 /* UIView+YZHTool.m */,
+				55337DF22150F4DC00307B75 /* UITextField+YZHTool.h */,
+				55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */,
+				55337DF52150F52E00307B75 /* NSString+YZHTool.h */,
+				55337DF62150F52E00307B75 /* NSString+YZHTool.m */,
+				55337DF82150FFCD00307B75 /* UIButton+YZHTool.h */,
+				55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -568,7 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */,
-				551289D921461EE30099CC55 /* Assets.xcassets */,
+				55B5DB8C21523573002A04A9 /* Assets.xcassets */,
 				551289DB21461EE30099CC55 /* LaunchScreen.storyboard */,
 				551289DE21461EE30099CC55 /* Info.plist */,
 				55C239DE2148F07800200798 /* YZHAppConfig.plist */,
@@ -612,8 +651,6 @@
 			children = (
 				556F6CDA21466AEF0048171C /* YZHLaunchViewController.h */,
 				556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */,
-				556F6CDD21466B1C0048171C /* YZHWelcomeViewController.h */,
-				556F6CDE21466B1C0048171C /* YZHWelcomeViewController.m */,
 				55337DD4214FE07500307B75 /* YZHWelcomeVC.h */,
 				55337DD5214FE07500307B75 /* YZHWelcomeVC.m */,
 				556F6CF2214769EC0048171C /* YZHRootTabBarViewController.h */,
@@ -653,16 +690,12 @@
 		55C239D62148E49800200798 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55C239D82148E60E00200798 /* YZHRegisterViewController.h */,
-				55C239D92148E60E00200798 /* YZHRegisterViewController.m */,
-				55C239DB2148E62300200798 /* YZHLoginViewController.h */,
-				55C239DC2148E62300200798 /* YZHLoginViewController.m */,
-				552B9C21214F392F00BDA0CF /* YZHFindPassWordViewController.h */,
-				552B9C22214F392F00BDA0CF /* YZHFindPassWordViewController.m */,
 				55337DBD214F775700307B75 /* YZHLoginVC.h */,
 				55337DBE214F775700307B75 /* YZHLoginVC.m */,
 				55337DC0214F8DF200307B75 /* YZHRegisterVC.h */,
 				55337DC1214F8DF200307B75 /* YZHRegisterVC.m */,
+				55337DFB2151053900307B75 /* YZHSettingPasswordVC.h */,
+				55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */,
 				55337DDC214FEFCA00307B75 /* YZHFindPasswordVC.h */,
 				55337DDD214FEFCA00307B75 /* YZHFindPasswordVC.m */,
 			);
@@ -678,6 +711,9 @@
 				55337DC6214F8EC300307B75 /* YZHRegisterView.h */,
 				55337DC7214F8EC300307B75 /* YZHRegisterView.m */,
 				55337DC9214F8ECF00307B75 /* YZHRegisterView.xib */,
+				55337DFE2151055500307B75 /* YZHSettingPasswordView.h */,
+				55337DFF2151055500307B75 /* YZHSettingPasswordView.m */,
+				55337E012151055F00307B75 /* YZHSettingPasswordView.xib */,
 				55337DCB214F8EE600307B75 /* YZHFindPasswordView.h */,
 				55337DCC214F8EE600307B75 /* YZHFindPasswordView.m */,
 				55337DCE214F8EEA00307B75 /* YZHFindPasswordView.xib */,
@@ -713,6 +749,8 @@
 			children = (
 				556F6CD721466A4B0048171C /* YZHBaseViewController.h */,
 				556F6CD821466A4B0048171C /* YZHBaseViewController.m */,
+				55337DEF2150D62B00307B75 /* YZHBaseNavigationController.h */,
+				55337DF02150D62B00307B75 /* YZHBaseNavigationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -814,11 +852,12 @@
 			files = (
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
+				55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
 				55337DBC214F75CA00307B75 /* YZHLoginView.xib in Resources */,
 				55337DCA214F8ECF00307B75 /* YZHRegisterView.xib in Resources */,
 				55337DD8214FE0AC00307B75 /* YZHWelcomeView.xib in Resources */,
-				551289DA21461EE30099CC55 /* Assets.xcassets in Resources */,
+				55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -875,6 +914,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
 				55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */,
 				556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */,
@@ -885,34 +925,40 @@
 				55337DDE214FEFCA00307B75 /* YZHFindPasswordVC.m in Sources */,
 				556F6D112147B9220048171C /* YZHRouter.m in Sources */,
 				55337DC8214F8EC300307B75 /* YZHRegisterView.m in Sources */,
+				55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */,
 				55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */,
+				55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */,
+				55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */,
 				55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */,
 				556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */,
-				556F6CDF21466B1C0048171C /* YZHWelcomeViewController.m in Sources */,
+				55337DF42150F4DC00307B75 /* UITextField+YZHTool.m in Sources */,
+				55B5DB85215223F1002A04A9 /* YZHAddressVC.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
 				556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
+				55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */,
 				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
+				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
+				55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */,
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
-				556F6D0E2147743E0048171C /* YZHMyCenterViewController.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
+				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
 				55337DDB214FE0CC00307B75 /* YZHWelcomeView.m in Sources */,
 				556F6D0B214774250048171C /* YZHDiscoverViewController.m in Sources */,
-				55C239DD2148E62300200798 /* YZHLoginViewController.m in Sources */,
-				552B9C23214F393000BDA0CF /* YZHFindPassWordViewController.m in Sources */,
+				55337DF12150D62B00307B75 /* YZHBaseNavigationController.m in Sources */,
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
 				556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */,
 				55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */,
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
-				55C239DA2148E60E00200798 /* YZHRegisterViewController.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
 				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
+				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55337DE5215086E500307B75 /* YYLabel+YMTool.m in Sources */,
 				552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */,
 			);
