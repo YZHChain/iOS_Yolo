@@ -8,9 +8,15 @@
 
 #import "YZHMyCenterVC.h"
 
-@interface YZHMyCenterVC ()
+#import "YZHMyCenterHeaderView.h"
+#import "YZHMyCenterCell.h"
+
+#import "UIScrollView+YZHRefresh.h"
+static NSString* const KCellIdentifier = @"centerCellIdentifier";
+@interface YZHMyCenterVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong)UITableView* tableView;
+@property(nonatomic, strong)YZHMyCenterHeaderView* headerView;
 
 @end
 
@@ -33,6 +39,23 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+//    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+//设置状态栏颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,7 +70,16 @@
 
 - (void)setupView
 {
-    self.view.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:self.tableView];
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    [self.tableView ym_addHeaderWithRefreshHandler:^{
+    }];
+
 }
 
 - (void)reloadView
@@ -64,14 +96,52 @@
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
-#pragma mark - 5.Event Response
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 4;
+}
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    if (section == 1) {
+        return 2;
+    }
+    return 1;
+}
+
+- (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    YZHMyCenterCell* cell = [tableView dequeueReusableCellWithIdentifier:KCellIdentifier forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [YZHRouter openURL:kYZHRouterMyInformation];
-    
-//    self.tabBarController.tabBar.hidden
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return 60;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 15;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    UIView* tableViewFooter = [[UIView alloc] init];
+
+    return tableViewFooter;
+}
+
+
+//- tableview
+#pragma mark - 5.Event Response
+
 
 #pragma mark - 6.Private Methods
 
@@ -85,12 +155,26 @@
 - (UITableView *)tableView{
     
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
+        _tableView.frame = self.view.bounds;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _tableView.tableHeaderView = self.headerView;
     }
     return _tableView;
 }
 
+- (YZHMyCenterHeaderView *)headerView{
+    
+    if (_headerView == nil) {
+        // 头尽量不写死 TODO:
+        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, 170)];
+    }
+    return _headerView;
+}
 /*
 #pragma mark - Navigation
 

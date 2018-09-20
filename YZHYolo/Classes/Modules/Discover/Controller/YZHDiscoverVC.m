@@ -45,7 +45,7 @@
 
 - (void)setupView
 {
-    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)reloadView
@@ -60,7 +60,7 @@
     
 }
 
-#pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
+#pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 #pragma mark - 5.Event Response
 

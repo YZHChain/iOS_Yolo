@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YZHMyCenterHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="FZy-27-BLj">
+                    <rect key="frame" x="34" y="66" width="63" height="63"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="63" id="mEA-eN-YPd"/>
+                        <constraint firstAttribute="width" constant="63" id="xYs-XG-inZ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-iv-AN8">
+                    <rect key="frame" x="109" y="74" width="46" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号：12556548754" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-2f-vyb">
+                    <rect key="frame" x="109" y="113" width="99" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOLO ID：adfdw" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3A-UM-oPB">
+                    <rect key="frame" x="109" y="97" width="80.5" height="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_code" translatesAutoresizingMaskIntoConstraints="NO" id="Fuq-rW-hrF">
+                    <rect key="frame" x="318" y="88" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="xj0-g9-h7K"/>
+                        <constraint firstAttribute="width" constant="23" id="zRZ-km-Es6"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaJ-1J-ZmB">
+                    <rect key="frame" x="310" y="65" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="6K4-90-fb4"/>
+                        <constraint firstAttribute="width" constant="40" id="pmZ-wy-iRZ"/>
+                    </constraints>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0039215686274509803" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="jPY-iv-AN8" firstAttribute="leading" secondItem="FZy-27-BLj" secondAttribute="trailing" constant="12" id="5kC-aZ-zJF"/>
+                <constraint firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="41" id="CHF-B2-inV"/>
+                <constraint firstItem="jPY-iv-AN8" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" constant="8" id="JfV-I6-HLN"/>
+                <constraint firstItem="J3A-UM-oPB" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="KAA-WU-sEn"/>
+                <constraint firstItem="FZy-27-BLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="Wct-Jp-Ffn"/>
+                <constraint firstItem="vaJ-1J-ZmB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Zv1-vf-Y2w"/>
+                <constraint firstItem="ZOb-2f-vyb" firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="-4" id="bVa-zp-jcJ"/>
+                <constraint firstItem="ZOb-2f-vyb" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="iCS-ru-WxU"/>
+                <constraint firstAttribute="trailing" secondItem="vaJ-1J-ZmB" secondAttribute="trailing" constant="25" id="ifR-cP-fdS"/>
+                <constraint firstAttribute="bottom" secondItem="Fuq-rW-hrF" secondAttribute="bottom" constant="59" id="rLb-3d-Pyh"/>
+                <constraint firstItem="ZOb-2f-vyb" firstAttribute="top" secondItem="J3A-UM-oPB" secondAttribute="bottom" constant="4" id="t3t-0T-zf1"/>
+                <constraint firstAttribute="trailing" secondItem="Fuq-rW-hrF" secondAttribute="trailing" constant="34" id="wK8-xi-7Bf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="50" y="-122"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="my_cover_code" width="22" height="22"/>
+        <image name="my_cover_headPhoto_default" width="63" height="63"/>
+    </resources>
+</document>

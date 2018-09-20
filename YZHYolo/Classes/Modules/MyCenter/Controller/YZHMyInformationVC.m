@@ -8,7 +8,11 @@
 
 #import "YZHMyInformationVC.h"
 
-@interface YZHMyInformationVC ()
+
+static NSString* const KCellIdentifier = @"imformationCellIdentifier";
+@interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource>
+
+@property(nonatomic, strong)UITableView* tableView;
 
 @end
 
@@ -38,9 +42,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-//    if (self.supportNavigation) {
-//        self.navigationController.navigationBar.hidden = NO;
-//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -63,16 +64,7 @@
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    UIButton * leftBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-//    leftBtn.frame = CGRectMake(0, 0, 11,19);
-//    [leftBtn setBackgroundImage:[UIImage imageNamed:@"navigation_item_left"] forState:UIControlStateNormal];
-//    [leftBtn addTarget:self action:@selector(leftBarBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem * leftBarBtn = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];;
-//    //创建UIBarButtonSystemItemFixedSpace
-//    UIBarButtonItem * spaceItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-//    //将宽度设为负值
-//    spaceItem.width = -18;
-//    self.navigationItem.leftBarButtonItems = @[spaceItem, leftBarBtn];
+    [self.view addSubview:self.tableView];
 }
 
 - (void)reloadView
@@ -89,6 +81,33 @@
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 4;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 2;
+}
+
+- (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:KCellIdentifier forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    return [[UIView alloc] init];
+}
+
 #pragma mark - 5.Event Response
 
 #pragma mark - 6.Private Methods
@@ -99,6 +118,20 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (UITableView *)tableView{
+    
+    if (_tableView == nil) {
+        
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyInformationCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
+        _tableView.frame = self.view.bounds;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    }
+    return _tableView;
+}
 
 /*
 #pragma mark - Navigation

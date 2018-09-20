@@ -15,6 +15,10 @@
     return [UIColor colorWithRed: 0.0/ 255.0f green: 19.0/ 255.0f blue: 51.0/ 255.0f alpha:1.0f];
 }
 
++ (UIColor *)yzh_backgroundThemeGray{
+    
+    return [UIColor colorWithRed: 239.0/ 255.0f green: 239.0/ 255.0f blue: 239.0/ 255.0f alpha: 1.0f];
+}
 //十六进制颜色转换
 + (UIColor *)yzh_colorWithHexString:(NSString *)color
 {
