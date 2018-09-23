@@ -38,6 +38,12 @@ extern NSString *const kYZHRouterRegister;
 extern NSString *const kYZHRouterFindPassword;
 extern NSString *const kYZHRouterSettingPassword;
 extern NSString *const kYZHRouterMyInformation;
+extern NSString *const kYZHRouterMyInformationPhoto;
+extern NSString *const kYZHRouterMyInformationSetName;
+extern NSString *const kYZHRouterMyInformationSetGender;
+extern NSString *const kYZHRouterMyInformationMyQRCode;
+extern NSString *const kYZHRouterMyInformationYoloID;
+extern NSString *const kYZHRouterMyInformationMyPlace;
 
 + (NSDictionary* )configInfo;
 

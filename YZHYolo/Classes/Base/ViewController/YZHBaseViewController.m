@@ -56,6 +56,7 @@
     
     if (self.showNavigationBar) {
         self.navigationController.navigationBar.hidden = YES;
+//        self.navigationController.navigationBarHidden
     }
     if (self.hideNavigationBarLine) {
         self.navigationController.navigationBarHidden = NO;

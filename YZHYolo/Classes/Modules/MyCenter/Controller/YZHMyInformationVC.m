@@ -8,17 +8,31 @@
 
 #import "YZHMyInformationVC.h"
 
+#import "YZHMyInformationModel.h"
+#import "YZHMyInformationCell.h"
+#import "YZHMyInformationPhotoVC.h"
 
-static NSString* const KCellIdentifier = @"imformationCellIdentifier";
+static NSString* const kPhoneCellIdentifier = @"imformationPhoneCellIdentifier";
+static NSString* const kPhotoCellIdentifier = @"imformationPhotoCellIdentifier";
+static NSString* const kNicknameCellIdentifier = @"imformationNicknameCellIdentifier";
+static NSString* const kGenderCellIdentifier = @"imformationGenderCellIdentifier";
+static NSString* const kQRCodeCellIdentifier = @"imformationQRCodeCellIdentifier";
+static NSArray* cellIdentifierArray;
 @interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic, strong)UITableView* tableView;
+@property(nonatomic, strong)YZHMyInformationListModel* viewModel;
 
 @end
 
 @implementation YZHMyInformationVC
 
 #pragma mark - 1.View Controller Life Cycle
+
++ (void)initialize{
+    
+    cellIdentifierArray = @[kPhoneCellIdentifier, kPhotoCellIdentifier, kNicknameCellIdentifier, kGenderCellIdentifier, kQRCodeCellIdentifier];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,43 +83,91 @@ static NSString* const KCellIdentifier = @"imformationCellIdentifier";
 
 - (void)reloadView
 {
-    
+    [self.tableView reloadData];
 }
 
 #pragma mark - 3.Request Data
 
 - (void)setupData
 {
-    
+    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYINFORMATION params:nil successCompletion:^(id obj) {
+        
+        self.viewModel = [YZHMyInformationListModel YZH_objectWithKeyValues:obj];
+        [self reloadView];
+    } failureCompletion:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 4;
+    return self.viewModel.list.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 2;
+    
+    return self.viewModel.list[section].content.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:KCellIdentifier forIndexPath:indexPath];
+    YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
+    YZHMyInformationCell* cell;
+    switch (model.type) {
+        case 0:
+            cell = [tableView dequeueReusableCellWithIdentifier:kPhoneCellIdentifier];
+            break;
+        case 1:
+            cell = [tableView dequeueReusableCellWithIdentifier:kPhotoCellIdentifier];
+            break;
+        case 2:
+            cell = [tableView dequeueReusableCellWithIdentifier:kNicknameCellIdentifier];
+            break;
+        case 3:
+            cell = [tableView dequeueReusableCellWithIdentifier:kGenderCellIdentifier];
+            break;
+        default:
+            cell = [tableView dequeueReusableCellWithIdentifier:kQRCodeCellIdentifier];
+            break;
+    }
+    
+    if (cell == nil) {
+        if (model.type <= 4) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil][model.type];
+        } else {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil].lastObject;
+        }
+    }
+    [cell setViewModel:model];
+    
     
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     return [[UIView alloc] init];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 10;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
+    
+    [YZHRouter openURL:model.route];
+    
+//    YZHMyInformationPhotoVC* vc = [[YZHMyInformationPhotoVC alloc] init];
+//
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 5.Event Response
@@ -124,11 +186,14 @@ static NSString* const KCellIdentifier = @"imformationCellIdentifier";
     if (_tableView == nil) {
         
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyInformationCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
         _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.tableFooterView = [[UIView alloc] init];
+        _tableView.rowHeight = 60;
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _tableView.separatorColor = [UIColor yzh_separatorLightGray];
     }
     return _tableView;
 }
