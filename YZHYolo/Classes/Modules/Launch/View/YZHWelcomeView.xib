@@ -51,22 +51,36 @@
                                 <action selector="gotoRegister:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vcu-Vg-ZCz"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-X2-Xda">
-                            <rect key="frame" x="209" y="96" width="35" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="登录"/>
-                            <connections>
-                                <action selector="gotoLogin:" destination="iN0-l3-epB" eventType="touchUpInside" id="fwD-iM-6Bx"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="已有账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWh-R7-fYE">
-                            <rect key="frame" x="125" y="102" width="70" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmA-y9-9oK">
+                            <rect key="frame" x="127.5" y="89" width="120" height="20"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有账号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWh-R7-fYE">
+                                    <rect key="frame" x="0.0" y="0.0" width="70" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBS-X2-Xda">
+                                    <rect key="frame" x="83" y="-7" width="37" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <state key="normal" title="登录">
+                                        <color key="titleColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="gotoLogin:" destination="iN0-l3-epB" eventType="touchUpInside" id="fwD-iM-6Bx"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="vWh-R7-fYE" firstAttribute="top" secondItem="qmA-y9-9oK" secondAttribute="top" id="3T1-Nd-4K7"/>
+                                <constraint firstItem="vWh-R7-fYE" firstAttribute="leading" secondItem="qmA-y9-9oK" secondAttribute="leading" id="Br7-kQ-fYI"/>
+                                <constraint firstAttribute="width" constant="120" id="OaI-MN-048"/>
+                                <constraint firstItem="EBS-X2-Xda" firstAttribute="top" secondItem="qmA-y9-9oK" secondAttribute="top" constant="-7" id="Qia-DU-UKe"/>
+                                <constraint firstAttribute="height" constant="20" id="iEi-CP-bbz"/>
+                                <constraint firstAttribute="trailing" secondItem="EBS-X2-Xda" secondAttribute="trailing" id="tIO-Fp-TfD"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -77,6 +91,8 @@
                         <constraint firstItem="89E-2u-oJ1" firstAttribute="leading" secondItem="iCJ-di-mEB" secondAttribute="trailing" id="MnC-Zz-LVs"/>
                         <constraint firstItem="89E-2u-oJ1" firstAttribute="bottom" secondItem="iCJ-di-mEB" secondAttribute="bottom" constant="1" id="YJ8-Hf-UC4"/>
                         <constraint firstItem="iCJ-di-mEB" firstAttribute="width" secondItem="VGq-dz-p6X" secondAttribute="width" id="b04-Py-RKP"/>
+                        <constraint firstItem="qmA-y9-9oK" firstAttribute="top" secondItem="VGq-dz-p6X" secondAttribute="bottom" constant="18" id="cn8-wb-v1s"/>
+                        <constraint firstItem="qmA-y9-9oK" firstAttribute="centerX" secondItem="ST1-75-p6C" secondAttribute="centerX" id="iOT-v4-jbE"/>
                         <constraint firstAttribute="trailing" secondItem="VGq-dz-p6X" secondAttribute="trailing" constant="70" id="pWW-9o-0PK"/>
                     </constraints>
                 </view>

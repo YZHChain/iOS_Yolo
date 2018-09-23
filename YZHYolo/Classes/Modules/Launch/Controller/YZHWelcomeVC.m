@@ -11,6 +11,7 @@
 #import "YZHWelcomeView.h"
 #import "SDCycleScrollView.h"
 #import "TAPageControl.h"
+#import "UIViewController+KeyboardAnimation.h"
 
 @interface YZHWelcomeVC ()
 
@@ -30,6 +31,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
+    
+    [self keyboardNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    // 移除通知.
+    [self an_unsubscribeKeyboard];
 }
 
 #pragma mark -- SettingView
@@ -54,12 +68,31 @@
     };
     
     [self.view addSubview:self.welcomeView];
+    
+    [self.welcomeView.phoneTextField becomeFirstResponder];
 }
 
 - (NSArray*)imagesForBanner{
     
     return @[@"welcome_background_cover",@"welcome_background_cover",@"welcome_background_cover"];
 }
+
+- (void)keyboardNotification{
+    
+    @weakify(self)
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        @strongify(self)
+        if (isShowing) {
+            // TODO: 小屏时最好修改一下.
+            self.welcomeView.y = -180;
+        } else {
+            self.welcomeView.y = 0;
+        }
+        [self.welcomeView layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
+}
+
 /*
 #pragma mark - Navigation
 

@@ -49,7 +49,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="账号、YOLO账号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="6DG-kF-IBm">
-                            <rect key="frame" x="34" y="37" width="303" height="45"/>
+                            <rect key="frame" x="34" y="39" width="303" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="NMf-rK-bZW"/>
                             </constraints>
@@ -61,9 +61,9 @@
                             </connections>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="aWm-Ep-rv5">
-                            <rect key="frame" x="34" y="110" width="303" height="40"/>
+                            <rect key="frame" x="34" y="99" width="303" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="en9-yv-DID"/>
+                                <constraint firstAttribute="height" constant="45" id="en9-yv-DID"/>
                             </constraints>
                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -115,7 +115,7 @@
                         <constraint firstItem="3Vl-t9-Ll4" firstAttribute="leading" secondItem="wLa-SP-hLN" secondAttribute="leading" constant="36" id="1BP-Sm-716"/>
                         <constraint firstItem="8Yh-CJ-1k9" firstAttribute="top" secondItem="toh-my-ACb" secondAttribute="bottom" constant="59" id="7W9-Tz-goz"/>
                         <constraint firstItem="toh-my-ACb" firstAttribute="top" secondItem="3Vl-t9-Ll4" secondAttribute="bottom" constant="59" id="8bx-e7-CpI"/>
-                        <constraint firstItem="toh-my-ACb" firstAttribute="top" secondItem="aWm-Ep-rv5" secondAttribute="bottom" constant="-5" id="E62-zv-hn1"/>
+                        <constraint firstItem="toh-my-ACb" firstAttribute="top" secondItem="aWm-Ep-rv5" secondAttribute="bottom" constant="1" id="E62-zv-hn1"/>
                         <constraint firstItem="6DG-kF-IBm" firstAttribute="width" secondItem="3Vl-t9-Ll4" secondAttribute="width" id="G75-1a-njq"/>
                         <constraint firstItem="aWm-Ep-rv5" firstAttribute="leading" secondItem="6DG-kF-IBm" secondAttribute="leading" id="JM6-xO-90N"/>
                         <constraint firstItem="Gft-34-PQq" firstAttribute="top" secondItem="8Yh-CJ-1k9" secondAttribute="bottom" constant="20" id="Jbp-EV-6cA"/>
@@ -128,7 +128,7 @@
                         <constraint firstItem="Gft-34-PQq" firstAttribute="centerX" secondItem="wLa-SP-hLN" secondAttribute="centerX" id="m0e-Eh-Xab"/>
                         <constraint firstAttribute="trailing" secondItem="6DG-kF-IBm" secondAttribute="trailing" constant="38" id="qjg-hY-UvR"/>
                         <constraint firstItem="Gqc-sJ-qhI" firstAttribute="top" secondItem="8Yh-CJ-1k9" secondAttribute="bottom" constant="15" id="rCz-Mc-9sg"/>
-                        <constraint firstItem="3Vl-t9-Ll4" firstAttribute="top" secondItem="6DG-kF-IBm" secondAttribute="bottom" constant="3" id="vYb-aY-7eX"/>
+                        <constraint firstItem="3Vl-t9-Ll4" firstAttribute="top" secondItem="6DG-kF-IBm" secondAttribute="bottom" constant="1" id="vYb-aY-7eX"/>
                         <constraint firstAttribute="trailing" secondItem="3Vl-t9-Ll4" secondAttribute="trailing" constant="36" id="vxH-Wy-XoK"/>
                         <constraint firstItem="9A9-bR-a1H" firstAttribute="top" secondItem="8Yh-CJ-1k9" secondAttribute="bottom" constant="15" id="xG3-HF-ZxP"/>
                         <constraint firstItem="Gft-34-PQq" firstAttribute="leading" secondItem="Gqc-sJ-qhI" secondAttribute="trailing" constant="15" id="xiC-IL-B7l"/>
@@ -149,6 +149,7 @@
             </constraints>
             <connections>
                 <outlet property="accountTextField" destination="6DG-kF-IBm" id="szH-DH-bO9"/>
+                <outlet property="chatInputBottomSpace" destination="sZt-fc-ag6" id="MyN-1l-9QO"/>
                 <outlet property="confirmButton" destination="8Yh-CJ-1k9" id="lmT-3G-G0z"/>
                 <outlet property="findPasswrodButton" destination="Gqc-sJ-qhI" id="soS-D8-DO2"/>
                 <outlet property="passwordTextField" destination="aWm-Ep-rv5" id="u0D-0H-3gA"/>

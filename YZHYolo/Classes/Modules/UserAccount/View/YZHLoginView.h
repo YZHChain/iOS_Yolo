@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 @property (weak, nonatomic) IBOutlet UIButton *findPasswrodButton;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *chatInputBottomSpace;
 
 @end

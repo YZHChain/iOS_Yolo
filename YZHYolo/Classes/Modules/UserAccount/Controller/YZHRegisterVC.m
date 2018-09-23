@@ -2,7 +2,7 @@
 //  YZHRegisterVC.m
 //  YZHYolo
 //
-//  Created by 😘王艳 on 2018/9/17.
+//  Created by Jersey on 2018/9/17.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
@@ -12,6 +12,7 @@
 #import "YZHRegisterView.h"
 #import "UITextField+YZHTool.h"
 #import "NSString+YZHTool.h"
+#import "UIViewController+KeyboardAnimation.h"
 
 @interface YZHRegisterVC ()<UITextFieldDelegate>
 
@@ -46,6 +47,15 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
+    [super viewWillDisappear:animated];
+    
+    [self keyboardNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    // 移除通知.
+    [self an_unsubscribeKeyboard];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -150,6 +160,17 @@
 - (void)setupNotification
 {
 
+}
+
+- (void)keyboardNotification{
+    
+    @weakify(self)
+//    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+//        @strongify(self)
+//
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 #pragma mark - 7.GET & SET
