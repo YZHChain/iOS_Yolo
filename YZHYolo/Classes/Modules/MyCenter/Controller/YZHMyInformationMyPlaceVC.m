@@ -54,7 +54,6 @@ static NSString* const kCountriesCellIdentifier =  @"countriesCellIdentifier";
 - (void)setupNavBar
 {
     self.navigationItem.title = @"设置地址";
-    self.showNavigationBar = YES;
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];

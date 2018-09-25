@@ -126,7 +126,7 @@
             //回退index步后再push
             NSUInteger index = [backIndexString integerValue];
             NSMutableArray *viewControllers = [nav.viewControllers mutableCopy];
-            if (viewControllers.count > index) {
+            if (viewControllers.count >= index) {
                 [viewControllers removeObjectsInRange:NSMakeRange(viewControllers.count-index, index)];
             }
             [viewControllers addObject:viewController];

@@ -28,7 +28,7 @@
 - (void)setupView{
     
 }
-- (IBAction)returnThePreviousPage:(UIButton *)sender {
+- (IBAction)backThePreviousPage:(UIButton *)sender {
     
     [[UIViewController yzh_findTopViewController].navigationController popViewControllerAnimated:YES];
 }

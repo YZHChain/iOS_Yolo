@@ -9,7 +9,7 @@
 #import "YZHSettingPasswordVC.h"
 
 #import "YZHSettingPasswordView.h"
-@interface YZHSettingPasswordVC ()
+@interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHSettingPasswordView* settingPasswordView;
 
@@ -40,15 +40,13 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    
-}
-
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar
 {
     self.navigationItem.title = @"设置密码";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.hideNavigationBar = YES;
 }
 
 - (void)setupView
@@ -62,6 +60,8 @@
     }
     
     [self.view addSubview:self.settingPasswordView];
+    
+    [self.settingPasswordView.passwordTextField becomeFirstResponder];
 }
 
 - (void)reloadView

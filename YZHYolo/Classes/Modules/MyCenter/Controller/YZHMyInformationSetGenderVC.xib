@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhs-1I-fNs">
-                    <rect key="frame" x="0.0" y="77" width="375" height="110"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="110"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QyZ-NQ-r0O">
                             <rect key="frame" x="36" y="55" width="303" height="1"/>
@@ -107,7 +107,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="nhs-1I-fNs" secondAttribute="trailing" id="Mam-jW-yjx"/>
                 <constraint firstItem="nhs-1I-fNs" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Rep-xZ-oVe"/>
-                <constraint firstItem="nhs-1I-fNs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="77" id="U7O-2a-Him"/>
+                <constraint firstItem="nhs-1I-fNs" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="U7O-2a-Him"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>

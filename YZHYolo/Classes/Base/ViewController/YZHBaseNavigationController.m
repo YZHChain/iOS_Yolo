@@ -2,13 +2,13 @@
 //  YZHBaseNavigationController.m
 //  YZHYolo
 //
-//  Created by 😘王艳 on 2018/9/18.
+//  Created by Jersey on 2018/9/18.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
 #import "YZHBaseNavigationController.h"
 
-@interface YZHBaseNavigationController ()
+@interface YZHBaseNavigationController ()<UINavigationControllerDelegate>
 
 @end
 
@@ -29,7 +29,7 @@
 
 - (void)setupNavBar{
     
-    self.navigationBar.hidden = YES;
+    self.navigationController.delegate = self;
     [self.navigationBar setBarTintColor:[UIColor yzh_backgroundDarkBlue]];
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -46,22 +46,27 @@
 }
 
 #pragma mark -- Push Pop
-
+// 保证导航栏展示根控制器时, 隐藏状态。Push 之后隐藏Bar。并显示导航栏.  此方法在 ViewController 视图生命周期之后, 所以如果想单独配置并不会影响。
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
-    NSInteger count = self.viewControllers.count;
-    if (count > 0) {
+    NSInteger viewControllerCount = self.viewControllers.count;
+    if (viewControllerCount > 0) {
         //push后隐藏tabBar
         viewController.hidesBottomBarWhenPushed = YES;
-//        //设置返回按钮
-//        UIViewController *priorVC = self.viewControllers[count-1];
-//        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-//        [item setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0]} forState:UIControlStateNormal];
-//        priorVC.navigationItem.backBarButtonItem = item;
+        self.navigationBarHidden = NO;
+    } else {
+        self.navigationBarHidden = YES;
     }
     [super pushViewController:viewController animated:animated];
 }
-
+// 保证每次到 RootViewController 时导航栏隐藏.
+- (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated{
+    
+      self.navigationBarHidden = YES;
+    
+   return [super popToRootViewControllerAnimated:animated];
+}
+// 直接通过 set 方法设置时也要将其 Bar 隐藏起来.
 - (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated
 {
     NSInteger count = viewControllers.count;
@@ -72,14 +77,13 @@
     [super setViewControllers:viewControllers animated:animated];
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark -- delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+//    self.navigationController.viewControllers
+    NSLog(@"导航栏检测");
+    
 }
-*/
 
 @end

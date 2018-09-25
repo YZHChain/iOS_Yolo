@@ -19,7 +19,6 @@
 
 @property(nonatomic, strong)YZHLoginView* loginView;
 
-
 @end
 
 @implementation YZHLoginVC
@@ -38,7 +37,6 @@
     [self setupData];
     //4.设置通知
     [self setupNotification];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,13 +47,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     
     [self keyboardNotification];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
+    [super viewWillDisappear:animated];
     // 移除通知.
     [self an_unsubscribeKeyboard];
 }
@@ -65,6 +64,8 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"去登录";
+    
+    self.hideNavigationBar = YES;
 }
 
 - (void)setupView

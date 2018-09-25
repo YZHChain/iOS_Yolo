@@ -8,6 +8,7 @@
 
 #import "YZHRegisterView.h"
 
+#import "UIViewController+YZHTool.h"
 @interface YZHRegisterView()<UITextFieldDelegate>
 
 @end
@@ -62,6 +63,10 @@
     }
 
     return YES;
+}
+- (IBAction)backThePreviousPage:(UIButton *)sender {
+    
+        [[UIViewController yzh_findTopViewController].navigationController popViewControllerAnimated:YES];
 }
 
 

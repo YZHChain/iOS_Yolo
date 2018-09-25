@@ -71,7 +71,7 @@ static NSArray* cellIdentifierArray;
 - (void)setupNavBar
 {
     self.navigationItem.title = @"个人信息";
-    self.showNavigationBar = YES;
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)setupView
@@ -164,10 +164,6 @@ static NSArray* cellIdentifierArray;
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     
     [YZHRouter openURL:model.route];
-    
-//    YZHMyInformationPhotoVC* vc = [[YZHMyInformationPhotoVC alloc] init];
-//
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 5.Event Response

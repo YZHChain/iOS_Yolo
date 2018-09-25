@@ -13,8 +13,10 @@
 #import "UITextField+YZHTool.h"
 #import "NSString+YZHTool.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "UIButton+YZHCountDown.h"
+#import "YZHBaseNavigationController.h"
 
-@interface YZHRegisterVC ()<UITextFieldDelegate>
+@interface YZHRegisterVC ()<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHRegisterView* registerView;
 
@@ -47,13 +49,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     
     [self keyboardNotification];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
+    [super viewWillDisappear:animated];
     // 移除通知.
     [self an_unsubscribeKeyboard];
 }
@@ -62,7 +65,11 @@
 
 - (void)setupNavBar
 {
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_backgroungImage"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_backgroungImage"] forBarMetrics:UIBarMetricsDefault];
+ self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
+    self.hideNavigationBar = YES;
+    
 }
 
 - (void)setupView
@@ -90,6 +97,8 @@
         [self postRegister];
     } forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.registerView];
+    
+    [self.registerView.phoneTextField becomeFirstResponder];
 }
 
 - (void)reloadView
@@ -146,11 +155,16 @@
 - (void)getMessagingVerificationWithSender:(UIButton* )sender{
     
     // 检测手机号,后台请求
-    if ([self.registerView.phoneTextField.text yzh_isPhone]) {
+    if (![self.registerView.phoneTextField.text yzh_isPhone]) {
         // 处理验证码按钮 倒计时
-        
+        [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
 //        [YZHNetworkService shareService] GETNetworkingResource: params:<#(NSDictionary *)#> successCompletion:<#^(id obj)successCompletion#> failureCompletion:<#^(NSError *error)failureCompletion#>
         
+    } else {
+//        [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
+        [YZHProgressHUD showText:@"请输入正确的手机号码!" customView:nil minSize:CGSizeMake(140, 25) onView:self.view completion:^{
+            
+        }];
     }
     
 }
@@ -164,7 +178,7 @@
 
 - (void)keyboardNotification{
     
-    @weakify(self)
+//    @weakify(self)
 //    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
 //        @strongify(self)
 //

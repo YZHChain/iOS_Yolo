@@ -49,7 +49,6 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"设置昵称";
-    self.showNavigationBar = YES;
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNickName)];

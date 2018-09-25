@@ -55,7 +55,6 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"我的二维码";
-    self.showNavigationBar = YES;
     self.hideNavigationBarLine = YES;
 }
 

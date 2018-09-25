@@ -10,6 +10,9 @@
 		551289D221461EE20099CC55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289D121461EE20099CC55 /* AppDelegate.m */; };
 		551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289DB21461EE30099CC55 /* LaunchScreen.storyboard */; };
 		551289E021461EE30099CC55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289DF21461EE30099CC55 /* main.m */; };
+		55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F2E21588E3300DEEC45 /* UIButton+YZHCountDown.m */; };
+		55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F57215901EA00DEEC45 /* YZHProgressHUD.m */; };
+		55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F5B21590C6000DEEC45 /* YZHAlertManage.m */; };
 		552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B9C2C214F41F900BDA0CF /* YZHLoginView.m */; };
 		553145712157298200A13F96 /* YZHMyInformationSetNameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5531456F2157298200A13F96 /* YZHMyInformationSetNameVC.m */; };
 		553145722157298200A13F96 /* YZHMyInformationSetNameVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553145702157298200A13F96 /* YZHMyInformationSetNameVC.xib */; };
@@ -97,6 +100,12 @@
 		551289DC21461EE30099CC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551289DE21461EE30099CC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551289DF21461EE30099CC55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		55256F2D21588E3300DEEC45 /* UIButton+YZHCountDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+YZHCountDown.h"; sourceTree = "<group>"; };
+		55256F2E21588E3300DEEC45 /* UIButton+YZHCountDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YZHCountDown.m"; sourceTree = "<group>"; };
+		55256F56215901EA00DEEC45 /* YZHProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHProgressHUD.h; sourceTree = "<group>"; };
+		55256F57215901EA00DEEC45 /* YZHProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHProgressHUD.m; sourceTree = "<group>"; };
+		55256F5A21590C6000DEEC45 /* YZHAlertManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAlertManage.h; sourceTree = "<group>"; };
+		55256F5B21590C6000DEEC45 /* YZHAlertManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAlertManage.m; sourceTree = "<group>"; };
 		552B9C2B214F41F900BDA0CF /* YZHLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginView.h; sourceTree = "<group>"; };
 		552B9C2C214F41F900BDA0CF /* YZHLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginView.m; sourceTree = "<group>"; };
 		5531456E2157298200A13F96 /* YZHMyInformationSetNameVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationSetNameVC.h; sourceTree = "<group>"; };
@@ -624,6 +633,9 @@
 		55128A2221463E480099CC55 /* BaseKit */ = {
 			isa = PBXGroup;
 			children = (
+				55256F5921590C4300DEEC45 /* YZHAlertMessage */,
+				55256F552159005700DEEC45 /* YZHStatusView */,
+				55256F542158FF7100DEEC45 /* YZHProgressHUD */,
 				55B5DB9821530EA8002A04A9 /* YZHRefresh */,
 				55337DE6215087D800307B75 /* YZHUIStyle */,
 				55C239F2214B50EA00200798 /* YZHDevice */,
@@ -644,6 +656,7 @@
 		55128A2421463E480099CC55 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				55256F2C21588E1000DEEC45 /* UIButton */,
 				55337DE2215086CB00307B75 /* YYKit */,
 				55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */,
 				55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */,
@@ -653,10 +666,44 @@
 				55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */,
 				55337DF52150F52E00307B75 /* NSString+YZHTool.h */,
 				55337DF62150F52E00307B75 /* NSString+YZHTool.m */,
-				55337DF82150FFCD00307B75 /* UIButton+YZHTool.h */,
-				55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		55256F2C21588E1000DEEC45 /* UIButton */ = {
+			isa = PBXGroup;
+			children = (
+				55337DF82150FFCD00307B75 /* UIButton+YZHTool.h */,
+				55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */,
+				55256F2D21588E3300DEEC45 /* UIButton+YZHCountDown.h */,
+				55256F2E21588E3300DEEC45 /* UIButton+YZHCountDown.m */,
+			);
+			path = UIButton;
+			sourceTree = "<group>";
+		};
+		55256F542158FF7100DEEC45 /* YZHProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				55256F56215901EA00DEEC45 /* YZHProgressHUD.h */,
+				55256F57215901EA00DEEC45 /* YZHProgressHUD.m */,
+			);
+			path = YZHProgressHUD;
+			sourceTree = "<group>";
+		};
+		55256F552159005700DEEC45 /* YZHStatusView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YZHStatusView;
+			sourceTree = "<group>";
+		};
+		55256F5921590C4300DEEC45 /* YZHAlertMessage */ = {
+			isa = PBXGroup;
+			children = (
+				55256F5A21590C6000DEEC45 /* YZHAlertManage.h */,
+				55256F5B21590C6000DEEC45 /* YZHAlertManage.m */,
+			);
+			path = YZHAlertMessage;
 			sourceTree = "<group>";
 		};
 		55337DE2215086CB00307B75 /* YYKit */ = {
@@ -1041,6 +1088,7 @@
 				556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */,
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
 				5531458A21574B4600A13F96 /* YZHMyInformationMyPlaceCell.m in Sources */,
+				55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */,
 				55337DDE214FEFCA00307B75 /* YZHFindPasswordVC.m in Sources */,
 				556F6D112147B9220048171C /* YZHRouter.m in Sources */,
 				55337DC8214F8EC300307B75 /* YZHRegisterView.m in Sources */,
@@ -1048,6 +1096,7 @@
 				5562DE29215683AF0098FA83 /* YZHMyInformationPhotoView.m in Sources */,
 				55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */,
 				55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */,
+				55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */,
 				55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */,
 				55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */,
 				55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */,
@@ -1080,6 +1129,7 @@
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
+				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
 				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,

@@ -44,7 +44,6 @@
         UIViewController *vc = [[clazz alloc] init];
         if (itemModel.hasNavigation) {
             vc = [[YZHBaseNavigationController alloc] initWithRootViewController:vc];
-
         }
         [vcs addObject:vc];
     }

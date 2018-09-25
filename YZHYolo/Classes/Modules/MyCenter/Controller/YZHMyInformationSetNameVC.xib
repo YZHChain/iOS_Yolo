@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YuI-0v-Bgb">
-                    <rect key="frame" x="0.0" y="74" width="375" height="60"/>
+                    <rect key="frame" x="0.0" y="10" width="375" height="60"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="不得超过20个字符" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hnI-hk-vRn">
                             <rect key="frame" x="19" y="0.0" width="337" height="60"/>
@@ -44,7 +44,7 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="YuI-0v-Bgb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="3yX-xS-otS"/>
+                <constraint firstItem="YuI-0v-Bgb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="3yX-xS-otS"/>
                 <constraint firstItem="YuI-0v-Bgb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ekz-Rg-FoD"/>
                 <constraint firstAttribute="trailing" secondItem="YuI-0v-Bgb" secondAttribute="trailing" id="xV3-zL-C2M"/>
             </constraints>

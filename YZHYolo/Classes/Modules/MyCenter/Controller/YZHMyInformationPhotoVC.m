@@ -49,7 +49,6 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"头像";
-    self.showNavigationBar = YES;
     self.hideNavigationBarLine = YES;
 }
 

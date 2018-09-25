@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hiu-D0-NkA">
-                    <rect key="frame" x="0.0" y="106" width="375" height="340"/>
+                    <rect key="frame" x="0.0" y="40" width="375" height="340"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_myinformationShow_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="OO4-X4-47K">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
@@ -37,10 +37,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUo-BO-HAP">
-                    <rect key="frame" x="0.0" y="502" width="375" height="165"/>
+                    <rect key="frame" x="0.0" y="436" width="375" height="231"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbv-p6-unQ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="拍照">
                                 <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -50,7 +50,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxx-83-eLd">
-                            <rect key="frame" x="0.0" y="55" width="375" height="55"/>
+                            <rect key="frame" x="0.0" y="77" width="375" height="77"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="从手机相册选择">
                                 <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,7 +60,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufw-3M-1F6">
-                            <rect key="frame" x="0.0" y="110" width="375" height="55"/>
+                            <rect key="frame" x="0.0" y="154" width="375" height="77"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="保存图片">
                                 <color key="titleColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,7 +93,7 @@
                 <constraint firstItem="hiu-D0-NkA" firstAttribute="leading" secondItem="xPI-2G-WNi" secondAttribute="leading" id="BIh-ZT-m47"/>
                 <constraint firstItem="NUo-BO-HAP" firstAttribute="top" secondItem="hiu-D0-NkA" secondAttribute="bottom" constant="56" id="MWb-Kp-9Jw"/>
                 <constraint firstItem="NUo-BO-HAP" firstAttribute="leading" secondItem="xPI-2G-WNi" secondAttribute="leading" id="NF6-Bn-JN9"/>
-                <constraint firstItem="hiu-D0-NkA" firstAttribute="top" secondItem="xPI-2G-WNi" secondAttribute="top" constant="106" id="c77-Kr-gAq"/>
+                <constraint firstItem="hiu-D0-NkA" firstAttribute="top" secondItem="xPI-2G-WNi" secondAttribute="top" constant="40" id="c77-Kr-gAq"/>
                 <constraint firstAttribute="bottom" secondItem="NUo-BO-HAP" secondAttribute="bottom" id="hR2-f2-782"/>
                 <constraint firstAttribute="trailing" secondItem="NUo-BO-HAP" secondAttribute="trailing" id="zd7-hu-WK9"/>
             </constraints>
