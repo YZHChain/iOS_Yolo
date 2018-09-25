@@ -51,12 +51,18 @@
     
     // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
     
-    [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES), @"phoneNumberString": self.phoneTextField.text}];
+    [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
+        }
+    }];
+
+//    [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
 }
 
 - (IBAction)gotoLogin:(UIButton *)sender {
     
-    [YZHRouter openURL:kYZHRouterLogin];
+    [YZHRouter openURL:kYZHRouterLogin info:@{kYZHRouteBackIndex: @(1)}];
 }
 
 #pragma mark -- UITextFieldDelegate

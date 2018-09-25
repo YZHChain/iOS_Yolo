@@ -15,10 +15,23 @@
     // Initialization code
 }
 
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setViewModel:(YZHMyInformationModel *)viewModel
+{
+    self.titleLabel.text = viewModel.title;
+    if (viewModel.subtitle.length) {
+        self.subTitleLabel.text = viewModel.subtitle;
+    }
+    if (viewModel.image.length) {
+        self.photoImageView.image = [UIImage imageNamed:viewModel.image];
+    }
 }
 
 @end

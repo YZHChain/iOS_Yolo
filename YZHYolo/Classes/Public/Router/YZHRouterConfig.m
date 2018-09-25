@@ -39,7 +39,12 @@ NSString* const kYZHRouterRegister        = @"/guidePage/register";
 NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
 NSString* const kYZHRouterSettingPassword = @"/guidePage/settingPassword";
 NSString* const kYZHRouterMyInformation   = @"/myCenter/myInformation";
-
+NSString* const kYZHRouterMyInformationPhoto   = @"/myInformation/photo";
+NSString* const kYZHRouterMyInformationSetName   = @"/myInformation/setName";
+NSString* const kYZHRouterMyInformationSetGender = @"/myInformation/setGender";
+NSString* const kYZHRouterMyInformationMyQRCode = @"/myInformation/myQRCode";
+NSString* const kYZHRouterMyInformationYoloID = @"/myInformation/YoloID";
+NSString* const kYZHRouterMyInformationMyPlace = @"/myInformation/myPlace";
 
 @implementation YZHRouterConfig
 
@@ -78,6 +83,42 @@ NSString* const kYZHRouterMyInformation   = @"/myCenter/myInformation";
              kYZHRouterMyInformation: @{
                      kYZHRouteViewControllerClassKey: @"YZHMyInformationVC",
                      kYZHRouteViewControllerNameKey: @"个人信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationPhoto: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationPhotoVC",
+                     kYZHRouteViewControllerNameKey: @"更换头像",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationSetName: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationSetNameVC",
+                     kYZHRouteViewControllerNameKey: @"设置昵称",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationSetGender: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationSetGenderVC",
+                     kYZHRouteViewControllerNameKey: @"设置性别",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationMyQRCode: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationMyQRCodeVC",
+                     kYZHRouteViewControllerNameKey: @"我的二维码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationYoloID: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationYoloIDVC",
+                     kYZHRouteViewControllerNameKey: @"设置 YoloID",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyInformationMyPlace: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyInformationMyPlaceVC",
+                     kYZHRouteViewControllerNameKey: @"设置地址",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

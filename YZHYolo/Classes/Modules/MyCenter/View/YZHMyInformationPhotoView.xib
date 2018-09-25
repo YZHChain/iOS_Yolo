@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbs-oW-N83">
+                    <rect key="frame" x="0.0" y="106" width="375" height="340"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_myinformationShow_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="eq7-I9-mw1">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="340"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="340" id="KpZ-dG-IcX"/>
+                        <constraint firstAttribute="trailing" secondItem="eq7-I9-mw1" secondAttribute="trailing" id="NBb-Qw-9ur"/>
+                        <constraint firstItem="eq7-I9-mw1" firstAttribute="top" secondItem="Sbs-oW-N83" secondAttribute="top" id="dfd-kv-iZ6"/>
+                        <constraint firstAttribute="bottom" secondItem="eq7-I9-mw1" secondAttribute="bottom" id="h0l-6b-LJy"/>
+                        <constraint firstItem="eq7-I9-mw1" firstAttribute="leading" secondItem="Sbs-oW-N83" secondAttribute="leading" id="jqO-Ig-HIW"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7I-f4-sTZ">
+                    <rect key="frame" x="0.0" y="502" width="375" height="165"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXS-ET-Fd1">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="拍照">
+                                <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nvD-Wt-wOj">
+                            <rect key="frame" x="0.0" y="55" width="375" height="55"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="从手机相册选择">
+                                <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbh-xT-eJM">
+                            <rect key="frame" x="0.0" y="110" width="375" height="55"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="保存图片">
+                                <color key="titleColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Jbh-xT-eJM" firstAttribute="top" secondItem="nvD-Wt-wOj" secondAttribute="bottom" id="1If-qL-0z8"/>
+                        <constraint firstItem="VXS-ET-Fd1" firstAttribute="top" secondItem="n7I-f4-sTZ" secondAttribute="top" id="1JU-iS-B02"/>
+                        <constraint firstItem="Jbh-xT-eJM" firstAttribute="leading" secondItem="n7I-f4-sTZ" secondAttribute="leading" id="1N1-1k-kc1"/>
+                        <constraint firstAttribute="trailing" secondItem="Jbh-xT-eJM" secondAttribute="trailing" id="2X2-Xe-QjN"/>
+                        <constraint firstAttribute="bottom" secondItem="Jbh-xT-eJM" secondAttribute="bottom" id="4DG-uS-a7k"/>
+                        <constraint firstAttribute="trailing" secondItem="nvD-Wt-wOj" secondAttribute="trailing" id="MD0-kg-j70"/>
+                        <constraint firstItem="Jbh-xT-eJM" firstAttribute="height" secondItem="nvD-Wt-wOj" secondAttribute="height" id="Ymw-oj-93I"/>
+                        <constraint firstAttribute="trailing" secondItem="VXS-ET-Fd1" secondAttribute="trailing" id="gpp-Ch-wdT"/>
+                        <constraint firstItem="nvD-Wt-wOj" firstAttribute="top" secondItem="VXS-ET-Fd1" secondAttribute="bottom" id="hg8-9A-ZyO"/>
+                        <constraint firstItem="Jbh-xT-eJM" firstAttribute="height" secondItem="VXS-ET-Fd1" secondAttribute="height" id="lN7-BP-PSE"/>
+                        <constraint firstItem="VXS-ET-Fd1" firstAttribute="leading" secondItem="n7I-f4-sTZ" secondAttribute="leading" id="lhb-us-DhD"/>
+                        <constraint firstItem="nvD-Wt-wOj" firstAttribute="leading" secondItem="n7I-f4-sTZ" secondAttribute="leading" id="m9e-bP-NyL"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="n7I-f4-sTZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0SI-b6-Nph"/>
+                <constraint firstItem="Sbs-oW-N83" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bdx-I6-g0B"/>
+                <constraint firstItem="n7I-f4-sTZ" firstAttribute="top" secondItem="Sbs-oW-N83" secondAttribute="bottom" constant="56" id="QJY-ak-Qrc"/>
+                <constraint firstAttribute="trailing" secondItem="Sbs-oW-N83" secondAttribute="trailing" id="TNG-cn-gqq"/>
+                <constraint firstAttribute="bottom" secondItem="n7I-f4-sTZ" secondAttribute="bottom" id="XLh-ht-hV1"/>
+                <constraint firstItem="Sbs-oW-N83" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="106" id="cMH-RV-Zwm"/>
+                <constraint firstAttribute="trailing" secondItem="n7I-f4-sTZ" secondAttribute="trailing" id="pY2-W7-5RB"/>
+            </constraints>
+            <point key="canvasLocation" x="46.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="my_myinformationShow_headPhoto_default" width="375" height="340"/>
+    </resources>
+</document>

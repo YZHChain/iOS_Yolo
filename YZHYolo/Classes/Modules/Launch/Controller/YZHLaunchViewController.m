@@ -44,6 +44,7 @@
 
 - (void)setupSplashScreen{
     
+    self.view.backgroundColor = [UIColor whiteColor];
     
 }
 
@@ -60,7 +61,7 @@
     } else {
         // 判断用户是否已登录,
         BOOL hasLogin = YES;
-        if (hasLogin) {
+        if (!hasLogin) {
             
             rootViewController = [[YZHRootTabBarViewController alloc] init];
             

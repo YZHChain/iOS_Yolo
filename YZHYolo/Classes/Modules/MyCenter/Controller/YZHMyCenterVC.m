@@ -12,7 +12,7 @@
 #import "YZHMyCenterCell.h"
 
 #import "UIScrollView+YZHRefresh.h"
-static NSString* const KCellIdentifier = @"centerCellIdentifier";
+static NSString* const kCellIdentifier = @"centerCellIdentifier";
 @interface YZHMyCenterVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong)UITableView* tableView;
@@ -76,10 +76,6 @@ static NSString* const KCellIdentifier = @"centerCellIdentifier";
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
-    [self.tableView ym_addHeaderWithRefreshHandler:^{
-    }];
-
 }
 
 - (void)reloadView
@@ -98,7 +94,7 @@ static NSString* const KCellIdentifier = @"centerCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 4;
+    return 10;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -111,35 +107,35 @@ static NSString* const KCellIdentifier = @"centerCellIdentifier";
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    YZHMyCenterCell* cell = [tableView dequeueReusableCellWithIdentifier:KCellIdentifier forIndexPath:indexPath];
+    YZHMyCenterCell* cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+//    if (indexPath.row == 1) {
+//
+//        cell.separatorView.hidden = YES;
+//    } else {
+//        cell.separatorView.hidden = NO;
+//    }
+    cell.separatorView.hidden = YES;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     [YZHRouter openURL:kYZHRouterMyInformation];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 60;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     return 15;
 }
 
-- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView* tableViewFooter = [[UIView alloc] init];
-
-    return tableViewFooter;
+    UIView* tableViewHeaderView = [[UIView alloc] init];
+    return tableViewHeaderView;
 }
-
-
-//- tableview
 #pragma mark - 5.Event Response
 
 
@@ -157,12 +153,18 @@ static NSString* const KCellIdentifier = @"centerCellIdentifier";
     if (_tableView == nil) {
         
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: kCellIdentifier];
         _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.tableHeaderView = self.headerView;
+        _tableView.tableFooterView = [[UIView alloc] init];
+        _tableView.rowHeight = 60;
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 36);
+        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _tableView.separatorColor = [UIColor yzh_separatorLightGray];
+        [_tableView.tableHeaderView setUserInteractionEnabled:YES];
+        
     }
     return _tableView;
 }
@@ -170,8 +172,14 @@ static NSString* const KCellIdentifier = @"centerCellIdentifier";
 - (YZHMyCenterHeaderView *)headerView{
     
     if (_headerView == nil) {
-        // 头尽量不写死 TODO:
+        
         _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, 170)];
+        UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
+        [btn setTitle:@"" forState:UIControlStateNormal];
+        [btn bk_addEventHandler:^(id sender) {
+            
+        } forControlEvents:UIControlEventAllEvents];
+        [_headerView addSubview:btn];
     }
     return _headerView;
 }

@@ -42,6 +42,9 @@
                                 <constraint firstAttribute="width" constant="60" id="lC9-QN-d3h"/>
                                 <constraint firstAttribute="height" constant="40" id="m6b-Dj-fiA"/>
                             </constraints>
+                            <connections>
+                                <action selector="backThePreviousPage:" destination="iN0-l3-epB" eventType="touchUpInside" id="yVj-eH-hrY"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0039215686274509803" green="0.078431372549019607" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

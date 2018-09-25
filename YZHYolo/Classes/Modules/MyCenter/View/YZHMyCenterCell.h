@@ -2,12 +2,17 @@
 //  YZHMyCenterCell.h
 //  YZHYolo
 //
-//  Created by 😘王艳 on 2018/9/19.
+//  Created by Jersey on 2018/9/19.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface YZHMyCenterCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UIImageView *iConImageView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *clickMarkImageView;
 
 @end

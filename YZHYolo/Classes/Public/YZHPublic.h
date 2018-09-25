@@ -11,5 +11,7 @@
 
 #import "UIView+YZHTool.h"
 #import "UIButton+YZHTool.h"
+#import "YZHProgressHUD.h"
+#import "YZHAlertManage.h"
 
 #endif /* YZHPublic_h */

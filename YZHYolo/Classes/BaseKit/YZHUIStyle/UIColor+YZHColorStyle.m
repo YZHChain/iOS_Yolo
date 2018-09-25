@@ -19,6 +19,11 @@
     
     return [UIColor colorWithRed: 239.0/ 255.0f green: 239.0/ 255.0f blue: 239.0/ 255.0f alpha: 1.0f];
 }
+
++ (UIColor *)yzh_separatorLightGray{
+    
+    return [UIColor colorWithRed: 193.0/ 255.0f green: 193.0/ 255.0f blue: 193.0/ 255.0f alpha: 1.0f];
+}
 //十六进制颜色转换
 + (UIColor *)yzh_colorWithHexString:(NSString *)color
 {

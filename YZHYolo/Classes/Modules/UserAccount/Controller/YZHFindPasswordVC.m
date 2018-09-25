@@ -10,7 +10,10 @@
 
 #import "YZHFindPasswordView.h"
 #import "YZHPublic.h"
-@interface YZHFindPasswordVC ()
+#import "UIButton+YZHCountDown.h"
+#import "NSString+YZHTool.h"
+
+@interface YZHFindPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHFindPasswordView* findPasswordView;
 
@@ -43,7 +46,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    
+
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -51,6 +55,8 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"找回密码";
+ self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.hideNavigationBar = YES;
 }
 
 - (void)setupView
@@ -59,8 +65,16 @@
     self.findPasswordView = [YZHFindPasswordView yzh_viewWithFrame:self.view.bounds];
     self.findPasswordView.frame = self.view.bounds;
     [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword) forControlEvents:UIControlEventTouchUpInside];
-    
+//    @weakify(self)
+//    [self.findPasswordView.getSMSCodeButton bk_addEventHandler:^(id sender) {
+//        @strongify(self)
+//        // 获取短信
+//        [self getMessagingVerificationWithSender:sender];
+//    } forControlEvents:UIControlEventTouchUpInside];
+    [self.findPasswordView.getSMSCodeButton addTarget:self action:@selector(getMessagingVerificationWithSender:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.findPasswordView];
+    
+    [self.findPasswordView.accountTextField becomeFirstResponder];
 }
 
 - (void)reloadView
@@ -83,6 +97,18 @@
     
     // 请求后台 成功则跳转至设置新密码
     [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"hasFindPassword": @(YES)}];
+    
+}
+
+- (void)getMessagingVerificationWithSender:(UIButton* )sender{
+    
+    // 检测手机号,后台请求
+    if ([self.findPasswordView.accountTextField.text yzh_isPhone]) {
+        // 处理验证码按钮 倒计时
+        [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+        //        [YZHNetworkService shareService] GETNetworkingResource: params:<#(NSDictionary *)#> successCompletion:<#^(id obj)successCompletion#> failureCompletion:<#^(NSError *error)failureCompletion#>
+        
+    }
     
 }
 
