@@ -5,15 +5,36 @@
 码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
 无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
 
-#### 软件架构
-软件架构说明
+#### 软件架构说明
 
+####  环境配置
+##### CocoaPods环境
+
+本项目使用CocoaPods管理第三方库，如果没安装CocoaPods请先[安装](#安装)，已安装的注意[使用](#使用)事项。
+
+移除ruby默认源
+
+```
+gem sources --remove https://rubygems.org/
+```
+
+添加china ruby源
+
+```
+gem sources -a https://gems.ruby-china.org/
+```
+
+安装cocoapods
+
+```
+sudo gem install cocoapods
+```
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. git clone https://gitee.com/yzhchain/yoloim-ios.git or git@gitee.com:yzhchain/yoloim-ios.git
+2. cd yoloim-ios 切换到项目, 首次执行 pod update 后续更新 pod install
+3. 待配置完成之后打开 YZHYolo.xcworkspace 即可。
 
 #### 使用说明
 
@@ -27,7 +48,6 @@
 2. 新建 Feat_xxx 分支
 3. 提交代码
 4. 新建 Pull Request
-
 
 #### 码云特技
 
