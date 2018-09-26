@@ -11,6 +11,11 @@
 @interface YZHMyInformationYoloIDVC ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *yoloIDTextField;
+@property (weak, nonatomic) IBOutlet UILabel *remindLabel;
+@property (weak, nonatomic) IBOutlet UIButton *checkButton;
+@property (weak, nonatomic) IBOutlet UIImageView *checkResultImageView;
+@property (weak, nonatomic) IBOutlet UILabel *checkResultLabel;
+@property (weak, nonatomic) IBOutlet UIView *checkResultView;
 
 @end
 
@@ -43,7 +48,7 @@
     [super viewWillAppear:animated];
     
     //TODO: 不知道什么原因, Bar 还是隐藏的。暂时先通过这里解决。。
-    self.navigationController.navigationBarHidden = NO;
+//    self.navigationController.navigationBarHidden = NO; 
 }
 
 #pragma mark - 2.SettingView and Style
@@ -52,7 +57,6 @@
 {
     self.navigationItem.title = @"设置 YOLO号";
     self.hideNavigationBarLine = YES;
-    
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
     
     self.navigationItem.rightBarButtonItem = item;
@@ -61,6 +65,12 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    [self.yoloIDTextField becomeFirstResponder];
+    
+    self.remindLabel.text = @"请注意:\nyolo号支持英文大小写、数字和特殊字符，必须是英文开头 且仅可设置一次，设置后不能再更改.";
+    self.checkResultView.hidden = YES;
+    
 }
 
 - (void)reloadView
@@ -79,6 +89,12 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
+    if (string.length == 0) {
+        return YES;
+    }
+    if (textField.text.length >= 30) {
+        return NO;
+    }
     return YES;
 }
 
@@ -93,7 +109,17 @@
 
 - (IBAction)detectionYoloID:(UIButton *)sender {
     
-    
+    static BOOL ckeckRsult = YES;
+    self.checkResultView.hidden = NO;
+    if (ckeckRsult) {
+
+        self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_correct"];
+        self.checkResultLabel.text = @"YOLO号可以正常使用";
+    } else {
+        
+        self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_fault"];
+        self.checkResultLabel.text = @"该YOLO号已存在，请重新设置";
+    }
 }
 
 #pragma mark - 6.Private Methods

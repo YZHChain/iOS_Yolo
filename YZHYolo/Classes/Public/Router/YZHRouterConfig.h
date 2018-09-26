@@ -44,6 +44,9 @@ extern NSString *const kYZHRouterMyInformationSetGender;
 extern NSString *const kYZHRouterMyInformationMyQRCode;
 extern NSString *const kYZHRouterMyInformationYoloID;
 extern NSString *const kYZHRouterMyInformationMyPlace;
+extern NSString *const kYZHRouterAboutYolo;
+extern NSString *const kYZHRouterSettingCenter;
+extern NSString *const kYZHRouterPrivacySetting;
 
 + (NSDictionary* )configInfo;
 

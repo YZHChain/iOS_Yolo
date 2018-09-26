@@ -8,9 +8,17 @@
 
 #import "UIButton+YZHTool.h"
 
+#import "UIImage+YZHTool.h"
 @implementation UIButton (YZHTool)
+
+- (void)yzh_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state{
+    
+    [self setBackgroundImage:[UIImage yzh_getImageWithColor:backgroundColor withSize:self.frame.size] forState:state];
+}
+
+
 //密码按钮隐藏控制
-- (void)hiddenPwdWithFields:(NSArray *)fieldsArray
+- (void)yzh_hiddenPwdWithFields:(NSArray *)fieldsArray
 {
     self.selected = !self.selected;
     
@@ -29,7 +37,7 @@
 }
 
 //是否激活按钮状态
-- (void)statusActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION
+- (void)yzh_statusActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION
 {
     BOOL result = FALSE ;
     va_list args;
@@ -61,9 +69,4 @@
     
 }
 
-- (void)yzh_statusRegisterActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION{
-    
-    
-    
-}
 @end

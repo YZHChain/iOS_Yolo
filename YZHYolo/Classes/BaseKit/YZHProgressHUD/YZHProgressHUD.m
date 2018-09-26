@@ -9,7 +9,7 @@
 #import "YZHProgressHUD.h"
 
 #import "Aspects.h"
-#import "MBProgressHUD.h"
+#import <MBProgressHUD.h>
 #import "UIViewController+YZHTool.h"
 
 //文本提示停留时间

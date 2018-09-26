@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-//@interface YZHMyInformationDataModel : NSObject
-//
-//@property(nonatomic, strong)NSArray<YZHMyInformationDataModel* >* list;
-//
-//@end
-
 @interface YZHMyInformationModel : NSObject
 
 @property(nonatomic, copy)NSString* title;

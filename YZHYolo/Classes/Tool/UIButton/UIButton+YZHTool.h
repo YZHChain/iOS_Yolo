@@ -10,14 +10,17 @@
 
 @interface UIButton (YZHTool)
 
+/**
+ *  设置背景颜色
+ *
+ *  @param backgroundColor 背景颜色
+ *  @param state           状态
+ */
+- (void)yzh_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
 //密码按钮隐藏控制
 - (void)yzh_hiddenPwdWithFields:(NSArray *)fieldsArray;
 //是否激活按钮状态
 - (void)yzh_statusActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION;
-- (void)yzh_statusRegisterActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION;
-
-//倒计时 缺省
-- (void)yzh_countdownWithTimeInterval:(NSInteger)ti;
-- (void)yzh_countDown;
+//- (void)yzh_statusRegisterActive:(UITextField *)textField, ...NS_REQUIRES_NIL_TERMINATION;
 
 @end

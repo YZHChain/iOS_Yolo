@@ -12,5 +12,6 @@
 #define PATH_REGISTERED_GETSMSCODE @""
 #define PATH_REGISTERED_CONFIRM    @""
 #define PATH_REGISTERED_MYINFORMATION @"/YZH/account/accountCenter"
+#define PATH_REGISTERED_MYCENTER   @"/account/myCenter"
 
 #endif /* YZHPathConst_h */
