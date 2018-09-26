@@ -71,7 +71,6 @@ static NSArray* cellIdentifierArray;
 - (void)setupNavBar
 {
     self.navigationItem.title = @"个人信息";
-    self.navigationController.navigationBar.translucent = NO;
 }
 
 - (void)setupView

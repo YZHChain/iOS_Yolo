@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZHMyCenterModel.h"
 
 @interface YZHMyCenterCell : UITableViewCell
 
@@ -14,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iConImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *clickMarkImageView;
+
+@property (nonatomic, strong) YZHMyCenterModel* model;
 
 @end

@@ -8,7 +8,15 @@
 
 #import "YZHMyInformationPhotoVC.h"
 
+#import "YZHPhotoManage.h"
+#import "UIButton+YZHTool.h"
+
+static NSArray* buttonArray;
 @interface YZHMyInformationPhotoVC ()
+
+@property (weak, nonatomic) IBOutlet UIButton *savePhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *callPhotoButton;
+@property (weak, nonatomic) IBOutlet UIButton *callCameraButton;
 
 @end
 
@@ -55,6 +63,11 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
+    
+    [self.callCameraButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
+    [self.callPhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
+    [self.savePhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
+    
 }
 
 - (void)reloadView
@@ -75,13 +88,34 @@
 
 - (IBAction)useCameraPictures:(UIButton *)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    sender.backgroundColor = [UIColor whiteColor];
+    [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypeCamera finishPicking:^(UIImage * _Nonnull image) {
+        self.photoImageView.image = image;
+    }];
 }
 
 - (IBAction)callMobilePhoto:(UIButton *)sender {
+    
+    sender.backgroundColor = [UIColor whiteColor];
+    
+    [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
+        self.photoImageView.image = image;
+    }];
+    
 }
 
 - (IBAction)performbSavePhoto:(UIButton *)sender {
+    
+//    sender.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)highlightedBackground:(UIButton *)sender {
+    
+//    if (sender.highlighted) {
+//        sender.backgroundColor = [UIColor yzh_backgroundThemeGray];
+//    } else {
+//
+//    }
 }
 
 

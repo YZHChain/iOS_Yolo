@@ -9,10 +9,10 @@
 	<key>apiLog</key>
 	<false/>
 	<key>severTest</key>
-	<true/>
+	<false/>
 	<key>severAddr</key>
-	<string>http://localhost:3600</string>
+	<string>http://192.168.0.107:3800</string>
 	<key>severAddrTest</key>
-	<string>http://192.168.0.100:3800</string>
+	<string>http://192.168.0.107:3800</string>
 </dict>
 </plist>

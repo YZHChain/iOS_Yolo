@@ -8,6 +8,7 @@
 
 #import "YZHMyCenterCell.h"
 
+
 @implementation YZHMyCenterCell
 
 - (void)awakeFromNib {
@@ -19,6 +20,12 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setModel:(YZHMyCenterModel *)model{
+    
+    self.iConImageView.image = [UIImage imageNamed:model.image];
+    self.titleLabel.text = model.title;
 }
 
 @end

@@ -26,6 +26,9 @@
 #define YZHVIEW_WIDTH (self.view.bounds.size.width)
 #define YZHVIEW_HEIGHT (self.view.bounds.size.height)
 
+#define YZHTabBarHeight 49
+#define YZHNavigationStatusBarHeight 64
+
 //分隔线1像素
 #define YZHSepLine_Height (1.0 / [[UIScreen mainScreen] scale])
 

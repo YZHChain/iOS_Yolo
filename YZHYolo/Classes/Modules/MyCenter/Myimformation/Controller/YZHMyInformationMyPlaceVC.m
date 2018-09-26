@@ -9,6 +9,8 @@
 #import "YZHMyInformationMyPlaceVC.h"
 
 #import "YZHMyInformationMyPlaceCell.h"
+#import "YZHLocationManager.h"
+
 static NSString* const kPositioningCellIdentifier = @"positioningCellIdentifier";
 static NSString* const kCountriesCellIdentifier =  @"countriesCellIdentifier";
 @interface YZHMyInformationMyPlaceVC ()<UITableViewDelegate, UITableViewDataSource>
@@ -67,6 +69,9 @@ static NSString* const kCountriesCellIdentifier =  @"countriesCellIdentifier";
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     [self.view addSubview:self.tableView];
+    
+    [[YZHLocationManager shareManager] getLocation];
+    
 }
 
 - (void)reloadView
@@ -143,6 +148,11 @@ static NSString* const kCountriesCellIdentifier =  @"countriesCellIdentifier";
     return view;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
 
 #pragma mark - 5.Event Response
 

@@ -12,11 +12,14 @@
 #import "YZHMyCenterCell.h"
 
 #import "UIScrollView+YZHRefresh.h"
+#import "YZHMyCenterModel.h"
+
 static NSString* const kCellIdentifier = @"centerCellIdentifier";
 @interface YZHMyCenterVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong)UITableView* tableView;
 @property(nonatomic, strong)YZHMyCenterHeaderView* headerView;
+@property(nonatomic, strong)YZHMyCenterListModel* viewModel;
 
 @end
 
@@ -66,6 +69,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)setupNavBar
 {
     self.navigationItem.title = @"我的";
+    self.hideNavigationBar = YES;
 }
 
 - (void)setupView
@@ -87,34 +91,32 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)setupData
 {
-    
+    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
+        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
+        [self.tableView reloadData];
+    } failureCompletion:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 10;
+    return self.viewModel.list.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (section == 1) {
-        return 2;
-    }
-    return 1;
+    return self.viewModel.list[section].content.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    YZHMyCenterModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     YZHMyCenterCell* cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-//    if (indexPath.row == 1) {
-//
-//        cell.separatorView.hidden = YES;
-//    } else {
-//        cell.separatorView.hidden = NO;
-//    }
     cell.separatorView.hidden = YES;
+    [cell setModel:model];
     
     return cell;
 }
@@ -122,8 +124,9 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YZHMyCenterModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     
-    [YZHRouter openURL:kYZHRouterMyInformation];
+    [YZHRouter openURL:model.route];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -134,6 +137,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
     UIView* tableViewHeaderView = [[UIView alloc] init];
+    
     return tableViewHeaderView;
 }
 #pragma mark - 5.Event Response
@@ -152,15 +156,14 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_tableView == nil) {
         
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, YZHVIEW_HEIGHT - YZHTabBarHeight) style:UITableViewStylePlain];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: kCellIdentifier];
-        _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = self.headerView;
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.rowHeight = 60;
-        _tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 36);
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorColor = [UIColor yzh_separatorLightGray];
         [_tableView.tableHeaderView setUserInteractionEnabled:YES];

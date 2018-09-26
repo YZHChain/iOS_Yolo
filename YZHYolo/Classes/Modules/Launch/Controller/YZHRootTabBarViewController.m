@@ -33,8 +33,9 @@
 - (void)setupView{
     
     self.tabBar.translucent = NO;
-    self.tabBar.tintColor = [UIColor redColor];
     self.tabBar.barTintColor = [UIColor whiteColor];
+    //TODO:
+    self.tabBar.backgroundImage = [UIImage imageNamed:@""];
     
     YZHTabBarItems *viewModel = [[YZHTabBarItems alloc] init];
     NSMutableArray *vcs = [[NSMutableArray alloc] init];

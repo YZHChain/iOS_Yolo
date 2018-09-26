@@ -30,6 +30,7 @@
 - (void)setupNavBar{
     
     self.navigationController.delegate = self;
+    self.navigationBar.translucent = NO;
     [self.navigationBar setBarTintColor:[UIColor yzh_backgroundDarkBlue]];
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -46,7 +47,7 @@
 }
 
 #pragma mark -- Push Pop
-// 保证导航栏展示根控制器时, 隐藏状态。Push 之后隐藏Bar。并显示导航栏.  此方法在 ViewController 视图生命周期之后, 所以如果想单独配置并不会影响。
+// 保证导航栏展示根控制器时, 隐藏状态。Push 之后隐藏Bar。并显示导航栏.  此方法在 ViewController 视图生命周期之后, 所以如果想单独配置并不会影响。  TODO: 还是需要再每个控制器添加一段隐藏Naviga 的代码,因为 pop 回来时,是显示的状态.
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     NSInteger viewControllerCount = self.viewControllers.count;
@@ -60,12 +61,7 @@
     [super pushViewController:viewController animated:animated];
 }
 // 保证每次到 RootViewController 时导航栏隐藏.
-- (NSArray<UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated{
-    
-      self.navigationBarHidden = YES;
-    
-   return [super popToRootViewControllerAnimated:animated];
-}
+
 // 直接通过 set 方法设置时也要将其 Bar 隐藏起来.
 - (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated
 {

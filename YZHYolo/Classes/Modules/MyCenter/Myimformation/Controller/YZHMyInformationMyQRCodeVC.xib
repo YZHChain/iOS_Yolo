@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +14,7 @@
                 <outlet property="QRCodeImageView" destination="SKP-Em-l5F" id="Dde-8R-wNp"/>
                 <outlet property="headerPhotoImageView" destination="EMn-Cm-12I" id="lmm-70-34d"/>
                 <outlet property="nickNameLabel" destination="obK-X8-hj4" id="8Rc-R4-fcU"/>
+                <outlet property="photoView" destination="lSZ-x8-246" id="H3I-6i-Ahi"/>
                 <outlet property="subTitleLabel" destination="8Pu-rg-dHd" id="nhv-Rg-fNH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,7 +35,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obK-X8-hj4">
-                            <rect key="frame" x="138" y="84" width="40" height="16"/>
+                            <rect key="frame" x="137.5" y="84" width="40" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="Zr1-63-7X3"/>
                             </constraints>
@@ -42,7 +43,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Em-l5F">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayButtonOverlayLarge.png" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Em-l5F">
                             <rect key="frame" x="49" y="120" width="217" height="213"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码，添加我为好友吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pu-rg-dHd">
@@ -112,6 +113,7 @@
         </view>
     </objects>
     <resources>
+        <image name="PlayButtonOverlayLarge.png" width="66" height="66"/>
         <image name="my_cover_headPhoto_default" width="63" height="63"/>
     </resources>
 </document>

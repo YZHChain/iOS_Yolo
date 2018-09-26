@@ -32,6 +32,16 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key> View controller-based status bar appearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App需要您的同意,才能在使用期间访问位置</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App需要您的同意,才能始终访问位置</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App需要您的同意,才能使用相机</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App需要您的同意,才能访问相册</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App需要您的同意,才能访问相册哈</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

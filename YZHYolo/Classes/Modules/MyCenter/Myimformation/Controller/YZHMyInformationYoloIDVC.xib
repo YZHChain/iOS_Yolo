@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHMyInformationYoloIDVC">
             <connections>
+                <outlet property="checkButton" destination="VKN-Az-Imh" id="U8M-tG-Y7f"/>
+                <outlet property="checkResultImageView" destination="viz-Mc-wDQ" id="vnl-sd-Fjx"/>
+                <outlet property="checkResultLabel" destination="JdY-An-QPQ" id="gxK-8W-QQB"/>
+                <outlet property="checkResultView" destination="lqm-2H-kFG" id="Qnw-dL-ZWg"/>
+                <outlet property="remindLabel" destination="JXb-kc-X0E" id="5ny-Zg-Mtg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="yoloIDTextField" destination="yhZ-C3-B4F" id="g4d-hM-JnA"/>
             </connections>
@@ -34,10 +39,13 @@
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKN-Az-Imh">
                             <rect key="frame" x="297" y="0.0" width="78" height="60"/>
+                            <color key="backgroundColor" red="0.12549019607843137" green="0.31372549019607843" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="78" id="6Ef-SL-chl"/>
                             </constraints>
-                            <state key="normal" title="检测"/>
+                            <state key="normal" title="检测">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="detectionYoloID:" destination="-1" eventType="touchUpInside" id="cJj-ek-Ihp"/>
                             </connections>
@@ -63,13 +71,56 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqm-2H-kFG">
+                    <rect key="frame" x="120.5" y="90" width="134.5" height="25"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_information_setYoloID_correct" translatesAutoresizingMaskIntoConstraints="NO" id="viz-Mc-wDQ">
+                            <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="0ST-b0-Byb"/>
+                                <constraint firstAttribute="width" constant="12" id="AcE-6P-GO1"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOLO号可以正常使用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JdY-An-QPQ">
+                            <rect key="frame" x="16" y="-2" width="118.5" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="viz-Mc-wDQ" firstAttribute="leading" secondItem="lqm-2H-kFG" secondAttribute="leading" id="0ku-6y-zVc"/>
+                        <constraint firstItem="JdY-An-QPQ" firstAttribute="leading" secondItem="viz-Mc-wDQ" secondAttribute="trailing" constant="4" id="Inf-cW-WrT"/>
+                        <constraint firstAttribute="height" constant="25" id="K7K-dR-mNU"/>
+                        <constraint firstItem="JdY-An-QPQ" firstAttribute="top" secondItem="lqm-2H-kFG" secondAttribute="top" constant="-2" id="Obe-Ut-4mQ"/>
+                        <constraint firstAttribute="trailing" secondItem="JdY-An-QPQ" secondAttribute="trailing" id="dK9-OY-iy7"/>
+                        <constraint firstItem="viz-Mc-wDQ" firstAttribute="top" secondItem="lqm-2H-kFG" secondAttribute="top" id="g3s-LG-4Gz"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXb-kc-X0E">
+                    <rect key="frame" x="45" y="116" width="285" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="JXb-kc-X0E" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="45" id="0iJ-eX-hiT"/>
+                <constraint firstAttribute="trailing" secondItem="JXb-kc-X0E" secondAttribute="trailing" constant="45" id="DRd-bd-0gZ"/>
                 <constraint firstAttribute="trailing" secondItem="W20-wF-dVg" secondAttribute="trailing" id="Dje-PI-y5D"/>
+                <constraint firstItem="JXb-kc-X0E" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="FnS-58-avc"/>
+                <constraint firstItem="lqm-2H-kFG" firstAttribute="top" secondItem="W20-wF-dVg" secondAttribute="bottom" constant="17" id="SbJ-Sq-XLH"/>
                 <constraint firstItem="W20-wF-dVg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="T0q-g7-Unp"/>
+                <constraint firstItem="JXb-kc-X0E" firstAttribute="top" secondItem="W20-wF-dVg" secondAttribute="bottom" constant="43" id="kpS-NC-dH0"/>
+                <constraint firstItem="lqm-2H-kFG" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mNq-G1-ifN"/>
                 <constraint firstItem="W20-wF-dVg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="13" id="pva-VC-L9c"/>
             </constraints>
+            <point key="canvasLocation" x="55.200000000000003" y="48.125937031484263"/>
         </view>
     </objects>
+    <resources>
+        <image name="my_information_setYoloID_correct" width="11" height="11"/>
+    </resources>
 </document>

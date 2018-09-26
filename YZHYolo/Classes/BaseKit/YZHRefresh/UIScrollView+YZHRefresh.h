@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^YZHRefreshHandler)();
+typedef void(^YZHRefreshHandler)(void);
 
 @interface UIScrollView (YZHRefresh)
 
