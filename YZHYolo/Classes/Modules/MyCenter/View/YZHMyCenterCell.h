@@ -11,7 +11,6 @@
 
 @interface YZHMyCenterCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
 @property (weak, nonatomic) IBOutlet UIImageView *iConImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *clickMarkImageView;

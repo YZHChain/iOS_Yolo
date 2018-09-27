@@ -46,18 +46,33 @@
     return _locationManager;
 }
 
-- (void)getLocation
-{
+- (void)getLocation{
+    
     if ([CLLocationManager locationServicesEnabled]) {
         @weakify(self)
         [self getUserLocationWithsuccess:^{
             @strongify(self)
             [self.locationManager startUpdatingLocation];
         } failure:^(CLAuthorizationStatus status) {
-            
         }];
     } else {
-        
+    }
+}
+
+- (void)getLocationWithSucceed:(callLocationBlock)succeed faildBlock:(callLocationBlock)faildBlock{
+    
+    if ([CLLocationManager locationServicesEnabled]) {
+        @weakify(self)
+        [self getUserLocationWithsuccess:^{
+            @strongify(self)
+            [self.locationManager startUpdatingLocation];
+            self.managerSucceedBlock = succeed;
+            self.managerfaildBlock = faildBlock;
+        } failure:^(CLAuthorizationStatus status) {
+            faildBlock ? faildBlock() : NULL;
+        }];
+    } else {
+        faildBlock ? faildBlock() : NULL;
     }
 }
 #pragma mark - Private Mothed
@@ -114,9 +129,11 @@
                         // 获取到省份和城市之后停止 查找地理位置。
                         [self.locationManager stopUpdatingLocation];
                     }
+                    self.managerSucceedBlock();
                 }
             } else {
                 NSLog(@"编码地理位置错误原因%@",error);
+                self.managerfaildBlock();
             }
         }];
 }
@@ -124,6 +141,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"获取地理位置错误原因%@",error);
+    self.managerfaildBlock();
 }
 
 - (void)spliceCurrentGeographicLocation{

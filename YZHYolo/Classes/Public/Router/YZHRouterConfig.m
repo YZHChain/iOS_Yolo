@@ -45,6 +45,7 @@ NSString* const kYZHRouterMyInformationSetGender = @"/myInformation/setGender";
 NSString* const kYZHRouterMyInformationMyQRCode = @"/myInformation/myQRCode";
 NSString* const kYZHRouterMyInformationYoloID = @"/myInformation/YoloID";
 NSString* const kYZHRouterMyInformationMyPlace = @"/myInformation/myPlace";
+NSString* const kYZHRouterMyPlaceCity = @"/myInformation/myPlaceCity";
 NSString* const kYZHRouterAboutYolo   = @"/myCenter/aboutYolo";
 NSString* const kYZHRouterPrivacySetting   = @"/myCenter/privacySetting";
 NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
@@ -121,6 +122,12 @@ NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
                      },
              kYZHRouterMyInformationMyPlace: @{
                      kYZHRouteViewControllerClassKey: @"YZHMyInformationMyPlaceVC",
+                     kYZHRouteViewControllerNameKey: @"设置地址",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterMyPlaceCity: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyplaceCityVC",
                      kYZHRouteViewControllerNameKey: @"设置地址",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",

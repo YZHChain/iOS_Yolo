@@ -115,7 +115,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     YZHMyCenterModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     YZHMyCenterCell* cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-    cell.separatorView.hidden = YES;
+
     [cell setModel:model];
     
     return cell;
