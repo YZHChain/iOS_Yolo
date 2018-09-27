@@ -41,11 +41,12 @@
         self.confirmButton.enabled = NO;
     }
 }
-
+// 前往注册
 - (IBAction)gotoRegisterViewController:(id)sender {
     
     [YZHRouter openURL:kYZHRouterRegister];
 }
+// 前往找回密码
 - (IBAction)gotoFindPasswordViewController:(UIButton *)sender {
     
     [YZHRouter openURL:kYZHRouterFindPassword];

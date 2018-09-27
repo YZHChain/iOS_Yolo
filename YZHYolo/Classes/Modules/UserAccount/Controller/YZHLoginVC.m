@@ -14,6 +14,7 @@
 #import "YZHFindPasswordVC.h"
 #import "YZHRootTabBarViewController.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHLoginVC ()
 
@@ -89,27 +90,35 @@
 
 
 #pragma mark - 5.Event Response
-
+// TODO:请求登录,云信登录待补充
 - (void)postLogin{
     
-    YZHRootTabBarViewController* tabBarViewController = [[YZHRootTabBarViewController alloc] init];
-    UIWindow* window = [[UIApplication sharedApplication].delegate window];
-    [UIView transitionWithView:window
-                      duration:0.3
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        BOOL oldState = [UIView areAnimationsEnabled];
-                        [UIView setAnimationsEnabled:NO];
-                        [window setRootViewController:tabBarViewController];
-                        [UIView setAnimationsEnabled:oldState];
-                    }
-                    completion:^(BOOL finished){
-                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
-                        [self.view removeFromSuperview];
-                    }];
+    NSString* account = self.loginView.accountTextField.text;
+    NSString* password = self.loginView.passwordTextField.text;
+    NSDictionary* parameter = @{@"account"  :account,
+                                @"password" :password
+                                };
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
+        @strongify(self)
+        [self serverloginSuccessWithResponData:obj];
+    } failureCompletion:^(NSError *error) {
+        //TODO: 失败处理
+    }];
+
 }
 
 #pragma mark - 6.Private Methods
+// 后台登录成功处理
+- (void)serverloginSuccessWithResponData:(id)responData{
+    
+    
+    
+}
+// 网易IM信登录成功处理
+- (void)IMServerLoginSuccessWithResponData:(id)responData{
+    
+}
 
 - (void)setupNotification
 {
@@ -123,7 +132,7 @@
         @strongify(self)
         if (isShowing) {
             // TODO: 小屏时最好修改一下.
-            self.loginView.y = -180;
+            self.loginView.y = -(keyboardRect.size.height);
         } else {
             self.loginView.y = 0;
         }
@@ -131,9 +140,6 @@
     } completion:^(BOOL finished) {
     }];
 }
-
-#pragma mark GET & SET
-
 #pragma mark - 7.GET & SET
 
 

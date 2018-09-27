@@ -63,7 +63,7 @@ static id instance;
     //添加公共参数，例如缓存时间、设备信息等
     NSDictionary *finalParams = [self appendingGeneralParams:params path:path];
     
-    [YZHNetworkConfig GETNetworkingResource:path params:finalParams successCompletion:^(id responseObject) {
+    [YZHNetworkConfig GETNetworkingResource:path params:params successCompletion:^(id responseObject) {
         // 统一处理返回成功逻辑.
         [self processResponse:responseObject path:path success:successCompletion failure:failureCompletion];
     } failureCompletion:^(NSError *error) {
@@ -94,7 +94,7 @@ static id instance;
     }];
 }
 
-#pragma mark --
+#pragma mark -- ResponUniftManage
 
 - (void)processError:(NSError *)error failure:(void (^)(NSError *error))failure refreshToken:(void (^)(void))refreshToken{
     

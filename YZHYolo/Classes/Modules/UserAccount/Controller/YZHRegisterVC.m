@@ -66,10 +66,9 @@
 - (void)setupNavBar
 {
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_backgroungImage"] forBarMetrics:UIBarMetricsDefault];
- self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     self.hideNavigationBar = YES;
-    
 }
 
 - (void)setupView
@@ -115,56 +114,43 @@
 
 #pragma mark - 4.UITextFieldDelegaten
 
-
-
 #pragma mark - 5.Event Response
 
 - (void)postRegister{
     
-//    NSDictionary* parameter = @{@"code": self.registerView.codeTextField.text,
-//                                @"phone": self.registerView.phoneTextField.text
-//                                };
-//    @weakify(self)
-//    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_REGISTERED_CONFIRM params:parameter successCompletion:^(id obj) {
-//        @strongify(self)
-//        [YZHRouter openURL:kYZHRouterSettingPassword];
-//
-//    } failureCompletion:^(NSError *error) {
-//
-//    }];
-    [YZHRouter openURL:kYZHRouterSettingPassword];
+    NSDictionary* parameter = @{
+                                 @"verifyCode": self.registerView.codeTextField.text,
+                                 @"phoneNum": self.registerView.phoneTextField.text };
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
+        @strongify(self)
+        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
+
+    } failureCompletion:^(NSError *error) {
+        
+        [YZHProgressHUD showAPIError:error];
+    }];
     
 }
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    
-    if ([textField isEqual:self.registerView.phoneTextField]) {
-        if (textField.text.length >= 16 && string.length == 0) {
-            return NO;
-        }
-    } else {
-        if (textField.text.length >= 4 && string.length == 0) {
-            return NO;
-        }
-    }
-    
-    return YES;
-    
-}
-
+//获取短信
 - (void)getMessagingVerificationWithSender:(UIButton* )sender{
     
+    NSString* phoneNumText = self.registerView.phoneTextField.text;
     // 检测手机号,后台请求
-    if (![self.registerView.phoneTextField.text yzh_isPhone]) {
-        // 处理验证码按钮 倒计时
-        [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
-//        [YZHNetworkService shareService] GETNetworkingResource: params:<#(NSDictionary *)#> successCompletion:<#^(id obj)successCompletion#> failureCompletion:<#^(NSError *error)failureCompletion#>
-        
-    } else {
-//        [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
-        [YZHProgressHUD showText:@"请输入正确的手机号码!" customView:nil minSize:CGSizeMake(140, 25) onView:self.view completion:^{
-            
+    if ([phoneNumText yzh_isPhone]) {
+        NSDictionary* parameters = @{@"phoneNum": phoneNumText};
+//        @weakify(self)
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameters successCompletion:^(id obj) {
+//            @strongify(self)
+//            [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
+            // 处理验证码按钮 倒计时
+            [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+        } failureCompletion:^(NSError *error) {
+//            @strongify(self)
+//            [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
         }];
+    } else {
+        [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
     }
     
 }
@@ -185,6 +171,22 @@
 //    } completion:^(BOOL finished) {
 //        
 //    }];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([textField isEqual:self.registerView.phoneTextField]) {
+        if (textField.text.length >= 16 && string.length == 0) {
+            return NO;
+        }
+    } else {
+        if (textField.text.length >= 4 && string.length == 0) {
+            return NO;
+        }
+    }
+    
+    return YES;
+    
 }
 
 #pragma mark - 7.GET & SET

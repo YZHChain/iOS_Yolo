@@ -84,7 +84,7 @@
         @strongify(self)
         if (isShowing) {
             // TODO: 小屏时最好修改一下.
-            self.welcomeView.y = -180;
+            self.welcomeView.y = - (keyboardRect.size.height);
         } else {
             self.welcomeView.y = 0;
         }

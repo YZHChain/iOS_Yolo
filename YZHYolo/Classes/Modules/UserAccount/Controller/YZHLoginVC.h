@@ -10,6 +10,4 @@
 
 @interface YZHLoginVC : YZHBaseViewController
 
-//@property (nonatomic, assign) BOOL hideNavigationBarLine;
-
 @end

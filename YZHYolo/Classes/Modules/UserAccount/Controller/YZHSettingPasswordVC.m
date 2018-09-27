@@ -9,6 +9,7 @@
 #import "YZHSettingPasswordVC.h"
 
 #import "YZHSettingPasswordView.h"
+#import "YZHRootTabBarViewController.h"
 @interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHSettingPasswordView* settingPasswordView;
@@ -52,12 +53,13 @@
 - (void)setupView
 {
     self.settingPasswordView = [YZHSettingPasswordView yzh_viewWithFrame:self.view.bounds];
-    if (self.hasFindPassword) {
+    if (self.settingPasswordType == YZHSettingPasswordTypeFind) {
         self.settingPasswordView.navigationTitleLaebl.text = @"忘记密码";
         self.settingPasswordView.tileTextLabel.text = @"设置新密码";
-        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateNormal];
-        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateDisabled];
+//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateNormal];
+//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateDisabled];
     }
+    [self.settingPasswordView.confirmButton addTarget:self action:@selector(requestSettingPassword) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.settingPasswordView];
     
@@ -80,7 +82,52 @@
 
 #pragma mark - 5.Event Response
 
+- (void)requestSettingPassword{
+    
+    NSString* requestURL;
+    switch (YZHSettingPasswordTypeFind) {
+        case YZHSettingPasswordTypeRegister:
+            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            break;
+            case YZHSettingPasswordTypeFind:
+            requestURL = PATH_USER_LOGIN_FORGETPASSWORD;
+        default:
+            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            break;
+    }
+    NSDictionary* parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
+          @"phoneNum":self.phoneNum };
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
+        @strongify(self)
+        [self autoLogin];
+    } failureCompletion:^(NSError *error) {
+        
+    }];
+    
+    
+}
+
 #pragma mark - 6.Private Methods
+
+- (void)autoLogin{
+    
+    YZHRootTabBarViewController* tabBarViewController = [[YZHRootTabBarViewController alloc] init];
+    UIWindow* window = [[UIApplication sharedApplication].delegate window];
+    [UIView transitionWithView:window
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        BOOL oldState = [UIView areAnimationsEnabled];
+                        [UIView setAnimationsEnabled:NO];
+                        [window setRootViewController:tabBarViewController];
+                        [UIView setAnimationsEnabled:oldState];
+                    }
+                    completion:^(BOOL finished){
+                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
+                        [self.view removeFromSuperview];
+                    }];
+}
 
 - (void)setupNotification
 {

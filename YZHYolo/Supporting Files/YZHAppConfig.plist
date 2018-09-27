@@ -7,12 +7,12 @@
 	<key>apiDebug</key>
 	<false/>
 	<key>apiLog</key>
-	<false/>
+	<true/>
 	<key>severTest</key>
 	<false/>
-	<key>severAddr</key>
-	<string>http://192.168.0.107:3800</string>
 	<key>severAddrTest</key>
-	<string>http://192.168.0.101:3800</string>
+	<string>http://192.168.0.107:3800</string>
+	<key>severAddrRelease</key>
+	<string>http://192.168.1.190:8084</string>
 </dict>
 </plist>

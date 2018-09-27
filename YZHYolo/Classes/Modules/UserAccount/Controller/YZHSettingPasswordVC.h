@@ -8,8 +8,13 @@
 
 #import "YZHBaseViewController.h"
 
+typedef enum : NSUInteger {
+    YZHSettingPasswordTypeRegister = 0,
+    YZHSettingPasswordTypeFind,
+} YZHSettingPasswordType;
 @interface YZHSettingPasswordVC : YZHBaseViewController
 
-@property(nonatomic, assign)BOOL hasFindPassword;
+@property(nonatomic, copy)NSString* phoneNum;
+@property(nonatomic, assign)YZHSettingPasswordType settingPasswordType;
 
 @end

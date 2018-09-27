@@ -8,7 +8,29 @@
 
 #import "UIViewController+YZHTool.h"
 
+#import "YZHRootTabBarViewController.h"
 @implementation UIViewController (YZHTool)
+
+#pragma mark extension
+
+- (void)yzh_userLoginSuccessToHomePage{
+    
+    YZHRootTabBarViewController* tabBarViewController = [[YZHRootTabBarViewController alloc] init];
+    UIWindow* window = [[UIApplication sharedApplication].delegate window];
+    [UIView transitionWithView:window
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        BOOL oldState = [UIView areAnimationsEnabled];
+                        [UIView setAnimationsEnabled:NO];
+                        [window setRootViewController:tabBarViewController];
+                        [UIView setAnimationsEnabled:oldState];
+                    }
+                    completion:^(BOOL finished){
+                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
+                        [self.view removeFromSuperview];
+                    }];
+}
 
 
 #pragma mark - To find the ViewController

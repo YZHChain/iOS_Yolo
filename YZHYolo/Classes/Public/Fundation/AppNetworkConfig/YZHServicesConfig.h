@@ -25,6 +25,7 @@ extern NSString *const kYZHAppConfigSeverAddrTest;
 + (id)configValueFromKey:(NSString *)key;
 + (BOOL)boolForKey:(NSString *)key;
 + (NSString *)stringForKey:(NSString *)key;
++ (NSString *)debugTestServerConfig;
 
 //- (void)saveConfigInfo:(NSDictionary *)info;
 

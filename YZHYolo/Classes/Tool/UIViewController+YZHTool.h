@@ -11,6 +11,7 @@
 @interface UIViewController (YZHTool)
 
 - (void)yzh_backToRootViewController:(BOOL)animated; //返回根控制器
+- (void)yzh_userLoginSuccessToHomePage;
 
 #pragma mark - To find the ViewController
 

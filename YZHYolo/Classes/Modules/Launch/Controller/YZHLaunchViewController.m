@@ -60,7 +60,7 @@
         rootViewController = navigationController;
     } else {
         // 判断用户是否已登录,
-        BOOL hasLogin = YES;
+        BOOL hasLogin = NO;
         if (hasLogin) {
             
             rootViewController = [[YZHRootTabBarViewController alloc] init];
