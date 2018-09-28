@@ -112,11 +112,22 @@
 // 后台登录成功处理
 - (void)serverloginSuccessWithResponData:(id)responData{
     
-    
+    NSString *account = @"3529437617057729695";
+    NSString *token   = @"06a44716b291734937a8b34d73066e7a";
+    [[[NIMSDK sharedSDK] loginManager] login:account token:token completion:^(NSError * _Nullable error) {
+        if (error == nil) {
+            [self IMServerLoginSuccessWithResponData:nil];
+        } else {
+            // 错误提示
+            
+        }
+    }];
     
 }
 // 网易IM信登录成功处理
 - (void)IMServerLoginSuccessWithResponData:(id)responData{
+    
+    [self yzh_userLoginSuccessToHomePage];
     
 }
 
@@ -142,5 +153,11 @@
 }
 #pragma mark - 7.GET & SET
 
+
+#pragma mark - 8. IMLoginDelegate
+
+//- (void)setLoginView:(YZHLoginView *)loginView{
+//
+//}
 
 @end

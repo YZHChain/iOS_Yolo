@@ -39,6 +39,9 @@ target 'YZHYolo' do
   #pod 'AliyunOSSiOS'
   pod 'JPush'
   pod 'UMengAnalytics-NO-IDFA'
+  
+  #IM
+  pod 'NIMSDK'
 
   #分享
   pod 'ShareSDK3'

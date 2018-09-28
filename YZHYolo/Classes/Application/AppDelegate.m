@@ -24,6 +24,13 @@
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
     [self.window makeKeyAndVisible];
 
+    // 初始化云信 NIMSDK  TODO: Packaging
+    NSString *appKey        = @"2828b3cd20e9263f914344c284588b60";
+    NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
+    option.apnsCername      = nil;
+    option.pkCername        = nil;
+    [[NIMSDK sharedSDK] registerWithOption:option];
+    
 
     return YES;
 }

@@ -15,6 +15,7 @@
 
 #import "BlocksKit+UIKit.h"
 #import "Masonry.h"
+#import "NIMSDK.h"
 
 #pragma mark -- Custom Category
 
