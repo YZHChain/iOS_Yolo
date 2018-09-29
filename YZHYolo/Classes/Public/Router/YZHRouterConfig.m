@@ -33,22 +33,26 @@ NSString* const kYZHRouteViewControllerNeedLoginKey = @"needLogin";
 
 #pragma mark -- GuidePage
 
-NSString* const kYZHRouterWelcome         = @"/guidePage/welcome";
-NSString* const kYZHRouterLogin           = @"/guidePage/login";
-NSString* const kYZHRouterRegister        = @"/guidePage/register";
-NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
-NSString* const kYZHRouterSettingPassword = @"/guidePage/settingPassword";
-NSString* const kYZHRouterMyInformation   = @"/myCenter/myInformation";
-NSString* const kYZHRouterMyInformationPhoto   = @"/myInformation/photo";
-NSString* const kYZHRouterMyInformationSetName   = @"/myInformation/setName";
-NSString* const kYZHRouterMyInformationSetGender = @"/myInformation/setGender";
-NSString* const kYZHRouterMyInformationMyQRCode = @"/myInformation/myQRCode";
-NSString* const kYZHRouterMyInformationYoloID = @"/myInformation/YoloID";
-NSString* const kYZHRouterMyInformationMyPlace = @"/myInformation/myPlace";
-NSString* const kYZHRouterMyPlaceCity = @"/myInformation/myPlaceCity";
-NSString* const kYZHRouterAboutYolo   = @"/myCenter/aboutYolo";
-NSString* const kYZHRouterPrivacySetting   = @"/myCenter/privacySetting";
-NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
+NSString* const kYZHRouterWelcome                 = @"/guidePage/welcome";
+NSString* const kYZHRouterLogin                   = @"/guidePage/login";
+NSString* const kYZHRouterRegister                = @"/guidePage/register";
+NSString* const kYZHRouterFindPassword            = @"/guidePage/findPassword";
+NSString* const kYZHRouterSettingPassword         = @"/guidePage/settingPassword";
+NSString* const kYZHRouterMyInformation           = @"/myCenter/myInformation";
+NSString* const kYZHRouterMyInformationPhoto      = @"/myInformation/photo";
+NSString* const kYZHRouterMyInformationSetName    = @"/myInformation/setName";
+NSString* const kYZHRouterMyInformationSetGender  = @"/myInformation/setGender";
+NSString* const kYZHRouterMyInformationMyQRCode   = @"/myInformation/myQRCode";
+NSString* const kYZHRouterMyInformationYoloID     = @"/myInformation/YoloID";
+NSString* const kYZHRouterMyInformationMyPlace    = @"/myInformation/myPlace";
+NSString* const kYZHRouterMyPlaceCity             = @"/myInformation/myPlaceCity";
+NSString* const kYZHRouterAboutYolo               = @"/myCenter/aboutYolo";
+NSString* const kYZHRouterPrivacySetting          = @"/myCenter/privacySetting";
+NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
+
+#pragma mark -- AddressBook
+
+NSString* const kYZHRouterAddressBookDetail   = @"/addressBook/settingCenter";
 
 @implementation YZHRouterConfig
 
@@ -150,8 +154,13 @@ NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterAddressBookDetail: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
+                     kYZHRouteViewControllerNameKey: @"通讯录-详情资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
              };
-    
 }
 
 @end

@@ -54,9 +54,7 @@
     if (viewControllerCount > 0) {
         //push后隐藏tabBar
         viewController.hidesBottomBarWhenPushed = YES;
-        self.navigationBarHidden = NO;
     } else {
-        self.navigationBarHidden = YES;
     }
     [super pushViewController:viewController animated:animated];
 }

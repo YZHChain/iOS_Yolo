@@ -49,6 +49,10 @@ extern NSString *const kYZHRouterAboutYolo;
 extern NSString *const kYZHRouterSettingCenter;
 extern NSString *const kYZHRouterPrivacySetting;
 
+#pragma mark -- AddressBook
+
+extern NSString *const kYZHRouterAddressBookDetail;
+
 + (NSDictionary* )configInfo;
 
 @end

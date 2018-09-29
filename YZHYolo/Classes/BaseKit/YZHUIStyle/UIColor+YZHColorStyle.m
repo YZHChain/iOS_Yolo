@@ -30,6 +30,11 @@
     return [UIColor colorWithRed: 62.0/ 255.0f green: 58.0/ 255.0f blue: 1.0/ 255.0f alpha: 1.0f];
 }
 
++ (UIColor *)yzh_buttonbackgroundGreen {
+    
+    return [UIColor colorWithRed: 42.0/ 255.0f green: 107.0/ 255.0f blue: 250.0/ 255.0f alpha: 1.0f];
+}
+
 //十六进制颜色转换
 + (UIColor *)yzh_colorWithHexString:(NSString *)color
 {

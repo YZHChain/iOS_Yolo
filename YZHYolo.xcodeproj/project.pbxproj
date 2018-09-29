@@ -74,17 +74,16 @@
 		556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CFE21476D670048171C /* YZHThemeItemModel.m */; };
 		556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D01214773470048171C /* YZHCommunityViewController.m */; };
 		556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */; };
-		556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D07214773E40048171C /* YZHAddressViewController.m */; };
 		556F6D112147B9220048171C /* YZHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D102147B9220048171C /* YZHRouter.m */; };
 		556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D132147B97A0048171C /* YZHRouter+Skip.m */; };
 		556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D162147B9F30048171C /* YZHRouterConfig.m */; };
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
+		557603B2215DD1C8007CEC60 /* YZHAddressBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603B1215DD1C8007CEC60 /* YZHAddressBookVC.m */; };
 		5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */; };
 		5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */; };
 		55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */; };
 		55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */; };
 		55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */; };
-		55B5DB85215223F1002A04A9 /* YZHAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB84215223F1002A04A9 /* YZHAddressVC.m */; };
 		55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB872152240A002A04A9 /* YZHCommunityVC.m */; };
 		55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8A215229BD002A04A9 /* YZHMyInformationVC.m */; };
 		55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB8C21523573002A04A9 /* Assets.xcassets */; };
@@ -95,6 +94,16 @@
 		55B5DB9B21530EDA002A04A9 /* UIScrollView+YZHRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB9A21530EDA002A04A9 /* UIScrollView+YZHRefresh.m */; };
 		55B5DB9F2153374A002A04A9 /* YZHMyInformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB9D2153374A002A04A9 /* YZHMyInformationCell.m */; };
 		55B5DBA02153374A002A04A9 /* YZHMyInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB9E2153374A002A04A9 /* YZHMyInformationCell.xib */; };
+		55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD8657215DDB2000D23ED1 /* YZHAddressBookHeaderView.m */; };
+		55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD865B215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib */; };
+		55BD8660215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD865E215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m */; };
+		55BD8661215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD865F215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib */; };
+		55BD8664215E084600D23ED1 /* YZHAddBookSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD8663215E084600D23ED1 /* YZHAddBookSectionView.m */; };
+		55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD8665215E085800D23ED1 /* YZHAddBookSectionView.xib */; };
+		55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD8668215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m */; };
+		55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */; };
+		55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */; };
+		55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */; };
 		55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C21081215A3948006AA568 /* YZHMyCenterModel.m */; };
 		55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C239DE2148F07800200798 /* YZHAppConfig.plist */; };
 		55C239E52149122400200798 /* YZHNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E42149122400200798 /* YZHNetworkService.m */; };
@@ -103,6 +112,29 @@
 		55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239EF214A6C0E00200798 /* YZHAPIRetryConfig.m */; };
 		55C239F5214B536000200798 /* YZHDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239F4214B536000200798 /* YZHDevice.m */; };
 		55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239F7214B54B500200798 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55C65698215E3601005E997B /* YZHAddBookDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C65696215E3601005E997B /* YZHAddBookDetailsVC.m */; };
+		55C65699215E3601005E997B /* YZHAddBookDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C65697215E3601005E997B /* YZHAddBookDetailsVC.xib */; };
+		55C6569E215E587A005E997B /* YZHAddBookUserIDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C6569C215E587A005E997B /* YZHAddBookUserIDCell.m */; };
+		55C6569F215E587A005E997B /* YZHAddBookUserIDCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C6569D215E587A005E997B /* YZHAddBookUserIDCell.xib */; };
+		55C656A3215E5907005E997B /* YZHAddBookSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656A1215E5907005E997B /* YZHAddBookSettingCell.m */; };
+		55C656A4215E5907005E997B /* YZHAddBookSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656A2215E5907005E997B /* YZHAddBookSettingCell.xib */; };
+		55C656A7215E6982005E997B /* YZHAddBookUserAskFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656A6215E6982005E997B /* YZHAddBookUserAskFooterView.m */; };
+		55C656A9215E6991005E997B /* YZHAddBookUserAskFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656A8215E6991005E997B /* YZHAddBookUserAskFooterView.xib */; };
+		55C656AC215F141C005E997B /* YZHAddressBookModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656AB215F141C005E997B /* YZHAddressBookModel.m */; };
+		55C656B0215F2614005E997B /* YZHCommonStyleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656AE215F2614005E997B /* YZHCommonStyleTableViewCell.m */; };
+		55C656B1215F2614005E997B /* YZHCommonStyleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656AF215F2614005E997B /* YZHCommonStyleTableViewCell.xib */; };
+		55C656B5215F283B005E997B /* YZHAddBookSetNoteVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656B3215F283B005E997B /* YZHAddBookSetNoteVC.m */; };
+		55C656B6215F283B005E997B /* YZHAddBookSetNoteVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656B4215F283B005E997B /* YZHAddBookSetNoteVC.xib */; };
+		55C656BB215F2A0B005E997B /* YZHAddBookSetNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656B9215F2A0B005E997B /* YZHAddBookSetNoteCell.m */; };
+		55C656BC215F2A0B005E997B /* YZHAddBookSetNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656BA215F2A0B005E997B /* YZHAddBookSetNoteCell.xib */; };
+		55C656C6215F5C61005E997B /* YZHAddBookSetTagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656C4215F5C61005E997B /* YZHAddBookSetTagVC.m */; };
+		55C656C7215F5C61005E997B /* YZHAddBookSetTagVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656C5215F5C61005E997B /* YZHAddBookSetTagVC.xib */; };
+		55C656CB215F5FAE005E997B /* YZHAddBookSetTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656C9215F5FAE005E997B /* YZHAddBookSetTagCell.m */; };
+		55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656CA215F5FAE005E997B /* YZHAddBookSetTagCell.xib */; };
+		55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656CF215F706E005E997B /* YZHAddBookSetTagFooterView.m */; };
+		55C656D2215F7077005E997B /* YZHAddBookSetTagFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656D1215F7077005E997B /* YZHAddBookSetTagFooterView.xib */; };
+		55C656D5215F7947005E997B /* YZHAddBookSetTagAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */; };
+		55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */; };
 		55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */; };
 		55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */; };
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
@@ -231,8 +263,6 @@
 		556F6D01214773470048171C /* YZHCommunityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityViewController.m; sourceTree = "<group>"; };
 		556F6D03214773700048171C /* YZHPrivatelyChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatViewController.h; sourceTree = "<group>"; };
 		556F6D04214773700048171C /* YZHPrivatelyChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatViewController.m; sourceTree = "<group>"; };
-		556F6D06214773E40048171C /* YZHAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressViewController.h; sourceTree = "<group>"; };
-		556F6D07214773E40048171C /* YZHAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressViewController.m; sourceTree = "<group>"; };
 		556F6D0F2147B9220048171C /* YZHRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouter.h; sourceTree = "<group>"; };
 		556F6D102147B9220048171C /* YZHRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouter.m; sourceTree = "<group>"; };
 		556F6D122147B97A0048171C /* YZHRouter+Skip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHRouter+Skip.h"; sourceTree = "<group>"; };
@@ -241,6 +271,8 @@
 		556F6D162147B9F30048171C /* YZHRouterConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouterConfig.m; sourceTree = "<group>"; };
 		557603AD215CE575007CEC60 /* YZHLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginModel.h; sourceTree = "<group>"; };
 		557603AE215CE575007CEC60 /* YZHLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginModel.m; sourceTree = "<group>"; };
+		557603B0215DD1C8007CEC60 /* YZHAddressBookVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookVC.h; sourceTree = "<group>"; };
+		557603B1215DD1C8007CEC60 /* YZHAddressBookVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookVC.m; sourceTree = "<group>"; };
 		5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHLocationManager.m; sourceTree = "<group>"; };
 		5591D7A2215A2B9300C2AA93 /* YZHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHLocationManager.h; sourceTree = "<group>"; };
 		5591D7A5215A2BDA00C2AA93 /* YZHPhotoManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPhotoManage.h; sourceTree = "<group>"; };
@@ -251,8 +283,6 @@
 		55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterVC.m; sourceTree = "<group>"; };
 		55B5DB8021522398002A04A9 /* YZHPrivatelyChatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatVC.h; sourceTree = "<group>"; };
 		55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatVC.m; sourceTree = "<group>"; };
-		55B5DB83215223F1002A04A9 /* YZHAddressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressVC.h; sourceTree = "<group>"; };
-		55B5DB84215223F1002A04A9 /* YZHAddressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressVC.m; sourceTree = "<group>"; };
 		55B5DB862152240A002A04A9 /* YZHCommunityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommunityVC.h; sourceTree = "<group>"; };
 		55B5DB872152240A002A04A9 /* YZHCommunityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityVC.m; sourceTree = "<group>"; };
 		55B5DB89215229BD002A04A9 /* YZHMyInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationVC.h; sourceTree = "<group>"; };
@@ -269,6 +299,21 @@
 		55B5DB9C2153374A002A04A9 /* YZHMyInformationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationCell.h; sourceTree = "<group>"; };
 		55B5DB9D2153374A002A04A9 /* YZHMyInformationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyInformationCell.m; sourceTree = "<group>"; };
 		55B5DB9E2153374A002A04A9 /* YZHMyInformationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHMyInformationCell.xib; sourceTree = "<group>"; };
+		55BD8656215DDB2000D23ED1 /* YZHAddressBookHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookHeaderView.h; sourceTree = "<group>"; };
+		55BD8657215DDB2000D23ED1 /* YZHAddressBookHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookHeaderView.m; sourceTree = "<group>"; };
+		55BD865B215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddressBookHeaderView.xib; sourceTree = "<group>"; };
+		55BD865D215DFCEC00D23ED1 /* YZHAddBookFriendsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookFriendsCell.h; sourceTree = "<group>"; };
+		55BD865E215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookFriendsCell.m; sourceTree = "<group>"; };
+		55BD865F215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookFriendsCell.xib; sourceTree = "<group>"; };
+		55BD8662215E084600D23ED1 /* YZHAddBookSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSectionView.h; sourceTree = "<group>"; };
+		55BD8663215E084600D23ED1 /* YZHAddBookSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSectionView.m; sourceTree = "<group>"; };
+		55BD8665215E085800D23ED1 /* YZHAddBookSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSectionView.xib; sourceTree = "<group>"; };
+		55BD8667215E0CA700D23ED1 /* YZHAddBookAdditionalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAdditionalCell.h; sourceTree = "<group>"; };
+		55BD8668215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAdditionalCell.m; sourceTree = "<group>"; };
+		55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookAdditionalCell.xib; sourceTree = "<group>"; };
+		55BD866C215E22DB00D23ED1 /* YZHAddressBookFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookFootView.h; sourceTree = "<group>"; };
+		55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookFootView.m; sourceTree = "<group>"; };
+		55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddressBookFootView.xib; sourceTree = "<group>"; };
 		55C21080215A3948006AA568 /* YZHMyCenterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyCenterModel.h; sourceTree = "<group>"; };
 		55C21081215A3948006AA568 /* YZHMyCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterModel.m; sourceTree = "<group>"; };
 		55C239DE2148F07800200798 /* YZHAppConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = YZHAppConfig.plist; sourceTree = "<group>"; };
@@ -286,6 +331,41 @@
 		55C239F4214B536000200798 /* YZHDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDevice.m; sourceTree = "<group>"; };
 		55C239F7214B54B500200798 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		55C239F8214B54B500200798 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		55C65695215E3601005E997B /* YZHAddBookDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookDetailsVC.h; sourceTree = "<group>"; };
+		55C65696215E3601005E997B /* YZHAddBookDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookDetailsVC.m; sourceTree = "<group>"; };
+		55C65697215E3601005E997B /* YZHAddBookDetailsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookDetailsVC.xib; sourceTree = "<group>"; };
+		55C6569B215E587A005E997B /* YZHAddBookUserIDCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookUserIDCell.h; sourceTree = "<group>"; };
+		55C6569C215E587A005E997B /* YZHAddBookUserIDCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookUserIDCell.m; sourceTree = "<group>"; };
+		55C6569D215E587A005E997B /* YZHAddBookUserIDCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookUserIDCell.xib; sourceTree = "<group>"; };
+		55C656A0215E5907005E997B /* YZHAddBookSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSettingCell.h; sourceTree = "<group>"; };
+		55C656A1215E5907005E997B /* YZHAddBookSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSettingCell.m; sourceTree = "<group>"; };
+		55C656A2215E5907005E997B /* YZHAddBookSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSettingCell.xib; sourceTree = "<group>"; };
+		55C656A5215E6982005E997B /* YZHAddBookUserAskFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookUserAskFooterView.h; sourceTree = "<group>"; };
+		55C656A6215E6982005E997B /* YZHAddBookUserAskFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookUserAskFooterView.m; sourceTree = "<group>"; };
+		55C656A8215E6991005E997B /* YZHAddBookUserAskFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookUserAskFooterView.xib; sourceTree = "<group>"; };
+		55C656AA215F141C005E997B /* YZHAddressBookModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookModel.h; sourceTree = "<group>"; };
+		55C656AB215F141C005E997B /* YZHAddressBookModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookModel.m; sourceTree = "<group>"; };
+		55C656AD215F2614005E997B /* YZHCommonStyleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommonStyleTableViewCell.h; sourceTree = "<group>"; };
+		55C656AE215F2614005E997B /* YZHCommonStyleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommonStyleTableViewCell.m; sourceTree = "<group>"; };
+		55C656AF215F2614005E997B /* YZHCommonStyleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCommonStyleTableViewCell.xib; sourceTree = "<group>"; };
+		55C656B2215F283B005E997B /* YZHAddBookSetNoteVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetNoteVC.h; sourceTree = "<group>"; };
+		55C656B3215F283B005E997B /* YZHAddBookSetNoteVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetNoteVC.m; sourceTree = "<group>"; };
+		55C656B4215F283B005E997B /* YZHAddBookSetNoteVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetNoteVC.xib; sourceTree = "<group>"; };
+		55C656B8215F2A0B005E997B /* YZHAddBookSetNoteCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetNoteCell.h; sourceTree = "<group>"; };
+		55C656B9215F2A0B005E997B /* YZHAddBookSetNoteCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetNoteCell.m; sourceTree = "<group>"; };
+		55C656BA215F2A0B005E997B /* YZHAddBookSetNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetNoteCell.xib; sourceTree = "<group>"; };
+		55C656C3215F5C61005E997B /* YZHAddBookSetTagVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagVC.h; sourceTree = "<group>"; };
+		55C656C4215F5C61005E997B /* YZHAddBookSetTagVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagVC.m; sourceTree = "<group>"; };
+		55C656C5215F5C61005E997B /* YZHAddBookSetTagVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetTagVC.xib; sourceTree = "<group>"; };
+		55C656C8215F5FAE005E997B /* YZHAddBookSetTagCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagCell.h; sourceTree = "<group>"; };
+		55C656C9215F5FAE005E997B /* YZHAddBookSetTagCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagCell.m; sourceTree = "<group>"; };
+		55C656CA215F5FAE005E997B /* YZHAddBookSetTagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetTagCell.xib; sourceTree = "<group>"; };
+		55C656CE215F706E005E997B /* YZHAddBookSetTagFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagFooterView.h; sourceTree = "<group>"; };
+		55C656CF215F706E005E997B /* YZHAddBookSetTagFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagFooterView.m; sourceTree = "<group>"; };
+		55C656D1215F7077005E997B /* YZHAddBookSetTagFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetTagFooterView.xib; sourceTree = "<group>"; };
+		55C656D3215F7947005E997B /* YZHAddBookSetTagAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagAlertView.h; sourceTree = "<group>"; };
+		55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagAlertView.m; sourceTree = "<group>"; };
+		55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetTagAlertView.xib; sourceTree = "<group>"; };
 		55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YZHTool.h"; sourceTree = "<group>"; };
 		55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YZHTool.m"; sourceTree = "<group>"; };
 		55EAB154215BC88900F4142A /* YZHMyplaceCityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyplaceCityVC.h; sourceTree = "<group>"; };
@@ -435,7 +515,7 @@
 				55128A0A21463E480099CC55 /* Discover */,
 				55128A0E21463E480099CC55 /* MyCenter */,
 				55128A1221463E480099CC55 /* PrivatelyChat */,
-				55128A1621463E480099CC55 /* Address */,
+				55128A1621463E480099CC55 /* AddressBook */,
 				55128A1A21463E480099CC55 /* Wallet */,
 				55128A1E21463E480099CC55 /* Community */,
 			);
@@ -555,23 +635,31 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		55128A1621463E480099CC55 /* Address */ = {
+		55128A1621463E480099CC55 /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
+				55C656CD215F6DA3005E997B /* ExtensionTool */,
 				55128A1721463E480099CC55 /* Controller */,
 				55128A1821463E480099CC55 /* Model */,
 				55128A1921463E480099CC55 /* View */,
 			);
-			path = Address;
+			path = AddressBook;
 			sourceTree = "<group>";
 		};
 		55128A1721463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				556F6D06214773E40048171C /* YZHAddressViewController.h */,
-				556F6D07214773E40048171C /* YZHAddressViewController.m */,
-				55B5DB83215223F1002A04A9 /* YZHAddressVC.h */,
-				55B5DB84215223F1002A04A9 /* YZHAddressVC.m */,
+				557603B0215DD1C8007CEC60 /* YZHAddressBookVC.h */,
+				557603B1215DD1C8007CEC60 /* YZHAddressBookVC.m */,
+				55C65695215E3601005E997B /* YZHAddBookDetailsVC.h */,
+				55C65696215E3601005E997B /* YZHAddBookDetailsVC.m */,
+				55C65697215E3601005E997B /* YZHAddBookDetailsVC.xib */,
+				55C656B2215F283B005E997B /* YZHAddBookSetNoteVC.h */,
+				55C656B3215F283B005E997B /* YZHAddBookSetNoteVC.m */,
+				55C656B4215F283B005E997B /* YZHAddBookSetNoteVC.xib */,
+				55C656C3215F5C61005E997B /* YZHAddBookSetTagVC.h */,
+				55C656C4215F5C61005E997B /* YZHAddBookSetTagVC.m */,
+				55C656C5215F5C61005E997B /* YZHAddBookSetTagVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -579,6 +667,8 @@
 		55128A1821463E480099CC55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
+				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -586,6 +676,10 @@
 		55128A1921463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55C656C2215F5C3E005E997B /* YZHAddBookSetTagView */,
+				55C656B7215F2976005E997B /* YZHAddBookSetNoteView */,
+				55C65694215E3580005E997B /* YZHAddressBookView */,
+				55C6569A215E3691005E997B /* YZHAddBookDetailsView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -943,6 +1037,9 @@
 		55337DE82150886D00307B75 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55C656AD215F2614005E997B /* YZHCommonStyleTableViewCell.h */,
+				55C656AE215F2614005E997B /* YZHCommonStyleTableViewCell.m */,
+				55C656AF215F2614005E997B /* YZHCommonStyleTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1148,6 +1245,77 @@
 			path = GenericKeychain;
 			sourceTree = "<group>";
 		};
+		55C65694215E3580005E997B /* YZHAddressBookView */ = {
+			isa = PBXGroup;
+			children = (
+				55BD8656215DDB2000D23ED1 /* YZHAddressBookHeaderView.h */,
+				55BD8657215DDB2000D23ED1 /* YZHAddressBookHeaderView.m */,
+				55BD865B215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib */,
+				55BD866C215E22DB00D23ED1 /* YZHAddressBookFootView.h */,
+				55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */,
+				55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */,
+				55BD865D215DFCEC00D23ED1 /* YZHAddBookFriendsCell.h */,
+				55BD865E215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m */,
+				55BD865F215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib */,
+				55BD8667215E0CA700D23ED1 /* YZHAddBookAdditionalCell.h */,
+				55BD8668215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m */,
+				55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */,
+				55BD8662215E084600D23ED1 /* YZHAddBookSectionView.h */,
+				55BD8663215E084600D23ED1 /* YZHAddBookSectionView.m */,
+				55BD8665215E085800D23ED1 /* YZHAddBookSectionView.xib */,
+			);
+			path = YZHAddressBookView;
+			sourceTree = "<group>";
+		};
+		55C6569A215E3691005E997B /* YZHAddBookDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				55C6569B215E587A005E997B /* YZHAddBookUserIDCell.h */,
+				55C6569C215E587A005E997B /* YZHAddBookUserIDCell.m */,
+				55C6569D215E587A005E997B /* YZHAddBookUserIDCell.xib */,
+				55C656A0215E5907005E997B /* YZHAddBookSettingCell.h */,
+				55C656A1215E5907005E997B /* YZHAddBookSettingCell.m */,
+				55C656A2215E5907005E997B /* YZHAddBookSettingCell.xib */,
+				55C656A5215E6982005E997B /* YZHAddBookUserAskFooterView.h */,
+				55C656A6215E6982005E997B /* YZHAddBookUserAskFooterView.m */,
+				55C656A8215E6991005E997B /* YZHAddBookUserAskFooterView.xib */,
+			);
+			path = YZHAddBookDetailsView;
+			sourceTree = "<group>";
+		};
+		55C656B7215F2976005E997B /* YZHAddBookSetNoteView */ = {
+			isa = PBXGroup;
+			children = (
+				55C656B8215F2A0B005E997B /* YZHAddBookSetNoteCell.h */,
+				55C656B9215F2A0B005E997B /* YZHAddBookSetNoteCell.m */,
+				55C656BA215F2A0B005E997B /* YZHAddBookSetNoteCell.xib */,
+			);
+			path = YZHAddBookSetNoteView;
+			sourceTree = "<group>";
+		};
+		55C656C2215F5C3E005E997B /* YZHAddBookSetTagView */ = {
+			isa = PBXGroup;
+			children = (
+				55C656C8215F5FAE005E997B /* YZHAddBookSetTagCell.h */,
+				55C656C9215F5FAE005E997B /* YZHAddBookSetTagCell.m */,
+				55C656CA215F5FAE005E997B /* YZHAddBookSetTagCell.xib */,
+				55C656CE215F706E005E997B /* YZHAddBookSetTagFooterView.h */,
+				55C656CF215F706E005E997B /* YZHAddBookSetTagFooterView.m */,
+				55C656D1215F7077005E997B /* YZHAddBookSetTagFooterView.xib */,
+				55C656D3215F7947005E997B /* YZHAddBookSetTagAlertView.h */,
+				55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */,
+				55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */,
+			);
+			path = YZHAddBookSetTagView;
+			sourceTree = "<group>";
+		};
+		55C656CD215F6DA3005E997B /* ExtensionTool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ExtensionTool;
+			sourceTree = "<group>";
+		};
 		EEB8AA5BD57523A3922FA62E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1224,19 +1392,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55BD8661215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib in Resources */,
 				552CC8A1215A782000135FDC /* YZHPrivacySettingVC.xib in Resources */,
+				55C656D2215F7077005E997B /* YZHAddBookSetTagFooterView.xib in Resources */,
 				55B5DBA02153374A002A04A9 /* YZHMyInformationCell.xib in Resources */,
 				5531458121573C1400A13F96 /* YZHMyInformationYoloIDVC.xib in Resources */,
 				5531458B21574B4600A13F96 /* YZHMyInformationMyPlaceCell.xib in Resources */,
 				5531457721572FAD00A13F96 /* YZHMyInformationSetGenderVC.xib in Resources */,
 				552CC897215A6F3900135FDC /* YZHAboutYoloCell.xib in Resources */,
 				55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */,
+				55C656B6215F283B005E997B /* YZHAddBookSetNoteVC.xib in Resources */,
+				55C656A4215E5907005E997B /* YZHAddBookSettingCell.xib in Resources */,
+				55C656B1215F2614005E997B /* YZHCommonStyleTableViewCell.xib in Resources */,
+				55C6569F215E587A005E997B /* YZHAddBookUserIDCell.xib in Resources */,
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
+				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
+				55C656C7215F5C61005E997B /* YZHAddBookSetTagVC.xib in Resources */,
+				55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */,
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
 				55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
+				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
 				55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */,
 				552CC89C215A746D00135FDC /* YZHSettingCenterVC.xib in Resources */,
 				552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */,
@@ -1247,10 +1425,16 @@
 				55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */,
 				553145722157298200A13F96 /* YZHMyInformationSetNameVC.xib in Resources */,
 				5562DE2B215683BA0098FA83 /* YZHMyInformationPhotoView.xib in Resources */,
+				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
 				5562DE35215687D70098FA83 /* YZHMyInformationPhotoVC.xib in Resources */,
+				55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */,
+				55C65699215E3601005E997B /* YZHAddBookDetailsVC.xib in Resources */,
 				55B5DB9721528566002A04A9 /* YZHMyCenterCell.xib in Resources */,
+				55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */,
 				552CC8A6215A798E00135FDC /* YZHPrivacySettingCell.xib in Resources */,
+				55C656A9215E6991005E997B /* YZHAddBookUserAskFooterView.xib in Resources */,
+				55C656BC215F2A0B005E997B /* YZHAddBookSetNoteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1307,16 +1491,24 @@
 				55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */,
 				5531458021573C1400A13F96 /* YZHMyInformationYoloIDVC.m in Sources */,
 				552CC89B215A746D00135FDC /* YZHSettingCenterVC.m in Sources */,
+				55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
 				55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */,
 				5531457B21573BB600A13F96 /* YZHMyInformationMyQRCodeVC.m in Sources */,
 				556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */,
+				55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */,
 				5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */,
 				556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */,
+				55C656A7215E6982005E997B /* YZHAddBookUserAskFooterView.m in Sources */,
+				55C656B0215F2614005E997B /* YZHCommonStyleTableViewCell.m in Sources */,
 				55C239E52149122400200798 /* YZHNetworkService.m in Sources */,
+				55C656AC215F141C005E997B /* YZHAddressBookModel.m in Sources */,
 				5531457621572FAD00A13F96 /* YZHMyInformationSetGenderVC.m in Sources */,
+				55C656CB215F5FAE005E997B /* YZHAddBookSetTagCell.m in Sources */,
 				55B5DB9621528566002A04A9 /* YZHMyCenterCell.m in Sources */,
 				55337DCD214F8EE600307B75 /* YZHFindPasswordView.m in Sources */,
+				55BD8660215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m in Sources */,
+				55C65698215E3601005E997B /* YZHAddBookDetailsVC.m in Sources */,
 				556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */,
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
 				5531458A21574B4600A13F96 /* YZHMyInformationMyPlaceCell.m in Sources */,
@@ -1328,33 +1520,40 @@
 				5562DE29215683AF0098FA83 /* YZHMyInformationPhotoView.m in Sources */,
 				55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */,
 				55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */,
+				55C6569E215E587A005E997B /* YZHAddBookUserIDCell.m in Sources */,
 				55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */,
 				55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */,
 				55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */,
+				55C656A3215E5907005E997B /* YZHAddBookSettingCell.m in Sources */,
 				55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */,
 				55B5DB9B21530EDA002A04A9 /* UIScrollView+YZHRefresh.m in Sources */,
 				55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */,
 				556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */,
 				55337DF42150F4DC00307B75 /* UITextField+YZHTool.m in Sources */,
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
-				55B5DB85215223F1002A04A9 /* YZHAddressVC.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
 				556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */,
 				55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */,
 				552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
+				55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */,
+				55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */,
 				55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */,
 				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
 				55B5DB9021527D78002A04A9 /* YZHMyCenterHeaderView.m in Sources */,
+				55C656B5215F283B005E997B /* YZHAddBookSetNoteVC.m in Sources */,
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
 				553145712157298200A13F96 /* YZHMyInformationSetNameVC.m in Sources */,
 				552CC8A9215B149A00135FDC /* UIImage+YZHTool.m in Sources */,
 				552CC8A0215A782000135FDC /* YZHPrivacySettingVC.m in Sources */,
 				55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */,
+				55BD8664215E084600D23ED1 /* YZHAddBookSectionView.m in Sources */,
 				55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */,
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
+				557603B2215DD1C8007CEC60 /* YZHAddressBookVC.m in Sources */,
+				55C656C6215F5C61005E997B /* YZHAddBookSetTagVC.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
@@ -1365,10 +1564,11 @@
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
-				556F6D08214773E40048171C /* YZHAddressViewController.m in Sources */,
 				55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */,
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
+				55C656BB215F2A0B005E997B /* YZHAddBookSetNoteCell.m in Sources */,
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
+				55C656D5215F7947005E997B /* YZHAddBookSetTagAlertView.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
 				5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */,
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,

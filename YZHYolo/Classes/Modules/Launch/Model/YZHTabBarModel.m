@@ -43,7 +43,7 @@
                               @"selectedColor": themeManage.themeitems[1].selectedColor,
                               },
                             @{@"title": @"通讯录",
-                              @"viewController": @"YZHAddressVC",
+                              @"viewController": @"YZHAddressBookVC",
                               @"hasNavigation": @"1",
                               @"image": themeManage.themeitems[2].image,
                               @"selectedImage": themeManage.themeitems[2].selectedImage,

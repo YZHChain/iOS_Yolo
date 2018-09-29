@@ -24,6 +24,7 @@ target 'YZHYolo' do
   pod 'JLRoutes', '1.6'
   pod 'WebViewJavascriptBridge'
   pod 'UIViewController+KeyboardAnimation', '~> 1.3'
+  pod 'SCIndexView' 
 
   #网络
   pod 'AFNetworking', '3.0'

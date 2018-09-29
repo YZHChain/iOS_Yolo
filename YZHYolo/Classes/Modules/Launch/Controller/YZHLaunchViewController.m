@@ -23,9 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //  设置闪屏页
+    // 设置闪屏页
     [self setupSplashScreen];
-    //  启动流程
+    // 启动流程
     [self startConfign];
 }
 

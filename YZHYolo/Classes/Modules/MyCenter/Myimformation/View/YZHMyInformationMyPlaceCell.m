@@ -24,7 +24,7 @@ static NSString* const kSelectedLocationCellIdentifier =  @"selectedLocationCell
     // Configure the view for the selected state
 }
 
-+ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
++ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     
     NSString* cellIdentifier;
     switch (indexPath.section) {

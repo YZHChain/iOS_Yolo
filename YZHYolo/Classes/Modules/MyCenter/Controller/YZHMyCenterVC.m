@@ -10,7 +10,6 @@
 
 #import "YZHMyCenterHeaderView.h"
 #import "YZHMyCenterCell.h"
-
 #import "UIScrollView+YZHRefresh.h"
 #import "YZHMyCenterModel.h"
 
@@ -142,6 +141,9 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 }
 #pragma mark - 5.Event Response
 
+- (void)clickTableViewHeader {
+    [YZHRouter openURL:kYZHRouterMyInformation];
+}
 
 #pragma mark - 6.Private Methods
 
@@ -179,21 +181,10 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
         _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, 170)];
         UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
         [btn setTitle:@"" forState:UIControlStateNormal];
-        [btn bk_addEventHandler:^(id sender) {
-            
-        } forControlEvents:UIControlEventAllEvents];
+        [btn addTarget:self action:@selector(clickTableViewHeader) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:btn];
     }
     return _headerView;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

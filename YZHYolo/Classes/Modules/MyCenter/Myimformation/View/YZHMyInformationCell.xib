@@ -85,7 +85,7 @@
                 <outlet property="photoImageView" destination="3uq-Ab-XGt" id="L93-a8-592"/>
                 <outlet property="titleLabel" destination="rsG-Ud-J6J" id="FZl-J4-kch"/>
             </connections>
-            <point key="canvasLocation" x="36" y="-14"/>
+            <point key="canvasLocation" x="35" y="-42"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationNicknameCellIdentifier" selectionStyle="default" indentationWidth="10" id="9As-xR-yqK" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -127,7 +127,7 @@
                 <outlet property="subTitleLabel" destination="gYl-QA-k5q" id="8QN-lG-9eW"/>
                 <outlet property="titleLabel" destination="rwN-mk-U4a" id="Aaw-J8-t1F"/>
             </connections>
-            <point key="canvasLocation" x="35.200000000000003" y="111.54422788605699"/>
+            <point key="canvasLocation" x="34" y="65"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationGenderCellIdentifier" selectionStyle="default" indentationWidth="10" id="dfr-gE-hGD" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -179,7 +179,7 @@
                 <outlet property="subTitleLabel" destination="02S-hJ-DGz" id="iJO-Qt-ntX"/>
                 <outlet property="titleLabel" destination="Cmh-RR-j0t" id="ZC3-yH-eN5"/>
             </connections>
-            <point key="canvasLocation" x="36" y="237"/>
+            <point key="canvasLocation" x="34" y="176"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationCellIdentifier" selectionStyle="default" indentationWidth="10" id="N1p-Hf-jAk" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
@@ -222,7 +222,7 @@
                 <outlet property="photoImageView" destination="3g5-Wn-WKd" id="4Bo-UE-9Ph"/>
                 <outlet property="titleLabel" destination="AoI-2E-Tyg" id="Hdq-QA-DKt"/>
             </connections>
-            <point key="canvasLocation" x="36" y="366"/>
+            <point key="canvasLocation" x="34" y="291"/>
         </tableViewCell>
     </objects>
     <resources>

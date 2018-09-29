@@ -15,5 +15,6 @@
 + (UIColor *)yzh_backgroundThemeGray; //  常用主题灰色;
 + (UIColor *)yzh_separatorLightGray;  // 分割线浅灰色;
 + (UIColor *)yzh_fontshallowBlack;   //  常用字体浅黑色;
++ (UIColor *)yzh_buttonbackgroundGreen; // 常用按钮背景绿
 
 @end
