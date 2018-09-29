@@ -58,8 +58,6 @@
     }
     [super pushViewController:viewController animated:animated];
 }
-// 保证每次到 RootViewController 时导航栏隐藏.
-
 // 直接通过 set 方法设置时也要将其 Bar 隐藏起来.
 - (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated
 {
