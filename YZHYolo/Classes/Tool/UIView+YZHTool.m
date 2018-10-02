@@ -10,6 +10,7 @@
 
 #import "BlocksKit+UIKit.h"
 
+#import "Masonry.h"
 @implementation UIView (YZHTool)
 
 #pragma mark - Frame
@@ -163,7 +164,7 @@
     [window addSubview:bgView];
     [bgView addSubview:tapButton];
     [bgView addSubview:self];
-    
+
     if (animations) {
         bgView.backgroundColor = [UIColor clearColor];
         [UIView animateWithDuration:0.3 animations:^{

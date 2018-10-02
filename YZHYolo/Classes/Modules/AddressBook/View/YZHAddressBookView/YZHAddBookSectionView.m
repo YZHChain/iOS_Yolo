@@ -18,4 +18,15 @@
 }
 */
 
+- (void)awakeFromNib{
+    
+    [super awakeFromNib];
+    
+    self.backgroundView = ({
+        UIView * view = [[UIView alloc] initWithFrame:self.bounds];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
+}
+
 @end

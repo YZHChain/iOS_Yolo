@@ -11,12 +11,17 @@
 #import "YZHAddBookSetTagCell.h"
 #import "YZHAddBookSetTagFooterView.h"
 #import "YZHAddBookSetTagAlertView.h"
-//#import "UIView+YZHTool.h"
-static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
+#import "YZHAddBookSetTagSectionView.h"
 
+
+static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
+static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdentifier";
 @interface YZHAddBookSetTagVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(nonatomic, strong)YZHAddBookSetTagFooterView* footerView;
+@property (nonatomic, strong) UIImageView* selectedImageView;
+@property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 
 @end
 
@@ -62,11 +67,18 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.scrollEnabled = YES;
-    [self.tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSetTagCell" bundle:nil] forCellReuseIdentifier:kSetTagCellIdentifier];
-    YZHAddBookSetTagFooterView* setTab =  [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookSetTagFooterView" owner:nil options:nil].lastObject;
-    self.tableView.tableFooterView = setTab;
-    [setTab.addTagButton addTarget:self action:@selector(clickAdditionTag:) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableView registerClass:[YZHAddBookSetTagSectionView class] forHeaderFooterViewReuseIdentifier:kSetTagCellSectionIdentifier];
+    self.footerView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookSetTagFooterView" owner:nil options:nil].lastObject;
+    [self.view addSubview:self.footerView];
+    [self.footerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(self.tableView.mas_bottom);
+    }];
+    [self.footerView.addTagButton addTarget:self action:@selector(clickAdditionTag:) forControlEvents:UIControlEventTouchUpInside];
     
+//    [self.tableView setEditing:YES animated:YES];
+//    self.tableView.allowsSelection = NO;
+    self.tableView.allowsSelectionDuringEditing = YES;
 }
 
 - (void)reloadView {
@@ -84,24 +96,44 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 1;
+    return 15;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    YZHAddBookSetTagCell* cell = [tableView dequeueReusableCellWithIdentifier:kSetTagCellIdentifier forIndexPath:indexPath];
+    YZHAddBookSetTagCell* cell = [YZHAddBookSetTagCell tempTableViewCellWith:tableView indexPath:indexPath];
+    if (indexPath.row == 0) {
+        cell.titleLabel.text = @"☆标准好友";
+    } else if (indexPath.row == 1) {
+        cell.titleLabel.text = @"家人";
+    } else if (indexPath.row == 2) {
+        cell.titleLabel.text = @"同事";
+    }
+    
+    if (indexPath.section == 0) {
+//        cell.editingStyle
+        cell.shouldIndentWhileEditing = NO;
+//        cell.editing = NO;
+//        [cell setEditing:NO animated:NO];
+//        cell.showingDeleteConfirmation
+        cell.userInteractionEnabledWhileDragging = NO;
+        cell.indentationWidth = 3;
+        cell.shouldIndentWhileEditing = NO;
+        
+        
+    }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 55;
+    return 40;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -111,7 +143,12 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UIView* view = [[UIView alloc] init];
+    YZHAddBookSetTagSectionView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kSetTagCellSectionIdentifier];
+    if (section == 0) {
+        view.titleLabel.text = @"选择已有标签";
+    } else {
+        view.titleLabel.text = @"自定义标签";
+    }
     
     return view;
 }
@@ -119,6 +156,59 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YZHAddBookSetTagCell* selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    YZHAddBookSetTagCell* lastSelectedCell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
+    [lastSelectedCell.titleLabel setTextColor:YZHColorWithRGB(193, 193, 193)];
+    self.selectedIndexPath = indexPath;
+    [selectedCell.contentView addSubview:self.selectedImageView];
+    [selectedCell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
+}
+
+#pragma mark -- UITableView Editing
+// 定制编辑按钮.
+//- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    if (indexPath.section == 1) {
+//
+//        UITableViewRowAction* removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+//
+//            [tableView setEditing:NO animated:NO];
+//        }];
+//
+//        return @[removeAction];
+//    } else {
+//
+//        return nil;
+//    }
+//}
+//点击编辑按钮
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //只要实现这个方法，就实现了默认滑动删除！！！！！
+    if (indexPath.section == 1) {
+        if (editingStyle == UITableViewCellEditingStyleDelete)
+        {
+            NSLog(@"删除了哦");
+        }
+
+    } else {
+
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return @"删除";
+}
+// 设置支持编辑状态
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (indexPath.section == 1) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - 5.Event Response
@@ -137,9 +227,8 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 - (void)clickAdditionTag:(UIButton* )sender {
     
     YZHAddBookSetTagAlertView* alertView = [YZHAddBookSetTagAlertView yzh_viewWithFrame:CGRectMake(37, 186, 300, 191)];
-    
+    // TODO: 待重新封装.
     [alertView yzh_showOnWindowAnimations:^{
-        
     }];
 }
 
@@ -150,5 +239,23 @@ static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 }
 
 #pragma mark - 7.GET & SET
+
+- (UIImageView *)selectedImageView {
+    
+    if (_selectedImageView == nil) {
+        _selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_information_setName_selected"]];
+        _selectedImageView.frame = CGRectMake(YZHVIEW_WIDTH - 18 - _selectedImageView.width, 18, _selectedImageView.width, _selectedImageView.height);
+    }
+
+    return _selectedImageView;
+}
+
+- (NSIndexPath *)selectedIndexPath {
+    
+    if (!_selectedIndexPath) {
+        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    }
+    return _selectedIndexPath;
+}
 
 @end

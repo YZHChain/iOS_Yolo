@@ -135,6 +135,11 @@
 		55C656D2215F7077005E997B /* YZHAddBookSetTagFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656D1215F7077005E997B /* YZHAddBookSetTagFooterView.xib */; };
 		55C656D5215F7947005E997B /* YZHAddBookSetTagAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */; };
 		55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */; };
+		55D083552160BD200028D919 /* YZHDetailsSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D083532160BD200028D919 /* YZHDetailsSettingVC.m */; };
+		55D083562160BD200028D919 /* YZHDetailsSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D083542160BD200028D919 /* YZHDetailsSettingVC.xib */; };
+		55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D083592160BE610028D919 /* YZHDetailsSettingCell.m */; };
+		55D0835C2160BE610028D919 /* YZHDetailsSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D0835A2160BE610028D919 /* YZHDetailsSettingCell.xib */; };
+		55D083622161C5ED0028D919 /* YZHAddBookSetTagSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D083612161C5ED0028D919 /* YZHAddBookSetTagSectionView.m */; };
 		55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */; };
 		55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */; };
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
@@ -366,6 +371,14 @@
 		55C656D3215F7947005E997B /* YZHAddBookSetTagAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagAlertView.h; sourceTree = "<group>"; };
 		55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagAlertView.m; sourceTree = "<group>"; };
 		55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSetTagAlertView.xib; sourceTree = "<group>"; };
+		55D083522160BD200028D919 /* YZHDetailsSettingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDetailsSettingVC.h; sourceTree = "<group>"; };
+		55D083532160BD200028D919 /* YZHDetailsSettingVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDetailsSettingVC.m; sourceTree = "<group>"; };
+		55D083542160BD200028D919 /* YZHDetailsSettingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHDetailsSettingVC.xib; sourceTree = "<group>"; };
+		55D083582160BE610028D919 /* YZHDetailsSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDetailsSettingCell.h; sourceTree = "<group>"; };
+		55D083592160BE610028D919 /* YZHDetailsSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHDetailsSettingCell.m; sourceTree = "<group>"; };
+		55D0835A2160BE610028D919 /* YZHDetailsSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHDetailsSettingCell.xib; sourceTree = "<group>"; };
+		55D083602161C5ED0028D919 /* YZHAddBookSetTagSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSetTagSectionView.h; sourceTree = "<group>"; };
+		55D083612161C5ED0028D919 /* YZHAddBookSetTagSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSetTagSectionView.m; sourceTree = "<group>"; };
 		55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YZHTool.h"; sourceTree = "<group>"; };
 		55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YZHTool.m"; sourceTree = "<group>"; };
 		55EAB154215BC88900F4142A /* YZHMyplaceCityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyplaceCityVC.h; sourceTree = "<group>"; };
@@ -639,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				55C656CD215F6DA3005E997B /* ExtensionTool */,
+				55F91A762160A2010037EC3B /* SearchFirend */,
 				55128A1721463E480099CC55 /* Controller */,
 				55128A1821463E480099CC55 /* Model */,
 				55128A1921463E480099CC55 /* View */,
@@ -660,6 +674,9 @@
 				55C656C3215F5C61005E997B /* YZHAddBookSetTagVC.h */,
 				55C656C4215F5C61005E997B /* YZHAddBookSetTagVC.m */,
 				55C656C5215F5C61005E997B /* YZHAddBookSetTagVC.xib */,
+				55D083522160BD200028D919 /* YZHDetailsSettingVC.h */,
+				55D083532160BD200028D919 /* YZHDetailsSettingVC.m */,
+				55D083542160BD200028D919 /* YZHDetailsSettingVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -676,6 +693,7 @@
 		55128A1921463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55D083572160BE470028D919 /* YZHDetailsSettingCell */,
 				55C656C2215F5C3E005E997B /* YZHAddBookSetTagView */,
 				55C656B7215F2976005E997B /* YZHAddBookSetNoteView */,
 				55C65694215E3580005E997B /* YZHAddressBookView */,
@@ -1299,6 +1317,8 @@
 				55C656C8215F5FAE005E997B /* YZHAddBookSetTagCell.h */,
 				55C656C9215F5FAE005E997B /* YZHAddBookSetTagCell.m */,
 				55C656CA215F5FAE005E997B /* YZHAddBookSetTagCell.xib */,
+				55D083602161C5ED0028D919 /* YZHAddBookSetTagSectionView.h */,
+				55D083612161C5ED0028D919 /* YZHAddBookSetTagSectionView.m */,
 				55C656CE215F706E005E997B /* YZHAddBookSetTagFooterView.h */,
 				55C656CF215F706E005E997B /* YZHAddBookSetTagFooterView.m */,
 				55C656D1215F7077005E997B /* YZHAddBookSetTagFooterView.xib */,
@@ -1314,6 +1334,23 @@
 			children = (
 			);
 			path = ExtensionTool;
+			sourceTree = "<group>";
+		};
+		55D083572160BE470028D919 /* YZHDetailsSettingCell */ = {
+			isa = PBXGroup;
+			children = (
+				55D083582160BE610028D919 /* YZHDetailsSettingCell.h */,
+				55D083592160BE610028D919 /* YZHDetailsSettingCell.m */,
+				55D0835A2160BE610028D919 /* YZHDetailsSettingCell.xib */,
+			);
+			path = YZHDetailsSettingCell;
+			sourceTree = "<group>";
+		};
+		55F91A762160A2010037EC3B /* SearchFirend */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchFirend;
 			sourceTree = "<group>";
 		};
 		EEB8AA5BD57523A3922FA62E /* Pods */ = {
@@ -1408,6 +1445,7 @@
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
 				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
+				55D0835C2160BE610028D919 /* YZHDetailsSettingCell.xib in Resources */,
 				55C656C7215F5C61005E997B /* YZHAddBookSetTagVC.xib in Resources */,
 				55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */,
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
@@ -1432,6 +1470,7 @@
 				55C65699215E3601005E997B /* YZHAddBookDetailsVC.xib in Resources */,
 				55B5DB9721528566002A04A9 /* YZHMyCenterCell.xib in Resources */,
 				55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */,
+				55D083562160BD200028D919 /* YZHDetailsSettingVC.xib in Resources */,
 				552CC8A6215A798E00135FDC /* YZHPrivacySettingCell.xib in Resources */,
 				55C656A9215E6991005E997B /* YZHAddBookUserAskFooterView.xib in Resources */,
 				55C656BC215F2A0B005E997B /* YZHAddBookSetNoteCell.xib in Resources */,
@@ -1467,12 +1506,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PYSearch.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDKUI.bundle",
 			);
@@ -1533,7 +1574,9 @@
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
+				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
 				556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */,
+				55D083622161C5ED0028D919 /* YZHAddBookSetTagSectionView.m in Sources */,
 				55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */,
 				552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
@@ -1559,6 +1602,7 @@
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
 				552CC8A5215A798E00135FDC /* YZHPrivacySettingCell.m in Sources */,
+				55D083552160BD200028D919 /* YZHDetailsSettingVC.m in Sources */,
 				55337DDB214FE0CC00307B75 /* YZHWelcomeView.m in Sources */,
 				55337DF12150D62B00307B75 /* YZHBaseNavigationController.m in Sources */,
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,

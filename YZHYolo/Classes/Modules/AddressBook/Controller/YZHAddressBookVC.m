@@ -130,7 +130,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    [YZHRouter openURL:kYZHRouterAddressBookDetail];
+    [YZHRouter openURL:kYZHRouterAddressBookDetails];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -153,9 +153,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     return view;
 }
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//}
+#pragma mark -- UITableView Editing
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -186,7 +184,16 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     return @[remarkAction, categoryAction];
 }
 
-//- tableviewit
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0 ) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
 #pragma mark - 5.Event Response
 
 - (void)clickLeftBarSwitchType:(UIButton *)sender{
@@ -221,12 +228,10 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _tableView.rowHeight = 55;
         _tableView.tableHeaderView = [YZHAddressBookHeaderView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
         _tableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
-        _tableView.tableFooterView.backgroundColor = [UIColor yellowColor];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAdditionalCell" bundle:nil] forCellReuseIdentifier:kYZHAdditionalCellIdentifier];
-        _tableView.tableFooterView = [[UIView alloc] init];
-        _tableView.sectionIndexColor = [UIColor yzh_fontshallowBlack];
+        _tableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
     }
     return _tableView;
 }

@@ -13,6 +13,7 @@
 #import "YZHLoginVC.h"
 #import "YZHPublic.h"
 #import "YZHBaseNavigationController.h"
+
 @interface YZHLaunchViewController ()
 
 @end
@@ -61,7 +62,7 @@
     } else {
         // 判断用户是否已登录,
         BOOL hasLogin = NO;
-        if (hasLogin) {
+        if (!hasLogin) {
             
             rootViewController = [[YZHRootTabBarViewController alloc] init];
             

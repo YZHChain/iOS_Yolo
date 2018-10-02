@@ -9,7 +9,6 @@
 #import "YZHWelcomeView.h"
 
 #import "YZHPublic.h"
-
 @interface YZHWelcomeView()<UITextFieldDelegate>
 
 

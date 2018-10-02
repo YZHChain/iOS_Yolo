@@ -52,7 +52,10 @@ NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
 
 #pragma mark -- AddressBook
 
-NSString* const kYZHRouterAddressBookDetail   = @"/addressBook/settingCenter";
+NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details";
+NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote";
+NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
+NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
 
 @implementation YZHRouterConfig
 
@@ -154,9 +157,27 @@ NSString* const kYZHRouterAddressBookDetail   = @"/addressBook/settingCenter";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
-             kYZHRouterAddressBookDetail: @{
+             kYZHRouterAddressBookDetails: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
-                     kYZHRouteViewControllerNameKey: @"通讯录-详情资料",
+                     kYZHRouteViewControllerNameKey: @"详情资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetNote: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookSetNoteVC",
+                     kYZHRouteViewControllerNameKey: @"设置备注",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetTag: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
+                     kYZHRouteViewControllerNameKey: @"设置标签",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetting: @{
+                     kYZHRouteViewControllerClassKey: @"YZHDetailsSettingVC",
+                     kYZHRouteViewControllerNameKey: @"其他设置",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

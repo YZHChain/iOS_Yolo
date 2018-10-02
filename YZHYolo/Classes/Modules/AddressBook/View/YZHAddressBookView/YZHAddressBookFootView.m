@@ -22,7 +22,6 @@
     
     [super awakeFromNib];
     
-    NSLog(@"加载");
 }
 
 @end

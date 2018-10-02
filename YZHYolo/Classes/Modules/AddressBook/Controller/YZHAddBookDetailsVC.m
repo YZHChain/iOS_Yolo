@@ -48,6 +48,12 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"详情资料";
+    //TODO:
+    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    
 }
 
 - (void)setupView
@@ -153,6 +159,11 @@
 }
 
 #pragma mark - 5.Event Response
+
+- (void)clickRightItemGotoSetting {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookSetting];
+}
 
 #pragma mark - 6.Private Methods
 

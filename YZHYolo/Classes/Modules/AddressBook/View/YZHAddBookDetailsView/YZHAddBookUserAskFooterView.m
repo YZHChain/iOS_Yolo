@@ -24,7 +24,7 @@
     [super awakeFromNib];
     
     [self.addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.sendMessageButton yzh_setBackgroundColor:[UIColor yzh_buttonbackgroundGreen] forState:UIControlStateNormal];
+    [self.sendMessageButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundGreen] forState:UIControlStateNormal];
 }
 
 @end

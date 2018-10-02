@@ -16,7 +16,6 @@ static NSString* const kCategoryTagCellIdentifier =  @"categoryTagCellIdentifier
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    NSLog(@"未服用");
     // Initialization code
 }
 
@@ -43,7 +42,6 @@ static NSString* const kCategoryTagCellIdentifier =  @"categoryTagCellIdentifier
     YZHAddBookSetNoteCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YZHAddBookSetNoteCell" owner:nil options:nil] objectAtIndex:cellType];
-    } else {
     }
     return cell;
 }

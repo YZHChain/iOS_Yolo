@@ -33,7 +33,6 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="2Ig-zh-0zt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HNq-53-fsM"/>
                 <constraint firstItem="2Ig-zh-0zt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="h21-7B-m6b"/>
