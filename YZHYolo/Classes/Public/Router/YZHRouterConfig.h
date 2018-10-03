@@ -29,6 +29,8 @@ extern NSString * const kYZHRouteNeedLogin;
 
 extern NSString * const kYZHRouteIndexRoot;
 extern NSString * const kYZHRouteSeguePush;
+extern NSString * const kYZHRouteSegueModal;
+extern NSString * const kYZHRouteSegueNewNavigation;
 
 #pragma mark -- GuidePage
 
@@ -55,6 +57,8 @@ extern NSString *const kYZHRouterAddressBookDetails;
 extern NSString *const kYZHRouterAddressBookSetNote;
 extern NSString *const kYZHRouterAddressBookSetTag;
 extern NSString *const kYZHRouterAddressBookSetting;
+extern NSString *const kYZHRouterAddressBookAddFirend;
+extern NSString *const kYZHRouterAddressBookPhoneContact;
 
 + (NSDictionary* )configInfo;
 

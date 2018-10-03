@@ -11,6 +11,8 @@
 //TODO:规范Segue参数与非Segue参数(YZHRouteFromOutside,YZHRouteNeedLogin等)，Segue参数统一以YZHRouteSegue开头。
 NSString *const kYZHRouteSegue           = @"YZHRouteSegue";
 NSString *const kYZHRouteSeguePush       = @"YZHRouteSeguePush";
+NSString *const kYZHRouteSegueModal      = @"YZHRouteSegueModal";
+NSString *const kYZHRouteSegueNewNavigation = @"YZHRouteNewNavigation";
 NSString *const kYZHRouteAnimated        = @"YZHRouteAnimated";
 NSString *const kYZHRouteBackIndex       = @"YZHRouteBackIndex";
 NSString *const kYZHRouteBackPage        = @"YZHRouteBackPage";
@@ -56,6 +58,8 @@ NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details";
 NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote";
 NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
 NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
+NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
+NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
 
 @implementation YZHRouterConfig
 
@@ -178,6 +182,18 @@ NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting"
              kYZHRouterAddressBookSetting: @{
                      kYZHRouteViewControllerClassKey: @"YZHDetailsSettingVC",
                      kYZHRouteViewControllerNameKey: @"其他设置",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookAddFirend: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendVC",
+                     kYZHRouteViewControllerNameKey: @"添加好友",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookPhoneContact: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookPhoneContactVC",
+                     kYZHRouteViewControllerNameKey: @"手机联系人",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

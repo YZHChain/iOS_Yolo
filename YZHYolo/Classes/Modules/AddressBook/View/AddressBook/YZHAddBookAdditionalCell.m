@@ -10,8 +10,7 @@
 
 @interface YZHAddBookAdditionalCell()
 
-@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 
 @end
 

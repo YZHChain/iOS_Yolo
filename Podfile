@@ -25,7 +25,8 @@ target 'YZHYolo' do
   pod 'WebViewJavascriptBridge'
   pod 'UIViewController+KeyboardAnimation', '~> 1.3'
   pod 'SCIndexView' 
-  pod "PYSearch"
+  pod 'PYSearch'                    #搜索视图
+  pod 'ZYCornerRadius', '~> 1.0.2'  #圆角
 
   #网络
   pod 'AFNetworking', '3.0'

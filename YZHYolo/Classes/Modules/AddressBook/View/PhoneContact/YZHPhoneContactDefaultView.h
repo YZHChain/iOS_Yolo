@@ -1,8 +1,8 @@
 //
-//  YZHAddBookAdditionalCell.h
+//  YZHPhoneContactDefaultView.h
 //  YZHYolo
 //
-//  Created by Jersey on 2018/9/28.
+//  Created by Jersey on 2018/10/2.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHAddBookAdditionalCell : UITableViewCell
+@interface YZHPhoneContactDefaultView : UIView
 
 @end
 

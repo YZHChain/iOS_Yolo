@@ -9,6 +9,8 @@
 #import "YZHAddBookUserAskFooterView.h"
 
 #import "UIButton+YZHTool.h"
+#import "YZHPublic.h"
+
 @implementation YZHAddBookUserAskFooterView
 
 /*
@@ -25,6 +27,9 @@
     
     [self.addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.sendMessageButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundGreen] forState:UIControlStateNormal];
+    
 }
+
+
 
 @end

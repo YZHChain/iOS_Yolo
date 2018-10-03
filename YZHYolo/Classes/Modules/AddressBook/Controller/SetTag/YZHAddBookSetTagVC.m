@@ -115,19 +115,6 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         cell.titleLabel.text = @"同事";
     }
     
-    if (indexPath.section == 0) {
-//        cell.editingStyle
-        cell.shouldIndentWhileEditing = NO;
-//        cell.editing = NO;
-//        [cell setEditing:NO animated:NO];
-//        cell.showingDeleteConfirmation
-        cell.userInteractionEnabledWhileDragging = NO;
-        cell.indentationWidth = 3;
-        cell.shouldIndentWhileEditing = NO;
-        
-        
-    }
-    
     return cell;
 }
 

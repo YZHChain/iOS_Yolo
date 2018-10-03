@@ -67,7 +67,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     [leftButton setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_default"] forState:UIControlStateNormal];
     [leftButton setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_catogory"] forState:UIControlStateSelected];
     UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightButton setImage:[UIImage imageNamed:@"my_myinformationCell_headPhoto_default"] forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"addBook_cover_rightBarButtonItem_addFirend"] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
@@ -120,6 +120,10 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     
     if (indexPath.section == 0) {
         YZHAddBookAdditionalCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHAdditionalCellIdentifier forIndexPath:indexPath];
+        if (indexPath.row == 1) {
+            cell.iconImage.image = [UIImage imageNamed:@"addBook_cover_cell_addFirendLog"];
+            cell.titleLabel.text = @"好友添加记录";
+        }
         return cell;
     }
     YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
@@ -129,8 +133,14 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    //TODO: 需要对 Router 封装跳转逻辑优化
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        //TODO:
+        [YZHRouter openURL:kYZHRouterAddressBookPhoneContact info:@{kYZHRouteSegue : kYZHRouteSegueModal, kYZHRouteSegueNewNavigation : @(YES)}];
+    } else {
     
     [YZHRouter openURL:kYZHRouterAddressBookDetails];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -203,7 +213,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 - (void)clickRightBarGotoAddFirend:(UIButton *)sender{
     
-    sender.selected = !sender.isSelected;
+    [YZHRouter openURL:kYZHRouterAddressBookAddFirend];
 }
 
 #pragma mark - 6.Private Methods

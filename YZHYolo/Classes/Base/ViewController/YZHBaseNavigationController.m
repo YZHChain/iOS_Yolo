@@ -32,6 +32,7 @@
     self.navigationController.delegate = self;
     self.navigationBar.translucent = NO;
     [self.navigationBar setBarTintColor:[UIColor yzh_backgroundDarkBlue]];
+    
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }
@@ -70,12 +71,5 @@
 }
 
 #pragma mark -- delegate
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    
-//    self.navigationController.viewControllers
-    NSLog(@"导航栏检测");
-    
-}
 
 @end

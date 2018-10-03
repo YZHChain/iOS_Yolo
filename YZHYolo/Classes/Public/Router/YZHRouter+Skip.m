@@ -10,6 +10,7 @@
 
 #import "YZHRouterConfig.h"
 #import "UIViewController+YZHTool.h"
+#import "YZHBaseNavigationController.h"
 
 @implementation YZHRouter (Skip)
 
@@ -110,6 +111,7 @@
     UIViewController* visibleViewController = [UIViewController yzh_findTopViewController];
     NSString* segue = parameters[kYZHRouteSegue] ? [NSString stringWithFormat:@"%@", parameters[kYZHRouteSegue]] : kYZHRouteSeguePush;
     BOOL animated = parameters[kYZHRouteAnimated] ? [parameters[kYZHRouteAnimated] boolValue] : YES;
+    BOOL needNewnavgationController = parameters[kYZHRouteSegueNewNavigation] ? parameters[kYZHRouteSegueNewNavigation] : NO;
     NSString* backIndexString = [NSString stringWithFormat:@"%@",parameters[kYZHRouteBackIndex]];
     
     NSLog(@"%s %@ ---> %@", __func__ , visibleViewController , viewController);
@@ -138,14 +140,20 @@
     }
     //segue为push且没导航控制器
     else if ([segue isEqualToString:kYZHRouteSeguePush] && visibleViewController.navigationController==nil) {
-        UINavigationController *navviewController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        navviewController.navigationBar.translucent = NO;
-        [visibleViewController presentViewController:navviewController animated:animated completion:nil];
+        YZHBaseNavigationController *navgationController = [[YZHBaseNavigationController alloc] initWithRootViewController:viewController];
+        [visibleViewController presentViewController:navgationController animated:animated completion:nil];
+    } else if (needNewnavgationController) { //模态, 并且需要导航控制器
+        YZHBaseNavigationController *navgationController = [[YZHBaseNavigationController alloc] initWithRootViewController:viewController];
+        [visibleViewController presentViewController:navgationController animated:animated completion:nil];
+        
     }
-    //segue为modal
+    //segue为modal.
     else {
         [visibleViewController presentViewController:viewController animated:animated completion:nil];
     }
+/*
+
+ */
 }
 
 @end

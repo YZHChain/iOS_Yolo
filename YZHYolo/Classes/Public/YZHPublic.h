@@ -13,5 +13,6 @@
 #import "UIButton+YZHTool.h"
 #import "YZHProgressHUD.h"
 #import "YZHAlertManage.h"
+#import "UIImageView+CornerRadius.h"
 
 #endif /* YZHPublic_h */

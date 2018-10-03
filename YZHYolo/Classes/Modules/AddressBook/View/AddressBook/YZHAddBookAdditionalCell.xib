@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_phone" translatesAutoresizingMaskIntoConstraints="NO" id="ybt-Wd-DIP">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_phoneAddressBook" translatesAutoresizingMaskIntoConstraints="NO" id="ybt-Wd-DIP" customClass="addBook_cover_cell_phoneAddressBook">
                         <rect key="frame" x="17" y="11.5" width="23" height="27"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机联系人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMW-5P-O6r">
@@ -43,6 +43,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="addBook_cover_cell_phone" width="23" height="27"/>
+        <image name="addBook_cover_cell_phoneAddressBook" width="23" height="27"/>
     </resources>
 </document>
