@@ -117,7 +117,13 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [YZHRouter openURL:kYZHRouterAddressBookPhoneContact info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+    
+    YZHAddBookFirendModel* model = self.model.list[indexPath.row];
+    
+//    if ([model.title isEqualToString:@"手机联系人"]) {
+        [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+//    }
+    
 }
 
 #pragma mark - 5.Event Response

@@ -59,6 +59,9 @@
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             break;
             
+            case YZHImagePickerSourceTypePhotosAlbum:
+            controller.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            break;
         default:
             controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             break;
@@ -68,6 +71,8 @@
     //    controller.mediaTypes = mediaTypes;
     controller.delegate = self;
     controller.allowsEditing = YES;
+    // 修改导航栏字体颜色.
+    [controller.navigationBar setTintColor:[UIColor yzh_backgroundDarkBlue]];
     [viewController presentViewController:controller animated:YES completion:nil];
     
     //    if ([self isPhotoLibraryAvailable]) {

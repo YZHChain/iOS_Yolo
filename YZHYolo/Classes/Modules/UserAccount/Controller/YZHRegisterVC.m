@@ -10,7 +10,6 @@
 
 #import "YZHPublic.h"
 #import "YZHRegisterView.h"
-#import "UITextField+YZHTool.h"
 #import "NSString+YZHTool.h"
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIButton+YZHCountDown.h"

@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHAddBookFirendModel : NSObject
 
 @property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy) NSString* route;
 
 @end
 

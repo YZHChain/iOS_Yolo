@@ -31,4 +31,20 @@
     return image;
 }
 
+// 扫描二维码图形
++ (NSArray<CIFeature *> *)yzh_readQRCodeFromImage:(UIImage *)image successfulBlock:(_Nullable readQRCodeComplete)successfulBlock {
+    // 创建一个CIImage对象
+    CIImage *ciImage = [[CIImage alloc] initWithCGImage:image.CGImage options:nil];    CIContext *context = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}];
+    // 软件渲染
+    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:context options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];
+    // 二维码识别
+    // 注意这里的CIDetectorTypeQRCode
+    NSArray<CIFeature *> *features = [detector featuresInImage:ciImage];
+    NSLog(@"features = %@",features);
+    // 识别后的结果集,默认读取第一个
+    successfulBlock ? successfulBlock(features.firstObject) : NULL;
+    
+    return features;
+}
+
 @end

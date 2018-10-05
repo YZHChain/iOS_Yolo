@@ -60,6 +60,7 @@ NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
 NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
 NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
 NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
+NSString* const kYZHRouterAddressScanQRCode  = @"/addressBook/scanQRCode";
 
 @implementation YZHRouterConfig
 
@@ -194,6 +195,12 @@ NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact
              kYZHRouterAddressBookPhoneContact: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookPhoneContactVC",
                      kYZHRouteViewControllerNameKey: @"手机联系人",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressScanQRCode: @{
+                     kYZHRouteViewControllerClassKey: @"YZHScanQRCodeVC",
+                     kYZHRouteViewControllerNameKey: @"扫码",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

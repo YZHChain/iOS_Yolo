@@ -53,7 +53,6 @@
 		55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DEA215088C800307B75 /* UIColor+YZHColorStyle.m */; };
 		55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DED215088E300307B75 /* UIFont+YZHFontStyle.m */; };
 		55337DF12150D62B00307B75 /* YZHBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF02150D62B00307B75 /* YZHBaseNavigationController.m */; };
-		55337DF42150F4DC00307B75 /* UITextField+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */; };
 		55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF62150F52E00307B75 /* NSString+YZHTool.m */; };
 		55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DF92150FFCD00307B75 /* UIButton+YZHTool.m */; };
 		55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */; };
@@ -65,6 +64,8 @@
 		5562DE2B215683BA0098FA83 /* YZHMyInformationPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5562DE2A215683BA0098FA83 /* YZHMyInformationPhotoView.xib */; };
 		5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5562DE32215687D70098FA83 /* YZHMyInformationPhotoVC.m */; };
 		5562DE35215687D70098FA83 /* YZHMyInformationPhotoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5562DE33215687D70098FA83 /* YZHMyInformationPhotoVC.xib */; };
+		556C3CCF2165CAE1007AEA39 /* YZHScanQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 556C3CCD2165CAE0007AEA39 /* YZHScanQRCodeVC.m */; };
+		556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556C3CCE2165CAE0007AEA39 /* YZHScanQRCodeVC.xib */; };
 		556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CD821466A4B0048171C /* YZHBaseViewController.m */; };
 		556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */; };
 		556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CEA214762190048171C /* YZHTabBarModel.m */; };
@@ -156,6 +157,7 @@
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
+		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -238,8 +240,6 @@
 		55337DED215088E300307B75 /* UIFont+YZHFontStyle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+YZHFontStyle.m"; sourceTree = "<group>"; };
 		55337DEF2150D62B00307B75 /* YZHBaseNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHBaseNavigationController.h; sourceTree = "<group>"; };
 		55337DF02150D62B00307B75 /* YZHBaseNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHBaseNavigationController.m; sourceTree = "<group>"; };
-		55337DF22150F4DC00307B75 /* UITextField+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+YZHTool.h"; sourceTree = "<group>"; };
-		55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+YZHTool.m"; sourceTree = "<group>"; };
 		55337DF52150F52E00307B75 /* NSString+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+YZHTool.h"; sourceTree = "<group>"; };
 		55337DF62150F52E00307B75 /* NSString+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+YZHTool.m"; sourceTree = "<group>"; };
 		55337DF82150FFCD00307B75 /* UIButton+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+YZHTool.h"; sourceTree = "<group>"; };
@@ -258,6 +258,9 @@
 		5562DE31215687D70098FA83 /* YZHMyInformationPhotoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationPhotoVC.h; sourceTree = "<group>"; };
 		5562DE32215687D70098FA83 /* YZHMyInformationPhotoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyInformationPhotoVC.m; sourceTree = "<group>"; };
 		5562DE33215687D70098FA83 /* YZHMyInformationPhotoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHMyInformationPhotoVC.xib; sourceTree = "<group>"; };
+		556C3CCC2165CAE0007AEA39 /* YZHScanQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHScanQRCodeVC.h; sourceTree = "<group>"; };
+		556C3CCD2165CAE0007AEA39 /* YZHScanQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHScanQRCodeVC.m; sourceTree = "<group>"; };
+		556C3CCE2165CAE0007AEA39 /* YZHScanQRCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHScanQRCodeVC.xib; sourceTree = "<group>"; };
 		556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHYolo-Prefix.pch"; sourceTree = "<group>"; };
 		556F6CD5214668960048171C /* YZHMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMacro.h; sourceTree = "<group>"; };
 		556F6CD6214668AB0048171C /* YZHPublic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPublic.h; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 		55EE6D3C215B7683004E092F /* YZHLocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YZHLocation.json; sourceTree = "<group>"; };
 		55EE6D3E215B76FD004E092F /* YZHMyinformationMyplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyinformationMyplaceModel.h; sourceTree = "<group>"; };
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
+		55F912D421661F4300EDF190 /* YZHQRCodeManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHQRCodeManage.h; sourceTree = "<group>"; };
+		55F912D521661F4300EDF190 /* YZHQRCodeManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHQRCodeManage.m; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -691,6 +696,7 @@
 		55128A1721463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				556C3CCB2165C8FB007AEA39 /* ScanQRCode */,
 				55D580E421632478000A8B55 /* AddressBookHome */,
 				55D580D82163240B000A8B55 /* Details */,
 				55D580D02163240B000A8B55 /* SetNote */,
@@ -826,8 +832,6 @@
 				55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */,
 				55337DDF215085C900307B75 /* UIView+YZHTool.h */,
 				55337DE0215085C900307B75 /* UIView+YZHTool.m */,
-				55337DF22150F4DC00307B75 /* UITextField+YZHTool.h */,
-				55337DF32150F4DC00307B75 /* UITextField+YZHTool.m */,
 				55337DF52150F52E00307B75 /* NSString+YZHTool.h */,
 				55337DF62150F52E00307B75 /* NSString+YZHTool.m */,
 				552CC8A7215B149A00135FDC /* UIImage+YZHTool.h */,
@@ -1129,6 +1133,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		556C3CCB2165C8FB007AEA39 /* ScanQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				556C3CCC2165CAE0007AEA39 /* YZHScanQRCodeVC.h */,
+				556C3CCD2165CAE0007AEA39 /* YZHScanQRCodeVC.m */,
+				556C3CCE2165CAE0007AEA39 /* YZHScanQRCodeVC.xib */,
+			);
+			path = ScanQRCode;
+			sourceTree = "<group>";
+		};
 		556F6CD2214664710048171C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1168,6 +1182,8 @@
 			children = (
 				5591D7A5215A2BDA00C2AA93 /* YZHPhotoManage.h */,
 				5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */,
+				55F912D421661F4300EDF190 /* YZHQRCodeManage.h */,
+				55F912D521661F4300EDF190 /* YZHQRCodeManage.m */,
 			);
 			path = YZHImagePhoto;
 			sourceTree = "<group>";
@@ -1579,6 +1595,7 @@
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
 				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
+				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
 				55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */,
 				552CC89C215A746D00135FDC /* YZHSettingCenterVC.xib in Resources */,
 				55D580FC21636AF2000A8B55 /* YZHAddBookPhoneContactVC.xib in Resources */,
@@ -1674,6 +1691,7 @@
 				5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */,
 				556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */,
 				55C656A7215E6982005E997B /* YZHAddBookUserAskFooterView.m in Sources */,
+				556C3CCF2165CAE1007AEA39 /* YZHScanQRCodeVC.m in Sources */,
 				55C656B0215F2614005E997B /* YZHCommonStyleTableViewCell.m in Sources */,
 				55C239E52149122400200798 /* YZHNetworkService.m in Sources */,
 				55C656AC215F141C005E997B /* YZHAddressBookModel.m in Sources */,
@@ -1684,6 +1702,7 @@
 				55BD8660215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m in Sources */,
 				556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */,
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
+				55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */,
 				5531458A21574B4600A13F96 /* YZHMyInformationMyPlaceCell.m in Sources */,
 				55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */,
 				55337DDE214FEFCA00307B75 /* YZHFindPasswordVC.m in Sources */,
@@ -1704,7 +1723,6 @@
 				55B5DB9B21530EDA002A04A9 /* UIScrollView+YZHRefresh.m in Sources */,
 				55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */,
 				556F6D05214773700048171C /* YZHPrivatelyChatViewController.m in Sources */,
-				55337DF42150F4DC00307B75 /* UITextField+YZHTool.m in Sources */,
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,

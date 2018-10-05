@@ -33,9 +33,15 @@
 - (NSArray* )defaultList {
     
     NSArray* list = @[
-                      @{@"title": @"扫一扫"},
-                      @{@"title": @"手机联系人"},
-                      @{@"title": @"搜索进群"}];
+                      @{@"title": @"扫一扫",
+                        @"route": kYZHRouterAddressScanQRCode
+                        },
+                      @{@"title": @"手机联系人",
+                        @"route": kYZHRouterAddressBookPhoneContact
+                        },
+                      @{@"title": @"搜索进群",
+                        @"route": kYZHRouterAddressScanQRCode
+                        }];
     return list;
 }
 
