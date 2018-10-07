@@ -37,7 +37,7 @@
 
 + (UIViewController *)yzh_rootViewController{
     
-    UIWindow* window = YZHWindow;
+    UIWindow* window = YZHAppWindow;
     return window.rootViewController;
 }
 

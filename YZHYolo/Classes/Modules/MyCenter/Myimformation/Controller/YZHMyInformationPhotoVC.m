@@ -47,9 +47,6 @@ static NSArray* buttonArray;
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    //TODO: 不知道什么原因, Bar 还是隐藏的。暂时先通过这里解决。。
-    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - 2.SettingView and Style

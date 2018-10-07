@@ -231,7 +231,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     
     if (_selectedImageView == nil) {
         _selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_information_setName_selected"]];
-        _selectedImageView.frame = CGRectMake(YZHVIEW_WIDTH - 18 - _selectedImageView.width, 18, _selectedImageView.width, _selectedImageView.height);
+        _selectedImageView.frame = CGRectMake(YZHView_Width - 18 - _selectedImageView.width, 18, _selectedImageView.width, _selectedImageView.height);
     }
 
     return _selectedImageView;

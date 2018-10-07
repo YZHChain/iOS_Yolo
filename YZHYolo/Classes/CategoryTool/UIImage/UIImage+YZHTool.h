@@ -14,6 +14,7 @@ typedef void(^readQRCodeComplete)(CIFeature * feature);
 @interface UIImage (YZHTool)
 
 + (UIImage *)yzh_getImageWithColor:(UIColor *)color;
+
 + (UIImage *)yzh_getImageWithColor:(UIColor *)color withSize:(CGSize)size;
 // 扫描二维码图形
 + (NSArray<CIFeature *> *)yzh_readQRCodeFromImage:(UIImage *)image successfulBlock:(_Nullable readQRCodeComplete)successfulBlock;

@@ -50,6 +50,10 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="sendMessage:" destination="iN0-l3-epB" eventType="touchUpInside" id="8zj-g2-b6j"/>
+                        <action selector="sendMessage:" destination="-1" eventType="touchUpInside" id="C9f-eJ-CjX"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

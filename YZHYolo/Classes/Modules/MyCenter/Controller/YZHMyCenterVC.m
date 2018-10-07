@@ -158,7 +158,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_tableView == nil) {
         
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, YZHVIEW_HEIGHT - YZHTabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHView_Width, YZHView_Height - YZHTabBarHeight) style:UITableViewStylePlain];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: kCellIdentifier];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -178,7 +178,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_headerView == nil) {
         
-        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, 170)];
+        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHView_Width, 170)];
         UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
         [btn setTitle:@"" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(clickTableViewHeader) forControlEvents:UIControlEventTouchUpInside];

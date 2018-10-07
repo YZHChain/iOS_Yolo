@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *addFriendButton;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
 
+- (IBAction)sendMessage:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

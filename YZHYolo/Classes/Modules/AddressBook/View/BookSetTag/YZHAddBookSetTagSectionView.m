@@ -26,7 +26,7 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont systemFontOfSize:13];
         _titleLabel.textColor = [UIColor yzh_fontShallowBlack];
-        _titleLabel.frame = CGRectMake(12, 6, YZHSCREEN_WIDTH - 30, 14);
+        _titleLabel.frame = CGRectMake(12, 6, YZHScreen_Width - 30, 14);
     }
     return _titleLabel;
 }

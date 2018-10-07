@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookDetailsVC : YZHBaseViewController
 
+@property (nonatomic, copy) NSString* name;
+@property (nonatomic, strong) NSArray* array;
+
 @end
 
 NS_ASSUME_NONNULL_END
