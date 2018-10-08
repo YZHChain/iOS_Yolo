@@ -1978,7 +1978,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4D5D57QCL;
+				DEVELOPMENT_TEAM = ZCM7EVA4S9;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1986,7 +1986,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.YZHBlockChain.YZHYolo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YZHChain.YOLO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
@@ -2002,7 +2002,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4D5D57QCL;
+				DEVELOPMENT_TEAM = ZCM7EVA4S9;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2010,7 +2010,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = www.YZHBlockChain.YZHYolo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.YZHChain.YOLO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
