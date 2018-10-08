@@ -175,7 +175,7 @@ NSString* const kYZHRouterAddressScanQRCode  = @"/addressBook/scanQRCode";
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
              kYZHRouterAddressBookSetTag: @{
-                     kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookSetTagVC",
                      kYZHRouteViewControllerNameKey: @"设置标签",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",

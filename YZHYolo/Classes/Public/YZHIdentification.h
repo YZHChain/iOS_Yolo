@@ -37,8 +37,14 @@ typedef void(^YZHButtonBlock)(UIButton *sender);
  *
  *    The common cell identifier
  */
-static const NSString *kYZHCellIdentifier = @"YZHCommonCellIdentifier";
+extern NSString const *kYZHCommonCellIdentifier;
 
+/**
+ *    @author https://github.com/ZexiFangkong
+ *
+ *    The common NonnullKey
+ */
+extern NSString const * kYZHCommonNonnullKey;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHIdentification : NSObject

@@ -1406,9 +1406,9 @@
 		55D580CC2163240B000A8B55 /* SetTag */ = {
 			isa = PBXGroup;
 			children = (
-				55D580CD2163240B000A8B55 /* YZHAddBookSetTagVC.xib */,
 				55D580CE2163240B000A8B55 /* YZHAddBookSetTagVC.h */,
 				55D580CF2163240B000A8B55 /* YZHAddBookSetTagVC.m */,
+				55D580CD2163240B000A8B55 /* YZHAddBookSetTagVC.xib */,
 			);
 			path = SetTag;
 			sourceTree = "<group>";

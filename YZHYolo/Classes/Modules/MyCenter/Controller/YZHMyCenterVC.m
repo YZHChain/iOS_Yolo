@@ -90,12 +90,12 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)setupData
 {
-    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
-        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
-        [self.tableView reloadData];
-    } failureCompletion:^(NSError *error) {
-        
-    }];
+//    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
+//        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
+//        [self.tableView reloadData];
+//    } failureCompletion:^(NSError *error) {
+//        
+//    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten

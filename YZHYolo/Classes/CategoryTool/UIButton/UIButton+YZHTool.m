@@ -9,7 +9,32 @@
 #import "UIButton+YZHTool.h"
 
 #import "UIImage+YZHTool.h"
+#import <objc/runtime.h>
+
 @implementation UIButton (YZHTool)
+
++ (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock {
+    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button yzh_setBarButtonItemWithImageName:imageName tapCallBlock:callBlock];
+
+    return button;
+}
+
+- (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock {
+    
+    [self setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_default"] forState:UIControlStateNormal];
+    [self setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_catogory"] forState:UIControlStateSelected];
+    [self sizeToFit];
+    
+    if (callBlock) {
+        
+        self.tapCallBlock = [callBlock copy];
+        [self addTarget:self action:@selector(tapButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return self;
+}
 
 - (void)yzh_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state{
     
@@ -67,6 +92,27 @@
 //        self.alpha = 0.5f;
     }
     
+}
+
+
+#pragma mark -- GET && SET
+
+- (YZHButtonBlock)tapCallBlock {
+    
+    return objc_getAssociatedObject(self, &kYZHCommonNonnullKey);
+}
+
+- (void)setTapCallBlock:(YZHButtonBlock)tapCallBlock {
+    
+    objc_setAssociatedObject(self, &kYZHCommonNonnullKey, tapCallBlock, OBJC_ASSOCIATION_COPY);
+}
+
+
+#pragma mark
+
+- (void)tapButton:(UIButton *)sender {
+    
+    self.tapCallBlock ? self.tapCallBlock(sender) : NULL;
 }
 
 @end

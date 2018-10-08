@@ -8,6 +8,10 @@
 
 #import "YZHIdentification.h"
 
+NSString const * kYZHCommonCellIdentifier = @"YZHCommonCellIdentifier";
+
+NSString const * kYZHCommonNonnullKey = @"YZHAssociatedNonnullKey";
+
 @implementation YZHIdentification
 
 @end
