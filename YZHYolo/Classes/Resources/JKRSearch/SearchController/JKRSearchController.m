@@ -15,8 +15,6 @@
 /// navigaionbar高度
 #define kSafeAreaNavHeight (([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125,2436), [[UIScreen mainScreen] currentMode].size) : NO) ? 88 : 64)
 
-NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
-
 @interface JKRSearchController ()
 
 @property (nonatomic, strong) UIView *bgView;
@@ -37,15 +35,24 @@ NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
     self.view.unTouchRect = CGRectMake(0, 0, self.view.width, kSafeAreaNavHeight);
     self.searchResultsController.view.frame = self.bgView.bounds;
     [self.bgView addSubview:self.searchResultsController.view];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endSearch) name:SEARCH_CANCEL_NOTIFICATION_KEY object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endSearch) name:UISearchBarCancelNotification object:nil];
+    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
 }
+
+//设置状态栏颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    //TODO: 最好做个异常捕获
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
+
 
 - (void)tapSearchBarAction {
     //点击方法应该优化
     if ([self.delegate respondsToSelector:@selector(willPresentSearchController:)]) [self.delegate willPresentSearchController:self];
 
-   //改变状态栏颜色.
-//    self.searchBar.jkr_viewController.jkr_lightStatusBar = NO;
     // 这里是添加一个方法？为了让每次点击时执行相应事件？
     [self.searchBar addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handGesture)]];
     [self.searchBar addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handGesture)]];
@@ -66,14 +73,6 @@ NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
     } else {
         
     }
-//    if (self.searchBar.jkr_viewController.parentViewController && [self.searchBar.jkr_viewController.parentViewController isKindOfClass:[UINavigationController class]] && self.hidesNavigationBarDuringPresentation) {
-//        [(UINavigationController *)self.searchBar.jkr_viewController.parentViewController setNavigationBarHidden:YES animated:YES];
-//        [UIView animateWithDuration:0.2 animations:^{
-//            self.bgView.y = kSafeAreaNavHeight;
-//        }];
-//    } else {
-//
-//    }
 }
 
 - (void)handGesture {
@@ -103,8 +102,7 @@ NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
     [self.searchBar setValue:@(NO) forKey:@"isEditing"];
     if (self.searchBar.jkr_viewController.parentViewController && [self.searchBar.jkr_viewController.parentViewController isKindOfClass:[UINavigationController class]] && self.hidesNavigationBarDuringPresentation) {
         [(UINavigationController *)self.searchBar.jkr_viewController.parentViewController setNavigationBarHidden:NO animated:YES];
-        self.bgView.y = CGRectGetMaxY(self.searchBar.frame) + kSafeAreaNavHeight;
-    } 
+    }
 }
 
 - (void)endSearchTextFieldEditing:(UITapGestureRecognizer *)sender {
@@ -124,7 +122,8 @@ NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
 - (UIView *)bgView {
     if (!_bgView) {
         _bgView = [[UIView alloc] init];
-        _bgView.frame = CGRectMake(0, 20 + 48, kScreenWidth, kScreenHeight - 20 + 48);
+        //TODO:  SearchBar + 状态栏高度.
+        _bgView.frame = CGRectMake(0, 50 + 20, kScreenWidth, kScreenHeight - 50 + 20);
         _bgView.backgroundColor = [UIColor redColor];
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endSearchTextFieldEditing:)];
         tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -134,6 +133,7 @@ NSString *SEARCH_CANCEL_NOTIFICATION_KEY = @"SEARCH_CANCEL_NOTIFICATION_KEY";
 }
 
 - (void)dealloc {
+    
     [self.searchBar removeObserver:self forKeyPath:@"text"];
     NSLog(@"JKRSearchController dealloc");
 }

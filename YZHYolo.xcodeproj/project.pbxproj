@@ -60,7 +60,6 @@
 		55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55337E012151055F00307B75 /* YZHSettingPasswordView.xib */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
-		555DA4AE216C35160057D434 /* UIColor+JKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA494216C35160057D434 /* UIColor+JKRColor.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
 		555DA4B1216C35160057D434 /* UIView+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA49C216C35160057D434 /* UIView+JKRTouch.m */; };
@@ -270,7 +269,6 @@
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
-		555DA494216C35160057D434 /* UIColor+JKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JKRColor.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
 		555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+JKRTouch.m"; sourceTree = "<group>"; };
 		555DA497216C35160057D434 /* UIView+JKR_Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKR_Frame.h"; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 		555DA49B216C35160057D434 /* UIView+JKRSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRSubView.h"; sourceTree = "<group>"; };
 		555DA49C216C35160057D434 /* UIView+JKRTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRTouch.m"; sourceTree = "<group>"; };
 		555DA49D216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+JKR_BackgroundColor.h"; sourceTree = "<group>"; };
-		555DA49E216C35160057D434 /* UIColor+JKRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JKRColor.h"; sourceTree = "<group>"; };
 		555DA49F216C35160057D434 /* UIViewController+JKRStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JKRStatusBarStyle.m"; sourceTree = "<group>"; };
 		555DA4A1216C35160057D434 /* UIView+JKR_Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKR_Frame.m"; sourceTree = "<group>"; };
 		555DA4A2216C35160057D434 /* UIGestureRecognizer+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+JKRTouch.h"; sourceTree = "<group>"; };
@@ -1207,8 +1204,6 @@
 				555DA49C216C35160057D434 /* UIView+JKRTouch.m */,
 				555DA49B216C35160057D434 /* UIView+JKRSubView.h */,
 				555DA493216C35160057D434 /* UIView+JKRSubView.m */,
-				555DA49E216C35160057D434 /* UIColor+JKRColor.h */,
-				555DA494216C35160057D434 /* UIColor+JKRColor.m */,
 				555DA49D216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.h */,
 				555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */,
 				555DA4A2216C35160057D434 /* UIGestureRecognizer+JKRTouch.h */,
@@ -1912,7 +1907,6 @@
 				555DA4B8216C35160057D434 /* JKRSearchBar.m in Sources */,
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
-				555DA4AE216C35160057D434 /* UIColor+JKRColor.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,

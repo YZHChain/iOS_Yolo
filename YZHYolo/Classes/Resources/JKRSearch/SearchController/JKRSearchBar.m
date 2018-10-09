@@ -10,7 +10,7 @@
 #import "JKRSearchTextField.h"
 #import "JKRSearchHeader.h"
 
-UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
+JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancelNotification";
 
 @interface JKRSearchBar ()<UITextFieldDelegate>
 
@@ -25,45 +25,58 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
 @implementation JKRSearchBar
 
 - (instancetype)initWithFrame:(CGRect)frame {
+    //默认高度 50, 如需适合 X 则需调整
     frame = CGRectMake(0, 0, kScreenWidth, 50);
     self = [super initWithFrame:frame];
+    
     self.backgroundColor = [UIColor whiteColor];
-//    [self addSubview:self.backgroundImageView];
     [self addSubTextFieldAndConstraint];
-//    [self addSubview:self.rightButton];
     [self addSubview:self.cancelButton];
+    
     return self;
 }
 
 - (void)setIsEditing:(BOOL)isEditing {
+    // 处于编辑页时 UI.
     _isEditing = isEditing;
     if (_isEditing) {
         [UIView animateWithDuration:0.2 animations:^{
-            self.searchTextField.x = 10;
-            self.rightButton.x = kScreenWidth - 38 - 40;
-            self.backgroundImageView.width = kScreenWidth - 20 - 40;
-            self.cancelButton.x = kScreenWidth - 40;
+            [self.cancelButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(-12);
+                make.centerY.mas_equalTo(self);
+            }];
+            [self.searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(15);
+                make.right.mas_equalTo(-50);
+                make.bottom.mas_equalTo(-10);
+                make.height.mas_equalTo(30);
+            }];
         } completion:^(BOOL finished) {
-            self.searchTextField.width = kScreenWidth - 20 - 38 - 40;
         }];
         self.searchTextField.canTouch = YES;
         self.searchTextField.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor yzh_backgroundDarkBlue];
         [self.searchTextField becomeFirstResponder];
     } else {
+        // 非编辑状态.
         self.searchTextField.text = @"";
         self.text = @"";
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forState:UIControlStateNormal];
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forState:UIControlStateHighlighted];
         [UIView animateWithDuration:0.2 animations:^{
-            self.searchTextField.x = kScreenWidth * 0.5 - 40;
-            self.rightButton.x = kScreenWidth - 38;
-            self.backgroundImageView.width = kScreenWidth - 20;
-            self.cancelButton.x = kScreenWidth;
+            [self.searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(-10);
+                make.center.mas_equalTo(self);
+                make.height.mas_equalTo(30);
+                make.left.mas_equalTo(58);
+                make.right.mas_equalTo(-58);
+            }];
+            [self.cancelButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                
+            }];
         } completion:^(BOOL finished) {
-            self.searchTextField.width = kScreenWidth * 0.5 + 20 - 38;
         }];
         self.searchTextField.canTouch = NO;
-        self.searchTextField.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        self.searchTextField.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        self.backgroundColor = [UIColor whiteColor];
         [self.searchTextField resignFirstResponder];
     }
 }
@@ -75,20 +88,14 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.searchTextField.x = kScreenWidth * 0.5 - 40;
-    } completion:^(BOOL finished) {
-        self.searchTextField.width = kScreenWidth * 0.5 + 20 - 38 - 40;
-    }];
+
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.searchTextField.x = 10;
-    } completion:^(BOOL finished) {
-        self.searchTextField.width = kScreenWidth - 20 - 38 - 40;
-    }];
+    
+    
     return YES;
 }
 
@@ -104,16 +111,17 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
     }
     self.text = self.searchTextField.text;
     if (self.searchTextField.text.length) {
-        [_rightButton setImage:[UIImage imageNamed:@"card_delete"] forState:UIControlStateNormal];
-        [_rightButton setImage:[UIImage imageNamed:@"card_delete"] forState:UIControlStateHighlighted];
+//        [_rightButton setImage:[UIImage imageNamed:@"card_delete"] forState:UIControlStateNormal];
+//        [_rightButton setImage:[UIImage imageNamed:@"card_delete"] forState:UIControlStateHighlighted];
     } else {
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forState:UIControlStateNormal];
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forState:UIControlStateHighlighted];
+//        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forState:UIControlStateNormal];
+//        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forState:UIControlStateHighlighted];
     }
 }
 
 - (void)cancelButtonClick {
-    [[NSNotificationCenter defaultCenter] postNotificationName:SEARCH_CANCEL_NOTIFICATION_KEY object:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UISearchBarCancelNotification object:nil];
 }
 
 - (void)rightButtonClick {
@@ -136,8 +144,6 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
 
 - (UIImageView *)backgroundImageView {
     if (!_backgroundImageView) {
-//        _backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabbar_mainframeHL"]];
-//        _backgroundImageView.frame = CGRectMake(10, 8, kScreenWidth - 20, 44 - 16);
     }
     return _backgroundImageView;
 }
@@ -151,9 +157,13 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
         searchIcon.frame = CGRectMake(0, 0, 30, 14);
         _searchTextField.leftView = searchIcon;
         _searchTextField.leftViewMode = UITextFieldViewModeAlways;
-        _searchTextField.font = [UIFont systemFontOfSize:16.0f];
+//        _searchTextField.clearsOnBeginEditing = YES;
+        _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _searchTextField.font = [UIFont systemFontOfSize:15.0f];
         [_searchTextField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
         _searchTextField.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        // TODO: 设配各个设备.
+        _searchTextField.layer.cornerRadius = 15;
         _searchTextField.delegate = self;
     }
     return _searchTextField;
@@ -161,11 +171,11 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
 
 - (UIButton *)rightButton {
     if (!_rightButton) {
-        _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forState:UIControlStateNormal];
-        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forState:UIControlStateHighlighted];
-        [_rightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        _rightButton.frame = CGRectMake(kScreenWidth - 38, 8, 28, 28);
+//        _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"] forState:UIControlStateNormal];
+//        [_rightButton setImage:[UIImage imageNamed:@"VoiceSearchStartBtnHL"] forState:UIControlStateHighlighted];
+//        [_rightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//        _rightButton.frame = CGRectMake(kScreenWidth - 38, 8, 28, 28);
     }
     return _rightButton;
 }
@@ -173,10 +183,9 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
 - (UIButton *)cancelButton {
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelButton.frame = CGRectMake(kScreenWidth, 0, 40, 44);
-        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:16];
-        [_cancelButton setTitle:@"取消  " forState:UIControlStateNormal];
-        [_cancelButton setTitleColor:JKRColor(85, 183, 55, 1.0) forState:UIControlStateNormal];
+        _cancelButton.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _cancelButton;
@@ -189,7 +198,8 @@ UIKIT_EXTERN NSString *SEARCH_CANCEL_NOTIFICATION_KEY;
         make.bottom.mas_equalTo(-10);
         make.center.mas_equalTo(self);
         make.height.mas_equalTo(30);
-        make.width.mas_equalTo(self.width - 58 * 2);
+        make.left.mas_equalTo(58);
+        make.right.mas_equalTo(-58);
     }];
     
 }

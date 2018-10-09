@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef NSString JKRNotificationName;
+extern JKRNotificationName * const UISearchBarCancelNotification;
+
 @class JKRSearchBar;
 
 @protocol JKRSearchBarDelegate <NSObject>

@@ -204,8 +204,8 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 #pragma mark - JKRSearchControllerhResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(JKRSearchController *)searchController {
-    NSString *searchText = searchController.searchBar.text;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF CONTAINS %@)", searchText];
+//    NSString *searchText = searchController.searchBar.text;
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF CONTAINS %@)", searchText];
 //    JKRSearchResultViewController *resultController = (JKRSearchResultViewController *)searchController.searchResultsController;
 //    if (!(searchText.length > 0)) resultController.filterDataArray = @[];
 //    else resultController.filterDataArray = [self.dataArray filteredArrayUsingPredicate:predicate];
@@ -214,33 +214,33 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 #pragma mark - JKRSearchControllerDelegate
 
 - (void)willPresentSearchController:(JKRSearchController *)searchController {
-    NSLog(@"willPresentSearchController, %@", searchController);
+//    NSLog(@"willPresentSearchController, %@", searchController);
 }
 
 - (void)didPresentSearchController:(JKRSearchController *)searchController {
-    NSLog(@"didPresentSearchController, %@", searchController);
+//    NSLog(@"didPresentSearchController, %@", searchController);
 }
 
 - (void)willDismissSearchController:(JKRSearchController *)searchController {
-    NSLog(@"willDismissSearchController, %@", searchController);
+//    NSLog(@"willDismissSearchController, %@", searchController);
 }
 
 - (void)didDismissSearchController:(JKRSearchController *)searchController {
-    NSLog(@"didDismissSearchController, %@", searchController);
+//    NSLog(@"didDismissSearchController, %@", searchController);
 }
 
 #pragma mark - JKRSearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(JKRSearchBar *)searchBar {
-    NSLog(@"searchBarTextDidBeginEditing %@", searchBar);
+//    NSLog(@"searchBarTextDidBeginEditing %@", searchBar);
 }
 
 - (void)searchBarTextDidEndEditing:(JKRSearchBar *)searchBar {
-    NSLog(@"searchBarTextDidEndEditing %@", searchBar);
+//    NSLog(@"searchBarTextDidEndEditing %@", searchBar);
 }
 
 - (void)searchBar:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText {
-    NSLog(@"searchBar:%@ textDidChange:%@", searchBar, searchText);
+//    NSLog(@"searchBar:%@ textDidChange:%@", searchBar, searchText);
 }
 
 #pragma mark - 5.Event Response
@@ -300,6 +300,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _searchController = [[JKRSearchController alloc] initWithSearchResultsController:addBookSearchVC];
         _searchController.searchBar.placeholder = @"搜索";
         _searchController.hidesNavigationBarDuringPresentation = YES;
+        // 代理方法都是设计业务, 可以单独抽取出来.
         _searchController.searchResultsUpdater = self;
         _searchController.searchBar.delegate = self;
         _searchController.delegate = self;
