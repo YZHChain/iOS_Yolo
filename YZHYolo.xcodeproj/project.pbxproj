@@ -59,6 +59,19 @@
 		55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFF2151055500307B75 /* YZHSettingPasswordView.m */; };
 		55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55337E012151055F00307B75 /* YZHSettingPasswordView.xib */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
+		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
+		555DA4AE216C35160057D434 /* UIColor+JKRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA494216C35160057D434 /* UIColor+JKRColor.m */; };
+		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
+		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
+		555DA4B1216C35160057D434 /* UIView+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA49C216C35160057D434 /* UIView+JKRTouch.m */; };
+		555DA4B2216C35160057D434 /* UIViewController+JKRStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA49F216C35160057D434 /* UIViewController+JKRStatusBarStyle.m */; };
+		555DA4B4216C35160057D434 /* UIView+JKR_Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4A1216C35160057D434 /* UIView+JKR_Frame.m */; };
+		555DA4B5216C35160057D434 /* UIView+JKRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4A3216C35160057D434 /* UIView+JKRViewController.m */; };
+		555DA4B6216C35160057D434 /* JKRSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4A9216C35160057D434 /* JKRSearchController.m */; };
+		555DA4B7216C35160057D434 /* JKRSearchTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4AA216C35160057D434 /* JKRSearchTextField.m */; };
+		555DA4B8216C35160057D434 /* JKRSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4AC216C35160057D434 /* JKRSearchBar.m */; };
+		555DA4BC216C408F0057D434 /* YZHAddBookSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA4BA216C408F0057D434 /* YZHAddBookSearchVC.m */; };
+		555DA4BD216C408F0057D434 /* YZHAddBookSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555DA4BB216C408F0057D434 /* YZHAddBookSearchVC.xib */; };
 		5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5562DE2221549FF40098FA83 /* YZHMyInformationModel.m */; };
 		5562DE29215683AF0098FA83 /* YZHMyInformationPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5562DE28215683AF0098FA83 /* YZHMyInformationPhotoView.m */; };
 		5562DE2B215683BA0098FA83 /* YZHMyInformationPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5562DE2A215683BA0098FA83 /* YZHMyInformationPhotoView.xib */; };
@@ -255,6 +268,32 @@
 		55337DFF2151055500307B75 /* YZHSettingPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSettingPasswordView.m; sourceTree = "<group>"; };
 		55337E012151055F00307B75 /* YZHSettingPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSettingPasswordView.xib; sourceTree = "<group>"; };
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
+		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
+		555DA494216C35160057D434 /* UIColor+JKRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+JKRColor.m"; sourceTree = "<group>"; };
+		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
+		555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+JKRTouch.m"; sourceTree = "<group>"; };
+		555DA497216C35160057D434 /* UIView+JKR_Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKR_Frame.h"; sourceTree = "<group>"; };
+		555DA499216C35160057D434 /* UIViewController+JKRStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JKRStatusBarStyle.h"; sourceTree = "<group>"; };
+		555DA49A216C35160057D434 /* UIView+JKRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRViewController.h"; sourceTree = "<group>"; };
+		555DA49B216C35160057D434 /* UIView+JKRSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRSubView.h"; sourceTree = "<group>"; };
+		555DA49C216C35160057D434 /* UIView+JKRTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRTouch.m"; sourceTree = "<group>"; };
+		555DA49D216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+JKR_BackgroundColor.h"; sourceTree = "<group>"; };
+		555DA49E216C35160057D434 /* UIColor+JKRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+JKRColor.h"; sourceTree = "<group>"; };
+		555DA49F216C35160057D434 /* UIViewController+JKRStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JKRStatusBarStyle.m"; sourceTree = "<group>"; };
+		555DA4A1216C35160057D434 /* UIView+JKR_Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKR_Frame.m"; sourceTree = "<group>"; };
+		555DA4A2216C35160057D434 /* UIGestureRecognizer+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+JKRTouch.h"; sourceTree = "<group>"; };
+		555DA4A3216C35160057D434 /* UIView+JKRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRViewController.m"; sourceTree = "<group>"; };
+		555DA4A4216C35160057D434 /* JKRSearchHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRSearchHeader.h; sourceTree = "<group>"; };
+		555DA4A6216C35160057D434 /* JKRSearchTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRSearchTextField.h; sourceTree = "<group>"; };
+		555DA4A8216C35160057D434 /* JKRSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRSearchBar.h; sourceTree = "<group>"; };
+		555DA4A9216C35160057D434 /* JKRSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKRSearchController.m; sourceTree = "<group>"; };
+		555DA4AA216C35160057D434 /* JKRSearchTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKRSearchTextField.m; sourceTree = "<group>"; };
+		555DA4AB216C35160057D434 /* JKRSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKRSearchController.h; sourceTree = "<group>"; };
+		555DA4AC216C35160057D434 /* JKRSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKRSearchBar.m; sourceTree = "<group>"; };
+		555DA4B9216C408F0057D434 /* YZHAddBookSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookSearchVC.h; sourceTree = "<group>"; };
+		555DA4BA216C408F0057D434 /* YZHAddBookSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookSearchVC.m; sourceTree = "<group>"; };
+		555DA4BB216C408F0057D434 /* YZHAddBookSearchVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookSearchVC.xib; sourceTree = "<group>"; };
 		5562DE2121549FF40098FA83 /* YZHMyInformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationModel.h; sourceTree = "<group>"; };
 		5562DE2221549FF40098FA83 /* YZHMyInformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyInformationModel.m; sourceTree = "<group>"; };
 		5562DE27215683AF0098FA83 /* YZHMyInformationPhotoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyInformationPhotoView.h; sourceTree = "<group>"; };
@@ -496,6 +535,7 @@
 		55128A0121463E480099CC55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				555DA490216C35160057D434 /* JKRSearch */,
 				55EE6D3C215B7683004E092F /* YZHLocation.json */,
 			);
 			path = Resources;
@@ -1150,6 +1190,52 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		555DA490216C35160057D434 /* JKRSearch */ = {
+			isa = PBXGroup;
+			children = (
+				555DA4A4216C35160057D434 /* JKRSearchHeader.h */,
+				555DA491216C35160057D434 /* Category */,
+				555DA4A5216C35160057D434 /* SearchController */,
+			);
+			path = JKRSearch;
+			sourceTree = "<group>";
+		};
+		555DA491216C35160057D434 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				555DA492216C35160057D434 /* UIView+JKRTouch.h */,
+				555DA49C216C35160057D434 /* UIView+JKRTouch.m */,
+				555DA49B216C35160057D434 /* UIView+JKRSubView.h */,
+				555DA493216C35160057D434 /* UIView+JKRSubView.m */,
+				555DA49E216C35160057D434 /* UIColor+JKRColor.h */,
+				555DA494216C35160057D434 /* UIColor+JKRColor.m */,
+				555DA49D216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.h */,
+				555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */,
+				555DA4A2216C35160057D434 /* UIGestureRecognizer+JKRTouch.h */,
+				555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */,
+				555DA497216C35160057D434 /* UIView+JKR_Frame.h */,
+				555DA4A1216C35160057D434 /* UIView+JKR_Frame.m */,
+				555DA499216C35160057D434 /* UIViewController+JKRStatusBarStyle.h */,
+				555DA49F216C35160057D434 /* UIViewController+JKRStatusBarStyle.m */,
+				555DA49A216C35160057D434 /* UIView+JKRViewController.h */,
+				555DA4A3216C35160057D434 /* UIView+JKRViewController.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		555DA4A5216C35160057D434 /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				555DA4AB216C35160057D434 /* JKRSearchController.h */,
+				555DA4A9216C35160057D434 /* JKRSearchController.m */,
+				555DA4A8216C35160057D434 /* JKRSearchBar.h */,
+				555DA4AC216C35160057D434 /* JKRSearchBar.m */,
+				555DA4A6216C35160057D434 /* JKRSearchTextField.h */,
+				555DA4AA216C35160057D434 /* JKRSearchTextField.m */,
+			);
+			path = SearchController;
+			sourceTree = "<group>";
+		};
 		556C3CCB2165C8FB007AEA39 /* ScanQRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -1448,6 +1534,9 @@
 			children = (
 				55D580E521632478000A8B55 /* YZHAddressBookVC.h */,
 				55D580E621632478000A8B55 /* YZHAddressBookVC.m */,
+				555DA4B9216C408F0057D434 /* YZHAddBookSearchVC.h */,
+				555DA4BA216C408F0057D434 /* YZHAddBookSearchVC.m */,
+				555DA4BB216C408F0057D434 /* YZHAddBookSearchVC.xib */,
 			);
 			path = AddressBookHome;
 			sourceTree = "<group>";
@@ -1652,6 +1741,7 @@
 				55D580E12163240B000A8B55 /* YZHDetailsSettingVC.xib in Resources */,
 				55D580F321635871000A8B55 /* YZHAddBookAddFirendCell.xib in Resources */,
 				55D0835C2160BE610028D919 /* YZHDetailsSettingCell.xib in Resources */,
+				555DA4BD216C408F0057D434 /* YZHAddBookSearchVC.xib in Resources */,
 				55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */,
 				55D580DC2163240B000A8B55 /* YZHAddBookSetTagVC.xib in Resources */,
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
@@ -1742,6 +1832,7 @@
 			files = (
 				55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */,
 				5531458021573C1400A13F96 /* YZHMyInformationYoloIDVC.m in Sources */,
+				555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */,
 				552CC89B215A746D00135FDC /* YZHSettingCenterVC.m in Sources */,
 				55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
@@ -1752,10 +1843,13 @@
 				55D580E02163240B000A8B55 /* YZHDetailsSettingVC.m in Sources */,
 				55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */,
 				55D580F721635976000A8B55 /* YZHAddBookFirendModel.m in Sources */,
+				555DA4BC216C408F0057D434 /* YZHAddBookSearchVC.m in Sources */,
 				5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */,
 				556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */,
 				55C656A7215E6982005E997B /* YZHAddBookUserAskFooterView.m in Sources */,
+				555DA4B1216C35160057D434 /* UIView+JKRTouch.m in Sources */,
 				556C3CCF2165CAE1007AEA39 /* YZHScanQRCodeVC.m in Sources */,
+				555DA4B4216C35160057D434 /* UIView+JKR_Frame.m in Sources */,
 				55DC36B72167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m in Sources */,
 				55C656B0215F2614005E997B /* YZHCommonStyleTableViewCell.m in Sources */,
 				55C239E52149122400200798 /* YZHNetworkService.m in Sources */,
@@ -1800,26 +1894,33 @@
 				55D5810121636CFF000A8B55 /* YZHPhoneContactDefaultView.m in Sources */,
 				552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
+				555DA4B2216C35160057D434 /* UIViewController+JKRStatusBarStyle.m in Sources */,
 				55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */,
 				55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */,
 				55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */,
 				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
+				555DA4B5216C35160057D434 /* UIView+JKRViewController.m in Sources */,
 				55B5DB9021527D78002A04A9 /* YZHMyCenterHeaderView.m in Sources */,
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
+				555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */,
 				553145712157298200A13F96 /* YZHMyInformationSetNameVC.m in Sources */,
 				552CC8A9215B149A00135FDC /* UIImage+YZHTool.m in Sources */,
 				552CC8A0215A782000135FDC /* YZHPrivacySettingVC.m in Sources */,
 				55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */,
 				55BD8664215E084600D23ED1 /* YZHAddBookSectionView.m in Sources */,
 				55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */,
+				555DA4B8216C35160057D434 /* JKRSearchBar.m in Sources */,
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
+				555DA4AE216C35160057D434 /* UIColor+JKRColor.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
 				55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
+				555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */,
+				555DA4B7216C35160057D434 /* JKRSearchTextField.m in Sources */,
 				552CC8A5215A798E00135FDC /* YZHPrivacySettingCell.m in Sources */,
 				55D580DD2163240B000A8B55 /* YZHAddBookSetTagVC.m in Sources */,
 				55337DDB214FE0CC00307B75 /* YZHWelcomeView.m in Sources */,
@@ -1838,6 +1939,7 @@
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
 				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,
 				552CC896215A6F3900135FDC /* YZHAboutYoloCell.m in Sources */,
+				555DA4B6216C35160057D434 /* JKRSearchController.m in Sources */,
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
 				559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */,
 				55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */,

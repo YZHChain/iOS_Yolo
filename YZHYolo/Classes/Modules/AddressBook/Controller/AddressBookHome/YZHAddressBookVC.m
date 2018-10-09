@@ -14,21 +14,19 @@
 #import "YZHAddBookAdditionalCell.h"
 #import "YZHAddressBookFootView.h"
 #import "UITableView+SCIndexView.h"
-#import "YZHAddBookSetNoteVC.h"
-#import "YZHAddBookSetTagVC.h"
 #import "YZHBaseNavigationController.h"
-#import "PYSearch.h"
 #import "YZHPublic.h"
+#import "JKRSearchController.h"
+#import "YZHAddBookSearchVC.h"
 
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
 static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier";
-@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSArray* indexArray;
-@property (nonatomic, strong) PYSearchViewController* searchViewController;
-@property (nonatomic, strong) YZHBaseNavigationController* searchNav;
+@property (nonatomic, strong) JKRSearchController* searchController;
 
 @end
 
@@ -95,7 +93,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     self.tableView.sc_indexViewConfiguration = indexViewConfiguration;
     self.tableView.sc_translucentForTableViewInNavigationBar = YES;
     self.tableView.sc_indexViewDataSource = self.indexArray;
-    
 }
 
 - (void)reloadView
@@ -204,6 +201,48 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     }
 }
 
+#pragma mark - JKRSearchControllerhResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(JKRSearchController *)searchController {
+    NSString *searchText = searchController.searchBar.text;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(SELF CONTAINS %@)", searchText];
+//    JKRSearchResultViewController *resultController = (JKRSearchResultViewController *)searchController.searchResultsController;
+//    if (!(searchText.length > 0)) resultController.filterDataArray = @[];
+//    else resultController.filterDataArray = [self.dataArray filteredArrayUsingPredicate:predicate];
+}
+
+#pragma mark - JKRSearchControllerDelegate
+
+- (void)willPresentSearchController:(JKRSearchController *)searchController {
+    NSLog(@"willPresentSearchController, %@", searchController);
+}
+
+- (void)didPresentSearchController:(JKRSearchController *)searchController {
+    NSLog(@"didPresentSearchController, %@", searchController);
+}
+
+- (void)willDismissSearchController:(JKRSearchController *)searchController {
+    NSLog(@"willDismissSearchController, %@", searchController);
+}
+
+- (void)didDismissSearchController:(JKRSearchController *)searchController {
+    NSLog(@"didDismissSearchController, %@", searchController);
+}
+
+#pragma mark - JKRSearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(JKRSearchBar *)searchBar {
+    NSLog(@"searchBarTextDidBeginEditing %@", searchBar);
+}
+
+- (void)searchBarTextDidEndEditing:(JKRSearchBar *)searchBar {
+    NSLog(@"searchBarTextDidEndEditing %@", searchBar);
+}
+
+- (void)searchBar:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText {
+    NSLog(@"searchBar:%@ textDidChange:%@", searchBar, searchText);
+}
+
 #pragma mark - 5.Event Response
 
 - (void)clickLeftBarSwitchType:(UIButton *)sender{
@@ -236,7 +275,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _tableView.rowHeight = 55;
-//        _tableView.tableHeaderView = self.searchViewController.searchBar;
+        _tableView.tableHeaderView = self.searchController.searchBar;
         _tableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
@@ -254,52 +293,19 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     return _indexArray;
 }
 
-- (PYSearchViewController* )searchViewController {
+- (JKRSearchController *)searchController {
     
-    if (!_searchViewController) {
+    if (!_searchController) {
+        YZHAddBookSearchVC* addBookSearchVC = [[YZHAddBookSearchVC alloc] init];
+        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:addBookSearchVC];
+        _searchController.searchBar.placeholder = @"搜索";
+        _searchController.hidesNavigationBarDuringPresentation = YES;
+        _searchController.searchResultsUpdater = self;
+        _searchController.searchBar.delegate = self;
+        _searchController.delegate = self;
         
-        NSArray *hotSeaches = @[@"Java", @"Python", @"Objective-C", @"Swift", @"C", @"C++", @"PHP", @"C#", @"Perl", @"Go", @"JavaScript", @"R", @"Ruby", @"MATLAB"];
-        // 2. Create searchViewController
-        _searchViewController = [PYSearchViewController searchViewControllerWithHotSearches:hotSeaches searchBarPlaceholder:@"Search programming language" didSearchBlock:^(PYSearchViewController *searchViewController, UISearchBar *searchBar, NSString *searchText) {
-            // Call this Block when completion search automatically
-            // Such as: Push to a view controller
-            [searchViewController.navigationController pushViewController:[[UIViewController alloc] init] animated:YES];
-
-        }];
-        // 3. present the searchViewController
-//        _searchViewController.searchBar.height = 48;
-//        _searchViewController.searchBarBackgroundColor = YZHColorWithRGB(247, 247, 247);
-        _searchViewController.searchBar.delegate = self;
-//        [_searchViewController.cancelButton addTarget:self action:@selector(cancelSearch) forControlEvents:UIControlEventTouchUpInside];
-//        _searchNav = [[YZHBaseNavigationController alloc] initWithRootViewController:_searchViewController];
-//        [self presentViewController:_searchNav animated:NO completion:^{
-//
-//        }];
     }
-    return _searchViewController;
+    return _searchController;
 }
-
-- (YZHBaseNavigationController *)searchNav {
-    
-    if (!_searchNav) {
-        _searchNav = [[YZHBaseNavigationController alloc] initWithRootViewController:self.searchViewController];
-    }
-    
-    return _searchNav;
-}
-
-//- (void)cancelSearch {
-//
-////    [UIView animateWithDuration:0.3 animations:^{
-////        self.searchNav.view.y = 64;
-////    } completion:^(BOOL finished) {
-////        [self.searchNav.view removeFromSuperview];
-////    }];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//
-//    }];
-//
-//}
-
 
 @end
