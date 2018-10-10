@@ -11,7 +11,6 @@
 #import "YZHPublic.h"
 @interface YZHPhoneContactCell()
 
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *datingButton;
 @property (weak, nonatomic) IBOutlet UILabel *rusultLabel;

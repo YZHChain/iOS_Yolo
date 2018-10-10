@@ -22,11 +22,12 @@
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
 static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier";
-@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating>
+@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating, SCTableViewSectionIndexDelegate>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSArray* indexArray;
 @property (nonatomic, strong) JKRSearchController* searchController;
+@property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
 
 @end
 
@@ -88,11 +89,11 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     [self.view addSubview:self.tableView];
-    
-    SCIndexViewConfiguration *indexViewConfiguration = [SCIndexViewConfiguration configuration];
-    self.tableView.sc_indexViewConfiguration = indexViewConfiguration;
-    self.tableView.sc_translucentForTableViewInNavigationBar = YES;
+    //设置右边索引;
+    self.tableView.sc_indexViewConfiguration = self.indexViewConfiguration;
     self.tableView.sc_indexViewDataSource = self.indexArray;
+    self.tableView.delegate = self;
+    
 }
 
 - (void)reloadView
@@ -204,6 +205,33 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     }
 }
 
+#pragma mark - SCTableViewSectionIndexDelegate
+// 重写这两个代理方法,否则默认算法 indexView 与实际不一致.
+- (void)tableView:(UITableView *)tableView didSelectIndexViewAtSection:(NSUInteger)section {
+    
+    NSIndexPath* indexPath;
+    if (section > 0) {
+        indexPath = [NSIndexPath indexPathForRow:0 inSection:section + 1];
+    } else {
+        indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
+    }
+    CGRect frame = [tableView rectForSection:indexPath.section];
+    [tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:NO];
+    
+}
+
+- (NSUInteger)sectionOfTableViewDidScroll:(UITableView *)tableView {
+
+    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
+    NSInteger indexSection = indexPath.section;
+    if (indexSection > 0) {
+        indexSection = indexPath.section - 1;
+    } else {
+        indexPath = 0;
+    }
+    return indexSection;
+}
+
 #pragma mark - JKRSearchControllerhResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(JKRSearchController *)searchController {
@@ -277,15 +305,27 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tableView.rowHeight = 55;
+        _tableView.rowHeight = kYZHCellHeight;
         _tableView.tableHeaderView = self.searchController.searchBar;
         _tableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAdditionalCell" bundle:nil] forCellReuseIdentifier:kYZHAdditionalCellIdentifier];
         _tableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
+        _tableView.showsVerticalScrollIndicator = NO;
     }
     return _tableView;
+}
+
+- (SCIndexViewConfiguration *)indexViewConfiguration {
+    
+    if (!_indexViewConfiguration) {
+        _indexViewConfiguration = [SCIndexViewConfiguration configuration];
+        _indexViewConfiguration.indexItemsSpace = 2.5;
+        self.tableView.sc_translucentForTableViewInNavigationBar = YES;
+        self.tableView.sc_indexViewDelegate = self;
+    }
+    return _indexViewConfiguration;
 }
 
 - (NSArray *)indexArray{
@@ -307,7 +347,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _searchController.searchResultsUpdater = self;
         _searchController.searchBar.delegate = self;
         _searchController.delegate = self;
-        
     }
     return _searchController;
 }
