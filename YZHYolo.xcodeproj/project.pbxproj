@@ -58,6 +58,12 @@
 		55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */; };
 		55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55337DFF2151055500307B75 /* YZHSettingPasswordView.m */; };
 		55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55337E012151055F00307B75 /* YZHSettingPasswordView.xib */; };
+		553C53E7216CB590007D46A9 /* YZHCommanDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53E6216CB590007D46A9 /* YZHCommanDefaultView.m */; };
+		553C53E9216CB5A8007D46A9 /* YZHCommanDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C53E8216CB5A8007D46A9 /* YZHCommanDefaultView.xib */; };
+		553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53EB216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m */; };
+		553C53EE216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C53ED216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib */; };
+		553C53F2216CEEC9007D46A9 /* YZHAddBookAddFirendRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */; };
+		553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5810B2163952C000A8B55 /* YZHPhoneContactCell.xib */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
@@ -93,13 +99,16 @@
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
 		5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */; };
 		5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */; };
+		5593C51F216D05FD00A50533 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB8C21523573002A04A9 /* Assets.xcassets */; };
+		5593C521216D0AA700A50533 /* YZHAddBookAddFirendRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */; };
+		5593C529216D947A00A50533 /* YZHAddFirendSubtitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593C527216D947A00A50533 /* YZHAddFirendSubtitleCell.m */; };
+		5593C52A216D947A00A50533 /* YZHAddFirendSubtitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */; };
 		559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B89DC2169AA5700249688 /* YZHIdentification.m */; };
 		55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */; };
 		55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */; };
 		55B5DB8221522398002A04A9 /* YZHPrivatelyChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8121522398002A04A9 /* YZHPrivatelyChatVC.m */; };
 		55B5DB882152240A002A04A9 /* YZHCommunityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB872152240A002A04A9 /* YZHCommunityVC.m */; };
 		55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8A215229BD002A04A9 /* YZHMyInformationVC.m */; };
-		55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB8C21523573002A04A9 /* Assets.xcassets */; };
 		55B5DB9021527D78002A04A9 /* YZHMyCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB8F21527D78002A04A9 /* YZHMyCenterHeaderView.m */; };
 		55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB9121527D8D002A04A9 /* YZHMyCenterHeaderView.xib */; };
 		55B5DB9621528566002A04A9 /* YZHMyCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB9421528566002A04A9 /* YZHMyCenterCell.m */; };
@@ -164,7 +173,6 @@
 		55D5810121636CFF000A8B55 /* YZHPhoneContactDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D5810021636CFF000A8B55 /* YZHPhoneContactDefaultView.m */; };
 		55D5810321636D18000A8B55 /* YZHPhoneContactDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5810221636D18000A8B55 /* YZHPhoneContactDefaultView.xib */; };
 		55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D5810A2163952C000A8B55 /* YZHPhoneContactCell.m */; };
-		55D5810D2163952C000A8B55 /* YZHPhoneContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5810B2163952C000A8B55 /* YZHPhoneContactCell.xib */; };
 		55DC36B72167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC36B52167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m */; };
 		55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DC36B62167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib */; };
 		55DC36BB2168997E00871C2B /* UIButton+YZHClickHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC36BA2168997E00871C2B /* UIButton+YZHClickHandle.m */; };
@@ -266,6 +274,15 @@
 		55337DFE2151055500307B75 /* YZHSettingPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSettingPasswordView.h; sourceTree = "<group>"; };
 		55337DFF2151055500307B75 /* YZHSettingPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSettingPasswordView.m; sourceTree = "<group>"; };
 		55337E012151055F00307B75 /* YZHSettingPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSettingPasswordView.xib; sourceTree = "<group>"; };
+		553C53E5216CB590007D46A9 /* YZHCommanDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommanDefaultView.h; sourceTree = "<group>"; };
+		553C53E6216CB590007D46A9 /* YZHCommanDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommanDefaultView.m; sourceTree = "<group>"; };
+		553C53E8216CB5A8007D46A9 /* YZHCommanDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCommanDefaultView.xib; sourceTree = "<group>"; };
+		553C53EA216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendRecordSectionHeader.h; sourceTree = "<group>"; };
+		553C53EB216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendRecordSectionHeader.m; sourceTree = "<group>"; };
+		553C53ED216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddFirendRecordSectionHeader.xib; sourceTree = "<group>"; };
+		553C53EF216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendRecordCell.h; sourceTree = "<group>"; };
+		553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendRecordCell.m; sourceTree = "<group>"; };
+		553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZHAddBookAddFirendRecordCell.xib; sourceTree = "<group>"; };
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
@@ -335,6 +352,9 @@
 		5591D7A2215A2B9300C2AA93 /* YZHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHLocationManager.h; sourceTree = "<group>"; };
 		5591D7A5215A2BDA00C2AA93 /* YZHPhotoManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPhotoManage.h; sourceTree = "<group>"; };
 		5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPhotoManage.m; sourceTree = "<group>"; };
+		5593C526216D947A00A50533 /* YZHAddFirendSubtitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendSubtitleCell.h; sourceTree = "<group>"; };
+		5593C527216D947A00A50533 /* YZHAddFirendSubtitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendSubtitleCell.m; sourceTree = "<group>"; };
+		5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddFirendSubtitleCell.xib; sourceTree = "<group>"; };
 		559B89DB2169AA5700249688 /* YZHIdentification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHIdentification.h; sourceTree = "<group>"; };
 		559B89DC2169AA5700249688 /* YZHIdentification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHIdentification.m; sourceTree = "<group>"; };
 		55B5DB7A2152236D002A04A9 /* YZHDiscoverVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDiscoverVC.h; sourceTree = "<group>"; };
@@ -765,9 +785,11 @@
 		55128A1821463E480099CC55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5593C525216D92CA00A50533 /* AddFirendRecord */,
+				5593C524216D928C00A50533 /* PhoneContact */,
+				5593C523216D926B00A50533 /* AddressBook */,
+				5593C522216D923D00A50533 /* Details */,
 				55D580F42163594A000A8B55 /* AddFirend */,
-				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
-				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -775,11 +797,12 @@
 		55128A1921463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				553C53E4216CB471007D46A9 /* AddFirendRecord */,
 				55D580FE21636C93000A8B55 /* PhoneContact */,
 				55C65694215E3580005E997B /* AddressBook */,
 				55C6569A215E3691005E997B /* Details */,
 				55D083572160BE470028D919 /* Setting */,
-				55C656C2215F5C3E005E997B /* BookSetTag */,
+				55C656C2215F5C3E005E997B /* SetTag */,
 				55C656B7215F2976005E997B /* SetNote */,
 				55D580EE2163255D000A8B55 /* AddFirend */,
 			);
@@ -1140,8 +1163,24 @@
 				55C656AD215F2614005E997B /* YZHCommonStyleTableViewCell.h */,
 				55C656AE215F2614005E997B /* YZHCommonStyleTableViewCell.m */,
 				55C656AF215F2614005E997B /* YZHCommonStyleTableViewCell.xib */,
+				553C53E5216CB590007D46A9 /* YZHCommanDefaultView.h */,
+				553C53E6216CB590007D46A9 /* YZHCommanDefaultView.m */,
+				553C53E8216CB5A8007D46A9 /* YZHCommanDefaultView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		553C53E4216CB471007D46A9 /* AddFirendRecord */ = {
+			isa = PBXGroup;
+			children = (
+				553C53EA216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.h */,
+				553C53EB216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m */,
+				553C53ED216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib */,
+				553C53EF216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.h */,
+				553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */,
+				553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */,
+			);
+			path = AddFirendRecord;
 			sourceTree = "<group>";
 		};
 		553EED1B21463F05006CDD08 /* Supporting Files */ = {
@@ -1284,6 +1323,36 @@
 				55F912D521661F4300EDF190 /* YZHQRCodeManage.m */,
 			);
 			path = YZHImagePhoto;
+			sourceTree = "<group>";
+		};
+		5593C522216D923D00A50533 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		5593C523216D926B00A50533 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
+				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
+		5593C524216D928C00A50533 /* PhoneContact */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhoneContact;
+			sourceTree = "<group>";
+		};
+		5593C525216D92CA00A50533 /* AddFirendRecord */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddFirendRecord;
 			sourceTree = "<group>";
 		};
 		55B5DB9821530EA8002A04A9 /* YZHRefresh */ = {
@@ -1432,6 +1501,9 @@
 				55C656A0215E5907005E997B /* YZHAddBookSettingCell.h */,
 				55C656A1215E5907005E997B /* YZHAddBookSettingCell.m */,
 				55C656A2215E5907005E997B /* YZHAddBookSettingCell.xib */,
+				5593C526216D947A00A50533 /* YZHAddFirendSubtitleCell.h */,
+				5593C527216D947A00A50533 /* YZHAddFirendSubtitleCell.m */,
+				5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */,
 				55C656A5215E6982005E997B /* YZHAddBookUserAskFooterView.h */,
 				55C656A6215E6982005E997B /* YZHAddBookUserAskFooterView.m */,
 				55C656A8215E6991005E997B /* YZHAddBookUserAskFooterView.xib */,
@@ -1449,7 +1521,7 @@
 			path = SetNote;
 			sourceTree = "<group>";
 		};
-		55C656C2215F5C3E005E997B /* BookSetTag */ = {
+		55C656C2215F5C3E005E997B /* SetTag */ = {
 			isa = PBXGroup;
 			children = (
 				55C656C8215F5FAE005E997B /* YZHAddBookSetTagCell.h */,
@@ -1464,7 +1536,7 @@
 				55C656D4215F7947005E997B /* YZHAddBookSetTagAlertView.m */,
 				55C656D6215F7955005E997B /* YZHAddBookSetTagAlertView.xib */,
 			);
-			path = BookSetTag;
+			path = SetTag;
 			sourceTree = "<group>";
 		};
 		55C656CD215F6DA3005E997B /* ExtensionTool */ = {
@@ -1517,9 +1589,9 @@
 		55D580D82163240B000A8B55 /* Details */ = {
 			isa = PBXGroup;
 			children = (
-				55D580D92163240B000A8B55 /* YZHAddBookDetailsVC.xib */,
 				55D580DA2163240B000A8B55 /* YZHAddBookDetailsVC.h */,
 				55D580DB2163240B000A8B55 /* YZHAddBookDetailsVC.m */,
+				55D580D92163240B000A8B55 /* YZHAddBookDetailsVC.xib */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -1728,6 +1800,7 @@
 				55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */,
 				55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */,
 				55C656A4215E5907005E997B /* YZHAddBookSettingCell.xib in Resources */,
+				5593C521216D0AA700A50533 /* YZHAddBookAddFirendRecordCell.xib in Resources */,
 				55C656B1215F2614005E997B /* YZHCommonStyleTableViewCell.xib in Resources */,
 				55C6569F215E587A005E997B /* YZHAddBookUserIDCell.xib in Resources */,
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
@@ -1740,6 +1813,8 @@
 				55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */,
 				55D580DC2163240B000A8B55 /* YZHAddBookSetTagVC.xib in Resources */,
 				551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */,
+				553C53E9216CB5A8007D46A9 /* YZHCommanDefaultView.xib in Resources */,
+				553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */,
 				55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
@@ -1752,18 +1827,19 @@
 				55337DBC214F75CA00307B75 /* YZHLoginView.xib in Resources */,
 				55337DCA214F8ECF00307B75 /* YZHRegisterView.xib in Resources */,
 				5531457C21573BB600A13F96 /* YZHMyInformationMyQRCodeVC.xib in Resources */,
+				5593C52A216D947A00A50533 /* YZHAddFirendSubtitleCell.xib in Resources */,
 				55337DD8214FE0AC00307B75 /* YZHWelcomeView.xib in Resources */,
 				55D5810321636D18000A8B55 /* YZHPhoneContactDefaultView.xib in Resources */,
-				55B5DB8D21523573002A04A9 /* Assets.xcassets in Resources */,
 				553145722157298200A13F96 /* YZHMyInformationSetNameVC.xib in Resources */,
 				5562DE2B215683BA0098FA83 /* YZHMyInformationPhotoView.xib in Resources */,
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
 				55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
+				553C53EE216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib in Resources */,
+				5593C51F216D05FD00A50533 /* Assets.xcassets in Resources */,
 				5562DE35215687D70098FA83 /* YZHMyInformationPhotoVC.xib in Resources */,
 				55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */,
 				55B5DB9721528566002A04A9 /* YZHMyCenterCell.xib in Resources */,
-				55D5810D2163952C000A8B55 /* YZHPhoneContactCell.xib in Resources */,
 				55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */,
 				55D580DE2163240B000A8B55 /* YZHAddBookSetNoteVC.xib in Resources */,
 				552CC8A6215A798E00135FDC /* YZHPrivacySettingCell.xib in Resources */,
@@ -1910,6 +1986,7 @@
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
+				553C53F2216CEEC9007D46A9 /* YZHAddBookAddFirendRecordCell.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
 				55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
@@ -1922,12 +1999,14 @@
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
+				553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */,
 				55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */,
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
 				55C656BB215F2A0B005E997B /* YZHAddBookSetNoteCell.m in Sources */,
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
 				55C656D5215F7947005E997B /* YZHAddBookSetTagAlertView.m in Sources */,
 				55D580E32163240B000A8B55 /* YZHAddBookDetailsVC.m in Sources */,
+				553C53E7216CB590007D46A9 /* YZHCommanDefaultView.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
 				5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */,
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
@@ -1935,6 +2014,7 @@
 				552CC896215A6F3900135FDC /* YZHAboutYoloCell.m in Sources */,
 				555DA4B6216C35160057D434 /* JKRSearchController.m in Sources */,
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
+				5593C529216D947A00A50533 /* YZHAddFirendSubtitleCell.m in Sources */,
 				559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */,
 				55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */,
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,

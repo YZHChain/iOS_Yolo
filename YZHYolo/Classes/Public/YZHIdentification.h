@@ -11,6 +11,8 @@
 
 #pragma mark - Blocks
 
+typedef CGFloat YZHHeightFloat;
+
 /**
  *    This is a common block for handling error.
  */
@@ -31,20 +33,43 @@ typedef void (^YZHStringBlock)(NSString *result);
  */
 typedef void(^YZHButtonBlock)(UIButton *sender);
 
-#pragma mark - Cell
+
+
+#pragma mark - TableView SubView Identifier Size
+
 /**
- *    @author https://github.com/CoderJackyHuang
+ *    @author https://github.com/ZexiFangkong
+ *
+ *    The common SectionHeader identifier
+ */
+extern NSString * const kYZHCommonHeaderIdentifier;
+/**
+ *    @author https://github.com/ZexiFangkong
  *
  *    The common cell identifier
  */
-extern NSString const *kYZHCommonCellIdentifier;
+extern NSString * const kYZHCommonCellIdentifier;
+/**
+ *    @author https://github.com/ZexiFangkong
+ *
+ *    The common CellHeight
+ */
+extern YZHHeightFloat const kYZHCellHeight;
+/**
+ *    @author https://github.com/ZexiFangkong
+ *
+ *    The common SectionHeight
+ */
+extern YZHHeightFloat const kYZHSectionHeight;
+
+#pragma mark -- Key
 
 /**
  *    @author https://github.com/ZexiFangkong
  *
  *    The common NonnullKey
  */
-extern NSString const * kYZHCommonNonnullKey;
+extern NSString * const kYZHCommonNonnullKey;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHIdentification : NSObject

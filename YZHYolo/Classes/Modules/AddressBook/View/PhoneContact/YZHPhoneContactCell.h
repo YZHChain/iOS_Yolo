@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
     YZHPhoneContactCellTypeDating = 0,
-    YZHPhoneContactCellTypeReview,
+    YZHPhoneContactCellTypeReview = 1,
 } YZHPhoneContactCellType;
 
 @interface YZHPhoneContactCell : UITableViewCell

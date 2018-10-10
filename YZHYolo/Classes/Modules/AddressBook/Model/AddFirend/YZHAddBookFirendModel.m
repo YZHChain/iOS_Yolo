@@ -34,13 +34,13 @@
     
     NSArray* list = @[
                       @{@"title": @"扫一扫",
-                        @"route": kYZHRouterAddressScanQRCode
+                        @"route": kYZHRouterAddressBookScanQRCode
                         },
                       @{@"title": @"手机联系人",
                         @"route": kYZHRouterAddressBookPhoneContact
                         },
                       @{@"title": @"搜索进群",
-                        @"route": kYZHRouterAddressScanQRCode
+                        @"route": kYZHRouterAddressBookScanQRCode
                         }];
     return list;
 }

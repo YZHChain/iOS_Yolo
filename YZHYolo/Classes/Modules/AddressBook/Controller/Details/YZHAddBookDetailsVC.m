@@ -13,10 +13,12 @@
 #import "YZHAddBookUserAskFooterView.h"
 #import "YZHAddBookSetTagVC.h"
 #import "YZHBaseNavigationController.h"
+#import "YZHAddFirendSubtitleCell.h"
 
 @interface YZHAddBookDetailsVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) YZHAddBookUserAskFooterView* userAskFooterView;
 
 @end
 
@@ -64,8 +66,12 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+    self.tableView.showsVerticalScrollIndicator = NO;
     //TODO: 计算高度.
-    self.tableView.tableFooterView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserAskFooterView" owner:nil options:nil].lastObject;
+    self.tableView.tableFooterView = self.userAskFooterView;
+    if (self.isShowFirendRecord) {
+        self.userAskFooterView.addFirendButtonTopLayoutConstraint.constant = 30;
+    }
 }
 
 - (void)reloadView
@@ -84,15 +90,29 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    if (self.isShowFirendRecord) {
+        return 4;
+    } else {
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     if (section == 0) {
         return 1;
+    }
+    if (self.isShowFirendRecord) {
+        if (section == 3) {
+            return 2;
+        } else {
+            return 1;
+        }
     } else {
-        return 2;
+        if (section == 1) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 }
 
@@ -120,6 +140,11 @@
             cell.titleLabel.text = @"地区";
             [cell.guideImageView removeFromSuperview];
             cell.showTextLabel.text = @"广东,深圳";
+        } else if (indexPath.section == 3) {
+           YZHAddFirendSubtitleCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddFirendSubtitleCell" owner:nil options:nil].lastObject;
+            cell.titleLabel.text = @"WO:";
+            cell.subtitleLabel.text = @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈";
+            return cell;
         }
         return cell;
         
@@ -129,7 +154,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 55;
+    if (self.isShowFirendRecord && indexPath.section == 3) {
+        return 126;
+    }
+    return kYZHCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -148,13 +176,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        [YZHRouter openURL:kYZHRouterAddressBookSetNote info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
+    }
     if ((indexPath.section == 2 && indexPath.row == 0)) {
-        
-        YZHAddBookSetTagVC* vc = [[YZHAddBookSetTagVC alloc] init];
-        YZHBaseNavigationController* nav = [[YZHBaseNavigationController alloc] initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:^{
-            
-        }];
+        [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
     }
 }
 
@@ -173,6 +199,14 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (YZHAddBookUserAskFooterView *)userAskFooterView {
+    
+    if (!_userAskFooterView) {
+        _userAskFooterView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserAskFooterView" owner:nil options:nil].lastObject;
+    }
+    return _userAskFooterView;
+}
 
 @end
 

@@ -71,7 +71,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     
     //TODO: 封装库后期可优化
     @weakify(self)
-    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithImageName:@"addBook_cover_leftBarButtonItem_default" tapCallBlock:^(UIButton *sender) {
+    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithStateNormalImageName:@"addBook_cover_leftBarButtonItem_default" stateSelectedImageName:@"addBook_cover_leftBarButtonItem_catogory" tapCallBlock:^(UIButton *sender) {
         @strongify(self)
         [self clickLeftBarSwitchType:sender];
     }];
@@ -142,8 +142,11 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     //TODO: 需要对 Router 封装跳转逻辑优化
     if (indexPath.section == 0 && indexPath.row == 0) {
+        //TODO: 分两种推出方式, 如果用户已授权手机号信息,则Push. 否则 Presen.
+        [YZHRouter openURL:kYZHRouterAddressBookPhoneContact];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
         //TODO:
-        [YZHRouter openURL:kYZHRouterAddressBookPhoneContact info:@{kYZHRouteSegue : kYZHRouteSegueModal, kYZHRouteSegueNewNavigation : @(YES)}];
+        [YZHRouter openURL:kYZHRouterAddressBookAddFirendRecord];
     } else {
     
     [YZHRouter openURL:kYZHRouterAddressBookDetails];

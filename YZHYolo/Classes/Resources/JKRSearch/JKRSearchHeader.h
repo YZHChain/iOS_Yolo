@@ -8,7 +8,6 @@
 
 #ifndef JKRSearchHeader_h
 #define JKRSearchHeader_h
-#import "UIColor+JKRColor.h"
 #define JKRColor(r,g,b,a) [UIColor jkr_colorWithRed:r green:g blue:b alpha:a]
 #define JKRColorHex(_hex_) [UIColor jkr_colorWithHexString:((__bridge NSString *)CFSTR(#_hex_))]
 #ifndef weakify

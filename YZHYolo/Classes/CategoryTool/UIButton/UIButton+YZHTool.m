@@ -13,18 +13,26 @@
 
 @implementation UIButton (YZHTool)
 
++ (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonBlock)callBlock {
+    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button yzh_setBarButtonItemWithStateNormalImageName:stateNormalImageName stateSelectedImageName:stateSelectedImageName tapCallBlock:callBlock];
+    
+    return button;
+}
+
 + (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock {
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button yzh_setBarButtonItemWithImageName:imageName tapCallBlock:callBlock];
+    [button yzh_setBarButtonItemWithStateNormalImageName:imageName stateSelectedImageName:imageName tapCallBlock:callBlock];
 
     return button;
 }
 
-- (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock {
+- (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString  *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonBlock)callBlock {
     
-    [self setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_default"] forState:UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"addBook_cover_leftBarButtonItem_catogory"] forState:UIControlStateSelected];
+    [self setImage:[UIImage imageNamed:stateNormalImageName] forState:UIControlStateNormal];
+    [self setImage:[UIImage imageNamed:stateSelectedImageName] forState:UIControlStateSelected];
     [self sizeToFit];
     
     if (callBlock) {

@@ -58,22 +58,23 @@
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="18876789520" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vxM-N6-9Ay">
-                        <rect key="frame" x="89.5" y="19" width="96" height="17"/>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="18876789520" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5ka-Eo-SVo">
+                        <rect key="frame" x="89.5" y="19" width="220.5" height="17"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="5ka-Eo-SVo" firstAttribute="leading" secondItem="4zb-8E-fXN" secondAttribute="trailing" constant="15" id="GZr-Cf-TAg"/>
+                    <constraint firstItem="5ka-Eo-SVo" firstAttribute="centerY" secondItem="3hM-Df-6Zs" secondAttribute="centerY" id="SAV-Kd-JlW"/>
                     <constraint firstItem="4zb-8E-fXN" firstAttribute="centerY" secondItem="3hM-Df-6Zs" secondAttribute="centerY" id="Xf8-RD-Cz1"/>
-                    <constraint firstItem="vxM-N6-9Ay" firstAttribute="centerY" secondItem="3hM-Df-6Zs" secondAttribute="centerY" id="kRo-J7-RmH"/>
+                    <constraint firstAttribute="trailing" secondItem="5ka-Eo-SVo" secondAttribute="trailing" constant="10" id="pHj-dw-Cd0"/>
                     <constraint firstItem="4zb-8E-fXN" firstAttribute="leading" secondItem="3hM-Df-6Zs" secondAttribute="leading" constant="13" id="rlz-er-fSA"/>
-                    <constraint firstItem="vxM-N6-9Ay" firstAttribute="leading" secondItem="4zb-8E-fXN" secondAttribute="trailing" constant="15" id="set-5S-R5S"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="subtitleTextField" destination="vxM-N6-9Ay" id="XSU-cn-jJQ"/>
+                <outlet property="subtitleTextField" destination="5ka-Eo-SVo" id="MS1-vA-fkl"/>
                 <outlet property="titleLabel" destination="4zb-8E-fXN" id="2R4-VE-Fii"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="152.02398800599701"/>

@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wW6-GX-Uku">
-                    <rect key="frame" x="67.5" y="235" width="240" height="40"/>
+                    <rect key="frame" x="67.5" y="229" width="240" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="DtB-e6-LNg"/>
@@ -34,7 +34,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYZ-iN-nxs">
-                    <rect key="frame" x="67.5" y="187" width="240" height="40"/>
+                    <rect key="frame" x="67.5" y="179" width="240" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="6IT-tb-cY7"/>
@@ -58,13 +58,14 @@
             </subviews>
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="qYZ-iN-nxs" secondAttribute="bottom" constant="123" id="SJG-vF-XpU"/>
+                <constraint firstItem="wW6-GX-Uku" firstAttribute="top" secondItem="qYZ-iN-nxs" secondAttribute="bottom" constant="10" id="Oxo-Uj-vGA"/>
                 <constraint firstItem="qYZ-iN-nxs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bJV-X0-7ur"/>
                 <constraint firstItem="wW6-GX-Uku" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gAs-pV-OMl"/>
-                <constraint firstAttribute="bottom" secondItem="wW6-GX-Uku" secondAttribute="bottom" constant="75" id="pUV-nD-ayV"/>
+                <constraint firstItem="qYZ-iN-nxs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="179" id="k64-Rd-J2f"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addFirendButtonTopLayoutConstraint" destination="k64-Rd-J2f" id="qta-m5-JrO"/>
                 <outlet property="addFriendButton" destination="wW6-GX-Uku" id="9fe-sW-lWa"/>
                 <outlet property="sendMessageButton" destination="qYZ-iN-nxs" id="K8w-dU-WSn"/>
             </connections>

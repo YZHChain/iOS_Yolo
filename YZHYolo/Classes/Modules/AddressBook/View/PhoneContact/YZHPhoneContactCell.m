@@ -19,6 +19,8 @@
 
 @end
 
+static NSString* kPhoneContactCellDating = @"phoneContactCellDating";
+static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
 @implementation YZHPhoneContactCell
 
 - (void)awakeFromNib {
@@ -40,14 +42,19 @@
 }
 // TODO: 后期可以把这块单独提出来. 
 + (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(YZHPhoneContactCellType)cellType {
-
-    NSString* identifierID = [NSString stringWithFormat:@"%ld%ldCell",(long)indexPath.section,(long)indexPath.row];
+    NSString* identifierID;
+    if (cellType == YZHPhoneContactCellTypeDating) {
+        identifierID = kPhoneContactCellDating;
+    } else {
+        identifierID = kPhoneContactCellReview;
+    }
     
-    YZHPhoneContactCell* cell;
-    UINib* nib = [UINib nibWithNibName:@"YZHPhoneContactCell" bundle:nil];
-    [tableView registerNib:nib forCellReuseIdentifier:identifierID];
-    cell = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:cellType];
-
+    YZHPhoneContactCell* cell = [tableView dequeueReusableCellWithIdentifier:identifierID];
+    if (cell == nil) {
+        UINib* nib = [UINib nibWithNibName:@"YZHPhoneContactCell" bundle:nil];
+        cell = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:cellType];
+    }
+    
     return cell;
 }
 

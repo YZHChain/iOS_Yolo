@@ -8,9 +8,13 @@
 
 #import "YZHIdentification.h"
 
-NSString const * kYZHCommonCellIdentifier = @"YZHCommonCellIdentifier";
 
-NSString const * kYZHCommonNonnullKey = @"YZHAssociatedNonnullKey";
+NSString * const kYZHCommonHeaderIdentifier = @"YZHCommonHeaderIdentifier";
+NSString * const kYZHCommonCellIdentifier = @"YZHCommonCellIdentifier";
+NSString * const kYZHCommonNonnullKey = @"YZHAssociatedNonnullKey";
+
+YZHHeightFloat const kYZHCellHeight = 55;
+YZHHeightFloat const kYZHSectionHeight = 25;
 
 @implementation YZHIdentification
 

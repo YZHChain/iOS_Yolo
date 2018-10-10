@@ -8,9 +8,14 @@
 
 #import "YZHAddBookAddFirendRecordVC.h"
 
+#import "YZHCommanDefaultView.h"
+#import "YZHPublic.h"
+#import "YZHAddFirendRecordSectionHeader.h"
+#import "YZHAddBookAddFirendRecordCell.h"
 @interface YZHAddBookAddFirendRecordVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) YZHCommanDefaultView* withoutDefaultView;
 
 @end
 
@@ -42,18 +47,23 @@
 
 - (void)setupNavBar {
     
-    self.navigationItem.title = @"好友添加记录";
+    self.navigationItem.title = @"好友申请";
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"添加好友" style:UIBarButtonItemStylePlain target:self action:@selector(addFriend:)];
 }
 
 - (void)setupView {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    [self.tableView registerNib:[UINib nibWithNibName:@"YZHAddFirendRecordSectionHeader" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHCommonHeaderIdentifier];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+    self.tableView.showsVerticalScrollIndicator = NO;
+    
+//    [self.view addSubview:self.withoutDefaultView];
 }
 
 - (void)reloadView {
@@ -71,44 +81,79 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return 5;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell* cell = [[UITableViewCell alloc] init];
+    YZHAddFirendRecordCellType cellType;
+    if (indexPath.section < 2) {
+        cellType = YZHAddFirendRecordCellTypeDating;
+    } else {
+        cellType = YZHAddFirendRecordCellTypeReview;
+    }
+    YZHAddBookAddFirendRecordCell* cell = [YZHAddBookAddFirendRecordCell tempTableViewCellWithTableView:tableView indexPath:indexPath cellType:cellType];
     
     return cell;
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewRowAction* removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+    }];
+    
+    return @[removeAction];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 55;
+    return kYZHCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return kYZHSectionHeight;
 }
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    YZHAddFirendRecordSectionHeader *sectionHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kYZHCommonHeaderIdentifier];
+    
+    return sectionHeader;
+}
+// 添加分段尾,为了隐藏分区最后一个 Cell 分割线
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return 0.1f;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
     UIView* view = [[UIView alloc] init];
     
     return view;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"isShowFirendRecord": @"YES"}];
 }
 
 #pragma mark - 5.Event Response
+
+- (void)addFriend:(UIBarButtonItem* )barButtonItem {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookAddFirend];
+}
 
 #pragma mark - 6.Private Methods
 
@@ -117,5 +162,13 @@
 }
 
 #pragma mark - 7.GET & SET
+
+-(YZHCommanDefaultView *)withoutDefaultView {
+    
+    if (!_withoutDefaultView) {
+        _withoutDefaultView = [YZHCommanDefaultView commanDefaultViewWithImageName:@"addBook_addFirendRecord_defualt" TitleString:@"暂无好友申请" subTitleString:@"（暂时无好友添加您，不如点击右上角按钮去添加好友吧)"];
+    }
+    return _withoutDefaultView;
+}
 
 @end

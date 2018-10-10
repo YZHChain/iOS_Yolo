@@ -51,22 +51,9 @@
 
 - (void)setupNavBar {
     
-    self.hasPhonePermissions = NO;
-    
     self.navigationItem.title = @"手机联系人";
-    //TODO
-    UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(backPreviousPage)];
-    self.navigationItem.leftBarButtonItem = leftItem;
-    // TODO: 封装.
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateNormal];
-    [self.navigationItem.leftBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateHighlighted];
     
-    if (self.hasPhonePermissions == NO) {
-        UIBarButtonItem* rightItem = [[UIBarButtonItem alloc] initWithTitle:@"获取" style:UIBarButtonItemStylePlain target:self action:@selector(readPhoneContact:)];
-        self.navigationItem.rightBarButtonItem = rightItem;
-        [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateNormal];
-        [self.navigationItem.rightBarButtonItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:14], NSFontAttributeName, nil] forState:UIControlStateHighlighted];
-    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"获取" style:UIBarButtonItemStylePlain target:self action:@selector(readPhoneContact:)];
 }
 
 - (void)setupView {
@@ -86,7 +73,7 @@
 
 - (void)setupData {
     
-    if (self.hasPhonePermissions) {
+    if (!self.hasPhonePermissions) {
         [self.view addSubview:self.tableView];
     } else {
         [self.view addSubview:self.defaultView];

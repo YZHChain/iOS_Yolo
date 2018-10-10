@@ -111,7 +111,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 55;
+    return kYZHCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -135,7 +135,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YZHAddBookSetNoteCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     // 选中备注
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.section == 0) {
         
         [cell.subtitleTextField becomeFirstResponder];
     } else if (indexPath.section == 1 && indexPath.row == 0) {

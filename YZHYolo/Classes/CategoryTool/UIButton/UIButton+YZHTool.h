@@ -13,7 +13,7 @@
 
 @property (nonatomic, copy) YZHButtonBlock tapCallBlock;
 
-- (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock;
++ (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString  *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonBlock)callBlock;
 + (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock;
 
 /**

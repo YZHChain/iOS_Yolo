@@ -119,10 +119,11 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YZHAddBookFirendModel* model = self.model.list[indexPath.row];
-    
-//    if ([model.title isEqualToString:@"手机联系人"]) {
+    if (indexPath.row == 1) {
         [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
-//    }
+    } else {
+        [YZHRouter openURL:model.route];
+    }
     
 }
 

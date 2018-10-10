@@ -124,7 +124,7 @@
         _bgView = [[UIView alloc] init];
         //TODO:  SearchBar + 状态栏高度.
         _bgView.frame = CGRectMake(0, 50 + 20, kScreenWidth, kScreenHeight - 50 + 20);
-        _bgView.backgroundColor = [UIColor redColor];
+        _bgView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endSearchTextFieldEditing:)];
         tapGestureRecognizer.cancelsTouchesInView = NO;
         [_bgView addGestureRecognizer:tapGestureRecognizer];
