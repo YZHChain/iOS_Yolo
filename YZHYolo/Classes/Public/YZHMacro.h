@@ -112,13 +112,13 @@
 #define YZHIsString(s) !((s == nil || [s isKindOfClass:[NSNull class]] || ([s isKindOfClass:[NSString class]] && s.length == 0)))
 
 // Judge whether it is a nil or null object.
-#define kIsEmptyObject(obj) (obj == nil || [obj isKindOfClass:[NSNull class]])
+#define YZHIsEmptyObject(obj) (obj == nil || [obj isKindOfClass:[NSNull class]])
 
 // Judge whether it is a vaid dictionary.
-#define kIsDictionary(objDict) (objDict != nil && [objDict isKindOfClass:[NSDictionary class]])
+#define YZHIsDictionary(objDict) (objDict != nil && [objDict isKindOfClass:[NSDictionary class]])
 
 // Judge whether it is a valid array.
-#define kIsArray(objArray) (objArray != nil && [objArray isKindOfClass:[NSArray class]])
+#define YZHIsArray(objArray) (objArray != nil && [objArray isKindOfClass:[NSArray class]])
 
 #pragma mark weakify && strongify
 

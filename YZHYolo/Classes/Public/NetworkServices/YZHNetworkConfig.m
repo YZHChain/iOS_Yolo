@@ -228,7 +228,7 @@ static YZHNetworkConfig* _instance;
         // TODO 需和后台协商
 //        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
         // 数据序列化处理
-        httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+        httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
         //AFHTTPSessionManager+RetryPolicy
         httpSessionManager.retryPolicyLogMessagesEnabled = YES;
         // TODO HOOK?

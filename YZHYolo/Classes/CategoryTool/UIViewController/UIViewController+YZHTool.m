@@ -13,6 +13,17 @@
 
 #pragma mark extension
 
+- (void)yzh_backToRootViewController:(BOOL)animated {
+    
+    
+}
+
++ (void)yzh_userLoginSuccessToHomePage {
+    
+    UIViewController* topViewController = [self yzh_rootViewController];
+    [topViewController yzh_userLoginSuccessToHomePage];
+}
+
 - (void)yzh_userLoginSuccessToHomePage{
     
     YZHRootTabBarViewController* tabBarViewController = [[YZHRootTabBarViewController alloc] init];

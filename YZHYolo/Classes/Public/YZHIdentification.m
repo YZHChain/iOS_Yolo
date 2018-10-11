@@ -12,7 +12,6 @@ NSString * const kYZHResponeCodeKey    = @"code";
 NSString * const kYZHResponeMessageKey = @"message";
 NSString * const kYZHResponeDataKey    = @"data";
 
-
 NSString * const kYZHCommonHeaderIdentifier = @"YZHCommonHeaderIdentifier";
 NSString * const kYZHCommonCellIdentifier   = @"YZHCommonCellIdentifier";
 NSString * const kYZHCommonNonnullKey       = @"YZHAssociatedNonnullKey";

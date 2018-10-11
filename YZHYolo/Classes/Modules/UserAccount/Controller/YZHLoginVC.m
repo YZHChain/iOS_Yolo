@@ -36,11 +36,11 @@
     [self setupNavBar];
     //2.设置view
     [self setupView];
-    //3.设置View Event
+    //4.设置View Event
     [self setupViewResponseEvent];
-    //3.请求数据
+    //5.请求数据
     [self setupData];
-    //4.设置通知
+    //6.设置通知
     [self setupNotification];
 }
 
@@ -90,15 +90,7 @@
 
 }
 
-#pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
-
-
-#pragma mark - 5.Event Response
-// TODO:请求登录,云信登录待补充
-- (void)postLogin{
-    
-}
-
+#pragma mark - 4.Event Response
 // 使设置 ExecuteBlock 回调与分离出来, 有利于调试, 提高 Code 可读性
 - (void)setupViewResponseEvent {
     
@@ -155,36 +147,26 @@
     }
 }
 
-
 #pragma mark - 6.Private Methods
 // 后台登录成功处理
 - (void)serverloginSuccessWithResponData:(id)responData{
-    
-<<<<<<< HEAD
-    NSString *account = @"3529437617057729695";
-    NSString *token   = @"06a44716b291734937a8b34d73066e7a";
+    // 缓存.
+    self.userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
+    NSString* account = self.userLoginModel.acctId;
+    NSString* token = self.userLoginModel.token;
+    // 请求登录云信.
     [[[NIMSDK sharedSDK] loginManager] login:account token:token completion:^(NSError * _Nullable error) {
         if (error == nil) {
             [self IMServerLoginSuccessWithResponData:nil];
         } else {
-            // 错误提示
-            
+            // 错误提示 TODO:
+            [YZHProgressHUD showAPIError:error];
         }
     }];
-=======
-    self.userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
-    
-    YZHIMParams params = @{@"accid":self.userLoginModel.acctId,
-                           @"token":self.userLoginModel.token
-                               };
-    // 请求登录云信.
-    
->>>>>>> developer
-    
 }
 // 网易IM信登录成功处理
 - (void)IMServerLoginSuccessWithResponData:(id)responData{
-    
+    //暂时先到主要,后面还需要加上从云信获取信息的逻辑
     [self yzh_userLoginSuccessToHomePage];
     
 }

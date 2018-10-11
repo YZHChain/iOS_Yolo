@@ -182,6 +182,7 @@
 		55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */; };
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
 		55ED2F2B216F0C41005BFD3E /* NSObject+YZHApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED2F2A216F0C41005BFD3E /* NSObject+YZHApiModel.m */; };
+		55ED2F2F216F5225005BFD3E /* YZHUserLoginManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED2F2E216F5225005BFD3E /* YZHUserLoginManage.m */; };
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
 		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
@@ -491,6 +492,8 @@
 		55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHMyplaceCityVC.xib; sourceTree = "<group>"; };
 		55ED2F29216F0C41005BFD3E /* NSObject+YZHApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+YZHApiModel.h"; sourceTree = "<group>"; };
 		55ED2F2A216F0C41005BFD3E /* NSObject+YZHApiModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YZHApiModel.m"; sourceTree = "<group>"; };
+		55ED2F2D216F5225005BFD3E /* YZHUserLoginManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHUserLoginManage.h; sourceTree = "<group>"; };
+		55ED2F2E216F5225005BFD3E /* YZHUserLoginManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHUserLoginManage.m; sourceTree = "<group>"; };
 		55EE6D3C215B7683004E092F /* YZHLocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YZHLocation.json; sourceTree = "<group>"; };
 		55EE6D3E215B76FD004E092F /* YZHMyinformationMyplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyinformationMyplaceModel.h; sourceTree = "<group>"; };
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
@@ -1383,6 +1386,7 @@
 		55C239D42148E47F00200798 /* UserAccount */ = {
 			isa = PBXGroup;
 			children = (
+				55ED2F2C216F5201005BFD3E /* UserManage */,
 				55C239D62148E49800200798 /* Controller */,
 				55C239D52148E49800200798 /* Model */,
 				55C239D72148E49800200798 /* View */,
@@ -1724,6 +1728,15 @@
 			path = UIViewController;
 			sourceTree = "<group>";
 		};
+		55ED2F2C216F5201005BFD3E /* UserManage */ = {
+			isa = PBXGroup;
+			children = (
+				55ED2F2D216F5225005BFD3E /* YZHUserLoginManage.h */,
+				55ED2F2E216F5225005BFD3E /* YZHUserLoginManage.m */,
+			);
+			path = UserManage;
+			sourceTree = "<group>";
+		};
 		55F91A762160A2010037EC3B /* SearchFirend */ = {
 			isa = PBXGroup;
 			children = (
@@ -1897,10 +1910,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-
 				"${PODS_ROOT}/NIMSDK/NIMAVChat/Resources/NMCVideoFilter.bundle",
 				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
-
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
 				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 			);
@@ -2067,6 +2078,7 @@
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55337DE5215086E500307B75 /* YYLabel+YMTool.m in Sources */,
 				552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */,
+				55ED2F2F216F5225005BFD3E /* YZHUserLoginManage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

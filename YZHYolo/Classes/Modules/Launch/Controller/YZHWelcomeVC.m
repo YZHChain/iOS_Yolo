@@ -144,7 +144,7 @@
 
 - (void)setupLoginEvent {
     NSDictionary *info;
-    if (YZHIsString(self.welcomeView.phoneTextField.text) == NO) {
+    if (YZHIsString(self.welcomeView.phoneTextField.text)) {
         info = @{kYZHRouteBackIndex: @(1),
                  @"phoneString": self.welcomeView.phoneTextField.text};
     } else {

@@ -10,6 +10,9 @@
 
 #import "YZHSettingPasswordView.h"
 #import "YZHRootTabBarViewController.h"
+#import "YZHProgressHUD.h"
+#import "YZHUserLoginManage.h"
+
 @interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHSettingPasswordView* settingPasswordView;
@@ -85,7 +88,7 @@
 - (void)requestSettingPassword{
     
     NSString* requestURL;
-    switch (YZHSettingPasswordTypeFind) {
+    switch (_settingPasswordType) {
         case YZHSettingPasswordTypeRegister:
             requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
             break;
@@ -97,52 +100,40 @@
     }
     NSDictionary* parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
           @"phoneNum":self.phoneNum };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
+        [hud hideWithText:nil];
         @strongify(self)
-        [self autoLogin];
+        if (self.settingPasswordType == YZHSettingPasswordTypeRegister) {
+            [self autoLoginWithResponse:obj];
+        } else {
+            
+        }
     } failureCompletion:^(NSError *error) {
-        
+        [hud hideWithText:error.domain];
     }];
-    
-    
 }
 
 #pragma mark - 6.Private Methods
-
-- (void)autoLogin{
+// 注册时设置完密码自动登录
+- (void)autoLoginWithResponse:(id)response {
     
-    YZHRootTabBarViewController* tabBarViewController = [[YZHRootTabBarViewController alloc] init];
-    UIWindow* window = [[UIApplication sharedApplication].delegate window];
-    [UIView transitionWithView:window
-                      duration:0.3
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        BOOL oldState = [UIView areAnimationsEnabled];
-                        [UIView setAnimationsEnabled:NO];
-                        [window setRootViewController:tabBarViewController];
-                        [UIView setAnimationsEnabled:oldState];
-                    }
-                    completion:^(BOOL finished){
-                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
-                        [self.view removeFromSuperview];
-                    }];
+    YZHLoginModel* model = [YZHLoginModel YZH_objectWithKeyValues:response];
+    
+    YZHUserLoginManage* manage = [[YZHUserLoginManage alloc] init];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
+    [manage IMServerLoginWithAccount:model.acctId token:model.token successCompletion:^{
+        //TODO:
+        [hud hideWithText:@"登录成功"];
+    } failureCompletion:^{
+        
+    }];
 }
 
 - (void)setupNotification
 {
     
-}
-
-- (void)keyboardNotification{
-    //TODO:需要对 iphoneSE 等小屏做处理, 否则会被键盘盖住.
-    //    @weakify(self)
-    //    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
-    //        @strongify(self)
-    //
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
 }
 
 #pragma mark - 7.GET & SET
