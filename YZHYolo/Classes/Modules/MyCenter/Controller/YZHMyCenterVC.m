@@ -10,7 +10,6 @@
 
 #import "YZHMyCenterHeaderView.h"
 #import "YZHMyCenterCell.h"
-
 #import "UIScrollView+YZHRefresh.h"
 #import "YZHMyCenterModel.h"
 
@@ -91,12 +90,12 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)setupData
 {
-    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
-        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
-        [self.tableView reloadData];
-    } failureCompletion:^(NSError *error) {
-        
-    }];
+//    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
+//        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
+//        [self.tableView reloadData];
+//    } failureCompletion:^(NSError *error) {
+//        
+//    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
@@ -142,6 +141,9 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 }
 #pragma mark - 5.Event Response
 
+- (void)clickTableViewHeader {
+    [YZHRouter openURL:kYZHRouterMyInformation];
+}
 
 #pragma mark - 6.Private Methods
 
@@ -156,7 +158,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_tableView == nil) {
         
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, YZHVIEW_HEIGHT - YZHTabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHView_Width, YZHView_Height - YZHTabBarHeight) style:UITableViewStylePlain];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: kCellIdentifier];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -176,24 +178,13 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_headerView == nil) {
         
-        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, 170)];
+        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHView_Width, 170)];
         UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
         [btn setTitle:@"" forState:UIControlStateNormal];
-        [btn bk_addEventHandler:^(id sender) {
-            
-        } forControlEvents:UIControlEventAllEvents];
+        [btn addTarget:self action:@selector(clickTableViewHeader) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:btn];
     }
     return _headerView;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

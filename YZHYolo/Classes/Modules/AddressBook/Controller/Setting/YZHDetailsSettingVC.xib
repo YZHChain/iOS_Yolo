@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHDetailsSettingVC">
+            <connections>
+                <outlet property="chatLogButton" destination="PrD-az-3Q9" id="1I3-pX-8xo"/>
+                <outlet property="removeButton" destination="h62-7V-g9G" id="y6C-m6-O95"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLv-np-5Zj">
+                    <rect key="frame" x="0.0" y="10" width="375" height="55"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="清空聊天记录 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boD-ff-fgV">
+                            <rect key="frame" x="13" y="18.5" width="96" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="asq-va-2Rq">
+                            <rect key="frame" x="353" y="19.5" width="9" height="16"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrD-az-3Q9">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                            <connections>
+                                <action selector="trashliChatLog:" destination="-1" eventType="touchUpInside" id="jbN-oz-r6D"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="PrD-az-3Q9" firstAttribute="top" secondItem="TLv-np-5Zj" secondAttribute="top" id="2c7-D8-Uui"/>
+                        <constraint firstAttribute="trailing" secondItem="asq-va-2Rq" secondAttribute="trailing" constant="13" id="3RZ-fK-y1J"/>
+                        <constraint firstItem="asq-va-2Rq" firstAttribute="centerY" secondItem="TLv-np-5Zj" secondAttribute="centerY" id="817-AT-zJH"/>
+                        <constraint firstItem="PrD-az-3Q9" firstAttribute="leading" secondItem="TLv-np-5Zj" secondAttribute="leading" id="C2q-ns-rzZ"/>
+                        <constraint firstAttribute="height" constant="55" id="DyQ-Hm-rMd"/>
+                        <constraint firstItem="boD-ff-fgV" firstAttribute="centerY" secondItem="TLv-np-5Zj" secondAttribute="centerY" id="Erl-am-YNq"/>
+                        <constraint firstAttribute="bottom" secondItem="PrD-az-3Q9" secondAttribute="bottom" id="Khi-UK-C1B"/>
+                        <constraint firstAttribute="trailing" secondItem="PrD-az-3Q9" secondAttribute="trailing" id="Vou-7R-lR7"/>
+                        <constraint firstItem="boD-ff-fgV" firstAttribute="leading" secondItem="TLv-np-5Zj" secondAttribute="leading" constant="13" id="iQd-Wh-84q"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h62-7V-g9G">
+                    <rect key="frame" x="67.5" y="505" width="240" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="2EV-3D-8H2"/>
+                        <constraint firstAttribute="height" constant="40" id="fd9-DZ-dMu"/>
+                    </constraints>
+                    <state key="normal" title="删除好友">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="deleteFriend:" destination="-1" eventType="touchUpInside" id="tA8-TE-E4p"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="h62-7V-g9G" secondAttribute="bottom" constant="122" id="0vB-zn-Zra"/>
+                <constraint firstAttribute="trailing" secondItem="TLv-np-5Zj" secondAttribute="trailing" id="BmC-B9-vZO"/>
+                <constraint firstItem="TLv-np-5Zj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UD5-rM-gMc"/>
+                <constraint firstItem="TLv-np-5Zj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="byb-2f-vok"/>
+                <constraint firstItem="h62-7V-g9G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uj7-9c-be5"/>
+            </constraints>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="my_cover_cell_back" width="9" height="16"/>
+    </resources>
+</document>

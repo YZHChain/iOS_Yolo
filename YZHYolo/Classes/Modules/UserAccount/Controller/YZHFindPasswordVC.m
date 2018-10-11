@@ -64,6 +64,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.findPasswordView = [YZHFindPasswordView yzh_viewWithFrame:self.view.bounds];
     self.findPasswordView.frame = self.view.bounds;
+    self.findPasswordView.accountTextField.text = self.phoneNumberString;
     [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword) forControlEvents:UIControlEventTouchUpInside];
 //    @weakify(self)
 //    [self.findPasswordView.getSMSCodeButton bk_addEventHandler:^(id sender) {
@@ -129,6 +130,17 @@
 - (void)setupNotification
 {
     
+}
+
+- (void)keyboardNotification{
+    //TODO:需要对 iphoneSE 等小屏做处理, 否则会被键盘盖住.
+    //    @weakify(self)
+    //    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+    //        @strongify(self)
+    //
+    //    } completion:^(BOOL finished) {
+    //
+    //    }];
 }
 
 #pragma mark - 7.GET & SET

@@ -103,7 +103,45 @@ static id instance;
 
 - (void)processResponse:(id)response path:(NSString *)path success:(void (^)(id obj))success failure:(void (^)(NSError *error))failure{
     
-    success(response);
+    
+    id successObj = nil;
+    NSError *failureError = nil;
+    
+    id finalResponse = [self packageResponse:response path:path];
+    // 返回解决有数据, 并且属于 字典类型为成功.
+    if (finalResponse && [finalResponse isKindOfClass:[NSDictionary class]]) {
+        //取出 Code, 约定 Code 200 为成功
+        //取code、message、data TODO:异常捕获
+        NSString* code = [finalResponse objectForKey:kYZHResponeCodeKey];
+        //排除为空的时候. 避免异常
+        if (YZHIsEmptyString(code)) {
+            code = nil;
+        }
+        NSString* detail = [finalResponse objectForKey:kYZHResponeMessageKey];
+        id value = [finalResponse objectForKey:kYZHResponeMessageKey];
+        if (YZHIsEmptyString(detail)) {
+            detail = nil;
+        } else {
+            [value setObject:detail forKey:kYZHResponeMessageKey];
+        }
+        if ([code isEqualToString:@"200"]) {
+            successObj = value;
+        } else  { // 这里最好和后台协商, 根据 Code 码来弹出相应的框
+            // 非成功状态统一弹框处理.
+            
+            failureError = [NSError errorWithDomain:detail code:[code integerValue] userInfo:nil];
+        }
+        
+        if (failureError) {
+            failure(failureError);
+        } else {
+            success(successObj);
+        }
+        
+        
+    }
+    
+//    success(response);
     
 }
 #pragma mark -- ConfigPublicParameter
@@ -115,6 +153,13 @@ static id instance;
     //添加App版本号
     dic[@"version"] = self.encodeVersion;
     return dic;
+}
+
+#pragma mark -- Respinse PackAge
+
+- (id)packageResponse:(id)response path:(NSString *)path {
+    
+    return response;
 }
 
 #pragma mark -- GET & SET

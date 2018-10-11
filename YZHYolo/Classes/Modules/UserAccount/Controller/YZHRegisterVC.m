@@ -10,7 +10,6 @@
 
 #import "YZHPublic.h"
 #import "YZHRegisterView.h"
-#import "UITextField+YZHTool.h"
 #import "NSString+YZHTool.h"
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIButton+YZHCountDown.h"
@@ -63,16 +62,14 @@
 
 #pragma mark - 2.SettingView and Style
 
-- (void)setupNavBar
-{
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigation_backgroungImage"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+- (void)setupNavBar {
+ self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
     self.hideNavigationBar = YES;
 }
 
-- (void)setupView
-{
+- (void)setupView {
+    
     self.registerView = [YZHRegisterView yzh_viewWithFrame:self.view.bounds];
     if (self.hiddenBack == YES) {
         // TODO:  封装一个快速优雅的隐藏. 不能导致图层混用.
@@ -121,15 +118,16 @@
     NSDictionary* parameter = @{
                                  @"verifyCode": self.registerView.codeTextField.text,
                                  @"phoneNum": self.registerView.phoneTextField.text };
-    @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
-        @strongify(self)
-        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
-
-    } failureCompletion:^(NSError *error) {
-        
-        [YZHProgressHUD showAPIError:error];
-    }];
+//    @weakify(self)
+//    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
+//        @strongify(self)
+//        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
+//
+//    } failureCompletion:^(NSError *error) {
+//
+//        [YZHProgressHUD showAPIError:error];
+//    }];
+    [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
     
 }
 //获取短信
@@ -163,7 +161,7 @@
 }
 
 - (void)keyboardNotification{
-    
+    //TODO:需要对 iphoneSE 等小屏做处理, 否则会被键盘盖住.
 //    @weakify(self)
 //    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
 //        @strongify(self)

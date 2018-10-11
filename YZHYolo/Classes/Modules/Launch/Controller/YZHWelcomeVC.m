@@ -12,6 +12,7 @@
 #import "SDCycleScrollView.h"
 #import "TAPageControl.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "YZHPublic.h"
 
 @interface YZHWelcomeVC ()
 
@@ -25,7 +26,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setupNav];
+    
     [self setupView];
+    
+    [self setupViewResponseEvent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,24 +40,31 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
     
     [self keyboardNotification];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
+    [super viewWillDisappear:animated];
     // 移除通知.
     [self an_unsubscribeKeyboard];
 }
 
 #pragma mark -- SettingView
 
-- (void)setupView{
+- (void)setupNav {
+ 
+   self.hideNavigationBar = YES;
+}
+
+- (void)setupView {
+    // TODO:低版本出现约束冲突.
+    YZHWelcomeView* welcomeView = [YZHWelcomeView yzh_viewWithFrame:self.view.bounds];
+    // 立即刷新视图,使约束更新.
+    [welcomeView layoutIfNeeded];
     
-    YZHWelcomeView* welcomeView = [[NSBundle mainBundle] loadNibNamed:@"YZHWelcomeView" owner:nil options:nil].lastObject;
-    
-    welcomeView.frame = self.view.bounds;
     self.welcomeView = welcomeView;
     
     NSArray *images = [self imagesForBanner];
@@ -69,7 +81,7 @@
     
     [self.view addSubview:self.welcomeView];
     
-    [self.welcomeView.phoneTextField becomeFirstResponder];
+//    [self.welcomeView.phoneTextField becomeFirstResponder];
 }
 
 - (NSArray*)imagesForBanner{
@@ -93,14 +105,52 @@
     }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Event Response
+// 使设置 ExecuteBlock 回调与分离出来, 有利于调试, 提高 Code 可读性
+- (void)setupViewResponseEvent {
+    
+    @weakify(self)
+    self.welcomeView.regesterButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupRegistEvent];
+    };
+    self.welcomeView.loginButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupLoginEvent];
+    };
 }
-*/
+
+- (void)setupRegistEvent {
+    // 检测 ID 是否可用. TODO
+    YZHParams params = @{
+                         @"yoloNo":self.welcomeView.phoneTextField.text
+                         };
+    YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.welcomeView text:nil];
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:params successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
+        [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.welcomeView.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
+            }
+        }];
+    } failureCompletion:^(NSError *error) {
+        
+        [hud hideWithText:error.domain];
+    }];
+
+
+}
+
+- (void)setupLoginEvent {
+    NSDictionary *info;
+    if (YZHIsString(self.welcomeView.phoneTextField.text) == NO) {
+        info = @{kYZHRouteBackIndex: @(1),
+                 @"phoneString": self.welcomeView.phoneTextField.text};
+    } else {
+        info = @{kYZHRouteBackIndex: @(1)};
+    }
+    [YZHRouter openURL:kYZHRouterLogin info:info];
+}
 
 @end

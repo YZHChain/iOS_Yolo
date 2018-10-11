@@ -10,4 +10,6 @@
 
 @interface YZHFindPasswordVC : YZHBaseViewController
 
+@property(nonatomic, copy)NSString* phoneNumberString;
+
 @end

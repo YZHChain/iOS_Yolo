@@ -267,7 +267,7 @@ typedef enum : NSUInteger {
     
     if (_tableView == nil) {
 
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHVIEW_WIDTH, YZHVIEW_HEIGHT - 64) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHView_Width, YZHView_Height - 64) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
