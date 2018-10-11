@@ -119,12 +119,16 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YZHAddBookFirendModel* model = self.model.list[indexPath.row];
-    if (indexPath.row == 1) {
+//    if (indexPath.row == 1) {
+//        [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+//    } else {
+//        [YZHRouter openURL:model.route];
+//    }
+    if ([model.title isEqualToString:@"扫一扫"]) {
         [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
     } else {
         [YZHRouter openURL:model.route];
     }
-    
 }
 
 #pragma mark - 5.Event Response

@@ -62,6 +62,13 @@ extern YZHHeightFloat const kYZHCellHeight;
  */
 extern YZHHeightFloat const kYZHSectionHeight;
 
+/**
+ *    @author https://github.com/ZexiFangkong
+ *
+ *    The common SectionHeight
+ */
+extern YZHHeightFloat const kYZHSectionSecondHeight;
+
 #pragma mark -- Key
 
 /**

@@ -36,50 +36,36 @@
 #pragma mark -- Extension Function
 
 - (void)startLight {
-    
-    if (@available(iOS 10.0, *)) {
-        AVCapturePhotoSettings* settings = [AVCapturePhotoSettings photoSettings];
-        NSError *error;
-        BOOL lockAcquired = [self.captureDevice lockForConfiguration:&error];
-        if (!lockAcquired) {
-            NSLog(@"锁定设备过程error，错误信息：%@",error.localizedDescription);
-        }
-        [self.caputreSession beginConfiguration];
-        if (settings.flashMode == AVCaptureFlashModeOff) {
-            [settings setFlashMode:AVCaptureFlashModeOn];
-        } else {
-            [settings setFlashMode:AVCaptureFlashModeOff];
-        }
-        [self.captureDevice unlockForConfiguration];
-        [self.caputreSession commitConfiguration];
-        [self.caputreSession startRunning];
-    } else {
-//         Fallback on earlier versions
+        //TODO:版本兼容.
+        //Fallback on earlier versions
         //也可以直接用_videoDevice,但是下面这种更好
         AVCaptureDevice *captureDevice = self.captureDevice;
         NSError *error;
-        
         BOOL lockAcquired = [captureDevice lockForConfiguration:&error];
         if (!lockAcquired) {
             NSLog(@"锁定设备过程error，错误信息：%@",error.localizedDescription);
-        }else{
-            [self.caputreSession beginConfiguration];
-            if (captureDevice.flashMode == AVCaptureFlashModeOff) {
+        } else {
+            // 检测当前设备是否支持开灯
+            if ([captureDevice isTorchModeSupported:AVCaptureTorchModeOn]) {
+                [self.caputreSession beginConfiguration];
                 
-                [captureDevice setFlashMode:AVCaptureFlashModeOn];
+                if (captureDevice.flashMode == AVCaptureFlashModeOff) {
+                    [captureDevice setTorchMode:AVCaptureTorchModeOn];
+                    [captureDevice setFlashMode:AVCaptureFlashModeOn];
+                } else {
+                    [captureDevice setTorchMode:AVCaptureTorchModeOff];
+                    [captureDevice setFlashMode:AVCaptureFlashModeOff];
+                }
+                
+                [captureDevice unlockForConfiguration];
+                
+                [self.caputreSession commitConfiguration];
+                [self.caputreSession startRunning];
             } else {
-                [captureDevice setFlashMode:AVCaptureFlashModeOff];
+              // 提示设备损坏.
             }
-            
-            [captureDevice unlockForConfiguration];
-            
-            [self.caputreSession commitConfiguration];
-            [self.caputreSession startRunning];
+
         }
-    }
-
-    
-
 }
 
 -(void)changeDevicePropertySafety:(void (^)(AVCaptureDevice *captureDevice))propertyChange{

@@ -12,19 +12,18 @@
 #import "YZHQRCodeManage.h"
 #import "YZHPhotoManage.h"
 #import "UIImage+YZHTool.h"
+#import "YZHScanQRCodeMaskView.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
-
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *scanImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *scanLineImageView;
+@property (weak, nonatomic) IBOutlet UIView *scanContentView;
 @property (weak, nonatomic) IBOutlet UIButton *startLightButton;
-
-@property (nonatomic, strong) AVCaptureSession* captureSession;
-@property (nonatomic, strong) AVCaptureDevice* videoDevice;
-@property (nonatomic, strong) AVCaptureDeviceInput* videoInput;
-@property (nonatomic, strong) AVCaptureMetadataOutput* movieOutput;
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer* captureVideoPreviewLayer;
 @property (nonatomic, strong) YZHQRCodeManage* manage;
+@property (nonatomic, strong) YZHScanQRCodeMaskView* maskView;
+@property (nonatomic, strong) NSTimer* lineTimer;
+@property (nonatomic, assign) BOOL startAnimation;
 
 @end
 
@@ -50,6 +49,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
 }
 
 - (void)dealloc {
@@ -78,7 +82,7 @@
 
 - (void)setupView {
     
-    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 - (void)reloadView {
@@ -94,13 +98,35 @@
         YZHQRCodeManage* QRCodeManage = [[YZHQRCodeManage alloc] init];
         self.manage = QRCodeManage;
         self.manage.metadatadelegate = self;
-        [QRCodeManage configurationVideoPreviewLayerWithScanImageView:self.scanImageView];
+        [QRCodeManage configurationVideoPreviewLayerWithScanImageView:self.photoImageView];
         [QRCodeManage startScanVideo];
+        self.scanContentView.backgroundColor = [UIColor clearColor];
+        //TODO: 待封装
+        [self.scanLineImageView removeFromSuperview];
+        [self.scanContentView addSubview:self.scanLineImageView];
+        self.scanLineImageView.origin = CGPointMake(0, 0);
+        [self.scanLineImageView sizeToFit];
+        [self startScanWithLineAnimation];
+//        [self.view insertSubview:self.maskView aboveSubview:self.photoImageView];
     }
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
+{
+    for (AVMetadataObject *current in metadataObjects) {
+        if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
+            NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
+            
+            NSLog(@"检测到二维码了哦%@", scannedResult);
+//            [self.manage stopScanVideo];
+            [self stopScanWithLineAnimation];
+            
+            break;
+        }
+    }
+}
 
 #pragma mark - 5.Event Response
 
@@ -139,5 +165,43 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (YZHScanQRCodeMaskView *)maskView {
+    
+    if (!_maskView) {
+        _maskView = [[YZHScanQRCodeMaskView alloc] initWithFrame:self.view.bounds];
+    }
+    return _maskView;
+}
+
+#pragma mark -- Line Animation
+
+//- (NSTimer *)lineTimer {
+//
+//    if (!_lineTimer) {
+//        _lineTimer = [NSTimer timerWithTimeInterval:0.2f target:self selector:@selector(startScanWithLineAnimation) userInfo:nil repeats:YES];
+//    }
+//    return _lineTimer;
+//}
+
+- (void)startScanWithLineAnimation {
+    
+        CABasicAnimation* frameAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.y"];
+        frameAnimation.fromValue = @(self.scanLineImageView.y);
+        frameAnimation.byValue = @(self.scanImageView.height / 2);
+        frameAnimation.toValue = @(self.scanImageView.height);
+        frameAnimation.duration = 1;
+        //设置动画重复次数
+        frameAnimation.repeatCount = MAXFLOAT;
+        frameAnimation.autoreverses = YES;
+        frameAnimation.removedOnCompletion = NO;
+        //添加动画到layer
+        [self.scanLineImageView.layer addAnimation:frameAnimation forKey:@"frameAnimation"];
+}
+
+- (void)stopScanWithLineAnimation {
+    
+    [self.scanLineImageView.layer removeAnimationForKey:@"frameAnimation"];
+}
 
 @end

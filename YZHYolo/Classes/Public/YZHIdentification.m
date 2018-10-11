@@ -15,6 +15,7 @@ NSString * const kYZHCommonNonnullKey = @"YZHAssociatedNonnullKey";
 
 YZHHeightFloat const kYZHCellHeight = 55;
 YZHHeightFloat const kYZHSectionHeight = 25;
+YZHHeightFloat const kYZHSectionSecondHeight = 20;
 
 @implementation YZHIdentification
 
