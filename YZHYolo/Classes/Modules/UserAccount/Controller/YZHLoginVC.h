@@ -10,4 +10,6 @@
 
 @interface YZHLoginVC : YZHBaseViewController
 
+@property (nonatomic, copy) NSString* phoneString;
+
 @end

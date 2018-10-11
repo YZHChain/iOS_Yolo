@@ -13,7 +13,7 @@
 
 @implementation UIButton (YZHTool)
 
-+ (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonBlock)callBlock {
++ (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonExecuteBlock)callBlock {
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button yzh_setBarButtonItemWithStateNormalImageName:stateNormalImageName stateSelectedImageName:stateSelectedImageName tapCallBlock:callBlock];
@@ -21,7 +21,7 @@
     return button;
 }
 
-+ (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonBlock)callBlock {
++ (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonExecuteBlock)callBlock {
     
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button yzh_setBarButtonItemWithStateNormalImageName:imageName stateSelectedImageName:imageName tapCallBlock:callBlock];
@@ -29,7 +29,7 @@
     return button;
 }
 
-- (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString  *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonBlock)callBlock {
+- (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString  *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonExecuteBlock)callBlock {
     
     [self setImage:[UIImage imageNamed:stateNormalImageName] forState:UIControlStateNormal];
     [self setImage:[UIImage imageNamed:stateSelectedImageName] forState:UIControlStateSelected];
@@ -105,12 +105,12 @@
 
 #pragma mark -- GET && SET
 
-- (YZHButtonBlock)tapCallBlock {
+- (YZHButtonExecuteBlock)tapCallBlock {
     
     return objc_getAssociatedObject(self, &kYZHCommonNonnullKey);
 }
 
-- (void)setTapCallBlock:(YZHButtonBlock)tapCallBlock {
+- (void)setTapCallBlock:(YZHButtonExecuteBlock)tapCallBlock {
     
     objc_setAssociatedObject(self, &kYZHCommonNonnullKey, tapCallBlock, OBJC_ASSOCIATION_COPY);
 }

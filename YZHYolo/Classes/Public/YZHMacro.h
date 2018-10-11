@@ -109,6 +109,8 @@
 // Judge whether it is an empty string.
 #define YZHIsEmptyString(s) (s == nil || [s isKindOfClass:[NSNull class]] || ([s isKindOfClass:[NSString class]] && s.length == 0))
 
+#define YZHIsString(s) !((s == nil || [s isKindOfClass:[NSNull class]] || ([s isKindOfClass:[NSString class]] && s.length == 0)))
+
 // Judge whether it is a nil or null object.
 #define kIsEmptyObject(obj) (obj == nil || [obj isKindOfClass:[NSNull class]])
 

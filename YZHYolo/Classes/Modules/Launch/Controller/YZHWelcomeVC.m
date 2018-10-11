@@ -12,6 +12,7 @@
 #import "SDCycleScrollView.h"
 #import "TAPageControl.h"
 #import "UIViewController+KeyboardAnimation.h"
+#import "YZHPublic.h"
 
 @interface YZHWelcomeVC ()
 
@@ -28,6 +29,8 @@
     [self setupNav];
     
     [self setupView];
+    
+    [self setupViewResponseEvent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,6 +103,54 @@
         [self.welcomeView layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
+}
+
+#pragma mark - Event Response
+// 使设置 ExecuteBlock 回调与分离出来, 有利于调试, 提高 Code 可读性
+- (void)setupViewResponseEvent {
+    
+    @weakify(self)
+    self.welcomeView.regesterButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupRegistEvent];
+    };
+    self.welcomeView.loginButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupLoginEvent];
+    };
+}
+
+- (void)setupRegistEvent {
+    // 检测 ID 是否可用. TODO
+    YZHParams params = @{
+                         @"yoloNo":self.welcomeView.phoneTextField.text
+                         };
+    YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.welcomeView text:nil];
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:params successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
+        [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.welcomeView.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
+            }
+        }];
+    } failureCompletion:^(NSError *error) {
+        
+        [hud hideWithText:error.domain];
+    }];
+
+
+}
+
+- (void)setupLoginEvent {
+    NSDictionary *info;
+    if (YZHIsString(self.welcomeView.phoneTextField.text) == NO) {
+        info = @{kYZHRouteBackIndex: @(1),
+                 @"phoneString": self.welcomeView.phoneTextField.text};
+    } else {
+        info = @{kYZHRouteBackIndex: @(1)};
+    }
+    [YZHRouter openURL:kYZHRouterLogin info:info];
 }
 
 @end

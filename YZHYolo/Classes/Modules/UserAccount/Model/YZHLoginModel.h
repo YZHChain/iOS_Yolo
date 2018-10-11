@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHLoginModel : NSObject
 
-
+@property (nonatomic, copy) NSString* appKey;
+@property (nonatomic, copy) NSString* userId;
+@property (nonatomic, copy) NSString* acctId;
+@property (nonatomic, copy) NSString* token;
+@property (nonatomic, copy) NSString* orderFlag;
 
 @end
 

@@ -181,6 +181,7 @@
 		55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */; };
 		55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */; };
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
+		55ED2F2B216F0C41005BFD3E /* NSObject+YZHApiModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED2F2A216F0C41005BFD3E /* NSObject+YZHApiModel.m */; };
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
 		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
@@ -488,6 +489,8 @@
 		55EAB154215BC88900F4142A /* YZHMyplaceCityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyplaceCityVC.h; sourceTree = "<group>"; };
 		55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyplaceCityVC.m; sourceTree = "<group>"; };
 		55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHMyplaceCityVC.xib; sourceTree = "<group>"; };
+		55ED2F29216F0C41005BFD3E /* NSObject+YZHApiModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+YZHApiModel.h"; sourceTree = "<group>"; };
+		55ED2F2A216F0C41005BFD3E /* NSObject+YZHApiModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YZHApiModel.m"; sourceTree = "<group>"; };
 		55EE6D3C215B7683004E092F /* YZHLocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YZHLocation.json; sourceTree = "<group>"; };
 		55EE6D3E215B76FD004E092F /* YZHMyinformationMyplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyinformationMyplaceModel.h; sourceTree = "<group>"; };
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
@@ -1440,6 +1443,8 @@
 				55C239E72149124E00200798 /* YZHNetworkConfig.m */,
 				55C239EE214A6C0E00200798 /* YZHAPIRetryConfig.h */,
 				55C239EF214A6C0E00200798 /* YZHAPIRetryConfig.m */,
+				55ED2F29216F0C41005BFD3E /* NSObject+YZHApiModel.h */,
+				55ED2F2A216F0C41005BFD3E /* NSObject+YZHApiModel.m */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -1971,6 +1976,7 @@
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
 				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
 				55DC36BB2168997E00871C2B /* UIButton+YZHClickHandle.m in Sources */,
+				55ED2F2B216F0C41005BFD3E /* NSObject+YZHApiModel.m in Sources */,
 				556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */,
 				55D083622161C5ED0028D919 /* YZHAddBookSetTagSectionView.m in Sources */,
 				55D580EC21632541000A8B55 /* YZHAddBookAddFirendVC.m in Sources */,
@@ -2176,7 +2182,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.YZHChain.YOLO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yzhchain.YOLOIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
@@ -2200,7 +2206,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.YZHChain.YOLO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yzhchain.YOLOIM;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";

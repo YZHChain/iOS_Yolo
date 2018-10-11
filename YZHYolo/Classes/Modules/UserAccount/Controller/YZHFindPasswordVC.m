@@ -64,6 +64,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.findPasswordView = [YZHFindPasswordView yzh_viewWithFrame:self.view.bounds];
     self.findPasswordView.frame = self.view.bounds;
+    self.findPasswordView.accountTextField.text = self.phoneNumberString;
     [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword) forControlEvents:UIControlEventTouchUpInside];
 //    @weakify(self)
 //    [self.findPasswordView.getSMSCodeButton bk_addEventHandler:^(id sender) {

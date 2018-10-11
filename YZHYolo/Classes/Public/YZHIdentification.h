@@ -31,39 +31,61 @@ typedef void (^YZHStringBlock)(NSString *result);
 /**
  * For single button block.
  */
-typedef void(^YZHButtonBlock)(UIButton *sender);
+typedef void(^YZHButtonExecuteBlock)(UIButton *sender);
 
+#pragma mark - NetWorkin
+/**
+ *    @author Jersey
+ *
+ *    YZH统一使用这个类型传参
+ */
+typedef NSDictionary* YZHParams;
+/**
+ *    @author Jersey
+ *
+ *    网易IM统一使用这个类型传参
+ */
+typedef NSDictionary* YZHIMParams;
+/**
+ *    @author Jersey
+ *
+ *    下面三个 Key 是后台 Respone 包含的三个 Key。
+ */
+extern NSString * const kYZHResponeCodeKey;
 
+extern NSString * const kYZHResponeMessageKey;
+
+extern NSString * const kYZHResponeDataKey;
 
 #pragma mark - TableView SubView Identifier Size
 
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common SectionHeader identifier
  */
 extern NSString * const kYZHCommonHeaderIdentifier;
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common cell identifier
  */
 extern NSString * const kYZHCommonCellIdentifier;
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common CellHeight
  */
 extern YZHHeightFloat const kYZHCellHeight;
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common SectionHeight
  */
 extern YZHHeightFloat const kYZHSectionHeight;
 
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common SectionHeight
  */
@@ -72,7 +94,7 @@ extern YZHHeightFloat const kYZHSectionSecondHeight;
 #pragma mark -- Key
 
 /**
- *    @author https://github.com/ZexiFangkong
+ *    @author Jersey
  *
  *    The common NonnullKey
  */

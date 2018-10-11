@@ -8,7 +8,6 @@
 
 #import "YZHWelcomeView.h"
 
-#import "YZHPublic.h"
 @interface YZHWelcomeView()<UITextFieldDelegate>
 
 
@@ -40,17 +39,12 @@
 // 去登录或注册时将欢迎页销毁掉.
 - (IBAction)gotoRegister:(UIButton *)sender {
     
-    // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
-    [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
-        }
-    }];
+    self.regesterButtonBlock ? self.regesterButtonBlock(sender) : NULL;
 }
 
 - (IBAction)gotoLogin:(UIButton *)sender {
     
-    [YZHRouter openURL:kYZHRouterLogin info:@{kYZHRouteBackIndex: @(1)}];
+    self.loginButtonBlock ? self.loginButtonBlock(sender) : NULL;
 }
 
 #pragma mark -- UITextFieldDelegate

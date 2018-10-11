@@ -15,10 +15,12 @@
 #import "YZHRootTabBarViewController.h"
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIViewController+YZHTool.h"
+#import "YZHLoginModel.h"
 
 @interface YZHLoginVC ()
 
 @property(nonatomic, strong)YZHLoginView* loginView;
+@property (nonatomic, strong) YZHLoginModel* userLoginModel;
 
 @end
 
@@ -34,6 +36,8 @@
     [self setupNavBar];
     //2.设置view
     [self setupView];
+    //3.设置View Event
+    [self setupViewResponseEvent];
     //3.请求数据
     [self setupData];
     //4.设置通知
@@ -72,7 +76,7 @@
 - (void)setupView
 {
     self.loginView = [YZHLoginView yzh_viewWithFrame:self.view.bounds];
-    [self.loginView.confirmButton addTarget:self action:@selector(postLogin) forControlEvents:UIControlEventTouchUpInside];
+    self.loginView.accountTextField.text = _phoneString;
     
     [self.view addSubview:self.loginView];
     
@@ -93,25 +97,75 @@
 // TODO:请求登录,云信登录待补充
 - (void)postLogin{
     
+}
+
+// 使设置 ExecuteBlock 回调与分离出来, 有利于调试, 提高 Code 可读性
+- (void)setupViewResponseEvent {
+    
+    @weakify(self)
+    self.loginView.loginButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupLoginEvent];
+    };
+    self.loginView.regesterButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupRegistEvent];
+    };
+    self.loginView.findPasswordButtonBlock = ^(UIButton *sender) {
+        @strongify(self)
+        [self setupFindPasswordEvent];
+    };
+}
+
+- (void)setupLoginEvent {
+    
     NSString* account = self.loginView.accountTextField.text;
     NSString* password = self.loginView.passwordTextField.text;
     NSDictionary* parameter = @{@"account"  :account,
                                 @"password" :password
                                 };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.loginView text:nil];
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
         @strongify(self)
         [self serverloginSuccessWithResponData:obj];
     } failureCompletion:^(NSError *error) {
         //TODO: 失败处理
+        [hud hideWithAPIError:error];
     }];
-
 }
+
+- (void)setupRegistEvent {
+    
+    if (YZHIsString(self.loginView.accountTextField.text)) {
+        
+        [YZHRouter openURL: kYZHRouterRegister info: @{@"phoneNumberString": self.loginView.accountTextField.text}];
+    } else {
+        [YZHRouter openURL: kYZHRouterRegister];
+    }
+}
+
+- (void)setupFindPasswordEvent {
+    
+    if (YZHIsString(self.loginView.accountTextField.text)) {
+        
+        [YZHRouter openURL: kYZHRouterFindPassword info: @{@"phoneNumberString": self.loginView.accountTextField.text}];
+    } else {
+        [YZHRouter openURL: kYZHRouterFindPassword];
+    }
+}
+
 
 #pragma mark - 6.Private Methods
 // 后台登录成功处理
 - (void)serverloginSuccessWithResponData:(id)responData{
     
+    self.userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
+    
+    YZHIMParams params = @{@"accid":self.userLoginModel.acctId,
+                           @"token":self.userLoginModel.token
+                               };
+    // 请求登录云信.
     
     
 }
@@ -140,6 +194,7 @@
     } completion:^(BOOL finished) {
     }];
 }
+
 #pragma mark - 7.GET & SET
 
 

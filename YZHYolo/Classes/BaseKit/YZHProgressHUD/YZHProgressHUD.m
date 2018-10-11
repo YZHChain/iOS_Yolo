@@ -331,7 +331,7 @@ typedef NS_ENUM(NSInteger, YZHAPIErrorHUDType) {
             [self hideWithText:error.domain completion:nil];
         }
             break;
-            
+
         default:  // 缺省为吐司提示
         {
             [self hideWithText:error.domain completion:nil];
