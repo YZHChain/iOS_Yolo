@@ -114,34 +114,8 @@ static NSArray* cellIdentifierArray;
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
-    YZHMyInformationCell* cell;
-    switch (model.type) {
-        case 0:
-            cell = [tableView dequeueReusableCellWithIdentifier:kPhoneCellIdentifier];
-            break;
-        case 1:
-            cell = [tableView dequeueReusableCellWithIdentifier:kPhotoCellIdentifier];
-            break;
-        case 2:
-            cell = [tableView dequeueReusableCellWithIdentifier:kNicknameCellIdentifier];
-            break;
-        case 3:
-            cell = [tableView dequeueReusableCellWithIdentifier:kGenderCellIdentifier];
-            break;
-        default:
-            cell = [tableView dequeueReusableCellWithIdentifier:kQRCodeCellIdentifier];
-            break;
-    }
-    
-    if (cell == nil) {
-        if (model.type <= 4) {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil][model.type];
-        } else {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil].lastObject;
-        }
-    }
+    YZHMyInformationCell* cell = [YZHMyInformationCell tempTableViewCellWithTableView:tableView indexPath:indexPath cellType:model.cellType];
     [cell setViewModel:model];
-    
     
     return cell;
 }
@@ -193,14 +167,12 @@ static NSArray* cellIdentifierArray;
     return _tableView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (YZHMyInformationListModel *)viewModel {
+    
+    if (!_viewModel) {
+        _viewModel = [[YZHMyInformationListModel alloc] init];
+    }
+    return _viewModel;
 }
-*/
 
 @end
