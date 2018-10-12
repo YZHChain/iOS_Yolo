@@ -45,6 +45,9 @@ target 'YZHYolo' do
   
   #IM
   pod 'NIMSDK'
+  pod 'Toast', '~> 3.0'
+  pod 'M80AttributedLabel', '~> 1.6.3'
+  pod 'TZImagePickerController', '~> 1.9.3'
 
   #分享
   pod 'ShareSDK3'
