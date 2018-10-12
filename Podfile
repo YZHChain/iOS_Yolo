@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '8.0'
+platform :ios, '8.0'
 
 target 'YZHYolo' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -31,7 +31,7 @@ target 'YZHYolo' do
   #网络
   pod 'AFNetworking', '3.0'
   pod 'AFNetworking+RetryPolicy'
-  pod 'YTKNetwork'
+ #pod 'YTKNetwork'
 
   #数据
   pod 'MJExtension'
@@ -42,7 +42,10 @@ target 'YZHYolo' do
   #pod 'AliyunOSSiOS'
   pod 'JPush'
   pod 'UMengAnalytics-NO-IDFA'
-
+  
+  #IM
+  #pod 'NIMSDK'
+  pod 'NIMKit'
   #分享
   pod 'ShareSDK3'
   pod 'ShareSDK3/ShareSDKUI'

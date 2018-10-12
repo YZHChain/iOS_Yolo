@@ -133,7 +133,8 @@
                 }
             } else {
                 NSLog(@"编码地理位置错误原因%@",error);
-                self.managerfaildBlock();
+                self.managerfaildBlock ? self.managerfaildBlock() : NULL;
+//                self.managerfaildBlock();
             }
         }];
 }
