@@ -154,7 +154,7 @@
     self.userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
     NSString* account = self.userLoginModel.acctId;
     NSString* token = self.userLoginModel.token;
-    // 请求登录云信.
+//     请求登录云信.
     [[[NIMSDK sharedSDK] loginManager] login:account token:token completion:^(NSError * _Nullable error) {
         if (error == nil) {
             [self IMServerLoginSuccessWithResponData:nil];
