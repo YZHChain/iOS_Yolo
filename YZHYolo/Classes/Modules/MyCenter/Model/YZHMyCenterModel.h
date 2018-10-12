@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHMyCenterListModel : NSObject
 
-@property(nonatomic, strong)NSArray<YZHMyCenterContentModel* >* list;
+@property(nonatomic, strong)NSMutableArray<YZHMyCenterContentModel* >* list;
 
 @end
 

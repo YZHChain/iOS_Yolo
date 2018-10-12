@@ -14,18 +14,18 @@
 @property(nonatomic, copy)NSString* subtitle;
 @property(nonatomic, copy)NSString* image;
 @property(nonatomic, copy)NSString* route;
-@property(nonatomic, assign)NSInteger type;
+@property(nonatomic, assign)NSInteger cellType;
 
 @end
 
 @interface YZHMyInformationContentModel : NSObject
 
-@property(nonatomic, strong)NSArray<YZHMyInformationModel *> *content;
+@property(nonatomic, strong)NSMutableArray<YZHMyInformationModel *> *content;
 
 @end
 
 @interface YZHMyInformationListModel : NSObject
 
-@property(nonatomic, strong)NSArray<YZHMyInformationContentModel* >* list;
+@property(nonatomic, strong)NSMutableArray<YZHMyInformationContentModel* >* list;
 
 @end

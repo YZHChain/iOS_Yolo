@@ -44,18 +44,6 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-//    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
-//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-}
-
-//设置状态栏颜色
-- (void)setStatusBarBackgroundColor:(UIColor *)color {
-    
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-        statusBar.backgroundColor = color;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,12 +78,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)setupData
 {
-//    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYCENTER params:nil successCompletion:^(id obj) {
-//        self.viewModel = [YZHMyCenterListModel YZH_objectWithKeyValues:obj];
-//        [self.tableView reloadData];
-//    } failureCompletion:^(NSError *error) {
-//        
-//    }];
+    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
@@ -139,6 +122,20 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     return tableViewHeaderView;
 }
+
+// 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return 0.1f;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    UIView* view = [[UIView alloc] init];
+    
+    return view;
+}
+
 #pragma mark - 5.Event Response
 
 - (void)clickTableViewHeader {
@@ -178,13 +175,21 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     
     if (_headerView == nil) {
         
-        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHView_Width, 170)];
+        _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHView_Width, 150)];
         UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
         [btn setTitle:@"" forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(clickTableViewHeader) forControlEvents:UIControlEventTouchUpInside];
         [_headerView addSubview:btn];
     }
     return _headerView;
+}
+
+- (YZHMyCenterListModel *)viewModel {
+    
+    if (!_viewModel) {
+        _viewModel = [[YZHMyCenterListModel alloc] init];
+    }
+    return _viewModel;
 }
 
 @end

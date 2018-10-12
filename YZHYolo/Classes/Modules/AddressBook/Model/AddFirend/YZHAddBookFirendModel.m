@@ -21,7 +21,6 @@
              };
 }
 
-
 - (NSArray<YZHAddBookFirendModel *> *)list {
     
     if (!_list) {

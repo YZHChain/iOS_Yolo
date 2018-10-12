@@ -32,4 +32,38 @@
     }
 }
 
++ (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(NSInteger)cellType {
+    
+    NSString* identifierID;
+    switch (cellType) {
+        case 0:
+            identifierID = @"phoneCellIdentifler";
+            break;
+        case 1:
+            identifierID = @"photoCellIdentifler";
+            break;
+        case 2:
+            identifierID = @"nickNameCellIdentifler";
+            break;
+        case 3:
+            identifierID = @"genderCellIdentifler";
+            break;
+        case 4:
+            identifierID = @"phoneCellIdentifler";
+            break;
+            
+        default:
+            identifierID = @"QRCodeCellIdentifler";
+            break;
+    }
+    
+    YZHMyInformationCell* cell = [tableView dequeueReusableCellWithIdentifier:identifierID];
+    if (!cell) {
+        UINib* nib = [UINib nibWithNibName:@"YZHMyInformationCell" bundle:nil];
+        cell = [[nib instantiateWithOwner:nil options:nil] objectAtIndex:cellType];
+    }
+    
+    return cell;
+}
+
 @end

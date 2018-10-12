@@ -14,5 +14,7 @@
 #import "YZHProgressHUD.h"
 #import "YZHAlertManage.h"
 #import "UIImageView+CornerRadius.h"
+#import "NSObject+YZHApiModel.h"
+#import "YZHProgressHUD.h"
 
 #endif /* YZHPublic_h */

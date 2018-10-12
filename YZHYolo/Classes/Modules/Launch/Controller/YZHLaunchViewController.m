@@ -54,7 +54,7 @@
 - (void)startConfign{
     
     UIViewController* rootViewController;
-    if (![self detectionApplicationStatus]) {
+    if ([self detectionApplicationStatus]) {
         // 引导页
         YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
         YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];
@@ -62,7 +62,7 @@
     } else {
         // 判断用户是否已登录,
         BOOL hasLogin = NO;
-        if (!hasLogin) {
+        if (hasLogin) {
             
             rootViewController = [[YZHRootTabBarViewController alloc] init];
             

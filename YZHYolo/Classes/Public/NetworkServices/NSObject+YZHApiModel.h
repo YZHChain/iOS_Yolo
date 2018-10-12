@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (YZHApiModel)
 
+@property (nonatomic, copy) NSString *yzh_apiCode;
+@property (nonatomic, copy) NSString *yzh_apiDetail;
+
 @end
 
 NS_ASSUME_NONNULL_END

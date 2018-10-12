@@ -118,17 +118,18 @@
     NSDictionary* parameter = @{
                                  @"verifyCode": self.registerView.codeTextField.text,
                                  @"phoneNum": self.registerView.phoneTextField.text };
-//    @weakify(self)
-//    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
-//        @strongify(self)
-//        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
-//
-//    } failureCompletion:^(NSError *error) {
-//
-//        [YZHProgressHUD showAPIError:error];
-//    }];
-    [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
-    
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(NSObject* obj) {
+        if ([obj.yzh_apiCode isEqualToString:@"200"]) {
+            [hud hideWithText:obj.yzh_apiDetail];
+            @strongify(self)
+            [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
+        }
+    } failureCompletion:^(NSError *error) {
+
+        [hud hideWithText:error.domain];
+    }];
 }
 //获取短信
 - (void)getMessagingVerificationWithSender:(UIButton* )sender{
@@ -138,14 +139,15 @@
     if ([phoneNumText yzh_isPhone]) {
         NSDictionary* parameters = @{@"phoneNum": phoneNumText};
 //        @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameters successCompletion:^(id obj) {
-//            @strongify(self)
-//            [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
-            // 处理验证码按钮 倒计时
-            [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameters successCompletion:^(NSObject* obj) {
+            if ([obj.yzh_apiCode isEqualToString:@"200"]) {
+                [hud hideWithText:obj.yzh_apiDetail];
+                // 处理验证码按钮 倒计时
+                [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+            }
         } failureCompletion:^(NSError *error) {
-//            @strongify(self)
-//            [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
+            [hud hideWithText:error.domain];
         }];
     } else {
         [YZHProgressHUD showText:@"请输入正确的手机号码!" onView:self.registerView];
@@ -161,14 +163,6 @@
 }
 
 - (void)keyboardNotification{
-    //TODO:需要对 iphoneSE 等小屏做处理, 否则会被键盘盖住.
-//    @weakify(self)
-//    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
-//        @strongify(self)
-//
-//    } completion:^(BOOL finished) {
-//        
-//    }];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -188,15 +182,5 @@
 }
 
 #pragma mark - 7.GET & SET
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

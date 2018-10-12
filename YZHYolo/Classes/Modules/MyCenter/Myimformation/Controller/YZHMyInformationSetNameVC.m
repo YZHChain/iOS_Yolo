@@ -8,7 +8,9 @@
 
 #import "YZHMyInformationSetNameVC.h"
 
+#import "YZHPublic.h"
 @interface YZHMyInformationSetNameVC ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
 
 @end
 
@@ -50,8 +52,7 @@
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNickName)];
-//    [item setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13.0]} forState:UIControlStateNormal];
-    
+
     self.navigationItem.rightBarButtonItem = item;
 }
 
@@ -85,8 +86,7 @@
 
 - (void)saveNickName{
     
-    //请求, 成功则弹框。
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 #pragma mark - 6.Private Methods
