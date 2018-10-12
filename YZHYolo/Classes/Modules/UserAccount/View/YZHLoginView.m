@@ -41,14 +41,21 @@
         self.confirmButton.enabled = NO;
     }
 }
-
-- (IBAction)gotoRegisterViewController:(id)sender {
+// 登录
+- (IBAction)executeLogin:(UIButton *)sender {
     
-    [YZHRouter openURL:kYZHRouterRegister];
+    self.loginButtonBlock ? self.loginButtonBlock(sender) : NULL;
 }
+
+// 前往注册
+- (IBAction)gotoRegisterViewController:(UIButton *)sender {
+    
+    self.regesterButtonBlock ? self.regesterButtonBlock(sender) : NULL;
+}
+// 前往找回密码
 - (IBAction)gotoFindPasswordViewController:(UIButton *)sender {
     
-    [YZHRouter openURL:kYZHRouterFindPassword];
+    self.findPasswordButtonBlock ? self.findPasswordButtonBlock(sender) : NULL;
 }
 
 #pragma mark -- TextFieldDelegate

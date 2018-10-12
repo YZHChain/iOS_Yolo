@@ -52,7 +52,7 @@
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.tableFooterView = [[UIView alloc] init];
     
 }

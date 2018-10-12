@@ -9,6 +9,10 @@
 #import "YZHSettingPasswordVC.h"
 
 #import "YZHSettingPasswordView.h"
+#import "YZHRootTabBarViewController.h"
+#import "YZHProgressHUD.h"
+#import "YZHUserLoginManage.h"
+
 @interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHSettingPasswordView* settingPasswordView;
@@ -52,12 +56,13 @@
 - (void)setupView
 {
     self.settingPasswordView = [YZHSettingPasswordView yzh_viewWithFrame:self.view.bounds];
-    if (self.hasFindPassword) {
+    if (self.settingPasswordType == YZHSettingPasswordTypeFind) {
         self.settingPasswordView.navigationTitleLaebl.text = @"忘记密码";
         self.settingPasswordView.tileTextLabel.text = @"设置新密码";
-        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateNormal];
-        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateDisabled];
+//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateNormal];
+//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateDisabled];
     }
+    [self.settingPasswordView.confirmButton addTarget:self action:@selector(requestSettingPassword) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.settingPasswordView];
     
@@ -80,7 +85,51 @@
 
 #pragma mark - 5.Event Response
 
+- (void)requestSettingPassword{
+    
+    NSString* requestURL;
+    switch (_settingPasswordType) {
+        case YZHSettingPasswordTypeRegister:
+            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            break;
+            case YZHSettingPasswordTypeFind:
+            requestURL = PATH_USER_LOGIN_FORGETPASSWORD;
+        default:
+            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            break;
+    }
+    NSDictionary* parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
+          @"phoneNum":self.phoneNum };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        @strongify(self)
+        if (self.settingPasswordType == YZHSettingPasswordTypeRegister) {
+            [self autoLoginWithResponse:obj];
+        } else {
+            
+        }
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
+}
+
 #pragma mark - 6.Private Methods
+// 注册时设置完密码自动登录
+- (void)autoLoginWithResponse:(id)response {
+    
+    YZHLoginModel* model = [YZHLoginModel YZH_objectWithKeyValues:response];
+    
+    YZHUserLoginManage* manage = [[YZHUserLoginManage alloc] init];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
+    [manage IMServerLoginWithAccount:model.acctId token:model.token successCompletion:^{
+        //TODO:
+        [hud hideWithText:@"登录成功"];
+    } failureCompletion:^{
+        
+    }];
+}
 
 - (void)setupNotification
 {

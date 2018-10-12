@@ -13,6 +13,7 @@
 #import "YZHLoginVC.h"
 #import "YZHPublic.h"
 #import "YZHBaseNavigationController.h"
+
 @interface YZHLaunchViewController ()
 
 @end
@@ -23,9 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //  设置闪屏页
+    // 设置闪屏页
     [self setupSplashScreen];
-    //  启动流程
+    // 启动流程
     [self startConfign];
 }
 
@@ -60,7 +61,7 @@
         rootViewController = navigationController;
     } else {
         // 判断用户是否已登录,
-        BOOL hasLogin = YES;
+        BOOL hasLogin = NO;
         if (hasLogin) {
             
             rootViewController = [[YZHRootTabBarViewController alloc] init];

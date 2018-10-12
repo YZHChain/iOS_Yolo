@@ -17,19 +17,46 @@
 + (NSDictionary *)YZH_objectClassInArray{
     
     return @{
-             @"content": @"YZHMyCenterModel"
+             @"content": [YZHMyCenterModel class]
              };
 }
-
 @end
 
 @implementation YZHMyCenterListModel
 
 + (NSDictionary *)YZH_objectClassInArray{
-    
+
     return @{
-             @"list": @"YZHMyCenterContentModel"
+             @"content": [YZHMyCenterContentModel class]
              };
+}
+
+- (NSMutableArray<YZHMyCenterContentModel *> *)list {
+    
+    if (!_list) {
+        NSArray* list = @[
+                              @{@"content": @[@{
+                                        @"title":@"隐私设置",
+                                        @"image":@"my_cover_cell_setting_privacy",
+                                        @"route":kYZHRouterPrivacySetting,
+                                        @"type" :@"1",
+                                        },
+                               @{
+                                          @"title":@"关于",
+                                          @"image":@"my_cover_cell_about",
+                                          @"route":kYZHRouterAboutYolo,
+                                          @"type" :@"1",
+                                          }]},
+                                @{@"content": @[@{
+                                          @"title":@"设置",
+                                          @"image":@"my_cover_cell_setting",
+                                          @"route":kYZHRouterSettingCenter,
+                                          @"type" :@"1",
+                                          }]}
+                              ];
+        _list = [YZHMyCenterContentModel YZH_objectArrayWithKeyValuesArray:list];
+    }
+    return _list;
 }
 
 @end

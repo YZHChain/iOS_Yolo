@@ -29,6 +29,8 @@ extern NSString * const kYZHRouteNeedLogin;
 
 extern NSString * const kYZHRouteIndexRoot;
 extern NSString * const kYZHRouteSeguePush;
+extern NSString * const kYZHRouteSegueModal;
+extern NSString * const kYZHRouteSegueNewNavigation;
 
 #pragma mark -- GuidePage
 
@@ -44,9 +46,21 @@ extern NSString *const kYZHRouterMyInformationSetGender;
 extern NSString *const kYZHRouterMyInformationMyQRCode;
 extern NSString *const kYZHRouterMyInformationYoloID;
 extern NSString *const kYZHRouterMyInformationMyPlace;
+extern NSString *const kYZHRouterMyPlaceCity;
 extern NSString *const kYZHRouterAboutYolo;
 extern NSString *const kYZHRouterSettingCenter;
 extern NSString *const kYZHRouterPrivacySetting;
+
+#pragma mark -- AddressBook
+
+extern NSString *const kYZHRouterAddressBookDetails;
+extern NSString *const kYZHRouterAddressBookSetNote;
+extern NSString *const kYZHRouterAddressBookSetTag;
+extern NSString *const kYZHRouterAddressBookSetting;
+extern NSString *const kYZHRouterAddressBookAddFirend;
+extern NSString *const kYZHRouterAddressBookPhoneContact;
+extern NSString *const kYZHRouterAddressBookAddFirendRecord;
+extern NSString *const kYZHRouterAddressBookScanQRCode;
 
 + (NSDictionary* )configInfo;
 

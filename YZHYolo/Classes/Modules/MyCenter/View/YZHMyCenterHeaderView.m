@@ -14,7 +14,6 @@
     
     [super awakeFromNib];
     
-
     [self setupView];
 }
 

@@ -11,6 +11,8 @@
 //TODO:规范Segue参数与非Segue参数(YZHRouteFromOutside,YZHRouteNeedLogin等)，Segue参数统一以YZHRouteSegue开头。
 NSString *const kYZHRouteSegue           = @"YZHRouteSegue";
 NSString *const kYZHRouteSeguePush       = @"YZHRouteSeguePush";
+NSString *const kYZHRouteSegueModal      = @"YZHRouteSegueModal";
+NSString *const kYZHRouteSegueNewNavigation = @"YZHRouteNewNavigation";
 NSString *const kYZHRouteAnimated        = @"YZHRouteAnimated";
 NSString *const kYZHRouteBackIndex       = @"YZHRouteBackIndex";
 NSString *const kYZHRouteBackPage        = @"YZHRouteBackPage";
@@ -33,22 +35,33 @@ NSString* const kYZHRouteViewControllerNeedLoginKey = @"needLogin";
 
 #pragma mark -- GuidePage
 
-NSString* const kYZHRouterWelcome         = @"/guidePage/welcome";
-NSString* const kYZHRouterLogin           = @"/guidePage/login";
-NSString* const kYZHRouterRegister        = @"/guidePage/register";
-NSString* const kYZHRouterFindPassword    = @"/guidePage/findPassword";
-NSString* const kYZHRouterSettingPassword = @"/guidePage/settingPassword";
-NSString* const kYZHRouterMyInformation   = @"/myCenter/myInformation";
-NSString* const kYZHRouterMyInformationPhoto   = @"/myInformation/photo";
-NSString* const kYZHRouterMyInformationSetName   = @"/myInformation/setName";
-NSString* const kYZHRouterMyInformationSetGender = @"/myInformation/setGender";
-NSString* const kYZHRouterMyInformationMyQRCode = @"/myInformation/myQRCode";
-NSString* const kYZHRouterMyInformationYoloID = @"/myInformation/YoloID";
-NSString* const kYZHRouterMyInformationMyPlace = @"/myInformation/myPlace";
-NSString* const kYZHRouterAboutYolo   = @"/myCenter/aboutYolo";
-NSString* const kYZHRouterPrivacySetting   = @"/myCenter/privacySetting";
-NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
+NSString* const kYZHRouterWelcome                 = @"/guidePage/welcome";
+NSString* const kYZHRouterLogin                   = @"/guidePage/login";
+NSString* const kYZHRouterRegister                = @"/guidePage/register";
+NSString* const kYZHRouterFindPassword            = @"/guidePage/findPassword";
+NSString* const kYZHRouterSettingPassword         = @"/guidePage/settingPassword";
+NSString* const kYZHRouterMyInformation           = @"/myCenter/myInformation";
+NSString* const kYZHRouterMyInformationPhoto      = @"/myInformation/photo";
+NSString* const kYZHRouterMyInformationSetName    = @"/myInformation/setName";
+NSString* const kYZHRouterMyInformationSetGender  = @"/myInformation/setGender";
+NSString* const kYZHRouterMyInformationMyQRCode   = @"/myInformation/myQRCode";
+NSString* const kYZHRouterMyInformationYoloID     = @"/myInformation/YoloID";
+NSString* const kYZHRouterMyInformationMyPlace    = @"/myInformation/myPlace";
+NSString* const kYZHRouterMyPlaceCity             = @"/myInformation/myPlaceCity";
+NSString* const kYZHRouterAboutYolo               = @"/myCenter/aboutYolo";
+NSString* const kYZHRouterPrivacySetting          = @"/myCenter/privacySetting";
+NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
 
+#pragma mark -- AddressBook
+
+NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details";
+NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote";
+NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
+NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
+NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
+NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
+NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
+NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendRecord";
 @implementation YZHRouterConfig
 
 + (NSDictionary *)configInfo{
@@ -125,6 +138,12 @@ NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterMyPlaceCity: @{
+                     kYZHRouteViewControllerClassKey: @"YZHMyplaceCityVC",
+                     kYZHRouteViewControllerNameKey: @"设置地址",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
              kYZHRouterAboutYolo: @{
                      kYZHRouteViewControllerClassKey: @"YZHAboutYoloVC",
                      kYZHRouteViewControllerNameKey: @"关于",
@@ -143,8 +162,55 @@ NSString* const kYZHRouterSettingCenter   = @"/myCenter/settingCenter";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterAddressBookDetails: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
+                     kYZHRouteViewControllerNameKey: @"详情资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetNote: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookSetNoteVC",
+                     kYZHRouteViewControllerNameKey: @"设置备注",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetTag: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookSetTagVC",
+                     kYZHRouteViewControllerNameKey: @"设置标签",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSetting: @{
+                     kYZHRouteViewControllerClassKey: @"YZHDetailsSettingVC",
+                     kYZHRouteViewControllerNameKey: @"其他设置",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookAddFirend: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendVC",
+                     kYZHRouteViewControllerNameKey: @"添加好友",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookPhoneContact: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookPhoneContactVC",
+                     kYZHRouteViewControllerNameKey: @"手机联系人",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookAddFirendRecord: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendRecordVC",
+                     kYZHRouteViewControllerNameKey: @"好友申请",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookScanQRCode: @{
+                     kYZHRouteViewControllerClassKey: @"YZHScanQRCodeVC",
+                     kYZHRouteViewControllerNameKey: @"扫码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
              };
-    
 }
 
 @end

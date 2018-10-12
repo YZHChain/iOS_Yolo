@@ -8,7 +8,9 @@
 
 #import "YZHMyInformationSetNameVC.h"
 
+#import "YZHPublic.h"
 @interface YZHMyInformationSetNameVC ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
 
 @end
 
@@ -40,8 +42,6 @@
     
     [super viewWillAppear:animated];
     
-    //TODO: 不知道什么原因, Bar 还是隐藏的。暂时先通过这里解决。。
-    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - 2.SettingView and Style
@@ -52,8 +52,7 @@
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNickName)];
-//    [item setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:13.0]} forState:UIControlStateNormal];
-    
+
     self.navigationItem.rightBarButtonItem = item;
 }
 
@@ -87,8 +86,7 @@
 
 - (void)saveNickName{
     
-    //请求, 成功则弹框。
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 #pragma mark - 6.Private Methods

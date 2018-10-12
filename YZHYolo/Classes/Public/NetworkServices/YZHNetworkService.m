@@ -9,6 +9,12 @@
 #import "YZHNetworkService.h"
 
 #import "YZHNetworkConfig.h"
+#import "NSObject+YZHApiModel.h"
+
+//数据服务错误代码
+#define SERVER_ERROR_NEED_REFRESH   -98      //需要重新刷新
+#define SERVER_ERROR_OTHER          -99      //其它错误
+#define SERVER_ERROR_MAINTAIN       -103    //系统维护
 
 //RefreshToken状态
 typedef NS_ENUM(NSInteger, YMRefreshTokenStatus) {
@@ -63,7 +69,7 @@ static id instance;
     //添加公共参数，例如缓存时间、设备信息等
     NSDictionary *finalParams = [self appendingGeneralParams:params path:path];
     
-    [YZHNetworkConfig GETNetworkingResource:path params:finalParams successCompletion:^(id responseObject) {
+    [YZHNetworkConfig GETNetworkingResource:path params:params successCompletion:^(id responseObject) {
         // 统一处理返回成功逻辑.
         [self processResponse:responseObject path:path success:successCompletion failure:failureCompletion];
     } failureCompletion:^(NSError *error) {
@@ -94,16 +100,78 @@ static id instance;
     }];
 }
 
-#pragma mark --
+#pragma mark -- ResponUniftManage
 
 - (void)processError:(NSError *)error failure:(void (^)(NSError *error))failure refreshToken:(void (^)(void))refreshToken{
     
-    failure(error);
+    NSError *failureError = nil;
+    switch (error.code) {
+            default:
+        {
+            failureError = [NSError errorWithDomain:error.domain code:SERVER_ERROR_NEED_REFRESH userInfo:nil];
+        }
+    }
+    failure(failureError);
 }
 
 - (void)processResponse:(id)response path:(NSString *)path success:(void (^)(id obj))success failure:(void (^)(NSError *error))failure{
     
-    success(response);
+    
+    id successObj = nil;
+    NSError *failureError = nil;
+    
+    id finalResponse = [self packageResponse:response path:path];
+    // 返回解决有数据, 并且属于 字典类型为成功.
+    if (finalResponse && [finalResponse isKindOfClass:[NSDictionary class]]) {
+        //取出 Code, 约定 Code 200 为成功
+        //取code、message、data TODO:异常捕获
+        NSString* code = [finalResponse objectForKey:kYZHResponeCodeKey];
+        //排除为空的时候. 避免异常
+        if (YZHIsEmptyString(code)) {
+            code = nil;
+        }
+        NSString* detail = [finalResponse objectForKey:kYZHResponeMessageKey];
+        //可能是空的
+        id value = [finalResponse objectForKey:kYZHResponeDataKey];
+        if ([value isKindOfClass:[NSNull class]]) {
+            value = nil;
+        } else {
+            
+        }
+        // 如果是空的直接拷贝则崩溃.
+//        NSMutableDictionary* value = [[finalResponse objectForKey:kYZHResponeDataKey] mutableCopy];
+        if (YZHIsEmptyString(detail)) {
+            detail = nil;
+        } else {
+            if (YZHIsDictionary(value)) {
+                value = [value mutableCopy];
+                //TODO:
+                [value setObject:detail forKey:kYZHResponeMessageKey];
+            }
+        }
+        if ([code isEqualToString:@"200"]) {
+            //追加code、detail参数
+            successObj = value;
+            //追加code、detail参数
+            //TODO:请求成功时返回YMAPIModel类型，不返回id类型
+            if (!successObj) {
+                successObj = [[NSObject alloc] init];
+                ((NSObject*)successObj).yzh_apiCode = code;
+                ((NSObject*)successObj).yzh_apiDetail = detail;
+            }
+        } else  { // 这里最好和后台协商, 根据 Code 码来弹出相应的框
+            // 非成功状态统一弹框处理.
+            failureError = [NSError errorWithDomain:detail code:[code integerValue] userInfo:nil];
+        }
+        
+        if (failureError) {
+            failure(failureError);
+        } else {
+            success(successObj);
+        }
+        
+        
+    }
     
 }
 #pragma mark -- ConfigPublicParameter
@@ -113,8 +181,15 @@ static id instance;
     //添加terminal参数
     //添加CLIENT参数，登录、注册、token刷新接口需要
     //添加App版本号
-    dic[@"version"] = self.encodeVersion;
+//    dic[@"version"] = self.encodeVersion;
     return dic;
+}
+
+#pragma mark -- Respinse PackAge
+
+- (id)packageResponse:(id)response path:(NSString *)path {
+    
+    return response;
 }
 
 #pragma mark -- GET & SET

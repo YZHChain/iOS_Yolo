@@ -82,7 +82,7 @@
 #pragma mark GET & SET
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    
+
     return UIStatusBarStyleLightContent;
 }
 
