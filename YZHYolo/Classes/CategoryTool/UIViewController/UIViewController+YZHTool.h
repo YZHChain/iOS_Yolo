@@ -13,6 +13,8 @@
 - (void)yzh_backToRootViewController:(BOOL)animated; //返回根控制器
 + (void)yzh_userLoginSuccessToHomePage;
 - (void)yzh_userLoginSuccessToHomePage;
++ (void)yzh_animationReplaceRootViewController:(UIViewController* )viewController;
+- (void)yzh_animationReplaceRootViewController:(UIViewController* )viewController;
 
 #pragma mark - To find the ViewController
 

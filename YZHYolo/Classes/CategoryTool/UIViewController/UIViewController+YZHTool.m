@@ -43,6 +43,29 @@
                     }];
 }
 
++ (void)yzh_animationReplaceRootViewController:(UIViewController *)viewController {
+    UIViewController* topViewController = [self yzh_rootViewController];
+    [topViewController yzh_animationReplaceRootViewController:viewController];
+}
+
+- (void)yzh_animationReplaceRootViewController:(UIViewController* )viewController{
+    
+    UIWindow* window = [[UIApplication sharedApplication].delegate window];
+    [UIView transitionWithView:window
+                      duration:0.3
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        BOOL oldState = [UIView areAnimationsEnabled];
+                        [UIView setAnimationsEnabled:NO];
+                        [window setRootViewController:viewController];
+                        [UIView setAnimationsEnabled:oldState];
+                    }
+                    completion:^(BOOL finished){
+                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
+                        [self.view removeFromSuperview];
+                    }];
+}
+
 
 #pragma mark - To find the ViewController
 
