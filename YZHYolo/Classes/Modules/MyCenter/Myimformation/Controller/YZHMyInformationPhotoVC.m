@@ -10,9 +10,14 @@
 
 #import "YZHPhotoManage.h"
 #import "UIButton+YZHTool.h"
+#import "NIMKitFileLocationHelper.h"
+#import "UIView+Toast.h"
+#import "NIMGlobalDefs.h"
+#import "NIMResourceManagerProtocol.h"
+#import "UIImage+NIMKit.h"
 
 static NSArray* buttonArray;
-@interface YZHMyInformationPhotoVC ()
+@interface YZHMyInformationPhotoVC ()<NIMUserManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *savePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *callPhotoButton;
@@ -86,33 +91,34 @@ static NSArray* buttonArray;
 - (IBAction)useCameraPictures:(UIButton *)sender {
     
     sender.backgroundColor = [UIColor whiteColor];
+    @weakify(self)
     [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypeCamera finishPicking:^(UIImage * _Nonnull image) {
+        @strongify(self)
         self.photoImageView.image = image;
+        [self updatePhotoToIMDataWithImage:image];
     }];
 }
 
 - (IBAction)callMobilePhoto:(UIButton *)sender {
     
     sender.backgroundColor = [UIColor whiteColor];
-    
+    @weakify(self)
     [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
+        @strongify(self)
         self.photoImageView.image = image;
+        [self updatePhotoToIMDataWithImage:image];
     }];
     
 }
 
 - (IBAction)performbSavePhoto:(UIButton *)sender {
     
-//    sender.backgroundColor = [UIColor whiteColor];
+    [self saveImageToPhotos:self.photoImageView.image];
 }
 
 - (void)highlightedBackground:(UIButton *)sender {
     
-//    if (sender.highlighted) {
-//        sender.backgroundColor = [UIColor yzh_backgroundThemeGray];
-//    } else {
-//
-//    }
+
 }
 
 
@@ -122,6 +128,64 @@ static NSArray* buttonArray;
 {
     
 }
+
+- (void)updatePhotoToIMDataWithImage:(UIImage* )image {
+    
+    UIImage *imageForAvatarUpload = [image nim_imageForAvatarUpload];
+    NSString *fileName = [NIMKitFileLocationHelper genFilenameWithExt:@"jpg"];
+    NSString *filePath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
+    BOOL success = data && [data writeToFile:filePath atomically:YES];
+    @weakify(self)
+    if (success) {
+        
+        [SVProgressHUD show];
+        [[NIMSDK sharedSDK].resourceManager upload:filePath progress:nil completion:^(NSString *urlString, NSError *error) {
+            [SVProgressHUD dismiss];
+            @strongify(self)
+            if (!error && self) {
+                [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagAvatar):urlString} completion:^(NSError *error) {
+                    if (!error) {
+                        //                        [[NTESRedPacketManager sharedManager] updateUserInfo];
+                        [[SDWebImageManager sharedManager] saveImageToCache:imageForAvatarUpload forURL:[NSURL URLWithString:urlString]];
+                        //                        [wself refresh];
+                    } else {
+                        [self.view makeToast:@"设置头像失败，请重试"
+                                     duration:2
+                                     position:CSToastPositionCenter];
+                    }
+                }];
+            } else {
+                [self.view makeToast:@"图片上传失败，请重试"
+                             duration:2
+                             position:CSToastPositionCenter];
+            }
+        }];
+    } else {
+        [self.view makeToast:@"图片保存失败，请重试"
+                    duration:2
+                    position:CSToastPositionCenter];
+    }
+}
+
+- (void)saveImageToPhotos:(UIImage*)savedImage {
+    
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+        [self.view makeToast:@"图片已经保存到相册"
+                    duration:1
+                    position:CSToastPositionCenter];
+    }else{
+        [self.view makeToast:@"图片保存失败,请重试"
+                    duration:1
+                    position:CSToastPositionCenter];
+    }
+}
+
+
 
 #pragma mark - 7.GET & SET
 

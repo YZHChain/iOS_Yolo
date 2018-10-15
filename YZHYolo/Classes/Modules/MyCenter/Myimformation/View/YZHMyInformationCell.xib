@@ -64,7 +64,7 @@
                             <constraint firstAttribute="height" constant="17" id="AwA-dF-jty"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
                         <rect key="frame" x="251" y="16" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="8x4-WS-nYx"/>
@@ -149,12 +149,8 @@
                             <constraint firstAttribute="height" constant="17" id="pFF-ia-6V9"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-LT-1Ot">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_gender_boy" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-LT-1Ot">
                         <rect key="frame" x="265" y="23.5" width="13" height="13"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="13" id="1Ex-dw-L4o"/>
-                            <constraint firstAttribute="width" constant="13" id="ncm-l0-oJb"/>
-                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02S-hJ-DGz">
                         <rect key="frame" x="242.5" y="21" width="15.5" height="18"/>
@@ -166,10 +162,10 @@
                 <constraints>
                     <constraint firstItem="Cmh-RR-j0t" firstAttribute="leading" secondItem="eDF-Gb-nqf" secondAttribute="leading" constant="13" id="0Ig-ZP-J3G"/>
                     <constraint firstItem="wG3-LT-1Ot" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="1Sy-3a-1DU"/>
-                    <constraint firstItem="wG3-LT-1Ot" firstAttribute="leading" secondItem="02S-hJ-DGz" secondAttribute="trailing" constant="7" id="SSq-6H-x1p"/>
                     <constraint firstItem="Cmh-RR-j0t" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="aUF-xq-KfT"/>
                     <constraint firstItem="02S-hJ-DGz" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="bmG-64-tfY"/>
                     <constraint firstAttribute="trailing" secondItem="s7J-Gc-vrJ" secondAttribute="trailing" constant="16" id="db5-oH-oea"/>
+                    <constraint firstAttribute="trailing" secondItem="02S-hJ-DGz" secondAttribute="trailing" constant="62" id="fCJ-Mq-PVi"/>
                     <constraint firstItem="s7J-Gc-vrJ" firstAttribute="leading" secondItem="wG3-LT-1Ot" secondAttribute="trailing" constant="17" id="hN3-YY-WGE"/>
                     <constraint firstItem="s7J-Gc-vrJ" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="oL6-E2-Dan"/>
                 </constraints>
@@ -201,7 +197,7 @@
                             <constraint firstAttribute="height" constant="17" id="OUY-Oy-3cx"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3g5-Wn-WKd">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_QRCode" translatesAutoresizingMaskIntoConstraints="NO" id="3g5-Wn-WKd">
                         <rect key="frame" x="255" y="18.5" width="23" height="23"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="23" id="Wxg-kY-Wbm"/>
@@ -227,5 +223,8 @@
     </objects>
     <resources>
         <image name="my_cover_cell_back" width="9" height="16"/>
+        <image name="my_informationCell_QRCode" width="22" height="22"/>
+        <image name="my_informationCell_gender_boy" width="13" height="13"/>
+        <image name="my_informationCell_headPhoto_default" width="28" height="28"/>
     </resources>
 </document>

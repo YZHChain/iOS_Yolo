@@ -8,6 +8,7 @@
 
 #import "YZHMyInformationMyQRCodeVC.h"
 
+#import "YZHPublic.h"
 @interface YZHMyInformationMyQRCodeVC ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerPhotoImageView;
@@ -58,7 +59,18 @@
 
 - (void)setupView
 {
-    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
+    
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+    if (YZHIsString(user.userInfo.nickName)) {
+        self.nickNameLabel.text = user.userInfo.nickName;
+    } else {
+        self.nickNameLabel.text = @"Yolo用户";
+    }
+    if (YZHIsString(user.userInfo.avatarUrl)) {
+        [self.headerPhotoImageView yzh_setImageWithString:user.userInfo.avatarUrl];
+        [self.headerPhotoImageView yzh_cornerRadiusAdvance:self.headerPhotoImageView.size.height / 2 rectCornerType: UIRectCornerAllCorners];
+    }
 }
 
 - (void)reloadView
@@ -99,18 +111,23 @@
     return image;
 }
 
-- (void)saveImageToPhotos:(UIImage*)savedImage{
+- (void)saveImageToPhotos:(UIImage*)savedImage {
     
     UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error == nil) {
-        NSLog(@"存入手机相册成功");
+        [self.view makeToast:@"图片已经保存到相册"
+                    duration:1
+                    position:CSToastPositionCenter];
     }else{
-        NSLog(@"存入手机相册失败");
+        [self.view makeToast:@"图片保存失败,请重试"
+                    duration:1
+                    position:CSToastPositionCenter];
     }
 }
+
 #pragma mark - 7.GET & SET
 
 @end

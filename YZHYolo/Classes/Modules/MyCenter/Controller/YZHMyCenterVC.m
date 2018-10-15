@@ -12,13 +12,16 @@
 #import "YZHMyCenterCell.h"
 #import "UIScrollView+YZHRefresh.h"
 #import "YZHMyCenterModel.h"
+#import "YZHUserLoginManage.h"
+#import "YZHUserDetailsModel.h"
 
 static NSString* const kCellIdentifier = @"centerCellIdentifier";
-@interface YZHMyCenterVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHMyCenterVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate>
 
-@property(nonatomic, strong)UITableView* tableView;
-@property(nonatomic, strong)YZHMyCenterHeaderView* headerView;
-@property(nonatomic, strong)YZHMyCenterListModel* viewModel;
+@property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) YZHMyCenterHeaderView* headerView;
+@property (nonatomic, strong) YZHMyCenterListModel* viewModel;
+@property (nonatomic, strong) YZHUserDetailsModel* userModel;
 
 @end
 
@@ -36,9 +39,8 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     [self setupView];
     //3.请求数据
     [self setupData];
-    //4.设置通知
-    [self setupNotification];
-    
+    //4.设置 NIM 委托
+    [self setupNIMDelegate];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -67,6 +69,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     } else {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    self.headerView.userModel = self.userModel;
 }
 
 - (void)reloadView
@@ -78,7 +81,6 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)setupData
 {
-    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
@@ -138,15 +140,23 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 #pragma mark - 5.Event Response
 
-- (void)clickTableViewHeader {
-    [YZHRouter openURL:kYZHRouterMyInformation];
+
+#pragma mark - 6. NIM delegate
+
+- (void)setupNIMDelegate
+{
+    [[NIMSDK sharedSDK].userManager addDelegate:self];
 }
 
-#pragma mark - 6.Private Methods
+- (void)onUserInfoChanged:(NIMUser *)user {
 
-- (void)setupNotification
-{
+    [self userInformationUpdateUser:user];
+}
+// 更新
+- (void)userInformationUpdateUser:(NIMUser *)user {
     
+    self.userModel.userIMData = user;
+    self.headerView.userModel = self.userModel;
 }
 
 #pragma mark - 7.GET & SET
@@ -176,10 +186,12 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     if (_headerView == nil) {
         
         _headerView = [YZHMyCenterHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHView_Width, 150)];
-        UIButton* btn = [[UIButton alloc] initWithFrame:_headerView.frame];
-        [btn setTitle:@"" forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(clickTableViewHeader) forControlEvents:UIControlEventTouchUpInside];
-        [_headerView addSubview:btn];
+        _headerView.executeHeaderBlock = ^(UIButton *sender) {
+            [YZHRouter openURL:kYZHRouterMyInformation];
+        };
+        _headerView.executeQRCodeBlock = ^(UIButton *sender) {
+            [YZHRouter openURL:kYZHRouterMyInformationMyQRCode];
+        };
     }
     return _headerView;
 }
@@ -190,6 +202,16 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
         _viewModel = [[YZHMyCenterListModel alloc] init];
     }
     return _viewModel;
+}
+
+- (YZHUserDetailsModel* )userModel {
+    
+    if (!_userModel) {
+        NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+        _userModel = [[YZHUserDetailsModel alloc] init];
+        _userModel.userIMData = user;
+    }
+    return _userModel;
 }
 
 @end

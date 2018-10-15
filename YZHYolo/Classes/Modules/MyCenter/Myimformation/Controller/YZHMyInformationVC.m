@@ -11,6 +11,7 @@
 #import "YZHMyInformationModel.h"
 #import "YZHMyInformationCell.h"
 #import "YZHMyInformationPhotoVC.h"
+#import "NIMKitDataProviderImpl.h"
 
 static NSString* const kPhoneCellIdentifier = @"imformationPhoneCellIdentifier";
 static NSString* const kPhotoCellIdentifier = @"imformationPhotoCellIdentifier";
@@ -18,7 +19,7 @@ static NSString* const kNicknameCellIdentifier = @"imformationNicknameCellIdenti
 static NSString* const kGenderCellIdentifier = @"imformationGenderCellIdentifier";
 static NSString* const kQRCodeCellIdentifier = @"imformationQRCodeCellIdentifier";
 static NSArray* cellIdentifierArray;
-@interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource,NIMUserManagerDelegate>
 
 @property(nonatomic, strong)UITableView* tableView;
 @property(nonatomic, strong)YZHMyInformationListModel* viewModel;
@@ -78,6 +79,7 @@ static NSArray* cellIdentifierArray;
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)reloadView
@@ -135,8 +137,11 @@ static NSArray* cellIdentifierArray;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
-    
-    [YZHRouter openURL:model.route];
+    if ([model.title isEqualToString:@"性别"]) {
+        [YZHRouter openURL:model.route info:@{@"userGender": model.subtitle}];
+    } else {
+        [YZHRouter openURL:model.route];
+    }
 }
 
 #pragma mark - 5.Event Response
@@ -145,7 +150,18 @@ static NSArray* cellIdentifierArray;
 
 - (void)setupNotification
 {
+    [[NIMSDK sharedSDK].userManager addDelegate:self];
+}
+
+- (void)userInformationUpUserData:(NIMUser *)user {
     
+    [self.viewModel updateModelWithUserData:user];
+    [self.tableView reloadData];
+}
+
+- (void)onUserInfoChanged:(NIMUser *)user {
+    
+    [self userInformationUpUserData:user];
 }
 
 #pragma mark - 7.GET & SET
@@ -170,7 +186,9 @@ static NSArray* cellIdentifierArray;
 - (YZHMyInformationListModel *)viewModel {
     
     if (!_viewModel) {
+        NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
         _viewModel = [[YZHMyInformationListModel alloc] init];
+        _viewModel.userIMData = user;
     }
     return _viewModel;
 }

@@ -8,11 +8,14 @@
 
 #import "YZHMyInformationSetGenderVC.h"
 
+#import "YZHPublic.h"
 @interface YZHMyInformationSetGenderVC ()
+
 @property (weak, nonatomic) IBOutlet UIButton *boyTitleButton;
 @property (weak, nonatomic) IBOutlet UIButton *girlTitleButton;
 @property (weak, nonatomic) IBOutlet UIImageView *boySelectedImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *girlSelectedImageView;
+@property (nonatomic, assign) NIMUserGender currentSeleced;
 
 @end
 
@@ -49,7 +52,7 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"设置昵称";
+    self.navigationItem.title = @"设置性别";
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
@@ -61,6 +64,11 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    if ([self.userGender isEqualToString:@"男"]) {
+        self.girlSelectedImageView.hidden = YES;
+    } else {
+        self.boySelectedImageView.hidden = YES;
+    }
 }
 
 - (void)reloadView
@@ -82,6 +90,23 @@
 
 - (void)saveSetting{
     
+    NSString* selectedGender = [YZHUserUtil genderString:self.currentSeleced];
+    NSString* genderNumber = [NSString stringWithFormat:@"%ld", self.currentSeleced];
+    if (![selectedGender isEqualToString:_userGender]) {
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:@""];
+        @weakify(self)
+        [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagGender) : genderNumber} completion:^(NSError *error) {
+            @strongify(self)
+            if (!error) {
+                [hud hideWithText:@"性别修改成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [hud hideWithText:error.domain];
+            }
+        }];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)selectedBoy:(UIButton *)sender {
@@ -109,5 +134,15 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (NIMUserGender)currentSeleced {
+    
+    if (self.girlSelectedImageView.isHidden) {
+        _currentSeleced = NIMUserGenderMale;
+    } else {
+        _currentSeleced = NIMUserGenderFemale;
+    }
+    return _currentSeleced;
+}
 
 @end

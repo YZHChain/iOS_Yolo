@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -32,6 +32,7 @@
                 <constraint firstItem="6tp-3F-WDJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U4S-o5-CUk"/>
                 <constraint firstItem="6tp-3F-WDJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="weG-SS-tfP"/>
             </constraints>
+            <point key="canvasLocation" x="139" y="154"/>
         </view>
     </objects>
 </document>

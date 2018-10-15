@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHUserDetailsModel : NSObject
 
+@property (nonatomic, copy) NSString* yoloID;
+@property (nonatomic, copy) NSString* phoneNum;
+@property (nonatomic, copy) NSString* QRCodeResult;
+@property (nonatomic, strong) NIMUser* userIMData;
+@property (nonatomic, assign) BOOL hasPhotoImage;
+@property (nonatomic, assign) BOOL hasNickName;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,6 +16,7 @@
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIViewController+YZHTool.h"
 #import "YZHLoginModel.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHLoginVC ()
 
@@ -40,8 +41,6 @@
     [self setupViewResponseEvent];
     //5.请求数据
     [self setupData];
-    //6.设置通知
-    [self setupNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,6 +119,7 @@
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
         @strongify(self)
+        [hud hideWithText:nil];
         [self serverloginSuccessWithResponData:obj];
     } failureCompletion:^(NSError *error) {
         //TODO: 失败处理
@@ -154,26 +154,15 @@
     self.userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
     NSString* account = self.userLoginModel.acctId;
     NSString* token = self.userLoginModel.token;
-//     请求登录云信.
-    [[[NIMSDK sharedSDK] loginManager] login:account token:token completion:^(NSError * _Nullable error) {
-        if (error == nil) {
-            [self IMServerLoginSuccessWithResponData:nil];
-        } else {
-            // 错误提示 TODO:
-            [YZHProgressHUD showAPIError:error];
-        }
+    //请求运行登录服务.
+    YZHUserLoginManage *loginManage = [YZHUserLoginManage sharedManager];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.loginView text:nil];
+    [loginManage IMServerLoginWithAccount:account token:token successCompletion:^{
+        [hud hideWithText:@"登录成功"];
+    } failureCompletion:^(NSError *error) {
+        // TODO云信登录错误
+        [hud hideWithText:error.domain];
     }];
-}
-// 网易IM信登录成功处理
-- (void)IMServerLoginSuccessWithResponData:(id)responData{
-    //暂时先到主要,后面还需要加上从云信获取信息的逻辑
-    [self yzh_userLoginSuccessToHomePage];
-    
-}
-
-- (void)setupNotification
-{
-
 }
 
 - (void)keyboardNotification{

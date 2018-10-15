@@ -8,7 +8,7 @@
 
 #import "YZHBaseViewController.h"
 
-@interface YZHBaseViewController ()
+@interface YZHBaseViewController ()<NIMUserManagerDelegate>
 
 @end
 
@@ -57,7 +57,8 @@
 }
 
 - (void)dealloc {
-    
+
+    [[NIMSDK sharedSDK].userManager removeDelegate:self];
     NSLog(@"%s %@",__FUNCTION__ ,self);
 }
 

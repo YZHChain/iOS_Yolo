@@ -55,7 +55,7 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
-    self.tableView.scrollEnabled = NO;
+    self.tableView.showsHorizontalScrollIndicator = NO;
 }
 
 - (void)reloadView

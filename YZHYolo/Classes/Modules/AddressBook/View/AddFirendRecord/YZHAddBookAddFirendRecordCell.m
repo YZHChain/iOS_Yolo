@@ -20,9 +20,7 @@ static NSString* kAddFirendRecordCellReview = @"addFirendRecordCellReview";
         self.datingButton.layer.borderWidth = 1;
         self.datingButton.layer.borderColor = [UIColor yzh_backgroundThemeGray].CGColor;
     }
-    // TODO: 需要 masksToBounds 则调用此方法来解决性能问题,此方法必须在 image 赋值之前圆角才生效.
-    [self.photoImageView zy_cornerRadiusAdvance:3.0f rectCornerType:UIRectCornerAllCorners];
-    self.photoImageView.image = [UIImage imageNamed:@"addBook_cover_cell_photo_default"];
+    [self.photoImageView yzh_cornerRadiusAdvance:3.0f rectCornerType:UIRectCornerAllCorners];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

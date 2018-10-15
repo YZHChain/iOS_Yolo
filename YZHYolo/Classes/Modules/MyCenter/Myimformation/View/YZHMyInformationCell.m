@@ -7,6 +7,8 @@
 //
 
 #import "YZHMyInformationCell.h"
+#import "NIMAvatarImageView.h"
+#import "UIImageView+YZHImage.h"
 
 @implementation YZHMyInformationCell
 
@@ -27,8 +29,18 @@
     if (viewModel.subtitle.length) {
         self.subTitleLabel.text = viewModel.subtitle;
     }
+    
     if (viewModel.image.length) {
-        self.photoImageView.image = [UIImage imageNamed:viewModel.image];
+        BOOL hasDefaultImageView = [viewModel.image hasPrefix:@"my_informationCell"];
+        NSLog(@"%@",viewModel.title);
+        if (hasDefaultImageView) {
+            self.photoImageView.image = [UIImage imageNamed:viewModel.image];
+            return;
+        }
+        [self.photoImageView yzh_setImageWithString:viewModel.image
+         ];
+        CGFloat radius = self.photoImageView.size.height / 2;
+        [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
     }
 }
 

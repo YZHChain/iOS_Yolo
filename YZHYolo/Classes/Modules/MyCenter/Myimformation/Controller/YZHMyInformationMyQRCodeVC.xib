@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSZ-x8-246">
-                    <rect key="frame" x="30" y="143" width="315" height="375"/>
+                    <rect key="frame" x="30" y="89" width="315" height="429"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="EMn-Cm-12I">
                             <rect key="frame" x="129" y="17" width="57" height="57"/>
@@ -43,11 +43,11 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlayButtonOverlayLarge.png" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Em-l5F">
-                            <rect key="frame" x="49" y="120" width="217" height="213"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_information_myQRCode_imageView" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Em-l5F">
+                            <rect key="frame" x="49" y="120" width="217" height="267"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码，添加我为好友吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pu-rg-dHd">
-                            <rect key="frame" x="91" y="344" width="133" height="12"/>
+                            <rect key="frame" x="91" y="398" width="133" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="kVG-z7-Ngv"/>
                             </constraints>
@@ -102,7 +102,7 @@
             <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="6w6-1N-pTc" secondAttribute="bottom" id="91p-a1-bNR"/>
-                <constraint firstItem="lSZ-x8-246" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="143" id="EfB-Oz-PYq"/>
+                <constraint firstItem="lSZ-x8-246" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="89" id="EfB-Oz-PYq"/>
                 <constraint firstItem="6w6-1N-pTc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dSW-V6-raD"/>
                 <constraint firstItem="6w6-1N-pTc" firstAttribute="top" secondItem="lSZ-x8-246" secondAttribute="bottom" constant="94" id="g0Z-Qt-CWh"/>
                 <constraint firstItem="lSZ-x8-246" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="hhK-p8-zhY"/>
@@ -113,7 +113,7 @@
         </view>
     </objects>
     <resources>
-        <image name="PlayButtonOverlayLarge.png" width="66" height="66"/>
         <image name="my_cover_headPhoto_default" width="63" height="63"/>
+        <image name="my_information_myQRCode_imageView" width="216" height="215"/>
     </resources>
 </document>

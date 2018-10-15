@@ -47,4 +47,9 @@
     return features;
 }
 
+- (void)yzh_loadImageFinished:(UIImage *)image completionTarget:(id)completionTarget
+{
+    UIImageWriteToSavedPhotosAlbum(image, completionTarget, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)completionTarget);
+}
+
 @end

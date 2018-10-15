@@ -126,8 +126,9 @@
     [manage IMServerLoginWithAccount:model.acctId token:model.token successCompletion:^{
         //TODO:
         [hud hideWithText:@"登录成功"];
-    } failureCompletion:^{
-        
+    } failureCompletion:^(NSError *error) {
+        // TODO:云信登录错误 需要和产品确认
+        [hud hideWithText:error.domain];
     }];
 }
 

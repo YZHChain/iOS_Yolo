@@ -10,6 +10,7 @@ target 'YZHYolo' do
   pod 'SDWebImage'
   pod 'DDPageControl'
   pod 'MBProgressHUD', '0.9.2'
+  pod 'SVProgressHUD', '~> 2.1.2'
   pod 'WZLBadge'
   pod 'UICountingLabel'
   pod 'YYText'

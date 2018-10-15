@@ -13,6 +13,8 @@
 #import "YZHLoginVC.h"
 #import "YZHPublic.h"
 #import "YZHBaseNavigationController.h"
+#import "YZHUserLoginManage.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHLaunchViewController ()
 
@@ -59,22 +61,11 @@
         YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
         YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];
         rootViewController = navigationController;
+        [self yzh_animationReplaceRootViewController:rootViewController];
     } else {
-        // 判断用户是否已登录,
-        BOOL hasLogin = NO;
-        if (hasLogin) {
-            
-            rootViewController = [[YZHRootTabBarViewController alloc] init];
-            
-        } else {
-            YZHLoginVC* loginVC = [[YZHLoginVC alloc] init];
-            YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:loginVC];
-            navigationController.navigationBar.hidden = YES;
-            rootViewController = navigationController;
-        }
+        // 判断用户是否已登录, 设置用户自动登录.
+        [self startAutoLogin];
     }
-    [self windowReplaceRootViewController:rootViewController];
-    
 }
 
 - (BOOL)detectionApplicationStatus{
@@ -97,32 +88,11 @@
 
 #pragma mark -- Privete
 
-- (void)windowReplaceRootViewController:(UIViewController* )viewController{
-    
-    UIWindow* window = [[UIApplication sharedApplication].delegate window];
-    [UIView transitionWithView:window
-                      duration:0.3
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        BOOL oldState = [UIView areAnimationsEnabled];
-                        [UIView setAnimationsEnabled:NO];
-                        [window setRootViewController:viewController];
-                        [UIView setAnimationsEnabled:oldState];
-                    }
-                    completion:^(BOOL finished){
-                        // 将当前控制器视图移除,否则会造成内存泄漏,被Window 引用无法正常释放.
-                        [self.view removeFromSuperview];
-                    }];
+// 自动登录
+- (void)startAutoLogin {
+   
+    YZHUserLoginManage* loginManage = [YZHUserLoginManage sharedManager];
+    [loginManage executeLogincheckout];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -129,12 +129,11 @@
                         // 获取到省份和城市之后停止 查找地理位置。
                         [self.locationManager stopUpdatingLocation];
                     }
-                    self.managerSucceedBlock();
+                    self.managerSucceedBlock ? self.managerSucceedBlock() : NULL;
                 }
             } else {
                 NSLog(@"编码地理位置错误原因%@",error);
                 self.managerfaildBlock ? self.managerfaildBlock() : NULL;
-//                self.managerfaildBlock();
             }
         }];
 }

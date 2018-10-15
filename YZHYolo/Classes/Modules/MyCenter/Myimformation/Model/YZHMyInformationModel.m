@@ -8,6 +8,7 @@
 
 #import "YZHMyInformationModel.h"
 
+#import "YZHUserUtil.h"
 @implementation YZHMyInformationModel
 
 @end
@@ -34,8 +35,13 @@
 }
 
 - (NSMutableArray<YZHMyInformationContentModel *> *)list {
-    
+
     if (!_list) {
+        NIMUser* user = _userIMData;
+        NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
+        NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"YOLOName";
+        NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
+        NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
         NSArray* list = @[
                           @{@"content": @[@{
                                               @"title":@"手机号",
@@ -47,34 +53,34 @@
                           @{@"content": @[@{
                                               @"title":@"头像",
                                               @"subtitle":@"",
-                                              @"image":@"my_myinformationCell_headPhoto_default",
+                                              @"image":avatarUrl,
                                               @"route":kYZHRouterMyInformationPhoto,
                                               @"cellType" :@"1",
                                               }
                                           ]},
                           @{@"content": @[@{
                                               @"title":@"昵称",
-                                              @"subtitle":@"",
-                                              @"image":@"my_cover_cell_about",
+                                              @"subtitle":nickName,
+                                              @"image":@"",
                                               @"route":kYZHRouterMyInformationSetName,
                                               @"cellType" :@"2",
                                               },@{
                                               @"title":@"YOLO 号",
                                               @"subtitle":@"8855842",
-                                              @"image":@"my_cover_cell_about",
+                                              @"image":@"",
                                               @"route":kYZHRouterMyInformationYoloID,
                                               @"cellType" :@"2",
                                               }]},
                           @{@"content": @[@{
                                               @"title":@"性别",
-                                              @"subtitle":@"女",
-                                              @"image":@"my_informationCell_gender_girl",
+                                              @"subtitle": gender,
+                                              @"image": genderImageName,
                                               @"route":kYZHRouterMyInformationSetGender,
                                               @"cellType" :@"3",
                                               },@{
                                               @"title":@"地区",
                                               @"subtitle":@"中国,上海",
-                                              @"image":@"my_cover_cell_about",
+                                              @"image":@"",
                                               @"route":kYZHRouterMyInformationMyPlace,
                                               @"cellType" :@"2",
                                               }]},
@@ -89,6 +95,38 @@
         _list = [YZHMyInformationContentModel YZH_objectArrayWithKeyValuesArray:list];
     }
     return _list;
+}
+
+- (void)updateModelWithUserData:(NIMUser *)user {
+    
+    NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
+    NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"YOLOName";
+    NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
+    NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
+    //TODO:
+    self.list[1].content[0].image = avatarUrl;
+    self.list[2].content[0].subtitle = nickName;
+    self.list[3].content[0].subtitle = gender;
+    self.list[3].content[0].image    = genderImageName;
+    
+}
+
+- (BOOL )hasPhotoImage {
+    
+    if (YZHIsString(self.userIMData.userInfo.avatarUrl)) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)hasNickName {
+    
+    if (YZHIsString(self.userIMData.userInfo.nickName)) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end
