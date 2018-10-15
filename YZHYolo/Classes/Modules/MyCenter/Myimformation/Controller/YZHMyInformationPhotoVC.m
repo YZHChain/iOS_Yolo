@@ -15,6 +15,7 @@
 #import "NIMGlobalDefs.h"
 #import "NIMResourceManagerProtocol.h"
 #import "UIImage+NIMKit.h"
+#import "UIImageView+YZHImage.h"
 
 static NSArray* buttonArray;
 @interface YZHMyInformationPhotoVC ()<NIMUserManagerDelegate>
@@ -69,6 +70,9 @@ static NSArray* buttonArray;
     [self.callCameraButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
     [self.callPhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
     [self.savePhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
+    
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+    [self.photoImageView yzh_setImageWithString:user.userInfo.avatarUrl placeholder:@"my_myinformationShow_headPhoto_default"];
     
 }
 
@@ -169,7 +173,7 @@ static NSArray* buttonArray;
 }
 
 - (void)saveImageToPhotos:(UIImage*)savedImage {
-    
+    // TODO: 先检查设备是否授权访问相册
     UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
@@ -188,6 +192,5 @@ static NSArray* buttonArray;
 
 
 #pragma mark - 7.GET & SET
-
 
 @end

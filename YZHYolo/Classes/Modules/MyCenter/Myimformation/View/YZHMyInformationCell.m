@@ -29,16 +29,19 @@
     if (viewModel.subtitle.length) {
         self.subTitleLabel.text = viewModel.subtitle;
     }
-    
     if (viewModel.image.length) {
+        NSString* placeholderImageName;
+        if ([viewModel.title isEqualToString:@"头像"]) {
+            placeholderImageName = @"my_informationCell_headPhoto_default";
+        } else {
+            placeholderImageName = nil;
+        }
         BOOL hasDefaultImageView = [viewModel.image hasPrefix:@"my_informationCell"];
-        NSLog(@"%@",viewModel.title);
         if (hasDefaultImageView) {
             self.photoImageView.image = [UIImage imageNamed:viewModel.image];
             return;
         }
-        [self.photoImageView yzh_setImageWithString:viewModel.image
-         ];
+        [self.photoImageView yzh_setImageWithString:viewModel.image placeholder:placeholderImageName];
         CGFloat radius = self.photoImageView.size.height / 2;
         [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
     }

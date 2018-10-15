@@ -112,7 +112,7 @@
 }
 
 - (void)saveImageToPhotos:(UIImage*)savedImage {
-    
+    // TODO: 先检查设备是否授权访问相册
     UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
