@@ -39,6 +39,10 @@ extern NSString *const kYZHRouterLogin;
 extern NSString *const kYZHRouterRegister;
 extern NSString *const kYZHRouterFindPassword;
 extern NSString *const kYZHRouterSettingPassword;
+extern NSString *const kYZHRouterModifyPassword;
+
+#pragma mark -- MyCenter
+
 extern NSString *const kYZHRouterMyInformation;
 extern NSString *const kYZHRouterMyInformationPhoto;
 extern NSString *const kYZHRouterMyInformationSetName;

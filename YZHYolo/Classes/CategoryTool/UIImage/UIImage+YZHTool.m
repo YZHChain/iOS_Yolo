@@ -19,6 +19,10 @@
 
 + (UIImage *)yzh_getImageWithColor:(UIColor *)color withSize:(CGSize)size{
     
+    if (size.width == 0 || size.height == 0) {
+        CGSize defaultSize = CGSizeMake(100, 100);
+        size = defaultSize;
+    }
     CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -46,10 +50,10 @@
     
     return features;
 }
-
-- (void)yzh_loadImageFinished:(UIImage *)image completionTarget:(id)completionTarget
-{
-    UIImageWriteToSavedPhotosAlbum(image, completionTarget, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)completionTarget);
-}
+//TODO
+//- (void)yzh_loadImageFinished:(UIImage *)image completionTarget:(id)completionTarget
+//{
+//    UIImageWriteToSavedPhotosAlbum(image, completionTarget, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)completionTarget);
+//}
 
 @end

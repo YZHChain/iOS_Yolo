@@ -22,14 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHUserLoginManage : NSObject
 
-@property (nonatomic, strong) YZHIMLoginData* currentLoginData;
+@property (nonatomic, strong, nullable) YZHIMLoginData* currentLoginData;
 
 + (instancetype)sharedManager;
 
 - (void)userLoginWithView:(UIView *)view Account:(NSString *)account andPassword:(NSString *)password successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
 - (void)IMServerLoginWithAccount:(NSString *)account token:(NSString *)token successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
-- (void)executeLogincheckout;
 
+- (void)executeLogincheckout;
+- (void)executeHandInputLogin;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,7 @@
 
 @implementation UIImage (YZHImage)
 
-+ (UIImage *)ym_imageWithString:(NSString *)aString
++ (UIImage *)yzh_imageWithString:(NSString *)aString
 {
     if (aString.length == 0) {
         return nil;
@@ -28,12 +28,12 @@
     }
 }
 
-+ (UIImage *)ym_imageWithString:(NSString *)aString size:(CGSize)size
++ (UIImage *)yzh_imageWithString:(NSString *)aString size:(CGSize)size
 {
-    return [[UIImage ym_imageWithString:aString] ym_imageScaledToSize:size];
+    return [[UIImage yzh_imageWithString:aString] yzh_imageScaledToSize:size];
 }
 
-- (UIImage *)ym_imageForTabBarItem
+- (UIImage *)yzh_imageForTabBarItem
 {
     CGFloat normalWidth = 25; //标准宽高
     CGFloat maxWidth = normalWidth * 3; //最大宽高
@@ -44,7 +44,7 @@
     //宽高过大时缩放到最大宽高
     if (width>maxWidth || height>maxWidth) {
         CGFloat scale = maxWidth / (width>height ? width : height);
-        image = [image ym_imageScaledToSize:CGSizeMake(width*scale, height*scale)];
+        image = [image yzh_imageScaledToSize:CGSizeMake(width*scale, height*scale)];
     }
     
     width = image.size.width;
@@ -61,7 +61,7 @@
     return image;
 }
 
-- (UIImage *)ym_imageForTabBarBackground
+- (UIImage *)yzh_imageForTabBarBackground
 {
     CGFloat normalHeight = 49; //标准高
     CGFloat normalWidth = [UIScreen mainScreen].bounds.size.width; //标准宽
@@ -76,23 +76,23 @@
         scaleHeight = normalHeight;
     }
     //生成图片
-    UIImage *image = [self ym_imageScaleAspectFillToSize:CGSizeMake(normalWidth, scaleHeight)];
+    UIImage *image = [self yzh_imageScaleAspectFillToSize:CGSizeMake(normalWidth, scaleHeight)];
     
     return image;
 }
 
-- (UIImage *)ym_imageForNavBarBackground
+- (UIImage *)yzh_imageForNavBarBackground
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     CGFloat height = 64;
-    UIImage *image = [self ym_imageScaleAspectFillToSize:CGSizeMake(width, height)];
+    UIImage *image = [self yzh_imageScaleAspectFillToSize:CGSizeMake(width, height)];
     
     return image;
 }
 
 #pragma mark - Private Method
 
-- (UIImage *)ym_imageScaleAspectFillToSize:(CGSize)size
+- (UIImage *)yzh_imageScaleAspectFillToSize:(CGSize)size
 {
     UIImage *image = self;
     CGFloat ratio = image.size.width / image.size.height;
@@ -114,7 +114,7 @@
     return image;
 }
 
-- (UIImage*)ym_imageScaledToSize:(CGSize)size
+- (UIImage*)yzh_imageScaledToSize:(CGSize)size
 {
     UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
     [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
@@ -123,7 +123,7 @@
     return image;
 }
 
-+ (UIImage *)ym_imageWithColor:(UIColor *)color size:(CGSize)size
++ (UIImage *)yzh_imageWithColor:(UIColor *)color size:(CGSize)size
 {
     UIGraphicsBeginImageContextWithOptions(size, 0, [UIScreen mainScreen].scale);
     [color set];

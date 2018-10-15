@@ -236,7 +236,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 }
 
 - (void)setCurrentLoginData:(YZHIMLoginData *)currentLoginData {
-    
+
     _currentLoginData = currentLoginData;
     [self saveData];
 }

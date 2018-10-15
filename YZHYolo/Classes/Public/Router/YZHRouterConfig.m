@@ -40,6 +40,10 @@ NSString* const kYZHRouterLogin                   = @"/guidePage/login";
 NSString* const kYZHRouterRegister                = @"/guidePage/register";
 NSString* const kYZHRouterFindPassword            = @"/guidePage/findPassword";
 NSString* const kYZHRouterSettingPassword         = @"/guidePage/settingPassword";
+NSString* const kYZHRouterModifyPassword         = @"/guidePage/modifyPassword";
+
+#pragma mark -- Mycenter
+
 NSString* const kYZHRouterMyInformation           = @"/myCenter/myInformation";
 NSString* const kYZHRouterMyInformationPhoto      = @"/myInformation/photo";
 NSString* const kYZHRouterMyInformationSetName    = @"/myInformation/setName";
@@ -96,6 +100,12 @@ NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendR
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"0",
                      },
+             kYZHRouterModifyPassword: @{
+                     kYZHRouteViewControllerClassKey: @"YZHModifyPasswordVC",
+                     kYZHRouteViewControllerNameKey: @"修改密码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                                          },
              kYZHRouterMyInformation: @{
                      kYZHRouteViewControllerClassKey: @"YZHMyInformationVC",
                      kYZHRouteViewControllerNameKey: @"个人信息",

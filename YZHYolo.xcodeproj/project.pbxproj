@@ -18,6 +18,9 @@
 		552B78F021737E9A00C1DD99 /* YZHUserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78EF21737E9A00C1DD99 /* YZHUserUtil.m */; };
 		552B78F32173ABBD00C1DD99 /* YZHAboutYoloModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78F22173ABBD00C1DD99 /* YZHAboutYoloModel.m */; };
 		552B78F62173B35300C1DD99 /* YZHPrivacySettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78F52173B35300C1DD99 /* YZHPrivacySettingModel.m */; };
+		552B78F921742CD000C1DD99 /* YZHSettingCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78F821742CD000C1DD99 /* YZHSettingCenterModel.m */; };
+		552B7902217432C700C1DD99 /* YZHModifyPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B7900217432C700C1DD99 /* YZHModifyPasswordVC.m */; };
+		552B7903217432C700C1DD99 /* YZHModifyPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552B7901217432C700C1DD99 /* YZHModifyPasswordVC.xib */; };
 		552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B9C2C214F41F900BDA0CF /* YZHLoginView.m */; };
 		552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 552CC88F215A698200135FDC /* YZHAboutYoloVC.m */; };
 		552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 552CC890215A698200135FDC /* YZHAboutYoloVC.xib */; };
@@ -219,6 +222,11 @@
 		552B78F22173ABBD00C1DD99 /* YZHAboutYoloModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAboutYoloModel.m; sourceTree = "<group>"; };
 		552B78F42173B35300C1DD99 /* YZHPrivacySettingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivacySettingModel.h; sourceTree = "<group>"; };
 		552B78F52173B35300C1DD99 /* YZHPrivacySettingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivacySettingModel.m; sourceTree = "<group>"; };
+		552B78F721742CD000C1DD99 /* YZHSettingCenterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSettingCenterModel.h; sourceTree = "<group>"; };
+		552B78F821742CD000C1DD99 /* YZHSettingCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSettingCenterModel.m; sourceTree = "<group>"; };
+		552B78FF217432C700C1DD99 /* YZHModifyPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHModifyPasswordVC.h; sourceTree = "<group>"; };
+		552B7900217432C700C1DD99 /* YZHModifyPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHModifyPasswordVC.m; sourceTree = "<group>"; };
+		552B7901217432C700C1DD99 /* YZHModifyPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHModifyPasswordVC.xib; sourceTree = "<group>"; };
 		552B9C2B214F41F900BDA0CF /* YZHLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginView.h; sourceTree = "<group>"; };
 		552B9C2C214F41F900BDA0CF /* YZHLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginView.m; sourceTree = "<group>"; };
 		552CC88E215A698200135FDC /* YZHAboutYoloVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAboutYoloVC.h; sourceTree = "<group>"; };
@@ -1161,6 +1169,8 @@
 		552CC88C215A691300135FDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				552B78F721742CD000C1DD99 /* YZHSettingCenterModel.h */,
+				552B78F821742CD000C1DD99 /* YZHSettingCenterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1448,6 +1458,9 @@
 				55337DFC2151053900307B75 /* YZHSettingPasswordVC.m */,
 				55337DDC214FEFCA00307B75 /* YZHFindPasswordVC.h */,
 				55337DDD214FEFCA00307B75 /* YZHFindPasswordVC.m */,
+				552B78FF217432C700C1DD99 /* YZHModifyPasswordVC.h */,
+				552B7900217432C700C1DD99 /* YZHModifyPasswordVC.m */,
+				552B7901217432C700C1DD99 /* YZHModifyPasswordVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1915,6 +1928,7 @@
 				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
 				55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */,
 				552CC89C215A746D00135FDC /* YZHSettingCenterVC.xib in Resources */,
+				552B7903217432C700C1DD99 /* YZHModifyPasswordVC.xib in Resources */,
 				55D580FC21636AF2000A8B55 /* YZHAddBookPhoneContactVC.xib in Resources */,
 				552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */,
 				55337DBC214F75CA00307B75 /* YZHLoginView.xib in Resources */,
@@ -2011,6 +2025,7 @@
 				55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
 				55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */,
+				552B78F921742CD000C1DD99 /* YZHSettingCenterModel.m in Sources */,
 				5531457B21573BB600A13F96 /* YZHMyInformationMyQRCodeVC.m in Sources */,
 				556F6CFF21476D670048171C /* YZHThemeItemModel.m in Sources */,
 				55D580FB21636AF2000A8B55 /* YZHAddBookPhoneContactVC.m in Sources */,
@@ -2132,6 +2147,7 @@
 				552B78EC21735F8400C1DD99 /* UIImage+YZHImage.m in Sources */,
 				552B9C2D214F41F900BDA0CF /* YZHLoginView.m in Sources */,
 				55ED2F2F216F5225005BFD3E /* YZHUserLoginManage.m in Sources */,
+				552B7902217432C700C1DD99 /* YZHModifyPasswordVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
