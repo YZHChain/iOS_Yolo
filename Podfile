@@ -47,6 +47,7 @@ target 'YZHYolo' do
   #IM
   #pod 'NIMSDK'
   pod 'NIMKit'
+  pod 'Reachability', '~> 3.2'
   #分享
   pod 'ShareSDK3'
   pod 'ShareSDK3/ShareSDKUI'

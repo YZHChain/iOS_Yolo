@@ -190,4 +190,22 @@
     }
 }
 
+- (void)yzh_showOnWindowCallShowBlock:(YZHVoidBlock)callShowBlock
+{
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    UIView *bgView = [[UIView alloc] initWithFrame:window.bounds];
+    UIButton *tapButton = [[UIButton alloc] initWithFrame:bgView.bounds];
+    [tapButton bk_addEventHandler:^(id sender) {
+        [self yzh_hideFromWindowAnimations:nil];
+    } forControlEvents:UIControlEventTouchUpInside];
+    [window addSubview:bgView];
+    [bgView addSubview:tapButton];
+    [bgView addSubview:self];
+    bgView.backgroundColor = [UIColor clearColor];
+    
+    if (callShowBlock) {
+        callShowBlock();
+    }
+}
+
 @end

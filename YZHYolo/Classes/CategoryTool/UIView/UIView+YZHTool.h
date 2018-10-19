@@ -27,5 +27,6 @@
 
 - (void)yzh_showOnWindowAnimations:(void (^)(void))animations;
 - (void)yzh_hideFromWindowAnimations:(void (^)(void))animations;
+- (void)yzh_showOnWindowCallShowBlock:(YZHVoidBlock)callShowBlock;
 
 @end

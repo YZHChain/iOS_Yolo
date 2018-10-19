@@ -48,7 +48,6 @@
     }
 }
 
-
 - (void)tapSearchBarAction {
     //点击方法应该优化
     if ([self.delegate respondsToSelector:@selector(willPresentSearchController:)]) [self.delegate willPresentSearchController:self];

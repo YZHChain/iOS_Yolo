@@ -19,6 +19,8 @@
 #define NSLog(...) {}
 #endif
 
+//#define DDLogError(...) {}     //暂时替换掉NIM DDLogError
+
 #pragma mark -- UI
 
 //屏幕属性宏

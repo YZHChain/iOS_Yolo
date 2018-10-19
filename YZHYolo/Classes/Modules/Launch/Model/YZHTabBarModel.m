@@ -35,7 +35,7 @@
                               @"selectedColor": themeManage.themeitems[0].selectedColor,
                               },
                             @{@"title": @"会话",
-                              @"viewController": @"YZHPrivatelyChatVC",
+                              @"viewController": @"YZHPrivatelyChatListVC",
                               @"hasNavigation": @"1",
                               @"image": themeManage.themeitems[1].image,
                               @"selectedImage": themeManage.themeitems[1].selectedImage,

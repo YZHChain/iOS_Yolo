@@ -116,6 +116,7 @@
                                 @"password" :password
                                 };
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.loginView text:nil];
+#if DEBUG
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
         @strongify(self)
@@ -125,6 +126,16 @@
         //TODO: 失败处理
         [hud hideWithAPIError:error];
     }];
+#endif
+    NSDictionary* obj = @{
+                              @"appKey" : @"2828b3cd20e9263f914344c284588b60",
+                              @"userId" : @"",
+                              @"acctId" : @"7991125052303329630",
+                              @"token" : @"8797d97e9ec56f09b7cfd0095e562390",
+                              @"orderFlag" : @""
+                              };
+    
+    [self serverloginSuccessWithResponData:obj];
 }
 
 - (void)setupRegistEvent {

@@ -17,5 +17,6 @@
 #import "NSObject+YZHApiModel.h"
 #import "YZHUserUtil.h"
 #import "UIImageView+YZHImage.h"
+#import "UIButton+YZHClickHandle.h"
 
 #endif /* YZHPublic_h */
