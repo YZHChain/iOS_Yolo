@@ -15,7 +15,6 @@
 
 @end
 
-
 @interface NTESSessionPeekNavigationViewController ()
 
 @property (nonatomic,strong) NIMRecentSession *recent;

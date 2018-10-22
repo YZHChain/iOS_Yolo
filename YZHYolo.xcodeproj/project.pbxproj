@@ -110,6 +110,7 @@
 		558A21482179850F00E892C3 /* NTESSessionPeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21472179850F00E892C3 /* NTESSessionPeekViewController.m */; };
 		558A214D2179BEEC00E892C3 /* NIMSessionListCell+YZHSessionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A214A2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.m */; };
 		558A214E2179BEEC00E892C3 /* NIMAvatarImageView+YZHAdditional.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A214C2179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.m */; };
+		558A2157217B285100E892C3 /* YZHPrivateChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A2155217B285100E892C3 /* YZHPrivateChatVC.m */; };
 		5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */; };
 		5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */; };
 		5593C51F216D05FD00A50533 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B5DB8C21523573002A04A9 /* Assets.xcassets */; };
@@ -406,6 +407,8 @@
 		558A214A2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMSessionListCell+YZHSessionListCell.m"; sourceTree = "<group>"; };
 		558A214B2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMSessionListCell+YZHSessionListCell.h"; sourceTree = "<group>"; };
 		558A214C2179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMAvatarImageView+YZHAdditional.m"; sourceTree = "<group>"; };
+		558A2155217B285100E892C3 /* YZHPrivateChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatVC.m; sourceTree = "<group>"; };
+		558A2156217B285100E892C3 /* YZHPrivateChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatVC.h; sourceTree = "<group>"; };
 		5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHLocationManager.m; sourceTree = "<group>"; };
 		5591D7A2215A2B9300C2AA93 /* YZHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHLocationManager.h; sourceTree = "<group>"; };
 		5591D7A5215A2BDA00C2AA93 /* YZHPhotoManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPhotoManage.h; sourceTree = "<group>"; };
@@ -838,6 +841,8 @@
 				55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */,
 				558A21462179850F00E892C3 /* NTESSessionPeekViewController.h */,
 				558A21472179850F00E892C3 /* NTESSessionPeekViewController.m */,
+				558A2156217B285100E892C3 /* YZHPrivateChatVC.h */,
+				558A2155217B285100E892C3 /* YZHPrivateChatVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2279,6 +2284,7 @@
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
 				5593C529216D947A00A50533 /* YZHAddFirendSubtitleCell.m in Sources */,
 				559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */,
+				558A2157217B285100E892C3 /* YZHPrivateChatVC.m in Sources */,
 				55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */,
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55337DE5215086E500307B75 /* YYLabel+YMTool.m in Sources */,

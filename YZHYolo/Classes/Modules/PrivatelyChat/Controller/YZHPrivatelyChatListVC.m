@@ -20,6 +20,7 @@
 #import "YZHExtensionFunctionView.h"
 #import "YZHPrivatelyChatListHeaderView.h"
 #import "YZHPrivatelyChatSearchVC.h"
+#import "YZHPrivateChatVC.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -294,10 +295,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 #pragma mark -- TableViewCell Interaction Function
 
-//- (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
+- (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
 //    NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:recent.session];
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
+    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
+    [self.navigationController pushViewController:privateChatVC animated:YES];
+}
 
 //- (void)onSelectedAvatar:(NIMRecentSession *)recent
 //             atIndexPath:(NSIndexPath *)indexPath{
