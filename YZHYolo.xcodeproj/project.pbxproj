@@ -234,8 +234,6 @@
 		558A21422179685200E892C3 /* YZHRecentSessionExtManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21412179685200E892C3 /* YZHRecentSessionExtManage.m */; };
 		558A21452179685D00E892C3 /* YZHPrivatelyChatListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21432179685D00E892C3 /* YZHPrivatelyChatListHeaderView.m */; };
 		558A21482179850F00E892C3 /* NTESSessionPeekViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21472179850F00E892C3 /* NTESSessionPeekViewController.m */; };
-		558A214D2179BEEC00E892C3 /* NIMSessionListCell+YZHSessionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A214A2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.m */; };
-		558A214E2179BEEC00E892C3 /* NIMAvatarImageView+YZHAdditional.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A214C2179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.m */; };
 		558A2157217B285100E892C3 /* YZHPrivateChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A2155217B285100E892C3 /* YZHPrivateChatVC.m */; };
 		5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */; };
 		5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5591D7A6215A2BDA00C2AA93 /* YZHPhotoManage.m */; };
@@ -795,10 +793,6 @@
 		558A21442179685D00E892C3 /* YZHPrivatelyChatListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatListHeaderView.h; sourceTree = "<group>"; };
 		558A21462179850F00E892C3 /* NTESSessionPeekViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSessionPeekViewController.h; sourceTree = "<group>"; };
 		558A21472179850F00E892C3 /* NTESSessionPeekViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSessionPeekViewController.m; sourceTree = "<group>"; };
-		558A21492179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMAvatarImageView+YZHAdditional.h"; sourceTree = "<group>"; };
-		558A214A2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMSessionListCell+YZHSessionListCell.m"; sourceTree = "<group>"; };
-		558A214B2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMSessionListCell+YZHSessionListCell.h"; sourceTree = "<group>"; };
-		558A214C2179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMAvatarImageView+YZHAdditional.m"; sourceTree = "<group>"; };
 		558A2155217B285100E892C3 /* YZHPrivateChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatVC.m; sourceTree = "<group>"; };
 		558A2156217B285100E892C3 /* YZHPrivateChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatVC.h; sourceTree = "<group>"; };
 		5591D7A1215A2B9300C2AA93 /* YZHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHLocationManager.m; sourceTree = "<group>"; };
@@ -1256,10 +1250,6 @@
 				55A286B521747CFC004DACEA /* YZHExtensionFunctionView.h */,
 				55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */,
 				55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */,
-				558A21492179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.h */,
-				558A214C2179BEEB00E892C3 /* NIMAvatarImageView+YZHAdditional.m */,
-				558A214B2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.h */,
-				558A214A2179BEEB00E892C3 /* NIMSessionListCell+YZHSessionListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1997,8 +1987,8 @@
 		55364129217EAEC2006F77A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5536412A217EAEC2006F77A5 /* NIMSessionListCell.m */,
 				5536412B217EAEC2006F77A5 /* NIMSessionListCell.h */,
+				5536412A217EAEC2006F77A5 /* NIMSessionListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3159,7 +3149,6 @@
 				55364229217EAEC3006F77A5 /* NIMCommonTableDelegate.m in Sources */,
 				55B5DB9F2153374A002A04A9 /* YZHMyInformationCell.m in Sources */,
 				5562DE29215683AF0098FA83 /* YZHMyInformationPhotoView.m in Sources */,
-				558A214E2179BEEC00E892C3 /* NIMAvatarImageView+YZHAdditional.m in Sources */,
 				553641E2217EAEC2006F77A5 /* NIMTeamCardOperationItem.m in Sources */,
 				55ED310B2171C6FD005BFD3E /* YZHUserDetailsModel.m in Sources */,
 				55BA210421763A3700F90268 /* NTESNotificationCenter.m in Sources */,
@@ -3250,7 +3239,6 @@
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
 				553641BC217EAEC2006F77A5 /* NIMContactSelectConfig.m in Sources */,
 				55364206217EAEC3006F77A5 /* NIMSessionMsgDatasource.m in Sources */,
-				558A214D2179BEEC00E892C3 /* NIMSessionListCell+YZHSessionListCell.m in Sources */,
 				553641C6217EAEC2006F77A5 /* NIMPinyinConverter.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
 				553641C2217EAEC2006F77A5 /* NIMKitRobotDefaultTemplateParser.m in Sources */,

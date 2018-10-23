@@ -17,28 +17,29 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        [self addSubview:_avatarImageView];
         
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _nameLabel.backgroundColor = [UIColor whiteColor];
-        _nameLabel.font            = [UIFont systemFontOfSize:15.f];
-        [self addSubview:_nameLabel];
+        self.avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        [self addSubview:self.avatarImageView];
         
-        _messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _messageLabel.backgroundColor = [UIColor whiteColor];
-        _messageLabel.font            = [UIFont systemFontOfSize:14.f];
-        _messageLabel.textColor       = [UIColor lightGrayColor];
-        [self addSubview:_messageLabel];
+        self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.nameLabel.backgroundColor = [UIColor whiteColor];
+        self.nameLabel.font            = [UIFont systemFontOfSize:14.f];
+        [self addSubview:self.nameLabel];
         
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _timeLabel.backgroundColor = [UIColor whiteColor];
-        _timeLabel.font            = [UIFont systemFontOfSize:14.f];
-        _timeLabel.textColor       = [UIColor lightGrayColor];
-        [self addSubview:_timeLabel];
+        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.messageLabel.backgroundColor = [UIColor whiteColor];
+        self.messageLabel.font            = [UIFont systemFontOfSize:12.f];
+        self.messageLabel.textColor       = [UIColor lightGrayColor];
+        [self addSubview:self.messageLabel];
         
-        _badgeView = [NIMBadgeView viewWithBadgeTip:@""];
-        [self addSubview:_badgeView];
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.timeLabel.backgroundColor = [UIColor whiteColor];
+        self.timeLabel.font            = [UIFont systemFontOfSize:11.f];
+        self.timeLabel.textColor       = [UIColor grayColor];
+        [self addSubview:self.timeLabel];
+        
+        self.badgeView = [NIMBadgeView viewWithBadgeTip:@""];
+        [self addSubview:self.badgeView];
     }
     return self;
 }
@@ -62,25 +63,25 @@
     [super layoutSubviews];
     //Session List
     NSInteger sessionListAvatarLeft             = 15;
-    NSInteger sessionListNameTop                = 15;
-    NSInteger sessionListNameLeftToAvatar       = 15;
-    NSInteger sessionListMessageLeftToAvatar    = 15;
-    NSInteger sessionListMessageBottom          = 15;
-    NSInteger sessionListTimeRight              = 15;
-    NSInteger sessionListTimeTop                = 15;
-    NSInteger sessionBadgeTimeBottom            = 15;
-    NSInteger sessionBadgeTimeRight             = 15;
+    NSInteger sessionListNameTop                = 12;
+    NSInteger sessionListNameLeftToAvatar       = 7;
+    NSInteger sessionListMessageLeftToAvatar    = 7;
+    NSInteger sessionListMessageBottom          = 12;
+    NSInteger sessionListTimeRight              = 20;
+    NSInteger sessionListTimeTop                = 12;
+    NSInteger sessionBadgeTimeBottom            = 12;
+    NSInteger sessionBadgeTimeRight             = 20;
     
-    _avatarImageView.nim_left    = sessionListAvatarLeft;
-    _avatarImageView.nim_centerY = self.nim_height * .5f;
-    _nameLabel.nim_top           = sessionListNameTop;
-    _nameLabel.nim_left          = _avatarImageView.nim_right + sessionListNameLeftToAvatar;
-    _messageLabel.nim_left       = _avatarImageView.nim_right + sessionListMessageLeftToAvatar;
-    _messageLabel.nim_bottom     = self.nim_height - sessionListMessageBottom;
-    _timeLabel.nim_right         = self.nim_width - sessionListTimeRight;
-    _timeLabel.nim_top           = sessionListTimeTop;
-    _badgeView.nim_right         = self.nim_width - sessionBadgeTimeRight;
-    _badgeView.nim_bottom        = self.nim_height - sessionBadgeTimeBottom;
+    self.avatarImageView.nim_left    = sessionListAvatarLeft;
+    self.avatarImageView.nim_centerY = self.nim_height * .5f;
+    self.nameLabel.nim_top           = sessionListNameTop;
+    self.nameLabel.nim_left          = self.avatarImageView.nim_right + sessionListNameLeftToAvatar;
+    self.messageLabel.nim_left       = self.avatarImageView.nim_right + sessionListMessageLeftToAvatar;
+    self.messageLabel.nim_bottom     = self.nim_height - sessionListMessageBottom;
+    self.timeLabel.nim_right         = self.nim_width - sessionListTimeRight;
+    self.timeLabel.nim_top           = sessionListTimeTop;
+    self.badgeView.nim_right         = self.nim_width - sessionBadgeTimeRight;
+    self.badgeView.nim_bottom        = self.nim_height - sessionBadgeTimeBottom;
 }
 
 

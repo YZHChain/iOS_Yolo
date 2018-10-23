@@ -66,8 +66,8 @@ static id instance;
 #if DEBUG
     
 #endif
-    //添加公共参数，例如缓存时间、设备信息等
-    NSDictionary *finalParams = [self appendingGeneralParams:params path:path];
+    //添加公共参数，例如缓存时间、设备信息等TODO
+//    NSDictionary *finalParams = [self appendingGeneralParams:params path:path];
     
     [YZHNetworkConfig GETNetworkingResource:path params:params successCompletion:^(id responseObject) {
         // 统一处理返回成功逻辑.

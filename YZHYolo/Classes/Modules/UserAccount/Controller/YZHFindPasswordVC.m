@@ -65,13 +65,7 @@
     self.findPasswordView = [YZHFindPasswordView yzh_viewWithFrame:self.view.bounds];
     self.findPasswordView.frame = self.view.bounds;
     self.findPasswordView.accountTextField.text = self.phoneNumberString;
-    [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword) forControlEvents:UIControlEventTouchUpInside];
-//    @weakify(self)
-//    [self.findPasswordView.getSMSCodeButton bk_addEventHandler:^(id sender) {
-//        @strongify(self)
-//        // 获取短信
-//        [self getMessagingVerificationWithSender:sender];
-//    } forControlEvents:UIControlEventTouchUpInside];
+    [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.findPasswordView.getSMSCodeButton addTarget:self action:@selector(getMessagingVerificationWithSender:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.findPasswordView];
     
@@ -94,12 +88,24 @@
 
 #pragma mark - 5.Event Response
 
-- (void)requestRetrievePassword{
+- (void)requestRetrievePassword:(UIButton*) sender{
     
-    
-    // 请求后台 成功则跳转至设置新密码 枚举
-    [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordTypeFind": @(1),
-               @"phoneNum":self.findPasswordView.accountTextField.text}];
+    NSDictionary* parameter = @{
+                                @"phoneNum": self.findPasswordView.accountTextField.text,
+                                @"type":@(1),
+                                @"verifyCode":self.findPasswordView.SMSCodeTextField.text
+                                };
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
+        @strongify(self)
+        // 请求后台 成功则跳转至设置新密码 枚举
+        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordTypeFind": @(1),
+                                                            @"phoneNum":self.findPasswordView.accountTextField.text}];
+    } failureCompletion:^(NSError *error) {
+        //        error.code = -102;
+        [YZHProgressHUD showAPIError:error];
+    }];
+
     
 }
 
@@ -108,19 +114,18 @@
     // 检测手机号,后台请求
     if ([self.findPasswordView.accountTextField.text yzh_isPhone]) {
         NSDictionary* parameter = @{
-                                    @"account": self.findPasswordView.accountTextField.text
+                                    @"phoneNum": self.findPasswordView.accountTextField.text,
+                                    @"type":@(1),
                                     };
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.findPasswordView text:@""];
         // 处理验证码按钮 倒计时
-        [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
-        //        [YZHNetworkService shareService] GETNetworkingResource: params:<#(NSDictionary *)#> successCompletion:<#^(id obj)successCompletion#> failureCompletion:<#^(NSError *error)failureCompletion#>
-//        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
-//            //        @strongify(self)
-//            [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text}];
-//            
-//        } failureCompletion:^(NSError *error) {
-//            //        error.code = -102;
-//            [YZHProgressHUD showAPIError:error];
-//        }];
+        [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameter successCompletion:^(id obj) {
+            [hud hideWithText:@"验证码已发送至手机"];
+            [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+        } failureCompletion:^(NSError *error) {
+            [YZHProgressHUD showAPIError:error];
+        }];
+
     }
     
 }
