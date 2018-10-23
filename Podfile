@@ -7,15 +7,15 @@ target 'YZHYolo' do
 
   #UI
   pod 'MJRefresh'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0.0'
   pod 'DDPageControl'
   pod 'MBProgressHUD', '0.9.2'
-  pod 'SVProgressHUD', '~> 2.1.2'
+  pod 'SVProgressHUD', '~> 2.0.3'
   pod 'WZLBadge'
   pod 'UICountingLabel'
   pod 'YYText'
   pod 'UICollectionViewLeftAlignedLayout'
- #pod 'MWPhotoBrowser'
+  #pod 'MWPhotoBrowser'
   pod 'Masonry'
   pod 'SDCycleScrollView'
 
@@ -32,7 +32,7 @@ target 'YZHYolo' do
   #网络
   pod 'AFNetworking', '3.0'
   pod 'AFNetworking+RetryPolicy'
- #pod 'YTKNetwork'
+  #pod 'YTKNetwork'
 
   #数据
   pod 'MJExtension'
@@ -45,9 +45,12 @@ target 'YZHYolo' do
   pod 'UMengAnalytics-NO-IDFA'
   
   #IM
-  #pod 'NIMSDK'
-  pod 'NIMKit'
+  pod 'NIMSDK'
+  #pod 'NIMKit'  
   pod 'Reachability', '~> 3.2'
+  pod 'Toast', '~> 3.0'
+  pod 'M80AttributedLabel', '~> 1.6.3'
+  pod 'TZImagePickerController', '~> 1.9.0'
   #分享
   pod 'ShareSDK3'
   pod 'ShareSDK3/ShareSDKUI'

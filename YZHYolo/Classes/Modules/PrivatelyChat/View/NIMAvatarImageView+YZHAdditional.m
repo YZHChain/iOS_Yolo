@@ -8,7 +8,7 @@
 
 #import "NIMAvatarImageView+YZHAdditional.h"
 
-#import <NIMKitInfoFetchOption.h>
+#import "NIMKitInfoFetchOption.h"
 #import "UIView+NIM.h"
 
 @implementation NIMAvatarImageView (YZHAdditional)

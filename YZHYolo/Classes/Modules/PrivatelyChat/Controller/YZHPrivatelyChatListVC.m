@@ -9,7 +9,6 @@
 #import "YZHPrivatelyChatListVC.h"
 #import "YZHPublic.h"
 
-#import "NIMKitUIConfig.h"
 #import "NTESSessionUtil.h"
 #import "NIMSessionListCell.h"
 #import "NIMAvatarImageView.h"
