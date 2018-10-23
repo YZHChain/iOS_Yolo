@@ -87,10 +87,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     
     // 设置UI配置器
-//    NIMKitUIConfig* config = [[NIMKitUIConfig alloc] init];
+    NIMKitConfig* config = [[NIMKitConfig alloc] init];
     
-//    config.avatarType = NIMKitAvatarTypeRadiusCorner;
-//    [NIMKit sharedKit].config = config;
+    config.avatarType = NIMKitAvatarTypeRadiusCorner;
+    [NIMKit sharedKit].config = config;
     
 //    // 设置 3D Touch.
 //    if (@available(iOS 9.0, *)) {
@@ -163,20 +163,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             [self.tagsTableView reloadData];
         }
     }
-    // 模拟数据
-    NIMRecentSession *recent = [[NIMRecentSession alloc] init];
-    NIMSession* session = [NIMSession session:@"7991125052303329630" type:NIMSessionTypeP2P];
-    NIMMessage* message = [[NIMMessage alloc] init];
-    [recent setValue:session forKey:@"session"];
-    [recent setValue:message forKey:@"lastMessage"];
-    [recent setValue:@(10) forKey:@"unreadCount"];
-    NSMutableArray* mutableArray = [[NSMutableArray alloc] init];
-    [mutableArray addObject:recent];
 
-    [self setValue:mutableArray forKey:kYZHRecentSessionsKey];
-    [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
-    [self.recentSessionExtManage sortTagRecentSession];
-    
     [self refresh];
 }
 
@@ -210,13 +197,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 #pragma mark -- Private
 - (void)refresh{
     
-    if (!self.recentSessions.count) {
-        self.tableView.hidden = YES;
-    }
     [self.tableView reloadData];
-    if (!self.recentSessionExtManage.tagsRecentSession.firstObject.count) {
-        self.tagsTableView.hidden = YES;
-    }
     [self.tagsTableView reloadData];
 }
 
@@ -295,7 +276,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 #pragma mark -- TableViewCell Interaction Function
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
-//    NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:recent.session];
+    
     YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
     [self.navigationController pushViewController:privateChatVC animated:YES];
 }
@@ -440,27 +421,15 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 }
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
+    //发现标签有更新之后,直接不要读缓存.TODO
+    YZHPrivatelyChatListHeaderView* headerView;
+    NIMRecentSession* session = [self.self.recentSessionExtManage.tagsRecentSession[section] firstObject];
     if (![tableView isEqual:self.tableView]) {
-        YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
+        headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (!headerView)
         {
-            NIMRecentSession* session = [self.self.recentSessionExtManage.tagsRecentSession[section] firstObject];
             headerView = [[YZHPrivatelyChatListHeaderView alloc] init];
-            if (section == 0)
-            {
-                NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
-                BOOL isMarkTop = session.localExt[markTypeTopkey];
-                if (isMarkTop) {
-                    headerView.tagNameLabel.text = @"置顶";
-                }
-            } else {
-                headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
-            }
-            [headerView.tagNameLabel sizeToFit];
-            headerView.unReadCountLabel.text = @"9";
-            [headerView.unReadCountLabel sizeToFit];
-            headerView.guideImageView.image = [UIImage imageNamed:@"chatroom_role_manager"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
             headerView.currentStatusType = YZHTableViewShowTypeDefault;
@@ -470,14 +439,25 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             };
             // 缓存
             [self.headerViewDictionary setObject:headerView forKey:@(section)];
-            return headerView;
+        }
+    }
+    if (section == 0)
+    {
+        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+        BOOL isMarkTop = session.localExt[markTypeTopkey];
+        //防止置顶被取消之后,分区头未清空掉.
+        if (isMarkTop) {
+            headerView.tagNameLabel.text = @"置顶";
         } else {
-            return headerView;
+            headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
         }
     } else {
-        return nil;
+        headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
     }
-    
+    [headerView.tagNameLabel sizeToFit];
+    headerView.unReadCountLabel.text = @"";
+    [headerView.unReadCountLabel sizeToFit];
+    return headerView;
 }
 
 - (void)selectedTableViewForHeaderInSection:(NSInteger)section {
@@ -491,17 +471,18 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     switch (headerView.currentStatusType) {
         case YZHListHeaderStatusTypeDefault:
-            headerView.guideImageView.image = [UIImage imageNamed:@"chatroom_role_manager"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
             break;
         case YZHListHeaderStatusTypeShow:
-            headerView.guideImageView.image = [UIImage imageNamed:@"chatroom_announce"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
             break;
         case YZHListHeaderStatusTypeClose:
-            headerView.guideImageView.image = [UIImage imageNamed:@"chatroom_role_master"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
             break;
         default:
             break;
     }
+    [headerView.guideImageView sizeToFit];
     NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
     [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
 }
@@ -817,7 +798,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     if (!_tagsTableView) {
         _tagsTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-        _tagsTableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.height - 48);
+        _tagsTableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.height);
         _tagsTableView.delegate         = self;
         _tagsTableView.dataSource       = self;
         _tagsTableView.tableFooterView  = [[UIView alloc] init];

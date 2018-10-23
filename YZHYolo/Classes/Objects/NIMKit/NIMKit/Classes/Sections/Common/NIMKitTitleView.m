@@ -18,6 +18,7 @@
     {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.font = [UIFont boldSystemFontOfSize:15.f];
+        _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
 

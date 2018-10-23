@@ -130,8 +130,8 @@
     NSDictionary* obj = @{
                               @"appKey" : @"2828b3cd20e9263f914344c284588b60",
                               @"userId" : @"",
-                              @"acctId" : @"7991125052303329630",
-                              @"token" : @"8797d97e9ec56f09b7cfd0095e562390",
+                              @"acctId" : @"zexi0625",
+                              @"token" : @"b0af18bc4c86fb38f668a4dfd1c26481",
                               @"orderFlag" : @""
                               };
     

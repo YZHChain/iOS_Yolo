@@ -50,7 +50,7 @@
     }
     else
     {
-        _recentSessions = [self customSortRecents:_recentSessions];
+        [self customSortRecents:_recentSessions];
     }
 
     [[NIMSDK sharedSDK].conversationManager addDelegate:self];
@@ -127,7 +127,7 @@
            totalUnreadCount:(NSInteger)totalUnreadCount{
     [self.recentSessions addObject:recentSession];
     [self sort];
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
@@ -144,7 +144,7 @@
     }
     NSInteger insert = [self findInsertPlace:recentSession];
     [self.recentSessions insertObject:recentSession atIndex:insert];
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
@@ -161,33 +161,33 @@
         [[NIMSDK sharedSDK].conversationManager deleteRemoteSessions:@[recentSession.session]
                            completion:nil];
     }
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)messagesDeletedInSession:(NIMSession *)session{
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)allMessagesDeleted{
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)allMessagesRead
 {
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-    _recentSessions = [self customSortRecents:_recentSessions];
+//    _recentSessions = [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
-- (NSMutableArray *)customSortRecents:(NSMutableArray *)recentSessions
-{
-    return self.recentSessions;
-}
+//- (NSMutableArray *)customSortRecents:(NSMutableArray *)recentSessions
+//{
+//    return self.recentSessions;
+//}
 
 #pragma mark - NIMLoginManagerDelegate
 - (void)onLogin:(NIMLoginStep)step

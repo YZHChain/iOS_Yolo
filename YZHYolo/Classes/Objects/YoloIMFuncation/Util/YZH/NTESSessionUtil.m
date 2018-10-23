@@ -391,7 +391,7 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
 {
     NSDictionary *localExt = recent.localExt;
     if (localExt.allKeys.count) {
-        NSLog(@"存在本地扩展字段");
+
     }
     NSString *key = [NTESSessionUtil keyForMarkType:type];
     return [localExt[key] boolValue] == YES;

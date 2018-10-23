@@ -78,7 +78,7 @@
 
 - (void)start
 {
-//    DDLogDebug(@"NIMService %@ Started", self);
+//    //DDLogDebug(@"NIMService %@ Started", self);
     NSLog(@"NIMService %@ Started", self);
 }
 @end

@@ -199,6 +199,12 @@
 		553C53F2216CEEC9007D46A9 /* YZHAddBookAddFirendRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */; };
 		553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5810B2163952C000A8B55 /* YZHPhoneContactCell.xib */; };
 		553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 553EED2121463FA8006CDD08 /* Default-568h@2x.png */; };
+		55560234217EF8A0000F46DF /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560232217EF8A0000F46DF /* NSString+NTES.m */; };
+		5556023A217EF9B0000F46DF /* YZHSessionMsgConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560239217EF9B0000F46DF /* YZHSessionMsgConverter.m */; };
+		5556023D217EFC6A000F46DF /* UIActionSheet+YZHBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556023C217EFC6A000F46DF /* UIActionSheet+YZHBlock.m */; };
+		55560241217EFE11000F46DF /* NTESGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5556023F217EFE11000F46DF /* NTESGalleryViewController.xib */; };
+		55560242217EFE11000F46DF /* NTESGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560240217EFE11000F46DF /* NTESGalleryViewController.m */; };
+		55560245217EFFAE000F46DF /* UIAlertView+NTESBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
@@ -230,6 +236,7 @@
 		556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D132147B97A0048171C /* YZHRouter+Skip.m */; };
 		556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D162147B9F30048171C /* YZHRouterConfig.m */; };
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
+		558027C6217EF6D10009E6ED /* YZHPrivateChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */; };
 		558A213F217965E800E892C3 /* YZHPrivatelyChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A213E217965E800E892C3 /* YZHPrivatelyChatListVC.m */; };
 		558A21422179685200E892C3 /* YZHRecentSessionExtManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21412179685200E892C3 /* YZHRecentSessionExtManage.m */; };
 		558A21452179685D00E892C3 /* YZHPrivatelyChatListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 558A21432179685D00E892C3 /* YZHPrivatelyChatListHeaderView.m */; };
@@ -243,6 +250,12 @@
 		5593C52A216D947A00A50533 /* YZHAddFirendSubtitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */; };
 		5593C52E216DFCE900A50533 /* YZHScanQRCodeMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593C52D216DFCE900A50533 /* YZHScanQRCodeMaskView.m */; };
 		559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B89DC2169AA5700249688 /* YZHIdentification.m */; };
+		559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */; };
+		559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F196B217EED340028B0E5 /* NTESSessionCustomContentConfig.m */; };
+		559F1B1A217EED370028B0E5 /* NTESChatroomRobotContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F196D217EED340028B0E5 /* NTESChatroomRobotContentConfig.m */; };
+		559F1B1B217EED370028B0E5 /* NTESChatroomTextContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1970217EED340028B0E5 /* NTESChatroomTextContentConfig.m */; };
+		559F1B1C217EED370028B0E5 /* NTESDemoFetchChatroomTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1973217EED340028B0E5 /* NTESDemoFetchChatroomTask.m */; };
+		559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1977217EED340028B0E5 /* NTESDemoRegisterTask.m */; };
 		55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */; };
 		55A286B421746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */; };
 		55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */; };
@@ -723,6 +736,17 @@
 		553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendRecordCell.m; sourceTree = "<group>"; };
 		553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZHAddBookAddFirendRecordCell.xib; sourceTree = "<group>"; };
 		553EED2121463FA8006CDD08 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		55560232217EF8A0000F46DF /* NSString+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NTES.m"; sourceTree = "<group>"; };
+		55560233217EF8A0000F46DF /* NSString+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NTES.h"; sourceTree = "<group>"; };
+		55560238217EF9B0000F46DF /* YZHSessionMsgConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSessionMsgConverter.h; sourceTree = "<group>"; };
+		55560239217EF9B0000F46DF /* YZHSessionMsgConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSessionMsgConverter.m; sourceTree = "<group>"; };
+		5556023B217EFC6A000F46DF /* UIActionSheet+YZHBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+YZHBlock.h"; sourceTree = "<group>"; };
+		5556023C217EFC6A000F46DF /* UIActionSheet+YZHBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+YZHBlock.m"; sourceTree = "<group>"; };
+		5556023E217EFE11000F46DF /* NTESGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGalleryViewController.h; sourceTree = "<group>"; };
+		5556023F217EFE11000F46DF /* NTESGalleryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESGalleryViewController.xib; sourceTree = "<group>"; };
+		55560240217EFE11000F46DF /* NTESGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESGalleryViewController.m; sourceTree = "<group>"; };
+		55560243217EFFAD000F46DF /* UIAlertView+NTESBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+NTESBlock.h"; sourceTree = "<group>"; };
+		55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+NTESBlock.m"; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
@@ -785,6 +809,8 @@
 		556F6D162147B9F30048171C /* YZHRouterConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouterConfig.m; sourceTree = "<group>"; };
 		557603AD215CE575007CEC60 /* YZHLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginModel.h; sourceTree = "<group>"; };
 		557603AE215CE575007CEC60 /* YZHLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginModel.m; sourceTree = "<group>"; };
+		558027C4217EF6D10009E6ED /* YZHPrivateChatConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatConfig.h; sourceTree = "<group>"; };
+		558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatConfig.m; sourceTree = "<group>"; };
 		558A213D217965E800E892C3 /* YZHPrivatelyChatListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatListVC.h; sourceTree = "<group>"; };
 		558A213E217965E800E892C3 /* YZHPrivatelyChatListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatListVC.m; sourceTree = "<group>"; };
 		558A21402179685200E892C3 /* YZHRecentSessionExtManage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZHRecentSessionExtManage.h; sourceTree = "<group>"; };
@@ -806,6 +832,20 @@
 		5593C52D216DFCE900A50533 /* YZHScanQRCodeMaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHScanQRCodeMaskView.m; sourceTree = "<group>"; };
 		559B89DB2169AA5700249688 /* YZHIdentification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHIdentification.h; sourceTree = "<group>"; };
 		559B89DC2169AA5700249688 /* YZHIdentification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHIdentification.m; sourceTree = "<group>"; };
+		559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESCellLayoutConfig.m; sourceTree = "<group>"; };
+		559F196A217EED340028B0E5 /* NTESChatroomRobotContentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESChatroomRobotContentConfig.h; sourceTree = "<group>"; };
+		559F196B217EED340028B0E5 /* NTESSessionCustomContentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSessionCustomContentConfig.m; sourceTree = "<group>"; };
+		559F196C217EED340028B0E5 /* NTESChatroomTextContentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESChatroomTextContentConfig.h; sourceTree = "<group>"; };
+		559F196D217EED340028B0E5 /* NTESChatroomRobotContentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESChatroomRobotContentConfig.m; sourceTree = "<group>"; };
+		559F196E217EED340028B0E5 /* NTESCellLayoutConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESCellLayoutConfig.h; sourceTree = "<group>"; };
+		559F196F217EED340028B0E5 /* NTESSessionCustomContentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSessionCustomContentConfig.h; sourceTree = "<group>"; };
+		559F1970217EED340028B0E5 /* NTESChatroomTextContentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESChatroomTextContentConfig.m; sourceTree = "<group>"; };
+		559F1973217EED340028B0E5 /* NTESDemoFetchChatroomTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESDemoFetchChatroomTask.m; sourceTree = "<group>"; };
+		559F1974217EED340028B0E5 /* NTESDemoRegisterTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDemoRegisterTask.h; sourceTree = "<group>"; };
+		559F1976217EED340028B0E5 /* NTESDemoFetchChatroomTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDemoFetchChatroomTask.h; sourceTree = "<group>"; };
+		559F1977217EED340028B0E5 /* NTESDemoRegisterTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESDemoRegisterTask.m; sourceTree = "<group>"; };
+		559F1978217EED340028B0E5 /* NTESDemoServiceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDemoServiceTask.h; sourceTree = "<group>"; };
+		559F1BD0217EEE180028B0E5 /* NTESGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGlobalMacro.h; sourceTree = "<group>"; };
 		55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatSearchVC.h; sourceTree = "<group>"; };
 		55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatSearchVC.m; sourceTree = "<group>"; };
 		55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHPrivatelyChatSearchVC.xib; sourceTree = "<group>"; };
@@ -1212,6 +1252,7 @@
 		55128A1221463E480099CC55 /* PrivatelyChat */ = {
 			isa = PBXGroup;
 			children = (
+				558027C3217EF6BA0009E6ED /* Config */,
 				55128A1321463E480099CC55 /* Controller */,
 				55128A1421463E480099CC55 /* Model */,
 				55128A1521463E480099CC55 /* View */,
@@ -1222,6 +1263,9 @@
 		55128A1321463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5556023E217EFE11000F46DF /* NTESGalleryViewController.h */,
+				55560240217EFE11000F46DF /* NTESGalleryViewController.m */,
+				5556023F217EFE11000F46DF /* NTESGalleryViewController.xib */,
 				558A213D217965E800E892C3 /* YZHPrivatelyChatListVC.h */,
 				558A213E217965E800E892C3 /* YZHPrivatelyChatListVC.m */,
 				55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */,
@@ -1875,20 +1919,20 @@
 				553640DF217EAEC2006F77A5 /* NIMKitKeyboard.h */,
 				553640E0217EAEC2006F77A5 /* NIMMemberGroupView.m */,
 				553640E1217EAEC2006F77A5 /* NIMKitMediaFetcher.m */,
-				553640E2217EAEC2006F77A5 /* NIMAvatarImageView.m */,
 				553640E3217EAEC2006F77A5 /* NIMKitKeyboardInfo.h */,
 				553640E4217EAEC2006F77A5 /* NIMCustomLeftBarView.h */,
 				553640E5217EAEC2006F77A5 /* NIMLoadProgressView.h */,
 				553640E6217EAEC2006F77A5 /* NIMKitNotificationFirer.h */,
-				553640E7217EAEC2006F77A5 /* NIMKitTitleView.m */,
 				553640E8217EAEC2006F77A5 /* NIMBadgeView.h */,
 				553640E9217EAEC2006F77A5 /* NIMPageView.m */,
 				553640EA217EAEC2006F77A5 /* NIMAvatarImageView.h */,
+				553640E2217EAEC2006F77A5 /* NIMAvatarImageView.m */,
 				553640EB217EAEC2006F77A5 /* NIMKitMediaFetcher.h */,
 				553640EC217EAEC2006F77A5 /* NIMMemberGroupView.h */,
 				553640ED217EAEC2006F77A5 /* NIMCustomLeftBarView.m */,
 				553640EE217EAEC2006F77A5 /* NIMKitKeyboardInfo.m */,
 				553640EF217EAEC2006F77A5 /* NIMKitTitleView.h */,
+				553640E7217EAEC2006F77A5 /* NIMKitTitleView.m */,
 				553640F0217EAEC2006F77A5 /* NIMKitNotificationFirer.m */,
 				553640F1217EAEC2006F77A5 /* NIMLoadProgressView.m */,
 			);
@@ -1977,9 +2021,9 @@
 		55364127217EAEC2006F77A5 /* SessionList */ = {
 			isa = PBXGroup;
 			children = (
+				5536412C217EAEC2006F77A5 /* NIMSessionListViewController.h */,
 				55364128217EAEC2006F77A5 /* NIMSessionListViewController.m */,
 				55364129217EAEC2006F77A5 /* View */,
-				5536412C217EAEC2006F77A5 /* NIMSessionListViewController.h */,
 			);
 			path = SessionList;
 			sourceTree = "<group>";
@@ -2085,13 +2129,13 @@
 		55364162217EAEC2006F77A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				55364163217EAEC2006F77A5 /* NIMSessionTimestampCell.m */,
-				55364164217EAEC2006F77A5 /* NIMLoadMoreView.m */,
 				55364165217EAEC2006F77A5 /* SessionContentView */,
 				5536417C217EAEC2006F77A5 /* NIMMessageCell.h */,
-				5536417D217EAEC2006F77A5 /* NIMLoadMoreView.h */,
-				5536417E217EAEC2006F77A5 /* NIMSessionTimestampCell.h */,
 				5536417F217EAEC2006F77A5 /* NIMMessageCell.m */,
+				5536417E217EAEC2006F77A5 /* NIMSessionTimestampCell.h */,
+				55364163217EAEC2006F77A5 /* NIMSessionTimestampCell.m */,
+				5536417D217EAEC2006F77A5 /* NIMLoadMoreView.h */,
+				55364164217EAEC2006F77A5 /* NIMLoadMoreView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2129,8 +2173,8 @@
 			isa = PBXGroup;
 			children = (
 				55364181217EAEC2006F77A5 /* NIMLocationViewController.h */,
-				55364182217EAEC2006F77A5 /* NIMSessionViewController.h */,
 				55364183217EAEC2006F77A5 /* NIMLocationViewController.m */,
+				55364182217EAEC2006F77A5 /* NIMSessionViewController.h */,
 				55364184217EAEC2006F77A5 /* NIMSessionViewController.m */,
 			);
 			path = ViewController;
@@ -2144,15 +2188,17 @@
 				55364188217EAEC2006F77A5 /* UIImage+NIMKit.m */,
 				55364189217EAEC2006F77A5 /* NIMExtensionHelper.h */,
 				5536418A217EAEC2006F77A5 /* UIView+NIM.h */,
+				55364191217EAEC2006F77A5 /* UIView+NIM.m */,
 				5536418B217EAEC2006F77A5 /* M80AttributedLabel+NIMKit.h */,
 				5536418C217EAEC2006F77A5 /* NSString+NIMKit.m */,
 				5536418D217EAEC2006F77A5 /* NSDictionary+NIMKit.h */,
 				5536418E217EAEC2006F77A5 /* UIImage+NIMKit.h */,
 				5536418F217EAEC2006F77A5 /* UITableView+NIMScrollToBottom.m */,
 				55364190217EAEC2006F77A5 /* NIMExtensionHelper.m */,
-				55364191217EAEC2006F77A5 /* UIView+NIM.m */,
 				55364192217EAEC2006F77A5 /* M80AttributedLabel+NIMKit.m */,
 				55364193217EAEC2006F77A5 /* NSString+NIMKit.h */,
+				55560243217EFFAD000F46DF /* UIAlertView+NTESBlock.h */,
+				55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2254,6 +2300,50 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		55560231217EF898000F46DF /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				55560233217EF8A0000F46DF /* NSString+NTES.h */,
+				55560232217EF8A0000F46DF /* NSString+NTES.m */,
+				5556023B217EFC6A000F46DF /* UIActionSheet+YZHBlock.h */,
+				5556023C217EFC6A000F46DF /* UIActionSheet+YZHBlock.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		55560235217EF95F000F46DF /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				55560236217EF96C000F46DF /* Object */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		55560236217EF96C000F46DF /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				55560246217F0133000F46DF /* Atttach */,
+				55560237217EF981000F46DF /* Misc */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		55560237217EF981000F46DF /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				55560238217EF9B0000F46DF /* YZHSessionMsgConverter.h */,
+				55560239217EF9B0000F46DF /* YZHSessionMsgConverter.m */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		55560246217F0133000F46DF /* Atttach */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Atttach;
+			sourceTree = "<group>";
+		};
 		555DA490216C35160057D434 /* JKRSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -2332,6 +2422,22 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		558027C2217EF5EF0009E6ED /* LayoutConfig */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LayoutConfig;
+			sourceTree = "<group>";
+		};
+		558027C3217EF6BA0009E6ED /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				558027C4217EF6D10009E6ED /* YZHPrivateChatConfig.h */,
+				558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		5591D7A0215A2B9300C2AA93 /* YZHLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2392,6 +2498,40 @@
 			path = ScanQRCode;
 			sourceTree = "<group>";
 		};
+		559F1968217EED340028B0E5 /* LayoutConfig */ = {
+			isa = PBXGroup;
+			children = (
+				559F196E217EED340028B0E5 /* NTESCellLayoutConfig.h */,
+				559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */,
+				559F196A217EED340028B0E5 /* NTESChatroomRobotContentConfig.h */,
+				559F196D217EED340028B0E5 /* NTESChatroomRobotContentConfig.m */,
+				559F196B217EED340028B0E5 /* NTESSessionCustomContentConfig.m */,
+				559F196C217EED340028B0E5 /* NTESChatroomTextContentConfig.h */,
+				559F196F217EED340028B0E5 /* NTESSessionCustomContentConfig.h */,
+				559F1970217EED340028B0E5 /* NTESChatroomTextContentConfig.m */,
+			);
+			path = LayoutConfig;
+			sourceTree = "<group>";
+		};
+		559F1971217EED340028B0E5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				559F1976217EED340028B0E5 /* NTESDemoFetchChatroomTask.h */,
+				559F1973217EED340028B0E5 /* NTESDemoFetchChatroomTask.m */,
+				559F1974217EED340028B0E5 /* NTESDemoRegisterTask.h */,
+				559F1977217EED340028B0E5 /* NTESDemoRegisterTask.m */,
+				559F1978217EED340028B0E5 /* NTESDemoServiceTask.h */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		559F1BCF217EED910028B0E5 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		55B5DB9821530EA8002A04A9 /* YZHRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -2404,6 +2544,12 @@
 		55BA210E21763EED00F90268 /* NIM */ = {
 			isa = PBXGroup;
 			children = (
+				55560235217EF95F000F46DF /* Session */,
+				55560231217EF898000F46DF /* Category */,
+				559F1BD0217EEE180028B0E5 /* NTESGlobalMacro.h */,
+				559F1BCF217EED910028B0E5 /* Util */,
+				559F1968217EED340028B0E5 /* LayoutConfig */,
+				559F1971217EED340028B0E5 /* Service */,
 				55BA20EE21763A3400F90268 /* NTESBundleSetting.h */,
 				55BA20ED21763A3400F90268 /* NTESBundleSetting.m */,
 				55BA20FB21763A3600F90268 /* NTESCADisplayLinkHolder.h */,
@@ -2433,6 +2579,7 @@
 		55BA210F21763F2C00F90268 /* YZH */ = {
 			isa = PBXGroup;
 			children = (
+				558027C2217EF5EF0009E6ED /* LayoutConfig */,
 				552B78EE21737E9A00C1DD99 /* YZHUserUtil.h */,
 				552B78EF21737E9A00C1DD99 /* YZHUserUtil.m */,
 				55BA20FF21763A3600F90268 /* NTESSessionUtil.h */,
@@ -2926,6 +3073,7 @@
 				5531457721572FAD00A13F96 /* YZHMyInformationSetGenderVC.xib in Resources */,
 				552CC897215A6F3900135FDC /* YZHAboutYoloCell.xib in Resources */,
 				55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */,
+				55560241217EFE11000F46DF /* NTESGalleryViewController.xib in Resources */,
 				55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */,
 				55C656A4215E5907005E997B /* YZHAddBookSettingCell.xib in Resources */,
 				5593C521216D0AA700A50533 /* YZHAddBookAddFirendRecordCell.xib in Resources */,
@@ -3063,6 +3211,7 @@
 				55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */,
 				5531458021573C1400A13F96 /* YZHMyInformationYoloIDVC.m in Sources */,
 				5536421C217EAEC3006F77A5 /* NIMMessageCell.m in Sources */,
+				5556023D217EFC6A000F46DF /* UIActionSheet+YZHBlock.m in Sources */,
 				555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */,
 				552CC89B215A746D00135FDC /* YZHSettingCenterVC.m in Sources */,
 				5536421D217EAEC3006F77A5 /* NIMLocationViewController.m in Sources */,
@@ -3126,6 +3275,7 @@
 				553641E1217EAEC2006F77A5 /* NIMTeamMemberListViewController.m in Sources */,
 				55BA210821763A3700F90268 /* NTESDemoConfig.m in Sources */,
 				5536421E217EAEC3006F77A5 /* NIMSessionViewController.m in Sources */,
+				55560242217EFE11000F46DF /* NTESGalleryViewController.m in Sources */,
 				5536420C217EAEC3006F77A5 /* NIMMessageMaker.m in Sources */,
 				55337DCD214F8EE600307B75 /* YZHFindPasswordView.m in Sources */,
 				5536422B217EAEC3006F77A5 /* NIMKitSwitcherCell.m in Sources */,
@@ -3155,6 +3305,7 @@
 				55364226217EAEC3006F77A5 /* NIMKitProgressHUD.m in Sources */,
 				553641E3217EAEC2006F77A5 /* NIMTeamCardRowItem.m in Sources */,
 				55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */,
+				559F1B1A217EED370028B0E5 /* NTESChatroomRobotContentConfig.m in Sources */,
 				55C6569E215E587A005E997B /* YZHAddBookUserIDCell.m in Sources */,
 				55364220217EAEC3006F77A5 /* UIImage+NIMKit.m in Sources */,
 				55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */,
@@ -3169,6 +3320,7 @@
 				55BA210D21763A3700F90268 /* NTESService.m in Sources */,
 				55337DEE215088E300307B75 /* UIFont+YZHFontStyle.m in Sources */,
 				55364218217EAEC3006F77A5 /* NIMSessionTextContentView.m in Sources */,
+				55560234217EF8A0000F46DF /* NSString+NTES.m in Sources */,
 				55B5DB9B21530EDA002A04A9 /* UIScrollView+YZHRefresh.m in Sources */,
 				553641D4217EAEC2006F77A5 /* NIMBadgeView.m in Sources */,
 				553641CB217EAEC2006F77A5 /* NIMInputView.m in Sources */,
@@ -3178,6 +3330,7 @@
 				553641FF217EAEC3006F77A5 /* NIMUnsupportContentConfig.m in Sources */,
 				553641CF217EAEC2006F77A5 /* NIMInputToolBar.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
+				559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */,
 				553641DA217EAEC2006F77A5 /* NIMCustomLeftBarView.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
 				553641EA217EAEC3006F77A5 /* NIMAdvancedTeamMemberCell.m in Sources */,
@@ -3201,6 +3354,7 @@
 				553641E8217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.m in Sources */,
 				552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */,
 				553641D8217EAEC2006F77A5 /* NIMKitTitleView.m in Sources */,
+				55560245217EFFAE000F46DF /* UIAlertView+NTESBlock.m in Sources */,
 				55BA210121763A3700F90268 /* NTESTimerHolder.m in Sources */,
 				551289E021461EE30099CC55 /* main.m in Sources */,
 				555DA4B2216C35160057D434 /* UIViewController+JKRStatusBarStyle.m in Sources */,
@@ -3219,6 +3373,7 @@
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
 				555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */,
 				55364212217EAEC3006F77A5 /* NIMSessionVideoContentView.m in Sources */,
+				559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */,
 				5536420B217EAEC3006F77A5 /* NIMKitLocationPoint.m in Sources */,
 				552B78F32173ABBD00C1DD99 /* YZHAboutYoloModel.m in Sources */,
 				553145712157298200A13F96 /* YZHMyInformationSetNameVC.m in Sources */,
@@ -3229,6 +3384,7 @@
 				55BA210B21763A3700F90268 /* NTESUserUtil.m in Sources */,
 				553641F6217EAEC3006F77A5 /* NIMSessionListViewController.m in Sources */,
 				552B78E921735F7700C1DD99 /* UIImageView+YZHImage.m in Sources */,
+				559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */,
 				55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */,
 				55BD8664215E084600D23ED1 /* YZHAddBookSectionView.m in Sources */,
 				55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */,
@@ -3282,6 +3438,7 @@
 				553641E0217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m in Sources */,
 				558A21482179850F00E892C3 /* NTESSessionPeekViewController.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
+				559F1B1B217EED370028B0E5 /* NTESChatroomTextContentConfig.m in Sources */,
 				553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */,
 				55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */,
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
@@ -3297,10 +3454,12 @@
 				553641CA217EAEC2006F77A5 /* NIMInputMoreContainerView.m in Sources */,
 				553641FC217EAEC3006F77A5 /* NIMAudioContentConfig.m in Sources */,
 				55BA210521763A3700F90268 /* NTESFileLocationHelper.m in Sources */,
+				559F1B1C217EED370028B0E5 /* NTESDemoFetchChatroomTask.m in Sources */,
 				553641FD217EAEC3006F77A5 /* NIMNotificationContentConfig.m in Sources */,
 				553C53E7216CB590007D46A9 /* YZHCommanDefaultView.m in Sources */,
 				553641CE217EAEC2006F77A5 /* NIMInputAtCache.m in Sources */,
 				553641DE217EAEC2006F77A5 /* NIMTeamMemberCardViewController.m in Sources */,
+				5556023A217EF9B0000F46DF /* YZHSessionMsgConverter.m in Sources */,
 				553641F1217EAEC3006F77A5 /* NIMKitInfoFetchOption.m in Sources */,
 				553641BB217EAEC2006F77A5 /* NIMContactSelectTabView.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
@@ -3309,6 +3468,7 @@
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
 				55364215217EAEC3006F77A5 /* NIMSessionNetChatNotifyContentView.m in Sources */,
 				553641C0217EAEC2006F77A5 /* NIMKitTimerHolder.m in Sources */,
+				558027C6217EF6D10009E6ED /* YZHPrivateChatConfig.m in Sources */,
 				55364201217EAEC3006F77A5 /* NIMImageContentConfig.m in Sources */,
 				55364203217EAEC3006F77A5 /* NIMCellLayoutConfig.m in Sources */,
 				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,

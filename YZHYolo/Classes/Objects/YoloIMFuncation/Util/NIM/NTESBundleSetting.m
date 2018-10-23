@@ -7,7 +7,7 @@
 //
 
 #import "NTESBundleSetting.h"
-/*
+
 @implementation NTESBundleSetting
 
 + (instancetype)sharedConfig
@@ -339,7 +339,7 @@
         return YES;
     }
 }
-
+/*
 - (NSString *)description
 {
     return [NSString stringWithFormat:
@@ -401,5 +401,6 @@
                 [self enableSyncWhenFetchRemoteMessages]
             ];
 }
+ */
 @end
-*/
+

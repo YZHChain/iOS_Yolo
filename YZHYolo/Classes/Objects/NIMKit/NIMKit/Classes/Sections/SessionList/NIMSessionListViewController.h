@@ -90,6 +90,7 @@
 /**
  *  自定义最近会话排序，上层可以重写这个方法对最近会话重新排序
  */
-- (NSMutableArray *)customSortRecents:(NSMutableArray *)recentSessions;
+//- (NSMutableArray *)customSortRecents:(NSMutableArray *)recentSessions;
+- (void)customSortRecents:(NSMutableArray *)recentSessions;
 
 @end

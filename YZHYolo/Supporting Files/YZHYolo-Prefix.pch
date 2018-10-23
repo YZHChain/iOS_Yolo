@@ -10,6 +10,7 @@
 #define YZHYolo_Prefix_pch
 
 #import "YZHMacro.h"
+#import "NTESGlobalMacro.h"
 #import "YZHIdentification.h"
 
 #pragma mark -- Third-party

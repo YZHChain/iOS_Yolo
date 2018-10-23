@@ -66,7 +66,7 @@ static char imageURLKey;
             _cornerRadius = self.nim_width *.5f;
             break;
         case NIMKitAvatarTypeRadiusCorner:
-            _cornerRadius = 6.f;
+            _cornerRadius = 3.f;
             break;
         default:
             break;
@@ -100,16 +100,11 @@ static char imageURLKey;
     return newImage;
 }
 
-
 - (CGPathRef)path
 {
     return [[UIBezierPath bezierPathWithRoundedRect:self.bounds
                                        cornerRadius:self.cornerRadius] CGPath];
 }
-
-
-
-
 
 - (void)setAvatarBySession:(NIMSession *)session
 {
@@ -257,12 +252,9 @@ static char imageURLKey;
     [self setNeedsLayout];
 }
 
-
-
 - (NSURL *)nim_imageURL {
     return objc_getAssociatedObject(self, &imageURLKey);
 }
-
 
 - (void)nim_cancelCurrentImageLoad {
     [self sd_cancelImageLoadOperationWithKey:@"UIImageViewImageLoad"];
