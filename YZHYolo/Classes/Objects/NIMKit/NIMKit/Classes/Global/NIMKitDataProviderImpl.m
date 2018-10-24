@@ -354,7 +354,7 @@
 {
     if (!_defaultTeamAvatar)
     {
-        _defaultTeamAvatar = [UIImage nim_imageInKit:@"avatar_team"];
+        _defaultTeamAvatar = [UIImage nim_imageInKit:@"addBook_cover_cell_photo_default"];
     }
     return _defaultTeamAvatar;
 }
@@ -363,13 +363,10 @@
 {
     if (!_defaultUserAvatar)
     {
-        _defaultUserAvatar = [UIImage nim_imageInKit:@"avatar_user"];
+        _defaultUserAvatar = [UIImage nim_imageInKit:@"addBook_cover_cell_photo_default"];
     }
     return _defaultUserAvatar;
 }
-
-
-
 
 //将个人信息和群组信息变化通知给 NIMKit 。
 //如果您的应用不托管个人信息给云信，则需要您自行在上层监听个人信息变动，并将变动通知给 NIMKit。

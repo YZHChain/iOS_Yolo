@@ -14,13 +14,10 @@
 
 NSInteger NIMMaxItemCountInPage = 8;
 NSInteger NIMButtonItemWidth = 75;
-NSInteger NIMButtonItemHeight = 85;
+NSInteger NIMButtonItemHeight = 68;
 NSInteger NIMPageRowCount     = 2;
 NSInteger NIMPageColumnCount  = 4;
 NSInteger NIMButtonBegintLeftX = 11;
-
-
-
 
 @interface NIMInputMoreContainerView() <NIMPageViewDataSource,NIMPageViewDelegate>
 {
@@ -55,7 +52,8 @@ NSInteger NIMButtonBegintLeftX = 11;
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-    return CGSizeMake(size.width, 216.f);
+    //TODO: 这个大小可以根据按钮个数计算调整.
+    return CGSizeMake(size.width, 107.0f);
 }
 
 
@@ -80,9 +78,10 @@ NSInteger NIMButtonBegintLeftX = 11;
         [btn setImage:item.normalImage forState:UIControlStateNormal];
         [btn setImage:item.selectedImage forState:UIControlStateHighlighted];
         [btn setTitle:item.title forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitleEdgeInsets:UIEdgeInsetsMake(76, -75, 0, 0)];
-        [btn.titleLabel setFont:[UIFont systemFontOfSize:14.0]];
+        //TODO:颜色应该也要提出来,以及字号等
+        [btn setTitleColor:YZHColorWithRGB(89, 87, 87) forState:UIControlStateNormal];
+        [btn setTitleEdgeInsets:UIEdgeInsetsMake(76, -66, 0, 0)];
+        [btn.titleLabel setFont:[UIFont systemFontOfSize:11.0]];
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [mediaButtons addObject:btn];
 
@@ -158,7 +157,7 @@ NSInteger NIMButtonBegintLeftX = 11;
     {
         UIButton *button = [_mediaButtons objectAtIndex:btnIndex];
         [button addTarget:self action:@selector(onTouchButton:) forControlEvents:UIControlEventTouchUpInside];
-        CGRect iconRect = CGRectMake(span + (NIMButtonItemWidth + span) * btnIndex, 58, NIMButtonItemWidth, NIMButtonItemHeight);
+        CGRect iconRect = CGRectMake(span + (NIMButtonItemWidth + span) * btnIndex, 21, NIMButtonItemWidth, NIMButtonItemHeight);
         [button setFrame:iconRect];
         [subView addSubview:button];
     }

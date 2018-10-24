@@ -315,26 +315,28 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
 //    }
 //    return YES;
 //}
-
-//+ (BOOL)canMessageBeRevoked:(NIMMessage *)message
-//{
-//    BOOL canRevokeMessageByRole  = [self canRevokeMessageByRole:message];
-//    BOOL isDeliverFailed = !message.isReceivedMsg && message.deliveryState == NIMMessageDeliveryStateFailed;
-//    if (!canRevokeMessageByRole || isDeliverFailed) {
-//        return NO;
-//    }
-//    id<NIMMessageObject> messageObject = message.messageObject;
-//    if ([messageObject isKindOfClass:[NIMTipObject class]]
-//        || [messageObject isKindOfClass:[NIMNotificationObject class]]) {
-//        return NO;
-//    }
-//    if ([messageObject isKindOfClass:[NIMCustomObject class]])
-//    {
+//Jersey:检测消息是否支持撤回
++ (BOOL)canMessageBeRevoked:(NIMMessage *)message
+{
+    BOOL canRevokeMessageByRole  = [self canRevokeMessageByRole:message];
+    BOOL isDeliverFailed = !message.isReceivedMsg && message.deliveryState == NIMMessageDeliveryStateFailed;
+    if (!canRevokeMessageByRole || isDeliverFailed) {
+        return NO;
+    }
+    id<NIMMessageObject> messageObject = message.messageObject;
+    if ([messageObject isKindOfClass:[NIMTipObject class]]
+        || [messageObject isKindOfClass:[NIMNotificationObject class]]) {
+        return NO;
+    }
+    if ([messageObject isKindOfClass:[NIMCustomObject class]])
+    {
+        //
 //        id<NTESCustomAttachmentInfo> attach = (id<NTESCustomAttachmentInfo>)[(NIMCustomObject *)message.messageObject attachment];
 //        return [attach canBeRevoked];
-//    }
-//    return YES;
-//}
+        return NO;
+    }
+    return YES;
+}
 
 
 + (BOOL)canRevokeMessageByRole:(NIMMessage *)message

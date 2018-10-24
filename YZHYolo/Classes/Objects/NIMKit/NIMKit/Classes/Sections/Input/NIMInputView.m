@@ -89,7 +89,7 @@
             //如果键盘还没有安全区域高，容器的初始值为0；否则则为键盘和安全区域的高度差值，这样可以保证 toolBar 始终在键盘上面
             containerHeight = keyboardDelta>0 ? keyboardDelta : 0;
         }
-           break;
+            break;
     }
     CGFloat height = toolBarHeight + containerHeight;
     CGFloat width = self.superview? self.superview.nim_width : self.nim_width;
@@ -113,7 +113,7 @@
     [self refreshStatus:NIMInputStatusText];
     [self sizeToFit];
 }
-
+// 编辑时刷新,实时更新输入框大小
 - (void)refreshStatus:(NIMInputStatus)status
 {
     self.status = status;
@@ -420,7 +420,7 @@
         [self.emoticonContainer setHidden:YES];
         [self refreshStatus:NIMInputStatusMore];
         [self sizeToFit];
-
+        
         if (self.toolBar.showsKeyboard)
         {
             self.toolBar.showsKeyboard = NO;
@@ -548,13 +548,10 @@
     }
 }
 
-
 - (void)toolBarDidChangeHeight:(CGFloat)height
 {
     [self sizeToFit];
 }
-
-
 
 #pragma mark - NIMContactSelectDelegate
 - (void)didFinishedSelect:(NSArray *)selectedContacts

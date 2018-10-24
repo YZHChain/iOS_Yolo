@@ -205,6 +205,7 @@
 		55560241217EFE11000F46DF /* NTESGalleryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5556023F217EFE11000F46DF /* NTESGalleryViewController.xib */; };
 		55560242217EFE11000F46DF /* NTESGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560240217EFE11000F46DF /* NTESGalleryViewController.m */; };
 		55560245217EFFAE000F46DF /* UIAlertView+NTESBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */; };
+		55560249217F8275000F46DF /* YZHAddBookDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560248217F8275000F46DF /* YZHAddBookDetailsModel.m */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
@@ -747,6 +748,8 @@
 		55560240217EFE11000F46DF /* NTESGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESGalleryViewController.m; sourceTree = "<group>"; };
 		55560243217EFFAD000F46DF /* UIAlertView+NTESBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+NTESBlock.h"; sourceTree = "<group>"; };
 		55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+NTESBlock.m"; sourceTree = "<group>"; };
+		55560247217F8275000F46DF /* YZHAddBookDetailsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookDetailsModel.h; sourceTree = "<group>"; };
+		55560248217F8275000F46DF /* YZHAddBookDetailsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookDetailsModel.m; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
@@ -1873,28 +1876,28 @@
 		553640C0217EAEC2006F77A5 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				553640D2217EAEC2006F77A5 /* NIMInputView.h */,
+				553640C7217EAEC2006F77A5 /* NIMInputView.m */,
+				553640C6217EAEC2006F77A5 /* NIMInputToolBar.h */,
+				553640D0217EAEC2006F77A5 /* NIMInputToolBar.m */,
+				553640CE217EAEC2006F77A5 /* NIMInputEmoticonParser.h */,
 				553640C1217EAEC2006F77A5 /* NIMInputEmoticonParser.m */,
 				553640C2217EAEC2006F77A5 /* NIMInputAtCache.h */,
+				553640CD217EAEC2006F77A5 /* NIMInputAtCache.m */,
+				553640CC217EAEC2006F77A5 /* NIMInputAudioRecordIndicatorView.h */,
 				553640C3217EAEC2006F77A5 /* NIMInputAudioRecordIndicatorView.m */,
 				553640C4217EAEC2006F77A5 /* NIMInputEmoticonManager.h */,
-				553640C5217EAEC2006F77A5 /* NIMInputMoreContainerView.m */,
-				553640C6217EAEC2006F77A5 /* NIMInputToolBar.h */,
-				553640C7217EAEC2006F77A5 /* NIMInputView.m */,
-				553640C8217EAEC2006F77A5 /* NIMInputEmoticonTabView.m */,
-				553640C9217EAEC2006F77A5 /* NIMInputEmoticonButton.h */,
-				553640CA217EAEC2006F77A5 /* NIMInputEmoticonContainerView.h */,
 				553640CB217EAEC2006F77A5 /* NIMInputEmoticonManager.m */,
-				553640CC217EAEC2006F77A5 /* NIMInputAudioRecordIndicatorView.h */,
-				553640CD217EAEC2006F77A5 /* NIMInputAtCache.m */,
-				553640CE217EAEC2006F77A5 /* NIMInputEmoticonParser.h */,
-				553640CF217EAEC2006F77A5 /* NIMInputBarItemType.h */,
-				553640D0217EAEC2006F77A5 /* NIMInputToolBar.m */,
-				553640D1217EAEC2006F77A5 /* NIMInputMoreContainerView.h */,
-				553640D2217EAEC2006F77A5 /* NIMInputView.h */,
-				553640D3217EAEC2006F77A5 /* NIMInputEmoticonDefine.h */,
-				553640D4217EAEC2006F77A5 /* NIMInputEmoticonContainerView.m */,
-				553640D5217EAEC2006F77A5 /* NIMInputEmoticonButton.m */,
 				553640D6217EAEC2006F77A5 /* NIMInputEmoticonTabView.h */,
+				553640C8217EAEC2006F77A5 /* NIMInputEmoticonTabView.m */,
+				553640D1217EAEC2006F77A5 /* NIMInputMoreContainerView.h */,
+				553640C5217EAEC2006F77A5 /* NIMInputMoreContainerView.m */,
+				553640C9217EAEC2006F77A5 /* NIMInputEmoticonButton.h */,
+				553640D5217EAEC2006F77A5 /* NIMInputEmoticonButton.m */,
+				553640CA217EAEC2006F77A5 /* NIMInputEmoticonContainerView.h */,
+				553640D4217EAEC2006F77A5 /* NIMInputEmoticonContainerView.m */,
+				553640CF217EAEC2006F77A5 /* NIMInputBarItemType.h */,
+				553640D3217EAEC2006F77A5 /* NIMInputEmoticonDefine.h */,
 				553640D7217EAEC2006F77A5 /* GrowingTextView */,
 			);
 			path = Input;
@@ -1903,10 +1906,10 @@
 		553640D7217EAEC2006F77A5 /* GrowingTextView */ = {
 			isa = PBXGroup;
 			children = (
-				553640D8217EAEC2006F77A5 /* NIMGrowingTextView.m */,
-				553640D9217EAEC2006F77A5 /* NIMGrowingInternalTextView.m */,
-				553640DA217EAEC2006F77A5 /* NIMGrowingInternalTextView.h */,
 				553640DB217EAEC2006F77A5 /* NIMGrowingTextView.h */,
+				553640D8217EAEC2006F77A5 /* NIMGrowingTextView.m */,
+				553640DA217EAEC2006F77A5 /* NIMGrowingInternalTextView.h */,
+				553640D9217EAEC2006F77A5 /* NIMGrowingInternalTextView.m */,
 			);
 			path = GrowingTextView;
 			sourceTree = "<group>";
@@ -1915,6 +1918,7 @@
 			isa = PBXGroup;
 			children = (
 				553640DD217EAEC2006F77A5 /* NIMPageView.h */,
+				553640E9217EAEC2006F77A5 /* NIMPageView.m */,
 				553640DE217EAEC2006F77A5 /* NIMBadgeView.m */,
 				553640DF217EAEC2006F77A5 /* NIMKitKeyboard.h */,
 				553640E0217EAEC2006F77A5 /* NIMMemberGroupView.m */,
@@ -1924,7 +1928,6 @@
 				553640E5217EAEC2006F77A5 /* NIMLoadProgressView.h */,
 				553640E6217EAEC2006F77A5 /* NIMKitNotificationFirer.h */,
 				553640E8217EAEC2006F77A5 /* NIMBadgeView.h */,
-				553640E9217EAEC2006F77A5 /* NIMPageView.m */,
 				553640EA217EAEC2006F77A5 /* NIMAvatarImageView.h */,
 				553640E2217EAEC2006F77A5 /* NIMAvatarImageView.m */,
 				553640EB217EAEC2006F77A5 /* NIMKitMediaFetcher.h */,
@@ -2002,18 +2005,18 @@
 		5536411A217EAEC2006F77A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55364121217EAEC2006F77A5 /* NIMTimestampModel.h */,
 				5536411B217EAEC2006F77A5 /* NIMTimestampModel.m */,
+				55364122217EAEC2006F77A5 /* NIMKitInfoFetchOption.h */,
 				5536411C217EAEC2006F77A5 /* NIMKitInfoFetchOption.m */,
 				5536411D217EAEC2006F77A5 /* NIMKitInfo.h */,
-				5536411E217EAEC2006F77A5 /* NIMMessageModel.h */,
-				5536411F217EAEC2006F77A5 /* NIMKitEvent.m */,
-				55364120217EAEC2006F77A5 /* NIMMediaItem.m */,
-				55364121217EAEC2006F77A5 /* NIMTimestampModel.h */,
-				55364122217EAEC2006F77A5 /* NIMKitInfoFetchOption.h */,
-				55364123217EAEC2006F77A5 /* NIMKitEvent.h */,
-				55364124217EAEC2006F77A5 /* NIMMessageModel.m */,
 				55364125217EAEC2006F77A5 /* NIMKitInfo.m */,
+				5536411E217EAEC2006F77A5 /* NIMMessageModel.h */,
+				55364124217EAEC2006F77A5 /* NIMMessageModel.m */,
+				55364123217EAEC2006F77A5 /* NIMKitEvent.h */,
+				5536411F217EAEC2006F77A5 /* NIMKitEvent.m */,
 				55364126217EAEC2006F77A5 /* NIMMediaItem.h */,
+				55364120217EAEC2006F77A5 /* NIMMediaItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2184,18 +2187,18 @@
 			isa = PBXGroup;
 			children = (
 				55364186217EAEC2006F77A5 /* UITableView+NIMScrollToBottom.h */,
+				5536418F217EAEC2006F77A5 /* UITableView+NIMScrollToBottom.m */,
+				5536418D217EAEC2006F77A5 /* NSDictionary+NIMKit.h */,
 				55364187217EAEC2006F77A5 /* NSDictionary+NIMKit.m */,
+				5536418E217EAEC2006F77A5 /* UIImage+NIMKit.h */,
 				55364188217EAEC2006F77A5 /* UIImage+NIMKit.m */,
 				55364189217EAEC2006F77A5 /* NIMExtensionHelper.h */,
+				55364190217EAEC2006F77A5 /* NIMExtensionHelper.m */,
 				5536418A217EAEC2006F77A5 /* UIView+NIM.h */,
 				55364191217EAEC2006F77A5 /* UIView+NIM.m */,
 				5536418B217EAEC2006F77A5 /* M80AttributedLabel+NIMKit.h */,
-				5536418C217EAEC2006F77A5 /* NSString+NIMKit.m */,
-				5536418D217EAEC2006F77A5 /* NSDictionary+NIMKit.h */,
-				5536418E217EAEC2006F77A5 /* UIImage+NIMKit.h */,
-				5536418F217EAEC2006F77A5 /* UITableView+NIMScrollToBottom.m */,
-				55364190217EAEC2006F77A5 /* NIMExtensionHelper.m */,
 				55364192217EAEC2006F77A5 /* M80AttributedLabel+NIMKit.m */,
+				5536418C217EAEC2006F77A5 /* NSString+NIMKit.m */,
 				55364193217EAEC2006F77A5 /* NSString+NIMKit.h */,
 				55560243217EFFAD000F46DF /* UIAlertView+NTESBlock.h */,
 				55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */,
@@ -2207,10 +2210,10 @@
 			isa = PBXGroup;
 			children = (
 				55364196217EAEC2006F77A5 /* NIMInputProtocol.h */,
+				5536419A217EAEC2006F77A5 /* NIMKitDataProvider.h */,
 				55364197217EAEC2006F77A5 /* NIMCellConfig.h */,
 				55364198217EAEC2006F77A5 /* NIMKitMessageProvider.h */,
 				55364199217EAEC2006F77A5 /* NIMMessageCellProtocol.h */,
-				5536419A217EAEC2006F77A5 /* NIMKitDataProvider.h */,
 				5536419B217EAEC2006F77A5 /* NIMSessionConfig.h */,
 			);
 			path = Protocols;
@@ -2219,24 +2222,24 @@
 		5536419C217EAEC2006F77A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				553641A9217EAEC2006F77A5 /* NIMGlobalMacro.h */,
 				5536419D217EAEC2006F77A5 /* NIMKitSwitcherCell.h */,
+				553641A8217EAEC2006F77A5 /* NIMKitSwitcherCell.m */,
+				553641A6217EAEC2006F77A5 /* NIMKitProgressHUD.h */,
 				5536419E217EAEC2006F77A5 /* NIMKitProgressHUD.m */,
+				553641A7217EAEC2006F77A5 /* NIMKitDataProviderImpl.h */,
 				5536419F217EAEC2006F77A5 /* NIMKitDataProviderImpl.m */,
-				553641A0217EAEC2006F77A5 /* NIMKitSetting.m */,
-				553641A1217EAEC2006F77A5 /* NIMKitConfig.h */,
 				553641A2217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.h */,
+				553641AE217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.m */,
+				553641AD217EAEC2006F77A5 /* NIMCommonTableDelegate.h */,
 				553641A3217EAEC2006F77A5 /* NIMCommonTableDelegate.m */,
 				553641A4217EAEC2006F77A5 /* NIMKitColorButtonCell.h */,
-				553641A5217EAEC2006F77A5 /* NIMCommonTableData.m */,
-				553641A6217EAEC2006F77A5 /* NIMKitProgressHUD.h */,
-				553641A7217EAEC2006F77A5 /* NIMKitDataProviderImpl.h */,
-				553641A8217EAEC2006F77A5 /* NIMKitSwitcherCell.m */,
-				553641A9217EAEC2006F77A5 /* NIMGlobalMacro.h */,
-				553641AA217EAEC2006F77A5 /* NIMKitConfig.m */,
-				553641AB217EAEC2006F77A5 /* NIMKitSetting.h */,
 				553641AC217EAEC2006F77A5 /* NIMKitColorButtonCell.m */,
-				553641AD217EAEC2006F77A5 /* NIMCommonTableDelegate.h */,
-				553641AE217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.m */,
+				553641A5217EAEC2006F77A5 /* NIMCommonTableData.m */,
+				553641AB217EAEC2006F77A5 /* NIMKitSetting.h */,
+				553641A0217EAEC2006F77A5 /* NIMKitSetting.m */,
+				553641A1217EAEC2006F77A5 /* NIMKitConfig.h */,
+				553641AA217EAEC2006F77A5 /* NIMKitConfig.m */,
 				553641AF217EAEC2006F77A5 /* NIMCommonTableViewCell.h */,
 				553641B0217EAEC2006F77A5 /* NIMKitDependency.h */,
 				553641B1217EAEC2006F77A5 /* NIMCommonTableData.h */,
@@ -2462,6 +2465,8 @@
 		5593C522216D923D00A50533 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				55560247217F8275000F46DF /* YZHAddBookDetailsModel.h */,
+				55560248217F8275000F46DF /* YZHAddBookDetailsModel.m */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -3385,6 +3390,7 @@
 				553641F6217EAEC3006F77A5 /* NIMSessionListViewController.m in Sources */,
 				552B78E921735F7700C1DD99 /* UIImageView+YZHImage.m in Sources */,
 				559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */,
+				55560249217F8275000F46DF /* YZHAddBookDetailsModel.m in Sources */,
 				55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */,
 				55BD8664215E084600D23ED1 /* YZHAddBookSectionView.m in Sources */,
 				55337DFD2151053900307B75 /* YZHSettingPasswordVC.m in Sources */,

@@ -15,7 +15,6 @@
 
 static char imageURLKey;
 
-
 @interface NIMAvatarImageView()
 
 @property (nonatomic,strong) UIImageView *imageView;
@@ -263,6 +262,5 @@ static char imageURLKey;
 - (void)nim_cancelCurrentAnimationImagesLoad {
     [self sd_cancelImageLoadOperationWithKey:@"UIImageViewAnimationImages"];
 }
-
 
 @end

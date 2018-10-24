@@ -165,8 +165,9 @@
 
 
 - (NSArray *)loadChartletEmoticonCatalog{
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"NIMDemoChartlet.bundle"
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"NIMKitResource.bundle"
                                          withExtension:nil];
+    //TODO 异常捕获
     NSBundle *bundle = [NSBundle bundleWithURL:url];
     NSArray  *paths   = [bundle pathsForResourcesOfType:nil inDirectory:@""];
     NSMutableArray *res = [[NSMutableArray alloc] init];

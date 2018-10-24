@@ -28,15 +28,15 @@
 
 
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
-UINavigationControllerDelegate,
-NIMSystemNotificationManagerDelegate,
-NIMMediaManagerDelegate,
-NTESTimerHolderDelegate,
-NIMContactSelectDelegate,
-NIMEventSubscribeManagerDelegate,
-NIMNormalTeamCardVCProtocol,
-NIMAdvancedTeamCardVCProtocol,
-NIMInputDelegate>
+                               UINavigationControllerDelegate,
+                               NIMSystemNotificationManagerDelegate,
+                               NIMMediaManagerDelegate,
+                               NTESTimerHolderDelegate,
+                               NIMContactSelectDelegate,
+                               NIMEventSubscribeManagerDelegate,
+                               NIMNormalTeamCardVCProtocol,
+                               NIMAdvancedTeamCardVCProtocol,
+                               NIMInputDelegate>
 
 @property (nonatomic, strong) YZHPrivateChatConfig *sessionConfig;
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
@@ -271,11 +271,11 @@ NIMInputDelegate>
 - (BOOL)onTapAvatar:(NIMMessage *)message{
     //TODO目前两种,一种是好友,一种是临时 非好友,不知道非好友状态聊天对方 id 字段是否也是
     NSString *userId = message.from;
-    UIViewController *vc = nil;
+    NSDictionary* info = @{
+                           @"userId": userId
+                           };
     //这里要到我们的用户详情页里
-    //    vc = [[NTESPersonalCardViewController alloc] initWithUserId:userId];
-    //
-    //    [self.navigationController pushViewController:vc animated:YES];
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
     return YES;
 }
 
@@ -370,6 +370,7 @@ NIMInputDelegate>
                 [alert show];
             }else{
 //                DDLogError(@"revoke message eror code %zd",error.code);
+                //TODO:超时了但是未返回相应错误.
                 [weakSelf.view makeToast:@"消息撤回失败，请重试" duration:2.0 position:CSToastPositionCenter];
             }
         }

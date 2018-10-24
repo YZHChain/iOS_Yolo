@@ -157,7 +157,7 @@
     
     return height;
 }
-
+//
 - (void)fitToScrollView{
     BOOL scrollToBottom = self.textView.contentOffset.y == self.textView.contentSize.height - self.textView.frame.size.height;
     CGSize actualTextViewSize = [self measureTextViewSize];
@@ -189,7 +189,7 @@
     if(scrollToBottom) {
         [self scrollToBottom];
     }
-    
+    // Jersey:高度变化时通知代理. 修改代理的高度
     if (oldScrollViewFrame.size.height != newScrollViewFrame.size.height && [self.textViewDelegate respondsToSelector:@selector(didChangeHeight:)]) {
         [self.textViewDelegate didChangeHeight:newScrollViewFrame.size.height];
     }

@@ -15,7 +15,7 @@
 #import "NIMInputEmoticonDefine.h"
 #import "UIImage+NIMKit.h"
 
-NSInteger NIMCustomPageControlHeight = 36;
+NSInteger NIMCustomPageControlHeight = 30;
 NSInteger NIMCustomPageViewHeight    = 159;
 
 @interface NIMInputEmoticonContainerView()<NIMEmoticonButtonTouchDelegate,NIMInputEmoticonTabDelegate>
@@ -36,7 +36,9 @@ NSInteger NIMCustomPageViewHeight    = 159;
 }
 
 - (void)loadConfig{
-    self.backgroundColor = [UIColor clearColor];
+    // Jersey表情框底下输入框
+//    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setConfig:(id<NIMSessionConfig>)config{
@@ -50,9 +52,6 @@ NSInteger NIMCustomPageViewHeight    = 159;
     return CGSizeMake(size.width, 216.f);
 }
 
-
-
-
 - (void)loadUIComponents
 {
     _emoticonPageView                  = [[NIMPageView alloc] initWithFrame:self.bounds];
@@ -64,6 +63,7 @@ NSInteger NIMCustomPageViewHeight    = 159;
     [self addSubview:_emoticonPageView];
     
     _emotPageController = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, self.nim_width, NIMCustomPageControlHeight)];
+    _emotPageController.backgroundColor = YZHColorWithRGB(249, 247, 247);
     _emotPageController.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     _emotPageController.pageIndicatorTintColor = [UIColor lightGrayColor];
     _emotPageController.currentPageIndicatorTintColor = [UIColor grayColor];

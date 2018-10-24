@@ -16,6 +16,7 @@
     self = [super init];
     if (self)
     {
+        //Jersey:聊天气泡图
         if (isRight)
         {
             _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"icon_sender_text_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];

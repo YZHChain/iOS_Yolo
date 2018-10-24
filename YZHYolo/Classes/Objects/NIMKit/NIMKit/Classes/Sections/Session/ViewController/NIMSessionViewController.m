@@ -618,6 +618,10 @@
         NIMRobotObject *robotObject = (NIMRobotObject *)message.messageObject;
         copyText = !robotObject.isFromRobot;
     }
+    if (message.messageType == NIMMessageTypeAudio) {
+        [items addObject:[[UIMenuItem alloc] initWithTitle:@"静音播放"
+                                                    action:@selector(mutePlayAudio:)]];
+    }
     if (copyText) {
         [items addObject:[[UIMenuItem alloc] initWithTitle:@"复制"
                                                     action:@selector(copyText:)]];
@@ -648,7 +652,11 @@
     }
     return NO;
 }
-
+//JerseyYolo: 静音播放
+- (void)mutePlayAudio:(id)sender {
+    
+    
+}
 
 - (void)copyText:(id)sender
 {

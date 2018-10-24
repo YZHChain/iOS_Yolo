@@ -57,9 +57,9 @@
     static UIImage *NIMRetryButtonImage;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NIMRetryButtonImage = [UIImage nim_imageInKit:@"icon_message_cell_error"];
+        NIMRetryButtonImage = [UIImage nim_imageInKit:@"session_sendMessage_cell_error"];
     });
-    //retyrBtn
+    //retyrBtn Jersey:发送失败重试按钮
     _retryButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_retryButton setImage:NIMRetryButtonImage forState:UIControlStateNormal];
     [_retryButton setImage:NIMRetryButtonImage forState:UIControlStateHighlighted];

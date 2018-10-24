@@ -37,6 +37,7 @@
 
 - (NSArray *)defaultMediaItems
 {
+    //TODO: 修改默认配置
     return @[[NIMMediaItem item:@"onTapMediaItemPicture:"
                     normalImage:[UIImage nim_imageInKit:@"bk_media_picture_normal"]
                   selectedImage:[UIImage nim_imageInKit:@"bk_media_picture_nomal_pressed"]
@@ -59,13 +60,12 @@
     return 20.f;
 }
 
-
 - (void)applyDefaultSettings
 {
     _messageInterval = 300;
     _messageLimit    = 20;
     _recordMaxDuration = 60.f;
-    _placeholder = @"请输入消息";
+    _placeholder = @"";
     _inputMaxLength = 1000;
     _nickFont  = [UIFont systemFontOfSize:13.0];
     _nickColor = [UIColor darkGrayColor];

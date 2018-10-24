@@ -395,29 +395,44 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    NIMSessionListCell* cell;
+    NIMRecentSession *recentSession;
     if ([tableView isEqual:self.tableView]) {
-        NIMSessionListCell* cell = (NIMSessionListCell* )[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell;
+       cell = (NIMSessionListCell* )[super tableView:tableView cellForRowAtIndexPath:indexPath];
+        recentSession = self.recentSessions[indexPath.row];
     } else {
         static NSString * cellId = @"TagCell";
-        NIMSessionListCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (!cell) {
             cell = [[NIMSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            //            [cell.avatarImageView addTarget:self action:@selector(onTouchAvatar:) forControlEvents:UIControlEventTouchUpInside];
         }
-        NIMRecentSession *recent = [self.recentSessionExtManage.tagsRecentSession[indexPath.section] objectAtIndex:indexPath.row];
-        cell.nameLabel.text = [self nameForRecentSession:recent];
-        [cell.avatarImageView setAvatarBySession:recent.session];
+        recentSession = [self.recentSessionExtManage.tagsRecentSession[indexPath.section] objectAtIndex:indexPath.row];
+        cell.nameLabel.text = [self nameForRecentSession:recentSession];
+        [cell.avatarImageView setAvatarBySession:recentSession.session];
         [cell.nameLabel sizeToFit];
-        cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
+        cell.messageLabel.attributedText  = [self contentForRecentSession:recentSession];
         [cell.messageLabel sizeToFit];
-        cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
+        cell.timeLabel.text = [self timestampDescriptionForRecentSession:recentSession];
         [cell.timeLabel sizeToFit];
         
-        [cell refresh:recent];
+        [cell refresh:recentSession];
         
-        return cell;
     }
+    //检查是否包含置顶标签
+    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+    BOOL isMarkTop = [[recentSession.localExt objectForKey:markTypeTopkey] boolValue];
+    if (isMarkTop) {
+        cell.contentView.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        cell.nameLabel.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        cell.timeLabel.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        cell.messageLabel.backgroundColor = YZHColorWithRGB(247, 247, 247);
+    } else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+        cell.nameLabel.backgroundColor = [UIColor whiteColor];
+        cell.timeLabel.backgroundColor = [UIColor whiteColor];
+        cell.messageLabel.backgroundColor = [UIColor whiteColor];
+    }
+    return cell;
 }
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -448,8 +463,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         //防止置顶被取消之后,分区头未清空掉.
         if (isMarkTop) {
             headerView.tagNameLabel.text = @"置顶";
+            headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
             headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
+            headerView.backgroundColor = [UIColor whiteColor];
         }
     } else {
         headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";

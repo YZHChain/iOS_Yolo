@@ -97,6 +97,8 @@
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.delegate = self;
         _scrollView.scrollsToTop = NO;
+        //Jersey:更多页颜色也是是Emoj
+        _scrollView.backgroundColor = YZHColorWithRGB(249, 247, 247);
     }
 }
 
