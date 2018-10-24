@@ -154,9 +154,11 @@
 - (void)applyDefaultTextSettings
 {
     _textSetting = [[NIMKitSetting alloc] init:_isRight];
-    _textSetting.contentInsets = _isRight? UIEdgeInsetsFromString(@"{11,11,9,15}") : UIEdgeInsetsFromString(@"{11,15,9,9}");
-    _textSetting.textColor = _isRight? NIMKit_UIColorFromRGB(0xFFFFFF) : NIMKit_UIColorFromRGB(0x000000);
-    _textSetting.font      = [UIFont systemFontOfSize:14];
+//    _textSetting.contentInsets = _isRight? UIEdgeInsetsFromString(@"{11,11,9,15}") : UIEdgeInsetsFromString(@"{11,15,9,9}");
+    _textSetting.contentInsets = _isRight? UIEdgeInsetsFromString(@"{7,11,5,13}") : UIEdgeInsetsFromString(@"{7,13,5,11}");
+//    _textSetting.textColor = _isRight? NIMKit_UIColorFromRGB(0xFFFFFF) : NIMKit_UIColorFromRGB(0x000000);
+    _textSetting.textColor = _isRight? YZHColorWithRGB(255, 255, 255) : YZHColorWithRGB(62, 58, 57);
+    _textSetting.font      = [UIFont systemFontOfSize:15];
     _textSetting.showAvatar = YES;
 }
 
@@ -190,6 +192,9 @@
     _imageSetting = [[NIMKitSetting alloc] init:_isRight];
     _imageSetting.contentInsets = _isRight? UIEdgeInsetsFromString(@"{3,3,3,8}") : UIEdgeInsetsFromString(@"{3,8,3,3}");
     _imageSetting.showAvatar = YES;
+    _imageSetting.normalBackgroundImage = nil;
+    _imageSetting.highLightBackgroundImage = nil;
+    
 }
 
 - (void)applyDefaultLocationSettings

@@ -93,7 +93,7 @@
 {
     return [self.dataSource deleteModels:range];
 }
-
+//查看回话数据源中是否包含与此人回话
 - (NIMMessageModel *)findModel:(NIMMessage *)message{
     NIMMessageModel *model;
     for (NIMMessageModel *item in self.dataSource.items.reverseObjectEnumerator.allObjects) {

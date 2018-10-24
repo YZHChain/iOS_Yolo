@@ -22,6 +22,8 @@
 #import "YZHSessionMsgConverter.h"
 #import "UIActionSheet+YZHBlock.h"
 #import "NTESGalleryViewController.h"
+#import "NTESSessionSnapchatContentView.h"
+#import "NTESSnapchatAttachment.h"
 
 #import "Reachability.h"
 #import <CoreServices/UTCoreTypes.h>
@@ -140,6 +142,12 @@
 
 - (void)reloadView {
     
+}
+
+#pragma mark - 消息收发接口
+- (void)sendMessage:(NIMMessage *)message
+{
+    [super sendMessage:message];
 }
 
 #pragma mark - NIMNormalTeamCardVCProtocol, NIMAdvancedTeamCardVCProtocol
@@ -280,6 +288,77 @@
 }
 
 #pragma mark - Cell Actions
+
+- (BOOL)onTapCell:(NIMKitEvent *)event
+{
+    BOOL handled = [super onTapCell:event];
+    NSString *eventName = event.eventName;
+    if ([eventName isEqualToString:NIMKitEventNameTapContent])
+    {
+        NIMMessage *message = event.messageModel.message;
+        NSDictionary *actions = [self cellActions];
+        NSString *value = actions[@(message.messageType)];
+        if (value) {
+            SEL selector = NSSelectorFromString(value);
+            if (selector && [self respondsToSelector:selector]) {
+                SuppressPerformSelectorLeakWarning([self performSelector:selector withObject:message]);
+                handled = YES;
+            }
+        }
+    }
+    else if([eventName isEqualToString:NIMKitEventNameTapLabelLink])
+    {
+        NSString *link = event.data;
+        [self openSafari:link];
+        handled = YES;
+    }
+    else if([eventName isEqualToString:NIMDemoEventNameOpenSnapPicture])
+    {
+        NIMCustomObject *object = event.messageModel.message.messageObject;
+        NTESSnapchatAttachment *attachment = (NTESSnapchatAttachment *)object.attachment;
+        if(attachment.isFired){
+            return handled;
+        }
+        UIView *sender = event.data;
+        self.currentSingleSnapView = [NTESGalleryViewController alertSingleSnapViewWithMessage:object.message baseView:sender];
+        handled = YES;
+    }
+//    else if([eventName isEqualToString:NIMDemoEventNameCloseSnapPicture])
+//    {
+//        //点击很快的时候可能会触发两次查看，所以这里不管有没有查看过 先强直销毁掉
+//        NIMCustomObject *object = event.messageModel.message.messageObject;
+//        UIView *senderView = event.data;
+//        [senderView dismissPresentedView:YES complete:nil];
+//
+//        NTESSnapchatAttachment *attachment = (NTESSnapchatAttachment *)object.attachment;
+//        if(attachment.isFired){
+//            return handled;
+//        }
+//        attachment.isFired  = YES;
+//        NIMMessage *message = object.message;
+//        if ([NTESBundleSetting sharedConfig].autoRemoveSnapMessage) {
+//            [[NIMSDK sharedSDK].conversationManager deleteMessage:message];
+//            [self uiDeleteMessage:message];
+//        }else{
+//            [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:message.session completion:nil];
+//            [self uiUpdateMessage:message];
+//        }
+//        [[NSFileManager defaultManager] removeItemAtPath:attachment.filepath error:nil];
+//        self.currentSingleSnapView = nil;
+//        handled = YES;
+//    }
+    else if([eventName isEqualToString:NIMKitEventNameTapRobotLink])
+    {
+        NSString *link = event.data;
+        [self openSafari:link];
+        handled = YES;
+    }
+    if (!handled) {
+        NSAssert(0, @"invalid event");
+    }
+    return handled;
+}
+
 // 图片展示,
 - (void)showImage:(NIMMessage *)message
 {

@@ -317,7 +317,7 @@
         {
             _audioPlayedIcon.nim_right = _bubbleView.nim_left - padding;
         }
-        _audioPlayedIcon.nim_top = _bubbleView.nim_top;
+        _audioPlayedIcon.y = (_bubbleView.height / 2 ) - (_audioPlayedIcon.height / 2);
     }
 }
 
@@ -456,7 +456,7 @@
 
 
 - (CGFloat)audioPlayedIconBubblePadding{
-    return 10.0;
+    return 8.0;
 }
 
 - (CGFloat)readButtonBubblePadding{

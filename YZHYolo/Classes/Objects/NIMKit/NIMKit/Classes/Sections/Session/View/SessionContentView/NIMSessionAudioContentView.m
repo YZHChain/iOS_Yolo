@@ -50,6 +50,7 @@
 - (void)addVoiceView{
     UIImage * image = [UIImage nim_imageInKit:@"icon_receiver_voice_playing.png"];
     _voiceImageView = [[UIImageView alloc] initWithImage:image];
+    //Jersey, 语音动画
     NSArray * animateNames = @[@"icon_receiver_voice_playing_001.png",@"icon_receiver_voice_playing_002.png",@"icon_receiver_voice_playing_003.png"];
     NSMutableArray * animationImages = [[NSMutableArray alloc] initWithCapacity:animateNames.count];
     for (NSString * animateName in animateNames) {

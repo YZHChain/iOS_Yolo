@@ -206,6 +206,9 @@
 		55560242217EFE11000F46DF /* NTESGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560240217EFE11000F46DF /* NTESGalleryViewController.m */; };
 		55560245217EFFAE000F46DF /* UIAlertView+NTESBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */; };
 		55560249217F8275000F46DF /* YZHAddBookDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55560248217F8275000F46DF /* YZHAddBookDetailsModel.m */; };
+		5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556024A21807CA4000F46DF /* NTESSessionSnapchatContentView.m */; };
+		5556024F21807CD5000F46DF /* NTESSnapchatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556024D21807CD4000F46DF /* NTESSnapchatAttachment.m */; };
+		5556025321807DFA000F46DF /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556025121807DFA000F46DF /* NSData+NTES.m */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
@@ -750,6 +753,13 @@
 		55560244217EFFAE000F46DF /* UIAlertView+NTESBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+NTESBlock.m"; sourceTree = "<group>"; };
 		55560247217F8275000F46DF /* YZHAddBookDetailsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookDetailsModel.h; sourceTree = "<group>"; };
 		55560248217F8275000F46DF /* YZHAddBookDetailsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookDetailsModel.m; sourceTree = "<group>"; };
+		5556024A21807CA4000F46DF /* NTESSessionSnapchatContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSessionSnapchatContentView.m; sourceTree = "<group>"; };
+		5556024B21807CA4000F46DF /* NTESSessionSnapchatContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSessionSnapchatContentView.h; sourceTree = "<group>"; };
+		5556024D21807CD4000F46DF /* NTESSnapchatAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSnapchatAttachment.m; sourceTree = "<group>"; };
+		5556024E21807CD5000F46DF /* NTESSnapchatAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSnapchatAttachment.h; sourceTree = "<group>"; };
+		5556025021807D02000F46DF /* NTESCustomAttachmentDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESCustomAttachmentDefines.h; sourceTree = "<group>"; };
+		5556025121807DFA000F46DF /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
+		5556025221807DFA000F46DF /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
@@ -1255,6 +1265,7 @@
 		55128A1221463E480099CC55 /* PrivatelyChat */ = {
 			isa = PBXGroup;
 			children = (
+				5556025421807F1B000F46DF /* NEESSession */,
 				558027C3217EF6BA0009E6ED /* Config */,
 				55128A1321463E480099CC55 /* Controller */,
 				55128A1421463E480099CC55 /* Model */,
@@ -2065,28 +2076,28 @@
 		55364130217EAEC2006F77A5 /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				55364131217EAEC2006F77A5 /* NIMRobotContentConfig.m */,
-				55364132217EAEC2006F77A5 /* NIMUnsupportContentConfig.h */,
-				55364133217EAEC2006F77A5 /* NIMTipContentConfig.h */,
 				55364134217EAEC2006F77A5 /* NIMAudioContentConfig.h */,
-				55364135217EAEC2006F77A5 /* NIMNotificationContentConfig.h */,
-				55364136217EAEC2006F77A5 /* NIMFileContentConfig.m */,
-				55364137217EAEC2006F77A5 /* NIMLocationContentConfig.m */,
-				55364138217EAEC2006F77A5 /* NIMImageContentConfig.h */,
-				55364139217EAEC2006F77A5 /* NIMTextContentConfig.h */,
-				5536413A217EAEC2006F77A5 /* NIMBaseSessionContentConfig.h */,
-				5536413B217EAEC2006F77A5 /* NIMVideoContentConfig.m */,
 				5536413C217EAEC2006F77A5 /* NIMAudioContentConfig.m */,
-				5536413D217EAEC2006F77A5 /* NIMNotificationContentConfig.m */,
-				5536413E217EAEC2006F77A5 /* NIMTipContentConfig.m */,
-				5536413F217EAEC2006F77A5 /* NIMUnsupportContentConfig.m */,
-				55364140217EAEC2006F77A5 /* NIMRobotContentConfig.h */,
+				5536413A217EAEC2006F77A5 /* NIMBaseSessionContentConfig.h */,
+				55364146217EAEC2006F77A5 /* NIMBaseSessionContentConfig.m */,
 				55364141217EAEC2006F77A5 /* NIMFileContentConfig.h */,
-				55364142217EAEC2006F77A5 /* NIMTextContentConfig.m */,
+				55364136217EAEC2006F77A5 /* NIMFileContentConfig.m */,
+				55364138217EAEC2006F77A5 /* NIMImageContentConfig.h */,
 				55364143217EAEC2006F77A5 /* NIMImageContentConfig.m */,
 				55364144217EAEC2006F77A5 /* NIMLocationContentConfig.h */,
+				55364137217EAEC2006F77A5 /* NIMLocationContentConfig.m */,
+				55364135217EAEC2006F77A5 /* NIMNotificationContentConfig.h */,
+				5536413D217EAEC2006F77A5 /* NIMNotificationContentConfig.m */,
+				55364140217EAEC2006F77A5 /* NIMRobotContentConfig.h */,
+				55364131217EAEC2006F77A5 /* NIMRobotContentConfig.m */,
+				55364139217EAEC2006F77A5 /* NIMTextContentConfig.h */,
+				55364142217EAEC2006F77A5 /* NIMTextContentConfig.m */,
+				55364133217EAEC2006F77A5 /* NIMTipContentConfig.h */,
+				5536413E217EAEC2006F77A5 /* NIMTipContentConfig.m */,
+				55364132217EAEC2006F77A5 /* NIMUnsupportContentConfig.h */,
+				5536413F217EAEC2006F77A5 /* NIMUnsupportContentConfig.m */,
 				55364145217EAEC2006F77A5 /* NIMVideoContentConfig.h */,
-				55364146217EAEC2006F77A5 /* NIMBaseSessionContentConfig.m */,
+				5536413B217EAEC2006F77A5 /* NIMVideoContentConfig.m */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -2094,22 +2105,22 @@
 		55364148217EAEC2006F77A5 /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				55364156217EAEC2006F77A5 /* NIMSessionMsgDatasource.h */,
+				5536414C217EAEC2006F77A5 /* NIMSessionMsgDatasource.m */,
+				55364153217EAEC2006F77A5 /* NIMSessionDataSourceImpl.h */,
 				55364149217EAEC2006F77A5 /* NIMSessionDataSourceImpl.m */,
+				5536414F217EAEC2006F77A5 /* NIMSessionInteractorImpl.h */,
+				55364157217EAEC2006F77A5 /* NIMSessionInteractorImpl.m */,
+				55364152217EAEC2006F77A5 /* NIMSessionTableAdapter.h */,
 				5536414A217EAEC2006F77A5 /* NIMSessionTableAdapter.m */,
 				5536414B217EAEC2006F77A5 /* NIMSessionConfigurator.h */,
-				5536414C217EAEC2006F77A5 /* NIMSessionMsgDatasource.m */,
-				5536414D217EAEC2006F77A5 /* NIMKitAudioCenter.m */,
-				5536414E217EAEC2006F77A5 /* NIMSessionLayoutImpl.m */,
-				5536414F217EAEC2006F77A5 /* NIMSessionInteractorImpl.h */,
-				55364150217EAEC2006F77A5 /* NIMSessionConfigurateProtocol.h */,
 				55364151217EAEC2006F77A5 /* NIMSessionConfigurator.m */,
-				55364152217EAEC2006F77A5 /* NIMSessionTableAdapter.h */,
-				55364153217EAEC2006F77A5 /* NIMSessionDataSourceImpl.h */,
 				55364154217EAEC2006F77A5 /* NIMKitAudioCenter.h */,
-				55364155217EAEC2006F77A5 /* NIMSessionPrivateProtocol.h */,
-				55364156217EAEC2006F77A5 /* NIMSessionMsgDatasource.h */,
-				55364157217EAEC2006F77A5 /* NIMSessionInteractorImpl.m */,
+				5536414D217EAEC2006F77A5 /* NIMKitAudioCenter.m */,
 				55364158217EAEC2006F77A5 /* NIMSessionLayoutImpl.h */,
+				5536414E217EAEC2006F77A5 /* NIMSessionLayoutImpl.m */,
+				55364150217EAEC2006F77A5 /* NIMSessionConfigurateProtocol.h */,
+				55364155217EAEC2006F77A5 /* NIMSessionPrivateProtocol.h */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -2117,14 +2128,14 @@
 		55364159217EAEC2006F77A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5536415A217EAEC2006F77A5 /* NIMMessageCellFactory.h */,
-				5536415B217EAEC2006F77A5 /* NIMKitLocationPoint.m */,
-				5536415C217EAEC2006F77A5 /* NIMMessageMaker.m */,
-				5536415D217EAEC2006F77A5 /* NIMKitMessageAtModel.m */,
 				5536415E217EAEC2006F77A5 /* NIMKitLocationPoint.h */,
+				5536415B217EAEC2006F77A5 /* NIMKitLocationPoint.m */,
+				55364161217EAEC2006F77A5 /* NIMKitMessageAtModel.h */,
+				5536415D217EAEC2006F77A5 /* NIMKitMessageAtModel.m */,
+				5536415A217EAEC2006F77A5 /* NIMMessageCellFactory.h */,
 				5536415F217EAEC2006F77A5 /* NIMMessageCellFactory.m */,
 				55364160217EAEC2006F77A5 /* NIMMessageMaker.h */,
-				55364161217EAEC2006F77A5 /* NIMKitMessageAtModel.h */,
+				5536415C217EAEC2006F77A5 /* NIMMessageMaker.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2146,28 +2157,28 @@
 		55364165217EAEC2006F77A5 /* SessionContentView */ = {
 			isa = PBXGroup;
 			children = (
-				55364166217EAEC2006F77A5 /* NIMSessionLocationContentView.m */,
-				55364167217EAEC2006F77A5 /* NIMSessionTextContentView.h */,
-				55364168217EAEC2006F77A5 /* NIMSessionFileTransContentView.h */,
-				55364169217EAEC2006F77A5 /* NIMSessionVideoContentView.m */,
-				5536416A217EAEC2006F77A5 /* NIMSessionUnknowContentView.h */,
-				5536416B217EAEC2006F77A5 /* NIMSessionAudioContentView.m */,
-				5536416C217EAEC2006F77A5 /* NIMSessionNotificationContentView.m */,
-				5536416D217EAEC2006F77A5 /* NIMSessionNetChatNotifyContentView.m */,
-				5536416E217EAEC2006F77A5 /* NIMSessionMessageContentView.h */,
-				5536416F217EAEC2006F77A5 /* NIMSessionImageContentView.m */,
-				55364170217EAEC2006F77A5 /* NIMSessionRobotContentView.h */,
-				55364171217EAEC2006F77A5 /* NIMSessionVideoContentView.h */,
-				55364172217EAEC2006F77A5 /* NIMSessionFileTransContentView.m */,
-				55364173217EAEC2006F77A5 /* NIMSessionTextContentView.m */,
-				55364174217EAEC2006F77A5 /* NIMSessionLocationContentView.h */,
-				55364175217EAEC2006F77A5 /* NIMSessionNotificationContentView.h */,
-				55364176217EAEC2006F77A5 /* NIMSessionUnknowContentView.m */,
 				55364177217EAEC2006F77A5 /* NIMSessionAudioContentView.h */,
+				5536416B217EAEC2006F77A5 /* NIMSessionAudioContentView.m */,
+				55364168217EAEC2006F77A5 /* NIMSessionFileTransContentView.h */,
+				55364172217EAEC2006F77A5 /* NIMSessionFileTransContentView.m */,
 				55364178217EAEC2006F77A5 /* NIMSessionImageContentView.h */,
+				5536416F217EAEC2006F77A5 /* NIMSessionImageContentView.m */,
+				55364174217EAEC2006F77A5 /* NIMSessionLocationContentView.h */,
+				55364166217EAEC2006F77A5 /* NIMSessionLocationContentView.m */,
+				5536416E217EAEC2006F77A5 /* NIMSessionMessageContentView.h */,
 				55364179217EAEC2006F77A5 /* NIMSessionMessageContentView.m */,
 				5536417A217EAEC2006F77A5 /* NIMSessionNetChatNotifyContentView.h */,
+				5536416D217EAEC2006F77A5 /* NIMSessionNetChatNotifyContentView.m */,
+				55364175217EAEC2006F77A5 /* NIMSessionNotificationContentView.h */,
+				5536416C217EAEC2006F77A5 /* NIMSessionNotificationContentView.m */,
+				55364170217EAEC2006F77A5 /* NIMSessionRobotContentView.h */,
 				5536417B217EAEC2006F77A5 /* NIMSessionRobotContentView.m */,
+				55364167217EAEC2006F77A5 /* NIMSessionTextContentView.h */,
+				55364173217EAEC2006F77A5 /* NIMSessionTextContentView.m */,
+				5536416A217EAEC2006F77A5 /* NIMSessionUnknowContentView.h */,
+				55364176217EAEC2006F77A5 /* NIMSessionUnknowContentView.m */,
+				55364171217EAEC2006F77A5 /* NIMSessionVideoContentView.h */,
+				55364169217EAEC2006F77A5 /* NIMSessionVideoContentView.m */,
 			);
 			path = SessionContentView;
 			sourceTree = "<group>";
@@ -2222,27 +2233,27 @@
 		5536419C217EAEC2006F77A5 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				553641A9217EAEC2006F77A5 /* NIMGlobalMacro.h */,
-				5536419D217EAEC2006F77A5 /* NIMKitSwitcherCell.h */,
-				553641A8217EAEC2006F77A5 /* NIMKitSwitcherCell.m */,
-				553641A6217EAEC2006F77A5 /* NIMKitProgressHUD.h */,
-				5536419E217EAEC2006F77A5 /* NIMKitProgressHUD.m */,
-				553641A7217EAEC2006F77A5 /* NIMKitDataProviderImpl.h */,
-				5536419F217EAEC2006F77A5 /* NIMKitDataProviderImpl.m */,
-				553641A2217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.h */,
-				553641AE217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.m */,
+				553641B1217EAEC2006F77A5 /* NIMCommonTableData.h */,
+				553641A5217EAEC2006F77A5 /* NIMCommonTableData.m */,
 				553641AD217EAEC2006F77A5 /* NIMCommonTableDelegate.h */,
 				553641A3217EAEC2006F77A5 /* NIMCommonTableDelegate.m */,
+				553641AF217EAEC2006F77A5 /* NIMCommonTableViewCell.h */,
+				553641A9217EAEC2006F77A5 /* NIMGlobalMacro.h */,
 				553641A4217EAEC2006F77A5 /* NIMKitColorButtonCell.h */,
 				553641AC217EAEC2006F77A5 /* NIMKitColorButtonCell.m */,
-				553641A5217EAEC2006F77A5 /* NIMCommonTableData.m */,
-				553641AB217EAEC2006F77A5 /* NIMKitSetting.h */,
-				553641A0217EAEC2006F77A5 /* NIMKitSetting.m */,
 				553641A1217EAEC2006F77A5 /* NIMKitConfig.h */,
 				553641AA217EAEC2006F77A5 /* NIMKitConfig.m */,
-				553641AF217EAEC2006F77A5 /* NIMCommonTableViewCell.h */,
+				553641A7217EAEC2006F77A5 /* NIMKitDataProviderImpl.h */,
+				5536419F217EAEC2006F77A5 /* NIMKitDataProviderImpl.m */,
 				553641B0217EAEC2006F77A5 /* NIMKitDependency.h */,
-				553641B1217EAEC2006F77A5 /* NIMCommonTableData.h */,
+				553641A2217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.h */,
+				553641AE217EAEC2006F77A5 /* NIMKitIndependentModeExtraInfo.m */,
+				553641A6217EAEC2006F77A5 /* NIMKitProgressHUD.h */,
+				5536419E217EAEC2006F77A5 /* NIMKitProgressHUD.m */,
+				553641AB217EAEC2006F77A5 /* NIMKitSetting.h */,
+				553641A0217EAEC2006F77A5 /* NIMKitSetting.m */,
+				5536419D217EAEC2006F77A5 /* NIMKitSwitcherCell.h */,
+				553641A8217EAEC2006F77A5 /* NIMKitSwitcherCell.m */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2347,6 +2358,13 @@
 			path = Atttach;
 			sourceTree = "<group>";
 		};
+		5556025421807F1B000F46DF /* NEESSession */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NEESSession;
+			sourceTree = "<group>";
+		};
 		555DA490216C35160057D434 /* JKRSearch */ = {
 			isa = PBXGroup;
 			children = (
@@ -2435,6 +2453,13 @@
 		558027C3217EF6BA0009E6ED /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				5556024B21807CA4000F46DF /* NTESSessionSnapchatContentView.h */,
+				5556024A21807CA4000F46DF /* NTESSessionSnapchatContentView.m */,
+				5556024E21807CD5000F46DF /* NTESSnapchatAttachment.h */,
+				5556024D21807CD4000F46DF /* NTESSnapchatAttachment.m */,
+				5556025021807D02000F46DF /* NTESCustomAttachmentDefines.h */,
+				5556025221807DFA000F46DF /* NSData+NTES.h */,
+				5556025121807DFA000F46DF /* NSData+NTES.m */,
 				558027C4217EF6D10009E6ED /* YZHPrivateChatConfig.h */,
 				558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */,
 			);
@@ -3368,6 +3393,7 @@
 				55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */,
 				55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */,
 				553641E9217EAEC3006F77A5 /* NIMTimePickerView.m in Sources */,
+				5556025321807DFA000F46DF /* NSData+NTES.m in Sources */,
 				55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */,
 				553641EE217EAEC3006F77A5 /* NIMTeamNotifyUpdateViewController.m in Sources */,
 				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
@@ -3441,6 +3467,7 @@
 				55364214217EAEC3006F77A5 /* NIMSessionNotificationContentView.m in Sources */,
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */,
+				5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */,
 				553641E0217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m in Sources */,
 				558A21482179850F00E892C3 /* NTESSessionPeekViewController.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
@@ -3448,6 +3475,7 @@
 				553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */,
 				55337DEB215088C800307B75 /* UIColor+YZHColorStyle.m in Sources */,
 				556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */,
+				5556024F21807CD5000F46DF /* NTESSnapchatAttachment.m in Sources */,
 				55C656BB215F2A0B005E997B /* YZHAddBookSetNoteCell.m in Sources */,
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
 				553641E4217EAEC2006F77A5 /* NIMUsrInfoData.m in Sources */,
