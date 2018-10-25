@@ -132,6 +132,7 @@
                     self.managerSucceedBlock ? self.managerSucceedBlock() : NULL;
                 }
             } else {
+                //TODO:编码错误.
                 NSLog(@"编码地理位置错误原因%@",error);
                 self.managerfaildBlock ? self.managerfaildBlock() : NULL;
             }

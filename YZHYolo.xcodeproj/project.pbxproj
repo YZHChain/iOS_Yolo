@@ -2066,8 +2066,8 @@
 		5536412E217EAEC2006F77A5 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				5536412F217EAEC2006F77A5 /* NIMCellLayoutConfig.h */,
 				55364130217EAEC2006F77A5 /* Content */,
+				5536412F217EAEC2006F77A5 /* NIMCellLayoutConfig.h */,
 				55364147217EAEC2006F77A5 /* NIMCellLayoutConfig.m */,
 			);
 			path = Config;

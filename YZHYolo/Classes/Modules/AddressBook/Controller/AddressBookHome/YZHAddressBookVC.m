@@ -318,10 +318,10 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 }
 
 - (SCIndexViewConfiguration *)indexViewConfiguration {
-    
+    //TODO: 不能让Y到表头里面,否则弹出搜索时,会出问题
     if (!_indexViewConfiguration) {
         _indexViewConfiguration = [SCIndexViewConfiguration configuration];
-        _indexViewConfiguration.indexItemsSpace = 2.5;
+        _indexViewConfiguration.indexItemsSpace = 1.5;
         self.tableView.sc_translucentForTableViewInNavigationBar = YES;
         self.tableView.sc_indexViewDelegate = self;
     }

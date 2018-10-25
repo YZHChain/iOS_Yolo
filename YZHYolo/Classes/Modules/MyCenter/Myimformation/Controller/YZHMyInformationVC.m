@@ -18,7 +18,6 @@ static NSString* const kPhotoCellIdentifier = @"imformationPhotoCellIdentifier";
 static NSString* const kNicknameCellIdentifier = @"imformationNicknameCellIdentifier";
 static NSString* const kGenderCellIdentifier = @"imformationGenderCellIdentifier";
 static NSString* const kQRCodeCellIdentifier = @"imformationQRCodeCellIdentifier";
-static NSArray* cellIdentifierArray;
 @interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource,NIMUserManagerDelegate>
 
 @property(nonatomic, strong)UITableView* tableView;
@@ -29,11 +28,6 @@ static NSArray* cellIdentifierArray;
 @implementation YZHMyInformationVC
 
 #pragma mark - 1.View Controller Life Cycle
-
-+ (void)initialize{
-    
-    cellIdentifierArray = @[kPhoneCellIdentifier, kPhotoCellIdentifier, kNicknameCellIdentifier, kGenderCellIdentifier, kQRCodeCellIdentifier];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -91,13 +85,6 @@ static NSArray* cellIdentifierArray;
 
 - (void)setupData
 {
-    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYINFORMATION params:nil successCompletion:^(id obj) {
-        
-        self.viewModel = [YZHMyInformationListModel YZH_objectWithKeyValues:obj];
-        [self reloadView];
-    } failureCompletion:^(NSError *error) {
-        
-    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
@@ -108,7 +95,6 @@ static NSArray* cellIdentifierArray;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     
     return self.viewModel.list[section].content.count;
 }

@@ -43,7 +43,6 @@ static NSString* const kSelectedLocationCellIdentifier =  @"selectedLocationCell
         // TODO: 写个异常捕获
         cell = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] objectAtIndex:indexPath.section];
     } else {
-        NSLog(@"复用了哦");
     }
     
     return cell;

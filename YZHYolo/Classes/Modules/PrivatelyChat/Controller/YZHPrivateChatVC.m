@@ -90,7 +90,7 @@
     
     self.navigationItem.title = [super sessionTitle];
     UIButton *rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightItemButton addTarget:self action:@selector(lookUserDetails:) forControlEvents:UIControlEventTouchUpInside];
+    [rightItemButton addTarget:self action:@selector(gotoUserDetails:) forControlEvents:UIControlEventTouchUpInside];
     [rightItemButton setImage:[UIImage imageNamed:@"session_rightItemBar_normal"] forState:UIControlStateNormal];
 //    [rightItemButton setImage:[UIImage imageNamed:@"icon_session_info_pressed"] forState:UIControlStateHighlighted];
     [rightItemButton sizeToFit];
@@ -99,11 +99,17 @@
     
 }
 
-- (void)lookUserDetails:(UIButton *)sender {
+- (void)gotoUserDetails:(UIButton *)sender {
     
     NSString* userId = self.session.sessionId;
-    //跳转用户资料.
-    
+    if (self.session.sessionType == NIMSessionTypeP2P) {
+        //跳转用户资料.
+        NSDictionary* info = @{
+                               @"userId": userId
+                               };
+        //这里要到我们的用户详情页里
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

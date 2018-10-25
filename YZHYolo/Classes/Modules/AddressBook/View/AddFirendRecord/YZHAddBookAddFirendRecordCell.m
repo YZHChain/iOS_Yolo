@@ -21,6 +21,7 @@ static NSString* kAddFirendRecordCellReview = @"addFirendRecordCellReview";
         self.datingButton.layer.borderColor = [UIColor yzh_backgroundThemeGray].CGColor;
     }
     [self.photoImageView yzh_cornerRadiusAdvance:3.0f rectCornerType:UIRectCornerAllCorners];
+    self.photoImageView.image = [UIImage imageNamed:@"addBook_cover_cell_photo_default"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

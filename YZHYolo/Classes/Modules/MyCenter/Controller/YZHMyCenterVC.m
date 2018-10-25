@@ -53,6 +53,11 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    
+    [[NIMSDK sharedSDK].userManager removeDelegate:self];
+}
+
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar
@@ -64,6 +69,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)setupView
 {
     [self.view addSubview:self.tableView];
+    //导航栏
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {
@@ -154,7 +160,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 }
 // 更新
 - (void)userInformationUpdateUser:(NIMUser *)user {
-    
+    //TODO:回头来看有点别扭.....有时间优化下 Model
     self.userModel.userIMData = user;
     self.headerView.userModel = self.userModel;
 }

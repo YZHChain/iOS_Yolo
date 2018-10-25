@@ -42,6 +42,8 @@
         NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"YOLOName";
         NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
         NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
+        //TODO:地区读扩展字段, 有时间在单独写个处理 UserExt 的类.
+        
         NSArray* list = @[
                           @{@"content": @[@{
                                               @"title":@"手机号",
@@ -79,7 +81,7 @@
                                               @"cellType" :@"3",
                                               },@{
                                               @"title":@"地区",
-                                              @"subtitle":@"中国,上海",
+                                              @"subtitle":@"中国,深圳",
                                               @"image":@"",
                                               @"route":kYZHRouterMyInformationMyPlace,
                                               @"cellType" :@"2",

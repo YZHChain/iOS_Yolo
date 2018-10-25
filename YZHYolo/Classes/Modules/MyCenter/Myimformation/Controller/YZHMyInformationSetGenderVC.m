@@ -66,8 +66,10 @@
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     if ([self.userGender isEqualToString:@"男"]) {
         self.girlSelectedImageView.hidden = YES;
+        self.boyTitleButton.selected = YES;
     } else {
         self.boySelectedImageView.hidden = YES;
+        self.girlTitleButton.selected = YES;
     }
 }
 

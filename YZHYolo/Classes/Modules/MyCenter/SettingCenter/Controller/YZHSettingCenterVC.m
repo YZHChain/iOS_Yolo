@@ -155,12 +155,13 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
     YZHAboutYoloCell* cell = [tableView cellForRowAtIndexPath:indexPath];
     
     if ([cell.titleLabel.text isEqualToString:kYZHCellPasswordTitle]) {
-        
+        //TODO: 修改密码未做.
         [YZHRouter openURL:kYZHRouterModifyPassword];
     } else {
         [YZHAlertManage showAlertTitle:kYZHEmptyLogAlertTitle message:kYZHEmptyLogAlertMessage actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
-                // 执行删除聊天记录
+                //TODO: 执行删除聊天记录
+                
             }
         }];
     }

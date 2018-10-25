@@ -12,6 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHPrivacySettingModel : NSObject
 
+@property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy) NSString* subTitle;
+@property (nonatomic, assign) BOOL isSelected;
+
+@end
+
+@interface YZHPrivacySettingContent : NSObject<NSSecureCoding>
+
+@property (nonatomic, strong) NSArray<YZHPrivacySettingModel* >* modelArray;
+
++ (instancetype)sharePrivacySettingContent;
+
 @end
 
 NS_ASSUME_NONNULL_END

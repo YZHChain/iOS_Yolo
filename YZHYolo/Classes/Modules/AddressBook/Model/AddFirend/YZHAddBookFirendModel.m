@@ -30,7 +30,7 @@
 }
 
 - (NSArray* )defaultList {
-    
+    //TODO:模拟器跳转至扫码是很卡,
     NSArray* list = @[
                       @{@"title": @"扫一扫",
                         @"route": kYZHRouterAddressBookScanQRCode
@@ -39,7 +39,7 @@
                         @"route": kYZHRouterAddressBookPhoneContact
                         },
                       @{@"title": @"搜索进群",
-                        @"route": kYZHRouterAddressBookScanQRCode
+                        @"route": @"",
                         }];
     return list;
 }
