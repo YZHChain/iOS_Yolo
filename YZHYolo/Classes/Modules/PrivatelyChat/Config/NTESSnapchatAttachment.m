@@ -10,6 +10,7 @@
 #import "NTESFileLocationHelper.h"
 #import "NSData+NTES.h"
 #import "NTESSessionUtil.h"
+#import "YZHCustomAttachmentDefines.h"
 
 @interface NTESSnapchatAttachment()
 

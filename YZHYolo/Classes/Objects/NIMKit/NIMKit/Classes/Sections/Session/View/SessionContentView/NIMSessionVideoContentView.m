@@ -40,6 +40,9 @@
         
         _progressView = [[NIMLoadProgressView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         _progressView.maxProgress = 1.0;
+        
+        //Jersey IM:去除气泡
+        [self.bubbleImageView removeFromSuperview];
         [self addSubview:_progressView];
     }
     return self;
@@ -56,7 +59,7 @@
     }
 }
 
-
+//Jersey IM:计算大小.
 - (void)layoutSubviews{
     [super layoutSubviews];
     UIEdgeInsets contentInsets = self.model.contentViewInsets;

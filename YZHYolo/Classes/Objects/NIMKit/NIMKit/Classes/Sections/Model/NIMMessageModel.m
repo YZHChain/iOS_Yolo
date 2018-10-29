@@ -60,9 +60,10 @@
         return [self.message isEqual:model.message];
     }
 }
-
+//Jersey IM:Model 精细计算,使用消息来计算真正高度.在 Cell layout 的时候调用获取.
 - (CGSize)contentSize:(CGFloat)width
 {
+    //这里做了个缓存,以宽度为键,大小为 Value！！！！！ NB
     CGSize size = [self.contentSizeInfo[@(width)] CGSizeValue];
     if (CGSizeEqualToSize(size, CGSizeZero))
     {

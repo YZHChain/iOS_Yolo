@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YZHUserCardAttachment.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHAddFirendAttachment.h"
+#import "YZHRequstAddFirendAttachment.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSessionMsgConverter : NSObject
@@ -28,6 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NIMMessage *)msgWithTip:(NSString *)tip;
 
++ (NIMMessage *)msgWithUserCard:(YZHUserCardAttachment* )attachment;
+
++ (NIMMessage *)msgWithTeamCard:(YZHTeamCardAttachment* )attachment;
+
++ (NIMMessage *)msgWithAddFirend:(YZHAddFirendAttachment* )attachment;
+
++ (NIMMessage *)msgWithRequstAddFirend:(YZHRequstAddFirendAttachment* )attachment;
 @end
 
 

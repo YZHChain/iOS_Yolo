@@ -16,15 +16,19 @@
 #import "UIView+Toast.h"
 
 #import "YZHPrivateChatConfig.h"
+#import "YZHUserCardAttachment.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHAddFirendAttachment.h"
+#import "YZHSessionMsgConverter.h"
+#import "YZHRequstAddFirendAttachment.h"
+
 #import "NTESSessionUtil.h"
 #import "NTESTimerHolder.h"
 //#import "NTESSnapchatAttachment.h"
-#import "YZHSessionMsgConverter.h"
-#import "UIActionSheet+YZHBlock.h"
 #import "NTESGalleryViewController.h"
 #import "NTESSessionSnapchatContentView.h"
 #import "NTESSnapchatAttachment.h"
-
+#import "UIActionSheet+YZHBlock.h"
 #import "Reachability.h"
 #import <CoreServices/UTCoreTypes.h>
 
@@ -44,6 +48,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
 @property (nonatomic, strong) UIView *currentSingleSnapView;
+@property (nonatomic, assign) BOOL requstAddFirendFlag;
 @end
 
 @implementation YZHPrivateChatVC
@@ -135,7 +140,6 @@
         [self.view addSubview:self.sessionInputView];
     }
 }
-
 //是否需要显示输入框 : 某些场景不需要显示输入框，如使用 3D touch 的场景预览会话界面内容
 - (BOOL)shouldShowInputView
 {
@@ -223,18 +227,31 @@
 // 联系人
 - (void)onTapMediaItemContact:(NIMMediaItem *)item {
     // 弹出联系人页面
-    UIViewController* vc = [[UIViewController alloc] init];
-    vc.navigationItem.title = @"联系人";
-    [self.navigationController pushViewController:vc animated:YES];
+//    UIViewController* vc = [[UIViewController alloc] init];
+//    vc.navigationItem.title = @"联系人";
+//    [self.navigationController pushViewController:vc animated:YES];
+    YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
+    userCardAttachment.userName = @"泽西哥";
+    userCardAttachment.yoloID = @"999999";
+    userCardAttachment.account = @"zexi0625";
+//    [userCardAttachment encodeAttachment];
+    
+    [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCardAttachment]];
 }
 // 我的社群
 - (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
     // 弹出联系人页面
-    UIViewController* vc = [[UIViewController alloc] init];
-    vc.navigationItem.title = @"社群";
-    [self.navigationController pushViewController:vc animated:YES];
+//    UIViewController* vc = [[UIViewController alloc] init];
+//    vc.navigationItem.title = @"社群";
+//    [self.navigationController pushViewController:vc animated:YES];
+    YZHTeamCardAttachment* teamCardAttachment = [[YZHTeamCardAttachment alloc] init];
+    teamCardAttachment.groupName = @"商业群名";
+    teamCardAttachment.groupID = @"999999";
+    teamCardAttachment.groupSynopsis = @"群简介群简介群简介群简介群简介群简介群简介群 简介群简介群简介群简介群简介.群简介群简介群简介群简介群简介群简介群简介群 简介群简介群简介群简介群简介.";
+    teamCardAttachment.groupUrl = @"http://www.baidu.com";
+    
+    [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment]];
 }
-
 
 #pragma mark - 消息发送时间截获
 
@@ -250,6 +267,27 @@
         NIMMessage *tip = [YZHSessionMsgConverter msgWithTip:@"消息已发送，但对方拒收"];
         [[NIMSDK sharedSDK].conversationManager saveMessage:tip forSession:self.session completion:nil];
     }
+    if (self.requstAddFirendFlag == NO) {
+        if (message.session.sessionType == NIMSessionTypeP2P) {
+            NSString* fromAccount = message.session.sessionId;
+            if ([[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+                //私聊则检测双发是否为好友状态
+                YZHAddFirendAttachment* addFirendAttachment = [[YZHAddFirendAttachment alloc] init];
+                addFirendAttachment.addFirendTitle = @"您不是对方的好友，请先添加为好友";
+                addFirendAttachment.addFirendButtonTitle = @"加为好友";
+                addFirendAttachment.fromAccount = self.session.sessionId;
+                @weakify(self)
+                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithAddFirend:addFirendAttachment] forSession:self.session completion:^(NSError * _Nullable error) {
+                    if (!error) {
+                        //标记, 保持进入回话只会弹出一次.
+                        @strongify(self)
+                        self.requstAddFirendFlag = YES;
+                    }
+                }];
+            }
+        }
+    }
+    
     [super sendMessage:message didCompleteWithError:error];
 }
 
@@ -299,6 +337,7 @@
 {
     BOOL handled = [super onTapCell:event];
     NSString *eventName = event.eventName;
+    //包括四种类型消息
     if ([eventName isEqualToString:NIMKitEventNameTapContent])
     {
         NIMMessage *message = event.messageModel.message;
@@ -311,7 +350,7 @@
                 handled = YES;
             }
         }
-    }
+    }//打开网页.跳转
     else if([eventName isEqualToString:NIMKitEventNameTapLabelLink])
     {
         NSString *link = event.data;
@@ -320,7 +359,7 @@
     }
     else if([eventName isEqualToString:NIMDemoEventNameOpenSnapPicture])
     {
-        NIMCustomObject *object = event.messageModel.message.messageObject;
+        NIMCustomObject *object = (NIMCustomObject *)event.messageModel.message.messageObject;
         NTESSnapchatAttachment *attachment = (NTESSnapchatAttachment *)object.attachment;
         if(attachment.isFired){
             return handled;
@@ -359,6 +398,10 @@
         [self openSafari:link];
         handled = YES;
     }
+//    else if ([eventName isEqualToString:NIMKitEventNameTapAudio]) {
+//        [super.interactor mediaAudioPressed:event.messageModel];
+//        handle = YES;
+//    }
     if (!handled) {
         NSAssert(0, @"invalid event");
     }
@@ -368,7 +411,7 @@
 // 图片展示,
 - (void)showImage:(NIMMessage *)message
 {
-    NIMImageObject *object = message.messageObject;
+    NIMImageObject *object = (NIMImageObject *)message.messageObject;
     NTESGalleryItem *item = [[NTESGalleryItem alloc] init];
     item.thumbPath      = [object thumbPath];
     item.imageURL       = [object url];
@@ -390,9 +433,66 @@
         }];
     }
 }
+/* 展示电影
+- (void)showVideo:(NIMMessage *)message
+{
+    NIMVideoObject *object = message.messageObject;
+    NIMSession *session = [self isMemberOfClass:[NTESSessionViewController class]]? self.session : nil;
+    
+    NTESVideoViewItem *item = [[NTESVideoViewItem alloc] init];
+    item.path = object.path;
+    item.url  = object.url;
+    item.session = session;
+    item.itemId  = object.message.messageId;
+    
+    NTESVideoViewController *playerViewController = [[NTESVideoViewController alloc] initWithVideoViewItem:item];
+    [self.navigationController pushViewController:playerViewController animated:YES];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:object.coverPath]){
+        //如果封面图下跪了，点进视频的时候再去下一把封面图
+        __weak typeof(self) wself = self;
+        [[NIMSDK sharedSDK].resourceManager download:object.coverUrl filepath:object.coverPath progress:nil completion:^(NSError *error) {
+            if (!error) {
+                [wself uiUpdateMessage:message];
+            }
+        }];
+    }
+}
+ */
+
+- (void)showVideo:(NIMMessage *)message {
+    
+}
 
 - (void)showCustom:(NIMMessage *)message
 {
+    //判断当前消息是否属于添加好友的消息.
+    NIMCustomObject* customObject = (NIMCustomObject *)message.messageObject;
+    id attachment = customObject.attachment;
+    //处理添加好友点击事件.
+    if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
+        YZHAddFirendAttachment* addFirendAttachment = (YZHAddFirendAttachment *)attachment;
+        NSString* fromAccount = addFirendAttachment.fromAccount;
+        //判断当前是否为好友,不是则执行添加好友,并且发出一条消息.否认提示等
+        if ([[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+            NIMUserRequest* request = [[NIMUserRequest alloc] init];
+            request.userId = fromAccount;
+            request.operation = NIMUserOperationRequest;
+            //TODO: 添加好友,附言,这里需要和产品对一下.
+            request.message = @"";
+            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
+                if (!error) {
+                    //发送添加请求成功,则发送一条已添加消息.
+                   YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                    addFirendAttachment.addFirendTitle = @"好友申请已经发出";
+                    //插入一条添加好友申请回话.
+                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+                } else {
+                    //这里可以提出相应提示等等.
+                }
+            }];
+        }
+        
+    }
     //普通的自定义消息点击事件可以在这里做哦~
 }
 
@@ -419,7 +519,8 @@
                     @(NIMMessageTypeVideo) :    @"showVideo:",
                     @(NIMMessageTypeLocation) : @"showLocation:",
                     @(NIMMessageTypeFile)  :    @"showFile:",
-                    @(NIMMessageTypeCustom):    @"showCustom:"};
+                    @(NIMMessageTypeCustom):    @"showCustom:",
+                    };
     });
     return actions;
 }

@@ -121,7 +121,7 @@
  *
  *  @param models 消息集合
  *
- *  @return 插入消息的index
+ *  @return 插入消息的index    jersey:
  */
 - (NSArray *)insertMessageModels:(NSArray *)models{
     if (!models.count) {
@@ -316,7 +316,7 @@
     [self.msgIdDict setObject:model forKey:model.message.messageId];
 }
 
-
+//Jersey: 插入消息,修改 items 和 msgIdDict
 - (NSArray *)insertMessageModel:(NIMMessageModel *)model index:(NSInteger)index{
     NSMutableArray *inserts = [[NSMutableArray alloc] init];
     if (![self.dataProvider respondsToSelector:@selector(needTimetag)] || self.dataProvider.needTimetag)
@@ -390,7 +390,7 @@
     return [self findInsertPosistion:half model:model];
 }
 
-
+//Jersey IM:判断是否需要插入时间戳
 - (BOOL)shouldInsertTimestamp:(NIMMessageModel *)model
 {
     NSTimeInterval lastTimeInterval = [self lastTimeInterval];

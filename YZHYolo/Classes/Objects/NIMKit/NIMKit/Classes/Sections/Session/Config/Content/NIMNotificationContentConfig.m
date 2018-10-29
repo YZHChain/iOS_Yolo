@@ -15,7 +15,7 @@
 @implementation NIMNotificationContentConfig
 - (CGSize)contentSize:(CGFloat)cellWidth message:(NIMMessage *)message
 {
-    NIMNotificationObject *object = message.messageObject;
+    NIMNotificationObject *object = (NIMNotificationObject*)message.messageObject;
     NSAssert([object isKindOfClass:[NIMNotificationObject class]], @"message should be notification");
     
     CGSize contentSize = CGSizeZero;
@@ -62,7 +62,8 @@
 
 - (NSString *)cellContent:(NIMMessage *)message
 {
-    NIMNotificationObject *object = message.messageObject;
+    //Jersey: 强转忽略警告
+    NIMNotificationObject *object = (NIMNotificationObject*)message.messageObject;
     NSAssert([object isKindOfClass:[NIMNotificationObject class]], @"message should be notification");
     
     switch (object.notificationType) {

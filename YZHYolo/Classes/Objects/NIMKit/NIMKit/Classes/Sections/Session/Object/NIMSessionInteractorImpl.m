@@ -280,7 +280,7 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
         }
     }];
 }
-
+//自动拉取消息, -> DataSourceImpl - MsgDatasource -> Handle -> SessionVC -> didFetchMessageData
 - (void)autoFetchMessages
 {
     if (![self.sessionConfig respondsToSelector:@selector(autoFetchWhenOpenSession)]
@@ -299,10 +299,11 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
         }];
     }
 }
-
+//Jersey: 拉取回话内容,可通过 PrivateChatConfig 设置
 - (void)setDataSource:(id<NIMSessionDataSource>)dataSource
 {
     _dataSource = dataSource;
+    
     [self autoFetchMessages];
 }
 
@@ -438,7 +439,7 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
     [[NIMSDK sharedSDK].chatManager sendMessage:message toSession:self.session error:nil];
 }
 
-
+//Jersey 每次即将展示页面时 Session 调用,刷新页面.
 - (void)onViewWillAppear
 {
     //fix bug: 竖屏进入会话界面，然后右上角进入群信息，再横屏，左上角返回，横屏的会话界面显示的就是竖屏时的大小

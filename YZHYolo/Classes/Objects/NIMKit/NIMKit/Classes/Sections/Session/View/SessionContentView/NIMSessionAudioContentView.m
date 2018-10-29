@@ -50,7 +50,7 @@
 - (void)addVoiceView{
     UIImage * image = [UIImage nim_imageInKit:@"icon_receiver_voice_playing.png"];
     _voiceImageView = [[UIImageView alloc] initWithImage:image];
-    //Jersey, 语音动画
+//    Jersey, 语音动画
     NSArray * animateNames = @[@"icon_receiver_voice_playing_001.png",@"icon_receiver_voice_playing_002.png",@"icon_receiver_voice_playing_003.png"];
     NSMutableArray * animationImages = [[NSMutableArray alloc] initWithCapacity:animateNames.count];
     for (NSString * animateName in animateNames) {
@@ -65,16 +65,17 @@
     _durationLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:_durationLabel];
 }
-
+//Jersey IM:刷新,
 - (void)refresh:(NIMMessageModel *)data{
     [super refresh:data];
-    NIMAudioObject *object = self.model.message.messageObject;
+    NIMAudioObject *object = (NIMAudioObject *)self.model.message.messageObject;
     self.durationLabel.text = [NSString stringWithFormat:@"%zd\"",(object.duration+500)/1000];//四舍五入
-    
+    //Jersey IM: 取出 setting作相应配置.
     NIMKitSetting *setting = [[NIMKit sharedKit].config setting:data.message];
 
     self.durationLabel.font      = setting.font;
     self.durationLabel.textColor = setting.textColor;
+    //Jersey IM: 重新设置左右语音图,和动画图.
     
     [self.durationLabel sizeToFit];
     
@@ -84,6 +85,31 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+    
+    //Jersey IM:使用消息排列的方式来判断左右.
+    //IMTODO: 动画效果有问题,重新切图.
+    if (self.model.message.isOutgoingMsg) {
+        _voiceImageView.image = [UIImage imageNamed:@"session_sender_audio"];
+        NSArray* imageNames = @[@"session_sender_audio_animationA",@"session_sender_audio_animationB",@"session_sender_audio_animationC"];
+        NSMutableArray* animationImages = [[NSMutableArray alloc] init];
+        for (NSString* imageName in imageNames) {
+            UIImage* image = [UIImage imageNamed:imageName];
+            [animationImages addObject:image];
+        }
+        _voiceImageView.animationImages = animationImages;
+        _voiceImageView.animationDuration = 1.0;
+        
+    } else {
+        _voiceImageView.image = [UIImage imageNamed:@"session_receiver_audio"];
+        NSArray* imageNames = @[@"session_receiver_audio_animationA",@"session_receiver_audio_animationB",@"session_receiver_audio_animationC"];
+        NSMutableArray* animationImages = [[NSMutableArray alloc] init];
+        for (NSString* imageName in imageNames) {
+            [animationImages addObject:[UIImage imageNamed:imageName]];
+        }
+        _voiceImageView.animationImages = animationImages;
+        _voiceImageView.animationDuration = 1.0;
+    }
+
     UIEdgeInsets contentInsets = self.model.contentViewInsets;
     if (self.model.message.isOutgoingMsg) {
         self.voiceImageView.nim_right = self.nim_width - contentInsets.right;
@@ -95,6 +121,7 @@
     }
     _voiceImageView.nim_centerY = self.nim_height * .5f;
     _durationLabel.nim_centerY = _voiceImageView.nim_centerY;
+    
 }
 
 -(void)onTouchUpInside:(id)sender
@@ -111,7 +138,7 @@
         if ([[NIMSDK sharedSDK].mediaManager isPlaying]) {
             [self stopPlayingUI];
         }
-        
+        //Jersey IM: 按钮名称
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameTapAudio;
         event.messageModel = self.model;
@@ -146,5 +173,6 @@
     return [NIMKitAudioCenter instance].currentPlayingMessage == self.model.message; //对比是否是同一条消息，严格同一条，不能是相同ID，防止进了会话又进云端消息界面，导致同一个ID的云消息也在动画
 }
 
+#pragma mark -- SET GET
 
 @end

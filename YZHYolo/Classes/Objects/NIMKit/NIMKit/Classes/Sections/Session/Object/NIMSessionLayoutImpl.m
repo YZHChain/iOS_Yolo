@@ -51,7 +51,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
+// 刷新.
 - (void)reloadTable
 {
     [self.tableView reloadData];
@@ -66,7 +66,7 @@
         [self setupRefreshControl];
     }
 }
-
+//Jersey 矫正, TableView 和 输入框
 - (void)resetLayout
 {
     [self adjustInputView];

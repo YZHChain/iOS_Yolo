@@ -43,8 +43,10 @@
     UITableViewCell *cell = nil;
     id model = [[self.interactor items] objectAtIndex:indexPath.row];
     if ([model isKindOfClass:[NIMMessageModel class]]) {
+        //Jersey IM: 通过 NIMMessageCellFactory 复用 Cell.
         cell = [self.cellFactory cellInTable:tableView
                                    forMessageMode:model];
+        //Jersey IM: 将自己的 delegate 设置到 Cell 实际上就是 SessionVC.
         [(NIMMessageCell *)cell setDelegate:self.delegate];
         [(NIMMessageCell *)cell refreshData:model];
     }

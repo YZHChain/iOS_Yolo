@@ -85,13 +85,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     //4.设置通知
     [self setupNotification];
     
-    
-    // 设置UI配置器
-    NIMKitConfig* config = [[NIMKitConfig alloc] init];
-    
-    config.avatarType = NIMKitAvatarTypeRadiusCorner;
-    [NIMKit sharedKit].config = config;
-    
 //    // 设置 3D Touch.
 //    if (@available(iOS 9.0, *)) {
 //        self.supportsForceTouch = [self.traitCollection respondsToSelector:@selector(forceTouchCapability)] && self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
@@ -594,13 +587,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     if (@available(iOS 9.0, *)) {
         UITableViewCell *touchCell = (UITableViewCell *)previewingContext.sourceView;
         if ([touchCell isKindOfClass:[UITableViewCell class]]) {
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:touchCell];
+//            NSIndexPath *indexPath = [self.tableView indexPathForCell:touchCell];
 //            NIMRecentSession *recent = self.recentSessions[indexPath.row];
             //TODO:
 //            NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:recent.session];
-            id addBookVC = NSClassFromString(@"YZHAddressBookVC");
-            id vc = [[addBookVC alloc] init];
-            [self.navigationController showViewController:vc sender:nil];
+//            id addBookVC = NSClassFromString(@"YZHAddressBookVC");
+//            id vc = [[addBookVC alloc] init];
+//            [self.navigationController showViewController:vc sender:nil];
         }
     } else {
         // Fallback on earlier versions
@@ -700,7 +693,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
               totalUnreadCount:(NSInteger)totalUnreadCount{
-    
+//    [self.recentSessionExtManage checkSessionUserTagWithRecentSession:recentSession];
     for (NIMRecentSession *recent in self.recentSessions)
     {
         if ([recentSession.session.sessionId isEqualToString:recent.session.sessionId])

@@ -110,7 +110,7 @@
 {
     [self.dataSource cleanCache];
 }
-
+//读取消息,在 InteractorImpl setDatasource 的时候, 同时会进行。
 - (void)resetMessages:(void(^)(NSError *error))handler{
     [self.dataSource resetMessages:handler];
 }
@@ -141,7 +141,7 @@
         }
     }
 }
-
+//检测已读回执,
 - (NSDictionary *)checkReceipts:(NSArray<NIMMessageReceipt *> *)receipts
 {
     if (self.session.sessionType == NIMSessionTypeP2P)

@@ -32,7 +32,7 @@
 {
     
 }
-
+// 配置 Cell.
 - (NIMMessageCell *)cellInTable:(UITableView*)tableView
                  forMessageMode:(NIMMessageModel *)model
 {

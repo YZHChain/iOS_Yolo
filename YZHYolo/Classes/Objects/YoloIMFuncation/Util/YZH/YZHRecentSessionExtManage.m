@@ -21,7 +21,7 @@
     _tagsRecentSession = [self defaultTagsRecentSession];
     _currentSessionTags = [self defaultCurrentSessionTags];
     NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
-        //检查本地扩展字段,
+        //检查本地扩展字段.
     for (NSInteger i = 0; i < allRecentSession.count; i++) {
         NIMRecentSession* recentSession = allRecentSession[i];
         //不比较未分类,直接存到到最后
@@ -85,13 +85,20 @@
     if (recentSession.session.sessionType == NIMSessionTypeP2P) {
         NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:recentSession.session.sessionId];
         NSString* userExt = user.ext;
-        NSData* jsonData = [userExt dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-        if (dic[@"tagName"]) {
-            NSDictionary* locExt = @{
-                                     @"tagName":dic[@"tagName"]
-                                     };
-            [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:locExt recentSession:recentSession];
+        if (YZHIsString(userExt)) {
+            NSData* jsonData = [userExt dataUsingEncoding:NSUTF8StringEncoding];
+            NSError* error;
+            NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+            if (!error) {
+                if (dic[@"tagName"]) {
+                    NSDictionary* locExt = @{
+                                             @"tagName":dic[@"tagName"]
+                                             };
+                    //TODO: 更新时机还需要在研究下.
+                        [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:locExt recentSession:recentSession];
+
+                }
+            }
         }
     }
     

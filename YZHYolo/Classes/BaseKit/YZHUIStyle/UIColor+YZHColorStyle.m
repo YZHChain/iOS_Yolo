@@ -37,7 +37,17 @@
 
 + (UIColor *)yzh_buttonBackgroundRed {
     
-    return [UIColor colorWithRed:227/255.0 green:41/255.0 blue:63/255.0 alpha:1];
+    return [UIColor colorWithRed: 227/255.0 green: 41/255.0 blue: 63/255.0 alpha: 1];
+}
+
++(UIColor *)yzh_sessionCellGray {
+    
+    return [UIColor colorWithRed: 142/255.0 green: 142/255.0 blue: 142/255.0 alpha:1];
+}
+
++(UIColor *)yzh_sessionCellBackgroundGray {
+    
+    return [UIColor colorWithRed: 249/255.0 green: 249/255.0 blue: 249/255.0 alpha:1];
 }
 
 //十六进制颜色转换

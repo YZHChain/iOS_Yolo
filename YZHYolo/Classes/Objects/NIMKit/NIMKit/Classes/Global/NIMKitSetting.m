@@ -22,6 +22,7 @@
             _normalBackgroundImage    =  [[UIImage nim_imageInKit:@"session_sender_node_normal"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
             _highLightBackgroundImage =  [[UIImage nim_imageInKit:@"session_sender_node_selected"] resizableImageWithCapInsets:UIEdgeInsetsFromString(@"{18,25,17,25}") resizingMode:UIImageResizingModeStretch];
             
+            
         }
         else
         {

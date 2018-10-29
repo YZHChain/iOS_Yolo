@@ -120,7 +120,7 @@
     return [self.model isKindOfClass:[NIMMessageModel class]];
 }
 
-
+//Jersey IM:通过 model 更新聊天内容.
 - (void)refresh
 {
     [self addContentViewIfNotExist];
@@ -140,7 +140,7 @@
     }
     [_nameLabel setHidden:![self needShowNickName]];
     
-    
+    //Jersey IM:将数据加载到内容视图中<
     [_bubbleView refresh:self.model];
     [_bubbleView setNeedsLayout];
     
@@ -181,7 +181,7 @@
         }
     }
 }
-
+//Jersey IM:懒加载内容视图 读取消息类型 匹配内容类型. 将 Cell 设置成气泡代理,如是语音类则也设置.
 - (void)addContentViewIfNotExist
 {
     if (_bubbleView == nil)
@@ -190,6 +190,7 @@
         NSString *contentStr = [layoutConfig cellContent:self.model];
         NSAssert([contentStr length] > 0, @"should offer cell content class name");
         Class clazz = NSClassFromString(contentStr);
+        //TODO: 异常捕获,
         NIMSessionMessageContentView *contentView =  [[clazz alloc] initSessionMessageContentView];
         NSAssert(contentView, @"can not init content view");
         _bubbleView = contentView;
@@ -255,6 +256,7 @@
 
 - (void)layoutBubbleView
 {
+    //计算正在的内容大小.
     CGSize size  = [self.model contentSize:self.nim_width];
     UIEdgeInsets insets = self.model.contentViewInsets;
     size.width  = size.width + insets.left + insets.right;

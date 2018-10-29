@@ -39,13 +39,14 @@
     return [config contentViewInsets:model.message];
 }
 
-
+//Jersey IM:设置气泡在 Cell 的间距.
 - (UIEdgeInsets)cellInsets:(NIMMessageModel *)model
 {
     if ([[self cellContent:model] isEqualToString:@"NIMSessionNotificationContentView"]) {
         return UIEdgeInsetsZero;
     }
-    CGFloat cellTopToBubbleTop           = 3;
+    //Jersey IM:设置气泡在 Cell 的间距.
+    CGFloat cellTopToBubbleTop           = 0;
     CGFloat otherNickNameHeight          = 20;
     CGFloat otherBubbleOriginX           = [self shouldShowAvatar:model]? 55 : 0;
     CGFloat cellBubbleButtomToCellButtom = 13;

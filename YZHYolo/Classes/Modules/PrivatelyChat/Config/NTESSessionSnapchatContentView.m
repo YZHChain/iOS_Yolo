@@ -14,7 +14,6 @@
 NSString *const NIMDemoEventNameOpenSnapPicture  = @"NIMDemoEventNameOpenSnapPicture";
 NSString *const NIMDemoEventNameCloseSnapPicture = @"NIMDemoEventNameCloseSnapPicture";
 
-
 @interface NTESSessionSnapchatContentView()
 
 @property (nonatomic,strong) UIImageView *imageView;

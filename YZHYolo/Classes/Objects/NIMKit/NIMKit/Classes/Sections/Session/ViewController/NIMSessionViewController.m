@@ -105,7 +105,6 @@
     [self.view addSubview:self.tableView];
 }
 
-
 - (void)setupInputView
 {
     if ([self shouldShowInputView])
@@ -119,7 +118,6 @@
         [self.view addSubview:_sessionInputView];
     }
 }
-
 
 - (void)setupConfigurator
 {
@@ -136,7 +134,6 @@
     [self.interactor onViewWillAppear];
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -148,22 +145,18 @@
     [super viewDidDisappear:animated];
     [self.interactor onViewDidDisappear];
 }
-
-
+//销毁未读小红点, 刷新页面. //Jersey 位置矫正, TableView 和 输入框  最终调用 LayoutImpl resetLayout
 - (void)viewDidLayoutSubviews
 {
     [self changeLeftBarBadge:self.conversationManager.allUnreadCount];
     [self.interactor resetLayout];
 }
 
-
-
 #pragma mark - 消息收发接口
 - (void)sendMessage:(NIMMessage *)message
 {
     [self.interactor sendMessage:message];
 }
-
 
 #pragma mark - Touch Event
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -235,7 +228,6 @@
 {
     //如果需要使用富文本推送，可以在这里进行 message apns payload 的设置
 }
-
 
 //发送结果
 - (void)sendMessage:(NIMMessage *)message didCompleteWithError:(NSError *)error
@@ -501,17 +493,17 @@
         NIMRobotObject *robotObject = (NIMRobotObject *)event.messageModel.message.messageObject;
         NIMRobot *robot = [[NIMSDK sharedSDK].robotManager robotInfo:robotObject.robotId];
         NSString *text = [NSString stringWithFormat:@"%@%@%@",NIMInputAtStartChar,robot.nickname,NIMInputAtEndChar];
-        
+
         NIMInputAtItem *item = [[NIMInputAtItem alloc] init];
         item.uid  = robot.userId;
         item.name = robot.nickname;
         [self.sessionInputView.atCache addAtItem:item];
-        
+
         [self.sessionInputView.toolBar insertText:text];
 
         handle = YES;
     }
-    
+
     return handle;
 }
 
@@ -569,8 +561,6 @@
     return should;
 }
 
-
-
 //是否需要显示输入框 : 某些场景不需要显示输入框，如使用 3D touch 的场景预览会话界面内容
 - (BOOL)shouldShowInputView
 {
@@ -580,7 +570,6 @@
     }
     return should;
 }
-
 
 //当前录音格式 : NIMSDK 支持 aac 和 amr 两种格式
 - (NIMAudioType)recordAudioType
@@ -601,7 +590,6 @@
     }
     return needProximityMonitor;
 }
-
 
 #pragma mark - 菜单
 - (NSArray *)menusItems:(NIMMessage *)message
@@ -624,7 +612,14 @@
     }
     if (copyText) {
         [items addObject:[[UIMenuItem alloc] initWithTitle:@"复制"
-                                                    action:@selector(copyText:)]];
+                                                action:@selector(copyText:)]];
+    }
+    if (message.messageType == NIMMessageTypeCustom) {
+        NIMCustomObject *customObject = (NIMCustomObject*)message.messageObject;
+        if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")]) {
+            [items addObject:[[UIMenuItem alloc] initWithTitle:@"转发"
+                                                        action:@selector(forwarding:)]];
+        }
     }
     [items addObject:[[UIMenuItem alloc] initWithTitle:@"删除"
                                                 action:@selector(deleteMsg:)]];
@@ -665,6 +660,11 @@
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         [pasteboard setString:message.text];
     }
+}
+
+- (void)forwarding:(id)sender {
+    
+    
 }
 
 - (void)deleteMsg:(id)sender

@@ -118,9 +118,6 @@ FOUNDATION_EXPORT const unsigned char NIMKitVersionString[];
  */
 @property (nonatomic,strong)    NIMKitRobotDefaultTemplateParser *robotTemplateParser;
 
-
-
-
 /**
  *  用户信息变更通知接口
  *

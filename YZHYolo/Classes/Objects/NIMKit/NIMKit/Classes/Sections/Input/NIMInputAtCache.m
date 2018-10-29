@@ -24,7 +24,7 @@
     }
     return self;
 }
-
+//Jersey IM:检测发送文本.@功能
 - (NSArray *)allAtUid:(NSString *)sendText;
 {
     NSArray *names = [self matchString:sendText];

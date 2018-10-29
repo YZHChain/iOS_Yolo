@@ -11,14 +11,14 @@
 
 @class NIMKitBubbleStyleObject;
 
-typedef NS_ENUM(NSInteger,NTESCustomMessageType){
-    CustomMessageTypeJanKenPon  = 1, //剪子石头布
-    CustomMessageTypeSnapchat   = 2, //阅后即焚
-    CustomMessageTypeChartlet   = 3, //贴图表情
-    CustomMessageTypeWhiteboard = 4, //白板会话
-    CustomMessageTypeRedPacket  = 5, //红包消息
-    CustomMessageTypeRedPacketTip = 6, //红包提示消息
-};
+//typedef NS_ENUM(NSInteger,NTESCustomMessageType){
+//    CustomMessageTypeJanKenPon  = 1, //剪子石头布
+//    CustomMessageTypeSnapchat   = 2, //阅后即焚
+//    CustomMessageTypeChartlet   = 3, //贴图表情
+//    CustomMessageTypeWhiteboard = 4, //白板会话
+//    CustomMessageTypeRedPacket  = 5, //红包消息
+//    CustomMessageTypeRedPacketTip = 6, //红包提示消息
+//};
 
 
 #define CMType             @"type"

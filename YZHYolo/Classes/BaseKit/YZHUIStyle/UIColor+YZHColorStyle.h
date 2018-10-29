@@ -17,5 +17,7 @@
 + (UIColor *)yzh_fontShallowBlack;   //  常用字体浅黑色;
 + (UIColor *)yzh_buttonBackgroundGreen; // 常用按钮背景绿
 + (UIColor *)yzh_buttonBackgroundRed;  //  按钮背景红
++ (UIColor *)yzh_sessionCellBackgroundGray; // 回话Cell 背景灰
++ (UIColor *)yzh_sessionCellGray;    // 回话Cell 边框
 
 @end

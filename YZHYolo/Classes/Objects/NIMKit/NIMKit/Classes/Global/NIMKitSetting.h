@@ -43,7 +43,6 @@
  */
 @property (nonatomic, strong) UIImage *highLightBackgroundImage;
 
-
 - (instancetype)init:(BOOL)isRight;
 
 @end

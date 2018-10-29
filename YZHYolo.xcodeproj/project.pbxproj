@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5509F0DF218206C6004E10D3 /* YZHCellLayoutConfign.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F0DE218206C6004E10D3 /* YZHCellLayoutConfign.m */; };
+		5509F0EB21821077004E10D3 /* YZHSessionCustomLayoutConfign.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F0EA21821077004E10D3 /* YZHSessionCustomLayoutConfign.m */; };
+		5509F0F5218212DE004E10D3 /* YZHUserCardAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F0F4218212DE004E10D3 /* YZHUserCardAttachment.m */; };
+		5509F0F821821633004E10D3 /* YZHCustomAttachmentDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F0F721821633004E10D3 /* YZHCustomAttachmentDecoder.m */; };
+		5509F0FB218218A9004E10D3 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F0FA218218A9004E10D3 /* NSDictionary+NTESJson.m */; };
+		5509F103218220A8004E10D3 /* YZHUserCardContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F102218220A8004E10D3 /* YZHUserCardContentView.m */; };
+		5509F106218228BE004E10D3 /* YZHTeamCardContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F105218228BE004E10D3 /* YZHTeamCardContentView.m */; };
+		5509F10921822902004E10D3 /* YZHTeamCardAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F10821822902004E10D3 /* YZHTeamCardAttachment.m */; };
+		5509F10F2183FED9004E10D3 /* YZHAddFirendAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F10E2183FED9004E10D3 /* YZHAddFirendAttachment.m */; };
+		5509F11221840307004E10D3 /* YZHAddFirendContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F11121840306004E10D3 /* YZHAddFirendContentView.m */; };
+		5509F1152184442E004E10D3 /* YZHRequstAddFirendContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F1142184442E004E10D3 /* YZHRequstAddFirendContentView.m */; };
+		5509F1182184444D004E10D3 /* YZHRequstAddFirendAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5509F1172184444D004E10D3 /* YZHRequstAddFirendAttachment.m */; };
 		551289D221461EE20099CC55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289D121461EE20099CC55 /* AppDelegate.m */; };
 		551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289DB21461EE30099CC55 /* LaunchScreen.storyboard */; };
 		551289E021461EE30099CC55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289DF21461EE30099CC55 /* main.m */; };
@@ -363,6 +375,31 @@
 
 /* Begin PBXFileReference section */
 		2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YZHYolo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5509F0DD218206C6004E10D3 /* YZHCellLayoutConfign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCellLayoutConfign.h; sourceTree = "<group>"; };
+		5509F0DE218206C6004E10D3 /* YZHCellLayoutConfign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCellLayoutConfign.m; sourceTree = "<group>"; };
+		5509F0E921821077004E10D3 /* YZHSessionCustomLayoutConfign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSessionCustomLayoutConfign.h; sourceTree = "<group>"; };
+		5509F0EA21821077004E10D3 /* YZHSessionCustomLayoutConfign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSessionCustomLayoutConfign.m; sourceTree = "<group>"; };
+		5509F0F2218212AD004E10D3 /* YZHCustomAttachmentDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCustomAttachmentDefines.h; sourceTree = "<group>"; };
+		5509F0F3218212DE004E10D3 /* YZHUserCardAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHUserCardAttachment.h; sourceTree = "<group>"; };
+		5509F0F4218212DE004E10D3 /* YZHUserCardAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHUserCardAttachment.m; sourceTree = "<group>"; };
+		5509F0F621821633004E10D3 /* YZHCustomAttachmentDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCustomAttachmentDecoder.h; sourceTree = "<group>"; };
+		5509F0F721821633004E10D3 /* YZHCustomAttachmentDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCustomAttachmentDecoder.m; sourceTree = "<group>"; };
+		5509F0F9218218A8004E10D3 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
+		5509F0FA218218A9004E10D3 /* NSDictionary+NTESJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NTESJson.m"; sourceTree = "<group>"; };
+		5509F101218220A8004E10D3 /* YZHUserCardContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHUserCardContentView.h; sourceTree = "<group>"; };
+		5509F102218220A8004E10D3 /* YZHUserCardContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHUserCardContentView.m; sourceTree = "<group>"; };
+		5509F104218228BE004E10D3 /* YZHTeamCardContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardContentView.h; sourceTree = "<group>"; };
+		5509F105218228BE004E10D3 /* YZHTeamCardContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamCardContentView.m; sourceTree = "<group>"; };
+		5509F10721822902004E10D3 /* YZHTeamCardAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardAttachment.h; sourceTree = "<group>"; };
+		5509F10821822902004E10D3 /* YZHTeamCardAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamCardAttachment.m; sourceTree = "<group>"; };
+		5509F10D2183FED9004E10D3 /* YZHAddFirendAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendAttachment.h; sourceTree = "<group>"; };
+		5509F10E2183FED9004E10D3 /* YZHAddFirendAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendAttachment.m; sourceTree = "<group>"; };
+		5509F11021840306004E10D3 /* YZHAddFirendContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendContentView.h; sourceTree = "<group>"; };
+		5509F11121840306004E10D3 /* YZHAddFirendContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendContentView.m; sourceTree = "<group>"; };
+		5509F1132184442E004E10D3 /* YZHRequstAddFirendContentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRequstAddFirendContentView.h; sourceTree = "<group>"; };
+		5509F1142184442E004E10D3 /* YZHRequstAddFirendContentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRequstAddFirendContentView.m; sourceTree = "<group>"; };
+		5509F1162184444D004E10D3 /* YZHRequstAddFirendAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRequstAddFirendAttachment.h; sourceTree = "<group>"; };
+		5509F1172184444D004E10D3 /* YZHRequstAddFirendAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRequstAddFirendAttachment.m; sourceTree = "<group>"; };
 		551289CD21461EE20099CC55 /* YZHYolo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YZHYolo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		551289D021461EE20099CC55 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		551289D121461EE20099CC55 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1045,6 +1082,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5509F0DA218205C6004E10D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5509F0DB218205F2004E10D3 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				5509F0EC21821202004E10D3 /* Object */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		5509F0DC21820603004E10D3 /* LayoutConfig */ = {
+			isa = PBXGroup;
+			children = (
+				5509F0DD218206C6004E10D3 /* YZHCellLayoutConfign.h */,
+				5509F0DE218206C6004E10D3 /* YZHCellLayoutConfign.m */,
+				5509F0E921821077004E10D3 /* YZHSessionCustomLayoutConfign.h */,
+				5509F0EA21821077004E10D3 /* YZHSessionCustomLayoutConfign.m */,
+			);
+			path = LayoutConfig;
+			sourceTree = "<group>";
+		};
+		5509F0EC21821202004E10D3 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				5509F0ED21821219004E10D3 /* Atttach */,
+				5509F0EE2182122A004E10D3 /* Manage */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		5509F0ED21821219004E10D3 /* Atttach */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Atttach;
+			sourceTree = "<group>";
+		};
+		5509F0EE2182122A004E10D3 /* Manage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manage;
+			sourceTree = "<group>";
+		};
+		5509F0FF2182207F004E10D3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5509F10021822091004E10D3 /* SessionContenView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5509F10021822091004E10D3 /* SessionContenView */ = {
+			isa = PBXGroup;
+			children = (
+				5509F101218220A8004E10D3 /* YZHUserCardContentView.h */,
+				5509F102218220A8004E10D3 /* YZHUserCardContentView.m */,
+				5509F104218228BE004E10D3 /* YZHTeamCardContentView.h */,
+				5509F105218228BE004E10D3 /* YZHTeamCardContentView.m */,
+				5509F11021840306004E10D3 /* YZHAddFirendContentView.h */,
+				5509F11121840306004E10D3 /* YZHAddFirendContentView.m */,
+				5509F1132184442E004E10D3 /* YZHRequstAddFirendContentView.h */,
+				5509F1142184442E004E10D3 /* YZHRequstAddFirendContentView.m */,
+			);
+			path = SessionContenView;
+			sourceTree = "<group>";
+		};
 		551289C421461EE20099CC55 = {
 			isa = PBXGroup;
 			children = (
@@ -1516,7 +1625,6 @@
 			isa = PBXGroup;
 			children = (
 				55BA210F21763F2C00F90268 /* YZH */,
-				55BA210E21763EED00F90268 /* NIM */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1775,9 +1883,9 @@
 			children = (
 				55364091217EAEC2006F77A5 /* Sections */,
 				55364185217EAEC2006F77A5 /* Category */,
-				55364194217EAEC2006F77A5 /* NIMKit.h */,
 				55364195217EAEC2006F77A5 /* Protocols */,
 				5536419C217EAEC2006F77A5 /* Global */,
+				55364194217EAEC2006F77A5 /* NIMKit.h */,
 				553641B2217EAEC2006F77A5 /* NIMKit.m */,
 			);
 			path = Classes;
@@ -1801,18 +1909,18 @@
 		55364092217EAEC2006F77A5 /* Contact */ = {
 			isa = PBXGroup;
 			children = (
+				5536409D217EAEC2006F77A5 /* Cell */,
+				55364097217EAEC2006F77A5 /* ContactGroup */,
+				553640A2217EAEC2006F77A5 /* NIMContactDataItem.h */,
 				55364093217EAEC2006F77A5 /* NIMContactDataItem.m */,
 				55364094217EAEC2006F77A5 /* NIMContactPickedView.h */,
-				55364095217EAEC2006F77A5 /* NIMContactSelectTabView.h */,
-				55364096217EAEC2006F77A5 /* NIMContactSelectViewController.m */,
-				55364097217EAEC2006F77A5 /* ContactGroup */,
-				5536409C217EAEC2006F77A5 /* NIMContactSelectConfig.h */,
-				5536409D217EAEC2006F77A5 /* Cell */,
 				553640A1217EAEC2006F77A5 /* NIMContactPickedView.m */,
-				553640A2217EAEC2006F77A5 /* NIMContactDataItem.h */,
-				553640A3217EAEC2006F77A5 /* NIMContactSelectViewController.h */,
-				553640A4217EAEC2006F77A5 /* NIMContactSelectTabView.m */,
+				5536409C217EAEC2006F77A5 /* NIMContactSelectConfig.h */,
 				553640A5217EAEC2006F77A5 /* NIMContactSelectConfig.m */,
+				55364095217EAEC2006F77A5 /* NIMContactSelectTabView.h */,
+				553640A4217EAEC2006F77A5 /* NIMContactSelectTabView.m */,
+				553640A3217EAEC2006F77A5 /* NIMContactSelectViewController.h */,
+				55364096217EAEC2006F77A5 /* NIMContactSelectViewController.m */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -1841,20 +1949,20 @@
 		553640A6217EAEC2006F77A5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				553640A7217EAEC2006F77A5 /* NIMKitFileLocationHelper.m */,
-				553640A8217EAEC2006F77A5 /* NIMKitUtil.h */,
-				553640A9217EAEC2006F77A5 /* NIMKitDevice.h */,
-				553640AA217EAEC2006F77A5 /* NIMKitAuthorizationTool.m */,
-				553640AB217EAEC2006F77A5 /* NIMKitResourceResizer.m */,
-				553640AC217EAEC2006F77A5 /* NIMKitTimerHolder.m */,
-				553640AD217EAEC2006F77A5 /* Robot */,
-				553640B5217EAEC2006F77A5 /* NIMKitFileLocationHelper.h */,
 				553640B6217EAEC2006F77A5 /* NIMKitAuthorizationTool.h */,
-				553640B7217EAEC2006F77A5 /* NIMKitResourceResizer.h */,
+				553640AA217EAEC2006F77A5 /* NIMKitAuthorizationTool.m */,
+				553640A9217EAEC2006F77A5 /* NIMKitDevice.h */,
 				553640B8217EAEC2006F77A5 /* NIMKitDevice.m */,
-				553640B9217EAEC2006F77A5 /* NIMKitUtil.m */,
-				553640BA217EAEC2006F77A5 /* Spelling */,
+				553640B5217EAEC2006F77A5 /* NIMKitFileLocationHelper.h */,
+				553640A7217EAEC2006F77A5 /* NIMKitFileLocationHelper.m */,
+				553640B7217EAEC2006F77A5 /* NIMKitResourceResizer.h */,
+				553640AB217EAEC2006F77A5 /* NIMKitResourceResizer.m */,
 				553640BF217EAEC2006F77A5 /* NIMKitTimerHolder.h */,
+				553640AC217EAEC2006F77A5 /* NIMKitTimerHolder.m */,
+				553640A8217EAEC2006F77A5 /* NIMKitUtil.h */,
+				553640B9217EAEC2006F77A5 /* NIMKitUtil.m */,
+				553640AD217EAEC2006F77A5 /* Robot */,
+				553640BA217EAEC2006F77A5 /* Spelling */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1928,27 +2036,27 @@
 		553640DC217EAEC2006F77A5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				553640DD217EAEC2006F77A5 /* NIMPageView.h */,
-				553640E9217EAEC2006F77A5 /* NIMPageView.m */,
-				553640DE217EAEC2006F77A5 /* NIMBadgeView.m */,
-				553640DF217EAEC2006F77A5 /* NIMKitKeyboard.h */,
-				553640E0217EAEC2006F77A5 /* NIMMemberGroupView.m */,
-				553640E1217EAEC2006F77A5 /* NIMKitMediaFetcher.m */,
-				553640E3217EAEC2006F77A5 /* NIMKitKeyboardInfo.h */,
-				553640E4217EAEC2006F77A5 /* NIMCustomLeftBarView.h */,
-				553640E5217EAEC2006F77A5 /* NIMLoadProgressView.h */,
-				553640E6217EAEC2006F77A5 /* NIMKitNotificationFirer.h */,
-				553640E8217EAEC2006F77A5 /* NIMBadgeView.h */,
 				553640EA217EAEC2006F77A5 /* NIMAvatarImageView.h */,
 				553640E2217EAEC2006F77A5 /* NIMAvatarImageView.m */,
-				553640EB217EAEC2006F77A5 /* NIMKitMediaFetcher.h */,
-				553640EC217EAEC2006F77A5 /* NIMMemberGroupView.h */,
+				553640E8217EAEC2006F77A5 /* NIMBadgeView.h */,
+				553640DE217EAEC2006F77A5 /* NIMBadgeView.m */,
+				553640E4217EAEC2006F77A5 /* NIMCustomLeftBarView.h */,
 				553640ED217EAEC2006F77A5 /* NIMCustomLeftBarView.m */,
+				553640DF217EAEC2006F77A5 /* NIMKitKeyboard.h */,
+				553640E3217EAEC2006F77A5 /* NIMKitKeyboardInfo.h */,
 				553640EE217EAEC2006F77A5 /* NIMKitKeyboardInfo.m */,
+				553640EB217EAEC2006F77A5 /* NIMKitMediaFetcher.h */,
+				553640E1217EAEC2006F77A5 /* NIMKitMediaFetcher.m */,
+				553640E6217EAEC2006F77A5 /* NIMKitNotificationFirer.h */,
+				553640F0217EAEC2006F77A5 /* NIMKitNotificationFirer.m */,
 				553640EF217EAEC2006F77A5 /* NIMKitTitleView.h */,
 				553640E7217EAEC2006F77A5 /* NIMKitTitleView.m */,
-				553640F0217EAEC2006F77A5 /* NIMKitNotificationFirer.m */,
+				553640E5217EAEC2006F77A5 /* NIMLoadProgressView.h */,
 				553640F1217EAEC2006F77A5 /* NIMLoadProgressView.m */,
+				553640EC217EAEC2006F77A5 /* NIMMemberGroupView.h */,
+				553640E0217EAEC2006F77A5 /* NIMMemberGroupView.m */,
+				553640DD217EAEC2006F77A5 /* NIMPageView.h */,
+				553640E9217EAEC2006F77A5 /* NIMPageView.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2328,6 +2436,8 @@
 		55560235217EF95F000F46DF /* Session */ = {
 			isa = PBXGroup;
 			children = (
+				5509F0FF2182207F004E10D3 /* View */,
+				5509F0DC21820603004E10D3 /* LayoutConfig */,
 				55560236217EF96C000F46DF /* Object */,
 			);
 			path = Session;
@@ -2345,6 +2455,9 @@
 		55560237217EF981000F46DF /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				5509F0F2218212AD004E10D3 /* YZHCustomAttachmentDefines.h */,
+				5509F0F621821633004E10D3 /* YZHCustomAttachmentDecoder.h */,
+				5509F0F721821633004E10D3 /* YZHCustomAttachmentDecoder.m */,
 				55560238217EF9B0000F46DF /* YZHSessionMsgConverter.h */,
 				55560239217EF9B0000F46DF /* YZHSessionMsgConverter.m */,
 			);
@@ -2354,6 +2467,14 @@
 		55560246217F0133000F46DF /* Atttach */ = {
 			isa = PBXGroup;
 			children = (
+				5509F0F3218212DE004E10D3 /* YZHUserCardAttachment.h */,
+				5509F0F4218212DE004E10D3 /* YZHUserCardAttachment.m */,
+				5509F10721822902004E10D3 /* YZHTeamCardAttachment.h */,
+				5509F10821822902004E10D3 /* YZHTeamCardAttachment.m */,
+				5509F10D2183FED9004E10D3 /* YZHAddFirendAttachment.h */,
+				5509F10E2183FED9004E10D3 /* YZHAddFirendAttachment.m */,
+				5509F1162184444D004E10D3 /* YZHRequstAddFirendAttachment.h */,
+				5509F1172184444D004E10D3 /* YZHRequstAddFirendAttachment.m */,
 			);
 			path = Atttach;
 			sourceTree = "<group>";
@@ -2361,6 +2482,8 @@
 		5556025421807F1B000F46DF /* NEESSession */ = {
 			isa = PBXGroup;
 			children = (
+				5509F0F9218218A8004E10D3 /* NSDictionary+NTESJson.h */,
+				5509F0FA218218A9004E10D3 /* NSDictionary+NTESJson.m */,
 			);
 			path = NEESSession;
 			sourceTree = "<group>";
@@ -2558,28 +2681,6 @@
 		559F1BCF217EED910028B0E5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		55B5DB9821530EA8002A04A9 /* YZHRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				55B5DB9921530EDA002A04A9 /* UIScrollView+YZHRefresh.h */,
-				55B5DB9A21530EDA002A04A9 /* UIScrollView+YZHRefresh.m */,
-			);
-			path = YZHRefresh;
-			sourceTree = "<group>";
-		};
-		55BA210E21763EED00F90268 /* NIM */ = {
-			isa = PBXGroup;
-			children = (
-				55560235217EF95F000F46DF /* Session */,
-				55560231217EF898000F46DF /* Category */,
-				559F1BD0217EEE180028B0E5 /* NTESGlobalMacro.h */,
-				559F1BCF217EED910028B0E5 /* Util */,
-				559F1968217EED340028B0E5 /* LayoutConfig */,
-				559F1971217EED340028B0E5 /* Service */,
 				55BA20EE21763A3400F90268 /* NTESBundleSetting.h */,
 				55BA20ED21763A3400F90268 /* NTESBundleSetting.m */,
 				55BA20FB21763A3600F90268 /* NTESCADisplayLinkHolder.h */,
@@ -2602,6 +2703,28 @@
 				55BA20E921763A3400F90268 /* NTESTimerHolder.m */,
 				55BA20FE21763A3600F90268 /* NTESUserUtil.h */,
 				55BA20FA21763A3600F90268 /* NTESUserUtil.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		55B5DB9821530EA8002A04A9 /* YZHRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				55B5DB9921530EDA002A04A9 /* UIScrollView+YZHRefresh.h */,
+				55B5DB9A21530EDA002A04A9 /* UIScrollView+YZHRefresh.m */,
+			);
+			path = YZHRefresh;
+			sourceTree = "<group>";
+		};
+		55BA210E21763EED00F90268 /* NIM */ = {
+			isa = PBXGroup;
+			children = (
+				55560235217EF95F000F46DF /* Session */,
+				55560231217EF898000F46DF /* Category */,
+				559F1BD0217EEE180028B0E5 /* NTESGlobalMacro.h */,
+				559F1BCF217EED910028B0E5 /* Util */,
+				559F1968217EED340028B0E5 /* LayoutConfig */,
+				559F1971217EED340028B0E5 /* Service */,
 			);
 			path = NIM;
 			sourceTree = "<group>";
@@ -2984,6 +3107,9 @@
 		55ED3106217094EE005BFD3E /* YoloIMFuncation */ = {
 			isa = PBXGroup;
 			children = (
+				55BA210E21763EED00F90268 /* NIM */,
+				5509F0DB218205F2004E10D3 /* Session */,
+				5509F0DA218205C6004E10D3 /* View */,
 				552B78ED21737E3900C1DD99 /* Util */,
 				55ED310721709513005BFD3E /* Sections */,
 			);
@@ -3308,6 +3434,7 @@
 				55560242217EFE11000F46DF /* NTESGalleryViewController.m in Sources */,
 				5536420C217EAEC3006F77A5 /* NIMMessageMaker.m in Sources */,
 				55337DCD214F8EE600307B75 /* YZHFindPasswordView.m in Sources */,
+				5509F0F821821633004E10D3 /* YZHCustomAttachmentDecoder.m in Sources */,
 				5536422B217EAEC3006F77A5 /* NIMKitSwitcherCell.m in Sources */,
 				553641FA217EAEC3006F77A5 /* NIMLocationContentConfig.m in Sources */,
 				55BD8660215DFCEC00D23ED1 /* YZHAddBookFriendsCell.m in Sources */,
@@ -3326,6 +3453,7 @@
 				556F6D112147B9220048171C /* YZHRouter.m in Sources */,
 				55D580DF2163240B000A8B55 /* YZHAddBookSetNoteVC.m in Sources */,
 				55337DC8214F8EC300307B75 /* YZHRegisterView.m in Sources */,
+				5509F11221840307004E10D3 /* YZHAddFirendContentView.m in Sources */,
 				55364229217EAEC3006F77A5 /* NIMCommonTableDelegate.m in Sources */,
 				55B5DB9F2153374A002A04A9 /* YZHMyInformationCell.m in Sources */,
 				5562DE29215683AF0098FA83 /* YZHMyInformationPhotoView.m in Sources */,
@@ -3358,13 +3486,17 @@
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
 				553641BF217EAEC2006F77A5 /* NIMKitResourceResizer.m in Sources */,
 				553641FF217EAEC3006F77A5 /* NIMUnsupportContentConfig.m in Sources */,
+				5509F106218228BE004E10D3 /* YZHTeamCardContentView.m in Sources */,
+				5509F103218220A8004E10D3 /* YZHUserCardContentView.m in Sources */,
 				553641CF217EAEC2006F77A5 /* NIMInputToolBar.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
+				5509F1152184442E004E10D3 /* YZHRequstAddFirendContentView.m in Sources */,
 				559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */,
 				553641DA217EAEC2006F77A5 /* NIMCustomLeftBarView.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
 				553641EA217EAEC3006F77A5 /* NIMAdvancedTeamMemberCell.m in Sources */,
 				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
+				5509F0FB218218A9004E10D3 /* NSDictionary+NTESJson.m in Sources */,
 				5536420D217EAEC3006F77A5 /* NIMKitMessageAtModel.m in Sources */,
 				55DC36BB2168997E00871C2B /* UIButton+YZHClickHandle.m in Sources */,
 				553641DF217EAEC2006F77A5 /* NIMNormalTeamCardViewController.m in Sources */,
@@ -3381,8 +3513,10 @@
 				553641C4217EAEC2006F77A5 /* NIMKitDevice.m in Sources */,
 				55D5810121636CFF000A8B55 /* YZHPhoneContactDefaultView.m in Sources */,
 				55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */,
+				5509F0F5218212DE004E10D3 /* YZHUserCardAttachment.m in Sources */,
 				553641E8217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.m in Sources */,
 				552CC891215A698200135FDC /* YZHAboutYoloVC.m in Sources */,
+				5509F1182184444D004E10D3 /* YZHRequstAddFirendAttachment.m in Sources */,
 				553641D8217EAEC2006F77A5 /* NIMKitTitleView.m in Sources */,
 				55560245217EFFAE000F46DF /* UIAlertView+NTESBlock.m in Sources */,
 				55BA210121763A3700F90268 /* NTESTimerHolder.m in Sources */,
@@ -3399,6 +3533,7 @@
 				55C239F5214B536000200798 /* YZHDevice.m in Sources */,
 				553641B6217EAEC2006F77A5 /* NIMContactSelectViewController.m in Sources */,
 				555DA4B5216C35160057D434 /* UIView+JKRViewController.m in Sources */,
+				5509F10F2183FED9004E10D3 /* YZHAddFirendAttachment.m in Sources */,
 				55B5DB9021527D78002A04A9 /* YZHMyCenterHeaderView.m in Sources */,
 				5536422F217EAEC3006F77A5 /* NIMKit.m in Sources */,
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
@@ -3443,6 +3578,7 @@
 				552B78F62173B35300C1DD99 /* YZHPrivacySettingModel.m in Sources */,
 				553C53F2216CEEC9007D46A9 /* YZHAddBookAddFirendRecordCell.m in Sources */,
 				553641F8217EAEC3006F77A5 /* NIMRobotContentConfig.m in Sources */,
+				5509F0EB21821077004E10D3 /* YZHSessionCustomLayoutConfign.m in Sources */,
 				551289D221461EE20099CC55 /* AppDelegate.m in Sources */,
 				5536421A217EAEC3006F77A5 /* NIMSessionMessageContentView.m in Sources */,
 				558A21422179685200E892C3 /* YZHRecentSessionExtManage.m in Sources */,
@@ -3453,6 +3589,7 @@
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
 				555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */,
 				5536422D217EAEC3006F77A5 /* NIMKitColorButtonCell.m in Sources */,
+				5509F10921822902004E10D3 /* YZHTeamCardAttachment.m in Sources */,
 				55364223217EAEC3006F77A5 /* NIMExtensionHelper.m in Sources */,
 				553641CD217EAEC2006F77A5 /* NIMInputEmoticonManager.m in Sources */,
 				555DA4B7216C35160057D434 /* JKRSearchTextField.m in Sources */,
@@ -3508,6 +3645,7 @@
 				55C239ED214A5ECA00200798 /* YZHServicesConfig.m in Sources */,
 				552CC896215A6F3900135FDC /* YZHAboutYoloCell.m in Sources */,
 				553641ED217EAEC3006F77A5 /* NIMTeamCardHeaderCell.m in Sources */,
+				5509F0DF218206C6004E10D3 /* YZHCellLayoutConfign.m in Sources */,
 				555DA4B6216C35160057D434 /* JKRSearchController.m in Sources */,
 				556F6D02214773470048171C /* YZHCommunityViewController.m in Sources */,
 				553641D0217EAEC2006F77A5 /* NIMInputEmoticonContainerView.m in Sources */,

@@ -75,8 +75,6 @@
                                       selectedImage:[UIImage imageNamed:@"icon_team_receipt_pressed"]
                                               title:@"已读回执"];
     
-    
-    
     BOOL isMe   = _session.sessionType == NIMSessionTypeP2P
     && [_session.sessionId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]];
     NSArray *items = @[];
@@ -98,9 +96,9 @@
     return [defaultMediaItems arrayByAddingObjectsFromArray:items];
     
 }
-
+//Jersey: 关闭处理已读消息回执
 - (BOOL)shouldHandleReceipt{
-    return YES;
+    return NO;
 }
 
 - (NSArray<NSNumber *> *)inputBarItemTypes{

@@ -89,5 +89,46 @@
     return message;
 }
 
++ (NIMMessage *)msgWithUserCard:(YZHUserCardAttachment* )attachment {
+    
+    NIMMessage* message = [[NIMMessage alloc] init];
+    NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
+    customObject.attachment           = attachment;
+    message.messageObject             = customObject;
+    //推送文案
+    message.apnsContent = [NSString stringWithFormat:@"%@发来了名片", attachment.userName];
+    
+    return message;
+}
 
++ (NIMMessage *)msgWithTeamCard:(YZHTeamCardAttachment *)attachment {
+    
+    NIMMessage* message = [[NIMMessage alloc] init];
+    NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
+    customObject.attachment           = attachment;
+    message.messageObject             = customObject;
+    //推送文案
+    message.apnsContent = [NSString stringWithFormat:@"%@发来了名片", attachment.groupName];
+    return message;
+}
+
++ (NIMMessage *)msgWithAddFirend:(YZHAddFirendAttachment *)attachment {
+    
+    NIMMessage* message = [[NIMMessage alloc] init];
+    NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
+    customObject.attachment           = attachment;
+    message.messageObject             = customObject;
+    //推送文案
+//    message.apnsContent = [NSString stringWithFormat:@"%@发来了名片", attachment.groupName];
+    return message;
+}
+
++ (NIMMessage *)msgWithRequstAddFirend:(YZHRequstAddFirendAttachment *)attachment {
+    
+    NIMMessage* message = [[NIMMessage alloc] init];
+    NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
+    customObject.attachment           = attachment;
+    message.messageObject             = customObject;
+    return message;
+}
 @end
