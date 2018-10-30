@@ -34,7 +34,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="nrb-5A-ISI" firstAttribute="centerY" secondItem="xjA-pH-QO0" secondAttribute="centerY" id="3kB-02-9oO"/>
                         <constraint firstAttribute="trailing" secondItem="nrb-5A-ISI" secondAttribute="trailing" constant="23" id="6rB-kP-9Lk"/>
@@ -72,7 +72,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="YBA-pC-LCA" firstAttribute="leading" secondItem="wol-Fu-CbZ" secondAttribute="leading" constant="25" id="0BB-8E-dya"/>
                         <constraint firstItem="YBA-pC-LCA" firstAttribute="centerY" secondItem="wol-Fu-CbZ" secondAttribute="centerY" id="HOe-r6-DEu"/>
@@ -105,12 +105,15 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-Ae-gf2">
                             <rect key="frame" x="0.0" y="0.0" width="179" height="46.5"/>
+                            <state key="normal">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="transfer:" destination="iN0-l3-epB" eventType="touchUpInside" id="CNd-sj-Ga1"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="vaO-Ae-gf2" secondAttribute="trailing" id="002-4w-Xdv"/>
                         <constraint firstItem="vaO-Ae-gf2" firstAttribute="leading" secondItem="KVh-d8-Ye9" secondAttribute="leading" id="9Zl-Ge-pED"/>
@@ -144,12 +147,15 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhe-cP-385">
                             <rect key="frame" x="0.0" y="0.0" width="179" height="46"/>
+                            <state key="normal">
+                                <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="scanQRCode:" destination="iN0-l3-epB" eventType="touchUpInside" id="GDl-wc-9ud"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="Hhe-cP-385" firstAttribute="top" secondItem="eGh-n2-tY1" secondAttribute="top" id="34u-FD-aY4"/>
                         <constraint firstItem="Zha-av-XJN" firstAttribute="centerY" secondItem="eGh-n2-tY1" secondAttribute="centerY" id="Fdz-0t-b2V"/>

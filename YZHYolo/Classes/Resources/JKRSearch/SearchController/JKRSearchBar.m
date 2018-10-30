@@ -40,13 +40,14 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
     // 处于编辑页时 UI.
     _isEditing = isEditing;
     if (_isEditing) {
+        _cancelButton.hidden = NO;
         [UIView animateWithDuration:0.2 animations:^{
             [self.cancelButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.right.mas_equalTo(-12);
                 make.centerY.mas_equalTo(self);
             }];
             [self.searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(15);
+                make.left.mas_equalTo(10);
                 make.right.mas_equalTo(-50);
                 make.bottom.mas_equalTo(-10);
                 make.height.mas_equalTo(30);
@@ -61,13 +62,14 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
         // 非编辑状态.
         self.searchTextField.text = @"";
         self.text = @"";
+        _cancelButton.hidden = YES;
         [UIView animateWithDuration:0.2 animations:^{
             [self.searchTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.mas_equalTo(-10);
                 make.center.mas_equalTo(self);
                 make.height.mas_equalTo(30);
-                make.left.mas_equalTo(58);
-                make.right.mas_equalTo(-58);
+                make.left.mas_equalTo(10);
+                make.right.mas_equalTo(-10);
             }];
             [self.cancelButton mas_updateConstraints:^(MASConstraintMaker *make) {
                 
@@ -157,12 +159,12 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
         searchIcon.frame = CGRectMake(0, 0, 30, 14);
         _searchTextField.leftView = searchIcon;
         _searchTextField.leftViewMode = UITextFieldViewModeAlways;
+        _searchTextField.textAlignment = NSTextAlignmentCenter;
 //        _searchTextField.clearsOnBeginEditing = YES;
         _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _searchTextField.font = [UIFont systemFontOfSize:15.0f];
         [_searchTextField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
         _searchTextField.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        // TODO: 设配各个设备.
         _searchTextField.layer.cornerRadius = 15;
         _searchTextField.delegate = self;
     }
@@ -187,6 +189,7 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
         [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];
+        _cancelButton.hidden = YES;
     }
     return _cancelButton;
 }
@@ -198,8 +201,8 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
         make.bottom.mas_equalTo(-10);
         make.center.mas_equalTo(self);
         make.height.mas_equalTo(30);
-        make.left.mas_equalTo(58);
-        make.right.mas_equalTo(-58);
+        make.left.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
     }];
     
 }

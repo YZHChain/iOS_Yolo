@@ -14,7 +14,7 @@
 /**
  *  会话列表tableView
  */
-@property (nonatomic,strong)   UITableView *tableView;
+@property (nonatomic,strong) UITableView *tableView;
 
 /**
  *  最近会话集合
@@ -24,7 +24,7 @@
 /**
  *  删除会话时是不是也同时删除服务器会话 (防止漫游)
  */
-@property (nonatomic,assign)   BOOL autoRemoveRemoteSession;
+@property (nonatomic,assign) BOOL autoRemoveRemoteSession;
 
 
 /**

@@ -33,9 +33,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 @property (nonatomic,assign) BOOL supportsForceTouch;
 
-@property (nonatomic,strong) NSMutableDictionary *previews;
-
-@property (nonatomic, strong) UIButton* leftButton;
+@property (nonatomic,strong) NSMutableDictionary *preview;
 
 @property (nonatomic, strong) UITableView* tagsTableView;
 
@@ -59,7 +57,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        _previews = [[NSMutableDictionary alloc] init];
+        _preview = [[NSMutableDictionary alloc] init];
 //        self.autoRemoveRemoteSession = [[NTESBundleSetting sharedConfig] autoRemoveRemoteSession];
         self.autoRemoveRemoteSession = YES;
     }
@@ -133,10 +131,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.extensionView showExtensionFunctionView];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
@@ -156,8 +150,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             [self.tagsTableView reloadData];
         }
     }
-
-    [self refresh];
 }
 
 #pragma mark -- setupNotification
@@ -546,7 +538,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     if (self.supportsForceTouch) {
         if (@available(iOS 9.0, *)) {
             id<UIViewControllerPreviewing> preview = [self registerForPreviewingWithDelegate:self sourceView:cell];
-            [self.previews setObject:preview forKey:@(indexPath.row)];
+            [self.preview setObject:preview forKey:@(indexPath.row)];
         } else {
             // Fallback on earlier versions
         }
@@ -556,13 +548,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.supportsForceTouch) {
-        id<UIViewControllerPreviewing> preview = [self.previews objectForKey:@(indexPath.row)];
+        id<UIViewControllerPreviewing> preview = [self.preview objectForKey:@(indexPath.row)];
         if (@available(iOS 9.0, *)) {
             [self unregisterForPreviewingWithContext:preview];
         } else {
             // Fallback on earlier versions
         }
-        [self.previews removeObjectForKey:@(indexPath.row)];
+        [self.preview removeObjectForKey:@(indexPath.row)];
     }
 }
 //TODO:  3D Touch

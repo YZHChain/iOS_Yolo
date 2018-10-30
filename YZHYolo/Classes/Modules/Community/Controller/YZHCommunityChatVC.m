@@ -1,18 +1,18 @@
 //
-//  YZHCommunityVC.m
+//  YZHCommunityChatVC.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/9/19.
+//  Created by Jersey on 2018/10/29.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHCommunityVC.h"
+#import "YZHCommunityChatVC.h"
 
-@interface YZHCommunityVC ()
+@interface YZHCommunityChatVC ()
 
 @end
 
-@implementation YZHCommunityVC
+@implementation YZHCommunityChatVC
 
 #pragma mark - 1.View Controller Life Cycle
 
@@ -40,12 +40,12 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"广场";
+    self.navigationItem.title = @"社群";
 }
 
 - (void)setupView
 {
-    
+    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
 }
 
 - (void)reloadView
@@ -72,17 +72,5 @@
 }
 
 #pragma mark - 7.GET & SET
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

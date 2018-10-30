@@ -119,5 +119,4 @@ NSString *const NIMDemoEventNameCloseSnapPicture = @"NIMDemoEventNameCloseSnapPi
     }
 }
 
-
 @end

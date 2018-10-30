@@ -135,6 +135,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         return cell;
     }
     YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
+    
     return cell;
 }
 

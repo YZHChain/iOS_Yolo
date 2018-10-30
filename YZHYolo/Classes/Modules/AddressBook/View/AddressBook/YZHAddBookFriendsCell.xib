@@ -47,6 +47,11 @@
                     <constraint firstItem="Yl4-cB-Q25" firstAttribute="leading" secondItem="Ze9-85-PDY" secondAttribute="trailing" constant="10" id="lsn-LN-lyP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="photoImageView" destination="Ze9-85-PDY" id="gZb-E8-PmE"/>
+                <outlet property="subtitleLabel" destination="d5E-4P-IQU" id="sg5-45-UhN"/>
+                <outlet property="titleLabel" destination="Yl4-cB-Q25" id="dVD-7J-i9Z"/>
+            </connections>
             <point key="canvasLocation" x="137.59999999999999" y="154.27286356821591"/>
         </tableViewCell>
     </objects>

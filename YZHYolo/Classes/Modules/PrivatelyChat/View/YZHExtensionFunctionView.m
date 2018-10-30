@@ -12,6 +12,12 @@
 
 @implementation YZHExtensionFunctionView
 
+- (void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
+}
+
 #pragma mark -- Button Event Response
 
 - (IBAction)creatGroupChat:(UIButton *)sender {

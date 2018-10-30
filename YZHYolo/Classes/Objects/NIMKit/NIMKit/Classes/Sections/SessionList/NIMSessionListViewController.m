@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.delegate         = self;
     self.tableView.dataSource       = self;
@@ -184,10 +184,10 @@
     [self refresh];
 }
 
-//- (NSMutableArray *)customSortRecents:(NSMutableArray *)recentSessions
-//{
-//    return self.recentSessions;
-//}
+- (void)customSortRecents:(NSMutableArray *)recentSessions {
+    
+    self.recentSessions = recentSessions;
+}
 
 #pragma mark - NIMLoginManagerDelegate
 - (void)onLogin:(NIMLoginStep)step
@@ -205,8 +205,6 @@
     NIMSessionViewController *vc = [[NIMSessionViewController alloc] initWithSession:recentSession.session];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-
 
 - (NSString *)nameForRecentSession:(NIMRecentSession *)recent{
     if (recent.session.sessionType == NIMSessionTypeP2P) {
@@ -328,7 +326,7 @@
 }
 
 - (NSString *)notificationMessageContent:(NIMMessage *)lastMessage{
-    NIMNotificationObject *object = lastMessage.messageObject;
+    NIMNotificationObject *object = (NIMNotificationObject *)lastMessage.messageObject;
     if (object.notificationType == NIMNotificationTypeNetCall) {
         NIMNetCallNotificationContent *content = (NIMNetCallNotificationContent *)object.content;
         if (content.callType == NIMNetCallTypeAudio) {
@@ -348,7 +346,7 @@
 }
 
 - (NSString *)robotMessageContent:(NIMMessage *)lastMessage{
-    NIMRobotObject *object = lastMessage.messageObject;
+    NIMRobotObject *object = (NIMRobotObject *)lastMessage.messageObject;
     if (object.isFromRobot)
     {
         return @"[机器人消息]";
@@ -373,6 +371,8 @@
     [self refresh];
 }
 
-
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 
 @end

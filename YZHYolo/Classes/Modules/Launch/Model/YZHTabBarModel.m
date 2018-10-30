@@ -27,14 +27,14 @@
     
     YZHThemeManage* themeManage = [[YZHThemeManage alloc] init];
     NSArray* itemsArray = @[@{@"title": @"社群",
-                              @"viewController": @"YZHCommunityVC",
+                              @"viewController": @"YZHCommunityListVC",
                               @"hasNavigation": @"1",
                               @"image": themeManage.themeitems[0].image,
                               @"selectedImage": themeManage.themeitems[0].selectedImage,
                               @"color": themeManage.themeitems[0].color,
                               @"selectedColor": themeManage.themeitems[0].selectedColor,
                               },
-                            @{@"title": @"会话",
+                            @{@"title": @"私聊",
                               @"viewController": @"YZHPrivatelyChatListVC",
                               @"hasNavigation": @"1",
                               @"image": themeManage.themeitems[1].image,
