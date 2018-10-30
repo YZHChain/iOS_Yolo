@@ -18,4 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *chatInputBottomSpace;
 
+@property (nonatomic, copy) YZHButtonExecuteBlock regesterButtonBlock;
+@property (nonatomic, copy) YZHButtonExecuteBlock loginButtonBlock;
+@property (nonatomic, copy) YZHButtonExecuteBlock findPasswordButtonBlock;
+
 @end

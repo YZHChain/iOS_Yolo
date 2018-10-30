@@ -11,12 +11,12 @@
 
 NSString *const kYZHAppConfig    = @"YMAppConfig.plist";
 
-NSString *const kYZHAppConfigLogToFile       = @"logToFile";
-NSString *const kYZHAppConfigApiLog          = @"apiLog";
-NSString *const kYZHAppConfigApiDebug        = @"apiDebug";
-NSString *const kYZHAppConfigSeverTest       = @"severTest";
-NSString *const kYZHAppConfigSeverAddr       = @"severAddr";
-NSString *const kYZHAppConfigSeverAddrTest   = @"severAddrTest";
+NSString *const kYZHAppConfigLogToFile              = @"logToFile";
+NSString *const kYZHAppConfigApiLog                 = @"apiLog";
+NSString *const kYZHAppConfigApiDebug               = @"apiDebug";
+NSString *const kYZHAppConfigSeverTest              = @"severTest";
+NSString *const kYZHAppConfigSeverAddrRelease       = @"severAddrRelease";
+NSString *const kYZHAppConfigSeverAddrTest          = @"severAddrTest";
 
 static id instance;
 @implementation YZHServicesConfig
@@ -63,7 +63,7 @@ static id instance;
 + (id)configValueFromKey:(NSString *)key{
     
     NSAssert(key, @"key Can't be empty");
-    // TODO: Key 不存在会崩溃吗？ 要测试下
+    
     NSString* value = [YZHServicesConfig shareServicesConfi].info[key];
     
     return value;
@@ -73,7 +73,6 @@ static id instance;
 
     id value = [YZHServicesConfig configValueFromKey:key];
     if (value) {
-        // TODO: Test  还有什么优雅的转换方法
         return [NSString stringWithFormat:@"%@", value];
     }
     return nil;
@@ -86,6 +85,17 @@ static id instance;
     } else{
         return NO;
     }
+}
+
++ (NSString *)debugTestServerConfig{
+    
+    NSString* appConfigSeverKey;
+    if ([[self stringForKey:kYZHAppConfigSeverTest] boolValue]) {
+        appConfigSeverKey = kYZHAppConfigSeverAddrTest;
+    } else {
+        appConfigSeverKey = kYZHAppConfigSeverAddrRelease;
+    }
+    return [self stringForKey:appConfigSeverKey];
 }
 
 #pragma mark -- ConfigCache

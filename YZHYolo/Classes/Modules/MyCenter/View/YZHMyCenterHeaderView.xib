@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,8 +28,8 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号：12556548754" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-2f-vyb">
-                    <rect key="frame" x="109" y="113" width="99" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码：12556548754" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-2f-vyb">
+                    <rect key="frame" x="109" y="113" width="119.5" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -47,30 +47,50 @@
                         <constraint firstAttribute="width" constant="23" id="zRZ-km-Es6"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anp-ex-N3Q">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                    <connections>
+                        <action selector="clickHeader:" destination="iN0-l3-epB" eventType="touchUpInside" id="f61-jE-sOw"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaJ-1J-ZmB">
                     <rect key="frame" x="310" y="80" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="6K4-90-fb4"/>
                         <constraint firstAttribute="width" constant="40" id="pmZ-wy-iRZ"/>
                     </constraints>
+                    <connections>
+                        <action selector="clickQRCode:" destination="iN0-l3-epB" eventType="touchUpInside" id="OTB-yG-pbX"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0039215686274509803" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vaJ-1J-ZmB" secondAttribute="bottom" constant="50" id="0ia-8m-ZRH"/>
+                <constraint firstAttribute="trailing" secondItem="Anp-ex-N3Q" secondAttribute="trailing" id="5VO-Cx-Fca"/>
                 <constraint firstItem="jPY-iv-AN8" firstAttribute="leading" secondItem="FZy-27-BLj" secondAttribute="trailing" constant="12" id="5kC-aZ-zJF"/>
+                <constraint firstItem="Anp-ex-N3Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Vi-fv-tpY"/>
                 <constraint firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="41" id="CHF-B2-inV"/>
                 <constraint firstItem="jPY-iv-AN8" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" constant="8" id="JfV-I6-HLN"/>
                 <constraint firstItem="J3A-UM-oPB" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="KAA-WU-sEn"/>
+                <constraint firstItem="Anp-ex-N3Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TTi-Rt-BwR"/>
                 <constraint firstItem="FZy-27-BLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="Wct-Jp-Ffn"/>
                 <constraint firstItem="ZOb-2f-vyb" firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="-4" id="bVa-zp-jcJ"/>
                 <constraint firstItem="ZOb-2f-vyb" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="iCS-ru-WxU"/>
                 <constraint firstAttribute="trailing" secondItem="vaJ-1J-ZmB" secondAttribute="trailing" constant="25" id="ifR-cP-fdS"/>
                 <constraint firstAttribute="bottom" secondItem="Fuq-rW-hrF" secondAttribute="bottom" constant="59" id="rLb-3d-Pyh"/>
                 <constraint firstItem="ZOb-2f-vyb" firstAttribute="top" secondItem="J3A-UM-oPB" secondAttribute="bottom" constant="4" id="t3t-0T-zf1"/>
+                <constraint firstAttribute="bottom" secondItem="Anp-ex-N3Q" secondAttribute="bottom" id="t9P-6H-3wm"/>
                 <constraint firstAttribute="trailing" secondItem="Fuq-rW-hrF" secondAttribute="trailing" constant="34" id="wK8-xi-7Bf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="QRCodeImageView" destination="Fuq-rW-hrF" id="xT9-cP-rG9"/>
+                <outlet property="nickNameLabel" destination="jPY-iv-AN8" id="B8r-GP-3YV"/>
+                <outlet property="phoneNumLabel" destination="ZOb-2f-vyb" id="4Kg-PI-Nl0"/>
+                <outlet property="photoImageView" destination="FZy-27-BLj" id="Ukn-D9-foz"/>
+                <outlet property="userYoloIDLabel" destination="J3A-UM-oPB" id="tnG-1Z-y0M"/>
+            </connections>
             <point key="canvasLocation" x="50" y="-122"/>
         </view>
     </objects>

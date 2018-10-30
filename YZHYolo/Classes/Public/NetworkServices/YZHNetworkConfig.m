@@ -24,7 +24,6 @@ static YZHNetworkConfig* _instance;
 @property(nonatomic, strong) NSURL *baseURL;
 @property(nonatomic, strong) YZHAPIRetryConfig* retryConfig;
 
-
 @end
 
 @implementation YZHNetworkConfig
@@ -47,7 +46,11 @@ static YZHNetworkConfig* _instance;
 
 + (instancetype)shareNetworkConfig{
     
-    return [[self alloc] init];
+    if (_instance) {
+        return _instance;
+    } else {
+        return [[self alloc] init];
+    }
 }
 
 - (instancetype)init{
@@ -104,7 +107,6 @@ static YZHNetworkConfig* _instance;
 
 + (void)postNetworkingResource:(NSString *)path params:(NSDictionary *)params success:(void (^)(id obj))success failure:(void (^)(NSError *error))failure retryCount:(NSInteger)retryCount retryInterval:(NSTimeInterval)retryInterval{
     //APILog模式，打印API信息
-    //APILog模式，打印API信息
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
@@ -126,17 +128,14 @@ static YZHNetworkConfig* _instance;
 }
 
 #pragma mark -- ConfignServer
-
+//TODO: 懒加载
 + (NSString* )confignServerHead{
     
     NSString* urlServerString;
 
 #if DEBUG
     // 配置测试服
-    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddrTest];
-    if (urlServerString.length == 0) {
-        urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
-    }
+    urlServerString = [YZHServicesConfig debugTestServerConfig];
     
 #else
     
@@ -228,6 +227,8 @@ static YZHNetworkConfig* _instance;
 //        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
         // TODO 需和后台协商
 //        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
+        // 数据序列化处理
+        httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
         //AFHTTPSessionManager+RetryPolicy
         httpSessionManager.retryPolicyLogMessagesEnabled = YES;
         // TODO HOOK?
@@ -240,6 +241,7 @@ static YZHNetworkConfig* _instance;
 - (NSURL *)baseURL{
     
     if (_baseURL == nil) {
+        //TODO: 正式服 BaseURL  异常捕获,
         _baseURL = [NSURL URLWithString:@"www"];
     }
     NSAssert(_baseURL, @"_baseURL Can't be empty");

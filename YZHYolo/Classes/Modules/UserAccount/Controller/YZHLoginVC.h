@@ -10,6 +10,6 @@
 
 @interface YZHLoginVC : YZHBaseViewController
 
-//@property (nonatomic, assign) BOOL hideNavigationBarLine;
+@property (nonatomic, copy) NSString* phoneString;
 
 @end

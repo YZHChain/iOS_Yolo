@@ -10,9 +10,15 @@
 
 #import "YZHPhotoManage.h"
 #import "UIButton+YZHTool.h"
+#import "NIMKitFileLocationHelper.h"
+#import "UIView+Toast.h"
+#import "NIMGlobalDefs.h"
+#import "NIMResourceManagerProtocol.h"
+#import "UIImage+NIMKit.h"
+#import "UIImageView+YZHImage.h"
 
 static NSArray* buttonArray;
-@interface YZHMyInformationPhotoVC ()
+@interface YZHMyInformationPhotoVC ()<NIMUserManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *savePhotoButton;
 @property (weak, nonatomic) IBOutlet UIButton *callPhotoButton;
@@ -47,9 +53,6 @@ static NSArray* buttonArray;
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    //TODO: 不知道什么原因, Bar 还是隐藏的。暂时先通过这里解决。。
-    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - 2.SettingView and Style
@@ -67,6 +70,9 @@ static NSArray* buttonArray;
     [self.callCameraButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
     [self.callPhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
     [self.savePhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
+    
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+    [self.photoImageView yzh_setImageWithString:user.userInfo.avatarUrl placeholder:@"my_myinformationShow_headPhoto_default"];
     
 }
 
@@ -89,33 +95,34 @@ static NSArray* buttonArray;
 - (IBAction)useCameraPictures:(UIButton *)sender {
     
     sender.backgroundColor = [UIColor whiteColor];
+    @weakify(self)
     [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypeCamera finishPicking:^(UIImage * _Nonnull image) {
+        @strongify(self)
         self.photoImageView.image = image;
+        [self updatePhotoToIMDataWithImage:image];
     }];
 }
 
 - (IBAction)callMobilePhoto:(UIButton *)sender {
     
     sender.backgroundColor = [UIColor whiteColor];
-    
+    @weakify(self)
     [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
+        @strongify(self)
         self.photoImageView.image = image;
+        [self updatePhotoToIMDataWithImage:image];
     }];
     
 }
 
 - (IBAction)performbSavePhoto:(UIButton *)sender {
     
-//    sender.backgroundColor = [UIColor whiteColor];
+    [self saveImageToPhotos:self.photoImageView.image];
 }
 
 - (void)highlightedBackground:(UIButton *)sender {
     
-//    if (sender.highlighted) {
-//        sender.backgroundColor = [UIColor yzh_backgroundThemeGray];
-//    } else {
-//
-//    }
+
 }
 
 
@@ -126,7 +133,64 @@ static NSArray* buttonArray;
     
 }
 
-#pragma mark - 7.GET & SET
+- (void)updatePhotoToIMDataWithImage:(UIImage* )image {
+    
+    UIImage *imageForAvatarUpload = [image nim_imageForAvatarUpload];
+    NSString *fileName = [NIMKitFileLocationHelper genFilenameWithExt:@"jpg"];
+    NSString *filePath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
+    BOOL success = data && [data writeToFile:filePath atomically:YES];
+    @weakify(self)
+    if (success) {
+        
+        [SVProgressHUD show];
+        [[NIMSDK sharedSDK].resourceManager upload:filePath progress:nil completion:^(NSString *urlString, NSError *error) {
+            [SVProgressHUD dismiss];
+            @strongify(self)
+            if (!error && self) {
+                [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagAvatar):urlString} completion:^(NSError *error) {
+                    if (!error) {
+                        //                        [[NTESRedPacketManager sharedManager] updateUserInfo];
+                        [[SDWebImageManager sharedManager] saveImageToCache:imageForAvatarUpload forURL:[NSURL URLWithString:urlString]];
+                        //                        [wself refresh];
+                    } else {
+                        [self.view makeToast:@"设置头像失败，请重试"
+                                     duration:2
+                                     position:CSToastPositionCenter];
+                    }
+                }];
+            } else {
+                [self.view makeToast:@"图片上传失败，请重试"
+                             duration:2
+                             position:CSToastPositionCenter];
+            }
+        }];
+    } else {
+        [self.view makeToast:@"图片保存失败，请重试"
+                    duration:2
+                    position:CSToastPositionCenter];
+    }
+}
 
+- (void)saveImageToPhotos:(UIImage*)savedImage {
+    // TODO: 先检查设备是否授权访问相册
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+        [self.view makeToast:@"图片已经保存到相册"
+                    duration:1
+                    position:CSToastPositionCenter];
+    }else{
+        [self.view makeToast:@"图片保存失败,请重试"
+                    duration:1
+                    position:CSToastPositionCenter];
+    }
+}
+
+
+
+#pragma mark - 7.GET & SET
 
 @end

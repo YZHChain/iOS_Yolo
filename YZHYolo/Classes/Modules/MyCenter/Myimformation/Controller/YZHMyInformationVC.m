@@ -11,14 +11,14 @@
 #import "YZHMyInformationModel.h"
 #import "YZHMyInformationCell.h"
 #import "YZHMyInformationPhotoVC.h"
+#import "NIMKitDataProviderImpl.h"
 
 static NSString* const kPhoneCellIdentifier = @"imformationPhoneCellIdentifier";
 static NSString* const kPhotoCellIdentifier = @"imformationPhotoCellIdentifier";
 static NSString* const kNicknameCellIdentifier = @"imformationNicknameCellIdentifier";
 static NSString* const kGenderCellIdentifier = @"imformationGenderCellIdentifier";
 static NSString* const kQRCodeCellIdentifier = @"imformationQRCodeCellIdentifier";
-static NSArray* cellIdentifierArray;
-@interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface YZHMyInformationVC ()<UITableViewDelegate,UITableViewDataSource,NIMUserManagerDelegate>
 
 @property(nonatomic, strong)UITableView* tableView;
 @property(nonatomic, strong)YZHMyInformationListModel* viewModel;
@@ -28,11 +28,6 @@ static NSArray* cellIdentifierArray;
 @implementation YZHMyInformationVC
 
 #pragma mark - 1.View Controller Life Cycle
-
-+ (void)initialize{
-    
-    cellIdentifierArray = @[kPhoneCellIdentifier, kPhotoCellIdentifier, kNicknameCellIdentifier, kGenderCellIdentifier, kQRCodeCellIdentifier];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,6 +73,7 @@ static NSArray* cellIdentifierArray;
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)reloadView
@@ -89,13 +85,6 @@ static NSArray* cellIdentifierArray;
 
 - (void)setupData
 {
-    [[YZHNetworkService shareService] GETNetworkingResource:PATH_REGISTERED_MYINFORMATION params:nil successCompletion:^(id obj) {
-        
-        self.viewModel = [YZHMyInformationListModel YZH_objectWithKeyValues:obj];
-        [self reloadView];
-    } failureCompletion:^(NSError *error) {
-        
-    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
@@ -107,41 +96,14 @@ static NSArray* cellIdentifierArray;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    
     return self.viewModel.list[section].content.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
-    YZHMyInformationCell* cell;
-    switch (model.type) {
-        case 0:
-            cell = [tableView dequeueReusableCellWithIdentifier:kPhoneCellIdentifier];
-            break;
-        case 1:
-            cell = [tableView dequeueReusableCellWithIdentifier:kPhotoCellIdentifier];
-            break;
-        case 2:
-            cell = [tableView dequeueReusableCellWithIdentifier:kNicknameCellIdentifier];
-            break;
-        case 3:
-            cell = [tableView dequeueReusableCellWithIdentifier:kGenderCellIdentifier];
-            break;
-        default:
-            cell = [tableView dequeueReusableCellWithIdentifier:kQRCodeCellIdentifier];
-            break;
-    }
-    
-    if (cell == nil) {
-        if (model.type <= 4) {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil][model.type];
-        } else {
-            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHMyInformationCell" owner:nil options:nil].lastObject;
-        }
-    }
+    YZHMyInformationCell* cell = [YZHMyInformationCell tempTableViewCellWithTableView:tableView indexPath:indexPath cellType:model.cellType];
     [cell setViewModel:model];
-    
     
     return cell;
 }
@@ -161,8 +123,11 @@ static NSArray* cellIdentifierArray;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
-    
-    [YZHRouter openURL:model.route];
+    if ([model.title isEqualToString:@"性别"]) {
+        [YZHRouter openURL:model.route info:@{@"userGender": model.subtitle}];
+    } else {
+        [YZHRouter openURL:model.route];
+    }
 }
 
 #pragma mark - 5.Event Response
@@ -171,7 +136,18 @@ static NSArray* cellIdentifierArray;
 
 - (void)setupNotification
 {
+    [[NIMSDK sharedSDK].userManager addDelegate:self];
+}
+
+- (void)userInformationUpUserData:(NIMUser *)user {
     
+    [self.viewModel updateModelWithUserData:user];
+    [self.tableView reloadData];
+}
+
+- (void)onUserInfoChanged:(NIMUser *)user {
+    
+    [self userInformationUpUserData:user];
 }
 
 #pragma mark - 7.GET & SET
@@ -193,14 +169,14 @@ static NSArray* cellIdentifierArray;
     return _tableView;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (YZHMyInformationListModel *)viewModel {
+    
+    if (!_viewModel) {
+        NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+        _viewModel = [[YZHMyInformationListModel alloc] init];
+        _viewModel.userIMData = user;
+    }
+    return _viewModel;
 }
-*/
 
 @end

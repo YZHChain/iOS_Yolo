@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAboutYoloModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAboutYoloCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (nonatomic, strong) YZHAboutYoloModel* model;
 
 @end
 

@@ -18,22 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LmW-Rv-QBH">
-                        <rect key="frame" x="38" y="58.5" width="246" height="1"/>
-                        <color key="backgroundColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-GR-URK">
+                        <rect key="frame" x="36" y="19.5" width="18" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="kIW-2k-sBn"/>
-                        </constraints>
-                    </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eFB-GR-URK">
-                        <rect key="frame" x="38" y="19.5" width="15" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="75W-Jw-iZZ"/>
-                            <constraint firstAttribute="width" constant="15" id="GXB-8C-IN3"/>
+                            <constraint firstAttribute="height" constant="21" id="hmE-hN-OKw"/>
+                            <constraint firstAttribute="width" constant="18" id="naW-yy-mBi"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Token钱包 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w13-ON-dbx">
-                        <rect key="frame" x="66" y="21" width="75.5" height="18"/>
+                        <rect key="frame" x="67" y="21" width="76" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -47,23 +40,20 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="w13-ON-dbx" firstAttribute="leading" secondItem="eFB-GR-URK" secondAttribute="trailing" constant="13" id="1LA-4E-vmn"/>
                     <constraint firstItem="eFB-GR-URK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Xx-rd-DG7"/>
-                    <constraint firstAttribute="bottom" secondItem="LmW-Rv-QBH" secondAttribute="bottom" id="Hse-Ls-iDG"/>
-                    <constraint firstItem="eFB-GR-URK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="38" id="JLQ-sA-6gc"/>
                     <constraint firstItem="hYt-G2-wse" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lig-1f-DIY"/>
-                    <constraint firstItem="LmW-Rv-QBH" firstAttribute="trailing" secondItem="hYt-G2-wse" secondAttribute="trailing" id="Sg2-dv-a0k"/>
                     <constraint firstAttribute="trailing" secondItem="hYt-G2-wse" secondAttribute="trailing" constant="36" id="VQW-4B-tQr"/>
                     <constraint firstItem="w13-ON-dbx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="a5H-7D-HTg"/>
-                    <constraint firstItem="LmW-Rv-QBH" firstAttribute="leading" secondItem="eFB-GR-URK" secondAttribute="leading" id="zvn-ax-OsE"/>
+                    <constraint firstItem="w13-ON-dbx" firstAttribute="leading" secondItem="eFB-GR-URK" secondAttribute="trailing" constant="13" id="hp6-WL-eXt"/>
+                    <constraint firstItem="eFB-GR-URK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="36" id="wHh-HE-BnG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="clickMarkImageView" destination="hYt-G2-wse" id="mjv-12-1OI"/>
                 <outlet property="iConImageView" destination="eFB-GR-URK" id="y8R-qr-igh"/>
-                <outlet property="separatorView" destination="LmW-Rv-QBH" id="Qs0-uU-4SP"/>
                 <outlet property="titleLabel" destination="w13-ON-dbx" id="Acw-3Y-7hd"/>
             </connections>
+            <point key="canvasLocation" x="140.80000000000001" y="154.72263868065968"/>
         </tableViewCell>
     </objects>
     <resources>

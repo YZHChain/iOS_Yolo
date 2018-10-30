@@ -9,16 +9,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHMyInformationMyPlaceCell"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="positioningCellIdentifier" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="YZHMyInformationMyPlaceCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="positioningCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="positioningCellIdentifier" id="KGk-i7-Jjw" customClass="YZHMyInformationMyPlaceCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_information_myPlaceCell_imageView" translatesAutoresizingMaskIntoConstraints="NO" id="cvx-FN-Ol2">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_myPlaceCell_imageView" translatesAutoresizingMaskIntoConstraints="NO" id="cvx-FN-Ol2">
                         <rect key="frame" x="15" y="12" width="11" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="11" id="CyA-rn-ewR"/>
@@ -40,14 +40,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="countriesLabel" destination="KP8-2G-e0i" id="znt-C5-5ba"/>
                 <outlet property="mapImageView" destination="cvx-FN-Ol2" id="6AP-4Y-wb1"/>
-                <outlet property="positioningResultLabel" destination="Vo8-pX-dZh" id="9M6-49-N9L"/>
-                <outlet property="selectStatusLabel" destination="Lsh-WI-nTi" id="Yd0-PU-2Kn"/>
+                <outlet property="positioningResultLabel" destination="Vo8-pX-dZh" id="vjA-U0-hht"/>
             </connections>
             <point key="canvasLocation" x="38" y="-177"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="countriesCellIdentifier" selectionStyle="default" indentationWidth="10" id="kfK-jc-0uR" customClass="YZHMyInformationMyPlaceCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="selectedLocationCellIdentifier" selectionStyle="default" indentationWidth="10" id="kfK-jc-0uR" customClass="YZHMyInformationMyPlaceCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kfK-jc-0uR" id="Q7R-bh-YGn">
@@ -60,34 +58,35 @@
                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前选择" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsh-WI-nTi">
-                        <rect key="frame" x="229.5" y="11.5" width="57.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsh-WI-nTi">
+                        <rect key="frame" x="287" y="20" width="0.0" height="0.0"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="tNW-2a-WIR">
-                        <rect key="frame" x="298" y="11.5" width="9" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="9" id="SuE-cn-6m8"/>
-                            <constraint firstAttribute="height" constant="17" id="UWR-jl-nbR"/>
-                        </constraints>
+                        <rect key="frame" x="298" y="12" width="9" height="16"/>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="KP8-2G-e0i" firstAttribute="centerY" secondItem="Q7R-bh-YGn" secondAttribute="centerY" id="IjM-7c-fGW"/>
                     <constraint firstItem="KP8-2G-e0i" firstAttribute="leading" secondItem="Q7R-bh-YGn" secondAttribute="leading" constant="13" id="KBf-XG-kie"/>
-                    <constraint firstItem="tNW-2a-WIR" firstAttribute="leading" secondItem="Lsh-WI-nTi" secondAttribute="trailing" constant="11" id="dw4-LQ-LOs"/>
+                    <constraint firstItem="tNW-2a-WIR" firstAttribute="centerY" secondItem="Q7R-bh-YGn" secondAttribute="centerY" id="fhX-Ct-NqP"/>
                     <constraint firstItem="Lsh-WI-nTi" firstAttribute="centerY" secondItem="Q7R-bh-YGn" secondAttribute="centerY" id="kIx-Ad-u0E"/>
-                    <constraint firstAttribute="trailing" secondItem="tNW-2a-WIR" secondAttribute="trailing" constant="13" id="nCt-5H-L6T"/>
-                    <constraint firstItem="tNW-2a-WIR" firstAttribute="centerY" secondItem="Q7R-bh-YGn" secondAttribute="centerY" id="nGa-1c-ziH"/>
+                    <constraint firstAttribute="trailing" secondItem="Lsh-WI-nTi" secondAttribute="trailing" constant="33" id="nme-So-zH4"/>
+                    <constraint firstAttribute="trailing" secondItem="tNW-2a-WIR" secondAttribute="trailing" constant="13" id="nq4-ax-pHh"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="countriesLabel" destination="KP8-2G-e0i" id="86R-7p-vug"/>
+                <outlet property="guideImageView" destination="tNW-2a-WIR" id="W2m-1l-MKV"/>
+                <outlet property="selectStatusLabel" destination="Lsh-WI-nTi" id="jLA-Ho-REM"/>
+            </connections>
             <point key="canvasLocation" x="38" y="-44"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="my_cover_cell_back" width="9" height="16"/>
-        <image name="my_information_myPlaceCell_imageView" width="10" height="16"/>
+        <image name="my_informationCell_myPlaceCell_imageView" width="10" height="16"/>
     </resources>
 </document>

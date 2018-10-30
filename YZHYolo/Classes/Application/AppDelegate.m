@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "YZHLaunchViewController.h"
 #import "YZHRootTabBarViewController.h"
+#import "YZHCellLayoutConfign.h"
+#import "YZHCustomAttachmentDecoder.h"
 
 @interface AppDelegate ()
 
@@ -20,11 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //云信配置
+    [self setupNIMSDK];
+    
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
     [self.window makeKeyAndVisible];
-
-
+    
     return YES;
 }
 
@@ -55,5 +59,27 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark -- IM Configuration
+
+- (void)setupNIMSDK {
+    
+    // 初始化云信 NIMSDK  TODO: Packaging
+    //    2828b3cd20e9263f914344c284588b60
+    NSString *appKey        = @"45c6af3c98409b18a84451215d0bdd6e";
+    NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
+    option.apnsCername      = nil;
+    option.pkCername        = nil;
+    [[NIMSDK sharedSDK] registerWithOption:option];
+    
+    //注册自定义消息的解析器
+    [NIMCustomObject registerCustomDecoder:[YZHCustomAttachmentDecoder new]];
+    
+    //注册 NIMKit 自定义排版配置
+    [[NIMKit sharedKit] registerLayoutConfig:[YZHCellLayoutConfign new]];
+    //定制 UI 配置器
+    NIMKitConfig* config = [[NIMKitConfig alloc] init];
+    config.avatarType = NIMKitAvatarTypeRadiusCorner;
+    [NIMKit sharedKit].config = config;
+}
 
 @end

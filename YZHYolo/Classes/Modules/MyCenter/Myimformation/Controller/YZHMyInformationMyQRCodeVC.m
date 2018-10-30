@@ -8,6 +8,7 @@
 
 #import "YZHMyInformationMyQRCodeVC.h"
 
+#import "YZHPublic.h"
 @interface YZHMyInformationMyQRCodeVC ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerPhotoImageView;
@@ -46,9 +47,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    //TODO: 不知道什么原因, Bar 还是隐藏的。暂时先通过这里解决。。
-//    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - 2.SettingView and Style
@@ -61,7 +59,18 @@
 
 - (void)setupView
 {
-    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
+    
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+    if (YZHIsString(user.userInfo.nickName)) {
+        self.nickNameLabel.text = user.userInfo.nickName;
+    } else {
+        self.nickNameLabel.text = @"Yolo用户";
+    }
+    if (YZHIsString(user.userInfo.avatarUrl)) {
+        [self.headerPhotoImageView yzh_setImageWithString:user.userInfo.avatarUrl];
+        [self.headerPhotoImageView yzh_cornerRadiusAdvance:self.headerPhotoImageView.size.height / 2 rectCornerType: UIRectCornerAllCorners];
+    }
 }
 
 - (void)reloadView
@@ -102,18 +111,23 @@
     return image;
 }
 
-- (void)saveImageToPhotos:(UIImage*)savedImage{
-    
+- (void)saveImageToPhotos:(UIImage*)savedImage {
+    // TODO: 先检查设备是否授权访问相册
     UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo{
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error == nil) {
-        NSLog(@"存入手机相册成功");
+        [self.view makeToast:@"图片已经保存到相册"
+                    duration:1
+                    position:CSToastPositionCenter];
     }else{
-        NSLog(@"存入手机相册失败");
+        [self.view makeToast:@"图片保存失败,请重试"
+                    duration:1
+                    position:CSToastPositionCenter];
     }
 }
+
 #pragma mark - 7.GET & SET
 
 @end

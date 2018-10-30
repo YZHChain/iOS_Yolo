@@ -68,7 +68,7 @@
                                   forState:UIControlStateSelected];
         
     }
-    
+    self.selectedIndex = 4;
     self.delegate = self;
     
 }

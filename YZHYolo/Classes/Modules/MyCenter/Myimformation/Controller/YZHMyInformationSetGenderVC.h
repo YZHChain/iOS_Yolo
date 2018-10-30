@@ -10,6 +10,6 @@
 
 @interface YZHMyInformationSetGenderVC : YZHBaseViewController
 
-
+@property (nonatomic, copy) NSString* userGender;
 
 @end

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '8.0'
+platform :ios, '8.0'
 
 target 'YZHYolo' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -7,14 +7,15 @@ target 'YZHYolo' do
 
   #UI
   pod 'MJRefresh'
-  pod 'SDWebImage'
+  pod 'SDWebImage', '~> 4.0.0'
   pod 'DDPageControl'
-  pod 'MBProgressHUD'
+  pod 'MBProgressHUD', '0.9.2'
+  pod 'SVProgressHUD', '~> 2.0.3'
   pod 'WZLBadge'
   pod 'UICountingLabel'
   pod 'YYText'
   pod 'UICollectionViewLeftAlignedLayout'
-  pod 'MWPhotoBrowser'
+  #pod 'MWPhotoBrowser'
   pod 'Masonry'
   pod 'SDCycleScrollView'
 
@@ -24,11 +25,14 @@ target 'YZHYolo' do
   pod 'JLRoutes', '1.6'
   pod 'WebViewJavascriptBridge'
   pod 'UIViewController+KeyboardAnimation', '~> 1.3'
+  pod 'SCIndexView' 
+  pod 'PYSearch'                    #搜索视图
+  pod 'ZYCornerRadius', '~> 1.0.2'  #圆角
 
   #网络
   pod 'AFNetworking', '3.0'
   pod 'AFNetworking+RetryPolicy'
-  pod 'YTKNetwork'
+  #pod 'YTKNetwork'
 
   #数据
   pod 'MJExtension'
@@ -39,7 +43,14 @@ target 'YZHYolo' do
   #pod 'AliyunOSSiOS'
   pod 'JPush'
   pod 'UMengAnalytics-NO-IDFA'
-
+  
+  #IM
+  pod 'NIMSDK'
+  #pod 'NIMKit'  
+  pod 'Reachability', '~> 3.2'
+  pod 'Toast', '~> 3.0'
+  pod 'M80AttributedLabel', '~> 1.6.3'
+  pod 'TZImagePickerController', '~> 1.9.0'
   #分享
   pod 'ShareSDK3'
   pod 'ShareSDK3/ShareSDKUI'

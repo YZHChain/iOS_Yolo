@@ -1,0 +1,72 @@
+//
+//  YZHUserCardAttachment.m
+//  YZHYolo
+//
+//  Created by Jersey on 2018/10/25.
+//  Copyright © 2018年 YZHChain. All rights reserved.
+//
+
+#import "YZHUserCardAttachment.h"
+
+#import "YZHCustomAttachmentDefines.h"
+@implementation YZHUserCardAttachment
+
+- (NSString *)encodeAttachment {
+    
+    NSDictionary *dict = @{
+                           CustomMessageType : @(CustomMessageTypeUserCard),
+                               CustomMessageData : @{ @"userName" : self.userName? self.userName : @"",
+                                       @"yoloID" : self.yoloID?self.yoloID : @"",
+                                       @"account": self.account?
+                                       self.account : @"",
+                                       }
+                           };
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict
+                                                   options:NSJSONWritingPrettyPrinted
+                                                     error:nil];
+    NSString *content = nil;
+    if (data) {
+        content = [[NSString alloc] initWithData:data
+                                        encoding:NSUTF8StringEncoding];
+    }
+    return content;
+    
+}
+
+#pragma mark -- YZHCustomAttachmentInfo
+
+- (NSString *)cellContent:(NIMMessage *)message {
+    
+    return @"YZHUserCardContentView";
+}
+
+- (CGSize)contentSize:(NIMMessage *)message cellWidth:(CGFloat)width {
+    //此消息宽高固定.
+    return CGSizeMake(250, 97);
+}
+
+#pragma mark -- GET SET
+
+-(NSString *)avatarUrl {
+    
+    if (!_avatarUrl) {
+        //先读取本地,本地没有,在去服务器下拉.TODOTODO
+//        [[NIMSDK sharedSDK].userManager fetchUserInfos:@[self.account] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+//            if (!error) {
+//                self->_avatarUrl = users.firstObject.userInfo.avatarUrl ? users.firstObject.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
+//            }
+//        }];
+        NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_account];
+        _avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
+    }
+    return _avatarUrl;
+}
+
+- (NSString *)titleName {
+    
+    if (!_titleName) {
+        _titleName = @"名片分享";
+    }
+    return _titleName;
+}
+@end

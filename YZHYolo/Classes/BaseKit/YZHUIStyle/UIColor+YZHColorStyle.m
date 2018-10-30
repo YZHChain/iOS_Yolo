@@ -25,9 +25,29 @@
     return [UIColor colorWithRed: 193.0/ 255.0f green: 193.0/ 255.0f blue: 193.0/ 255.0f alpha: 1.0f];
 }
 
-+ (UIColor *)yzh_fontshallowBlack {
++ (UIColor *)yzh_fontShallowBlack {
     
-    return [UIColor colorWithRed: 62.0/ 255.0f green: 58.0/ 255.0f blue: 1.0/ 255.0f alpha: 1.0f];
+    return [UIColor colorWithRed: 62.0/ 255.0f green: 58.0/ 255.0f blue: 57.0/ 255.0f alpha: 1.0f];
+}
+
++ (UIColor *)yzh_buttonBackgroundGreen {
+    
+    return [UIColor colorWithRed: 42.0/ 255.0f green: 107.0/ 255.0f blue: 250.0/ 255.0f alpha: 1.0f];
+}
+
++ (UIColor *)yzh_buttonBackgroundRed {
+    
+    return [UIColor colorWithRed: 227/255.0 green: 41/255.0 blue: 63/255.0 alpha: 1];
+}
+
++(UIColor *)yzh_sessionCellGray {
+    
+    return [UIColor colorWithRed: 142/255.0 green: 142/255.0 blue: 142/255.0 alpha:1];
+}
+
++(UIColor *)yzh_sessionCellBackgroundGray {
+    
+    return [UIColor colorWithRed: 249/255.0 green: 249/255.0 blue: 249/255.0 alpha:1];
 }
 
 //十六进制颜色转换

@@ -47,7 +47,7 @@ static id instance;
     infoJsonString = [infoJsonString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return infoJsonString;
 }
-
+//TODO: 字典异常捕获,
 - (NSString *)confignInfoJson{
     
     NSDictionary *info = @{@"uuid": self.UUID,

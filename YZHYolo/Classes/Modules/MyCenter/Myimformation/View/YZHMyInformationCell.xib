@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="imformationPhoneCellIdentifier" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="YZHMyInformationCell">
+        <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" restorationIdentifier="imformationPhoneCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="phoneCellIdentifler" id="KGk-i7-Jjw" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -44,7 +44,7 @@
             </connections>
             <point key="canvasLocation" x="36" y="-144"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationPhoneCellIdentifier" selectionStyle="default" indentationWidth="10" id="nbh-fT-A3g" customClass="YZHMyInformationCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationPhoneCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="photoCellIdentifler" id="nbh-fT-A3g" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbh-fT-A3g" id="luJ-4r-zvC">
@@ -64,7 +64,7 @@
                             <constraint firstAttribute="height" constant="17" id="AwA-dF-jty"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
                         <rect key="frame" x="251" y="16" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="8x4-WS-nYx"/>
@@ -85,9 +85,9 @@
                 <outlet property="photoImageView" destination="3uq-Ab-XGt" id="L93-a8-592"/>
                 <outlet property="titleLabel" destination="rsG-Ud-J6J" id="FZl-J4-kch"/>
             </connections>
-            <point key="canvasLocation" x="36" y="-14"/>
+            <point key="canvasLocation" x="35" y="-42"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationNicknameCellIdentifier" selectionStyle="default" indentationWidth="10" id="9As-xR-yqK" customClass="YZHMyInformationCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationNicknameCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="nickNameCellIdentifler" id="9As-xR-yqK" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9As-xR-yqK" id="XmU-nE-HlQ">
@@ -127,9 +127,9 @@
                 <outlet property="subTitleLabel" destination="gYl-QA-k5q" id="8QN-lG-9eW"/>
                 <outlet property="titleLabel" destination="rwN-mk-U4a" id="Aaw-J8-t1F"/>
             </connections>
-            <point key="canvasLocation" x="35.200000000000003" y="111.54422788605699"/>
+            <point key="canvasLocation" x="34" y="65"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationGenderCellIdentifier" selectionStyle="default" indentationWidth="10" id="dfr-gE-hGD" customClass="YZHMyInformationCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationGenderCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="genderCellIdentifler" id="dfr-gE-hGD" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dfr-gE-hGD" id="eDF-Gb-nqf">
@@ -149,12 +149,8 @@
                             <constraint firstAttribute="height" constant="17" id="pFF-ia-6V9"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-LT-1Ot">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_gender_boy" translatesAutoresizingMaskIntoConstraints="NO" id="wG3-LT-1Ot">
                         <rect key="frame" x="265" y="23.5" width="13" height="13"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="13" id="1Ex-dw-L4o"/>
-                            <constraint firstAttribute="width" constant="13" id="ncm-l0-oJb"/>
-                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02S-hJ-DGz">
                         <rect key="frame" x="242.5" y="21" width="15.5" height="18"/>
@@ -166,10 +162,10 @@
                 <constraints>
                     <constraint firstItem="Cmh-RR-j0t" firstAttribute="leading" secondItem="eDF-Gb-nqf" secondAttribute="leading" constant="13" id="0Ig-ZP-J3G"/>
                     <constraint firstItem="wG3-LT-1Ot" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="1Sy-3a-1DU"/>
-                    <constraint firstItem="wG3-LT-1Ot" firstAttribute="leading" secondItem="02S-hJ-DGz" secondAttribute="trailing" constant="7" id="SSq-6H-x1p"/>
                     <constraint firstItem="Cmh-RR-j0t" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="aUF-xq-KfT"/>
                     <constraint firstItem="02S-hJ-DGz" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="bmG-64-tfY"/>
                     <constraint firstAttribute="trailing" secondItem="s7J-Gc-vrJ" secondAttribute="trailing" constant="16" id="db5-oH-oea"/>
+                    <constraint firstAttribute="trailing" secondItem="02S-hJ-DGz" secondAttribute="trailing" constant="62" id="fCJ-Mq-PVi"/>
                     <constraint firstItem="s7J-Gc-vrJ" firstAttribute="leading" secondItem="wG3-LT-1Ot" secondAttribute="trailing" constant="17" id="hN3-YY-WGE"/>
                     <constraint firstItem="s7J-Gc-vrJ" firstAttribute="centerY" secondItem="eDF-Gb-nqf" secondAttribute="centerY" id="oL6-E2-Dan"/>
                 </constraints>
@@ -179,9 +175,9 @@
                 <outlet property="subTitleLabel" destination="02S-hJ-DGz" id="iJO-Qt-ntX"/>
                 <outlet property="titleLabel" destination="Cmh-RR-j0t" id="ZC3-yH-eN5"/>
             </connections>
-            <point key="canvasLocation" x="36" y="237"/>
+            <point key="canvasLocation" x="34" y="176"/>
         </tableViewCell>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationCellIdentifier" selectionStyle="default" indentationWidth="10" id="N1p-Hf-jAk" customClass="YZHMyInformationCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="imformationCellIdentifier" selectionStyle="default" indentationWidth="10" reuseIdentifier="QRCodeCellIdentifler" id="N1p-Hf-jAk" customClass="YZHMyInformationCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N1p-Hf-jAk" id="xOn-sL-CxZ">
@@ -201,7 +197,7 @@
                             <constraint firstAttribute="height" constant="17" id="OUY-Oy-3cx"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3g5-Wn-WKd">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_QRCode" translatesAutoresizingMaskIntoConstraints="NO" id="3g5-Wn-WKd">
                         <rect key="frame" x="255" y="18.5" width="23" height="23"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="23" id="Wxg-kY-Wbm"/>
@@ -222,10 +218,13 @@
                 <outlet property="photoImageView" destination="3g5-Wn-WKd" id="4Bo-UE-9Ph"/>
                 <outlet property="titleLabel" destination="AoI-2E-Tyg" id="Hdq-QA-DKt"/>
             </connections>
-            <point key="canvasLocation" x="36" y="366"/>
+            <point key="canvasLocation" x="34" y="291"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="my_cover_cell_back" width="9" height="16"/>
+        <image name="my_informationCell_QRCode" width="22" height="22"/>
+        <image name="my_informationCell_gender_boy" width="13" height="13"/>
+        <image name="my_informationCell_headPhoto_default" width="28" height="28"/>
     </resources>
 </document>

@@ -9,8 +9,10 @@
 #import "YZHAboutYoloVC.h"
 
 #import "YZHAboutYoloCell.h"
+#import "YZHAboutYoloModel.h"
 @interface YZHAboutYoloVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) YZHAboutYoloListModel* viewModel;
 
 @end
 
@@ -52,7 +54,7 @@
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.tableFooterView = [[UIView alloc] init];
     
 }
@@ -73,17 +75,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return self.viewModel.list.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 2;
+    return self.viewModel.list[section].content.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    YZHAboutYoloModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     YZHAboutYoloCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
+    cell.model = model;
     
     return cell;
 }
@@ -105,6 +109,20 @@
     return view;
 }
 
+// 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return 0.1f;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    UIView* view = [[UIView alloc] init];
+    
+    return view;
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -120,5 +138,13 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (YZHAboutYoloListModel *)viewModel {
+    
+    if (!_viewModel) {
+        _viewModel = [[YZHAboutYoloListModel alloc] init];
+    }
+    return _viewModel;
+}
 
 @end

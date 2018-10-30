@@ -9,9 +9,20 @@
 #import "YZHSettingCenterVC.h"
 
 #import "YZHAboutYoloCell.h"
+#import "YZHAlertManage.h"
+#import "UIButton+YZHTool.h"
+#import "YZHUserLoginManage.h"
+
+static NSString* const kYZHCellPasswordTitle = @"修改密码";
+static NSString* const kYZHCellChatLogTitle  = @"清空聊天记录";
+static NSString* const kYZHEmptyLogAlertTitle = @"确认要清空全部聊天记录吗？";
+static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎操作";
+
 @interface YZHSettingCenterVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableViewHeaderFooterView* footerView;
+@property (nonatomic, strong) UIButton* logOutButton;
 
 @end
 
@@ -53,9 +64,23 @@
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
-    self.tableView.scrollEnabled = NO;
+//    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+    self.tableView.showsHorizontalScrollIndicator = NO;
+    self.tableView.rowHeight = kYZHCellHeight;
+    
+    self.tableView.tableFooterView = self.footerView;
+    [self.tableView.tableFooterView addSubview:self.logOutButton];
+
+    [_logOutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(-30);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(240);
+        make.centerX.mas_equalTo(self.tableView.tableFooterView);
+        
+    }];
+    [self.tableView.tableFooterView layoutIfNeeded];
+    [_logOutButton yzh_setBackgroundColor:[UIColor colorWithRed:204.0/ 255.0 green:208.0/ 255.0 blue:214.0/ 255.0 alpha:1] forState:UIControlStateNormal];
     
 }
 
@@ -87,9 +112,9 @@
     
     YZHAboutYoloCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
     if (indexPath.row == 0) {
-        cell.titleLabel.text = @"修改密码";
+        cell.titleLabel.text = kYZHCellPasswordTitle;
     } else {
-        cell.titleLabel.text = @"清空聊天记录";
+        cell.titleLabel.text = kYZHCellChatLogTitle;
     }
     
     cell.subtitleLabel.text = nil;
@@ -97,14 +122,9 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 55;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 10;
+    return 7;
 }
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -114,12 +134,59 @@
     return view;
 }
 
+// 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    
+    return 0.1f;
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    UIView* view = [[UIView alloc] init];
+    
+    return view;
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    YZHAboutYoloCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell.titleLabel.text isEqualToString:kYZHCellPasswordTitle]) {
+        //TODO: 修改密码未做.
+        [YZHRouter openURL:kYZHRouterModifyPassword];
+    } else {
+        [YZHAlertManage showAlertTitle:kYZHEmptyLogAlertTitle message:kYZHEmptyLogAlertMessage actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                //TODO: 执行删除聊天记录
+                
+            }
+        }];
+    }
 }
 
 #pragma mark - 5.Event Response
+
+- (void)executeExitLogin {
+    
+    [YZHAlertManage showAlertTitle:@"确定要退出登录么？" message:nil actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [[NIMSDK sharedSDK].loginManager logout:^(NSError * _Nullable error) {
+                if (!error) {
+                    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+                    // 清空缓存用户信息
+                    [manage setCurrentLoginData:nil];
+                    // 跳转至登录页
+                    [manage executeHandInputLogin];
+                } else {
+                    [YZHProgressHUD showText:@"退出失败,请重试" onView:self.view];
+                }
+            }];
+        }
+    }];
+}
 
 #pragma mark - 6.Private Methods
 
@@ -129,6 +196,35 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (UITableViewHeaderFooterView *)footerView {
+    
+    if (!_footerView) {
+        _footerView = [[UITableViewHeaderFooterView alloc] initWithFrame:CGRectMake(0, 0, YZHView_Width, YZHView_Height - 117 - YZHNavigationStatusBarHeight)];
+        _footerView.backgroundView = ({
+            UIView * view = [[UIView alloc] initWithFrame:_footerView.bounds];
+            view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+            view;
+        });
+        self.tableView.tableFooterView = _footerView;
+    }
+    return _footerView;
+}
+
+- (UIButton *)logOutButton {
+    
+    if (!_logOutButton) {
+        UIButton* logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
+        [logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _logOutButton = logOutButton;
+        _logOutButton.layer.cornerRadius = 4;
+        _logOutButton.layer.masksToBounds = YES;
+        [logOutButton addTarget:self action:@selector(executeExitLogin) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _logOutButton;
+}
 
 @end
 

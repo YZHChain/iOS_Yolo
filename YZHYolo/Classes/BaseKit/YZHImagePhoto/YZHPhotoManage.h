@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, YZHImagePickerSourceType) {
     YZHImagePickerSourceTypePhotoLibrary = 0,
     YZHImagePickerSourceTypeCamera,
+    YZHImagePickerSourceTypePhotosAlbum,
 };
 @interface YZHPhotoManage : NSObject
 

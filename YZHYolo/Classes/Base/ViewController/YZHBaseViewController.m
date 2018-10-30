@@ -8,7 +8,7 @@
 
 #import "YZHBaseViewController.h"
 
-@interface YZHBaseViewController ()
+@interface YZHBaseViewController ()<NIMUserManagerDelegate>
 
 @end
 
@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // 修改状态栏
+//    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
     // 设置通知
     [self setupNotification];
     
@@ -57,9 +59,21 @@
 }
 
 - (void)dealloc {
-    
+
+    [[NIMSDK sharedSDK].userManager removeDelegate:self];
     NSLog(@"%s %@",__FUNCTION__ ,self);
 }
+
+#pragma mark -- Setting View
+
+//设置状态栏颜色
+//- (void)setStatusBarBackgroundColor:(UIColor *)color {
+//
+//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+//    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+//        statusBar.backgroundColor = color;
+//    }
+//}
 
 #pragma mark setting Notifaction
 
@@ -82,7 +96,7 @@
 #pragma mark GET & SET
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    
+
     return UIStatusBarStyleLightContent;
 }
 
