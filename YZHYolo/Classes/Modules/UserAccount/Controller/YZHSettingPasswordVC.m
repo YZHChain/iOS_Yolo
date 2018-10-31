@@ -59,8 +59,6 @@
     if (self.settingPasswordType == YZHSettingPasswordTypeFind) {
         self.settingPasswordView.navigationTitleLaebl.text = @"忘记密码";
         self.settingPasswordView.tileTextLabel.text = @"设置新密码";
-//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateNormal];
-//        [self.settingPasswordView.confirmButton setTitle:@"完成" forState:UIControlStateDisabled];
     }
     [self.settingPasswordView.confirmButton addTarget:self action:@selector(requestSettingPassword) forControlEvents:UIControlEventTouchUpInside];
     

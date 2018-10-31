@@ -340,5 +340,31 @@
     return string.copy;
 }
 
+- (NSInteger)yzh_calculateStringLeng {
+    
+    NSUInteger asciiLength = 0;
+    
+    for (NSUInteger i = 0; i < self.length; i++) {
+        
+        
+        unichar uc = [self characterAtIndex: i];
+        
+        asciiLength += isascii(uc) ? 1 : 2;
+    }
+    
+    NSUInteger unicodeLength = asciiLength;
+    
+    return unicodeLength;
+}
+//TODO 利用这种方式计算,对于英文直接转成拼音时,会有一个问题. 如输入 ha,拼接成 哈 应该是 2 个字符, 但是前面读取到 h,  ha直接转成 哈, 这样计算的时候相当于是 3 个字符了。
++ (BOOL)yzh_checkoutStringWithCurrenString:(NSString *)currentString importString:(NSString *)importString standardLength:(NSInteger)standardLength {
+    NSInteger currentStringLength = [currentString yzh_calculateStringLeng];
+    NSInteger importStringLength = [importString yzh_calculateStringLeng];
+    
+    BOOL isQualified = currentStringLength + importStringLength <= standardLength;
+    
+    return isQualified;
+}
+
 @end
 

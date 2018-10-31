@@ -10,6 +10,7 @@
 
 #import "YZHPublic.h"
 #import "NIMKitDataProviderImpl.h"
+#import "NSString+YZHTool.h"
 
 @interface YZHMyInformationSetNameVC ()<UITextFieldDelegate>
 
@@ -85,15 +86,24 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    
+    NSLog(@"将要输入代理方法");
     if (string.length == 0) {
         return YES;
-    }
-    //检查输入框字符
-    if (textField.text.length >= 20) {
-        return NO;
+    } else {
+       return [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:20];
     }
     
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    NSLog(@"当前输入字符%@", textField);
     return YES;
 }
 

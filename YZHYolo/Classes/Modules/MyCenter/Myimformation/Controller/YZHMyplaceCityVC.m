@@ -15,10 +15,11 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
 @interface YZHMyplaceCityVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic, strong)YZHLocationCountrieModel* countriesArray;
-@property(nonatomic, strong)YZHLocationProvinceModel* provincesArray;
-@property(nonatomic, strong)YZHMyInformationMyPlaceCell* lastSelectedCell;
-@property(nonatomic, assign)NSInteger selectedRow;
+@property (nonatomic, strong) YZHLocationCountrieModel* countriesArray;
+@property (nonatomic, strong) YZHLocationProvinceModel* provincesArray;
+@property (nonatomic, strong) YZHMyInformationMyPlaceCell* lastSelectedCell;
+@property (nonatomic, assign) NSInteger selectedRow;
+@property (nonatomic, strong) NSMutableDictionary* nextLocationDic;
 
 @end
 
@@ -53,8 +54,7 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
     self.navigationItem.title = @"设置地址";
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
-    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateNormal];
-    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yzh_backgroundThemeGray]} forState:UIControlStateDisabled];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
     item.enabled = NO;
     self.navigationItem.rightBarButtonItem = item;
 }
@@ -69,6 +69,8 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.rowHeight = 40;
     
+    self.selectedRow = MAXFLOAT;
+    NSLog(@"当前选择行数%ld",self.selectedRow);
 }
 
 - (void)reloadView
@@ -105,23 +107,25 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
     NSString* countrieName;
     BOOL hasNextLocation = NO;
     if (self.countriesArray.provinces.count) {
-        
         countrieName = self.countriesArray.provinces[indexPath.row].name;
         if (self.countriesArray.provinces[indexPath.row].citys.count > 0) {
             hasNextLocation = YES;
         }
-    
     } else {
-        
         countrieName = self.provincesArray.citys[indexPath.row].name;
     }
-    
     if (hasNextLocation) {
         cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
     } else {
         cell.guideImageView.image = nil;
     }
     cell.countriesLabel.text = countrieName;
+    [self.nextLocationDic setObject:@(hasNextLocation) forKey:indexPath];
+    if (self.selectedRow == indexPath.row) {
+        cell.selectStatusLabel.text = @"当前选择";
+    } else {
+        cell.selectStatusLabel.text = @"";
+    }
     
     return cell;
 }
@@ -146,20 +150,16 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YZHMyInformationMyPlaceCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    BOOL hasNextLocation = [[self.nextLocationDic objectForKey:indexPath] boolValue];
     
-    if (cell.guideImageView.hidden == NO) {
+    if (hasNextLocation) {
         
         YZHLocationProvinceModel* model = self.countriesArray.provinces[indexPath.row];
         [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesArray": model}];
         
     } else {
-        // 清除上一个选择Cell Tag
-        self.lastSelectedCell.selectStatusLabel.text = nil;
-        cell.selectStatusLabel.text = @"当前选择";
         self.selectedRow = indexPath.row;
-        // 将自己设置成最后一个选择的Cell
-        self.lastSelectedCell = cell;
+        [self.tableView reloadData];
         self.navigationItem.rightBarButtonItem.enabled = YES;
     }
 }
@@ -185,5 +185,13 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
 }
 
 #pragma mark - 7.GET & SET
+
+- (NSMutableDictionary *)nextLocationDic {
+    
+    if (!_nextLocationDic) {
+        _nextLocationDic = [[NSMutableDictionary alloc] init];
+    }
+    return _nextLocationDic;
+}
 
 @end

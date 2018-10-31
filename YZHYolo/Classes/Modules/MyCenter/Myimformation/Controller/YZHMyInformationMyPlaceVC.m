@@ -12,24 +12,23 @@
 #import "YZHLocationManager.h"
 #import "YZHMyinformationMyplaceModel.h"
 
-
-static NSString* const kPositioningCellIdentifier = @"positioningCellIdentifier";
-static NSString* const kCountriesCellIdentifier =  @"countriesCellIdentifier";
 typedef enum : NSUInteger {
-    selectMyPlaceTypeCountries = 0,
-    selectMyPlaceTypeProvinces = 1,
-    selectMyPlaceTypeCity = 2,
-} selectMyPlaceType;
+    YZHSelectMyPlaceTypeCountries = 0,
+    YZHSelectMyPlaceTypeProvinces = 1,
+    YZHSelectMyPlaceTypeCity = 2,
+} YZHSelectMyPlaceType;
 
 @interface YZHMyInformationMyPlaceVC ()<UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, strong)UITableView* tableView;
-@property(nonatomic, strong)YZHLocationWorldModel* viewModel;
-@property(nonatomic, assign)NSInteger selectedCountrieIndex;
-@property(nonatomic, assign)NSInteger selectedProvinceIndex;
-@property(nonatomic, assign)selectMyPlaceType currentType;
-@property(nonatomic, strong)YZHMyInformationMyPlaceCell* lastSelectedCell;
-@property(nonatomic, strong)YZHMyInformationMyPlaceCell* locationCell;
+@property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) YZHLocationWorldModel* viewModel;
+@property (nonatomic, assign) NSInteger selectedCountrieIndex;
+@property (nonatomic, assign) NSInteger selectedProvinceIndex;
+@property (nonatomic, assign) YZHSelectMyPlaceType currentType;
+@property (nonatomic, strong) YZHMyInformationMyPlaceCell* lastSelectedCell;
+@property (nonatomic, strong) YZHMyInformationMyPlaceCell* locationCell;
+@property (nonatomic, strong) NSMutableDictionary* nextLocationDic;
+@property (nonatomic, assign) NSInteger selectedRow;
 
 @end
 
@@ -60,9 +59,11 @@ typedef enum : NSUInteger {
     
     [super viewWillAppear:animated];
     //TODO: 第二版本.
-    self.currentType = 0;
+    self.currentType = YZHSelectMyPlaceTypeCountries;
     self.selectedProvinceIndex = 0;
     self.selectedCountrieIndex = 0;
+    self.selectedRow = NSIntegerMax;
+    NSLog(@"当前选择%ld", self.selectedRow);
     //3.请求数据
     [self setupData];
 }
@@ -75,7 +76,7 @@ typedef enum : NSUInteger {
     self.hideNavigationBarLine = YES;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
-    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blueColor]} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
     item.enabled = NO;
     
     self.navigationItem.rightBarButtonItem = item;
@@ -106,12 +107,13 @@ typedef enum : NSUInteger {
     //读取地理位置 JSON 文件.
     NSString *jsonPath = [[NSBundle mainBundle] pathForResource:@"YZHLocation" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:jsonPath];
-    NSError *error = nil;
-    // TODO: 出错处理.
-    id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-    
-    self.viewModel = [YZHLocationWorldModel YZH_objectWithKeyValues:result];
-    
+    if (data) {
+        NSError *error = nil;
+        id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        self.viewModel = [YZHLocationWorldModel YZH_objectWithKeyValues:result];
+    } else {
+        self.viewModel = nil;
+    }
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -127,18 +129,11 @@ typedef enum : NSUInteger {
     if (section == 0) {
         return 1;
     } else {
-    if (_currentType == 0) {
         return self.viewModel.countries.count;
-    } else if (_currentType == 1) {
-        return self.viewModel.countries[_selectedCountrieIndex].provinces.count;
-    } else {
-        return self.viewModel.countries[_selectedCountrieIndex].provinces[_selectedProvinceIndex].citys.count;
-    }
     }
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     //TODO:
     YZHMyInformationMyPlaceCell* cell;
     cell = [YZHMyInformationMyPlaceCell tempTableViewCellWith:tableView indexPath:indexPath];
@@ -154,19 +149,18 @@ typedef enum : NSUInteger {
             if (self.viewModel.countries[indexPath.row].provinces.count > 0) {
                 hasNextLocation = YES;
             }
-        } else if (_currentType == 1) {
-            countrieName = self.viewModel.countries[self.selectedCountrieIndex].provinces[indexPath.row].name;
-            if (self.viewModel.countries[self.selectedCountrieIndex].provinces[indexPath.row].citys.count > 0) {
-                hasNextLocation = YES;
-            }
-        } else if (_currentType == 2) {
-            countrieName = self.viewModel.countries[self.selectedCountrieIndex].provinces[self.selectedProvinceIndex].citys[indexPath.row].name;
         }
         cell.countriesLabel.text = countrieName;
         if (hasNextLocation) {
             cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
         } else {
             cell.guideImageView.image = nil;
+        }
+        [self.nextLocationDic setObject:@(hasNextLocation) forKey:indexPath];
+        if (self.selectedRow == indexPath.row) {
+            cell.selectStatusLabel.text = @"当前选择";
+        } else {
+            cell.selectStatusLabel.text = @"";
         }
     }
     return cell;
@@ -211,38 +205,26 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YZHMyInformationMyPlaceCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    BOOL hasNextLocation = cell.guideImageView.image ? YES : NO;
-    if (indexPath.section == 0) {
-        
-    } else {
-    if (hasNextLocation) {
-    if (_currentType == 0) {
-        _currentType++;
-        self.selectedCountrieIndex = indexPath.row;
-        // 先检查当前国家下是否存在省份,如果不存在则直接到具体城市
-        BOOL hasProvinces = self.viewModel.countries[self.selectedCountrieIndex].provinces.firstObject.name.length ? YES : NO;
-        if (hasProvinces) {
-            YZHLocationCountrieModel* model = self.viewModel.countries[self.selectedCountrieIndex];
-            [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"countriesArray": model}];
+//    YZHMyInformationMyPlaceCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    BOOL hasNextLocation = [[self.nextLocationDic objectForKey:indexPath] boolValue];
+    if (indexPath.section == 1) {
+        if (hasNextLocation) {
+            self.selectedCountrieIndex = indexPath.row;
+            // 先检查当前国家下是否存在省份,如果不存在则直接到具体城市
+            BOOL hasProvinces = self.viewModel.countries[self.selectedCountrieIndex].provinces.firstObject.name.length ? YES : NO;
+            if (hasProvinces) {
+                YZHLocationCountrieModel* model = self.viewModel.countries[self.selectedCountrieIndex];
+                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"countriesArray": model}];
+            } else {
+                self.selectedProvinceIndex = 0;
+                YZHLocationProvinceModel* model = self.viewModel.countries[self.selectedCountrieIndex].provinces[self.selectedProvinceIndex];
+                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesArray": model}];
+            }
         } else {
-            _currentType++;
-            self.selectedProvinceIndex = 0;
-            YZHLocationProvinceModel* model = self.viewModel.countries[self.selectedCountrieIndex].provinces[self.selectedProvinceIndex];
-            [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesArray": model}];
+            self.selectedRow = indexPath.row;
+            [self.tableView reloadData];
+            self.navigationItem.rightBarButtonItem.enabled = YES;
         }
-    } else if (_currentType == 1) {
-        _currentType++;
-        self.selectedProvinceIndex = indexPath.row;
-    }
-    } else {
-        // 执行完成选择位置任务.   清除上一个选择Cell Tag
-        self.lastSelectedCell.selectStatusLabel.text = nil;
-        cell.selectStatusLabel.text = @"当前选择";
-        // 将自己设置成最后一个选择的Cell
-        self.lastSelectedCell = cell;
-        self.navigationItem.rightBarButtonItem.enabled = YES;
-    }
     }
     
 }
@@ -275,6 +257,14 @@ typedef enum : NSUInteger {
         _tableView.rowHeight = 40;
     }
     return _tableView;
+}
+
+- (NSMutableDictionary *)nextLocationDic {
+    
+    if (!_nextLocationDic) {
+        _nextLocationDic = [[NSMutableDictionary alloc] init];
+    }
+    return _nextLocationDic;
 }
 
 @end

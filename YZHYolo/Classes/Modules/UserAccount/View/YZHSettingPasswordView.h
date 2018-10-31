@@ -18,6 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *checkStatusImageView;
 @property (weak, nonatomic) IBOutlet UIView *securityIndexView;
-@property (weak, nonatomic) IBOutlet UILabel *securityIndexLabel;
+@property (weak, nonatomic) IBOutlet UILabel *securityIndexLable;
 
 @end

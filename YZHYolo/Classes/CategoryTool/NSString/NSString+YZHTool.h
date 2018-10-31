@@ -65,4 +65,9 @@
 // 将HTML字符串转NSAttributedString
 + (NSAttributedString* )yzh_setHTMLText:(NSString *)text;
 
+// 字符串长度计算, 非文字以 1 个单位计算, 文字以 2个 单位计算。
+- (NSInteger)yzh_calculateStringLeng;
+// 校验字符串长度
++ (BOOL)yzh_checkoutStringWithCurrenString:(NSString *)currentString importString:(NSString *)importString standardLength:(NSInteger)length;
+
 @end

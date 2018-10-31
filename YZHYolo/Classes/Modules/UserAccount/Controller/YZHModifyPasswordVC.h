@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    YZHModifyPasswordTypePhone = 0, //手机号修改
+    YZHModifyPasswordTypeOriginalPW, //原密码修改
+} YZHModifyPasswordType;
 @interface YZHModifyPasswordVC : YZHBaseViewController
 
 @end

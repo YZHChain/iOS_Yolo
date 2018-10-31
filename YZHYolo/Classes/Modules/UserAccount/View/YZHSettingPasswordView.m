@@ -28,6 +28,7 @@
 - (void)setupView{
     
 }
+
 - (IBAction)backThePreviousPage:(UIButton *)sender {
     
     [[UIViewController yzh_findTopViewController].navigationController popViewControllerAnimated:YES];
@@ -85,7 +86,6 @@
     NSString* statusTypeString;
     NSString* passwordText = self.passwordTextField.text;
     if ([passwordText yzh_isNumberChars] || [passwordText yzh_isLowercaseEnglishChars]) {
-        NSLog(@"yzh_isNumberChars包括");
         statusColor  = YZHColorWithRGB(85, 195, 158);
         statusTypeString = @"弱";
     } else if ([passwordText yzh_isSpecialChars]) {
@@ -96,7 +96,7 @@
         statusTypeString = @"强";
     }
     self.securityIndexView.backgroundColor = statusColor;
-    self.securityIndexLabel.text = statusTypeString;
+    self.securityIndexLable.text = statusTypeString;
     self.securityIndexView.hidden = NO;
 }
 
