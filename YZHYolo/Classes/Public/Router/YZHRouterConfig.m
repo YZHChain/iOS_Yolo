@@ -9,24 +9,23 @@
 #import "YZHRouterConfig.h"
 
 //TODO:规范Segue参数与非Segue参数(YZHRouteFromOutside,YZHRouteNeedLogin等)，Segue参数统一以YZHRouteSegue开头。
-NSString *const kYZHRouteSegue           = @"YZHRouteSegue";
-NSString *const kYZHRouteSeguePush       = @"YZHRouteSeguePush";
-NSString *const kYZHRouteSegueModal      = @"YZHRouteSegueModal";
-NSString *const kYZHRouteSegueNewNavigation = @"YZHRouteNewNavigation";
-NSString *const kYZHRouteAnimated        = @"YZHRouteAnimated";
-NSString *const kYZHRouteBackIndex       = @"YZHRouteBackIndex";
-NSString *const kYZHRouteBackPage        = @"YZHRouteBackPage";
-NSString *const kYZHRouteBackPageOffset  = @"YZHRouteBackPageOffset";
-NSString *const kYZHRouteFromOutside     = @"YZHRouteFromOutside";
+NSString* const kYZHRouteSegue           = @"YZHRouteSegue";
+NSString* const kYZHRouteSeguePush       = @"YZHRouteSeguePush";
+NSString* const kYZHRouteSegueModal      = @"YZHRouteSegueModal";
+NSString* const kYZHRouteSegueNewNavigation = @"YZHRouteNewNavigation";
+NSString* const kYZHRouteAnimated        = @"YZHRouteAnimated";
+NSString* const kYZHRouteBackIndex       = @"YZHRouteBackIndex";
+NSString* const kYZHRouteBackPage        = @"YZHRouteBackPage";
+NSString* const kYZHRouteBackPageOffset  = @"YZHRouteBackPageOffset";
+NSString* const kYZHRouteFromOutside     = @"YZHRouteFromOutside";
 
-NSString *const kYZHRouteIndexRoot  = @"YZHRouteIndexRoot";
+NSString* const kYZHRouteIndexRoot       = @"YZHRouteIndexRoot";
 
-//NSString * const YZHRouteHomeTab     = @"/rootTab/0";
-//NSString * const YZHRouteInvestTab   = @"/rootTab/1";
-//NSString * const YZHRouteDiscoverTab = @"/rootTab/2";
-//NSString * const YZHRouteWealthTab   = @"/rootTab/3";
-//NSString * const YZHRouteInvestTabGB = @"/rootTab/1?tag=0";
-//NSString * const YZHRouteInvestTabYX = @"/rootTab/1?tag=1";
+NSString* const kYZHRouteCommunityTab        = @"/rootTab/0";
+NSString* const kYZHRoutePrivatelyChatTab    = @"/rootTab/1";
+NSString* const kYZHRouteAddressBookTab      = @"/rootTab/2";
+NSString* const kYZHRouteDiscoverTab         = @"/rootTab/3";
+NSString* const kYZHRouteMyCenterthTab       = @"/rootTab/4";
 
 NSString* const kYZHRouteViewControllerClassKey = @"class";
 NSString* const kYZHRouteViewControllerNameKey = @"name";
@@ -66,6 +65,14 @@ NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
 NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
 NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
 NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendRecord";
+
+#pragma mark -- Session
+
+NSString *const kYZHRouterCommunityCreateTeam = @"/community/createTeam";
+NSString *const kYZHRouterCommunityCreateTeamAddition = @"/community/createTeam/addition";
+NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/result";
+
+
 @implementation YZHRouterConfig
 
 + (NSDictionary *)configInfo{
@@ -217,6 +224,24 @@ NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendR
              kYZHRouterAddressBookScanQRCode: @{
                      kYZHRouteViewControllerClassKey: @"YZHScanQRCodeVC",
                      kYZHRouteViewControllerNameKey: @"扫码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterCommunityCreateTeam: @{
+                     kYZHRouteViewControllerClassKey: @"YZHCreatTeamVC",
+                     kYZHRouteViewControllerNameKey: @"填写群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterCommunityCreateTeamAddition: @{
+                     kYZHRouteViewControllerClassKey: @"YZHCreateTeamAdditionVC",
+                     kYZHRouteViewControllerNameKey: @"填写公开群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterCommunityCreateTeamResult: @{
+                     kYZHRouteViewControllerClassKey: @"YZHCreateTeamResultVC",
+                     kYZHRouteViewControllerNameKey: @"填写公开群信息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

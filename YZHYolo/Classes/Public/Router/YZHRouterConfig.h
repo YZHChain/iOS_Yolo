@@ -32,6 +32,12 @@ extern NSString * const kYZHRouteSeguePush;
 extern NSString * const kYZHRouteSegueModal;
 extern NSString * const kYZHRouteSegueNewNavigation;
 
+extern NSString * const kYZHRouteCommunityTab;
+extern NSString * const kYZHRoutePrivatelyChatTab;
+extern NSString * const kYZHRouteAddressBookTab;
+extern NSString * const kYZHRouteDiscoverTab;
+extern NSString * const kYZHRouteMyCenterthTab;
+
 #pragma mark -- GuidePage
 
 extern NSString *const kYZHRouterWelcome;
@@ -65,6 +71,12 @@ extern NSString *const kYZHRouterAddressBookAddFirend;
 extern NSString *const kYZHRouterAddressBookPhoneContact;
 extern NSString *const kYZHRouterAddressBookAddFirendRecord;
 extern NSString *const kYZHRouterAddressBookScanQRCode;
+
+#pragma mark -- Session
+
+extern NSString *const kYZHRouterCommunityCreateTeam;
+extern NSString *const kYZHRouterCommunityCreateTeamAddition;
+extern NSString *const kYZHRouterCommunityCreateTeamResult;
 
 + (NSDictionary* )configInfo;
 

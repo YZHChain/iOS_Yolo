@@ -13,7 +13,7 @@
 #import "YZHPathConst.h"
 #import "YZHServicesConfig.h"
 #import "YZHDevice.h"
-#import <Aspects.h>
+//#import <Aspects.h>
 #import <AFHTTPSessionManager+RetryPolicy.h>
 
 static NSTimeInterval const YZHAPIDefaultTimeoutInterval = 8.0;//缺省请求超时时间

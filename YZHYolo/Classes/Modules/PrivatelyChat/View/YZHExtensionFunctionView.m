@@ -23,6 +23,8 @@
 - (IBAction)creatGroupChat:(UIButton *)sender {
     
     [self hideExtensionFunctionView];
+    
+    [YZHRouter openURL:kYZHRouterCommunityCreateTeam];
 }
 
 - (IBAction)addFriend:(UIButton *)sender {

@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString* kYZHFontStyleSHSCN_Regular;
+extern NSString* kYZHFontStyleSHSCN_Light;
+extern NSString* kYZHFontStyleSHSCN_Normal;
+
 @interface UIFont (YZHFontStyle)
+
++ (UIFont *)yzh_commonFontStyle;
++ (UIFont *)yzh_commonStyleWithFontSize:(CGFloat)size;
++ (UIFont *)yzh_styleName:(NSString *)name fontSize:(CGFloat)size;
 
 @end

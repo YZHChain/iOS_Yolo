@@ -310,6 +310,10 @@
 		55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */; };
 		55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */; };
 		55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */; };
+		55BDA36D2189BF27006400B0 /* FSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36C2189BF27006400B0 /* FSTextView.m */; };
+		55BDA370218AA267006400B0 /* YZHImportBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36F218AA267006400B0 /* YZHImportBoxView.m */; };
+		55BDA374218AD9F1006400B0 /* YZHCreateTeamResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */; };
+		55BDA375218AD9F1006400B0 /* YZHCreateTeamResultVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BDA373218AD9F1006400B0 /* YZHCreateTeamResultVC.xib */; };
 		55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C21081215A3948006AA568 /* YZHMyCenterModel.m */; };
 		55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 55C239DE2148F07800200798 /* YZHAppConfig.plist */; };
 		55C239E52149122400200798 /* YZHNetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C239E42149122400200798 /* YZHNetworkService.m */; };
@@ -362,6 +366,12 @@
 		55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DC36B62167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib */; };
 		55DC36BB2168997E00871C2B /* UIButton+YZHClickHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC36BA2168997E00871C2B /* UIButton+YZHClickHandle.m */; };
 		55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DC36BD216899C000871C2B /* UIControl+YZHClickHandle.m */; };
+		55DF5D54218942F000BFA7E6 /* YZHCreatTeamVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */; };
+		55DF5D57218943B200BFA7E6 /* YZHCreatTeamMailDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF5D56218943B200BFA7E6 /* YZHCreatTeamMailDataView.m */; };
+		55DF5D59218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF5D58218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib */; };
+		55DF5D5D218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 55DF5D5C218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf */; };
+		55DF5D612189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */; };
+		55DF5D622189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */; };
 		55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */; };
 		55EAB157215BC88900F4142A /* YZHMyplaceCityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EAB155215BC88900F4142A /* YZHMyplaceCityVC.m */; };
 		55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55EAB156215BC88900F4142A /* YZHMyplaceCityVC.xib */; };
@@ -964,6 +974,13 @@
 		55BD866C215E22DB00D23ED1 /* YZHAddressBookFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookFootView.h; sourceTree = "<group>"; };
 		55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookFootView.m; sourceTree = "<group>"; };
 		55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddressBookFootView.xib; sourceTree = "<group>"; };
+		55BDA36B2189BF27006400B0 /* FSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextView.h; sourceTree = "<group>"; };
+		55BDA36C2189BF27006400B0 /* FSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextView.m; sourceTree = "<group>"; };
+		55BDA36E218AA267006400B0 /* YZHImportBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHImportBoxView.h; sourceTree = "<group>"; };
+		55BDA36F218AA267006400B0 /* YZHImportBoxView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHImportBoxView.m; sourceTree = "<group>"; };
+		55BDA371218AD9F1006400B0 /* YZHCreateTeamResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCreateTeamResultVC.h; sourceTree = "<group>"; };
+		55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCreateTeamResultVC.m; sourceTree = "<group>"; };
+		55BDA373218AD9F1006400B0 /* YZHCreateTeamResultVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCreateTeamResultVC.xib; sourceTree = "<group>"; };
 		55C21080215A3948006AA568 /* YZHMyCenterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyCenterModel.h; sourceTree = "<group>"; };
 		55C21081215A3948006AA568 /* YZHMyCenterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyCenterModel.m; sourceTree = "<group>"; };
 		55C239DE2148F07800200798 /* YZHAppConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = YZHAppConfig.plist; sourceTree = "<group>"; };
@@ -1052,6 +1069,15 @@
 		55DC36BA2168997E00871C2B /* UIButton+YZHClickHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YZHClickHandle.m"; sourceTree = "<group>"; };
 		55DC36BC216899C000871C2B /* UIControl+YZHClickHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+YZHClickHandle.h"; sourceTree = "<group>"; };
 		55DC36BD216899C000871C2B /* UIControl+YZHClickHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+YZHClickHandle.m"; sourceTree = "<group>"; };
+		55DF5D52218942F000BFA7E6 /* YZHCreatTeamVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCreatTeamVC.h; sourceTree = "<group>"; };
+		55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCreatTeamVC.m; sourceTree = "<group>"; };
+		55DF5D55218943B200BFA7E6 /* YZHCreatTeamMailDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCreatTeamMailDataView.h; sourceTree = "<group>"; };
+		55DF5D56218943B200BFA7E6 /* YZHCreatTeamMailDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCreatTeamMailDataView.m; sourceTree = "<group>"; };
+		55DF5D58218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCreatTeamMailDataView.xib; sourceTree = "<group>"; };
+		55DF5D5C218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		55DF5D5E2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCreateTeamAdditionVC.h; sourceTree = "<group>"; };
+		55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCreateTeamAdditionVC.m; sourceTree = "<group>"; };
+		55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCreateTeamAdditionVC.xib; sourceTree = "<group>"; };
 		55E7A362214CAF9F0063F7C4 /* UIViewController+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YZHTool.h"; sourceTree = "<group>"; };
 		55E7A363214CAF9F0063F7C4 /* UIViewController+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YZHTool.m"; sourceTree = "<group>"; };
 		55EAB154215BC88900F4142A /* YZHMyplaceCityVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyplaceCityVC.h; sourceTree = "<group>"; };
@@ -1205,6 +1231,7 @@
 			children = (
 				555DA490216C35160057D434 /* JKRSearch */,
 				55EE6D3C215B7683004E092F /* YZHLocation.json */,
+				55DF5D5C218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1530,6 +1557,14 @@
 				55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */,
 				55B385F72186EA590057FBEE /* YZHCommunitySearchVC.h */,
 				55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */,
+				55DF5D52218942F000BFA7E6 /* YZHCreatTeamVC.h */,
+				55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */,
+				55DF5D5E2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.h */,
+				55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */,
+				55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */,
+				55BDA371218AD9F1006400B0 /* YZHCreateTeamResultVC.h */,
+				55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */,
+				55BDA373218AD9F1006400B0 /* YZHCreateTeamResultVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1544,6 +1579,12 @@
 		55128A2121463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55DF5D55218943B200BFA7E6 /* YZHCreatTeamMailDataView.h */,
+				55DF5D56218943B200BFA7E6 /* YZHCreatTeamMailDataView.m */,
+				55DF5D58218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib */,
+				55BDA36E218AA267006400B0 /* YZHImportBoxView.h */,
+				55BDA36F218AA267006400B0 /* YZHImportBoxView.m */,
+				55BDA36A2189BF27006400B0 /* FSTextView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2750,6 +2791,15 @@
 			path = YZH;
 			sourceTree = "<group>";
 		};
+		55BDA36A2189BF27006400B0 /* FSTextView */ = {
+			isa = PBXGroup;
+			children = (
+				55BDA36B2189BF27006400B0 /* FSTextView.h */,
+				55BDA36C2189BF27006400B0 /* FSTextView.m */,
+			);
+			path = FSTextView;
+			sourceTree = "<group>";
+		};
 		55C239D42148E47F00200798 /* UserAccount */ = {
 			isa = PBXGroup;
 			children = (
@@ -3175,7 +3225,7 @@
 				551289CA21461EE20099CC55 /* Frameworks */,
 				551289CB21461EE20099CC55 /* Resources */,
 				CB37C6FCF7E6E14A3011B1B0 /* [CP] Copy Pods Resources */,
-				DE6302BB94E97EEB01FE5DEF /* [CP] Embed Pods Frameworks */,
+				135A6EC901A282421A92BC27 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3245,6 +3295,7 @@
 				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
 				55D580E12163240B000A8B55 /* YZHDetailsSettingVC.xib in Resources */,
 				55D580F321635871000A8B55 /* YZHAddBookAddFirendCell.xib in Resources */,
+				55DF5D59218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib in Resources */,
 				55D0835C2160BE610028D919 /* YZHDetailsSettingCell.xib in Resources */,
 				555DA4BD216C408F0057D434 /* YZHAddBookSearchVC.xib in Resources */,
 				55BD865C215DDC9E00D23ED1 /* YZHAddressBookHeaderView.xib in Resources */,
@@ -3254,6 +3305,7 @@
 				553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */,
 				55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
+				55BDA375218AD9F1006400B0 /* YZHCreateTeamResultVC.xib in Resources */,
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
 				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
 				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
@@ -3271,6 +3323,7 @@
 				55D5810321636D18000A8B55 /* YZHPhoneContactDefaultView.xib in Resources */,
 				553145722157298200A13F96 /* YZHMyInformationSetNameVC.xib in Resources */,
 				5562DE2B215683BA0098FA83 /* YZHMyInformationPhotoView.xib in Resources */,
+				55DF5D5D218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf in Resources */,
 				553641B3217EAEC2006F77A5 /* NIMKitResource.bundle in Resources */,
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
 				55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */,
@@ -3278,6 +3331,7 @@
 				553C53EE216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib in Resources */,
 				5593C51F216D05FD00A50533 /* Assets.xcassets in Resources */,
 				5562DE35215687D70098FA83 /* YZHMyInformationPhotoVC.xib in Resources */,
+				55DF5D622189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib in Resources */,
 				55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */,
 				55B5DB9721528566002A04A9 /* YZHMyCenterCell.xib in Resources */,
 				55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */,
@@ -3292,6 +3346,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		135A6EC901A282421A92BC27 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh",
+				"${PODS_ROOT}/NIMSDK/NIMSDK/NIMSDK.framework",
+				"${PODS_ROOT}/NIMSDK/NIMAVChat/NIMAVChat.framework",
+				"${PODS_ROOT}/NIMSDK/NIMAVChat/NVS.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NIMSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NIMAVChat.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVS.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1D936A92C85F4468A34A79F2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3321,8 +3397,6 @@
 				"${PODS_ROOT}/NIMSDK/NIMAVChat/Resources/NMCVideoFilter.bundle",
 				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Required/ShareSDK.bundle",
-				"${PODS_ROOT}/ShareSDK3/SDK/ShareSDK/Support/Optional/ShareSDKUI.bundle",
 				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -3331,35 +3405,11 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NMCVideoFilter.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PYSearch.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDK.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ShareSDKUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE6302BB94E97EEB01FE5DEF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh",
-				"${PODS_ROOT}/NIMSDK/NIMSDK/NIMSDK.framework",
-				"${PODS_ROOT}/NIMSDK/NIMAVChat/NIMAVChat.framework",
-				"${PODS_ROOT}/NIMSDK/NIMAVChat/NVS.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NIMSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NIMAVChat.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVS.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3379,6 +3429,7 @@
 				55364210217EAEC3006F77A5 /* NIMLoadMoreView.m in Sources */,
 				55BA210621763A3700F90268 /* NTESCADisplayLinkHolder.m in Sources */,
 				553641DD217EAEC2006F77A5 /* NIMLoadProgressView.m in Sources */,
+				55BDA374218AD9F1006400B0 /* YZHCreateTeamResultVC.m in Sources */,
 				55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */,
 				55364228217EAEC3006F77A5 /* NIMKitSetting.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
@@ -3393,6 +3444,7 @@
 				55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */,
 				55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */,
 				55364222217EAEC3006F77A5 /* UITableView+NIMScrollToBottom.m in Sources */,
+				55DF5D57218943B200BFA7E6 /* YZHCreatTeamMailDataView.m in Sources */,
 				553641EB217EAEC3006F77A5 /* NIMTeamAnnouncementListCell.m in Sources */,
 				55364221217EAEC3006F77A5 /* NSString+NIMKit.m in Sources */,
 				553641BE217EAEC2006F77A5 /* NIMKitAuthorizationTool.m in Sources */,
@@ -3421,6 +3473,7 @@
 				553641EC217EAEC3006F77A5 /* NIMTeamMemberCardHeaderCell.m in Sources */,
 				553641D2217EAEC2006F77A5 /* NIMGrowingTextView.m in Sources */,
 				555DA4B4216C35160057D434 /* UIView+JKR_Frame.m in Sources */,
+				55DF5D612189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m in Sources */,
 				55DC36B72167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m in Sources */,
 				553641CC217EAEC2006F77A5 /* NIMInputEmoticonTabView.m in Sources */,
 				55DC01BB2175B8FC009CE59B /* YZHSessionUtil.m in Sources */,
@@ -3431,6 +3484,7 @@
 				55C656AC215F141C005E997B /* YZHAddressBookModel.m in Sources */,
 				5531457621572FAD00A13F96 /* YZHMyInformationSetGenderVC.m in Sources */,
 				5536422C217EAEC3006F77A5 /* NIMKitConfig.m in Sources */,
+				55BDA36D2189BF27006400B0 /* FSTextView.m in Sources */,
 				5536420A217EAEC3006F77A5 /* NIMSessionInteractorImpl.m in Sources */,
 				55C656CB215F5FAE005E997B /* YZHAddBookSetTagCell.m in Sources */,
 				55B5DB9621528566002A04A9 /* YZHMyCenterCell.m in Sources */,
@@ -3495,6 +3549,7 @@
 				5509F106218228BE004E10D3 /* YZHTeamCardContentView.m in Sources */,
 				5509F103218220A8004E10D3 /* YZHUserCardContentView.m in Sources */,
 				553641CF217EAEC2006F77A5 /* NIMInputToolBar.m in Sources */,
+				55BDA370218AA267006400B0 /* YZHImportBoxView.m in Sources */,
 				55C239F0214A6C0E00200798 /* YZHAPIRetryConfig.m in Sources */,
 				5509F1152184442E004E10D3 /* YZHRequstAddFirendContentView.m in Sources */,
 				559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */,
@@ -3624,6 +3679,7 @@
 				55337DC2214F8DF200307B75 /* YZHRegisterVC.m in Sources */,
 				553641E4217EAEC2006F77A5 /* NIMUsrInfoData.m in Sources */,
 				553641D1217EAEC2006F77A5 /* NIMInputEmoticonButton.m in Sources */,
+				55DF5D54218942F000BFA7E6 /* YZHCreatTeamVC.m in Sources */,
 				55C656D5215F7947005E997B /* YZHAddBookSetTagAlertView.m in Sources */,
 				55364225217EAEC3006F77A5 /* M80AttributedLabel+NIMKit.m in Sources */,
 				558A213F217965E800E892C3 /* YZHPrivatelyChatListVC.m in Sources */,
