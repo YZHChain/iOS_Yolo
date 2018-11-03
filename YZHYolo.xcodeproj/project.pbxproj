@@ -1306,12 +1306,12 @@
 			children = (
 				55C239D42148E47F00200798 /* UserAccount */,
 				553EED1C21463F66006CDD08 /* Launch */,
-				55128A0A21463E480099CC55 /* Discover */,
-				55128A0E21463E480099CC55 /* MyCenter */,
+				55128A1E21463E480099CC55 /* Community */,
 				55128A1221463E480099CC55 /* PrivatelyChat */,
 				55128A1621463E480099CC55 /* AddressBook */,
+				55128A0A21463E480099CC55 /* Discover */,
+				55128A0E21463E480099CC55 /* MyCenter */,
 				55128A1A21463E480099CC55 /* Wallet */,
-				55128A1E21463E480099CC55 /* Community */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -3849,7 +3849,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZCM7EVA4S9;
+				DEVELOPMENT_TEAM = 8MTV8KXWXC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3857,7 +3857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yzhchain.Yolo-IM";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yzhchain.yoloImService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
@@ -3873,7 +3873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZCM7EVA4S9;
+				DEVELOPMENT_TEAM = 8MTV8KXWXC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/YZHYolo/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3881,7 +3881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yzhchain.Yolo-IM";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yzhchain.yoloImService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";

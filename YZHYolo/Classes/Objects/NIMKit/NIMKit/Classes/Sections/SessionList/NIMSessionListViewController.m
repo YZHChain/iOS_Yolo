@@ -121,13 +121,12 @@
     return cell;
 }
 
-
 #pragma mark - NIMConversationManagerDelegate
 - (void)didAddRecentSession:(NIMRecentSession *)recentSession
            totalUnreadCount:(NSInteger)totalUnreadCount{
     [self.recentSessions addObject:recentSession];
     [self sort];
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
@@ -144,7 +143,7 @@
     }
     NSInteger insert = [self findInsertPlace:recentSession];
     [self.recentSessions insertObject:recentSession atIndex:insert];
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
@@ -161,26 +160,26 @@
         [[NIMSDK sharedSDK].conversationManager deleteRemoteSessions:@[recentSession.session]
                            completion:nil];
     }
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)messagesDeletedInSession:(NIMSession *)session{
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)allMessagesDeleted{
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
 - (void)allMessagesRead
 {
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
-//    _recentSessions = [self customSortRecents:_recentSessions];
+    [self customSortRecents:_recentSessions];
     [self refresh];
 }
 
@@ -301,6 +300,10 @@
             break;
         case NIMMessageTypeRobot:
             text = [self robotMessageContent:lastMessage];
+            break;
+        case NIMMessageTypeCustom:
+            //TODO:增加自定义消息解析.识别不同自定义消息格式
+            text = @"自定义消息";
             break;
         default:
             text = @"[未知消息]";

@@ -28,10 +28,11 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
     //默认高度 50, 如需适合 X 则需调整
     frame = CGRectMake(0, 0, kScreenWidth, 50);
     self = [super initWithFrame:frame];
-    
-    self.backgroundColor = [UIColor whiteColor];
-    [self addSubTextFieldAndConstraint];
-    [self addSubview:self.cancelButton];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self addSubTextFieldAndConstraint];
+        [self addSubview:self.cancelButton];
+    }
     
     return self;
 }
@@ -155,14 +156,15 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
         _searchTextField = [[JKRSearchTextField alloc] init];
         _searchTextField.canTouch = NO;
         UIImageView *searchIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addBook_cover_search_default"]];
-        searchIcon.contentMode = UIViewContentModeScaleAspectFit;
+        searchIcon.contentMode = UIViewContentModeCenter;
         searchIcon.frame = CGRectMake(0, 0, 30, 14);
         _searchTextField.leftView = searchIcon;
         _searchTextField.leftViewMode = UITextFieldViewModeAlways;
-        _searchTextField.textAlignment = NSTextAlignmentCenter;
+        _searchTextField.textAlignment = NSTextAlignmentLeft;
 //        _searchTextField.clearsOnBeginEditing = YES;
         _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _searchTextField.font = [UIFont systemFontOfSize:15.0f];
+        [UIFont yzh_commonStyleWithFontSize:15.0];
         [_searchTextField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
         _searchTextField.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _searchTextField.layer.cornerRadius = 15;

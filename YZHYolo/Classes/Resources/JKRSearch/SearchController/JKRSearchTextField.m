@@ -25,6 +25,20 @@
     }
 }
 
+//- (CGRect)leftViewRectForBounds:(CGRect)bounds {
+//    
+////    self.textInputView.frame
+//    
+//    return CGRectMake(20, 15, 20, 20);
+//}
+//
+//- (CGRect)placeholderRectForBounds:(CGRect)bounds {
+//    
+//    NSLog(@"执行");
+//    CGRect rect = CGRectMake(50, 10, bounds.size.width, bounds.size.height);
+//    return rect;
+//}
+
 - (void)dealloc {
     NSLog(@"JKRSearchTextField dealloc");
 }

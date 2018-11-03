@@ -191,16 +191,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     // 这里只需要遍历一次即可.然后等收到群通知时,在进行编译.
     for (NSInteger i = 0 ; i < recentSessions.count; i++) {
         NIMRecentSession* recentSession = recentSessions[i];
-        BOOL isSessionP2PType;
+        BOOL isSessionTypeP2P = NO;
         if (recentSession.session.sessionType == NIMSessionTypeP2P) {
-            isSessionP2PType = YES;
-        } else {
-            isSessionP2PType = NO;
+            isSessionTypeP2P = YES;
         }
-        if (isSessionP2PType) {
-            
-        } else {
+        if (!isSessionTypeP2P) {
             [recentSessions removeObjectAtIndex:i];
+            i--;
         }
     }
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[recentSessions copy]];
@@ -266,21 +263,12 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.navigationController pushViewController:privateChatVC animated:YES];
 }
 
-//- (void)onSelectedAvatar:(NIMRecentSession *)recent
-//             atIndexPath:(NSIndexPath *)indexPath{
-//    if (recent.session.sessionType == NIMSessionTypeP2P) {
-//        UIViewController *vc;
-//        if ([[NIMSDK sharedSDK].robotManager isValidRobot:recent.session.sessionId])
-//        {
-//            vc = [[NTESRobotCardViewController alloc] initWithUserId:recent.session.sessionId];
-//        }
-//        else
-//        {
-//            vc = [[NTESPersonalCardViewController alloc] initWithUserId:recent.session.sessionId];
-//        }
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
-//}
+- (void)onSelectedAvatar:(NIMRecentSession *)recent
+             atIndexPath:(NSIndexPath *)indexPath{
+    if (recent.session.sessionType == NIMSessionTypeP2P) {
+        [self onSelectedRecent:recent atIndexPath:indexPath];
+    }
+}
 //TODO:
 - (NSAttributedString *)contentForRecentSession:(NIMRecentSession *)recent{
     NSAttributedString *content;

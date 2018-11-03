@@ -17,6 +17,7 @@
 #import "JKRSearchController.h"
 #import "YZHCommunitySearchVC.h"
 #import "YZHRecentSessionExtManage.h"
+#import "YZHPrivateChatVC.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -37,6 +38,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 @property (nonatomic, strong) YZHRecentSessionExtManage* recentSessionExtManage;
 
+
+
 @end
 
 @implementation YZHCommunityListVC
@@ -51,8 +54,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self setupNavBar];
     //2.设置view
     [self setupView];
-    //3.请求数据
-    [self setupData];
     //4.设置通知
     [self setupNotification];
     
@@ -102,7 +103,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         self.tableView.hidden = NO;
         self.tagsTableView.hidden = YES;
     }
-    
 }
 
 - (void)clickRightBarShowExtensionFunction:(UIButton *)sender{
@@ -133,86 +133,21 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }
 }
 
-- (void)refresh
-{
-    [self.tableView reloadData];
-    [self.tagsTableView reloadData];
-}
 
-#pragma mark - 3.Request Data
 
-- (void)setupData
-{
-    
-}
-
-#pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    if (!self.recentSessions.count) {
-        return 1;
-    } else {
-        return 4;
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (!self.recentSessions.count) {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    } else {
-        return 3;
-    }
-    
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if ([self hasCommunity]) {
-        NIMSessionListCell* cell;
-        cell = (NIMSessionListCell* )[super tableView:tableView cellForRowAtIndexPath:indexPath];
-        
-        return cell;
-    } else {
-        UITableViewCell* cell = [[UITableViewCell alloc] init];
-        
-        return cell;
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    if (!self.recentSessions.count) {
-        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    } else {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return 20;
-    } else {
-        return 40;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    UIView* view = [[UIView alloc] init];
-    return view;
-}
-
-#pragma mark - 5.Event Response
-
-#pragma mark - 6.Private Methods
+#pragma mark -- setupNotification
 
 - (void)setupNotification
 {
     
+}
+
+#pragma mark -- Private Methods
+
+- (void)refresh
+{
+    [self.tableView reloadData];
+    [self.tagsTableView reloadData];
 }
 
 - (void)customSortRecents:(NSMutableArray *)recentSessions
@@ -220,16 +155,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     // 这里只需要遍历一次即可.然后等收到群通知时,在进行编译.
     for (NSInteger i = 0 ; i < recentSessions.count; i++) {
         NIMRecentSession* recentSession = recentSessions[i];
-        BOOL isSessionP2PType;
-        if (recentSession.session.sessionType == NIMSessionTypeP2P) {
-            isSessionP2PType = YES;
-        } else {
-            isSessionP2PType = NO;
+        BOOL isSessionTypeTeam = NO;
+        if (recentSession.session.sessionType == NIMSessionTypeTeam) {
+            isSessionTypeTeam = YES;
         }
-        if (isSessionP2PType) {
-            
-        } else {
+        if (!isSessionTypeTeam) {
             [recentSessions removeObjectAtIndex:i];
+            i--;
         }
     }
     NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[recentSessions copy]];
@@ -253,6 +185,88 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self setValue:array forKey:kYZHRecentSessionsKey];
 }
 
+#pragma mark -- TableViewCell Interaction Function
+
+- (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
+    
+    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
+    [self.navigationController pushViewController:privateChatVC animated:YES];
+}
+
+- (void)onSelectedAvatar:(NIMRecentSession *)recent
+             atIndexPath:(NSIndexPath *)indexPath{
+    if (recent.session.sessionType == NIMSessionTypeTeam) {
+        [self onSelectedRecent:recent atIndexPath:indexPath];
+    }
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    if (self.recentSessions.count) {
+        return 1;
+    } else {
+        return 4;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (self.recentSessions.count) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    } else {
+        return 3;
+    }
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self hasCommunity]) {
+        NIMSessionListCell* cell;
+        cell = (NIMSessionListCell* )[super tableView:tableView cellForRowAtIndexPath:indexPath];
+        
+        return cell;
+    } else {
+        UITableViewCell* cell = [[UITableViewCell alloc] init];
+        
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.recentSessions.count) {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    } else {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return 20;
+    } else {
+        return 40;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView* view = [[UIView alloc] init];
+    return view;
+}
+
+#pragma mark - UITableViewDelegate
+
+#pragma mark - NIMLoginManagerDelegate
+
+#pragma mark - NIMEventSubscribeManagerDelegate
+
+#pragma mark - NIMConversationManagerDelegate
+
 #pragma mark - TeamDelegate
 
 - (void)onTeamMemberChanged:(NIMTeam *)team {
@@ -260,7 +274,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
 }
 
-#pragma mark - 7.GET & SET
+#pragma mark - GET & SET
 
 -(UITableView *)tagsTableView {
     
