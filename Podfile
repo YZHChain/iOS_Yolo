@@ -44,8 +44,8 @@ target 'YZHYolo' do
   #pod 'UMengAnalytics-NO-IDFA'
   
   #IM
-  pod 'NIMSDK'
-  #pod 'NIMSDK_LITE'
+  #pod 'NIMSDK'
+  pod 'NIMSDK_LITE'
   pod 'Reachability', '~> 3.2'
   pod 'Toast', '~> 3.0'
   pod 'M80AttributedLabel', '~> 1.6.3'
