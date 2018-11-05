@@ -18,6 +18,8 @@
 #import "YZHPublic.h"
 #import "JKRSearchController.h"
 #import "YZHAddBookSearchVC.h"
+#import "YZHGroupedContacts.h"
+#import "YZHContactMemberModel.h"
 
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
@@ -28,6 +30,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 @property (nonatomic, strong) NSArray* indexArray;
 @property (nonatomic, strong) JKRSearchController* searchController;
 @property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
+@property (nonatomic, strong) YZHGroupedContacts* contacts;
 
 @end
 
@@ -105,6 +108,12 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 - (void)setupData
 {
+    self.contacts = [[YZHGroupedContacts alloc] init];
+    
+    [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
+    [[NIMSDK sharedSDK].loginManager addDelegate:self];
+    [[NIMSDK sharedSDK].userManager addDelegate:self];
+    [[NIMSDK sharedSDK].subscribeManager addDelegate:self];
     
 }
 
@@ -112,29 +121,27 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.indexArray.count + 1;
+    return _contacts.groupTitleCount + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (section == 0 ) {
+    if (section == 0) {
         return 2;
     } else {
-        return 2;
+        return [_contacts memberCountOfGroup:section];
     }
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        YZHAddBookAdditionalCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHAdditionalCellIdentifier forIndexPath:indexPath];
-        if (indexPath.row == 1) {
-            cell.iconImage.image = [UIImage imageNamed:@"addBook_cover_cell_addFirendLog"];
-            cell.titleLabel.text = @"好友添加记录";
-        }
+        YZHAddBookAdditionalCell* cell = [YZHAddBookAdditionalCell tempTableViewCellWithTableView:tableView indexPath:indexPath];
         return cell;
     }
+    YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
     YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
+    [cell refreshUser:memberModel];
     
     return cell;
 }
@@ -311,7 +318,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _tableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAdditionalCell" bundle:nil] forCellReuseIdentifier:kYZHAdditionalCellIdentifier];
         _tableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
         _tableView.showsVerticalScrollIndicator = NO;
     }

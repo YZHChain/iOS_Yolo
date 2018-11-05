@@ -195,7 +195,7 @@
         {
             [self.request requestUserIds:@[userId]];
         }
-        
+        //Jersey-IM 当本地通过 UserId 读取不到此用户信息时,后台异步拉取最新,暂时读取默认信息。
         info = [[NIMKitInfo alloc] init];
         info.infoId = userId;
         info.showName = userId; //默认值
@@ -221,6 +221,14 @@
                              memberInfo:nil
                                  option:option];
         info.showName = name?:userId;
+        //如是通讯录则添加此字段
+        if (option.isAddressBook) {
+            if (user.alias.length) {
+                info.nickName = userInfo.nickName;
+            } else {
+                info.nickName = nil;
+            }
+        }
         info.avatarUrlString = userInfo.thumbAvatarUrl;
         info.avatarImage = self.defaultUserAvatar;
     }

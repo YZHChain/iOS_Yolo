@@ -28,4 +28,11 @@
  */
 @property (nonatomic,assign) BOOL forbidaAlias;
 
+/**
+ *  处于通讯录
+ */
+@property (nonatomic,assign) BOOL isAddressBook;
+
+- (instancetype)initWithIsAddressBook:(BOOL)isAddressBook;
+
 @end

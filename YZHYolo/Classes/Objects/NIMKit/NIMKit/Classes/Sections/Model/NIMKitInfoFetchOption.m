@@ -10,4 +10,13 @@
 
 @implementation NIMKitInfoFetchOption
 
+- (instancetype)initWithIsAddressBook:(BOOL)isAddressBook {
+    
+    self = [super init];
+    if (self) {
+        _isAddressBook = isAddressBook;
+    }
+    return self;
+}
+
 @end

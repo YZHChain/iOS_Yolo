@@ -22,6 +22,9 @@
 		551289D221461EE20099CC55 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289D121461EE20099CC55 /* AppDelegate.m */; };
 		551289DD21461EE30099CC55 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 551289DB21461EE30099CC55 /* LaunchScreen.storyboard */; };
 		551289E021461EE30099CC55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 551289DF21461EE30099CC55 /* main.m */; };
+		5520DE1E218EE4B10042ED56 /* YZHContactMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5520DE1D218EE4B10042ED56 /* YZHContactMemberModel.m */; };
+		5520DE21218EE5A90042ED56 /* YZHGroupedContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 5520DE20218EE5A90042ED56 /* YZHGroupedContacts.m */; };
+		5520DE27218EE6380042ED56 /* YZHGroupedDataCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5520DE26218EE6380042ED56 /* YZHGroupedDataCollection.m */; };
 		55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F2E21588E3300DEEC45 /* UIButton+YZHCountDown.m */; };
 		55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F57215901EA00DEEC45 /* YZHProgressHUD.m */; };
 		55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F5B21590C6000DEEC45 /* YZHAlertManage.m */; };
@@ -415,6 +418,12 @@
 		551289DC21461EE30099CC55 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		551289DE21461EE30099CC55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		551289DF21461EE30099CC55 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5520DE1C218EE4B10042ED56 /* YZHContactMemberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHContactMemberModel.h; sourceTree = "<group>"; };
+		5520DE1D218EE4B10042ED56 /* YZHContactMemberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHContactMemberModel.m; sourceTree = "<group>"; };
+		5520DE1F218EE5A90042ED56 /* YZHGroupedContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHGroupedContacts.h; sourceTree = "<group>"; };
+		5520DE20218EE5A90042ED56 /* YZHGroupedContacts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHGroupedContacts.m; sourceTree = "<group>"; };
+		5520DE25218EE6380042ED56 /* YZHGroupedDataCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHGroupedDataCollection.h; sourceTree = "<group>"; };
+		5520DE26218EE6380042ED56 /* YZHGroupedDataCollection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHGroupedDataCollection.m; sourceTree = "<group>"; };
 		55256F2D21588E3300DEEC45 /* UIButton+YZHCountDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+YZHCountDown.h"; sourceTree = "<group>"; };
 		55256F2E21588E3300DEEC45 /* UIButton+YZHCountDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+YZHCountDown.m"; sourceTree = "<group>"; };
 		55256F56215901EA00DEEC45 /* YZHProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHProgressHUD.h; sourceTree = "<group>"; };
@@ -438,6 +447,7 @@
 		552B7901217432C700C1DD99 /* YZHModifyPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHModifyPasswordVC.xib; sourceTree = "<group>"; };
 		552B9C2B214F41F900BDA0CF /* YZHLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLoginView.h; sourceTree = "<group>"; };
 		552B9C2C214F41F900BDA0CF /* YZHLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginView.m; sourceTree = "<group>"; };
+		552CC5D0218D6FF8008C2421 /* YZHYolo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YZHYolo.entitlements; sourceTree = "<group>"; };
 		552CC88E215A698200135FDC /* YZHAboutYoloVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAboutYoloVC.h; sourceTree = "<group>"; };
 		552CC88F215A698200135FDC /* YZHAboutYoloVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAboutYoloVC.m; sourceTree = "<group>"; };
 		552CC890215A698200135FDC /* YZHAboutYoloVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAboutYoloVC.xib; sourceTree = "<group>"; };
@@ -1200,6 +1210,7 @@
 		551289CF21461EE20099CC55 /* YZHYolo */ = {
 			isa = PBXGroup;
 			children = (
+				552CC5D0218D6FF8008C2421 /* YZHYolo.entitlements */,
 				55128A0021463E480099CC55 /* Classes */,
 				553EED1B21463F05006CDD08 /* Supporting Files */,
 			);
@@ -1966,10 +1977,10 @@
 		55364097217EAEC2006F77A5 /* ContactGroup */ = {
 			isa = PBXGroup;
 			children = (
-				55364098217EAEC2006F77A5 /* NIMGroupedUsrInfo.h */,
-				55364099217EAEC2006F77A5 /* NIMGroupedData.m */,
-				5536409A217EAEC2006F77A5 /* NIMGroupedUsrInfo.m */,
 				5536409B217EAEC2006F77A5 /* NIMGroupedData.h */,
+				55364099217EAEC2006F77A5 /* NIMGroupedData.m */,
+				55364098217EAEC2006F77A5 /* NIMGroupedUsrInfo.h */,
+				5536409A217EAEC2006F77A5 /* NIMGroupedUsrInfo.m */,
 			);
 			path = ContactGroup;
 			sourceTree = "<group>";
@@ -2022,10 +2033,10 @@
 		553640BA217EAEC2006F77A5 /* Spelling */ = {
 			isa = PBXGroup;
 			children = (
-				553640BB217EAEC2006F77A5 /* NIMPinyinConverter.m */,
-				553640BC217EAEC2006F77A5 /* NIMSpellingCenter.m */,
 				553640BD217EAEC2006F77A5 /* NIMPinyinConverter.h */,
+				553640BB217EAEC2006F77A5 /* NIMPinyinConverter.m */,
 				553640BE217EAEC2006F77A5 /* NIMSpellingCenter.h */,
+				553640BC217EAEC2006F77A5 /* NIMSpellingCenter.m */,
 			);
 			path = Spelling;
 			sourceTree = "<group>";
@@ -2662,6 +2673,12 @@
 			children = (
 				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
 				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
+				5520DE1C218EE4B10042ED56 /* YZHContactMemberModel.h */,
+				5520DE1D218EE4B10042ED56 /* YZHContactMemberModel.m */,
+				5520DE1F218EE5A90042ED56 /* YZHGroupedContacts.h */,
+				5520DE20218EE5A90042ED56 /* YZHGroupedContacts.m */,
+				5520DE25218EE6380042ED56 /* YZHGroupedDataCollection.h */,
+				5520DE26218EE6380042ED56 /* YZHGroupedDataCollection.m */,
 			);
 			path = AddressBook;
 			sourceTree = "<group>";
@@ -3239,6 +3256,14 @@
 				TargetAttributes = {
 					551289CC21461EE20099CC55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -3488,6 +3513,7 @@
 				553641D5217EAEC2006F77A5 /* NIMMemberGroupView.m in Sources */,
 				5536421B217EAEC3006F77A5 /* NIMSessionRobotContentView.m in Sources */,
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
+				5520DE1E218EE4B10042ED56 /* YZHContactMemberModel.m in Sources */,
 				553641D3217EAEC2006F77A5 /* NIMGrowingInternalTextView.m in Sources */,
 				55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */,
 				5536421F217EAEC3006F77A5 /* NSDictionary+NIMKit.m in Sources */,
@@ -3611,6 +3637,7 @@
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
 				553641C2217EAEC2006F77A5 /* NIMKitRobotDefaultTemplateParser.m in Sources */,
 				553641F9217EAEC3006F77A5 /* NIMFileContentConfig.m in Sources */,
+				5520DE27218EE6380042ED56 /* YZHGroupedDataCollection.m in Sources */,
 				553641F7217EAEC3006F77A5 /* NIMSessionListCell.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				5536420E217EAEC3006F77A5 /* NIMMessageCellFactory.m in Sources */,
@@ -3698,6 +3725,7 @@
 				5593C529216D947A00A50533 /* YZHAddFirendSubtitleCell.m in Sources */,
 				559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */,
 				558A2157217B285100E892C3 /* YZHPrivateChatVC.m in Sources */,
+				5520DE21218EE5A90042ED56 /* YZHGroupedContacts.m in Sources */,
 				55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */,
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55364209217EAEC3006F77A5 /* NIMSessionConfigurator.m in Sources */,

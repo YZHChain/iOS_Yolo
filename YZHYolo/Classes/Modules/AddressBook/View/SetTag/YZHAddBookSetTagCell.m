@@ -25,11 +25,11 @@
 
 + (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
     
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
-    YZHAddBookSetTagCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
+    YZHAddBookSetTagCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         UINib* nib = [UINib nibWithNibName:@"YZHAddBookSetTagCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:CellIdentifier];
+        [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
         cell = [nib instantiateWithOwner:nil options:nil].lastObject;
     }
     

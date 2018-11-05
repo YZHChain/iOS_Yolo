@@ -20,6 +20,11 @@
  */
 @property (nonatomic,copy)   NSString *showName;
 
+/**
+ *  通讯录列表,使用。
+ */
+@property (nonatomic, copy) NSString* nickName;
+
 
 //如果avatarUrlString为nil，则显示头像图片
 //如果avatarUrlString不为nil,则将头像图片当做占位图，当下载完成后显示头像url指定的图片。
