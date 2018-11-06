@@ -9,6 +9,9 @@
 #import "YZHMyInformationModel.h"
 
 #import "YZHUserUtil.h"
+#import "YZHUserModelManage.h"
+#import "YZHUserLoginManage.h"
+
 @implementation YZHMyInformationModel
 
 @end
@@ -38,16 +41,23 @@
 
     if (!_list) {
         NIMUser* user = _userIMData;
+        YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+        YZHIMLoginData* _userLoginModel = manage.currentLoginData;
+        
+        NSString* phoneNumber = _userLoginModel.phoneNumber;
         NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
-        NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"YOLOName";
+        NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"Yolo用户";
         NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
         NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
-        //TODO:地区读扩展字段, 有时间在单独写个处理 UserExt 的类.
+        YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+        NSString* yoloID = userInfoExt.userYolo.yoloID;
+        NSString* myPlace = userInfoExt.place.complete;
+        
         
         NSArray* list = @[
                           @{@"content": @[@{
                                               @"title":@"手机号",
-                                              @"subtitle":@"18574352255",
+                                              @"subtitle":phoneNumber,
                                               @"image":@"",
                                               @"route":@"",
                                               @"cellType" :@"0",
@@ -68,7 +78,7 @@
                                               @"cellType" :@"2",
                                               },@{
                                               @"title":@"YOLO 号",
-                                              @"subtitle":@"8855842",
+                                              @"subtitle":yoloID,
                                               @"image":@"",
                                               @"route":kYZHRouterMyInformationYoloID,
                                               @"cellType" :@"2",
@@ -81,7 +91,7 @@
                                               @"cellType" :@"3",
                                               },@{
                                               @"title":@"地区",
-                                              @"subtitle":@"中国,深圳",
+                                              @"subtitle":myPlace,
                                               @"image":@"",
                                               @"route":kYZHRouterMyInformationMyPlace,
                                               @"cellType" :@"2",
@@ -102,15 +112,19 @@
 - (void)updateModelWithUserData:(NIMUser *)user {
     
     NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
-    NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"YOLOName";
+    NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"Yolo用户";
     NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
     NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    NSString* yoloID = userInfoExt.userYolo.yoloID;
+    NSString* myPlace = userInfoExt.place.complete;
     //TODO:
     self.list[1].content[0].image = avatarUrl;
     self.list[2].content[0].subtitle = nickName;
+    self.list[2].content[1].subtitle = yoloID;
     self.list[3].content[0].subtitle = gender;
     self.list[3].content[0].image    = genderImageName;
-    
+    self.list[3].content[1].subtitle = myPlace;
 }
 
 - (BOOL )hasPhotoImage {

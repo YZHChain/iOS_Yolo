@@ -25,7 +25,9 @@
 
 - (void)setupView{
     
-    
+    self.backgroundColor = [UIColor yzh_backgroundDarkBlue];
+    self.contentMode = UIViewContentModeTop;
+    self.contentView.layer.cornerRadius = 5;
 }
 
 - (void)setupNotification{

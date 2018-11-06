@@ -11,7 +11,6 @@
 #import "YZHUserDetailsModel.h"
 @interface YZHMyCenterHeaderView : UIView
 
-
 @property (nonatomic, copy) YZHButtonExecuteBlock executeHeaderBlock;
 @property (nonatomic, copy) YZHButtonExecuteBlock executeQRCodeBlock;
 

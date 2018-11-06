@@ -110,32 +110,28 @@
 
 - (void)setupLoginEvent {
     
+    YZHUserLoginManage *loginManage = [YZHUserLoginManage sharedManager];
+    
     NSString* account = self.loginView.accountTextField.text;
     NSString* password = self.loginView.passwordTextField.text;
-    NSDictionary* parameter = @{@"account"  :account,
-                                @"password" :password
-                                };
+    
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.loginView text:nil];
-#if DEBUG
-    @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
-        @strongify(self)
+    [loginManage userLoginWithView:self.loginView Account:account andPassword:password successCompletion:^{
         [hud hideWithText:nil];
-        [self serverloginSuccessWithResponData:obj];
     } failureCompletion:^(NSError *error) {
         //TODO: 失败处理
         [hud hideWithAPIError:error];
     }];
-#endif
-    NSDictionary* obj = @{
-                              @"appKey" : @"2828b3cd20e9263f914344c284588b60",
-                              @"userId" : @"",
-                              @"acctId" : @"zexi0625",
-                              @"token" : @"b0af18bc4c86fb38f668a4dfd1c26481",
-                              @"orderFlag" : @""
-                              };
-    
-    [self serverloginSuccessWithResponData:obj];
+//#endif
+//    NSDictionary* obj = @{
+//                              @"appKey" : @"2828b3cd20e9263f914344c284588b60",
+//                              @"userId" : @"",
+//                              @"acctId" : @"zexi0625",
+//                              @"token" : @"b0af18bc4c86fb38f668a4dfd1c26481",
+//                              @"orderFlag" : @""
+//                              };
+//
+//    [self serverloginSuccessWithResponData:obj];
 }
 
 - (void)setupRegistEvent {
@@ -196,9 +192,5 @@
 
 
 #pragma mark - 8. IMLoginDelegate
-
-//- (void)setLoginView:(YZHLoginView *)loginView{
-//
-//}
 
 @end

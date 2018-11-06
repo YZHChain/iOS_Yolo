@@ -69,7 +69,7 @@
                             <constraint firstAttribute="height" constant="17" id="AwA-dF-jty"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_informationCell_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3uq-Ab-XGt">
                         <rect key="frame" x="251" y="16" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="8x4-WS-nYx"/>
@@ -230,6 +230,5 @@
         <image name="my_cover_cell_back" width="9" height="16"/>
         <image name="my_informationCell_QRCode" width="22" height="22"/>
         <image name="my_informationCell_gender_boy" width="13" height="13"/>
-        <image name="my_informationCell_headPhoto_default" width="28" height="28"/>
     </resources>
 </document>

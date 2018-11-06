@@ -26,9 +26,9 @@
 - (void)setViewModel:(YZHMyInformationModel *)viewModel
 {
     self.titleLabel.text = viewModel.title;
-    if (viewModel.subtitle.length) {
+//    if (viewModel.subtitle.length) {
         self.subTitleLabel.text = viewModel.subtitle;
-    }
+//    }
     if (viewModel.image.length) {
         NSString* placeholderImageName;
         if ([viewModel.title isEqualToString:@"头像"]) {

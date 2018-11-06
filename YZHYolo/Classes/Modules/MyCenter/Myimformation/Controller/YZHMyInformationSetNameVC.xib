@@ -29,7 +29,10 @@
                     <rect key="frame" x="0.0" y="10" width="375" height="60"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="不得超过20个字符" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hnI-hk-vRn">
-                            <rect key="frame" x="19" y="0.0" width="337" height="60"/>
+                            <rect key="frame" x="19" y="15" width="337" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="vQl-B3-CWz"/>
+                            </constraints>
                             <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
@@ -41,9 +44,8 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="hnI-hk-vRn" secondAttribute="trailing" constant="19" id="Bxv-es-xGa"/>
-                        <constraint firstAttribute="bottom" secondItem="hnI-hk-vRn" secondAttribute="bottom" id="KBr-lk-Cgi"/>
                         <constraint firstItem="hnI-hk-vRn" firstAttribute="leading" secondItem="YuI-0v-Bgb" secondAttribute="leading" constant="19" id="Ons-y7-tid"/>
-                        <constraint firstItem="hnI-hk-vRn" firstAttribute="top" secondItem="YuI-0v-Bgb" secondAttribute="top" id="iu5-UM-HqO"/>
+                        <constraint firstItem="hnI-hk-vRn" firstAttribute="centerY" secondItem="YuI-0v-Bgb" secondAttribute="centerY" id="frp-BS-snJ"/>
                         <constraint firstAttribute="height" constant="60" id="vmX-bY-ryi"/>
                     </constraints>
                 </view>

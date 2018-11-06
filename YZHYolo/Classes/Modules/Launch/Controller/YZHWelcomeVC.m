@@ -16,7 +16,9 @@
 
 @interface YZHWelcomeVC ()
 
-@property(nonatomic, strong)YZHWelcomeView* welcomeView;
+@property (nonatomic, strong) YZHWelcomeView* welcomeView;
+@property (nonatomic, strong) SDCycleScrollView* cycleScrollView;
+//@property (nonatomic, strong) <#NSString#>* <#name#>;
 
 @end
 
@@ -64,7 +66,6 @@
     YZHWelcomeView* welcomeView = [YZHWelcomeView yzh_viewWithFrame:self.view.bounds];
     // 立即刷新视图,使约束更新.
     [welcomeView layoutIfNeeded];
-    
     self.welcomeView = welcomeView;
     
     NSArray *images = [self imagesForBanner];
@@ -78,7 +79,11 @@
     scroollView.clickItemOperationBlock = ^(NSInteger currentIndex) {
         [self.view endEditing:YES];
     };
+    scroollView.itemDidScrollOperationBlock = ^(NSInteger currentIndex) {
+        
+    };
     
+    _cycleScrollView = scroollView;
     [self.view addSubview:self.welcomeView];
     
 //    [self.welcomeView.phoneTextField becomeFirstResponder];
@@ -123,10 +128,10 @@
 - (void)setupRegistEvent {
     // 检测 ID 是否可用. TODO
     YZHParams params = @{
-                         @"yoloNo":self.welcomeView.phoneTextField.text
+                         @"phone":self.welcomeView.phoneTextField.text
                          };
     YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.welcomeView text:nil];
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:params successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUPhone params:params successCompletion:^(id obj) {
         [hud hideWithText:nil];
         // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
         [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
@@ -138,7 +143,6 @@
         
         [hud hideWithText:error.domain];
     }];
-
 
 }
 

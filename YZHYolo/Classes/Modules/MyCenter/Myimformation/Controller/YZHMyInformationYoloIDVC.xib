@@ -34,10 +34,13 @@
                     <rect key="frame" x="0.0" y="13" width="375" height="60"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="不得超过30个字符" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yhZ-C3-B4F">
-                            <rect key="frame" x="18" y="0.0" width="261" height="60"/>
+                            <rect key="frame" x="18" y="15" width="261" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="HaU-nC-2LK"/>
+                            </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="D7S-Ny-OCo"/>
                             </connections>
@@ -53,6 +56,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
+                                <action selector="ckeckoutYoloID:" destination="-1" eventType="touchUpInside" id="gbI-oF-zwl"/>
                                 <action selector="detectionYoloID:" destination="-1" eventType="touchUpInside" id="cJj-ek-Ihp"/>
                             </connections>
                         </button>
@@ -62,11 +66,10 @@
                         <constraint firstItem="VKN-Az-Imh" firstAttribute="leading" secondItem="yhZ-C3-B4F" secondAttribute="trailing" constant="18" id="7s6-Ey-d4J"/>
                         <constraint firstItem="VKN-Az-Imh" firstAttribute="top" secondItem="W20-wF-dVg" secondAttribute="top" id="9hi-t1-Wj1"/>
                         <constraint firstAttribute="bottom" secondItem="VKN-Az-Imh" secondAttribute="bottom" id="AeQ-Be-0pu"/>
+                        <constraint firstItem="yhZ-C3-B4F" firstAttribute="centerY" secondItem="W20-wF-dVg" secondAttribute="centerY" id="Bbe-9u-x6x"/>
                         <constraint firstItem="VKN-Az-Imh" firstAttribute="leading" secondItem="yhZ-C3-B4F" secondAttribute="trailing" constant="18" id="FC2-IF-rnl"/>
                         <constraint firstItem="yhZ-C3-B4F" firstAttribute="leading" secondItem="W20-wF-dVg" secondAttribute="leading" constant="18" id="HKf-z9-tMP"/>
-                        <constraint firstItem="yhZ-C3-B4F" firstAttribute="top" secondItem="W20-wF-dVg" secondAttribute="top" id="OWG-mT-nuA"/>
                         <constraint firstAttribute="trailing" secondItem="VKN-Az-Imh" secondAttribute="trailing" id="ef1-pQ-rxa"/>
-                        <constraint firstAttribute="bottom" secondItem="yhZ-C3-B4F" secondAttribute="bottom" id="snO-ap-9cU"/>
                         <constraint firstAttribute="height" constant="60" id="y8R-lY-C5Y"/>
                     </constraints>
                 </view>

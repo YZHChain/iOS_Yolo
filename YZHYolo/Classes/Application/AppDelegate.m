@@ -64,8 +64,8 @@
 - (void)setupNIMSDK {
     
     // 初始化云信 NIMSDK  TODO: Packaging
-    //    2828b3cd20e9263f914344c284588b60
-    NSString *appKey        = @"45c6af3c98409b18a84451215d0bdd6e";
+    //    d62461f3a67a1f9eb1d8604b9ebea576 45c6af3c98409b18a84451215d0bdd6e
+    NSString *appKey        = @"2828b3cd20e9263f914344c284588b60";
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
     option.apnsCername      = nil;
     option.pkCername        = nil;

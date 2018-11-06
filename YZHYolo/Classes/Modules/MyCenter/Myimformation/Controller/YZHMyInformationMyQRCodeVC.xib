@@ -30,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSZ-x8-246">
-                    <rect key="frame" x="30" y="89" width="315" height="429"/>
+                    <rect key="frame" x="30" y="142" width="315" height="376"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="EMn-Cm-12I">
                             <rect key="frame" x="129" y="17" width="57" height="57"/>
@@ -49,14 +49,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_information_myQRCode_imageView" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Em-l5F">
-                            <rect key="frame" x="49" y="120" width="217" height="267"/>
+                            <rect key="frame" x="49" y="120" width="217" height="216"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="216" id="46Z-nM-aYk"/>
+                                <constraint firstAttribute="width" constant="217" id="aVy-x2-CQQ"/>
+                            </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码，添加我为好友吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pu-rg-dHd">
-                            <rect key="frame" x="91" y="398" width="133" height="12"/>
+                            <rect key="frame" x="99" y="347" width="117" height="10"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="12" id="kVG-z7-Ngv"/>
+                                <constraint firstAttribute="height" constant="10" id="kVG-z7-Ngv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="9"/>
                             <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -70,7 +74,6 @@
                         <constraint firstAttribute="bottom" secondItem="8Pu-rg-dHd" secondAttribute="bottom" constant="19" id="YaD-c5-lud"/>
                         <constraint firstItem="8Pu-rg-dHd" firstAttribute="centerX" secondItem="lSZ-x8-246" secondAttribute="centerX" id="Z6u-S8-z7D"/>
                         <constraint firstItem="SKP-Em-l5F" firstAttribute="centerX" secondItem="lSZ-x8-246" secondAttribute="centerX" id="dkr-a2-vpN"/>
-                        <constraint firstItem="SKP-Em-l5F" firstAttribute="leading" secondItem="lSZ-x8-246" secondAttribute="leading" constant="49" id="ejI-Jq-R3A"/>
                         <constraint firstItem="EMn-Cm-12I" firstAttribute="centerX" secondItem="lSZ-x8-246" secondAttribute="centerX" id="ll7-9T-OEA"/>
                         <constraint firstItem="EMn-Cm-12I" firstAttribute="top" secondItem="lSZ-x8-246" secondAttribute="top" constant="17" id="vBN-8B-goS"/>
                     </constraints>
@@ -108,7 +111,6 @@
             <color key="backgroundColor" red="0.0" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="6w6-1N-pTc" secondAttribute="bottom" id="91p-a1-bNR"/>
-                <constraint firstItem="lSZ-x8-246" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="89" id="EfB-Oz-PYq"/>
                 <constraint firstItem="6w6-1N-pTc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dSW-V6-raD"/>
                 <constraint firstItem="6w6-1N-pTc" firstAttribute="top" secondItem="lSZ-x8-246" secondAttribute="bottom" constant="94" id="g0Z-Qt-CWh"/>
                 <constraint firstItem="lSZ-x8-246" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="hhK-p8-zhY"/>

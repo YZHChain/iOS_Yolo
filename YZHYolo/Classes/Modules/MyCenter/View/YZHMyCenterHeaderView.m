@@ -9,6 +9,7 @@
 #import "YZHMyCenterHeaderView.h"
 
 #import "UIImageView+YZHImage.h"
+#import "YZHUserLoginManage.h"
 @interface YZHMyCenterHeaderView()
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -19,13 +20,18 @@
 
 @end
 
-@implementation YZHMyCenterHeaderView
+@implementation YZHMyCenterHeaderView {
+    YZHIMLoginData* _userLoginModel;
+}
 
 - (void)awakeFromNib{
     
     [super awakeFromNib];
     
     [self setupView];
+    
+    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+    _userLoginModel = manage.currentLoginData;
 }
 
 - (void)setupView{
@@ -57,10 +63,10 @@
         [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
     }
     if (YZHIsString(userModel.yoloID)) {
-        self.userYoloIDLabel.text = userModel.yoloID;
+        self.userYoloIDLabel.text = [NSString stringWithFormat:@"%@%@",self.userYoloIDLabel.text, userModel.yoloID];
     }
-    if (YZHIsString(userModel.phoneNum)) {
-        self.phoneNumLabel.text = userModel.phoneNum;
+    if (YZHIsString(_userLoginModel.phoneNumber)) {
+        self.phoneNumLabel.text = [NSString stringWithFormat:@"%@%@",self.phoneNumLabel.text, _userLoginModel.phoneNumber];
     }
 
 }

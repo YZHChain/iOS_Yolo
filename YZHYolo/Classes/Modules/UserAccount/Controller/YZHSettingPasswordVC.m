@@ -56,9 +56,11 @@
 - (void)setupView
 {
     self.settingPasswordView = [YZHSettingPasswordView yzh_viewWithFrame:self.view.bounds];
+    //根据不同类型切换文案
     if (self.settingPasswordType == YZHSettingPasswordTypeFind) {
         self.settingPasswordView.navigationTitleLaebl.text = @"忘记密码";
         self.settingPasswordView.tileTextLabel.text = @"设置新密码";
+        [self.settingPasswordView.confirmButton setTitle:@"确认" forState:UIControlStateNormal];
     }
     [self.settingPasswordView.confirmButton addTarget:self action:@selector(requestSettingPassword) forControlEvents:UIControlEventTouchUpInside];
     
@@ -90,8 +92,9 @@
         case YZHSettingPasswordTypeRegister:
             requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
             break;
-            case YZHSettingPasswordTypeFind:
+        case YZHSettingPasswordTypeFind:
             requestURL = PATH_USER_LOGIN_FORGETPASSWORD;
+            break;
         default:
             requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
             break;
@@ -101,13 +104,9 @@
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
-        [hud hideWithText:nil];
         @strongify(self)
-        if (self.settingPasswordType == YZHSettingPasswordTypeRegister) {
-            [self autoLoginWithResponse:obj];
-        } else {
-            
-        }
+        // 设置完密码一律直接走登录
+        [self autoLoginWithResponse:obj progressHUD:hud];
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];
     }];
@@ -115,18 +114,17 @@
 
 #pragma mark - 6.Private Methods
 // 注册时设置完密码自动登录
-- (void)autoLoginWithResponse:(id)response {
+- (void)autoLoginWithResponse:(id)response progressHUD:(YZHProgressHUD*)progressHUD{
     
     YZHLoginModel* model = [YZHLoginModel YZH_objectWithKeyValues:response];
     
     YZHUserLoginManage* manage = [[YZHUserLoginManage alloc] init];
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
     [manage IMServerLoginWithAccount:model.acctId token:model.token successCompletion:^{
         //TODO:
-        [hud hideWithText:@"登录成功"];
+        [progressHUD hideWithText:@"登录成功"];
     } failureCompletion:^(NSError *error) {
         // TODO:云信登录错误 需要和产品确认
-        [hud hideWithText:error.domain];
+        [progressHUD hideWithText:error.domain];
     }];
 }
 
@@ -136,14 +134,5 @@
 }
 
 #pragma mark - 7.GET & SET
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

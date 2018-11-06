@@ -27,7 +27,6 @@
 @interface YZHMyInformationListModel : NSObject
 
 @property(nonatomic, strong)NSMutableArray<YZHMyInformationContentModel* >* list;
-
 @property (nonatomic, strong) NIMUser* userIMData;
 @property (nonatomic, assign) BOOL hasPhotoImage;
 @property (nonatomic, assign) BOOL hasNickName;

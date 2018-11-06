@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *SMSCodeTextField;
 @property (weak, nonatomic) IBOutlet UIButton *getSMSCodeButton;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @end

@@ -13,6 +13,7 @@
 
 static NSString* kYZHIMAccountKey     = @"account";
 static NSString* kYZHIMTokenKey       = @"token";
+static NSString* kYZHUserPhoneNumberKey = @"phoneNumber";
 static NSString* kYZHIMAutoLoginKey   = @"kYZHIMAutoLogin";
 static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 
@@ -24,6 +25,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
         _account = [aDecoder decodeObjectForKey:kYZHIMAccountKey];
         _token = [aDecoder decodeObjectForKey:kYZHIMTokenKey];
         _isAutoLogin = [[aDecoder decodeObjectForKey:kYZHIMAutoLoginKey] boolValue];
+        _phoneNumber = [aDecoder decodeObjectForKey:kYZHUserPhoneNumberKey];
     }
     return self;
 }
@@ -36,6 +38,9 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     if ([_token length]) {
         [encoder encodeObject:_token forKey:kYZHIMTokenKey];
     }
+    if ([_phoneNumber length]) {
+        [encoder encodeObject:_phoneNumber forKey:kYZHUserPhoneNumberKey];
+    }
     [encoder encodeObject:@(self.isAutoLogin) forKey:kYZHIMAutoLoginKey];
     
 }
@@ -43,6 +48,14 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 - (BOOL)isAutoLogin {
 
     return YES;
+}
+
+- (NSString *)phoneNumber {
+    
+    if (!_phoneNumber) {
+        _phoneNumber = @"18888888888";
+    }
+    return _phoneNumber;
 }
 
 @end
@@ -176,7 +189,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
         @strongify(self)
-        [self serverloginSuccessWithResponData:obj];
+        [self serverloginSuccessWithResponData:obj successCompletion:successCompletion failureCompletion:failureCompletion];
     } failureCompletion:^(NSError *error) {
         //TODO: 失败处理
         failureCompletion ? failureCompletion(error) : NULL;
@@ -184,26 +197,21 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 }
 
 // 后台登录成功处理
-- (void)serverloginSuccessWithResponData:(id)responData{
+- (void)serverloginSuccessWithResponData:(id)responData successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
     // 缓存.
     YZHLoginModel* userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
     NSString* account = userLoginModel.acctId;
     NSString* token = userLoginModel.token;
-    //
-    [self IMServerLoginWithAccount:account token:token successCompletion:^{
-        
-    } failureCompletion:^(NSError *error) {
-        
-    }];
+    [self IMServerLoginWithAccount:account token:token userLoginModel:userLoginModel successCompletion:successCompletion failureCompletion:failureCompletion];
 }
-
-- (void)IMServerLoginWithAccount:(NSString *)account token:(NSString *)token successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
+// 请求登录云信
+- (void)IMServerLoginWithAccount:(NSString *)account token:(NSString *)token userLoginModel:(YZHLoginModel* )userLoginModel successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
     
     // 请求登录云信.
     [[[NIMSDK sharedSDK] loginManager] login:account token:token completion:^(NSError * _Nullable error) {
         if (error == nil) {
             successCompletion ? successCompletion() : NULL;
-            [self IMServerLoginSuccessWithAccount:account token:token];
+            [self IMServerLoginSuccessWithAccount:account token:token userLoginModel:userLoginModel];
         } else {
             // 错误提示 TODO:
             failureCompletion ? failureCompletion(error) : NULL;
@@ -212,7 +220,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 }
 
 // 网易IM信登录成功处理
-- (void)IMServerLoginSuccessWithAccount:(NSString *)account token:(NSString *)token{
+- (void)IMServerLoginSuccessWithAccount:(NSString *)account token:(NSString *)token userLoginModel:(YZHLoginModel* )userLoginModel {
     //暂时先到主要,后面还需要加上从云信获取信息的逻辑
     [UIViewController yzh_userLoginSuccessToHomePage];
     
@@ -221,7 +229,8 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     currentLoginData.account = account;
     currentLoginData.token = token;
     currentLoginData.isAutoLogin = YES;
-    // 负责, 并且保存.
+    currentLoginData.phoneNumber = userLoginModel.phone;
+    // 赋值, 并且保存.
     self.currentLoginData = currentLoginData;
 }
 

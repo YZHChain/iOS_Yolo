@@ -77,6 +77,8 @@ typedef enum : NSUInteger {
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yzh_separatorLightGray]} forState:UIControlStateDisabled];
+    
     item.enabled = NO;
     
     self.navigationItem.rightBarButtonItem = item;

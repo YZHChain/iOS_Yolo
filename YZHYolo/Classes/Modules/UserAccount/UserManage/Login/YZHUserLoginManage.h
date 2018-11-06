@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHIMLoginData : NSObject
 
-@property (nonatomic, copy)  NSString *account;
-@property (nonatomic, copy)  NSString *token;
+@property (nonatomic, copy) NSString *account;
+@property (nonatomic, copy) NSString *token;
+@property (nonatomic, copy) NSString* phoneNumber;
 @property (nonatomic, assign) BOOL isAutoLogin;
 
 @end

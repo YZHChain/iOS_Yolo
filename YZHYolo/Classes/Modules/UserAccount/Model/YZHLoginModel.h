@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* acctId;
 @property (nonatomic, copy) NSString* token;
 @property (nonatomic, copy) NSString* orderFlag;
+@property (nonatomic, copy) NSString* phone;
 
 @end
 

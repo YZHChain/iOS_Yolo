@@ -54,7 +54,7 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"找回密码";
+    self.navigationItem.title = @"忘记密码";
  self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.hideNavigationBar = YES;
 }
@@ -99,7 +99,7 @@
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
         @strongify(self)
         // 请求后台 成功则跳转至设置新密码 枚举
-        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordTypeFind": @(1),
+        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordType": @(1),
                                                             @"phoneNum":self.findPasswordView.accountTextField.text}];
     } failureCompletion:^(NSError *error) {
         //        error.code = -102;
@@ -119,7 +119,7 @@
                                     };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.findPasswordView text:@""];
         // 处理验证码按钮 倒计时
-        [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameter successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameter successCompletion:^(id obj) {
             [hud hideWithText:@"验证码已发送至手机"];
             [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
         } failureCompletion:^(NSError *error) {

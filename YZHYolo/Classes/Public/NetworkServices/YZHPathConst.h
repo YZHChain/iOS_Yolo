@@ -16,7 +16,7 @@
 #define PATH_USER_LOGIN_LOGINVERIFY             @"/user/login"             // 客户端用户登录
 #define PATH_USER_REGISTERED_REGISTEREDNVERIFY  @"/user/register"         // 客户端用户注册
 #define PATH_USER_CHECKOUTYOLOID                @"/user/checkYoloNo"      // 检测YoloID 是否可用包括手机号
-#define PATH_USER_MODIFI_YOLOID                 @"/user/updateYoloNo"     //修改 YoloID
+#define PATH_USER_CHECKOUPhone               @"/user/checkPhone"     //检测Phone 是否已经注册
 
 #define PATH_REGISTERED_MYINFORMATION           @"/YZH/account/accountCenter"
 #define PATH_REGISTERED_MYCENTER                @"/account/myCenter"

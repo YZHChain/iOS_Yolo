@@ -75,7 +75,6 @@
 
 - (void)setupData
 {
-    
     if (YZHIsString(self.userInfo.nickName)) {
         self.nickNameTextField.text = _userInfo.nickName;
     } else {
@@ -96,14 +95,8 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    
-}
-
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField {
     
-    NSLog(@"当前输入字符%@", textField);
     return YES;
 }
 
@@ -133,6 +126,7 @@
 
 - (void)setupNotification
 {
+    
 }
 
 #pragma mark - 7.GET & SET
