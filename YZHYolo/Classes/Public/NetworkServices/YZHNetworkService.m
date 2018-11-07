@@ -158,6 +158,7 @@ static id instance;
                 successObj = [[NSObject alloc] init];
                 ((NSObject*)successObj).yzh_apiCode = code;
                 ((NSObject*)successObj).yzh_apiDetail = detail;
+                ((NSObject*)successObj).yzh_apiEmptyValue = YES;
             }
         } else  { // 这里最好和后台协商, 根据 Code 码来弹出相应的框
             // 非成功状态统一弹框处理.

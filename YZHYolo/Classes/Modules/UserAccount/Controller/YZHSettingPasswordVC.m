@@ -117,13 +117,12 @@
 - (void)autoLoginWithResponse:(id)response progressHUD:(YZHProgressHUD*)progressHUD{
     
     YZHLoginModel* model = [YZHLoginModel YZH_objectWithKeyValues:response];
+    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
     
-    YZHUserLoginManage* manage = [[YZHUserLoginManage alloc] init];
-    [manage IMServerLoginWithAccount:model.acctId token:model.token successCompletion:^{
-        //TODO:
+    [manage IMServerLoginWithAccount:model.acctId token:model.token userLoginModel:model successCompletion:^{
         [progressHUD hideWithText:@"登录成功"];
     } failureCompletion:^(NSError *error) {
-        // TODO:云信登录错误 需要和产品确认
+        // TODO云信登录错误
         [progressHUD hideWithText:error.domain];
     }];
 }

@@ -40,6 +40,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface YZHUserPrivateSettingModel : NSObject
+
+@property (nonatomic, assign) BOOL allowAdd;
+@property (nonatomic, assign) BOOL addVerift;
+@property (nonatomic, assign) BOOL allowPhoneAdd;
+@property (nonatomic, strong) NSString* groupPassword;
+
+@end
+
 @interface YZHUserInfoExtManage : NSObject
 
 @property (nonatomic, strong) YZHUserPlaceModel* place;
@@ -47,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<YZHUserGroupTagsModel* > *groupTags;
 @property (nonatomic, strong) YZHUserYoloModel* userYolo;
 @property (nonatomic, strong) NSString* qrCode;
+@property (nonatomic, strong) YZHUserPrivateSettingModel* privateSetting;
 
 + (instancetype)currentUserInfoExt;
 - (NSString* )userInfoExtString;

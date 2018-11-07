@@ -44,8 +44,9 @@
         YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
         YZHIMLoginData* _userLoginModel = manage.currentLoginData;
         
-        NSString* phoneNumber = _userLoginModel.phoneNumber;
+        NSString* phoneNumber = _userLoginModel.phoneNumber.length ? _userLoginModel.phoneNumber : @"";
         NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
+        //如果读不到, 或者后台未设置随便给个.
         NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"Yolo用户";
         NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
         NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
@@ -53,11 +54,10 @@
         NSString* yoloID = userInfoExt.userYolo.yoloID;
         NSString* myPlace = userInfoExt.place.complete;
         
-        
         NSArray* list = @[
                           @{@"content": @[@{
                                               @"title":@"手机号",
-                                              @"subtitle":phoneNumber,
+                                              @"subtitle":phoneNumber.length ? phoneNumber : @"",
                                               @"image":@"",
                                               @"route":@"",
                                               @"cellType" :@"0",

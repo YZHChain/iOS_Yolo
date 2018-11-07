@@ -56,8 +56,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="ckeckoutYoloID:" destination="-1" eventType="touchUpInside" id="gbI-oF-zwl"/>
-                                <action selector="detectionYoloID:" destination="-1" eventType="touchUpInside" id="cJj-ek-Ihp"/>
+                                <action selector="checkoutYoloID:" destination="-1" eventType="touchUpInside" id="APr-oq-yKJ"/>
                             </connections>
                         </button>
                     </subviews>

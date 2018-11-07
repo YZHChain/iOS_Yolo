@@ -9,11 +9,13 @@
 #import "YZHPrivacySettingVC.h"
 #import "YZHPrivacySettingModel.h"
 #import "YZHPrivacySettingCell.h"
+#import "YZHAboutYoloCell.h"
 
-@interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource, YZHPrivacyProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHPrivacySettingContent* viewModel;
+@property (nonatomic, assign) NSTimeInterval lastClickTimer;
 
 @end
 
@@ -45,7 +47,6 @@
 
 - (void)setupNavBar
 {
-    //TODO:数据持久化未做.
     self.navigationItem.title = @"隐私设置";
 }
 
@@ -77,30 +78,49 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.viewModel.modelArray.count;
+    YZHPrivacySettingModel* settingModel = self.viewModel.content.firstObject;
+    if (section == 0) {
+        if (settingModel.isSelected == NO) {
+            return 1;
+        } else {
+            return self.viewModel.content.count;
+        }
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString* privacySettingCell = @"privacyCellIdentifier";
-    YZHPrivacySettingCell* cell = [tableView dequeueReusableCellWithIdentifier:privacySettingCell];
-    YZHPrivacySettingModel* model = self.viewModel.modelArray[indexPath.row];
-    if (!cell) {
-        cell = [[NSBundle mainBundle] loadNibNamed:@"YZHPrivacySettingCell" owner:nil options:nil].lastObject;
-        cell.titleLabel.text = model.title;
-        cell.viewModel = self.viewModel;
+    if (indexPath.section == 0) {
+        static NSString* privacySettingCell = @"privacyCellIdentifier";
+        YZHPrivacySettingCell* cell = [tableView dequeueReusableCellWithIdentifier:privacySettingCell];
+        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHPrivacySettingCell" owner:nil options:nil].lastObject;
+            cell.titleLabel.text = model.title;
+            cell.viewModel = self.viewModel;
+        }
+        cell.indexPath = indexPath;
+        cell.subtitleLabel.text = model.subTitle;
+        [cell.chooseSwitch setOn:model.isSelected];
+        cell.delegate = self;
+        return cell;
+    } else {
+        static NSString* aboutYoloCell = @"aboutYoloCell";
+        YZHAboutYoloCell* cell = [tableView dequeueReusableCellWithIdentifier:aboutYoloCell];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
+            cell.titleLabel.text = @"设置上锁群阅读密码";
+            cell.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
+        }
+        return cell;
     }
-    cell.currentRow = indexPath.row;
-    cell.subtitleLabel.text = model.subTitle;
-    [cell.chooseSwitch setOn:model.isSelected];
-    
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,19 +143,56 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YZHPrivacySettingModel* model = self.viewModel.modelArray[indexPath.row];
-    YZHPrivacySettingCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-//    cell.chooseSwitch setOn:<#(BOOL)#> animated:<#(BOOL)#>
-//    if (indexPath.row == 0) {
-//
-//    } else if (indexPath.row == 1) {
+    if (indexPath.section == 0) {
+        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+        model.isSelected = !model.isSelected;
+        [self.tableView reloadData];
+        [self updateUserPrivacySetting];
+    } else {
+        
+    }
+//    double timerInterval = 0;
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"HH:mm"];
+//    if (self.lastClickTimer) {
+//        NSDate *startDate = [dateFormatter dateFromString:NSTimeIntervalSince1970];
+//        self.lastClickTimer =
 //
 //    } else {
 //
 //    }
 }
 
+- (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    }
+    
+}
+
 #pragma mark - 5.Event Response
+
+- (void)updateUserPrivacySetting {
+    
+    //时间间隔.
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    YZHUserPrivateSettingModel* userSetting = userInfoExt.privateSetting;
+    YZHPrivacySettingModel* addFirendModel = self.viewModel.content[0];
+    YZHPrivacySettingModel* addVerifyModel = self.viewModel.content[1];
+    YZHPrivacySettingModel* phoneAddModel = self.viewModel.content[2];
+    userSetting.allowAdd = addFirendModel.isSelected;
+    userSetting.allowPhoneAdd = phoneAddModel.isSelected;
+    userSetting.addVerift = addVerifyModel.isSelected;
+    
+    NSString* userInfoExtString = [userInfoExt userInfoExtString];
+    
+    [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{
+                                                       @(NIMUserInfoUpdateTagExt): userInfoExtString
+                                                       } completion:^(NSError * _Nullable error) {
+                                                           
+                                                       }];
+}
 
 #pragma mark - 6.Private Methods
 

@@ -25,14 +25,17 @@
 
 - (void)settingStatus:(UISwitch *)sender {
     
-    YZHPrivacySettingModel* model = self.viewModel.modelArray[_currentRow];
-    if (_currentRow == 0) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedUISwitch:indexPath:)]) {
+        [self.delegate selectedUISwitch:sender indexPath:_indexPath];
+    }
+    YZHPrivacySettingModel* model = self.viewModel.content[_indexPath.row];
+    if (_indexPath.row == 0) {
         if (self.chooseSwitch.isOn == NO) {
             model.subTitle = @"不允许";
         } else {
             model.subTitle = @"允许";
         }
-    } else if (_currentRow == 1) {
+    } else if (_indexPath.row == 1) {
         if (self.chooseSwitch.isOn == NO) {
             model.subTitle = @"无需验证";
         } else {
@@ -46,7 +49,7 @@
         }
     }
     model.isSelected = self.chooseSwitch.isOn;
-    self.subtitleLabel.text = self.viewModel.modelArray[_currentRow].subTitle;
+    self.subtitleLabel.text = self.viewModel.content[_indexPath.row].subTitle;
 }
 
 

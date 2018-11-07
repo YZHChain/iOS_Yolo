@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YZHUserModelManage.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHPrivacySettingModel : NSObject
@@ -18,11 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface YZHPrivacySettingContent : NSObject<NSSecureCoding>
+@interface YZHPrivacySettingContent : NSObject
 
-@property (nonatomic, strong) NSArray<YZHPrivacySettingModel* >* modelArray;
+@property (nonatomic, strong) NSArray<YZHPrivacySettingModel* >* content;
+
+@property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
 
 + (instancetype)sharePrivacySettingContent;
+- (void)updateModel;
 
 @end
 

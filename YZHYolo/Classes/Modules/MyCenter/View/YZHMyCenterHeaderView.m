@@ -17,11 +17,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *userYoloIDLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *QRCodeImageView;
+@property (nonatomic, strong) YZHIMLoginData* userLoginModel;
 
 @end
 
 @implementation YZHMyCenterHeaderView {
-    YZHIMLoginData* _userLoginModel;
+   
 }
 
 - (void)awakeFromNib{
@@ -29,9 +30,6 @@
     [super awakeFromNib];
     
     [self setupView];
-    
-    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
-    _userLoginModel = manage.currentLoginData;
 }
 
 - (void)setupView{
@@ -43,7 +41,6 @@
     self.executeHeaderBlock ? self.executeHeaderBlock(sender) : NULL;
 }
 
-
 - (IBAction)clickQRCode:(UIButton *)sender {
     
     self.executeQRCodeBlock ? self.executeQRCodeBlock(sender) : NULL;
@@ -51,6 +48,7 @@
 
 - (void)setUserModel:(YZHUserDetailsModel *)userModel {
     
+
     _userModel = userModel;
     NIMUser* user = [userModel userIMData];
     NSString* avatarUrl = userModel.hasPhotoImage ? user.userInfo.avatarUrl : @"my_cover_headPhoto_default";
@@ -63,12 +61,22 @@
         [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
     }
     if (YZHIsString(userModel.yoloID)) {
-        self.userYoloIDLabel.text = [NSString stringWithFormat:@"%@%@",self.userYoloIDLabel.text, userModel.yoloID];
+        self.userYoloIDLabel.text = [NSString stringWithFormat:@"YOLO ID: %@", userModel.yoloID];
     }
-    if (YZHIsString(_userLoginModel.phoneNumber)) {
-        self.phoneNumLabel.text = [NSString stringWithFormat:@"%@%@",self.phoneNumLabel.text, _userLoginModel.phoneNumber];
+    if (YZHIsString(self.userLoginModel.phoneNumber)) {
+        self.phoneNumLabel.text = [NSString stringWithFormat:@"手机号码: %@", _userLoginModel.phoneNumber];
     }
 
+}
+
+- (YZHIMLoginData *)userLoginModel {
+    
+    if (!_userLoginModel) {
+        
+        YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+        _userLoginModel = manage.currentLoginData;
+    }
+    return _userLoginModel;
 }
 
 @end

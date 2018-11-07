@@ -30,6 +30,7 @@
 		55256F5C21590C6000DEEC45 /* YZHAlertManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55256F5B21590C6000DEEC45 /* YZHAlertManage.m */; };
 		5528C5DC2190A8E600F255EE /* YZHMyinformationQRCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5528C5DB2190A8E600F255EE /* YZHMyinformationQRCodeModel.m */; };
 		5528C5E221913BE500F255EE /* YZHUserModelManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5528C5E121913BE500F255EE /* YZHUserModelManage.m */; };
+		5528DE81219271F8002FB26B /* YZHPageControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5528DE80219271F8002FB26B /* YZHPageControlView.m */; };
 		552B78E921735F7700C1DD99 /* UIImageView+YZHImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78E821735F7700C1DD99 /* UIImageView+YZHImage.m */; };
 		552B78EC21735F8400C1DD99 /* UIImage+YZHImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78EB21735F8400C1DD99 /* UIImage+YZHImage.m */; };
 		552B78F021737E9A00C1DD99 /* YZHUserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 552B78EF21737E9A00C1DD99 /* YZHUserUtil.m */; };
@@ -436,6 +437,8 @@
 		5528C5DB2190A8E600F255EE /* YZHMyinformationQRCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationQRCodeModel.m; sourceTree = "<group>"; };
 		5528C5E021913BE500F255EE /* YZHUserModelManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHUserModelManage.h; sourceTree = "<group>"; };
 		5528C5E121913BE500F255EE /* YZHUserModelManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHUserModelManage.m; sourceTree = "<group>"; };
+		5528DE7F219271F8002FB26B /* YZHPageControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPageControlView.h; sourceTree = "<group>"; };
+		5528DE80219271F8002FB26B /* YZHPageControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPageControlView.m; sourceTree = "<group>"; };
 		552B78E721735F7700C1DD99 /* UIImageView+YZHImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+YZHImage.h"; sourceTree = "<group>"; };
 		552B78E821735F7700C1DD99 /* UIImageView+YZHImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+YZHImage.m"; sourceTree = "<group>"; };
 		552B78EA21735F8400C1DD99 /* UIImage+YZHImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+YZHImage.h"; sourceTree = "<group>"; };
@@ -2475,6 +2478,8 @@
 				55337DD9214FE0CC00307B75 /* YZHWelcomeView.h */,
 				55337DDA214FE0CC00307B75 /* YZHWelcomeView.m */,
 				55337DD7214FE0AC00307B75 /* YZHWelcomeView.xib */,
+				5528DE7F219271F8002FB26B /* YZHPageControlView.h */,
+				5528DE80219271F8002FB26B /* YZHPageControlView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3526,6 +3531,7 @@
 				5520DE1E218EE4B10042ED56 /* YZHContactMemberModel.m in Sources */,
 				553641D3217EAEC2006F77A5 /* NIMGrowingInternalTextView.m in Sources */,
 				55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */,
+				5528DE81219271F8002FB26B /* YZHPageControlView.m in Sources */,
 				5536421F217EAEC3006F77A5 /* NSDictionary+NIMKit.m in Sources */,
 				5531458A21574B4600A13F96 /* YZHMyInformationMyPlaceCell.m in Sources */,
 				55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */,

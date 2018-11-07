@@ -164,7 +164,7 @@
     //请求运行登录服务.
     YZHUserLoginManage *loginManage = [YZHUserLoginManage sharedManager];
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.loginView text:nil];
-    [loginManage IMServerLoginWithAccount:account token:token successCompletion:^{
+    [loginManage IMServerLoginWithAccount:account token:token userLoginModel:self.userLoginModel successCompletion:^{
         [hud hideWithText:@"登录成功"];
     } failureCompletion:^(NSError *error) {
         // TODO云信登录错误

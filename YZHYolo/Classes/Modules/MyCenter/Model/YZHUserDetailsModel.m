@@ -45,11 +45,7 @@
 
 - (YZHUserInfoExtManage *)userInfoExt {
     
-    if (!_userInfoExt) {
-        if (YZHIsString(self.userIMData.userInfo.ext)) {
-            _userInfoExt = [YZHUserInfoExtManage YZH_objectWithKeyValues:self.userIMData.userInfo.ext];
-        }
-    }
+    _userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     return _userInfoExt;
 }
 

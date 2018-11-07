@@ -102,7 +102,6 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     } else {
         
     }
-    
 }
 
 - (void)saveData
@@ -221,9 +220,6 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 
 // 网易IM信登录成功处理
 - (void)IMServerLoginSuccessWithAccount:(NSString *)account token:(NSString *)token userLoginModel:(YZHLoginModel* )userLoginModel {
-    //暂时先到主要,后面还需要加上从云信获取信息的逻辑
-    [UIViewController yzh_userLoginSuccessToHomePage];
-    
     //TODO:开启子线程异步执行保存登录数据.
     YZHIMLoginData* currentLoginData = [[YZHIMLoginData alloc] init];
     currentLoginData.account = account;
@@ -232,6 +228,8 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     currentLoginData.phoneNumber = userLoginModel.phone;
     // 赋值, 并且保存.
     self.currentLoginData = currentLoginData;
+    //暂时先到主要,后面还需要加上从云信获取信息的逻辑
+    [UIViewController yzh_userLoginSuccessToHomePage];
 }
 
 #pragma mark -- Set Get

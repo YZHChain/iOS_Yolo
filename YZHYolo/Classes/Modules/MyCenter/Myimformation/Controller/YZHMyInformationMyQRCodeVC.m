@@ -9,6 +9,8 @@
 #import "YZHMyInformationMyQRCodeVC.h"
 
 #import "YZHPublic.h"
+#import "ZXingObjC.h"
+#import "YZHUserModelManage.h"
 @interface YZHMyInformationMyQRCodeVC ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerPhotoImageView;
@@ -16,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *QRCodeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *photoView;
-
+@property (nonatomic, copy) NSString* QRCodeResult;
 
 @end
 
@@ -71,6 +73,26 @@
         [self.headerPhotoImageView yzh_setImageWithString:user.userInfo.avatarUrl];
         [self.headerPhotoImageView yzh_cornerRadiusAdvance:self.headerPhotoImageView.size.height / 2 rectCornerType: UIRectCornerAllCorners];
     }
+    //生成二维码
+    NSError *error = nil;
+    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
+    CGSize imageSize = self.QRCodeImageView.size;
+    ZXBitMatrix* result = [writer encode:self.QRCodeResult
+                                  format:kBarcodeFormatQRCode
+                                   width:imageSize.width
+                                  height:imageSize.height
+                                   error:&error];
+    if (result) {
+        CGImageRef image = CGImageRetain([[ZXImage imageWithMatrix:result] cgimage]);
+        
+        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
+        self.QRCodeImageView.image = [UIImage imageWithCGImage:image];
+        
+        CGImageRelease(image);
+    } else {
+        
+    }
+    
 }
 
 - (void)reloadView
@@ -129,5 +151,14 @@
 }
 
 #pragma mark - 7.GET & SET
+
+- (NSString *)QRCodeResult {
+    
+    if (!_QRCodeResult) {
+        
+        _QRCodeResult = [YZHUserInfoExtManage currentUserInfoExt].qrCode;
+    }
+    return _QRCodeResult;
+}
 
 @end

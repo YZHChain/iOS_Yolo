@@ -33,4 +33,15 @@
     objc_setAssociatedObject(self, @selector(yzh_apiDetail), yzh_apiDetail, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
+- (BOOL)yzh_apiEmptyValue {
+    
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setYzh_apiEmptyValue:(BOOL )yzh_apiEmptyValue {
+    
+    objc_setAssociatedObject(self, @selector(yzh_apiEmptyValue), @(yzh_apiEmptyValue), OBJC_ASSOCIATION_ASSIGN);
+    
+}
+
 @end

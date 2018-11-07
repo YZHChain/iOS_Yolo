@@ -43,6 +43,7 @@
 
     BOOL startingTest = (self.passwordTextField.text.length >= 6 && self.confirmPasswordTextField.text.length >= 6);
     BOOL checkpasswordIndex = self.passwordTextField.text.length >= 6;
+//    BOOL checkConfirmIndex = self.confirmPasswordTextField.text.length >= 6;
     if (checkpasswordIndex) {
         [self checkPasswordTextSecurityIndex];
         if (startingTest) {
@@ -62,6 +63,8 @@
         }
     } else {
         self.securityIndexView.hidden = YES;
+        self.confirmButton.enabled = NO;
+        self.checkStatusImageView.image = nil;
     }
 
 }

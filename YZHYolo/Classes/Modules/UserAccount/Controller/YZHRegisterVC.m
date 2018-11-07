@@ -137,7 +137,9 @@
     NSString* phoneNumText = self.registerView.phoneTextField.text;
     // 检测手机号,后台请求
     if ([phoneNumText yzh_isPhone]) {
-        NSDictionary* parameters = @{@"phoneNum": phoneNumText};
+        NSDictionary* parameters = @{
+                                     @"phoneNum":  phoneNumText,
+                                     @"type":@(0),};
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
         [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameters successCompletion:^(NSObject* obj) {
             if ([obj.yzh_apiCode isEqualToString:@"200"]) {

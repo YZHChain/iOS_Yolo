@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "YZHPrivacySettingModel.h"
+
+@protocol YZHPrivacyProtocol <NSObject>
+
+- (void)selectedUISwitch:(UISwitch* )uiSwitch indexPath:(NSIndexPath *)indexPath;
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHPrivacySettingCell : UITableViewCell
@@ -17,7 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, strong) YZHPrivacySettingContent* viewModel;
-@property (nonatomic, assign) NSInteger currentRow;
+@property (nonatomic, strong) NSIndexPath* indexPath;
+@property (nonatomic, weak) id<YZHPrivacyProtocol> delegate;
 
 @end
 

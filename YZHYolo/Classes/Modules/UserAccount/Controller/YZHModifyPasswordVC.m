@@ -11,6 +11,7 @@
 #import "YZHPublic.h"
 #import "NSString+YZHTool.h"
 #import "UIButton+YZHCountDown.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHModifyPasswordVC ()<UITextFieldDelegate>
 
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *securityIndexView;
 @property (weak, nonatomic) IBOutlet UILabel *securityIndexLable;
 @property (nonatomic, assign) YZHModifyPasswordType currentType;
+@property (nonatomic, strong) NSString* phoneNumber;
 
 @end
 
@@ -108,15 +110,46 @@
 
 - (IBAction)executeModification:(UIButton *)sender {
     
+    NSDictionary* dic;
     if (self.currentType == YZHModifyPasswordTypeOriginalPW) {
+        dic = @{
+                @"phoneNum":self.phoneNumber ? self.phoneNumber : @"",
+                @"newPassword":self.passwordTextField.text,
+                @"password":self.modifyTypeTextField.text,
+                @"type": @(self.currentType)
+                };
+    } else {
+        dic = @{
+                @"phoneNum":self.phoneNumber ? self.phoneNumber : @"",
+                @"newPassword":self.passwordTextField.text,
+                @"verifyCode":self.modifyTypeTextField.text,
+                @"type": @(self.currentType)
+                };
     }
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_MODIFI_PASSWORD params:dic successCompletion:^(id obj) {
+        [hud hideWithText:@"密码修改成功"];
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
 }
 
 - (IBAction)sendVerifyCode:(UIButton *)sender {
     
-    [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+    NSDictionary* dic;
+    if (YZHIsString(self.phoneNumber)) {
+        dic = @{@"phoneNum": self.phoneNumber,
+                @"type":@(2),
+                };
+    }
+    YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:dic successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
 }
-
 
 - (IBAction)switchModifyPasswordType:(UIButton *)sender {
     
@@ -148,6 +181,7 @@
     //密码强度检测规则: 新密码输入超过大于等于 6 个字符。否则隐藏掉.
     BOOL startingTest = (self.passwordTextField.text.length >= 6 && self.confirmPasswordTextField.text.length >= 6 && self.modifyTypeTextField.text.length >= 4);
     BOOL checkpasswordIndex = self.passwordTextField.text.length >= 6;
+//    BOOL checkConfirmIndex = self.confirmPasswordTextField.text.length >= 6;
     if (checkpasswordIndex) {
         [self checkPasswordTextSecurityIndex];
         if (startingTest) {
@@ -168,6 +202,7 @@
     } else {
         self.securityIndexView.hidden = YES;
         self.confirmButton.enabled = NO;
+        self.checkStatusImageView.image = nil;
     }
     
 }
@@ -208,6 +243,17 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark Get && Set
+
+- (NSString *)phoneNumber {
+    
+    if (!_phoneNumber) {
+        YZHUserLoginManage* userLoginData = [YZHUserLoginManage sharedManager];
+        _phoneNumber = userLoginData.currentLoginData.phoneNumber;
+    }
+    return _phoneNumber;
 }
 
 @end

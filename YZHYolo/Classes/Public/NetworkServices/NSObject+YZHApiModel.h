@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *yzh_apiCode;
 @property (nonatomic, copy) NSString *yzh_apiDetail;
+@property (nonatomic, assign) BOOL yzh_apiEmptyValue;
 
 @end
 

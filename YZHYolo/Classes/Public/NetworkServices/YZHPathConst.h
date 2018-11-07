@@ -12,13 +12,11 @@
 #define PATH_USER_REGISTERED_SENDSMSCODE        @"/sms/sendSMSVerifyCode" //短信验证码发送
 #define PATH_USER_REGISTERED_SMSVERIFYCODE      @"/sms/verifySMSVerifyCode" //短信验证码校验
 #define PATH_USER_LOGIN_FORGETPASSWORD          @"/user/forgetPassword"    // 客户端用户忘记密码
-#define PATH_USER_MODIFI_PASSWORD               @"/user/updatePassword"    // 客户端用户忘记密码
+#define PATH_USER_MODIFI_PASSWORD               @"/user/updatePassword"    // 客户端用户修改密码
 #define PATH_USER_LOGIN_LOGINVERIFY             @"/user/login"             // 客户端用户登录
 #define PATH_USER_REGISTERED_REGISTEREDNVERIFY  @"/user/register"         // 客户端用户注册
 #define PATH_USER_CHECKOUTYOLOID                @"/user/checkYoloNo"      // 检测YoloID 是否可用包括手机号
-#define PATH_USER_CHECKOUPhone               @"/user/checkPhone"     //检测Phone 是否已经注册
-
-#define PATH_REGISTERED_MYINFORMATION           @"/YZH/account/accountCenter"
-#define PATH_REGISTERED_MYCENTER                @"/account/myCenter"
+#define PATH_USER_UPDATELOGIN                  @"/user/updateLogin"      //修改 Yolo 号
+#define PATH_USER_CHECKOUPHONE                  @"/user/checkPhone"     //检测Phone 是否已经注册
 
 #endif /* YZHPathConst_h */

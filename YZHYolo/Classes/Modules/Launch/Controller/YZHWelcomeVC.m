@@ -13,12 +13,14 @@
 #import "TAPageControl.h"
 #import "UIViewController+KeyboardAnimation.h"
 #import "YZHPublic.h"
+#import "YZHPageControlView.h"
 
 @interface YZHWelcomeVC ()
 
 @property (nonatomic, strong) YZHWelcomeView* welcomeView;
 @property (nonatomic, strong) SDCycleScrollView* cycleScrollView;
-//@property (nonatomic, strong) <#NSString#>* <#name#>;
+@property (nonatomic, strong) YZHPageControlView* controlView;
+
 
 @end
 
@@ -71,22 +73,35 @@
     NSArray *images = [self imagesForBanner];
     CGRect frame = welcomeView.bannerView.frame;
     SDCycleScrollView* scroollView = [SDCycleScrollView cycleScrollViewWithFrame:frame imageNamesGroup:images];
-    [self.welcomeView addSubview:scroollView];
-    scroollView.autoScrollTimeInterval = 2;
-    scroollView.currentPageDotImage = [UIImage imageNamed:@"welcome_cover_currentPageDotImage"];
-    scroollView.pageDotImage = [UIImage imageNamed:@"welcome_cover_pageDotImage"];
-    scroollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    scroollView.clickItemOperationBlock = ^(NSInteger currentIndex) {
-        [self.view endEditing:YES];
-    };
-    scroollView.itemDidScrollOperationBlock = ^(NSInteger currentIndex) {
-        
-    };
-    
+    scroollView.showPageControl = NO;
+    scroollView.autoScroll = NO;
+    scroollView.autoScrollTimeInterval = 10;
     _cycleScrollView = scroollView;
+    
+    [self.welcomeView addSubview:scroollView];
     [self.view addSubview:self.welcomeView];
     
-//    [self.welcomeView.phoneTextField becomeFirstResponder];
+    _controlView = [[YZHPageControlView alloc] initWithFrame:CGRectMake(0, 33, 33 * 3 + 19 * 2, 10)];
+    _controlView.centerX = self.welcomeView.centerX;
+    _controlView.selectedIndex = 0;
+
+    [self.welcomeView addSubview:_controlView];
+    
+    @weakify(self)
+    self.cycleScrollView.itemDidScrollOperationBlock = ^(NSInteger currentIndex) {
+        @strongify(self)
+        self.controlView.selectedIndex = currentIndex;
+    };
+    self.cycleScrollView.clickItemOperationBlock = ^(NSInteger currentIndex) {
+        @strongify(self)
+        [self.view endEditing:YES];
+    };
+    self.controlView.executeBlock = ^(NSInteger selectedIndex) {
+        @strongify(self)
+       [self.cycleScrollView makeScrollViewScrollToIndex:selectedIndex];
+    };
+    
+    [self.welcomeView.phoneTextField becomeFirstResponder];
 }
 
 - (NSArray*)imagesForBanner{
@@ -131,14 +146,24 @@
                          @"phone":self.welcomeView.phoneTextField.text
                          };
     YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.welcomeView text:nil];
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUPhone params:params successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUPHONE params:params successCompletion:^(id obj) {
         [hud hideWithText:nil];
-        // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
-        [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
-            if (buttonIndex == 1) {
-                [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.welcomeView.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
-            }
-        }];
+        if ([obj isEqualToString:@"621"]) {
+            // 请求后台对手机号做校验 弹出相应框 通过则引导其去登录
+            [YZHAlertManage showAlertTitle:nil message:@"该账号已注册、是否马上去登录" actionButtons:@[@"返回",@"去登录"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    [YZHRouter openURL:kYZHRouterLogin info:@{@"phoneString": self.welcomeView.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
+                }
+            }];
+        } else {
+            // 请求后台对手机号做校验 弹出相应框 通过则引导其去注册
+            [YZHAlertManage showAlertTitle:nil message:@"该账号尚未注册、是否马上去注册" actionButtons:@[@"返回",@"去注册"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES),@"phoneNumberString": self.welcomeView.phoneTextField.text, kYZHRouteBackIndex: @(1)}];
+                }
+            }];
+        }
+
     } failureCompletion:^(NSError *error) {
         
         [hud hideWithText:error.domain];
