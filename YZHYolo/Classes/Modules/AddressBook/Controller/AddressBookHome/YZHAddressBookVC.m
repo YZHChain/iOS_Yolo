@@ -224,7 +224,8 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     }
     CGRect frame = [tableView rectForSection:indexPath.section];
-    [tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:NO];
+    //TODO
+    [tableView setContentOffset:CGPointMake(0, 0) animated:NO];
     
 }
 
@@ -237,7 +238,8 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     } else {
         indexPath = 0;
     }
-    return indexSection;
+    //TODO
+    return 0;
 }
 
 #pragma mark - JKRSearchControllerhResultsUpdating

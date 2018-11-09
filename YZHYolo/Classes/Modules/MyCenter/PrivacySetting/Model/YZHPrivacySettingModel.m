@@ -47,18 +47,16 @@ static id instance;
         }
         YZHPrivacySettingModel* addVerifyModel = [[YZHPrivacySettingModel alloc] init];
         addVerifyModel.title = @"加好友时是否需要验证";
-        if (userSetting.allowAdd) {
+        if (userSetting.addVerift) {
             addVerifyModel.subTitle = @"需验证";
             addVerifyModel.isSelected = YES;
         } else {
             addVerifyModel.subTitle = @"无需验证";
             addVerifyModel.isSelected = NO;
         }
-        addVerifyModel.subTitle = @"无需验证";
-        addVerifyModel.isSelected = NO;
         YZHPrivacySettingModel* phoneAddModel = [[YZHPrivacySettingModel alloc] init];
         phoneAddModel.title = @"是否通过手机号码添加我";
-        if (userSetting.allowAdd) {
+        if (userSetting.allowPhoneAdd) {
             phoneAddModel.subTitle = @"允许";
             phoneAddModel.isSelected = YES;
         } else {

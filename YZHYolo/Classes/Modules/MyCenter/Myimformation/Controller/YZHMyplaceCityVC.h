@@ -8,9 +8,13 @@
 
 #import "YZHBaseViewController.h"
 
+#import "YZHMyinformationMyplaceModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHMyplaceCityVC : YZHBaseViewController
+
+@property (nonatomic, strong) YZHLocationWorldModel* viewModel;
+@property (nonatomic, assign) BOOL isNextSelected;
 
 @end
 

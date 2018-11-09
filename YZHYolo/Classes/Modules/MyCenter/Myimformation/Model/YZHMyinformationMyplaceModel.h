@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YZHUserModelManage.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHLocationCityModel : NSObject
@@ -19,20 +21,33 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHLocationProvinceModel : NSObject
 
 @property(nonatomic, copy)NSString* name;
-@property(nonatomic, strong)NSArray<YZHLocationCityModel* >* citys;
+@property(nonatomic, strong)NSMutableArray<YZHLocationCityModel* >* citys;
 
 @end
 
 @interface YZHLocationCountrieModel : NSObject
 
 @property(nonatomic, copy)NSString* name;
-@property(nonatomic, strong)NSArray<YZHLocationProvinceModel* >* provinces;
+@property(nonatomic, strong)NSMutableArray<YZHLocationProvinceModel* >* provinces;
 
 @end
 
 @interface YZHLocationWorldModel : NSObject
 
-@property(nonatomic, strong)NSArray<YZHLocationCountrieModel* >* countries;
+@property (nonatomic, strong) NSMutableArray<YZHLocationCountrieModel* >* countries;
+@property (nonatomic, strong) NSMutableArray<YZHLocationCountrieModel* >* sortCountries;
+
+@property (nonatomic, assign) NSInteger selectCountry;
+@property (nonatomic, assign) NSInteger selectProvince;
+@property (nonatomic, assign) NSInteger selectCity;
+@property (nonatomic, copy) NSString* complete;
+@property (nonatomic, assign) BOOL isFacilityLocation;
+@property (nonatomic, strong) YZHUserPlaceModel* userPlaceModel;
+@property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
+@property (nonatomic, assign) NSInteger jumpNumber;
+
+- (void)checkoutUserPlaceData;
+- (void)updataUserPlaceData;
 
 @end
 

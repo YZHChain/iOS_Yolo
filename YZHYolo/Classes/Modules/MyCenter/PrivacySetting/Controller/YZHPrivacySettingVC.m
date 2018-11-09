@@ -15,7 +15,10 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHPrivacySettingContent* viewModel;
-@property (nonatomic, assign) NSTimeInterval lastClickTimer;
+@property (nonatomic, assign) NSTimeInterval timerInterval;
+@property (nonatomic, strong) NSDate* lastDate;
+@property (nonatomic, assign) BOOL hasLastClick;
+@property (nonatomic, assign) BOOL executeDelayUpdate;
 
 @end
 
@@ -143,14 +146,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 0) {
-        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
-        model.isSelected = !model.isSelected;
-        [self.tableView reloadData];
-        [self updateUserPrivacySetting];
-    } else {
-        
-    }
 //    double timerInterval = 0;
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    [dateFormatter setDateFormat:@"HH:mm"];
@@ -164,18 +159,62 @@
 }
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.row == 0) {
-        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+        model.isSelected = !model.isSelected;
+        [self.tableView reloadData];
     }
-    
+    if (!self.lastDate) {
+        self.lastDate = [NSDate date];
+        NSLog(@"无上一次点击事件记录,直接执行");
+        [self updateUserPrivacySetting];
+    } else {
+        NSDate *end = [NSDate date];
+        NSTimeInterval clickTimerInterval = [end timeIntervalSinceDate:self.lastDate];
+        //计算点击间隔.如果数据连续点击,并且间隔在 5S 之内,则只会执行其最后一次操作.防止重复请求后台.
+        if (clickTimerInterval <= 5.000000) {
+            // 更新最后一次点击时间
+            self.lastDate = [NSDate date];
+            // 处理连续点击事件,最终只更新最后一次数据
+            [self executeDelayUpdateLogic];
+        } else {
+           // 更新
+           _lastDate = nil;
+           NSLog(@"时间间隔超过5S,执行有效更新");
+           [self updateUserPrivacySetting];
+        }
+    }
 }
 
 #pragma mark - 5.Event Response
 
+// 处理延迟更新逻辑
+- (void)executeDelayUpdateLogic {
+    
+    if (self.executeDelayUpdate) {
+        //修改 Flag. 直到真正执行成功之后才算.
+        self.executeDelayUpdate = NO;
+        //延迟执行
+        [self performSelector:@selector(delayUpdateUserPrivacySetting) withObject:nil afterDelay:0.10000];
+    } else {
+        //取消掉上一次
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayUpdateUserPrivacySetting) object:nil];
+        //执行最后一次.
+        [self performSelector:@selector(delayUpdateUserPrivacySetting) withObject:nil afterDelay:0.10000];
+    }
+}
+
+// 执行延迟更新
+- (void)delayUpdateUserPrivacySetting {
+    NSLog(@"成功执行一次延后更新");
+    //执行更新,修改标志.
+    self.executeDelayUpdate = YES;
+    
+    [self updateUserPrivacySetting];
+}
+
 - (void)updateUserPrivacySetting {
     
-    //时间间隔.
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     YZHUserPrivateSettingModel* userSetting = userInfoExt.privateSetting;
     YZHPrivacySettingModel* addFirendModel = self.viewModel.content[0];
@@ -186,11 +225,16 @@
     userSetting.addVerift = addVerifyModel.isSelected;
     
     NSString* userInfoExtString = [userInfoExt userInfoExtString];
-    
+    static NSInteger number = 0;
     [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{
                                                        @(NIMUserInfoUpdateTagExt): userInfoExtString
                                                        } completion:^(NSError * _Nullable error) {
-                                                           
+                                                           if (!error) {
+                                                               NSLog(@"成功");
+                                                               NSLog(@"修改成功%ld", number);
+                                                           } else {
+                                                               NSLog(@"修改失败%ld", number);
+                                                           }
                                                        }];
 }
 

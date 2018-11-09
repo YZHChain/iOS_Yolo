@@ -35,6 +35,11 @@
 
 @end
 
+@implementation YZHUserPrivateSettingModel
+
+
+@end
+
 @implementation YZHUserInfoExtManage
 
 //- (instancetype)init {
@@ -62,7 +67,8 @@
 + (NSDictionary *)YZH_replacedKeyFromPropertyName {
     
     return @{
-             @"place": @"area"
+             @"place": @"area",
+             @"privateSetting": @"privacySetting"
              };
 }
 

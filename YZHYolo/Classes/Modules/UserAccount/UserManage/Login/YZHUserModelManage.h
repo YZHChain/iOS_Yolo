@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger selectProvince;
 @property (nonatomic, assign) NSInteger selectCountry;
 @property (nonatomic, copy) NSString* complete;
+@property (nonatomic, assign) BOOL isFacilityLocation;
 
 @end
 
@@ -45,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL allowAdd;
 @property (nonatomic, assign) BOOL addVerift;
 @property (nonatomic, assign) BOOL allowPhoneAdd;
-@property (nonatomic, strong) NSString* groupPassword;
+@property (nonatomic, copy) NSString* groupPassword;
 
 @end
 
@@ -55,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<YZHUserCustomTagsModel* > *customTags;
 @property (nonatomic, strong) NSArray<YZHUserGroupTagsModel* > *groupTags;
 @property (nonatomic, strong) YZHUserYoloModel* userYolo;
-@property (nonatomic, strong) NSString* qrCode;
+@property (nonatomic, copy) NSString* qrCode;
 @property (nonatomic, strong) YZHUserPrivateSettingModel* privateSetting;
 
 + (instancetype)currentUserInfoExt;

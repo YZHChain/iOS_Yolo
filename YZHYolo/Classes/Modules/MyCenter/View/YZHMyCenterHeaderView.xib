@@ -28,9 +28,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-iv-AN8">
-                    <rect key="frame" x="109" y="74" width="45" height="15"/>
+                    <rect key="frame" x="109" y="74" width="45" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="Ymh-6e-hvO"/>
+                        <constraint firstAttribute="height" constant="18" id="Ymh-6e-hvO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,6 +40,7 @@
                     <rect key="frame" x="109" y="113" width="50" height="12"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="6bZ-8k-L5v"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="X4q-1J-n6W"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,6 +49,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOLO ID：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3A-UM-oPB">
                     <rect key="frame" x="109" y="97" width="48" height="12"/>
                     <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="8Ja-OA-Lsk"/>
                         <constraint firstAttribute="height" constant="12" id="Re9-7M-Qt9"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="10"/>
@@ -81,10 +83,12 @@
             <color key="backgroundColor" red="0.0039215686274509803" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="vaJ-1J-ZmB" secondAttribute="bottom" constant="50" id="0ia-8m-ZRH"/>
+                <constraint firstItem="ZOb-2f-vyb" firstAttribute="top" relation="lessThanOrEqual" secondItem="J3A-UM-oPB" secondAttribute="bottom" constant="4" id="4jd-j6-Nqz"/>
                 <constraint firstAttribute="trailing" secondItem="Anp-ex-N3Q" secondAttribute="trailing" id="5VO-Cx-Fca"/>
                 <constraint firstItem="jPY-iv-AN8" firstAttribute="leading" secondItem="FZy-27-BLj" secondAttribute="trailing" constant="12" id="5kC-aZ-zJF"/>
                 <constraint firstItem="Anp-ex-N3Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Vi-fv-tpY"/>
                 <constraint firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="41" id="CHF-B2-inV"/>
+                <constraint firstItem="J3A-UM-oPB" firstAttribute="top" secondItem="jPY-iv-AN8" secondAttribute="bottom" constant="5" id="DNz-45-nnK"/>
                 <constraint firstItem="jPY-iv-AN8" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" constant="8" id="JfV-I6-HLN"/>
                 <constraint firstItem="J3A-UM-oPB" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="KAA-WU-sEn"/>
                 <constraint firstItem="Anp-ex-N3Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TTi-Rt-BwR"/>
@@ -93,7 +97,6 @@
                 <constraint firstItem="ZOb-2f-vyb" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="iCS-ru-WxU"/>
                 <constraint firstAttribute="trailing" secondItem="vaJ-1J-ZmB" secondAttribute="trailing" constant="25" id="ifR-cP-fdS"/>
                 <constraint firstAttribute="bottom" secondItem="Fuq-rW-hrF" secondAttribute="bottom" constant="59" id="rLb-3d-Pyh"/>
-                <constraint firstItem="ZOb-2f-vyb" firstAttribute="top" secondItem="J3A-UM-oPB" secondAttribute="bottom" constant="4" id="t3t-0T-zf1"/>
                 <constraint firstAttribute="bottom" secondItem="Anp-ex-N3Q" secondAttribute="bottom" id="t9P-6H-3wm"/>
                 <constraint firstAttribute="trailing" secondItem="Fuq-rW-hrF" secondAttribute="trailing" constant="34" id="wK8-xi-7Bf"/>
             </constraints>

@@ -10,13 +10,15 @@
 
 #import "YZHMyinformationMyplaceModel.h"
 #import "YZHMyInformationMyPlaceCell.h"
+#import "YZHUserModelManage.h"
+#import "YZHProgressHUD.h"
 
 static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentifier";
 @interface YZHMyplaceCityVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) YZHLocationCountrieModel* countriesArray;
-@property (nonatomic, strong) YZHLocationProvinceModel* provincesArray;
+@property (nonatomic, strong) YZHLocationCountrieModel* countriesModel;
+@property (nonatomic, strong) YZHLocationProvinceModel* provincesModel;
 @property (nonatomic, strong) YZHMyInformationMyPlaceCell* lastSelectedCell;
 @property (nonatomic, assign) NSInteger selectedRow;
 @property (nonatomic, strong) NSMutableDictionary* nextLocationDic;
@@ -95,7 +97,7 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return self.countriesArray.provinces.count ? self.countriesArray.provinces.count :  self.provincesArray.citys.count;
+    return self.countriesModel.provinces.count ? self.countriesModel.provinces.count :  self.provincesModel.citys.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -107,13 +109,13 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
     // TODO:尽量提取
     NSString* countrieName;
     BOOL hasNextLocation = NO;
-    if (self.countriesArray.provinces.count) {
-        countrieName = self.countriesArray.provinces[indexPath.row].name;
-        if (self.countriesArray.provinces[indexPath.row].citys.count > 0) {
+    if (self.countriesModel.provinces.count) {
+        countrieName = self.countriesModel.provinces[indexPath.row].name;
+        if (self.countriesModel.provinces[indexPath.row].citys.count > 0) {
             hasNextLocation = YES;
         }
     } else {
-        countrieName = self.provincesArray.citys[indexPath.row].name;
+        countrieName = self.provincesModel.citys[indexPath.row].name;
     }
     if (hasNextLocation) {
         cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
@@ -150,18 +152,21 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    //TODO:优化
     BOOL hasNextLocation = [[self.nextLocationDic objectForKey:indexPath] boolValue];
-    
+    NSInteger selectedRow = indexPath.row;
+    self.viewModel.isFacilityLocation = NO;
     if (hasNextLocation) {
-        
-        YZHLocationProvinceModel* model = self.countriesArray.provinces[indexPath.row];
-        [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesArray": model}];
-        
+        self.viewModel.selectProvince = selectedRow;
+        YZHLocationProvinceModel* model = self.countriesModel.provinces[selectedRow];
+        [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesModel": model, @"viewModel": self.viewModel}];
     } else {
         self.selectedRow = indexPath.row;
+        if (self.provincesModel.citys.count) {
+        self.viewModel.selectCity = self.selectedRow;
         [self.tableView reloadData];
         self.navigationItem.rightBarButtonItem.enabled = YES;
+        }
     }
 }
 
@@ -169,13 +174,23 @@ static NSString* const kCountriesCellIdentifier =  @"selectedLocationCellIdentif
 
 - (void)saveSetting{
     
-    NSInteger backindex;
-    if (self.countriesArray) {
-        backindex = 2;
-    } else {
-        backindex = 3;
-    }
-    [YZHRouter openURL:kYZHRouterMyInformation info:@{kYZHRouteAnimated: @(NO), kYZHRouteBackIndex: @(backindex)}];
+    [self.viewModel updataUserPlaceData];
+    
+
+    NSString* usrInfoExtString = [self.viewModel.userInfoExt userInfoExtString];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{
+                                                       @(NIMUserInfoUpdateTagExt):usrInfoExtString
+                                                       } completion:^(NSError * _Nullable error) {
+                                                           if (!error) {
+                                                               [hud hideWithText:nil];
+                                                                   [YZHRouter openURL:kYZHRouterMyInformation info:@{kYZHRouteAnimated: @(NO), kYZHRouteBackIndex: kYZHRouteIndexRoot}];
+                                                           } else {
+                                                               [hud hideWithText:error.domain];
+                                                           }
+                                                       }];
+
+    
 
 }
 

@@ -11,6 +11,8 @@
 #import "YZHMyInformationMyPlaceCell.h"
 #import "YZHLocationManager.h"
 #import "YZHMyinformationMyplaceModel.h"
+#import "YZHUserModelManage.h"
+#import "YZHProgressHUD.h"
 
 typedef enum : NSUInteger {
     YZHSelectMyPlaceTypeCountries = 0,
@@ -28,7 +30,10 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) YZHMyInformationMyPlaceCell* lastSelectedCell;
 @property (nonatomic, strong) YZHMyInformationMyPlaceCell* locationCell;
 @property (nonatomic, strong) NSMutableDictionary* nextLocationDic;
-@property (nonatomic, assign) NSInteger selectedRow;
+@property (nonatomic, strong) NSIndexPath* selectedIndexPath;
+@property (nonatomic, strong) YZHUserPlaceModel* userPlaceModel;
+@property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
+@property (nonatomic, assign) BOOL readLocationSucceed;//
 
 @end
 
@@ -43,8 +48,6 @@ typedef enum : NSUInteger {
     [self setupNavBar];
     //2.设置view
     [self setupView];
-    //3.请求数据
-//    [self setupData];
     //4.设置通知
     [self setupNotification];
     
@@ -58,14 +61,16 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    //TODO: 第二版本.
-    self.currentType = YZHSelectMyPlaceTypeCountries;
     self.selectedProvinceIndex = 0;
     self.selectedCountrieIndex = 0;
-    self.selectedRow = NSIntegerMax;
-    NSLog(@"当前选择%ld", self.selectedRow);
-    //3.请求数据
-    [self setupData];
+    self.selectedIndexPath = [NSIndexPath indexPathForRow:1000 inSection:1000];
+    //如数据为空则
+    if (self.viewModel) {
+        [self.tableView reloadData];
+    } else {
+        [self setupData];
+    }
+    
 }
 
 #pragma mark - 2.SettingView and Style
@@ -92,14 +97,17 @@ typedef enum : NSUInteger {
     YZHLocationManager* manager = [YZHLocationManager shareManager];
     [manager getLocationWithSucceed:^{
         self.locationCell.positioningResultLabel.text = manager.currentLocation;
+        self.readLocationSucceed = YES;
     } faildBlock:^{
-        self.locationCell.positioningResultLabel.text = @"无法获取定位....";
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.locationCell.positioningResultLabel.text = @"无法获取定位....";
+            self.readLocationSucceed = NO;
+        });
     }];
 }
 
 - (void)reloadView
 {
-    
 }
 
 #pragma mark - 3.Request Data
@@ -113,9 +121,12 @@ typedef enum : NSUInteger {
         NSError *error = nil;
         id result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
         self.viewModel = [YZHLocationWorldModel YZH_objectWithKeyValues:result];
+        //重新排序;
+        [self.viewModel checkoutUserPlaceData];
     } else {
         self.viewModel = nil;
     }
+    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -126,12 +137,10 @@ typedef enum : NSUInteger {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    //TODO: 暂时预留两个版本
     if (section == 0) {
         return 1;
     } else {
-        return self.viewModel.countries.count;
+        return self.viewModel.sortCountries.count;
     }
 }
 
@@ -140,15 +149,21 @@ typedef enum : NSUInteger {
     YZHMyInformationMyPlaceCell* cell;
     cell = [YZHMyInformationMyPlaceCell tempTableViewCellWith:tableView indexPath:indexPath];
     if (indexPath.section == 0) {
+        if (self.readLocationSucceed && [self.selectedIndexPath isEqual:indexPath]) {
+            
+            cell.selectStatusLabel.text = @"当前选择";
+          
+            } else {
+                cell.selectStatusLabel.text = @"";
+            }
         self.locationCell = cell;
     }
-    
     if (indexPath.section == 1) {
         NSString* countrieName;
         BOOL hasNextLocation = NO;
         if (_currentType == 0) {
-            countrieName = self.viewModel.countries[indexPath.row].name;
-            if (self.viewModel.countries[indexPath.row].provinces.count > 0) {
+            countrieName = self.viewModel.sortCountries[indexPath.row].name;
+            if (self.viewModel.sortCountries[indexPath.row].provinces.count > 0) {
                 hasNextLocation = YES;
             }
         }
@@ -159,7 +174,7 @@ typedef enum : NSUInteger {
             cell.guideImageView.image = nil;
         }
         [self.nextLocationDic setObject:@(hasNextLocation) forKey:indexPath];
-        if (self.selectedRow == indexPath.row) {
+        if (self.selectedIndexPath == indexPath) {
             cell.selectStatusLabel.text = @"当前选择";
         } else {
             cell.selectStatusLabel.text = @"";
@@ -207,23 +222,88 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    YZHMyInformationMyPlaceCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        if (self.readLocationSucceed) {
+            self.selectedIndexPath = indexPath;
+            self.viewModel.selectCountry = 0;
+            self.viewModel.selectProvince = 0;
+            self.viewModel.selectCity = 0;
+            self.viewModel.isFacilityLocation = YES;
+            self.viewModel.complete = self.locationCell.positioningResultLabel.text;
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+            [tableView reloadData];
+        }
+    }
+    //TODO可以直接通过校验数组方式来判断,去掉字典缓存的方式.
     BOOL hasNextLocation = [[self.nextLocationDic objectForKey:indexPath] boolValue];
     if (indexPath.section == 1) {
         if (hasNextLocation) {
             self.selectedCountrieIndex = indexPath.row;
             // 先检查当前国家下是否存在省份,如果不存在则直接到具体城市
-            BOOL hasProvinces = self.viewModel.countries[self.selectedCountrieIndex].provinces.firstObject.name.length ? YES : NO;
+            BOOL hasProvinces = self.viewModel.sortCountries[self.selectedCountrieIndex].provinces.count > 1 ? YES : NO;
             if (hasProvinces) {
-                YZHLocationCountrieModel* model = self.viewModel.countries[self.selectedCountrieIndex];
-                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"countriesArray": model}];
+                //有省份可选择
+                if (self.selectedCountrieIndex > self.viewModel.userPlaceModel.selectCountry) {
+                    //暂时标记保存,
+                    self.viewModel.selectCountry = self.selectedCountrieIndex;
+                } else if (self.selectedCountrieIndex == 0) {
+                    //取原来的索引
+                    self.viewModel.selectCountry = self.viewModel.userPlaceModel.selectCountry;
+                } else {
+                    //由于重新排序过,所以其向下偏移一位.需要减去否则其并不是真正的索引.
+                    self.viewModel.selectCountry = self.selectedCountrieIndex - 1;
+                }
+                //保存标记
+                self.viewModel.userPlaceModel.selectCountry = self.selectedCountrieIndex;
+                //真正使用到的 Model 则是通过重新排序过的 ViewModel 并且使用当前列表所选择索引来找到.
+                YZHLocationCountrieModel* model = self.viewModel.sortCountries[self.selectedCountrieIndex];
+                self.navigationItem.rightBarButtonItem.enabled = NO;
+
+                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"countriesModel": model, @"viewModel": self.viewModel}];
             } else {
+                // 无省份选择则默认读取第一个,去选择城市
                 self.selectedProvinceIndex = 0;
-                YZHLocationProvinceModel* model = self.viewModel.countries[self.selectedCountrieIndex].provinces[self.selectedProvinceIndex];
-                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesArray": model}];
+                if (self.selectedCountrieIndex > self.viewModel.userPlaceModel.selectCountry) {
+                    //暂时标记保存,
+                    self.viewModel.selectCountry = self.selectedCountrieIndex;
+                } else if (self.selectedCountrieIndex == 0) {
+                    //取原来的索引
+                    self.viewModel.selectCountry = self.viewModel.userPlaceModel.selectCountry;
+                } else {
+                    //由于重新排序过,所以其向下偏移一位.需要减去否则其并不是真正的索引.
+                    self.viewModel.selectCountry = self.selectedCountrieIndex - 1;
+                }
+                self.viewModel.selectProvince = self.selectedProvinceIndex;
+                //真正使用到的 Model 则是通过重新排序过的 ViewModel 并且使用当前列表所选择索引来找到.
+                YZHLocationProvinceModel* model = self.viewModel.sortCountries[self.selectedCountrieIndex].provinces[self.selectedProvinceIndex];
+                self.navigationItem.rightBarButtonItem.enabled = NO;
+                [YZHRouter openURL:kYZHRouterMyPlaceCity info:@{@"provincesModel": model, @"viewModel": self.viewModel}];
             }
         } else {
-            self.selectedRow = indexPath.row;
+            //只有国家
+            self.selectedIndexPath = indexPath;
+            self.selectedCountrieIndex = indexPath.row;
+            //针对有做过选择的位置的,如果选择为第一个则
+            if (YZHIsString(self.viewModel.userPlaceModel.complete) && !self.viewModel.userPlaceModel.isFacilityLocation) {
+                if (self.selectedCountrieIndex == 0) {
+                    
+                }
+            }
+            if (self.selectedCountrieIndex > self.viewModel.userPlaceModel.selectCountry) {
+                //暂时标记保存,
+                self.viewModel.selectCountry = self.selectedCountrieIndex;
+            } else if (self.selectedCountrieIndex == 0) {
+                //取原来的索引
+                self.viewModel.selectCountry = self.viewModel.userPlaceModel.selectCountry;
+            } else {
+                //由于重新排序过,所以其向下偏移一位.需要减去否则其并不是真正的索引.
+                self.viewModel.selectCountry = self.selectedCountrieIndex - 1;
+            }
+            //标记当前选择的位置.
+            self.viewModel.selectProvince = 0;
+            self.viewModel.selectCity = 0;
+            self.viewModel.isFacilityLocation = NO;
+            self.viewModel.complete = self.viewModel.countries[self.viewModel.selectCountry].name;
             [self.tableView reloadData];
             self.navigationItem.rightBarButtonItem.enabled = YES;
         }
@@ -234,8 +314,22 @@ typedef enum : NSUInteger {
 #pragma mark - 5.Event Response
 
 - (void)saveSetting{
-    
-    [self.navigationController popViewControllerAnimated:YES];
+
+    //将数据保存到 UserInfoExt 里面;
+    [self.viewModel updataUserPlaceData];
+    NSString* usrInfoExtString = [self.viewModel.userInfoExt userInfoExtString];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{
+                                                       @(NIMUserInfoUpdateTagExt): usrInfoExtString
+                                                       } completion:^(NSError * _Nullable error) {
+                                                           if (!error) {
+                                                               [hud hideWithText: nil];
+                                                                   [self.navigationController popViewControllerAnimated:YES];
+                                                           } else {
+                                                               [hud hideWithText: error.domain];
+                                                           }
+                                                       }];
+
 }
 
 #pragma mark - 6.Private Methods
@@ -267,6 +361,22 @@ typedef enum : NSUInteger {
         _nextLocationDic = [[NSMutableDictionary alloc] init];
     }
     return _nextLocationDic;
+}
+
+- (YZHUserInfoExtManage *)userInfoExt {
+    
+    if (!_userInfoExt) {
+        _userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    }
+    return _userInfoExt;
+}
+
+- (YZHUserPlaceModel *)userPlaceModel {
+    
+    if (!_userPlaceModel) {
+        _userPlaceModel = self.userInfoExt.place;
+    }
+    return _userPlaceModel;
 }
 
 @end

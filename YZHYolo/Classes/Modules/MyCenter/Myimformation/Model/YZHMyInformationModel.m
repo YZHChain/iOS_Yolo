@@ -52,7 +52,11 @@
         NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
         YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
         NSString* yoloID = userInfoExt.userYolo.yoloID;
-        NSString* myPlace = userInfoExt.place.complete;
+        NSInteger yoloCellType = 2;
+        if (userInfoExt.userYolo.hasSetting) {
+            yoloCellType = 0;
+        }
+        NSString* myPlace = userInfoExt.place.complete ? userInfoExt.place.complete : @"";
         
         NSArray* list = @[
                           @{@"content": @[@{
@@ -81,7 +85,7 @@
                                               @"subtitle":yoloID,
                                               @"image":@"",
                                               @"route":kYZHRouterMyInformationYoloID,
-                                              @"cellType" :@"2",
+                                              @"cellType" :@(yoloCellType),
                                               }]},
                           @{@"content": @[@{
                                               @"title":@"性别",
@@ -117,11 +121,16 @@
     NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     NSString* yoloID = userInfoExt.userYolo.yoloID;
+    NSInteger yoloCellType = 2;
+    if (userInfoExt.userYolo.hasSetting) {
+        yoloCellType = 0;
+    }
     NSString* myPlace = userInfoExt.place.complete;
     //TODO:
     self.list[1].content[0].image = avatarUrl;
     self.list[2].content[0].subtitle = nickName;
     self.list[2].content[1].subtitle = yoloID;
+    self.list[2].content[1].cellType = yoloCellType;
     self.list[3].content[0].subtitle = gender;
     self.list[3].content[0].image    = genderImageName;
     self.list[3].content[1].subtitle = myPlace;

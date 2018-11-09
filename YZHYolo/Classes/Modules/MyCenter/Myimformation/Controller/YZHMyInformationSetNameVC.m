@@ -64,6 +64,8 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    [self.nickNameTextField becomeFirstResponder];
 }
 
 - (void)reloadView

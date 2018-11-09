@@ -64,10 +64,6 @@
 // 根据用户名首字母排序
 - (void)sortWithUserName {
     
-    _contactList = [[NSMutableArray alloc] init];
-    for (NIMUser* user in _myFirends) {
-        
-    }
     
 }
 

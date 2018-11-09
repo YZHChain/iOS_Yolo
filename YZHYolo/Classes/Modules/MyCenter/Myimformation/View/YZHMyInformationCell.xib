@@ -105,7 +105,7 @@
                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYl-QA-k5q">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYl-QA-k5q">
                         <rect key="frame" x="232" y="8.5" width="45" height="43"/>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,6 +122,7 @@
                 <constraints>
                     <constraint firstItem="gYl-QA-k5q" firstAttribute="centerY" secondItem="XmU-nE-HlQ" secondAttribute="centerY" id="Cws-8V-BM0"/>
                     <constraint firstItem="rBd-ph-oha" firstAttribute="centerY" secondItem="XmU-nE-HlQ" secondAttribute="centerY" id="IVF-ii-aQn"/>
+                    <constraint firstItem="gYl-QA-k5q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rwN-mk-U4a" secondAttribute="trailing" constant="5" id="Np6-Hz-BVj"/>
                     <constraint firstItem="rwN-mk-U4a" firstAttribute="centerY" secondItem="XmU-nE-HlQ" secondAttribute="centerY" id="RNa-A5-ctM"/>
                     <constraint firstAttribute="trailing" secondItem="rBd-ph-oha" secondAttribute="trailing" constant="16" id="b0h-92-NpA"/>
                     <constraint firstItem="rBd-ph-oha" firstAttribute="leading" secondItem="gYl-QA-k5q" secondAttribute="trailing" constant="18" id="m9L-1c-XD4"/>
