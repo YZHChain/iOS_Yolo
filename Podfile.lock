@@ -47,6 +47,7 @@ PODS:
   - ObjcAssociatedObjectHelpers/Core (2.0.1)
   - "ObjcAssociatedObjectHelpers/NSObject+Dictionary (2.0.1)":
     - ObjcAssociatedObjectHelpers/Core
+  - PPGetAddressBook (0.2.8)
   - PYSearch (0.9.0)
   - Reachability (3.2)
   - SCIndexView (2.1.1)
@@ -79,6 +80,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - NIMSDK_LITE
+  - PPGetAddressBook (from `https://github.com/jkpang/PPGetAddressBook.git`)
   - PYSearch
   - Reachability (~> 3.2)
   - SCIndexView
@@ -122,6 +124,15 @@ SPEC REPOS:
     - ZXingObjC
     - ZYCornerRadius
 
+EXTERNAL SOURCES:
+  PPGetAddressBook:
+    :git: https://github.com/jkpang/PPGetAddressBook.git
+
+CHECKOUT OPTIONS:
+  PPGetAddressBook:
+    :commit: ed620972b46ed71916294c9cebc2c0dad7fa82f5
+    :git: https://github.com/jkpang/PPGetAddressBook.git
+
 SPEC CHECKSUMS:
   AFNetworking: 932ff751f9d6fb1dad0b3af58b7e3ffba0a4e7fd
   "AFNetworking+RetryPolicy": 3c0e09e525b8bc74ec788e337b12ea97d952ef10
@@ -136,6 +147,7 @@ SPEC CHECKSUMS:
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   NIMSDK_LITE: fdf7216c84c2c3f0aa662ddf6c78728726845fd8
   ObjcAssociatedObjectHelpers: 686c291f292c26a49b9b1fa7d58130a8d35d59d2
+  PPGetAddressBook: e4b6b0a87e852df5d5b90c44ecd9ded7f6f1ccf6
   PYSearch: 55175e6046e2e1b5236a90c780351988e914a015
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SCIndexView: b68cded2054ddf3000cdaa56f17627dfb1041c78
@@ -150,6 +162,6 @@ SPEC CHECKSUMS:
   ZXingObjC: 4ed7bbb878b2cff73b3c02f6f87be9baf65097ef
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 47889d162dd0fe385e21ade328c4a01add7164c6
+PODFILE CHECKSUM: 43f1eb80f2c048b4b71c6fab087b83e4b6fe1cbd
 
 COCOAPODS: 1.5.3

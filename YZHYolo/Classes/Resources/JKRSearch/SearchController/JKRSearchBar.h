@@ -19,6 +19,7 @@ extern JKRNotificationName * const UISearchBarCancelNotification;
 - (void)searchBarTextDidBeginEditing:(JKRSearchBar *)searchBar;
 - (void)searchBarTextDidEndEditing:(JKRSearchBar *)searchBar;
 - (void)searchBar:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText;
+- (void)searchBarTextFieldShouldReturn:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText;
 
 @end
 

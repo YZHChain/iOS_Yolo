@@ -267,10 +267,11 @@
         NIMMessage *tip = [YZHSessionMsgConverter msgWithTip:@"消息已发送，但对方拒收"];
         [[NIMSDK sharedSDK].conversationManager saveMessage:tip forSession:self.session completion:nil];
     }
+    //TODO: 需要区别临时聊天
     if (self.requstAddFirendFlag == NO) {
         if (message.session.sessionType == NIMSessionTypeP2P) {
             NSString* fromAccount = message.session.sessionId;
-            if ([[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+            if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
                 //私聊则检测双发是否为好友状态
                 YZHAddFirendAttachment* addFirendAttachment = [[YZHAddFirendAttachment alloc] init];
                 addFirendAttachment.addFirendTitle = @"您不是对方的好友，请先添加为好友";

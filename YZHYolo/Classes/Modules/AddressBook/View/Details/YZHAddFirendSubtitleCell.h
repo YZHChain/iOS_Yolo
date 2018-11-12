@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAddBookDetailsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddFirendSubtitleCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
+
+@property (nonatomic, strong) YZHAddBookDetailModel* model;
 
 @end
 

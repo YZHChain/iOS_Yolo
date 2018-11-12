@@ -10,12 +10,17 @@
 
 #import "YZHAddBookAddFirendCell.h"
 #import "YZHAddBookFirendModel.h"
+#import "JKRSearchController.h"
+#import "YZHAddFirendSearchVC.h"
+#import "YZHPublic.h"
 
 static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
-@interface YZHAddBookAddFirendVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHAddBookAddFirendVC ()<UITableViewDelegate, UITableViewDataSource, JKRSearchControllerhResultsUpdating, JKRSearchControllerDelegate, JKRSearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHFirendContentModel* model;
+@property (nonatomic, strong) JKRSearchController* searchController;
+@property (nonatomic, weak) YZHAddFirendSearchVC* searchResultVC;
 
 @end
 
@@ -58,7 +63,9 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     [self.tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAddFirendCell" bundle:nil] forCellReuseIdentifier:kaddFirendCellIdentifier];
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-    self.tableView.rowHeight = 51;
+    self.tableView.rowHeight = kYZHCellHeight;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
 }
 
 #pragma mark - 3.Request Data
@@ -139,6 +146,58 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     
 }
 
+#pragma mark - JKRSearchControllerhResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(JKRSearchController *)searchController {
+    NSString *searchText = searchController.searchBar.text;
+    if (YZHIsString(searchText)) {
+        
+    } else {
+        self.searchResultVC.searchStatus = YZHAddFirendSearchStatusNotImput;
+        [self.searchResultVC.tableView reloadData];
+    }
+}
+
+#pragma mark - JKRSearchControllerDelegate
+- (void)willPresentSearchController:(JKRSearchController *)searchController {
+    
+    self.searchResultVC.searchStatus = YZHAddFirendSearchStatusNotImput;
+    [self.searchResultVC.tableView reloadData];
+}
+
+- (void)didPresentSearchController:(JKRSearchController *)searchController {
+    NSLog(@"didPresentSearchController, %@", searchController);
+}
+
+#pragma mark - JKRSearchBarDelegate
+// 点击搜索时。
+- (void)searchBarTextFieldShouldReturn:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (YZHIsString(searchText)) {
+        NSDictionary* dic = @{
+                              @"searchUser": searchText
+                              };
+        YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.searchResultVC.tableView text:nil];
+        @weakify(self)
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(id obj) {
+            @strongify(self)
+            if (obj) {
+                self.searchResultVC.viewModel = [YZHAddFirendSearchModel YZH_objectWithKeyValues:obj];
+                self.searchResultVC.searchStatus = YZHAddFirendSearchStatusSucceed;
+            } else {
+                self.searchResultVC.searchStatus = YZHAddFirendSearchStatusEmpty;
+            }
+            [self.searchResultVC.tableView reloadData];
+            [hud hideWithText:nil];
+        } failureCompletion:^(NSError *error) {
+            //相关状态展示
+            [hud hideWithText:error.domain];
+            
+        }];
+    }
+    
+}
+
 #pragma mark - 7.GET & SET
 
 - (YZHFirendContentModel *)model {
@@ -147,6 +206,22 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
         _model = [[YZHFirendContentModel alloc] init];
     }
     return _model;
+}
+
+- (JKRSearchController *)searchController {
+    
+    if (!_searchController) {
+        YZHAddFirendSearchVC* addFirendSearchVC = [[YZHAddFirendSearchVC alloc] init];
+        _searchResultVC = addFirendSearchVC;
+        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:addFirendSearchVC];
+        _searchController.searchBar.placeholder = @"搜索 YOLO ID,手机号";
+        _searchController.hidesNavigationBarDuringPresentation = YES;
+        // 代理方法都是设计业务, 可以单独抽取出来.
+        _searchController.searchResultsUpdater = self;
+        _searchController.searchBar.delegate = self;
+        _searchController.delegate = self;
+    }
+    return _searchController;
 }
 
 @end

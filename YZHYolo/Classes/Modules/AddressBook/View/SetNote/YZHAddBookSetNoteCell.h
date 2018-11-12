@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAddBookDetailsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    YZHAddBookSetNoteCellNoteNameType = 0,
-    YZHAddBookSetNoteCellPhoneType,           // Xib 将此类型Cell 交互关闭
-    YZHAddBookSetNoteCellCategoryTagType,
+    YZHAddBookSetNoteCellTypeNoteName = 0,
+    YZHAddBookSetNoteCellTypePhone,
+    YZHAddBookSetNoteCellTypeCategoryTag,
 } YZHAddBookSetNoteCellType;
 
 @interface YZHAddBookSetNoteCell : UITableViewCell
@@ -22,8 +23,10 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 @property (weak, nonatomic) IBOutlet UITextField *subtitleTextField;
+@property (nonatomic, assign) YZHAddBookSetNoteCellType cellType;
+@property (nonatomic, strong) YZHAddBookDetailModel* model;
 
-+ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(YZHAddBookSetNoteCellType)cellType;
++ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 
 @end
 

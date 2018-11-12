@@ -29,6 +29,7 @@ target 'YZHYolo' do
   pod 'PYSearch'                    #搜索视图
   pod 'ZYCornerRadius', '~> 1.0.2'  #圆角
   pod 'ZXingObjC', '~> 3.6.1'       #二维码相关
+  pod 'PPGetAddressBook',:git => 'https://github.com/jkpang/PPGetAddressBook.git' #通讯录
 
   #网络
   pod 'AFNetworking', '3.0'

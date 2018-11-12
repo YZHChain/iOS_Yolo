@@ -48,7 +48,6 @@
 - (void)setupSplashScreen{
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
 }
 
 #pragma mark -- Start
@@ -56,7 +55,7 @@
 - (void)startConfign{
     
     UIViewController* rootViewController;
-    if (![self detectionApplicationStatus]) {
+    if ([self detectionApplicationStatus]) {
         // 引导页
         YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
         YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];

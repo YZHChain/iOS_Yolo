@@ -11,10 +11,14 @@
 #import "YZHAddBookSetNoteCell.h"
 #import "YZHAddBookSetTagVC.h"
 #import "YZHBaseNavigationController.h"
+#import "YZHProgressHUD.h"
 
 @interface YZHAddBookSetNoteVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) YZHAddBookSetNoteCell* noteCell;
+@property (nonatomic, strong) YZHAddBookSetNoteCell* phoneCell;
+@property (nonatomic, strong) YZHAddBookSetNoteCell* tagCell;
 
 @end
 
@@ -59,7 +63,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
-//    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.rowHeight = 55;
     
 }
@@ -93,19 +97,22 @@
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    YZHAddBookSetNoteCellType cellType;
+    YZHAddBookSetNoteCell* cell = [YZHAddBookSetNoteCell tempTableViewCellWith:tableView indexPath:indexPath];
+    YZHAddBookDetailModel* viewModel;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            cellType = YZHAddBookSetNoteCellNoteNameType;
+            viewModel = self.noteModel.firstObject;
+            self.noteCell = cell;
         } else {
-            cellType = YZHAddBookSetNoteCellPhoneType;
+            viewModel = self.noteModel.lastObject;
+            self.phoneCell = cell;
         }
     } else {
-        cellType = YZHAddBookSetNoteCellCategoryTagType;
+        viewModel = self.classTagModel;
+        self.tagCell = cell;
     }
     
-    YZHAddBookSetNoteCell* cell = [YZHAddBookSetNoteCell tempTableViewCellWith:tableView indexPath:indexPath cellType:cellType];
-    
+    cell.model = viewModel;
     return cell;
 }
 
@@ -148,10 +155,16 @@
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    [self.tableView endEditing:YES];
+}
+
 #pragma mark - 5.Event Response
 
 - (void)clickLeftBarItem {
     
+    // 可以检测当前编辑是否改变,改变则提示.是否需要保存编辑
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
@@ -159,6 +172,53 @@
 
 - (void)clickRightBarItem {
     
+    if ([self checkoutEditChange]) {
+        YZHTargetUserExtManage* userExtManage = self.userDetailsModel.targetUserExt;
+        userExtManage.friend_phone = self.phoneCell.subtitleTextField.text;
+        userExtManage.friend_tagName = self.tagCell.subtitleLabel.text;
+        NSString* userExtString = [userExtManage mj_JSONString];
+        if (YZHIsString(userExtString)) {
+            self.userDetailsModel.user.ext = userExtString;
+        }
+        self.userDetailsModel.user.alias = self.noteCell.subtitleTextField.text;
+        
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        [[[NIMSDK sharedSDK] userManager] updateUser:self.userDetailsModel.user completion:^(NSError * _Nullable error) {
+            if (!error) {
+                self.userDetailsModel.userNotePhoneArray.firstObject.title = self.phoneCell.subtitleTextField.text;
+                if (self.userDetailsModel.userNotePhoneArray.count == 1) {
+                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
+
+                        [self.userDetailsModel.userNotePhoneArray addObject:self.
+                         noteModel.lastObject];
+                    } else {
+
+                    }
+                } else {
+                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
+                        self.userDetailsModel.userNotePhoneArray.lastObject.title = self.tagCell.subtitleLabel.text;
+                    } else {
+                        [self.userDetailsModel.userNotePhoneArray removeLastObject];
+                    }
+                }
+//                [self.detailsTableView reloadData];
+                [self dismissViewControllerAnimated:YES completion:^{
+
+                }];
+                [hud hideWithText:nil];
+            } else {
+                //TODO:云信错误.
+                [hud hideWithText:error.domain];
+            }
+        }];
+    }
+    
+}
+
+- (BOOL)checkoutEditChange {
+    
+    // 暂时不对标签做检测
+    return YES;
 }
 
 #pragma mark - 6.Private Methods
@@ -169,5 +229,28 @@
 
 #pragma mark - 7.GET & SET
 
+- (NSMutableArray<YZHAddBookDetailModel *> *)noteModel {
+    
+    if (!_noteModel) {
+        _noteModel = self.userDetailsModel.viewModel[self.userDetailsModel.viewModel.count - 2];
+        //如果未设置过手机号,则临时添加一个Model 为了展示.
+        if (_noteModel.count == 1) {
+            YZHAddBookDetailModel* phoneModel = [[YZHAddBookDetailModel alloc] init];
+            phoneModel.title = @"手机号码";
+            phoneModel.cellClass = @"YZHAddBookSettingCell";
+            phoneModel.cellHeight = 55;
+            [_noteModel addObject:phoneModel];
+        }
+    }
+    return _noteModel;
+}
+
+-  (YZHAddBookDetailModel *)classTagModel {
+    
+    if (!_classTagModel) {
+       _classTagModel = self.userDetailsModel.viewModel.lastObject.firstObject;
+    }
+    return _classTagModel;
+}
 @end
 

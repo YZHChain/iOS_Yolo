@@ -8,18 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAddBookPhoneContactModel.h"
+#import "YZHAddFirendSearchModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    YZHPhoneContactCellTypeDating = 0,
-    YZHPhoneContactCellTypeReview = 1,
+    YZHPhoneContactCellTypeAllowAdd = 0,
+    YZHPhoneContactCellTypeAlreadyAdd = 1,
+    YZHPhoneContactCellTypeAllowInvite = 2,
+    YZHPhoneContactCellTypeAlreadyInvite = 3,
 } YZHPhoneContactCellType;
 
 @interface YZHPhoneContactCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (nonatomic, strong) YZHAddBookPhoneContactModel* contactModel;
+@property (nonatomic, strong) YZHAddFirendSearchModel* searchModel;
 
 + (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(YZHPhoneContactCellType)cellType;
+
+
 
 @end
 

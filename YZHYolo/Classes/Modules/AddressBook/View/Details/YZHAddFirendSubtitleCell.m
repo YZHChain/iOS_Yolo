@@ -21,4 +21,12 @@
     // Configure the view for the selected state
 }
 
+- (void)setModel:(YZHAddBookDetailModel *)model {
+    
+    _model = model;
+    
+    self.titleLabel.text = model.title;
+    self.subtitleLabel.text = model.subtitle;
+}
+
 @end

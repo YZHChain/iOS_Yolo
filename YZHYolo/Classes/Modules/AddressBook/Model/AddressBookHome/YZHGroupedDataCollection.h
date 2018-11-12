@@ -31,12 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addGroupAboveWithTitle:(NSString *)title members:(NSArray *)members;
 
+//
 - (NSString *)titleOfGroup:(NSInteger)groupIndex;
-
+//
 - (NSArray *)membersOfGroup:(NSInteger)groupIndex;
 
 - (id<YZHGroupMemberProtocol>)memberOfIndex:(NSIndexPath *)indexPath;
-
+//
 - (id<YZHGroupMemberProtocol>)memberOfId:(NSString *)uid;
 
 - (NSInteger)groupTitleCount;

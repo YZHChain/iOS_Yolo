@@ -41,6 +41,8 @@
 	<string>App需要您的同意,才能访问相册哈</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要您的同意,才能访问相册</string>
+	<key>NSContactsUsageDescription</key>
+	<string>App需要您的同意,才能访问通讯录</string>
 	<key>Status Bar Style</key>
 	<string>Light</string>
 	<key>UIAppFonts</key>

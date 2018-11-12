@@ -38,11 +38,13 @@
         UINib* nib = [UINib nibWithNibName:@"YZHAddBookAdditionalCell" bundle:nil];
         [tableView registerNib:nib forCellReuseIdentifier:identifierID];
         cell = [nib instantiateWithOwner:nil options:nil].lastObject;
-        
-        if (indexPath.row == 1) {
-            cell.iconImage.image = [UIImage imageNamed:@"addBook_cover_cell_addFirendLog"];
-            cell.titleLabel.text = @"好友添加记录";
-        }
+    }
+    if (indexPath.row == 0) {
+        cell.iconImage.image = [UIImage imageNamed:@"addBook_cover_cell_phoneAddressBook"];
+        cell.titleLabel.text = @"手机联系人";
+    } else {
+        cell.iconImage.image = [UIImage imageNamed:@"addBook_cover_cell_addFirendLog"];
+        cell.titleLabel.text = @"好友添加记录";
     }
     return cell;
 }

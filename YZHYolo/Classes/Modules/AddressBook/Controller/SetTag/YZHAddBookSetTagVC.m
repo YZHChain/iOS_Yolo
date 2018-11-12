@@ -12,22 +12,33 @@
 #import "YZHAddBookSetTagFooterView.h"
 #import "YZHAddBookSetTagAlertView.h"
 #import "YZHAddBookSetTagSectionView.h"
+#import "YZHSetTagModel.h"
+#import "YZHProgressHUD.h"
 
-
-static NSString* const kSetTagCellIdentifier =  @"setTagCellIdentifier";
 static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdentifier";
 @interface YZHAddBookSetTagVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property(nonatomic, strong)YZHAddBookSetTagFooterView* footerView;
+@property (nonatomic, strong) YZHAddBookSetTagFooterView* footerView;
 @property (nonatomic, strong) UIImageView* selectedImageView;
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
+@property (nonatomic, strong) YZHSetTagModel* tagsModel;
+@property (nonatomic, weak) YZHAddBookSetTagAlertView* alertView;
 
 @end
 
 @implementation YZHAddBookSetTagVC
 
 #pragma mark - 1.View Controller Life Cycle
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        _tagsModel = [YZHSetTagModel sharedSetTagModel];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,6 +71,8 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    //查找之前选中行数
+    self.selectedIndexPath = [self.tagsModel findtargetUserTagName:self.userDetailsModel.classTagModel.title];
     
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
     self.tableView.delegate = self;
@@ -96,23 +109,26 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 2;
+    return self.tagsModel.userTagModel.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 15;
+    return [self.tagsModel tagNumberOfRowsInSection:section];
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YZHAddBookSetTagCell* cell = [YZHAddBookSetTagCell tempTableViewCellWith:tableView indexPath:indexPath];
-    if (indexPath.row == 0) {
-        cell.titleLabel.text = @"☆标准好友";
-    } else if (indexPath.row == 1) {
-        cell.titleLabel.text = @"家人";
-    } else if (indexPath.row == 2) {
-        cell.titleLabel.text = @"同事";
+    
+    YZHUserGroupTagModel* tagModel = self.tagsModel.userTagModel[indexPath.section][indexPath.row];
+    cell.model = tagModel;
+    if ([self.selectedIndexPath isEqual:indexPath]) {
+        [cell.contentView addSubview:self.selectedImageView];
+        [cell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
+    } else {
+        
+        [cell.titleLabel setTextColor:YZHColorRGBAWithRGBA(193, 193, 193, 1)];
     }
     
     return cell;
@@ -144,12 +160,14 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    YZHAddBookSetTagCell* selectedCell = [tableView cellForRowAtIndexPath:indexPath];
-    YZHAddBookSetTagCell* lastSelectedCell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
-    [lastSelectedCell.titleLabel setTextColor:YZHColorWithRGB(193, 193, 193)];
+//    YZHAddBookSetTagCell* selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+//    YZHAddBookSetTagCell* lastSelectedCell = [tableView cellForRowAtIndexPath:self.selectedIndexPath];
+//    [lastSelectedCell.titleLabel setTextColor:YZHColorWithRGB(193, 193, 193)];
     self.selectedIndexPath = indexPath;
-    [selectedCell.contentView addSubview:self.selectedImageView];
-    [selectedCell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
+//    [selectedCell.contentView addSubview:self.selectedImageView];
+//    [selectedCell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
+    
+    [tableView reloadData];
 }
 
 #pragma mark -- UITableView Editing
@@ -176,7 +194,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     if (indexPath.section == 1) {
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
-            NSLog(@"删除了哦");
+            [self removeCustomTagName:indexPath.row];
         }
 
     } else {
@@ -209,13 +227,94 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 
 - (void)clickRightBarItem {
     
+    YZHAddBookSetTagCell* cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
+    NSString* selectedTag = cell.titleLabel.text;
+    if (![selectedTag isEqualToString:self.userDetailsModel.classTagModel.title]) {
+        YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:self.userDetailsModel.userId];
+        userExtManage.friend_tagName = selectedTag;
+        NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo: self.userDetailsModel.userId];
+        user.ext = [userExtManage mj_JSONString];
+        
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        @weakify(self)
+        [[[NIMSDK sharedSDK] userManager] updateUser:user completion:^(NSError * _Nullable error) {
+            @strongify(self)
+            if (!error) {
+                [hud hideWithText:@"保存成功"];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    //TODO: 需要更新上层 Model,刷新
+                }];
+            } else {
+                //TODO:失败文案
+                [hud hideWithText:error.domain];
+            }
+        }];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }
+
 }
 
 - (void)clickAdditionTag:(UIButton* )sender {
     
     YZHAddBookSetTagAlertView* alertView = [YZHAddBookSetTagAlertView yzh_viewWithFrame:CGRectMake(37, 186, 300, 191)];
+    self.alertView = alertView;
     // TODO: 待重新封装.
     [alertView yzh_showOnWindowAnimations:^{
+    }];
+    @weakify(self)
+    alertView.YZHButtonExecuteBlock = ^(UITextField * _Nonnull customTagTextField) {
+        if (self.tagsModel.userTagModel.lastObject.count < 30) {
+            //先检测当前是否存在此标签,如果不存在则直接去添加.
+            if (![self.tagsModel checkoutContainCustomTagName:customTagTextField.text]) {
+                @strongify(self)
+                [self addCustomTagName:customTagTextField.text];
+            } else {
+                //TODO:文案需产品确认
+                [YZHProgressHUD showText:@"当前标签已包含,请您重新输入" onView:self.tableView];
+            }
+        } else {
+            //TODO:文案需产品确认
+            [YZHProgressHUD showText:@"当前标签已满,请您删除无用标签" onView:self.tableView];
+        }
+
+    };
+}
+
+- (void)addCustomTagName:(NSString *)tagName{
+    
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
+    [self.tagsModel addUserCustomTag:tagName WithsuccessCompletion:^{
+        @strongify(self)
+        //TODO:文案需产品确认
+        [self refreshTags];
+        [hud hideWithText:@"标签添加成功"];
+        [self.alertView yzh_hideFromWindowAnimations:^{
+            
+        }];
+    } failureCompletion:^(NSError *error) {
+        //TODO:文案需产品确认
+        [hud hideWithText:error.domain];
+    }];
+}
+
+- (void)removeCustomTagName:(NSInteger)tagIndex {
+    
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
+    [self.tagsModel removeUserCustomTagIndex:tagIndex  WithsuccessCompletion:^{
+        @strongify(self)
+        //TODO:文案需产品确认
+        [self refreshTags];
+        [hud hideWithText:@"标签添加成功"];
+        [self.alertView yzh_hideFromWindowAnimations:^{
+            
+        }];
+    } failureCompletion:^(NSError *error) {
+        //TODO:文案需产品确认
+        [hud hideWithText:error.domain];
     }];
 }
 
@@ -223,6 +322,12 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 
 - (void)setupNotification {
     
+}
+
+- (void)refreshTags {
+    
+    [self.tagsModel updateTargetUserTag];
+    [self.tableView reloadData];
 }
 
 #pragma mark - 7.GET & SET

@@ -8,10 +8,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Normal.ttf">
+            <string>SourceHanSansCN-Normal</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xDM-fT-TTW" customClass="YZHAddBookSettingCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="YZHAddBookSettingCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="YZHAddBookSettingCell" id="xDM-fT-TTW" customClass="YZHAddBookSettingCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xDM-fT-TTW" id="zNH-50-xR0">
@@ -19,8 +24,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置备注" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yT0-ah-NKa">
-                        <rect key="frame" x="12" y="18.5" width="61.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="12" y="18.5" width="60" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="eaR-NJ-1kN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
                         <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,8 +36,11 @@
                         <rect key="frame" x="298" y="19.5" width="9" height="16"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQy-N6-RNA">
-                        <rect key="frame" x="258" y="18.5" width="31" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="259" y="18.5" width="30" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="dz1-di-jx0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -46,7 +57,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="guideImageView" destination="Pmh-Uu-RRV" id="NM6-Hn-Zc4"/>
-                <outlet property="showTextLabel" destination="UQy-N6-RNA" id="i9v-lJ-hAi"/>
+                <outlet property="subTitleLabel" destination="UQy-N6-RNA" id="LTD-VS-2BB"/>
                 <outlet property="titleLabel" destination="yT0-ah-NKa" id="ecL-4d-8N4"/>
             </connections>
             <point key="canvasLocation" x="52.799999999999997" y="48.125937031484263"/>

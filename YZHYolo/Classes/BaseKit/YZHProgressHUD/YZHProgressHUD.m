@@ -231,6 +231,9 @@ typedef NS_ENUM(NSInteger, YZHAPIErrorHUDType) {
 //隐藏loading HUD,可带文字,停留1.5s
 - (void)hideWithText:(NSString *)text
 {
+    if ([text isEqualToString:@"NSURLErrorDomain"]) {
+        text = @"网络连接失败";
+    }
     [self hideWithText:text completion:nil];
 }
 

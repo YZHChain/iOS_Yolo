@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAddBookDetailsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookUserIDCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *userpicImageView;
 @property (weak, nonatomic) IBOutlet UILabel *notoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userYoloIDLabel;
+
+@property (nonatomic, strong) YZHAddBookHeaderModel* model;
 
 @end
 

@@ -32,8 +32,13 @@
         [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
         cell = [nib instantiateWithOwner:nil options:nil].lastObject;
     }
-    
     return cell;
+}
+
+- (void)setModel:(YZHUserGroupTagModel *)model {
+    
+    _model = model;
+    self.titleLabel.text = model.tagName;
 }
 
 @end

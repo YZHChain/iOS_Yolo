@@ -13,19 +13,19 @@
 - (NSString *)yoloID {
     
     if (!_yoloID) {
-        _yoloID = @"Yolo";
+        _yoloID = @"Yolo用户";
     }
     return _yoloID;
 }
 
 @end
 
-@implementation YZHUserGroupTagsModel
+@implementation YZHUserGroupTagModel
 
 
 @end
 
-@implementation YZHUserCustomTagsModel
+@implementation YZHUserCustomTagModel
 
 
 @end
@@ -60,7 +60,21 @@
     YZHUserInfoExtManage* userInfoExtManage;
     if (YZHIsString(user.userInfo.ext)) {
         userInfoExtManage = [YZHUserInfoExtManage YZH_objectWithKeyValues:user.userInfo.ext];
+    } else {
+        //TODO: 空处理.
+        userInfoExtManage = [[YZHUserInfoExtManage alloc] init];
+    }
+    return userInfoExtManage;
+}
+
++ (instancetype)targetUserInfoExtWithUserId:(NSString *)userId {
+    
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:userId];
+    YZHUserInfoExtManage* userInfoExtManage;
+    if (YZHIsString(user.userInfo.ext)) {
+        userInfoExtManage = [YZHUserInfoExtManage YZH_objectWithKeyValues:user.userInfo.ext];
     };
+    
     return userInfoExtManage;
 }
 
@@ -75,14 +89,32 @@
 + (NSDictionary *)YZH_objectClassInArray {
     
     return @{
-             @"customTags": [YZHUserCustomTagsModel class],
-             @"groupTags": [YZHUserGroupTagsModel class]
+             @"customTags": [YZHUserCustomTagModel class],
+             @"groupTags": [YZHUserGroupTagModel class]
              };
 }
 
 - (NSString *)userInfoExtString {
     
     return [self mj_JSONString];
+}
+
+- (NSArray<YZHUserGroupTagModel *> *)groupTags {
+    
+    if (!_groupTags) {
+        
+        NSArray* tagNameArray = @[@"☆标准好友", @"家人", @"同事"
+                                  ];
+        NSMutableArray* groupTagModel = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < 3; i++) {
+            YZHUserGroupTagModel* defaultModel = [[YZHUserGroupTagModel alloc] init];
+            defaultModel.isDefault = YES;
+            defaultModel.tagName = tagNameArray[i];
+            [groupTagModel addObject:defaultModel];
+        }
+        _groupTags = groupTagModel.copy;
+    }
+    return _groupTags;
 }
 
 @end

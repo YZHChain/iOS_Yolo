@@ -19,6 +19,7 @@ static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
     // Initialization code
     
     [_photoImageView yzh_cornerRadiusAdvance:3 rectCornerType:UIRectCornerAllCorners];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -29,11 +30,6 @@ static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
 
 + (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil]   forCellReuseIdentifier:kYZHFriendsCellIdentifier];
-    });
-    
     YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
     
     return cell;
@@ -43,7 +39,10 @@ static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
     
     self.titleLabel.text = member.info.showName;
     NSString *imageUrl = member.info.avatarUrlString ? member.info.avatarUrlString : nil;
-    [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"addBook_cover_cell_photo_default"];
+    //TODO: 加载图片方法需优化.
+    if (imageUrl) {
+        [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"addBook_cover_cell_photo_default"];
+    }
     NSString* showNickName = member.info.nickName ? [NSString stringWithFormat:@"(%@)", member.info.nickName] : nil;
     self.subtitleLabel.text = showNickName;
 }

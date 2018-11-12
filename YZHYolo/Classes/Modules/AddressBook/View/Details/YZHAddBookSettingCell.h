@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHAddBookDetailsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookSettingCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *showTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
+
+@property (nonatomic, strong) YZHAddBookDetailModel* model;
 
 @end
 

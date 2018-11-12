@@ -92,6 +92,39 @@
     [self sort];
 }
 
+- (void)addGroupMember:(id<YZHGroupMemberProtocol>)member
+{
+    NSString *groupTitle = [member groupTitle];
+    NSInteger groupIndex = [_groupTtiles indexOfObject:groupTitle];
+    Pair *pair = [_groups objectAtIndex:groupIndex];
+    if(!pair) {
+        NSMutableArray *members = [NSMutableArray array];
+        pair = [[Pair alloc] initWithFirst:groupTitle second:members];
+    }
+    NSMutableArray *members = pair.second;
+    [members addObject:member];
+    [_groupTtiles addObject:groupTitle];
+    [_groups addObject:pair];
+    [self sort];
+}
+
+- (void)removeGroupMember:(id<YZHGroupMemberProtocol>)member{
+    NSString *groupTitle = [member groupTitle];
+    NSInteger groupIndex = [_groupTtiles indexOfObject:groupTitle];
+    Pair *pair = [_groups objectAtIndex:groupIndex];
+    [pair.second removeObject:member];
+    if (![pair.second count]) {
+        [_groups removeObject:pair];
+    }
+    [self sort];
+}
+
+- (void)addGroupAboveWithTitle:(NSString *)title members:(NSArray *)members {
+    Pair *pair = [[Pair alloc] initWithFirst:title second:members];
+    [_specialGroupTtiles addObject:title];
+    [_specialGroups addObject:pair];
+}
+
 - (id<YZHGroupMemberProtocol>)memberOfIndex:(NSIndexPath *)indexPath {
     
     NSArray *members = nil;

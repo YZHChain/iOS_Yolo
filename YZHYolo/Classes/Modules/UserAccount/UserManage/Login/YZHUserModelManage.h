@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface YZHUserGroupTagsModel : NSObject
+@interface YZHUserGroupTagModel : NSObject
 
 @property (nonatomic, copy) NSString* tagName;
 @property (nonatomic, assign) BOOL isDefault;
@@ -34,10 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface YZHUserCustomTagsModel : NSObject
+@interface YZHUserCustomTagModel : NSObject
 
-@property (nonatomic, assign) NSInteger tagName;
-@property (nonatomic, copy) NSString* isDefault;
+@property (nonatomic, copy) NSString* tagName;
+@property (nonatomic, assign) BOOL isDefault;
 
 @end
 
@@ -53,13 +53,14 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHUserInfoExtManage : NSObject
 
 @property (nonatomic, strong) YZHUserPlaceModel* place;
-@property (nonatomic, strong) NSArray<YZHUserCustomTagsModel* > *customTags;
-@property (nonatomic, strong) NSArray<YZHUserGroupTagsModel* > *groupTags;
+@property (nonatomic, strong) NSArray<YZHUserCustomTagModel* > *customTags;
+@property (nonatomic, strong) NSArray<YZHUserGroupTagModel* > *groupTags;
 @property (nonatomic, strong) YZHUserYoloModel* userYolo;
 @property (nonatomic, copy) NSString* qrCode;
 @property (nonatomic, strong) YZHUserPrivateSettingModel* privateSetting;
 
 + (instancetype)currentUserInfoExt;
++ (instancetype)targetUserInfoExtWithUserId:(NSString* )userId;
 - (NSString* )userInfoExtString;
 
 @end

@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookSetTagAlertView : UIView
 
+@property (weak, nonatomic) IBOutlet UITextField *customTagTextField;
+@property (weak, nonatomic) IBOutlet UIButton *affirmButton;
+
+@property (nonatomic, copy) void(^YZHButtonExecuteBlock)(UITextField *customTagTextField);
+
 @end
 
 NS_ASSUME_NONNULL_END

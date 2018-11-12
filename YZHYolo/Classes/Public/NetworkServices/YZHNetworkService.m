@@ -10,6 +10,7 @@
 
 #import "YZHNetworkConfig.h"
 #import "NSObject+YZHApiModel.h"
+#import "AFURLResponseSerialization.h"
 
 //数据服务错误代码
 #define SERVER_ERROR_NEED_REFRESH   -98      //需要重新刷新
@@ -105,17 +106,28 @@ static id instance;
 - (void)processError:(NSError *)error failure:(void (^)(NSError *error))failure refreshToken:(void (^)(void))refreshToken{
     
     NSError *failureError = nil;
+    
     switch (error.code) {
             default:
         {
+#if DEBUG
             failureError = [NSError errorWithDomain:error.domain code:SERVER_ERROR_NEED_REFRESH userInfo:nil];
+            NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+            if (errorData) {
+                NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData:errorData options:kNilOptions error:nil];
+                NSLog(@"请求后台报错日志:error--%@",serializedData);
+            }
+
+#endif
         }
+    }
+    if (!failureError) {
+        failureError = [[NSError alloc] init];
     }
     failure(failureError);
 }
 
 - (void)processResponse:(id)response path:(NSString *)path success:(void (^)(id obj))success failure:(void (^)(NSError *error))failure{
-    
     
     id successObj = nil;
     NSError *failureError = nil;
@@ -170,8 +182,9 @@ static id instance;
         } else {
             success(successObj);
         }
-        
-        
+    } else {
+        successObj = response;
+        success(successObj);
     }
     
 }

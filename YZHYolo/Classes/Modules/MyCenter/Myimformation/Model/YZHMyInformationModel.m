@@ -45,23 +45,23 @@
         YZHIMLoginData* _userLoginModel = manage.currentLoginData;
         
         NSString* phoneNumber = _userLoginModel.phoneNumber.length ? _userLoginModel.phoneNumber : @"";
-        NSString* avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
+        NSString* avatarUrl = user.userInfo.avatarUrl.length ? user.userInfo.avatarUrl : @"my_myinformationCell_headPhoto_default";
         //如果读不到, 或者后台未设置随便给个.
-        NSString* nickName = user.userInfo.nickName ? user.userInfo.nickName : @"Yolo用户";
+        NSString* nickName = user.userInfo.nickName.length ? user.userInfo.nickName : @"Yolo用户";
         NSString* gender = [YZHUserUtil genderString:user.userInfo.gender];
         NSString* genderImageName = [YZHUserUtil genderImageNameString:user.userInfo.gender];
         YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
-        NSString* yoloID = userInfoExt.userYolo.yoloID;
+        NSString* yoloID = userInfoExt.userYolo.yoloID.length ? userInfoExt.userYolo.yoloID : @"Yolo默认用户";
         NSInteger yoloCellType = 2;
         if (userInfoExt.userYolo.hasSetting) {
             yoloCellType = 0;
         }
-        NSString* myPlace = userInfoExt.place.complete ? userInfoExt.place.complete : @"";
+        NSString* myPlace = userInfoExt.place.complete.length ? userInfoExt.place.complete : @"";
         
         NSArray* list = @[
                           @{@"content": @[@{
                                               @"title":@"手机号",
-                                              @"subtitle":phoneNumber.length ? phoneNumber : @"",
+                                              @"subtitle":phoneNumber,
                                               @"image":@"",
                                               @"route":@"",
                                               @"cellType" :@"0",

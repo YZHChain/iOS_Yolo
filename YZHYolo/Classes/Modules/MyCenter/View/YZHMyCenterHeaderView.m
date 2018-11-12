@@ -34,6 +34,8 @@
 
 - (void)setupView{
     
+    CGFloat radius = self.photoImageView.size.height / 2;
+    [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
 }
 
 - (IBAction)clickHeader:(UIButton *)sender {
@@ -56,9 +58,7 @@
 
     self.nickNameLabel.text = nickName;
     if (userModel.hasPhotoImage) {
-        [self.photoImageView yzh_setImageWithString:avatarUrl];
-        CGFloat radius = self.photoImageView.size.height / 2;
-        [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
+        [self.photoImageView yzh_setImageWithString:avatarUrl placeholder:@"my_cover_headPhoto_default"];
     }
     if (YZHIsString(userModel.yoloID)) {
         self.userYoloIDLabel.text = [NSString stringWithFormat:@"YOLO ID: %@", userModel.yoloID];

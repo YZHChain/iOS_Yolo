@@ -20,6 +20,7 @@
 #import "YZHAddBookSearchVC.h"
 #import "YZHGroupedContacts.h"
 #import "YZHContactMemberModel.h"
+#import "YZHAddBookDetailsModel.h"
 
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
@@ -27,7 +28,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 @interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating, SCTableViewSectionIndexDelegate>
 
 @property (nonatomic, strong) UITableView* tableView;
-@property (nonatomic, strong) NSArray* indexArray;
 @property (nonatomic, strong) JKRSearchController* searchController;
 @property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
 @property (nonatomic, strong) YZHGroupedContacts* contacts;
@@ -94,7 +94,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     [self.view addSubview:self.tableView];
     //设置右边索引;
     self.tableView.sc_indexViewConfiguration = self.indexViewConfiguration;
-    self.tableView.sc_indexViewDataSource = self.indexArray;
+    self.tableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
     self.tableView.delegate = self;
     
 }
@@ -109,6 +109,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 - (void)setupData
 {
     self.contacts = [[YZHGroupedContacts alloc] init];
+    self.tableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
     
     [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
     [[NIMSDK sharedSDK].loginManager addDelegate:self];
@@ -129,7 +130,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (section == 0) {
         return 2;
     } else {
-        return [_contacts memberCountOfGroup:section];
+        return [_contacts memberCountOfGroup:section - 1];
     }
 }
 
@@ -157,8 +158,10 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         //TODO:
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendRecord];
     } else {
-    
-    [YZHRouter openURL:kYZHRouterAddressBookDetails];
+        
+        YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
+        YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": memberModel.info.infoId, @"userDetailsModel": model}];
     }
 }
 
@@ -176,7 +179,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (section == 0) {
         view.titleLabel.text = nil;
     } else {
-        view.titleLabel.text = self.indexArray[section - 1];
+        view.titleLabel.text = self.contacts.sortedGroupTitles[section - 1];
     }
     
     return view;
@@ -185,16 +188,30 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 #pragma mark -- UITableView Editing
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+//    YZHAddBookDetailModel* model = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
+//    if (model.canSkip) {
+//        [YZHRouter openURL:model.router info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+//                                               @"userDetailsModel": self.userDetailsModel
+//                                               }];
+//    }
     //TODO: 过长
+    @weakify(self)
     UITableViewRowAction *categoryAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"分类标签" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-
-        [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
+        @strongify(self)
+        YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[self.contacts memberOfIndex:indexPath];
+        YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
+        [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+                                                              @"userDetailsModel": model
+                                                              }];
     }];
     
     UITableViewRowAction *remarkAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"备注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        
-       [YZHRouter openURL:kYZHRouterAddressBookSetNote info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
+        @strongify(self)
+          YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[self.contacts memberOfIndex:indexPath];
+          YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
+           [YZHRouter openURL:kYZHRouterAddressBookSetNote info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+                                                              @"userDetailsModel": model
+                                                                  }];
     }];
     
     categoryAction.backgroundColor = [UIColor colorWithRed:148/255.0 green:156/255.0 blue:169/255.0 alpha:1];
@@ -224,8 +241,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     }
     CGRect frame = [tableView rectForSection:indexPath.section];
-    //TODO
-    [tableView setContentOffset:CGPointMake(0, 0) animated:NO];
+    [tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:NO];
     
 }
 
@@ -239,7 +255,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         indexPath = 0;
     }
     //TODO
-    return 0;
+    return indexSection;
 }
 
 #pragma mark - JKRSearchControllerhResultsUpdating
@@ -335,14 +351,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         self.tableView.sc_indexViewDelegate = self;
     }
     return _indexViewConfiguration;
-}
-
-- (NSArray *)indexArray{
-    
-    if (_indexArray == nil) {
-        _indexArray = @[@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",@"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
-    }
-    return _indexArray;
 }
 
 - (JKRSearchController *)searchController {

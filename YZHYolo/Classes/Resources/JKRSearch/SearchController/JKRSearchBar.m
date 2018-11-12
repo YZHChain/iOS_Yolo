@@ -122,6 +122,14 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
     }
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if ([self.delegate respondsToSelector:@selector(searchBarTextFieldShouldReturn:textDidChange:)]) {
+        [self.delegate searchBarTextFieldShouldReturn:self textDidChange:self.searchTextField.text];
+    }
+    return YES;
+}
+
 - (void)cancelButtonClick {
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UISearchBarCancelNotification object:nil];
@@ -155,6 +163,7 @@ JKRNotificationName * const  UISearchBarCancelNotification = @"UISearchBarCancel
     if (!_searchTextField) {
         _searchTextField = [[JKRSearchTextField alloc] init];
         _searchTextField.canTouch = NO;
+        _searchTextField.returnKeyType = UIReturnKeySearch;
         UIImageView *searchIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addBook_cover_search_default"]];
         searchIcon.contentMode = UIViewContentModeCenter;
         searchIcon.frame = CGRectMake(0, 0, 30, 14);

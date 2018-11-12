@@ -14,6 +14,7 @@
 #import "YZHAddBookSetTagVC.h"
 #import "YZHBaseNavigationController.h"
 #import "YZHAddFirendSubtitleCell.h"
+#import "YZHPrivateChatVC.h"
 
 @interface YZHAddBookDetailsVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate>
 
@@ -29,9 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self nimConfig];
-    //3.请求数据
-    [self setupData];
+    [self NIMConfig];
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
@@ -46,9 +45,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)nimConfig {
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
+- (void)NIMConfig {
     
     [[NIMSDK sharedSDK].userManager addDelegate:self];
+}
+
+- (void)dealloc {
+    
+    [[NIMSDK sharedSDK].userManager removeDelegate:self];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -75,9 +86,11 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     //TODO: 计算高度.
     self.tableView.tableFooterView = self.userAskFooterView;
-    if (self.isShowFirendRecord) {
-        self.userAskFooterView.addFirendButtonTopLayoutConstraint.constant = 30;
-    }
+    [self.userAskFooterView.sendMessageButton addTarget:self action:@selector(senderMessage:) forControlEvents:UIControlEventTouchUpInside];
+    //暂时不考虑, 添加好友状态.
+//    if (self.isShowFirendRecord) {
+//        self.userAskFooterView.addFirendButtonTopLayoutConstraint.constant = 30;
+//    }
 }
 
 - (void)reloadView
@@ -90,81 +103,50 @@
 - (void)setupData
 {
     
-    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if (self.isShowFirendRecord) {
-        return 4;
-    } else {
-        return 3;
-    }
+    return self.userDetailsModel.viewModel.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 1;
-    }
-    if (self.isShowFirendRecord) {
-        if (section == 3) {
-            return 2;
-        } else {
-            return 1;
-        }
-    } else {
-        if (section == 1) {
-            return 1;
-        } else {
-            return 2;
-        }
-    }
+    
+    return self.userDetailsModel.viewModel[section].count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    id cellData = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
     // 配置Cell
     if (indexPath.section == 0) {
-        //TODO: NIB 封装
-        YZHAddBookUserIDCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserIDCell" owner:nil options:nil].lastObject;
+        static NSString* cellId = @"YZHAddBookUserIDCell";
+        YZHAddBookUserIDCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserIDCell" owner:nil options:nil].lastObject;
+        }
+        cell.model = cellData;
+        
         return cell;
     } else {
-        YZHAddBookSettingCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookSettingCell" owner:nil options:nil].lastObject;
-        if (indexPath.section == 1 && indexPath.row == 0) {
-            cell.titleLabel.text = @"设置备注";
-            cell.showTextLabel.text = nil;
-            cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
-        } else if (indexPath.section == 1 && indexPath.row == 1) {
-            cell.titleLabel.text = @"手机号码";
-            cell.showTextLabel.text = @"18876789520";
-            [cell.guideImageView removeFromSuperview];
-        } else if (indexPath.section == 2 && indexPath.row == 0) {
-            cell.titleLabel.text = @"设置分类标签";
-            cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
-            cell.showTextLabel.text = @"家人";
-        } else if (indexPath.section == 2 && indexPath.row == 1) {
-            cell.titleLabel.text = @"地区";
-            [cell.guideImageView removeFromSuperview];
-            cell.showTextLabel.text = @"广东,深圳";
-        } else if (indexPath.section == 3) {
-           YZHAddFirendSubtitleCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddFirendSubtitleCell" owner:nil options:nil].lastObject;
-            cell.titleLabel.text = @"WO:";
-            cell.subtitleLabel.text = @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈";
-            return cell;
+        YZHAddBookDetailModel* model = cellData;
+        YZHAddBookSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:model.cellClass];
+        if (!cell) {
+            cell = [[NSBundle mainBundle] loadNibNamed:model.cellClass owner:nil options:nil].lastObject;
         }
+        cell.model = cellData;
         return cell;
-        
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.isShowFirendRecord && indexPath.section == 3) {
-        return 126;
-    }
-    return kYZHCellHeight;
+    id cellData = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
+    YZHAddBookDetailModel* model = cellData;
+    
+    return model.cellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -183,11 +165,12 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 1 && indexPath.row == 0) {
-        [YZHRouter openURL:kYZHRouterAddressBookSetNote info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
-    }
-    if ((indexPath.section == 2 && indexPath.row == 0)) {
-        [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES)}];
+    YZHAddBookDetailModel* model = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
+    if (model.canSkip) {
+        
+        [YZHRouter openURL:model.router info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+                                               @"userDetailsModel": self.userDetailsModel
+                                               }];
     }
 }
 
@@ -196,6 +179,13 @@
 - (void)clickRightItemGotoSetting {
     
     [YZHRouter openURL:kYZHRouterAddressBookSetting];
+}
+
+- (void)senderMessage:(UIButton *)sender {
+    
+    NIMSession *session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
+    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:session];
+    [self.navigationController pushViewController:privateChatVC animated:YES];
 }
 
 #pragma mark - 6.Private Methods
@@ -213,6 +203,14 @@
         _userAskFooterView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserAskFooterView" owner:nil options:nil].lastObject;
     }
     return _userAskFooterView;
+}
+
+- (YZHAddBookDetailsModel *)userDetailsModel {
+    
+    if (!_userDetailsModel) {
+        _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+    }
+    return _userDetailsModel;
 }
 
 @end

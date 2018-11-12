@@ -26,7 +26,7 @@
     }
     NSURL *url = [NSURL URLWithString:aString];
     //加载本地图片
-    if (url==nil || url.scheme.length==0 || [url.scheme isEqualToString:@"yzhYolo"]) {
+    if (url == nil || url.scheme.length == 0 || [url.scheme isEqualToString:@"yzhYolo"]) {
         NSString *imageName = [[aString componentsSeparatedByString:@"://"] lastObject];
         if ([UIImage imageNamed:imageName] == nil) {
             [self setImage:placeholderImage];
