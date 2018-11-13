@@ -117,4 +117,12 @@
     return _groupTags;
 }
 
+- (NSString *)qrCode {
+    
+    if (!_qrCode) {
+        _qrCode = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    }
+    return _qrCode;
+}
+
 @end

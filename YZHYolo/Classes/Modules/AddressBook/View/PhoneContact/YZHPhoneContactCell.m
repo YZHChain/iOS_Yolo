@@ -104,10 +104,10 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
 - (IBAction)clickRequestButton:(UIButton *)sender {
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(onSelectedCellButtonWithModel:)]) {
-        if (self.contentMode) {
-            [self.delegate onSelectedCellButtonWithModel:self.contactModel];
+        if (_contactModel) {
+            [self.delegate onSelectedCellButtonWithModel:_contactModel];
         } else {
-            [self.delegate onSelectedCellButtonWithModel:self.searchModel];
+            [self.delegate onSelectedCellButtonWithModel:_searchModel];
         }
         
     }

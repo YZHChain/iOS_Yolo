@@ -199,7 +199,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         }
         NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
         NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败,请重试" : @"请求失败,请重试";
-        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
         [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
             [SVProgressHUD dismiss];
             if (!error) {
@@ -214,7 +214,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         NSDictionary* dic = @{
                               @"phoneNum": contactModel.phone
                               };
-        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
         [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_INVITE_SENDSMS params:dic successCompletion:^(NSObject* obj) {
             //TODO: 邀请成功
             [hud hideWithText: obj.yzh_apiDetail];

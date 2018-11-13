@@ -10,6 +10,7 @@
 #import "YZHPrivacySettingModel.h"
 #import "YZHPrivacySettingCell.h"
 #import "YZHAboutYoloCell.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource, YZHPrivacyProtocol>
 
@@ -146,16 +147,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    double timerInterval = 0;
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"HH:mm"];
-//    if (self.lastClickTimer) {
-//        NSDate *startDate = [dateFormatter dateFromString:NSTimeIntervalSince1970];
-//        self.lastClickTimer =
-//
-//    } else {
-//
-//    }
 }
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {
@@ -166,7 +157,7 @@
     }
     if (!self.lastDate) {
         self.lastDate = [NSDate date];
-        NSLog(@"无上一次点击事件记录,直接执行");
+        //无上一次点击事件记录,直接执行
         [self updateUserPrivacySetting];
     } else {
         NSDate *end = [NSDate date];
@@ -180,7 +171,7 @@
         } else {
            // 更新
            _lastDate = nil;
-           NSLog(@"时间间隔超过5S,执行有效更新");
+           //时间间隔超过5S,执行有效更新
            [self updateUserPrivacySetting];
         }
     }
@@ -214,6 +205,29 @@
 }
 
 - (void)updateUserPrivacySetting {
+    
+    NSString* userId = [YZHUserLoginManage sharedManager].currentLoginData.account;
+    YZHPrivacySettingModel* addFirendModel = self.viewModel.content[0];
+    YZHPrivacySettingModel* addVerifyModel = self.viewModel.content[1];
+    YZHPrivacySettingModel* phoneAddModel = self.viewModel.content[2];
+    NSString* allowAdd = @(addFirendModel.isSelected).stringValue;
+    NSString* allowPhoneAdd = @(phoneAddModel.isSelected).stringValue;
+    NSString* addVerift = @(addVerifyModel.isSelected).stringValue;
+    NSDictionary* dic = @{
+                          @"addVerify": addVerift,
+                          @"allowAdd": allowAdd,
+                          @"allowPhoneAdd": allowPhoneAdd,
+                          @"userId":userId,
+                          };
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_SETTINGSPRIVACY params:dic successCompletion:^(id obj) {
+        
+        [self updateUserPrivacySetting];
+    } failureCompletion:^(NSError *error) {
+        
+    }];
+}
+
+- (void)updateUserPrivacySettingIM {
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     YZHUserPrivateSettingModel* userSetting = userInfoExt.privateSetting;

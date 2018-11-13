@@ -32,6 +32,8 @@
 #import "Reachability.h"
 #import <CoreServices/UTCoreTypes.h>
 
+#import "YZHProgressHUD.h"
+
 
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
@@ -483,7 +485,7 @@
             [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
                 if (!error) {
                     //发送添加请求成功,则发送一条已添加消息.
-                   YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
                     addFirendAttachment.addFirendTitle = @"好友申请已经发出";
                     //插入一条添加好友申请回话.
                     [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];

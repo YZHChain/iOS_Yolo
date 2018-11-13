@@ -291,20 +291,16 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 
 - (NSUInteger)sectionOfTableViewDidScroll:(UITableView *)tableView {
     
-    if ([self.defaultTableView isEqual: tableView]) {
-        NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
-        NSInteger indexSection = indexPath.section;
-        if (indexSection > 0) {
-            indexSection = indexPath.section - 1;
-        } else {
-            indexPath = 0;
-        }
-        //TODO
-        return indexSection;
-    } else {
-        return 0;
-    }
 
+    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
+    NSInteger indexSection = indexPath.section;
+    if (indexSection > 0) {
+        indexSection = indexPath.section - 1;
+    } else {
+        indexPath = 0;
+    }
+    //TODO
+    return indexSection;
 }
 
 #pragma mark - JKRSearchControllerhResultsUpdating

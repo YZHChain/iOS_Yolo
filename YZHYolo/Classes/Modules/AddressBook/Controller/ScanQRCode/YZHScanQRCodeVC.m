@@ -24,6 +24,7 @@
 @property (nonatomic, strong) YZHScanQRCodeMaskView* maskView;
 @property (nonatomic, strong) NSTimer* lineTimer;
 @property (nonatomic, assign) BOOL startAnimation;
+@property (nonatomic, assign) BOOL isSkip;
 
 @end
 
@@ -119,9 +120,13 @@
         if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
             
-            NSLog(@"检测到二维码了哦%@", scannedResult);
-//            [self.manage stopScanVideo];
-            [self stopScanWithLineAnimation];
+            if (!self.isSkip) {
+                self.isSkip = YES;
+                [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+                                                                       @"userId": scannedResult
+                                                                       }];
+            }
+//            [self stopScanWithLineAnimation];
             
             break;
         }

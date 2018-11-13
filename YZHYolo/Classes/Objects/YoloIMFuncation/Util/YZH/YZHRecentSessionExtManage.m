@@ -90,9 +90,9 @@
             NSError* error;
             NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
             if (!error) {
-                if (dic[@"tagName"]) {
+                if (dic[@"friend_tagName"]) {
                     NSDictionary* locExt = @{
-                                             @"tagName":dic[@"tagName"]
+                                             @"friend_tagName":dic[@"friend_tagName"]
                                              };
                     //TODO: 更新时机还需要在研究下.
                         [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:locExt recentSession:recentSession];

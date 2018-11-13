@@ -110,6 +110,7 @@ static YZHNetworkConfig* _instance;
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
+//     || [path containsString:PATH_USER_INVITE_SENDSMS]
     if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS]) {
         httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
     }
@@ -243,13 +244,13 @@ static YZHNetworkConfig* _instance;
     return _httpManager;
 }
 // 防止 baseURL 读取失败,直接从这里设置.
-- (NSURL *)baseURL{
-    
-    if (_baseURL == nil) {
-        //TODO: 正式服 BaseURL  异常捕获,
-        _baseURL = [NSURL URLWithString:@"www"];
-    }
-    NSAssert(_baseURL, @"_baseURL Can't be empty");
-    return _baseURL;
-}
+//- (NSURL *)baseURL{
+//
+//    if (_baseURL == nil) {
+//        //TODO: 正式服 BaseURL  异常捕获,
+//        _baseURL = [NSURL URLWithString:@"www"];
+//    }
+//    NSAssert(_baseURL, @"_baseURL Can't be empty");
+//    return _baseURL;
+//}
 @end
