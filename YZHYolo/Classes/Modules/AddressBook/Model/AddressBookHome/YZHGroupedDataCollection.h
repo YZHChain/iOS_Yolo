@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YZHGroupMemberProtocol <NSObject>
 
 - (NSString *)groupTitle;
+- (NSString *)groupTagTitle;
 - (NSString *)memberId;
 - (id)sortKey;
 
@@ -24,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSArray *sortedGroupTitles;
 @property (nonatomic, copy) NSComparator groupTitleComparator;
 @property (nonatomic, copy) NSComparator groupMemberComparator;
+//@property (nonatomic, strong) NSMutableOrderedSet* groupTtiles;
+//@property (nonatomic, strong) NSMutableOrderedSet* groups;
 
 - (void)addGroupMember:(id<YZHGroupMemberProtocol>)member;
 

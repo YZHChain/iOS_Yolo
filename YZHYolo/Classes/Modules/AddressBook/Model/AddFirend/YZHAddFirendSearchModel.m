@@ -29,9 +29,15 @@
     return _addText;
 }
 
+- (BOOL)isMySelf {
+    
+  return [self.userId isEqualToString:[[[NIMSDK sharedSDK] loginManager] currentAccount]];
+}
+
 - (void)configurationUserData {
     
     self.userModel = [[YZHAddressBookModel alloc] initWithUser:self.user];
+
     // 判断是否为好友
     if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId]) {
         self.isMyFriend = YES;
@@ -41,6 +47,7 @@
         YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.userId];
         _userInfoExt = userInfoExt;
         self.allowAdd = userInfoExt.privateSetting.allowAdd;
+        self.needVerfy = userInfoExt.privateSetting.addVerift;
     }
 }
 

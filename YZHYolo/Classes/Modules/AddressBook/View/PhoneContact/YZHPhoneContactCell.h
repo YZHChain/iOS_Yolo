@@ -19,10 +19,17 @@ typedef enum : NSUInteger {
     YZHPhoneContactCellTypeAlreadyInvite = 3,
 } YZHPhoneContactCellType;
 
+@protocol YZHPhoneContactCellProtocol <NSObject>
+
+- (void)onSelectedCellButtonWithModel:(id)model;
+
+@end
+
 @interface YZHPhoneContactCell : UITableViewCell
 
 @property (nonatomic, strong) YZHAddBookPhoneContactModel* contactModel;
 @property (nonatomic, strong) YZHAddFirendSearchModel* searchModel;
+@property (nonatomic, weak) id<YZHPhoneContactCellProtocol> delegate;
 
 + (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(YZHPhoneContactCellType)cellType;
 

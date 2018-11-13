@@ -12,6 +12,7 @@
 #import "UIButton+YZHTool.h"
 #import "UIImage+YZHTool.h"
 #import "YZHAlertManage.h"
+#import "YZHProgressHUD.h"
 
 @interface YZHDetailsSettingVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -110,15 +111,38 @@
 - (IBAction)trashliChatLog:(UIButton *)sender {
     
     [YZHAlertManage showAlertTitle:@"确定要清空所有社群的聊天记录么？" message:@"此操作不可逆，请谨慎操作" actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
-
+        if (buttonIndex == 1) {
+            NIMDeleteMessagesOption *option = [[NIMDeleteMessagesOption alloc] init];
+            option.removeSession = NO;
+            option.removeTable = NO;
+            
+            [[NIMSDK sharedSDK].conversationManager deleteAllMessages:option];
+        }
     }];
 }
 
 - (IBAction)deleteFriend:(UIButton *)sender {
     
-    [YZHAlertManage showAlertTitle:@"删除该好友，并清空与TA的聊天记录" message:nil actionButtons:@[@"取消", @"删除"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+    if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId]) {
+        @weakify(self)
+        [YZHAlertManage showAlertTitle:@"删除该好友，并清空与TA的聊天记录" message:nil actionButtons:@[@"取消", @"删除"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                @strongify(self)
+                YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+                [[NIMSDK sharedSDK].userManager deleteFriend:self.userId completion:^(NSError *error) {
+                    [SVProgressHUD dismiss];
+                    if (!error) {
+                        [hud hideWithText:@"已删除"];
+                    }else{
+                        [hud hideWithText:@"删除失败,请重试"];
+                    }
+                }];
+            }
+        }];
+    } else {
+        [YZHAlertManage showAlertMessage:@"对方已经不是你好友"];
+    }
 
-    }];
 }
 
 #pragma mark - 6.Private Methods

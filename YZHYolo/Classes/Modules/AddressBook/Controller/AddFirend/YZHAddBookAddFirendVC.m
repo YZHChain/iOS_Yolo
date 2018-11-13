@@ -72,7 +72,7 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 
 - (void)setupData {
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -174,25 +174,29 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 - (void)searchBarTextFieldShouldReturn:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (YZHIsString(searchText)) {
+        [searchBar endEditing:YES];
         NSDictionary* dic = @{
                               @"searchUser": searchText
                               };
         YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.searchResultVC.tableView text:nil];
         @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(NSObject* obj) {
             @strongify(self)
-            if (obj) {
+            //后台能不能别瞎返回状态码???????
+            if (!obj.yzh_apiEmptyValue) {
                 self.searchResultVC.viewModel = [YZHAddFirendSearchModel YZH_objectWithKeyValues:obj];
                 self.searchResultVC.searchStatus = YZHAddFirendSearchStatusSucceed;
+                [hud hideWithText:nil];
+                [self.searchResultVC refreshData];
             } else {
                 self.searchResultVC.searchStatus = YZHAddFirendSearchStatusEmpty;
+                [self.searchResultVC.tableView reloadData];
+                [hud hideWithText:nil];
             }
-            [self.searchResultVC.tableView reloadData];
-            [hud hideWithText:nil];
         } failureCompletion:^(NSError *error) {
+            
             //相关状态展示
             [hud hideWithText:error.domain];
-            
         }];
     }
     

@@ -11,9 +11,9 @@
 #import "YZHAddBookAddFirendCell.h"
 #import "YZHPhoneContactCell.h"
 #import "YZHAddFirendSearchRemindCell.h"
-#import "YZHProgressHUD.h"
+#import "YZHPublic.h"
 
-@interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
 
 @end
 
@@ -47,6 +47,14 @@
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    _tableView.frame = self.view.bounds;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.tableFooterView = [[UIView alloc] init];
+    
     [self.view addSubview:self.reminderView];
     [self.view addSubview:self.tableView];
 }
@@ -60,33 +68,37 @@
 - (void)refreshData {
     
     if (self.searchStatus == YZHAddFirendSearchStatusSucceed) {
-       __block NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:self.viewModel.userId];
-        // 本地无数据
-        if (!user) {
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
-            [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-                if (!error) {
-                    self.viewModel.user = users.firstObject;
-                    [self.viewModel configurationUserData];
-                } else {
-                    self.searchStatus = YZHAddFirendSearchStatusEmpty;
-                }
-                [hud hideWithText:error.domain];
-            }];
+        if (self.viewModel.isMySelf) {
+            // 弹框提示
+            [YZHAlertManage showAlertMessage:@"你不能添加自己到通讯录"];
         } else {
-            self.viewModel.user = user;
-            [self.viewModel configurationUserData];
+            __block NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:self.viewModel.userId];
+            // 本地无数据
+            if (!user) {
+                YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+                @weakify(self)
+                [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+                    @strongify(self)
+                    if (!error) {
+                        self.viewModel.user = users.firstObject;
+                        [self.viewModel configurationUserData];
+                    } else {
+                        @strongify(self)
+                        self.searchStatus = YZHAddFirendSearchStatusEmpty;
+                    }
+                    [self.tableView reloadData];
+                    [hud hideWithText:error.domain];
+                }];
+            } else {
+                self.viewModel.user = user;
+                [self.viewModel configurationUserData];
+                [self.tableView reloadData];
+            }
         }
     }
-    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -100,6 +112,12 @@
         YZHPhoneContactCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHPhoneContactCell" owner:nil options:nil].firstObject;
         //先判断是否为好友状态
         cell.searchModel = self.viewModel;
+        
+        if (self.viewModel.allowAdd == 0) {
+            cell.delegate = self;
+        } else {
+            cell.delegate = nil;
+        }
         return cell;
     } else {
        YZHAddFirendSearchRemindCell* cell = [YZHAddFirendSearchRemindCell yzh_viewWithFrame:CGRectZero];
@@ -111,6 +129,7 @@
             titleString = @"请输入准确的YOLO号或手机号查找";
         }
         cell.titleLabel.text = titleString;
+        NSLog(@"刷新列表状态%ld", self.searchStatus);
         return cell;
     }
 }
@@ -130,26 +149,56 @@
     }
 }
 
+- (void)onSelectedCellButtonWithModel:(id)model {
+    
+    YZHAddFirendSearchModel* contactModel = model;
+    if (contactModel.allowAdd) {
+        NIMUserRequest *request = [[NIMUserRequest alloc] init];
+        request.userId = contactModel.userId;
+        if (contactModel.needVerfy) {
+            request.operation = NIMUserOperationRequest;
+            //快速添加文案.
+            request.message = @"请求添加";
+            request.operation = NIMUserOperationRequest;
+        } else {
+            request.operation = NIMUserOperationAdd;
+        }
+        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败,请重试" : @"请求失败,请重试";
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+            [SVProgressHUD dismiss];
+            if (!error) {
+                [hud hideWithText:successText];
+            }else{
+                [hud hideWithText:failedText];
+            }
+        }];
+        
+    }
+}
+
 #pragma mark - 5.Event Response
 
 #pragma mark - 6.Private Methods
 
 #pragma mark - 7.GET & SET
 
-- (UITableView *)tableView{
-    
-    if (_tableView == nil) {
-        
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        _tableView.frame = self.view.bounds;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.tableFooterView = [[UIView alloc] init];
-    }
-    return _tableView;
-}
+//- (UITableView *)tableView{
+//
+//    if (_tableView == nil) {
+//
+//        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+//        _tableView.frame = self.view.bounds;
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _tableView.tableFooterView = [[UIView alloc] init];
+//        [self.view addSubview:_tableView];
+//    }
+//    return _tableView;
+//}
 
 - (YZHAddFirendSearchModel *)viewModel {
     

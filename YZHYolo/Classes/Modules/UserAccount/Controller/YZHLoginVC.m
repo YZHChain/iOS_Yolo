@@ -110,7 +110,7 @@
 
 - (void)setupLoginEvent {
     
-    BOOL isIMTest = YES;
+    BOOL isIMTest = NO;
     if (isIMTest) {
         NSDictionary* obj = @{
                                   @"appKey" : @"2828b3cd20e9263f914344c284588b60",
@@ -135,8 +135,6 @@
             [hud hideWithAPIError:error];
         }];
     }
-
-
 }
 
 - (void)setupRegistEvent {

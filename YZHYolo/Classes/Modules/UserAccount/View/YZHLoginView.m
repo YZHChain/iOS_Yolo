@@ -10,15 +10,8 @@
 
 #import "YZHPublic.h"
 #import "YZHLoginVC.h"
-@implementation YZHLoginView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+@implementation YZHLoginView
 
 - (void)awakeFromNib{
 
@@ -73,7 +66,7 @@
 
 - (BOOL)checkAccountTextFieldWithinputCharacters:(NSString* )characters{
     
-    if (self.accountTextField.text.length >= 18 && characters.length != 0) {
+    if (self.accountTextField.text.length >= 32 && characters.length != 0) {
         return NO;
     }
     return YES;

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* phone;
 @property (nonatomic, copy) NSString* accid;
 @property (nonatomic, assign) NSInteger status; //当前账户状态: 0-可添加,1-已添加, 2-可邀请
+@property (nonatomic, assign) BOOL needVerfy;   // 添加是否需要验证
 @property (nonatomic, copy) NSString* subtitle;
 @property (nonatomic, copy) NSString* photoImageName;
 

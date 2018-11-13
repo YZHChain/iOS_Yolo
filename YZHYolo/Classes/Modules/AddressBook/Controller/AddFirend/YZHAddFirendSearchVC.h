@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) YZHAddFirendSearchStatus searchStatus;
 @property (nonatomic, strong) YZHAddFirendSearchModel* viewModel;
 
+- (void)refreshData;
 @end
 
 NS_ASSUME_NONNULL_END

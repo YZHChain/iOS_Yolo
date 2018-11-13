@@ -178,7 +178,9 @@
 
 - (void)clickRightItemGotoSetting {
     
-    [YZHRouter openURL:kYZHRouterAddressBookSetting];
+    [YZHRouter openURL:kYZHRouterAddressBookSetting info:@{
+                                                           @"userId": self.userId
+                                                           }];
 }
 
 - (void)senderMessage:(UIButton *)sender {

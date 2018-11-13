@@ -17,7 +17,7 @@
 #import "YZHAddBookSectionView.h"
 
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
-@interface YZHAddBookPhoneContactVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHAddBookPhoneContactVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHPhoneContactDefaultView* defaultView;
@@ -93,8 +93,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     } authorizationFailure:^{
         //读取失败
     }];
-    
-    
 }
 
 - (void)requestNetworking {
@@ -140,11 +138,14 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     
     NSArray* contactContents = self.contactModel.phoneContactList[indexPath.section];
     YZHAddBookPhoneContactModel* model = contactContents[indexPath.row];
-    //根据 Model 状态还选择 Cell 类型,分两种一种是 Labelm,一种是 Button
+    //根据 Model 状态还选择 Cell 类型,分两种一种是 Label,一种是 Button
     YZHPhoneContactCell* cell = [YZHPhoneContactCell tempTableViewCellWithTableView:tableView indexPath:indexPath cellType:model.status];
     cell.contactModel = model;
-    
-    
+    if (model.status == 0 || model.status == 2) {
+        cell.delegate = self;
+    } else {
+        cell.delegate = nil;
+    }
     
     return cell;
 }
@@ -158,6 +159,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     
      YZHAddBookSectionView* headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kYZHAddBookSectionViewIdentifier];
     headerView.titleLabel.text = self.contactModel.sortedGroupTitles[section];
+    
     
     return headerView;
 }
@@ -178,6 +180,50 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)onSelectedCellButtonWithModel:(id)model {
+    
+    YZHAddBookPhoneContactModel* contactModel = model;
+    if (contactModel.status == 0) {
+        //快速添加
+        NIMUserRequest *request = [[NIMUserRequest alloc] init];
+        request.userId = contactModel.accid;
+        
+        if (contactModel.needVerfy) {
+            //快速添加文案.
+            request.message = @"请求添加";
+            request.operation = NIMUserOperationRequest;
+        } else {
+            request.operation = NIMUserOperationAdd;
+        }
+        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败,请重试" : @"请求失败,请重试";
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+            [SVProgressHUD dismiss];
+            if (!error) {
+                [hud hideWithText:successText];
+            }else{
+                [hud hideWithText:failedText];
+            }
+        }];
+        
+    } else if (contactModel.status == 2) {
+        //邀请当前用户
+        NSDictionary* dic = @{
+                              @"phoneNum": contactModel.phone
+                              };
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_INVITE_SENDSMS params:dic successCompletion:^(NSObject* obj) {
+            //TODO: 邀请成功
+            [hud hideWithText: obj.yzh_apiDetail];
+        } failureCompletion:^(NSError *error) {
+            [hud hideWithText:error.domain];
+        }];
+       
+    }
+    
 }
 
 #pragma mark - 5.Event Response

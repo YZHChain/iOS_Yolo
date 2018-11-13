@@ -1,3 +1,4 @@
+
 //
 //  YZHPhoneContactCell.m
 //  YZHYolo
@@ -99,4 +100,18 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
     self.nameLabel.text = searchModel.userModel.title;
     self.nickNameLabel.text = searchModel.userModel.nickName;
 }
+
+- (IBAction)clickRequestButton:(UIButton *)sender {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onSelectedCellButtonWithModel:)]) {
+        if (self.contentMode) {
+            [self.delegate onSelectedCellButtonWithModel:self.contactModel];
+        } else {
+            [self.delegate onSelectedCellButtonWithModel:self.searchModel];
+        }
+        
+    }
+    
+}
+
 @end

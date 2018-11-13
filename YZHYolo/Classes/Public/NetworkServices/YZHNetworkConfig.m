@@ -110,6 +110,9 @@ static YZHNetworkConfig* _instance;
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
+    if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS]) {
+        httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+    }
     [httpSessionManager POST:path parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -229,10 +232,9 @@ static YZHNetworkConfig* _instance;
 //        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
         // 数据序列化处理
         httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
-        httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
-        httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
-        [httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        //AFHTTPSessionManager+RetryPolicy
+//        httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+//        httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+//        [httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         httpSessionManager.retryPolicyLogMessagesEnabled = YES;
         // TODO HOOK?
         _httpManager = httpSessionManager;

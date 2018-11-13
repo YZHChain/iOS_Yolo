@@ -61,11 +61,6 @@
     }
     return self;
 }
-// 根据用户名首字母排序
-- (void)sortWithUserName {
-    
-    
-}
 
 
 @end

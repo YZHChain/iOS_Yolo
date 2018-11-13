@@ -232,6 +232,7 @@
 		5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556024A21807CA4000F46DF /* NTESSessionSnapchatContentView.m */; };
 		5556024F21807CD5000F46DF /* NTESSnapchatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556024D21807CD4000F46DF /* NTESSnapchatAttachment.m */; };
 		5556025321807DFA000F46DF /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556025121807DFA000F46DF /* NSData+NTES.m */; };
+		555B80682199D80500168C3C /* YZHTagContactManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B80672199D80500168C3C /* YZHTagContactManage.m */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
@@ -841,6 +842,8 @@
 		5556025021807D02000F46DF /* NTESCustomAttachmentDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESCustomAttachmentDefines.h; sourceTree = "<group>"; };
 		5556025121807DFA000F46DF /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		5556025221807DFA000F46DF /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
+		555B80662199D80500168C3C /* YZHTagContactManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTagContactManage.h; sourceTree = "<group>"; };
+		555B80672199D80500168C3C /* YZHTagContactManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTagContactManage.m; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
@@ -2725,6 +2728,8 @@
 		5593C523216D926B00A50533 /* AddressBookHome */ = {
 			isa = PBXGroup;
 			children = (
+				555B80662199D80500168C3C /* YZHTagContactManage.h */,
+				555B80672199D80500168C3C /* YZHTagContactManage.m */,
 				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
 				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
 				5520DE1C218EE4B10042ED56 /* YZHContactMemberModel.h */,
@@ -3584,6 +3589,7 @@
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
 				5520DE1E218EE4B10042ED56 /* YZHContactMemberModel.m in Sources */,
 				553641D3217EAEC2006F77A5 /* NIMGrowingInternalTextView.m in Sources */,
+				555B80682199D80500168C3C /* YZHTagContactManage.m in Sources */,
 				55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */,
 				5528DE81219271F8002FB26B /* YZHPageControlView.m in Sources */,
 				5536421F217EAEC3006F77A5 /* NSDictionary+NIMKit.m in Sources */,

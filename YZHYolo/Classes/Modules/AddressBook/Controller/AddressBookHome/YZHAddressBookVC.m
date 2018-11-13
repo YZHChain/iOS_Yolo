@@ -21,16 +21,26 @@
 #import "YZHGroupedContacts.h"
 #import "YZHContactMemberModel.h"
 #import "YZHAddBookDetailsModel.h"
+#import "YZHTagContactManage.h"
 
+typedef enum : NSUInteger {
+    YZHAddressBookShowTypeDefault = 0,
+    YZHAddressBookShowTypeTag = 1,
+} YZHAddressBookShowType;
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
 static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier";
-@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating, SCTableViewSectionIndexDelegate>
+@interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating, SCTableViewSectionIndexDelegate, NIMUserManagerDelegate,
+NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 
-@property (nonatomic, strong) UITableView* tableView;
+@property (nonatomic, strong) UITableView* defaultTableView;
+@property (nonatomic, strong) UITableView* tagTableView;
 @property (nonatomic, strong) JKRSearchController* searchController;
+@property (nonatomic, strong) JKRSearchController* tagSearchController;
 @property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
 @property (nonatomic, strong) YZHGroupedContacts* contacts;
+@property (nonatomic, strong) YZHTagContactManage* tagContactManage;
+@property (nonatomic, assign) YZHAddressBookShowType currentType;
 
 @end
 
@@ -48,18 +58,12 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     [self setupView];
     //3.请求数据
     [self setupData];
-    //4.设置通知
-    [self setupNotification];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-
 }
 
 #pragma mark - 2.SettingView and Style
@@ -91,38 +95,55 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.defaultTableView];
+    [self.view addSubview:self.tagTableView];
     //设置右边索引;
-    self.tableView.sc_indexViewConfiguration = self.indexViewConfiguration;
-    self.tableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
-    self.tableView.delegate = self;
-    
-}
-
-- (void)reloadView
-{
-    
+    self.defaultTableView.sc_indexViewConfiguration = self.indexViewConfiguration;
+    self.defaultTableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
+    self.defaultTableView.delegate = self;
 }
 
 #pragma mark - 3.Request Data
 
 - (void)setupData
 {
+    self.currentType = YZHAddressBookShowTypeDefault;
     self.contacts = [[YZHGroupedContacts alloc] init];
-    self.tableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
+    self.tagContactManage = [[YZHTagContactManage alloc] init];
+    self.defaultTableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
     
     [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
-    [[NIMSDK sharedSDK].loginManager addDelegate:self];
+//    [[NIMSDK sharedSDK].loginManager addDelegate:self];
     [[NIMSDK sharedSDK].userManager addDelegate:self];
     [[NIMSDK sharedSDK].subscribeManager addDelegate:self];
     
+}
+
+- (void)refresh {
+    
+    if (self.currentType == YZHAddressBookShowTypeDefault) {
+        self.defaultTableView.hidden = NO;
+        self.tagTableView.hidden = YES;
+        self.defaultTableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
+    } else {
+        self.defaultTableView.hidden = YES;
+        self.tagTableView.hidden = NO;
+        self.defaultTableView.sc_indexViewDataSource = nil;
+    }
+    [self.defaultTableView reloadData];
+    [self.tagTableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return _contacts.groupTitleCount + 1;
+    if ([self.defaultTableView isEqual: tableView]) {
+       return _contacts.groupTitleCount + 1;
+    } else {
+        return _tagContactManage.tagContacts.count + 1;
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -130,7 +151,11 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (section == 0) {
         return 2;
     } else {
-        return [_contacts memberCountOfGroup:section - 1];
+        if ([self.defaultTableView isEqual:tableView]) {
+            return [_contacts memberCountOfGroup:section - 1];
+        } else {
+            return _tagContactManage.tagContacts[section - 1].count;
+        }
     }
 }
 
@@ -140,7 +165,13 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         YZHAddBookAdditionalCell* cell = [YZHAddBookAdditionalCell tempTableViewCellWithTableView:tableView indexPath:indexPath];
         return cell;
     }
-    YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
+    
+    YZHContactMemberModel* memberModel;
+    if ([self.defaultTableView isEqual:tableView]) {
+        memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
+    } else {
+        memberModel = self.tagContactManage.tagContacts[indexPath.section - 1][indexPath.row];
+    }
     YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
     [cell refreshUser:memberModel];
     
@@ -158,8 +189,12 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         //TODO:
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendRecord];
     } else {
-        
-        YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
+        YZHContactMemberModel* memberModel;
+        if ([self.defaultTableView isEqual:tableView]) {
+            memberModel =  (YZHContactMemberModel *)[_contacts memberOfIndex:indexPath];
+        } else {
+            memberModel = self.tagContactManage.tagContacts[indexPath.section - 1][indexPath.row];
+        }
         YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
         [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": memberModel.info.infoId, @"userDetailsModel": model}];
     }
@@ -179,7 +214,11 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (section == 0) {
         view.titleLabel.text = nil;
     } else {
-        view.titleLabel.text = self.contacts.sortedGroupTitles[section - 1];
+        if ([self.defaultTableView isEqual: tableView]) {
+            view.titleLabel.text = self.contacts.sortedGroupTitles[section - 1];
+        } else {
+            view.titleLabel.text = self.tagContactManage.showTagNameArray[section - 1];
+        }
     }
     
     return view;
@@ -188,17 +227,17 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 #pragma mark -- UITableView Editing
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    YZHAddBookDetailModel* model = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
-//    if (model.canSkip) {
-//        [YZHRouter openURL:model.router info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
-//                                               @"userDetailsModel": self.userDetailsModel
-//                                               }];
-//    }
     //TODO: 过长
     @weakify(self)
     UITableViewRowAction *categoryAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"分类标签" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         @strongify(self)
-        YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[self.contacts memberOfIndex:indexPath];
+        
+        YZHContactMemberModel* memberModel;
+        if ([self.defaultTableView isEqual:tableView]) {
+            memberModel =  (YZHContactMemberModel *)[self.contacts memberOfIndex:indexPath];
+        } else {
+            memberModel = self.tagContactManage.tagContacts[indexPath.section - 1][indexPath.row];
+        }
         YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
         [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
                                                               @"userDetailsModel": model
@@ -206,8 +245,13 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     }];
     
     UITableViewRowAction *remarkAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"备注" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-        @strongify(self)
-          YZHContactMemberModel* memberModel =  (YZHContactMemberModel *)[self.contacts memberOfIndex:indexPath];
+          @strongify(self)
+          YZHContactMemberModel* memberModel;
+          if ([self.defaultTableView isEqual:tableView]) {
+              memberModel =  (YZHContactMemberModel *)[self->_contacts   memberOfIndex:indexPath];
+          } else {
+              memberModel =   self.tagContactManage.tagContacts[indexPath.section - 1]  [indexPath.row];
+          }
           YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
            [YZHRouter openURL:kYZHRouterAddressBookSetNote info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
                                                               @"userDetailsModel": model
@@ -241,21 +285,26 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         indexPath = [NSIndexPath indexPathForRow:0 inSection:section];
     }
     CGRect frame = [tableView rectForSection:indexPath.section];
-    [tableView setContentOffset:CGPointMake(0, frame.origin.y) animated:NO];
+    [_defaultTableView setContentOffset:CGPointMake(0, frame.origin.y) animated:NO];
     
 }
 
 - (NSUInteger)sectionOfTableViewDidScroll:(UITableView *)tableView {
-
-    NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
-    NSInteger indexSection = indexPath.section;
-    if (indexSection > 0) {
-        indexSection = indexPath.section - 1;
+    
+    if ([self.defaultTableView isEqual: tableView]) {
+        NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
+        NSInteger indexSection = indexPath.section;
+        if (indexSection > 0) {
+            indexSection = indexPath.section - 1;
+        } else {
+            indexPath = 0;
+        }
+        //TODO
+        return indexSection;
     } else {
-        indexPath = 0;
+        return 0;
     }
-    //TODO
-    return indexSection;
+
 }
 
 #pragma mark - JKRSearchControllerhResultsUpdating
@@ -305,6 +354,15 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 - (void)clickLeftBarSwitchType:(UIButton *)sender{
     
     sender.selected = !sender.isSelected;
+    self.currentType = !self.currentType;
+//    if (self.currentType == YZHAddressBookShowTypeDefault) {
+//        self.defaultTableView.hidden = NO;
+//        self.tagTableView.hidden = YES;
+//    } else {
+//        self.defaultTableView.hidden = YES;
+//        self.tagTableView.hidden = NO;
+//    }
+    [self refresh];
 }
 
 - (void)clickRightBarGotoAddFirend:(UIButton *)sender{
@@ -314,32 +372,66 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 #pragma mark - 6.Private Methods
 
-- (void)setupNotification
+#pragma mark - NIMSDK Delegate
+
+- (void)onUserInfoChanged:(NIMUser *)user
 {
     
+    self.contacts = [[YZHGroupedContacts alloc] init];
+    self.tagContactManage = [[YZHTagContactManage alloc] init];
+    [self refresh];
 }
+
+- (void)onFriendChanged:(NIMUser *)user{
+    
+    self.contacts = [[YZHGroupedContacts alloc] init];
+    self.tagContactManage = [[YZHTagContactManage alloc] init];
+    [self refresh];
+}
+
 
 #pragma mark - 7.GET & SET
 
-- (UITableView *)tableView{
+- (UITableView *)defaultTableView{
     
-    if (_tableView == nil) {
+    if (_defaultTableView == nil) {
         
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _tableView.frame = CGRectMake(0, 10, self.view.width, self.view.height - 64 - 40 - 10);
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tableView.rowHeight = kYZHCellHeight;
-        _tableView.tableHeaderView = self.searchController.searchBar;
-        _tableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
-        _tableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
-        _tableView.showsVerticalScrollIndicator = NO;
+        _defaultTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _defaultTableView.frame = CGRectMake(0, 0, self.view.width, self.view.height - 64 - 40 - 10);
+        _defaultTableView.delegate = self;
+        _defaultTableView.dataSource = self;
+        _defaultTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _defaultTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+        _defaultTableView.rowHeight = kYZHCellHeight;
+        _defaultTableView.tableHeaderView = self.searchController.searchBar;
+        _defaultTableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 10, self.view.width, 48)];
+        [_defaultTableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
+        [_defaultTableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
+        _defaultTableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
+        _defaultTableView.showsVerticalScrollIndicator = NO;
     }
-    return _tableView;
+    return _defaultTableView;
+}
+
+- (UITableView *)tagTableView{
+    
+    if (_tagTableView == nil) {
+        
+        _tagTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tagTableView.frame = CGRectMake(0, 0, self.view.width, self.view.height - 64 - 40 - 10);
+        _tagTableView.delegate = self;
+        _tagTableView.dataSource = self;
+        _tagTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _tagTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+        _tagTableView.rowHeight = kYZHCellHeight;
+        _tagTableView.tableHeaderView = self.tagSearchController.searchBar;
+        _tagTableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
+        [_tagTableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
+        [_tagTableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
+        _tagTableView.sectionIndexColor = [UIColor yzh_fontShallowBlack];
+        _tagTableView.showsVerticalScrollIndicator = NO;
+    }
+    return _tagTableView;
 }
 
 - (SCIndexViewConfiguration *)indexViewConfiguration {
@@ -347,10 +439,25 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (!_indexViewConfiguration) {
         _indexViewConfiguration = [SCIndexViewConfiguration configuration];
         _indexViewConfiguration.indexItemsSpace = 1.5;
-        self.tableView.sc_translucentForTableViewInNavigationBar = YES;
-        self.tableView.sc_indexViewDelegate = self;
+        self.defaultTableView.sc_translucentForTableViewInNavigationBar = YES;
+        self.defaultTableView.sc_indexViewDelegate = self;
     }
     return _indexViewConfiguration;
+}
+
+- (JKRSearchController *)tagSearchController {
+    
+    if (!_tagSearchController) {
+        YZHAddBookSearchVC* addBookSearchVC = [[YZHAddBookSearchVC alloc] init];
+        _tagSearchController = [[JKRSearchController alloc] initWithSearchResultsController:addBookSearchVC];
+        _tagSearchController.searchBar.placeholder = @"搜索";
+        _tagSearchController.hidesNavigationBarDuringPresentation = YES;
+        // 代理方法都是设计业务, 可以单独抽取出来.
+        _tagSearchController.searchResultsUpdater = self;
+        _tagSearchController.searchBar.delegate = self;
+        _tagSearchController.delegate = self;
+    }
+    return _tagSearchController;
 }
 
 - (JKRSearchController *)searchController {

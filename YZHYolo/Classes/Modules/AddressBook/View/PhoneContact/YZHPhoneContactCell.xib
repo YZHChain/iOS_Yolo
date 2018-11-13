@@ -61,6 +61,9 @@
                                 <integer key="value" value="3"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="clickRequestButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="GjF-85-Oiw"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

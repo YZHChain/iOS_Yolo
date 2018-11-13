@@ -10,6 +10,7 @@
 
 #import "YZHUserLoginManage.h"
 #import "PPPersonModel.h"
+#import "YZHUserModelManage.h"
 
 static NSString* subTitleAllowAddText = @"添加";
 static NSString* subTitleAlreadyAddText = @"已添加";
@@ -78,6 +79,12 @@ static NSString* subTitleAlreadyInviteText = @"已邀请";
     }
     //读取 IM 头像信息
     return nil;
+}
+
+- (BOOL)needVerfy {
+    
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.accid];
+    return userInfoExt.privateSetting.addVerift;
 }
 
 @end

@@ -19,6 +19,7 @@
 #define PATH_USER_UPDATELOGIN                   @"/user/updateLogin"        //修改 Yolo 号
 #define PATH_USER_CHECKOUPHONE                  @"/user/checkPhone"         //检测Phone 是否已经注册
 #define PATH_FRIENDS_MOBILEFRIENDS              @"/friendsManage/getMobileFriends" //获取通讯录好友
-#define PATH_FRIENDS_SEARCHUSER                 @"/user/searchuser" //用户搜索
+#define PATH_FRIENDS_SEARCHUSER                 @"/user/searchuser"         //用户搜索
+#define PATH_USER_INVITE_SENDSMS                @"/sms/sendSMSInvite"         //用户邀请短信发送接口
 
 #endif /* YZHPathConst_h */

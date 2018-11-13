@@ -9,6 +9,7 @@
 #import "YZHContactMemberModel.h"
 
 #import "NIMSpellingCenter.h"
+#import "YZHTargetUserDataManage.h"
 @implementation YZHContactMemberModel
 
 - (instancetype)initWithInfo:(NIMKitInfo *)info {
@@ -31,6 +32,17 @@
     }else{
         return @"#";
     }
+}
+//当前用户标签
+- (NSString *)groupTagTitle {
+    
+    YZHTargetUserExtManage* targetUserExt = [YZHTargetUserExtManage targetUserExtWithUserId:self.info.infoId];
+    
+    NSString* tagName = targetUserExt.friend_tagName;
+    if (!YZHIsString(tagName)) {
+        tagName = @"其他好友";
+    }
+    return tagName;
 }
 
 - (NSString *)userId{

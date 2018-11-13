@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* userId;
 @property (nonatomic, assign) BOOL isMyFriend; //
 @property (nonatomic, assign) BOOL allowAdd; //
+@property (nonatomic, assign) BOOL isMySelf;
+@property (nonatomic, assign) BOOL needVerfy;
 @property (nonatomic, strong) NIMUser* user;
 @property (nonatomic, strong) YZHAddressBookModel* userModel;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
