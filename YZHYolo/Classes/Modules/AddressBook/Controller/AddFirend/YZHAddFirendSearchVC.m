@@ -12,6 +12,7 @@
 #import "YZHPhoneContactCell.h"
 #import "YZHAddFirendSearchRemindCell.h"
 #import "YZHPublic.h"
+#import "YZHAddBookDetailsVC.h"
 
 @interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
 
@@ -74,7 +75,7 @@
         } else {
             __block NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:self.viewModel.userId];
             // 本地无数据
-            if (!user) {
+            if (!user.userInfo) {
                 YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
                 @weakify(self)
                 [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
@@ -143,10 +144,26 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.searchStatus == 0 && self.viewModel) {
-       //跳转至用户详情页
-       
+    if (self.searchStatus == YZHAddFirendSearchStatusSucceed) {
+        //跳转至用户详情页
     }
+    if (self.searchStatus == 0 && self.viewModel.allowAdd) {
+       //跳转至用户详情页
+//        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+//                                                               @"userId":self.viewModel.userId
+//                                                               }];
+        
+//        YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
+//        detailsVC.userId = self.viewModel.userId;
+//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
+//
+//        }];
+    }
+    YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
+    detailsVC.userId = self.viewModel.userId;
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
+        
+    }];
 }
 
 - (void)onSelectedCellButtonWithModel:(id)model {
@@ -201,13 +218,11 @@
 //}
 
 - (YZHAddFirendSearchModel *)viewModel {
-    
+
     if (!_viewModel) {
         _viewModel = [[YZHAddFirendSearchModel alloc] init];
     }
     return _viewModel;
 }
-
-
 
 @end

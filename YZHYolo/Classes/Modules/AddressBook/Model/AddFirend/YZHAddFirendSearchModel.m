@@ -8,7 +8,7 @@
 
 #import "YZHAddFirendSearchModel.h"
 
-
+#import "NIMKitInfoFetchOption.h"
 
 @implementation YZHAddFirendSearchModel
 
@@ -36,7 +36,9 @@
 
 - (void)configurationUserData {
     
-    self.userModel = [[YZHAddressBookModel alloc] initWithUser:self.user];
+    NIMKitInfoFetchOption* infoFetchOption = [[NIMKitInfoFetchOption alloc] initWithIsAddressBook:YES];
+    NIMKitInfo* kitInfo = [[NIMKit sharedKit] infoByUser:self.userId option:infoFetchOption];
+    self.memberModel = [[YZHContactMemberModel alloc] initWithInfo:kitInfo];
 
     // 判断是否为好友
     if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId]) {
@@ -50,7 +52,5 @@
         self.needVerfy = userInfoExt.privateSetting.addVerift;
     }
 }
-
-
 
 @end

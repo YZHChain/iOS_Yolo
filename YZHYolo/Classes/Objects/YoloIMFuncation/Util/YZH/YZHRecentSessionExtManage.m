@@ -8,6 +8,8 @@
 
 #import "YZHRecentSessionExtManage.h"
 #import "NTESSessionUtil.h"
+#import "YZHTargetUserDataManage.h"
+#import "YZHUserModelManage.h"
 
 @implementation YZHRecentSeesionExtModel
 
@@ -18,6 +20,8 @@
 #pragma mark -- Sort
 
 - (void)screeningTagSessionAllRecentSession:(NSMutableArray<NIMRecentSession *> *)allRecentSession {
+    
+    [self updataDefaultTags];
     _tagsRecentSession = [self defaultTagsRecentSession];
     _currentSessionTags = [self defaultCurrentSessionTags];
     NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
@@ -91,11 +95,15 @@
             NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
             if (!error) {
                 if (dic[@"friend_tagName"]) {
-                    NSDictionary* locExt = @{
-                                             @"friend_tagName":dic[@"friend_tagName"]
-                                             };
-                    //TODO: 更新时机还需要在研究下.
-                        [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:locExt recentSession:recentSession];
+                    NSDictionary *localExt = recentSession.localExt?:@{};
+                    NSMutableDictionary *dict = [localExt mutableCopy];
+                    [dict setObject:dic[@"friend_tagName"] forKey:@"friend_tagName"];
+                    localExt = dict.copy;
+                    NSDictionary* recentSessionLocExt = recentSession.localExt;
+                    if (![recentSessionLocExt isEqualToDictionary:localExt]) {
+                        [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:localExt recentSession:recentSession];
+                    }
+
 
                 }
             }
@@ -135,27 +143,26 @@
     return _myFriends;
 }
 
-//- (NSMutableArray *)currentTags {
-//
-//    if (!_currentTags) {
-////        _currentTags = [[NSMutableArray alloc] initWithArray:self.defaultTags];
-////        [_currentTags addObject:];
-//    }
-//    return _currentTags;
-//}
-
-- (NSArray *)defaultTags {
+- (void)updataDefaultTags {
     
-    if (!_defaultTags) {
-        _defaultTags = [[NSMutableArray alloc] initWithObjects:@"置顶",@"☆标好友", @"家人", @"朋友",@"无标签好友", nil];
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    NSMutableArray* tagsArray = [[NSMutableArray alloc] init];
+    for (YZHUserGroupTagModel* groupTags in userInfoExt.groupTags) {
+        [tagsArray addObject:groupTags.tagName];
     }
-    return _defaultTags;
+    for (YZHUserGroupTagModel* customTags in userInfoExt.customTags) {
+        [tagsArray addObject:customTags.tagName];
+    }
+    [tagsArray insertObject:@"置顶" atIndex:0];
+    [tagsArray addObject:@"无好友标签"];
+    
+    self.defaultTags = tagsArray.copy;
 }
 
 - (NSString* )getSessionExtTagNameWithRecentSession:(NIMRecentSession* )recentSession {
     // 优化
     YZHRecentSeesionExtModel* extModel = [[YZHRecentSeesionExtModel alloc] init];
-    extModel.tagName = recentSession.localExt[@"tagName"];
+    extModel.tagName = recentSession.localExt[@"friend_tagName"];
     
     return extModel.tagName;
 }

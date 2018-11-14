@@ -93,12 +93,17 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
     } else {
         if (searchModel.allowAdd) {
             [self.datingButton setTitle:searchModel.addText forState:UIControlStateNormal];
+        } else {
+            [self.datingButton removeFromSuperview];
+            self.datingButton = nil;
         }
     }
-    [self.photoImageView yzh_setImageWithString:@"addBook_cover_cell_photo_default" placeholder:searchModel.userModel.image];
-    
-    self.nameLabel.text = searchModel.userModel.title;
-    self.nickNameLabel.text = searchModel.userModel.nickName;
+    if (YZHIsString(searchModel.memberModel.info.avatarUrlString)) {
+        [self.photoImageView yzh_setImageWithString:@"addBook_cover_cell_photo_default" placeholder:searchModel.memberModel.info.avatarUrlString];
+    }
+
+    self.nameLabel.text = searchModel.memberModel.info.showName;
+    self.nickNameLabel.text = searchModel.memberModel.info.nickName;
 }
 
 - (IBAction)clickRequestButton:(UIButton *)sender {

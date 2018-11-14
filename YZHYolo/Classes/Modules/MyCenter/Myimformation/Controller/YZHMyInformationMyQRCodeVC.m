@@ -156,7 +156,12 @@
     
     if (!_QRCodeResult) {
         
-        _QRCodeResult = [YZHUserInfoExtManage currentUserInfoExt].qrCode;
+        NSDictionary* dic = @{
+                              @"type": [NSNumber numberWithInteger:0],
+                              @"accid": [[[NIMSDK sharedSDK] loginManager] currentAccount]
+                              };
+        
+        _QRCodeResult = [dic mj_JSONString];
     }
     return _QRCodeResult;
 }

@@ -57,11 +57,13 @@ NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
 
 #pragma mark -- AddressBook
 
-NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details";
+NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details/";
+NSString* const kYZHRouterAddressBookAddFriendShow   = @"/addressBook/addFirendShow/";
 NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote";
 NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
 NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
 NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
+NSString* const kYZHRouterAddressBookAddFirendSendVerify = @"/addressBook/addFriend/sendVerify";
 NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
 NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
 NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendRecord";
@@ -185,6 +187,12 @@ NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/re
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterAddressBookAddFriendShow: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendShowVC",
+                     kYZHRouteViewControllerNameKey: @"详情资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
              kYZHRouterAddressBookSetNote: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookSetNoteVC",
                      kYZHRouteViewControllerNameKey: @"设置备注",
@@ -206,6 +214,12 @@ NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/re
              kYZHRouterAddressBookAddFirend: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendVC",
                      kYZHRouteViewControllerNameKey: @"添加好友",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookAddFirendSendVerify: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddFirendSendVerifyVC",
+                     kYZHRouteViewControllerNameKey: @"添加好友验证消息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

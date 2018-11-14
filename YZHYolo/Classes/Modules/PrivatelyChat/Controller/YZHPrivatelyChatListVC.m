@@ -438,11 +438,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             headerView.tagNameLabel.text = @"置顶";
             headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
-            headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
+            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"无好友标签";
             headerView.backgroundColor = [UIColor whiteColor];
         }
     } else {
-        headerView.tagNameLabel.text = session.localExt[@"tagName"] ? session.localExt[@"tagName"] : @"无好友标签";
+        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"无好友标签";
     }
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
@@ -673,7 +673,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
               totalUnreadCount:(NSInteger)totalUnreadCount{
-//    [self.recentSessionExtManage checkSessionUserTagWithRecentSession:recentSession];
+    [self.recentSessionExtManage checkSessionUserTagWithRecentSession:recentSession];
     for (NIMRecentSession *recent in self.recentSessions)
     {
         if ([recentSession.session.sessionId isEqualToString:recent.session.sessionId])

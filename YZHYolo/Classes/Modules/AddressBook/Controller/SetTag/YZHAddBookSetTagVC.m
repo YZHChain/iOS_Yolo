@@ -308,7 +308,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         @strongify(self)
         //TODO:文案需产品确认
         [self refreshTags];
-        [hud hideWithText:@"标签添加成功"];
+        [hud hideWithText:@"标签删除成功"];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
         }];

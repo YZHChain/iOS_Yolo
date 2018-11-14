@@ -31,6 +31,7 @@
 #import "UIActionSheet+YZHBlock.h"
 #import "Reachability.h"
 #import <CoreServices/UTCoreTypes.h>
+#import "YZHUserModelManage.h"
 
 #import "YZHProgressHUD.h"
 
@@ -51,6 +52,7 @@
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, assign) BOOL requstAddFirendFlag;
+@property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
 @end
 
 @implementation YZHPrivateChatVC
@@ -294,6 +296,49 @@
     [super sendMessage:message didCompleteWithError:error];
 }
 
+- (void)sendAddFriendMeesage {
+    
+    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerift;
+    NIMUserRequest *request = [[NIMUserRequest alloc] init];
+    request.userId = self.session.sessionId;
+    if (needAddVerify) {
+        //跳转至填写验证消息
+        [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
+                                                                           kYZHRouteSegue:kYZHRouteSegueModal,
+                                                                           @"userId": self.session.sessionId,
+                                                                           @"isPrivate": @(1),
+                                                                           @"session": self.session
+                                                                           }];
+    } else {
+        request.operation = NIMUserOperationAdd;
+    }
+    NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+    NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
+    [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+        @strongify(self)
+        if (!error) {
+            //添加成功文案;
+            [hud hideWithText:successText];
+            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
+                if (!error) {
+                    //发送添加请求成功,则发送一条已添加消息.
+                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                    addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
+                    //插入一条添加好友申请回话.
+                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+                } else {
+                    //这里可以提出相应提示等等.
+                }
+            }];
+        }else{
+            
+            [hud hideWithText:failedText];
+        }
+    }];
+}
+
 #pragma mark - 录音事件
 
 - (BOOL)recordFileCanBeSend:(NSString *)filepath
@@ -325,7 +370,12 @@
 
 - (BOOL)onTapAvatar:(NIMMessage *)message{
     //TODO目前两种,一种是好友,一种是临时 非好友,不知道非好友状态聊天对方 id 字段是否也是
-    NSString *userId = message.from;
+    NSString* userId;
+    if (message.isOutgoingMsg) {
+        userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    } else {
+        userId = message.session.sessionId;
+    }
     NSDictionary* info = @{
                            @"userId": userId
                            };
@@ -465,7 +515,7 @@
 - (void)showVideo:(NIMMessage *)message {
     
 }
-
+//处理自定义消息事件
 - (void)showCustom:(NIMMessage *)message
 {
     //判断当前消息是否属于添加好友的消息.
@@ -475,26 +525,29 @@
     if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
         YZHAddFirendAttachment* addFirendAttachment = (YZHAddFirendAttachment *)attachment;
         NSString* fromAccount = addFirendAttachment.fromAccount;
+        NSLog(@"当前好友关系:%ld", [[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]);
         //判断当前是否为好友,不是则执行添加好友,并且发出一条消息.否认提示等
-        if ([[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+        if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+            
+            [self sendAddFriendMeesage];
             NIMUserRequest* request = [[NIMUserRequest alloc] init];
             request.userId = fromAccount;
+            
             request.operation = NIMUserOperationRequest;
             //TODO: 添加好友,附言,这里需要和产品对一下.
             request.message = @"";
-            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
-                if (!error) {
-                    //发送添加请求成功,则发送一条已添加消息.
-                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
-                    addFirendAttachment.addFirendTitle = @"好友申请已经发出";
-                    //插入一条添加好友申请回话.
-                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
-                } else {
-                    //这里可以提出相应提示等等.
-                }
-            }];
+//            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
+//                if (!error) {
+//                    //发送添加请求成功,则发送一条已添加消息.
+//                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+//                    addFirendAttachment.addFirendTitle = @"好友申请已经发出";
+//                    //插入一条添加好友申请回话.
+//                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+//                } else {
+//                    //这里可以提出相应提示等等.
+//                }
+//            }];
         }
-        
     }
     //普通的自定义消息点击事件可以在这里做哦~
 }
@@ -644,6 +697,14 @@
 
 - (BOOL)shouldAutorotate{
     return !self.currentSingleSnapView;
+}
+
+- (YZHUserInfoExtManage *)userInfoExtManage {
+    
+    if (!_userInfoExtManage) {
+        _userInfoExtManage = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.session.sessionId];
+    }
+    return _userInfoExtManage;
 }
 
 @end

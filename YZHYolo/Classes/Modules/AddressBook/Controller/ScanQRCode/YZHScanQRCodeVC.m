@@ -55,6 +55,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    self.isSkip = NO;
 }
 
 - (void)dealloc {
@@ -119,13 +121,21 @@
     for (AVMetadataObject *current in metadataObjects) {
         if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
-            
-            if (!self.isSkip) {
-                self.isSkip = YES;
-                [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
-                                                                       @"userId": scannedResult
-                                                                       }];
+            NSDictionary* dic = [scannedResult mj_JSONObject];
+            if (YZHIsDictionary(dic)) {
+                //0为用户 1 为群聊
+                if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:0]]) {
+                    if (!self.isSkip) {
+                        self.isSkip = YES;
+                        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+                                                                               @"userId": dic[@"accid"]
+                                                                               }];
+                    }
+                } else {
+                    
+                }
             }
+
 //            [self stopScanWithLineAnimation];
             
             break;

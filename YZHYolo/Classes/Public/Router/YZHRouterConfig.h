@@ -64,10 +64,12 @@ extern NSString *const kYZHRouterPrivacySetting;
 #pragma mark -- AddressBook
 
 extern NSString *const kYZHRouterAddressBookDetails;
+extern NSString *const kYZHRouterAddressBookAddFriendShow;
 extern NSString *const kYZHRouterAddressBookSetNote;
 extern NSString *const kYZHRouterAddressBookSetTag;
 extern NSString *const kYZHRouterAddressBookSetting;
 extern NSString *const kYZHRouterAddressBookAddFirend;
+extern NSString *const kYZHRouterAddressBookAddFirendSendVerify;
 extern NSString *const kYZHRouterAddressBookPhoneContact;
 extern NSString *const kYZHRouterAddressBookAddFirendRecord;
 extern NSString *const kYZHRouterAddressBookScanQRCode;

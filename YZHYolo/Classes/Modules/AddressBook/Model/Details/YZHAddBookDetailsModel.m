@@ -8,6 +8,7 @@
 
 #import "YZHAddBookDetailsModel.h"
 
+#import "YZHProgressHUD.h"
 @implementation YZHAddBookDetailModel
 
 
@@ -16,7 +17,38 @@
 
 @implementation YZHAddBookHeaderModel
 
+- (instancetype)initWithUserId:(NSString *)userId {
+    
+    self = [super init];
+    if (self) {
+        _userId = userId;
+        [self configuration];
+    }
+    return self;
+}
 
+- (void)configuration {
+    
+    NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
+    NIMUserInfo* userInfo = user.userInfo;
+    YZHUserInfoExtManage* userInfoExtManage = [YZHUserInfoExtManage targetUserInfoExtWithUserId:_userId];
+//    YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:_userId];
+    self.photoImageName = userInfo.avatarUrl;
+    self.remarkName = user.alias;
+    if (YZHIsString(self.remarkName)) {
+        //TODO:暂时不设置
+        self.nickName = self.remarkName;
+        
+    } else {
+        self.remarkName = userInfo.nickName;
+        self.nickName = @"";
+    }
+    self.genderImageName = [YZHUserUtil genderImageNameString:userInfo.gender];
+    self.yoloId = userInfoExtManage.userYolo.yoloID;
+    self.cellClass = @"YZHAddBookUserIDCell";
+    self.canSkip = NO;
+    self.cellHeight = 55;
+}
 
 @end
 
@@ -28,38 +60,43 @@
     if (self) {
         _userId = userId;
         [self createData];
+        [self updataUserData];
     }
     return self;
 }
 
-- (void)createData {
+- (void)updataUserData {
     
     NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
     _user = user;
-    NIMUserInfo* userInfo = user.userInfo;
+    if (!user.userInfo) {
+//        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        @weakify(self)
+        [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+            @strongify(self)
+            if (!error) {
+                self.user = users.firstObject;
+                [self createData];
+                self.updataBlock ? self.updataBlock() : NULL;
+            } else {
+                [self createData];
+            }
+        }];
+    }
+}
+
+- (void)createData {
+    
     YZHUserInfoExtManage* userInfoExtManage = [YZHUserInfoExtManage targetUserInfoExtWithUserId:_userId];
     _userInfoExt = userInfoExtManage;
     YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:_userId];
     _targetUserExt = userExtManage;
     
+    self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:_userId]; // 用来控制备注和分类标签是否支持跳转修改.
+
     //详情头部数据
-    YZHAddBookHeaderModel* headerModel = [[YZHAddBookHeaderModel alloc] init];
-//    headerModel.photoImageName = userInfo.thumbAvatarUrl;
-    headerModel.photoImageName = userInfo.avatarUrl;
-    headerModel.remarkName = user.alias;
-    if (YZHIsString(headerModel.remarkName)) {
-        //TODO:暂时不设置
-        headerModel.nickName = headerModel.remarkName;
-        
-    } else {
-        headerModel.remarkName = userInfo.nickName;
-        headerModel.nickName = @"";
-    }
-    headerModel.genderImageName = [YZHUserUtil genderImageNameString:userInfo.gender];
-    headerModel.yoloId = userInfoExtManage.userYolo.yoloID;
-    headerModel.cellClass = @"YZHAddBookUserIDCell";
-    headerModel.canSkip = NO;
-    headerModel.cellHeight = 55;
+    YZHAddBookHeaderModel* headerModel = [[YZHAddBookHeaderModel alloc] initWithUserId:_userId];
+
     //添加好友验证消息;
     YZHAddBookDetailModel* requteAddModel = nil;
     if (!self.isFriend && self.requstAddFirend) {
@@ -68,11 +105,12 @@
         requteAddModel.subtitle = userExtManage.requstAddText;
         requteAddModel.cellHeight = 126;
     }
+    self.requteAddModel = requteAddModel;
     //备注
     YZHAddBookDetailModel* remarkModel = [[YZHAddBookDetailModel alloc] init];
     remarkModel.title = @"设置备注";
-    remarkModel.subtitle = user.alias;
-    remarkModel.canSkip = YES;
+    remarkModel.subtitle = self.user.alias;
+    remarkModel.canSkip = self.isMyFriend;
     remarkModel.cellClass = @"YZHAddBookSettingCell";
     remarkModel.cellHeight = 55;
     remarkModel.router = kYZHRouterAddressBookSetNote;
@@ -89,7 +127,7 @@
     //分类标签
     YZHAddBookDetailModel* classTagModel = [[YZHAddBookDetailModel alloc] init];
     classTagModel.title = @"设置分类标签";
-    classTagModel.canSkip = YES;
+    classTagModel.canSkip = self.isMyFriend;
     classTagModel.cellClass = @"YZHAddBookSettingCell";
     classTagModel.cellHeight = 55;
     classTagModel.router = kYZHRouterAddressBookSetTag;
@@ -113,13 +151,19 @@
     NSArray* headerContentsArray = @[headerModel];
     //设置备注
     NSMutableArray* remarkContentsArray;
+    
     if (phoneModel) {
         remarkContentsArray = @[remarkModel,phoneModel].mutableCopy;
+        self.hasPhoneNumber = YES;
     } else {
         remarkContentsArray = @[remarkModel].mutableCopy;
+        self.hasPhoneNumber = NO;
     }
+    self.userNotePhoneArray = remarkContentsArray;
     //标签与地址
     NSArray* classTagArray = @[classTagModel, placeModel];
+    self.classTagModel = classTagModel;
+    self.placeModel = placeModel;
     // 拼装数据
     if (requteAddModel) {
        self.viewModel = @[
@@ -136,14 +180,6 @@
                            ].mutableCopy;
     }
     
-}
-
--  (YZHAddBookDetailModel *)classTagModel {
-    
-    if (!_classTagModel) {
-        _classTagModel = self.viewModel.lastObject.firstObject;
-    }
-    return _classTagModel;
 }
 
 @end

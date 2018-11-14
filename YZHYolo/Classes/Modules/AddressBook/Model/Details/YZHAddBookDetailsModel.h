@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL canSkip;
 @property (nonatomic, copy) NSString* router;
 @property (nonatomic, assign) NSInteger cellHeight;
+@property (nonatomic, copy) NSString* userId;
+
+- (instancetype)initWithUserId:(NSString *)userId;
+- (void)configuration;
 
 @end
 
@@ -48,11 +52,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTargetUserExtManage* targetUserExt;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
 @property (nonatomic, strong) YZHAddBookDetailModel* classTagModel;
+@property (nonatomic, strong) YZHAddBookDetailModel* placeModel;
 @property (nonatomic, strong) NSMutableArray<YZHAddBookDetailModel*>* userNotePhoneArray;
+@property (nonatomic, strong) YZHAddBookDetailModel* requteAddModel;
 
+
+@property (nonatomic, assign) BOOL isMyFriend;
+@property (nonatomic, assign) BOOL hasPhoneNumber;
 @property (nonatomic, assign) BOOL isFriend;
 @property (nonatomic, assign) BOOL userAllowAdd;   //是否允许添加
 @property (nonatomic, assign) BOOL requstAddFirend;//是否发起好友请求
+
+@property (nonatomic, copy) YZHVoidBlock updataBlock;
 
 - (instancetype)initDetailsModelWithUserId:(NSString *)userId;
 

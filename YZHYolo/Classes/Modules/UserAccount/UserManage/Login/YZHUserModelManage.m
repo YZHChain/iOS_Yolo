@@ -73,9 +73,18 @@
     YZHUserInfoExtManage* userInfoExtManage;
     if (YZHIsString(user.userInfo.ext)) {
         userInfoExtManage = [YZHUserInfoExtManage YZH_objectWithKeyValues:user.userInfo.ext];
-    };
+    } else {
+        [self updateUserWithUserId:userId];
+    }
     
     return userInfoExtManage;
+}
+
++ (void)updateUserWithUserId:(NSString *)userId {
+    
+    [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+        [self targetUserInfoExtWithUserId:userId];
+    }];
 }
 
 + (NSDictionary *)YZH_replacedKeyFromPropertyName {

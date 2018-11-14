@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "YZHAddressBookModel.h"
+#import "YZHContactMemberModel.h"
 #import "YZHUserModelManage.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,11 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isMySelf;
 @property (nonatomic, assign) BOOL needVerfy;
 @property (nonatomic, strong) NIMUser* user;
-@property (nonatomic, strong) YZHAddressBookModel* userModel;
+@property (nonatomic, strong) YZHContactMemberModel* memberModel;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
 @property (nonatomic, copy) NSString* addText;
-
-
 
 - (void)configurationUserData;
 

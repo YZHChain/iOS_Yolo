@@ -180,6 +180,17 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSArray* contactContents = self.contactModel.phoneContactList[indexPath.section];
+    YZHAddBookPhoneContactModel* model = contactContents[indexPath.row];
+    
+    
+    if (model.status != 2) {
+        //跳转至用户详情页
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+                                                               @"userId":model.accid
+                                                               }];
+    }
 }
 
 - (void)onSelectedCellButtonWithModel:(id)model {

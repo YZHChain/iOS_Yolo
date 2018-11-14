@@ -52,7 +52,6 @@
     //点击方法应该优化
     if ([self.delegate respondsToSelector:@selector(willPresentSearchController:)]) [self.delegate willPresentSearchController:self];
 
-    // 这里是添加一个方法？为了让每次点击时执行相应事件？
     [self.searchBar addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handGesture)]];
     [self.searchBar addGestureRecognizer:[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handGesture)]];
     //不应该要每次点击添加哦.虽然没什么影响

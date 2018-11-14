@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Normal.ttf">
+            <string>SourceHanSansCN-Normal</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHAddFirendSendVerifyVC">
+            <connections>
+                <outlet property="sendMessage" destination="MwE-Py-aMo" id="2VO-aq-swD"/>
+                <outlet property="verifyMessageTextField" destination="urS-dR-aRs" id="a9w-I7-eSI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-AR-dDU">
+                    <rect key="frame" x="0.0" y="10" width="375" height="55"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写验证信息，不得超过50个字符" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="urS-dR-aRs">
+                            <rect key="frame" x="12" y="0.0" width="351" height="55"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="Bi6-gM-cep"/>
+                        <constraint firstAttribute="trailing" secondItem="urS-dR-aRs" secondAttribute="trailing" constant="12" id="Ce2-SV-pnT"/>
+                        <constraint firstItem="urS-dR-aRs" firstAttribute="leading" secondItem="Nmf-AR-dDU" secondAttribute="leading" constant="12" id="Y6r-ef-Cav"/>
+                        <constraint firstAttribute="bottom" secondItem="urS-dR-aRs" secondAttribute="bottom" id="Z5F-iu-Xkm"/>
+                        <constraint firstItem="urS-dR-aRs" firstAttribute="top" secondItem="Nmf-AR-dDU" secondAttribute="top" id="eRx-xS-Wjc"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwE-Py-aMo">
+                    <rect key="frame" x="60" y="225" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="XsU-os-4I9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="18"/>
+                    <state key="normal" title="发消息">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Nmf-AR-dDU" secondAttribute="trailing" id="3n9-JD-uDt"/>
+                <constraint firstItem="Nmf-AR-dDU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7IE-Mq-19Q"/>
+                <constraint firstAttribute="trailing" secondItem="MwE-Py-aMo" secondAttribute="trailing" constant="60" id="7nl-ee-mNF"/>
+                <constraint firstItem="MwE-Py-aMo" firstAttribute="top" secondItem="Nmf-AR-dDU" secondAttribute="bottom" constant="160" id="Cxy-rO-hHQ"/>
+                <constraint firstItem="Nmf-AR-dDU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="ZnS-Kp-dl0"/>
+                <constraint firstItem="MwE-Py-aMo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="uPg-wr-0gP"/>
+            </constraints>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+</document>

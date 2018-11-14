@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* friend_tagName;
 @property (nonatomic, copy) NSString* requstAddText; // 请求添加好友验证消息
 @property (nonatomic, assign) BOOL requteAddFirend; // 是否发送过好友请求.
+@property (nonatomic, copy) YZHVoidBlock updataUserExt;
 
 + (instancetype)targetUserExtWithUserId:(NSString* )userId;
+
 
 @end
 

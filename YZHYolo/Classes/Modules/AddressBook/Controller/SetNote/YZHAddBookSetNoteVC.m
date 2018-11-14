@@ -185,7 +185,7 @@
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
         [[[NIMSDK sharedSDK] userManager] updateUser:self.userDetailsModel.user completion:^(NSError * _Nullable error) {
             if (!error) {
-                self.userDetailsModel.userNotePhoneArray.firstObject.title = self.phoneCell.subtitleTextField.text;
+                self.userDetailsModel.userNotePhoneArray.firstObject.subtitle = self.phoneCell.subtitleTextField.text;
                 if (self.userDetailsModel.userNotePhoneArray.count == 1) {
                     if (YZHIsString(self.tagCell.subtitleLabel.text)) {
 
@@ -196,7 +196,7 @@
                     }
                 } else {
                     if (YZHIsString(self.tagCell.subtitleLabel.text)) {
-                        self.userDetailsModel.userNotePhoneArray.lastObject.title = self.tagCell.subtitleLabel.text;
+                        self.userDetailsModel.userNotePhoneArray.lastObject.subtitle = self.tagCell.subtitleLabel.text;
                     } else {
                         [self.userDetailsModel.userNotePhoneArray removeLastObject];
                     }

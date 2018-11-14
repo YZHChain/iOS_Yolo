@@ -21,6 +21,7 @@ static YZHNetworkConfig* _instance;
 @interface YZHNetworkConfig()
 
 @property(nonatomic, strong) AFHTTPSessionManager *httpManager;
+@property(nonatomic, strong) AFHTTPSessionManager *httpJSONManager;
 @property(nonatomic, strong) NSURL *baseURL;
 @property(nonatomic, strong) YZHAPIRetryConfig* retryConfig;
 
@@ -110,9 +111,8 @@ static YZHNetworkConfig* _instance;
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
-//     || [path containsString:PATH_USER_INVITE_SENDSMS]
     if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS]) {
-        httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpJSONManager;
     }
     [httpSessionManager POST:path parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
@@ -239,9 +239,34 @@ static YZHNetworkConfig* _instance;
         httpSessionManager.retryPolicyLogMessagesEnabled = YES;
         // TODO HOOK?
         _httpManager = httpSessionManager;
-
     }
     return _httpManager;
+}
+
+- (AFHTTPSessionManager *)httpJSONManager{
+    
+    if (_httpJSONManager == nil) {
+        //TODO 暂时不做配置。
+        //        NSURLSessionConfiguration* URLSessionConfiguration = [URLSessionConfiguration ]
+        AFHTTPSessionManager* httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:self.baseURL];
+        // 设置HTTPS安全策略
+        httpSessionManager.securityPolicy = [self securityPolicy];
+        // TODO设置请求超时时间
+        httpSessionManager.requestSerializer.timeoutInterval = YZHAPIDefaultTimeoutInterval;
+        // HTTPHeader添加设备信息
+        //        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
+        // TODO 需和后台协商
+        //        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
+        // 数据序列化处理
+        httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
+        httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
+        httpSessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [httpSessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        httpSessionManager.retryPolicyLogMessagesEnabled = YES;
+        // TODO HOOK?
+        _httpJSONManager = httpSessionManager;
+    }
+    return _httpJSONManager;
 }
 // 防止 baseURL 读取失败,直接从这里设置.
 //- (NSURL *)baseURL{

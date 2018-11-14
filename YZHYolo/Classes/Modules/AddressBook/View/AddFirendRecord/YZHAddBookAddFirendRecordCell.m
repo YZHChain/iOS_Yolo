@@ -26,8 +26,6 @@ static NSString* kAddFirendRecordCellReview = @"addFirendRecordCellReview";
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 + (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath cellType:(YZHAddFirendRecordCellType)cellType {
@@ -46,6 +44,19 @@ static NSString* kAddFirendRecordCellReview = @"addFirendRecordCellReview";
     }
     
     return cell;
+}
+
+- (void)update:(YZHAddFriendRecordModel *)model {
+    
+    self.nameLabel.text = model.member.info.showName;
+    NSString *imageUrl = model.member.info.avatarUrlString ? model.member.info.avatarUrlString : nil;
+    //TODO: 加载图片方法需优化.
+    if (imageUrl) {
+        [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"addBook_cover_cell_photo_default"];
+    }
+    NSString* showNickName = model.member.info.nickName ? [NSString stringWithFormat:@"(%@)", model.member.info.nickName] : nil;
+    self.nickNameLabel.text = showNickName;
+    
 }
 
 @end

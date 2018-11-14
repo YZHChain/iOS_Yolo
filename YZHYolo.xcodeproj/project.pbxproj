@@ -233,6 +233,16 @@
 		5556024F21807CD5000F46DF /* NTESSnapchatAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556024D21807CD4000F46DF /* NTESSnapchatAttachment.m */; };
 		5556025321807DFA000F46DF /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556025121807DFA000F46DF /* NSData+NTES.m */; };
 		555B80682199D80500168C3C /* YZHTagContactManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B80672199D80500168C3C /* YZHTagContactManage.m */; };
+		555B806B219ADC4300168C3C /* YZHAddFirendRecordManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B806A219ADC4300168C3C /* YZHAddFirendRecordManage.m */; };
+		555B806F219B238D00168C3C /* NTESSystemNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B806C219B238C00168C3C /* NTESSystemNotificationCell.m */; };
+		555B8070219B238D00168C3C /* NTESSystemNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555B806D219B238C00168C3C /* NTESSystemNotificationCell.xib */; };
+		555B8074219B455000168C3C /* YZHAddBookAddFirendShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B8072219B454F00168C3C /* YZHAddBookAddFirendShowVC.m */; };
+		555B8075219B455000168C3C /* YZHAddBookAddFirendShowVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555B8073219B454F00168C3C /* YZHAddBookAddFirendShowVC.xib */; };
+		555B8078219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B8077219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m */; };
+		555B807B219B5AC700168C3C /* YZHAddFriendShowFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B807A219B5AC700168C3C /* YZHAddFriendShowFooterView.m */; };
+		555B807F219B5E0900168C3C /* YZHAddFriendShowFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555B807E219B5E0900168C3C /* YZHAddFriendShowFooterView.xib */; };
+		555B8083219BC25300168C3C /* YZHAddFirendSendVerifyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 555B8081219BC25300168C3C /* YZHAddFirendSendVerifyVC.m */; };
+		555B8084219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 555B8082219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib */; };
 		555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA493216C35160057D434 /* UIView+JKRSubView.m */; };
 		555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */; };
 		555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 555DA496216C35160057D434 /* UIGestureRecognizer+JKRTouch.m */; };
@@ -844,6 +854,22 @@
 		5556025221807DFA000F46DF /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		555B80662199D80500168C3C /* YZHTagContactManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTagContactManage.h; sourceTree = "<group>"; };
 		555B80672199D80500168C3C /* YZHTagContactManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTagContactManage.m; sourceTree = "<group>"; };
+		555B8069219ADC4300168C3C /* YZHAddFirendRecordManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendRecordManage.h; sourceTree = "<group>"; };
+		555B806A219ADC4300168C3C /* YZHAddFirendRecordManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendRecordManage.m; sourceTree = "<group>"; };
+		555B806C219B238C00168C3C /* NTESSystemNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSystemNotificationCell.m; sourceTree = "<group>"; };
+		555B806D219B238C00168C3C /* NTESSystemNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESSystemNotificationCell.xib; sourceTree = "<group>"; };
+		555B806E219B238D00168C3C /* NTESSystemNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSystemNotificationCell.h; sourceTree = "<group>"; };
+		555B8071219B454F00168C3C /* YZHAddBookAddFirendShowVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendShowVC.h; sourceTree = "<group>"; };
+		555B8072219B454F00168C3C /* YZHAddBookAddFirendShowVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendShowVC.m; sourceTree = "<group>"; };
+		555B8073219B454F00168C3C /* YZHAddBookAddFirendShowVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookAddFirendShowVC.xib; sourceTree = "<group>"; };
+		555B8076219B45FC00168C3C /* YZHAddBookAddFirendShowModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendShowModel.h; sourceTree = "<group>"; };
+		555B8077219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendShowModel.m; sourceTree = "<group>"; };
+		555B8079219B5AC700168C3C /* YZHAddFriendShowFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFriendShowFooterView.h; sourceTree = "<group>"; };
+		555B807A219B5AC700168C3C /* YZHAddFriendShowFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFriendShowFooterView.m; sourceTree = "<group>"; };
+		555B807E219B5E0900168C3C /* YZHAddFriendShowFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddFriendShowFooterView.xib; sourceTree = "<group>"; };
+		555B8080219BC25300168C3C /* YZHAddFirendSendVerifyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddFirendSendVerifyVC.h; sourceTree = "<group>"; };
+		555B8081219BC25300168C3C /* YZHAddFirendSendVerifyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddFirendSendVerifyVC.m; sourceTree = "<group>"; };
+		555B8082219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddFirendSendVerifyVC.xib; sourceTree = "<group>"; };
 		555DA492216C35160057D434 /* UIView+JKRTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKRTouch.h"; sourceTree = "<group>"; };
 		555DA493216C35160057D434 /* UIView+JKRSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKRSubView.m"; sourceTree = "<group>"; };
 		555DA495216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+JKR_BackgroundColor.m"; sourceTree = "<group>"; };
@@ -2467,9 +2493,15 @@
 				553C53EA216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.h */,
 				553C53EB216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m */,
 				553C53ED216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib */,
+				555B806E219B238D00168C3C /* NTESSystemNotificationCell.h */,
+				555B806C219B238C00168C3C /* NTESSystemNotificationCell.m */,
+				555B806D219B238C00168C3C /* NTESSystemNotificationCell.xib */,
 				553C53EF216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.h */,
 				553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */,
 				553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */,
+				555B8079219B5AC700168C3C /* YZHAddFriendShowFooterView.h */,
+				555B807A219B5AC700168C3C /* YZHAddFriendShowFooterView.m */,
+				555B807E219B5E0900168C3C /* YZHAddFriendShowFooterView.xib */,
 			);
 			path = AddFirendRecord;
 			sourceTree = "<group>";
@@ -2754,6 +2786,10 @@
 		5593C525216D92CA00A50533 /* AddFirendRecord */ = {
 			isa = PBXGroup;
 			children = (
+				555B8069219ADC4300168C3C /* YZHAddFirendRecordManage.h */,
+				555B806A219ADC4300168C3C /* YZHAddFirendRecordManage.m */,
+				555B8076219B45FC00168C3C /* YZHAddBookAddFirendShowModel.h */,
+				555B8077219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m */,
 			);
 			path = AddFirendRecord;
 			sourceTree = "<group>";
@@ -3128,6 +3164,9 @@
 				55D580EB21632541000A8B55 /* YZHAddBookAddFirendVC.xib */,
 				5520584121995DEE00591A4A /* YZHAddFirendSearchVC.h */,
 				5520584221995DEE00591A4A /* YZHAddFirendSearchVC.m */,
+				555B8080219BC25300168C3C /* YZHAddFirendSendVerifyVC.h */,
+				555B8081219BC25300168C3C /* YZHAddFirendSendVerifyVC.m */,
+				555B8082219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib */,
 			);
 			path = AddFirend;
 			sourceTree = "<group>";
@@ -3182,6 +3221,9 @@
 				55DC36B42167B23D00871C2B /* YZHAddBookAddFirendRecordVC.h */,
 				55DC36B52167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m */,
 				55DC36B62167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib */,
+				555B8071219B454F00168C3C /* YZHAddBookAddFirendShowVC.h */,
+				555B8072219B454F00168C3C /* YZHAddBookAddFirendShowVC.m */,
+				555B8073219B454F00168C3C /* YZHAddBookAddFirendShowVC.xib */,
 			);
 			path = AddFirendRecord;
 			sourceTree = "<group>";
@@ -3363,6 +3405,7 @@
 				552CC8A1215A782000135FDC /* YZHPrivacySettingVC.xib in Resources */,
 				55A286B421746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib in Resources */,
 				553641B4217EAEC2006F77A5 /* NIMKitEmoticon.bundle in Resources */,
+				555B8084219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib in Resources */,
 				55C656D2215F7077005E997B /* YZHAddBookSetTagFooterView.xib in Resources */,
 				55B5DBA02153374A002A04A9 /* YZHMyInformationCell.xib in Resources */,
 				5531458121573C1400A13F96 /* YZHMyInformationYoloIDVC.xib in Resources */,
@@ -3380,6 +3423,7 @@
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
 				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
 				55D580E12163240B000A8B55 /* YZHDetailsSettingVC.xib in Resources */,
+				555B8070219B238D00168C3C /* NTESSystemNotificationCell.xib in Resources */,
 				55D580F321635871000A8B55 /* YZHAddBookAddFirendCell.xib in Resources */,
 				55DF5D59218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib in Resources */,
 				55D0835C2160BE610028D919 /* YZHDetailsSettingCell.xib in Resources */,
@@ -3390,7 +3434,9 @@
 				553C53E9216CB5A8007D46A9 /* YZHCommanDefaultView.xib in Resources */,
 				553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */,
 				55337E022151055F00307B75 /* YZHSettingPasswordView.xib in Resources */,
+				555B807F219B5E0900168C3C /* YZHAddFriendShowFooterView.xib in Resources */,
 				553EED2221463FA8006CDD08 /* Default-568h@2x.png in Resources */,
+				555B8075219B455000168C3C /* YZHAddBookAddFirendShowVC.xib in Resources */,
 				55BDA375218AD9F1006400B0 /* YZHCreateTeamResultVC.xib in Resources */,
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
 				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
@@ -3656,7 +3702,10 @@
 				553641B9217EAEC2006F77A5 /* NIMContactDataCell.m in Sources */,
 				55D580EC21632541000A8B55 /* YZHAddBookAddFirendVC.m in Sources */,
 				55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */,
+				555B806F219B238D00168C3C /* NTESSystemNotificationCell.m in Sources */,
+				555B806B219ADC4300168C3C /* YZHAddFirendRecordManage.m in Sources */,
 				553641E5217EAEC2006F77A5 /* NIMCardMemberItem.m in Sources */,
+				555B807B219B5AC700168C3C /* YZHAddFriendShowFooterView.m in Sources */,
 				553641C4217EAEC2006F77A5 /* NIMKitDevice.m in Sources */,
 				55D5810121636CFF000A8B55 /* YZHPhoneContactDefaultView.m in Sources */,
 				55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */,
@@ -3681,6 +3730,7 @@
 				553641B6217EAEC2006F77A5 /* NIMContactSelectViewController.m in Sources */,
 				555DA4B5216C35160057D434 /* UIView+JKRViewController.m in Sources */,
 				5509F10F2183FED9004E10D3 /* YZHAddFirendAttachment.m in Sources */,
+				555B8083219BC25300168C3C /* YZHAddFirendSendVerifyVC.m in Sources */,
 				55B5DB9021527D78002A04A9 /* YZHMyCenterHeaderView.m in Sources */,
 				5536422F217EAEC3006F77A5 /* NIMKit.m in Sources */,
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
@@ -3735,6 +3785,8 @@
 				558A21422179685200E892C3 /* YZHRecentSessionExtManage.m in Sources */,
 				553641B8217EAEC2006F77A5 /* NIMGroupedUsrInfo.m in Sources */,
 				553641F4217EAEC3006F77A5 /* NIMMessageModel.m in Sources */,
+				555B8074219B455000168C3C /* YZHAddBookAddFirendShowVC.m in Sources */,
+				555B8078219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m in Sources */,
 				55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */,
 				553641DC217EAEC2006F77A5 /* NIMKitNotificationFirer.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,

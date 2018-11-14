@@ -372,7 +372,6 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 
 - (void)onUserInfoChanged:(NIMUser *)user
 {
-    
     self.contacts = [[YZHGroupedContacts alloc] init];
     self.tagContactManage = [[YZHTagContactManage alloc] init];
     [self refresh];

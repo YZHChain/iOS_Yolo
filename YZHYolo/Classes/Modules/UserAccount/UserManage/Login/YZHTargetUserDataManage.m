@@ -12,13 +12,17 @@
 
 + (instancetype)targetUserExtWithUserId:(NSString *)userId {
     
-
     NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:userId];
     YZHTargetUserExtManage* userExtManage = [[self alloc] init];
     if (YZHIsString(user.ext)) {
         userExtManage = [YZHTargetUserExtManage YZH_objectWithKeyValues:user.ext];
+    } else {
+        if (!user.userInfo) {
+            [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+                [self targetUserExtWithUserId:userId];
+            }];
+        }
     }
-
     
     return userExtManage;
 }
