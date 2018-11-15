@@ -63,6 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)targetUserInfoExtWithUserId:(NSString* )userId;
 - (NSString* )userInfoExtString;
 
+@property (nonatomic, assign) BOOL updateFlag;
+
 @end
 
 NS_ASSUME_NONNULL_END

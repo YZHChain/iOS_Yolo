@@ -113,12 +113,7 @@
         YZHPhoneContactCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHPhoneContactCell" owner:nil options:nil].firstObject;
         //先判断是否为好友状态
         cell.searchModel = self.viewModel;
-        
-        if (self.viewModel.allowAdd == 0) {
-            cell.delegate = self;
-        } else {
-            cell.delegate = nil;
-        }
+        cell.delegate = self;
         return cell;
     } else {
        YZHAddFirendSearchRemindCell* cell = [YZHAddFirendSearchRemindCell yzh_viewWithFrame:CGRectZero];
@@ -161,9 +156,11 @@
     }
     YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
     detailsVC.userId = self.viewModel.userId;
+    NSLog(@"当前跟控制器%@",[UIApplication sharedApplication].keyWindow.rootViewController);
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
         
     }];
+//    [[UIApplication sharedApplication].keyWindow.rootViewController.navigationController pushViewController:detailsVC animated:YES];
 }
 
 - (void)onSelectedCellButtonWithModel:(id)model {
@@ -200,22 +197,6 @@
 #pragma mark - 6.Private Methods
 
 #pragma mark - 7.GET & SET
-
-//- (UITableView *)tableView{
-//
-//    if (_tableView == nil) {
-//
-//        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-//        _tableView.frame = self.view.bounds;
-//        _tableView.delegate = self;
-//        _tableView.dataSource = self;
-//        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-//        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _tableView.tableFooterView = [[UIView alloc] init];
-//        [self.view addSubview:_tableView];
-//    }
-//    return _tableView;
-//}
 
 - (YZHAddFirendSearchModel *)viewModel {
 

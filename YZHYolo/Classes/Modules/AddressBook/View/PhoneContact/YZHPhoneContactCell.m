@@ -103,7 +103,9 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
     }
 
     self.nameLabel.text = searchModel.memberModel.info.showName;
-    self.nickNameLabel.text = searchModel.memberModel.info.nickName;
+    if (YZHIsString(searchModel.memberModel.info.nickName)) {
+        self.nickNameLabel.text = [NSString stringWithFormat:@"(%@)", searchModel.memberModel.info.nickName];
+    }
 }
 
 - (IBAction)clickRequestButton:(UIButton *)sender {
@@ -114,7 +116,6 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
         } else {
             [self.delegate onSelectedCellButtonWithModel:_searchModel];
         }
-        
     }
     
 }

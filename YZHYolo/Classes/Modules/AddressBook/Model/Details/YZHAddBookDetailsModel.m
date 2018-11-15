@@ -69,7 +69,7 @@
     
     NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
     _user = user;
-    if (!user.userInfo) {
+//    if (!user.userInfo) {
 //        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
         @weakify(self)
         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
@@ -82,7 +82,7 @@
                 [self createData];
             }
         }];
-    }
+//    }
 }
 
 - (void)createData {

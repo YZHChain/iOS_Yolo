@@ -118,8 +118,6 @@
 }
 
 - (void)refresh {
-    
-    [self.tableView reloadData];
     // 判断是否为好友,
     self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
     if (self.isMyFriend) {
@@ -150,6 +148,7 @@
         //清空表尾
         self.tableView.tableFooterView = [[UIView alloc] init];
     }
+    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -245,7 +244,7 @@
     if (needAddVerify) {
         //跳转至填写验证消息
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                           kYZHRouteSegue:kYZHRouteSegueModal,
+                                                                           
                                                                            @"userId": self.userId
                                                                            }];
     } else {
