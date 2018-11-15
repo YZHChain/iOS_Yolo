@@ -93,9 +93,7 @@
 
 - (void)shutdown:(UIBarButtonItem* )sender {
     
-    [self dismissViewControllerAnimated:YES completion:^{
-          
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)senderVerifyMessage:(UIButton *)sender {
@@ -103,6 +101,7 @@
     NIMUserRequest *request = [[NIMUserRequest alloc] init];
     request.userId = self.userId;
     request.operation = NIMUserOperationRequest;
+    request.message = self.verifyMessageTextField.text;
     NSString *successText = @"请求成功";
     NSString *failedText =  @"请求失败";
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];

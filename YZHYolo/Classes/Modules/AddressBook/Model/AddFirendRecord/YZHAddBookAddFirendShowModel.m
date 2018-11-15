@@ -14,7 +14,7 @@
     
     self = [super initDetailsModelWithUserId:userId];
     if (self) {
-        [self configurationAddMessage: addMessage isMySend: isMysend];
+        [self configurationAddMessage:addMessage isMySend:isMysend];
     }
     return self;
 }
@@ -29,7 +29,8 @@
     } else {
         addRequstModel.title = @"我:";
     }
-    addRequstModel.subtitle = message;
+    //TODO:当出现空消息时 应该如何展示.避免成功发送验证消息但是收不到的情况.
+    addRequstModel.subtitle = message.length ? message : @"";
     addRequstModel.cellHeight = 126;
     
     [self.viewModel insertObject:@[addRequstModel].mutableCopy atIndex:1];

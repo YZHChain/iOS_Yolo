@@ -59,7 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isMyFriend;
 @property (nonatomic, assign) BOOL hasPhoneNumber;
-@property (nonatomic, assign) BOOL isFriend;
 @property (nonatomic, assign) BOOL userAllowAdd;   //是否允许添加
 @property (nonatomic, assign) BOOL requstAddFirend;//是否发起好友请求
 

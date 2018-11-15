@@ -14,10 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookDetailsVC : YZHBaseViewController
 
-@property (nonatomic, assign) BOOL isShowFirendRecord;
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, strong) YZHAddBookDetailsModel* userDetailsModel;
-
 
 @end
 

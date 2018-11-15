@@ -221,7 +221,7 @@
                           };
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_SETTINGSPRIVACY params:dic successCompletion:^(id obj) {
         
-        [self updateUserPrivacySetting];
+        [self updateUserPrivacySettingIM];
     } failureCompletion:^(NSError *error) {
         
     }];

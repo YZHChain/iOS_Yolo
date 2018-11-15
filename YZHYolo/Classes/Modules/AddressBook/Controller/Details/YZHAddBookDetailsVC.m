@@ -23,19 +23,23 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHAddBookUserAskFooterView* userAskFooterView;
-@property (nonatomic, assign) BOOL isMyFriend;
+@property (nonatomic, strong) UIButton* addFriendButton;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
+@property (nonatomic, assign) BOOL isMyFriend;
+@property (nonatomic, assign) BOOL needAddVerify;
+@property (nonatomic, assign) BOOL isMySelf;
 
 @end
 
 @implementation YZHAddBookDetailsVC
+
 #pragma mark - 1.View Controller Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self NIMConfig];
+    [self setUpNIMConfig];
     
     [self setupData];
     //1.设置导航栏
@@ -55,11 +59,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
-    [self.tableView reloadData];
 }
 
-- (void)NIMConfig {
+- (void)setUpNIMConfig {
     
     [[NIMSDK sharedSDK].userManager addDelegate:self];
 }
@@ -74,12 +76,14 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"详情资料";
-//    TODO:
+    // 不是自己,并且是我的好友时,才会有更多选项
     if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
@@ -96,6 +100,15 @@
     //TODO: 计算高度.
     self.tableView.tableFooterView = self.userAskFooterView;
     [self.userAskFooterView.sendMessageButton addTarget:self action:@selector(senderMessage:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //暂时不考虑, 添加好友状态.
+    //如果是自己的个人详情,则。
+    if (self.isMySelf) {
+        //清空表尾
+//        self.tableView.tableFooterView = [[UIView alloc] init];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)reloadView
@@ -107,48 +120,68 @@
 
 - (void)setupData
 {
-    if (!_userDetailsModel) {
+    if (!self.isMySelf) {
+        //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
+        self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
         _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
-        @weakify(self)
-        _userDetailsModel.updataBlock = ^{
-            @strongify(self)
-            [self refresh];
-        };
+        if (_isMyFriend) {
+        } else {
+            //拉取最新
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            @weakify(self)
+            [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+                @strongify(self)
+                if (!error) {
+                    [self refresh];
+                }
+                [hud hideWithText:nil];
+            }];
+        }
+    } else {
+        _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
     }
 }
 
 - (void)refresh {
-    // 判断是否为好友,
-    self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
-    if (self.isMyFriend) {
+    
+    if (!self.isMySelf) {
+        [self setupNavBar];
         
-    } else {
-        BOOL allowAdd = self.userInfoExtManage.privateSetting.allowAdd;
-        if (allowAdd) {
-            UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-            addFriendButton.x = self.userAskFooterView.sendMessageButton.x;
-            addFriendButton.y = self.userAskFooterView.sendMessageButton.bottom + 10;
-            addFriendButton.layer.cornerRadius = 5;
-            addFriendButton.layer.masksToBounds = YES;
-            [addFriendButton addTarget:self action:@selector(addFriendRequst:) forControlEvents:UIControlEventTouchUpInside];
-            [addFriendButton setTitle:@"加好友" forState:UIControlStateNormal];
-            [addFriendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:18]];
-            [addFriendButton setTintColor:[UIColor yzh_fontShallowBlack]];
-            [addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-            
-            [self.userAskFooterView addSubview:addFriendButton];
-            self.tableView.tableFooterView = self.userAskFooterView;
+        self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+        // 判断是否为好友,
+        self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
+        
+        if (self.isMyFriend) {
+            if (self.addFriendButton.superview) {
+                [self.addFriendButton removeFromSuperview];
+                self.tableView.tableFooterView = self.userAskFooterView;
+            }
+        } else {
+            BOOL allowAdd = self.userInfoExtManage.privateSetting.allowAdd;
+            if (allowAdd) {
+                UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
+                addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
+                addFriendButton.x = self.userAskFooterView.sendMessageButton.x;
+                addFriendButton.y = self.userAskFooterView.sendMessageButton.bottom + 10;
+                addFriendButton.layer.cornerRadius = 5;
+                addFriendButton.layer.masksToBounds = YES;
+                [addFriendButton addTarget:self action:@selector(addFriendRequst:) forControlEvents:UIControlEventTouchUpInside];
+                [addFriendButton setTitle:@"加好友" forState:UIControlStateNormal];
+                [addFriendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:18]];
+                [addFriendButton setTintColor:[UIColor yzh_fontShallowBlack]];
+                [addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
+                self.addFriendButton = addFriendButton;
+                
+                [self.userAskFooterView addSubview:addFriendButton];
+                self.tableView.tableFooterView = self.userAskFooterView;
+            }
         }
+        [self.tableView reloadData];
+    } else {
+        _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+        [self.tableView reloadData];
     }
-    //暂时不考虑, 添加好友状态.
-    //如果是自己的个人详情,则。
-    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId]) {
-        //清空表尾
-        self.tableView.tableFooterView = [[UIView alloc] init];
-    }
-    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -249,22 +282,23 @@
                                                                            }];
     } else {
         request.operation = NIMUserOperationAdd;
+        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        @weakify(self)
+        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+            @strongify(self)
+            if (!error) {
+                //添加成功文案;
+                [hud hideWithText:successText];
+                [self refresh];
+            }else{
+                
+                [hud hideWithText:failedText];
+            }
+        }];
     }
-    NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
-    NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-    @weakify(self)
-    [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
-        @strongify(self)
-        if (!error) {
-            //添加成功文案;
-            [hud hideWithText:successText];
-            [self refresh];
-        }else{
-            
-            [hud hideWithText:failedText];
-        }
-    }];
+
 }
 
 #pragma mark - 6.Private Methods
@@ -272,6 +306,22 @@
 - (void)setupNotification
 {
     
+}
+
+#pragma mark - NIMUserManagerDelegate
+
+- (void)onFriendChanged:(NIMUser *)user {
+    
+    if ([self.userId isEqualToString:user.userId]) {
+        [self refresh];
+    }
+}
+
+- (void)onUserInfoChanged:(NIMUser *)user {
+    
+    if ([self.userId isEqualToString:user.userId]) {
+        [self refresh];
+    }
 }
 
 #pragma mark - 7.GET & SET
@@ -290,6 +340,15 @@
         _userInfoExtManage = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.userId];
     }
     return _userInfoExtManage;
+}
+
+- (BOOL)isMySelf {
+    
+    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

@@ -56,7 +56,6 @@ static NSString* kAddFirendRecordCellReview = @"addFirendRecordCellReview";
     }
     NSString* showNickName = model.member.info.nickName ? [NSString stringWithFormat:@"(%@)", model.member.info.nickName] : nil;
     self.nickNameLabel.text = showNickName;
-    
 }
 
 @end

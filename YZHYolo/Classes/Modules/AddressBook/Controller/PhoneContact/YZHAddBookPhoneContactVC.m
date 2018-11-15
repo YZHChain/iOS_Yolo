@@ -43,6 +43,8 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     [self setupData];
     //4.设置通知
     [self setupNotification];
+    //TODO:在进入这个页面时,应该异步去请求所有在平台内成员信息
+    
     
 }
 
@@ -113,6 +115,8 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             //获取到数据之后,删除获取按钮.
             self.navigationItem.rightBarButtonItem = nil;
             [self.tableView reloadData];
+            //TODO:可以在这里异步请求所有在当前平台的用户实时信息.可以防止通过手机联系人添加时跳过验证的步骤. 否则无法判断当前用户是否开启需要验证的权限.
+            
         }
     } failureCompletion:^(NSError *error) {
         
@@ -184,7 +188,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     NSArray* contactContents = self.contactModel.phoneContactList[indexPath.section];
     YZHAddBookPhoneContactModel* model = contactContents[indexPath.row];
     
-    
     if (model.status != 2) {
         //跳转至用户详情页
         [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
@@ -195,15 +198,16 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 
 - (void)onSelectedCellButtonWithModel:(id)model {
     
+    //TODO:
     YZHAddBookPhoneContactModel* contactModel = model;
     if (contactModel.status == 0) {
         //快速添加
         NIMUserRequest *request = [[NIMUserRequest alloc] init];
         request.userId = contactModel.accid;
-        
+        //TODO:这里读取的需要验证,并不是最新的,需要和产品确认.
         if (contactModel.needVerfy) {
-            //快速添加文案.
-            request.message = @"请求添加";
+            //TODO:快速添加文案.
+            request.message = @"通过手机联系人,请求添加好友";
             request.operation = NIMUserOperationRequest;
         } else {
             request.operation = NIMUserOperationAdd;

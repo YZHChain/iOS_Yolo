@@ -14,6 +14,7 @@
 #import "YZHAddBookAddFirendRecordCell.h"
 #import "YZHAddFirendRecordManage.h"
 #import "YZHAddBookDetailsModel.h"
+#import "YZHAddBookAddFirendShowModel.h"
 
 @interface YZHAddBookAddFirendRecordVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate,NIMSystemNotificationManagerDelegate>
 
@@ -31,6 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // 配置云信代理
+    [self setUpNIMDelegate];
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
@@ -46,10 +49,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setUpNIMDelegate {
+    
+    [[[NIMSDK sharedSDK] userManager] addDelegate:self];
+    [[[NIMSDK sharedSDK] systemNotificationManager] addDelegate:self];
+//    [[NIMSDK sharedSDK].subscribeManager addDelegate:self];
+}
+
 - (void)dealloc {
     
     [[[NIMSDK sharedSDK] userManager] removeDelegate:self];
+    [[[NIMSDK sharedSDK] systemNotificationManager] removeDelegate:self];
+//    [[NIMSDK sharedSDK].subscribeManager removeDelegate:self];
 }
+//
+//- (void)viewWillAppear:(BOOL)animated {
+//
+//    [super viewWillAppear:animated];
+//
+//    [self refresh];
+//}
 
 #pragma mark - 2.SettingView and Style
 
@@ -61,6 +80,7 @@
 }
 
 - (void)setupView {
+    
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
@@ -71,23 +91,34 @@
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    [[[NIMSDK sharedSDK] userManager] addDelegate:self];
-//    [self.view addSubview:self.withoutDefaultView];
+    [self refresh];
 }
 
 #pragma mark - 3.Request Data
 
 - (void)setupData {
-    
+    //配置消息数据.
     self.addFriendManage = [[YZHAddFirendRecordManage alloc] init];
 }
 
 - (void)refresh {
     
     [self setupData];
-    [self.tableView reloadData];
+    [self refreshView];
 }
 
+- (void)refreshView {
+    
+    if (self.addFriendManage.addFirendListModel.firstObject.count) {
+        [self.withoutDefaultView removeFromSuperview];
+        [self.tableView reloadData];
+        self.tableView.hidden = NO;
+    } else {
+        [self.view addSubview:self.withoutDefaultView];
+        self.tableView.hidden = YES;
+    }
+    [self.tableView reloadData];
+}
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
@@ -127,8 +158,10 @@
     UITableViewRowAction* removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         @strongify(self)
         [self.addFriendManage removeAddFirendMessage:indexPath];
+        if (!self.addFriendManage.addFirendListModel.firstObject.count) {
+            [self refreshView];
+        }
         [self.tableView reloadData];
-        
     }];
     
     return @[removeAction];
@@ -165,39 +198,40 @@
     return view;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YZHAddFriendRecordModel* model = self.addFriendManage.addFirendListModel[indexPath.section][indexPath.row];
-    
+    //跳转逻辑.
     //先判断是我发起还是对方发起.
     if (model.isMySend) {
-        //因为没有拒绝的操作,所以当用户收到我发送出去的消息时,都是属于收到发出的请求得到回复的情况.
-        //判断当前用户与对方是否为好友,是好友则
-//        if (model.isMyFriend) { 直接在模型判断
-           //直接跳转用户详情页,带发消息按钮 非好友时 //直接跳转用户详情页,带发送按钮和添加好友
-            YZHAddBookDetailsModel* detailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:model.targetUserId];
-            [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId, @"userDetailsModel": detailsModel}];
-//        }
+        [self isMysendRequstReviewModel:model];
     } else {
-        //不判断是否做过处理, 有限判断是否为好友. 如果判断是否处理状态,则会出现前面收到多条未处理消息, 然后处理了最后一条,但是前面所有未处理同一个人消息与这个消息会保持不一致. 可以考虑去重
-//        if (model.isMyFriend) {
-        
-            //跳转至用户申请详情, 按钮改为发送消息.
-//            [YZHRouter openURL:kYZHRouterAddressBookAddFriendShow info:@{@"userId": model.targetUserId, @"addMessage": model.addFriendNotification.postscript.length ? model.addFriendNotification.postscript : @"", @"isMySend": @(model.isMySend),
-//                                                                         @"addFriendNotification":model.addFriendNotification
-//                                                                         }];
-//        } else {
-            BOOL messageTimeout = NO;
-            //调准至用户详情, 按钮为添加好友
-            //跳转至用户申请详情, 按钮为发送消息
-            [YZHRouter openURL:kYZHRouterAddressBookAddFriendShow info:@{@"userId": model.targetUserId, @"addMessage": model.addFriendNotification.postscript.length ? model.addFriendNotification.postscript : @"", @"isMySend": @(model.isMySend),
-                                                                         @"addFriendNotification":model.addFriendNotification,
-                                                                         @"messageTimeout": @(messageTimeout)
-                                                                         }];
-//        }
+        // 未处理过的消息
+        if (model.addFriendNotification.handleStatus == 0) {
+            NIMUserAddAttachment* attachment = model.addFriendNotification.attachment;
+            if (model.isMyFriend) {
+                //是好友,非自己发出请求,对方直接添加我为好友无需时。
+                [self notMysendRequstIsFriendNotVerifyReviewModel:model];
+            } else {
+                //非好友,非自己发出请求,对方需要添加我为好友需要验证时,或者不需要验证的方式
+                if (attachment.operationType == NIMUserOperationAdd) {
+                    [self notMySendRequstNotFirendNotVerifyReviewModel:model];
+                } else {
+                     [self notMySendRequstNotFirendNeedVerifyReviewModel:model];
+                }
+               
+            }
+        } else {
+            //非自己发出,已经处理过的,属于我的好友.跳转至用户申请详情
+            if (model.isMyFriend) {
+                [self notMySendRequstIsFirendHasHandleStatusReviewModel:model];
+            } else {
+                [self notMySendRequstNotFirendHasHandleStatusReviewModel:model];
+            }
+        }
     }
+    
 }
 
 #pragma mark - 5.Event Response
@@ -205,6 +239,74 @@
 - (void)addFriend:(UIBarButtonItem* )barButtonItem {
     
     [YZHRouter openURL:kYZHRouterAddressBookAddFirend];
+}
+
+- (void)isMysendRequstReviewModel:(YZHAddFriendRecordModel* )model {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId}];
+}
+
+- (void)notMysendRequstNotFriendNotVerifyReviewModel:(YZHAddFriendRecordModel* )model {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId}];
+}
+
+- (void)notMysendRequstIsFriendNotVerifyReviewModel:(YZHAddFriendRecordModel* )model {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId}];
+}
+
+- (void)notMySendRequstNotFirendNotVerifyReviewModel:(YZHAddFriendRecordModel* )model {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId}];
+}
+
+- (void)notMySendRequstNotFirendNeedVerifyReviewModel:(YZHAddFriendRecordModel *)model {
+    BOOL messageTimeout = NO;
+    NSString* requstMessage;
+    if (YZHIsString(model.addFriendNotification.postscript)) {
+        requstMessage = model.addFriendNotification.postscript;
+    } else {
+        //TODO:默认展示？
+        requstMessage = @"";
+    }
+    YZHAddBookAddFirendShowModel* userDetailsModel = [[YZHAddBookAddFirendShowModel alloc] initDetailsModelWithUserId:model.targetUserId addMessage:requstMessage
+                                                                                                             isMySend:model.isMySend];
+    [YZHRouter openURL:kYZHRouterAddressBookAddFriendShow info:@{
+                                                                 @"addFriendNotification":model.addFriendNotification,
+                                                                 @"userDetailsModel": userDetailsModel,
+                                                                 @"messageTimeout": @(messageTimeout),
+                                                                 @"userId": model.targetUserId,
+                                                                 @"addMessage":requstMessage
+                                                                 }];
+}
+
+- (void)notMySendRequstIsFirendHasHandleStatusReviewModel:(YZHAddFriendRecordModel *)model {
+    
+    [self notMySendRequstNotFirendNeedVerifyReviewModel:model];
+//    //TODO:计算是否超时.也可以跳转到下个页面之后在计算.
+//    BOOL messageTimeout = NO;
+//    NSString* requstMessage;
+//    if (YZHIsString(requstMessage)) {
+//        requstMessage = model.addFriendNotification.postscript;
+//    } else {
+//        //TODO:默认展示？
+//        requstMessage = @"";
+//    }
+//    YZHAddBookAddFirendShowModel* userDetailsModel = [[YZHAddBookAddFirendShowModel alloc] initDetailsModelWithUserId:model.targetUserId addMessage:requstMessage
+//                                                                                                             isMySend:model.isMySend];
+//    [YZHRouter openURL:kYZHRouterAddressBookAddFriendShow info:@{
+//                                                                 @"addFriendNotification":model.addFriendNotification,
+//                                                                 @"userDetailsModel": userDetailsModel,
+//                                                                 @"messageTimeout": @(messageTimeout),
+//                                                                 @"userId": model.targetUserId,
+//                                                                 @"addMessage":requstMessage
+//                                                                 }];
+}
+
+- (void)notMySendRequstNotFirendHasHandleStatusReviewModel:(YZHAddFriendRecordModel *)model {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": model.targetUserId}];
 }
 
 #pragma mark - 6.Private Methods
@@ -216,19 +318,20 @@
 #pragma mark - NIMSDK Delegate
 
 - (void)onUserInfoChanged:(NIMUser *)user {
+    
     [self refresh];
 }
 
 - (void)onFriendChanged:(NIMUser *)user {
+    
     [self refresh];
 }
 
 - (void)onReceiveSystemNotification:(NIMSystemNotification *)notification
 {
-
     YZHAddFriendRecordModel* model = [[YZHAddFriendRecordModel alloc] init];
     model.addFriendNotification = notification;[self.addFriendManage.addFirendListModel.firstObject addObject:model];
-    [self.tableView reloadData];
+    [self refresh];
 }
 
 #pragma mark - 7.GET & SET

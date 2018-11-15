@@ -17,9 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* addMessage;
 @property (nonatomic, assign) BOOL isMySend;
 @property (nonatomic, assign) BOOL messageTimeout;
-
 @property (nonatomic, strong) NIMSystemNotification* addFriendNotification;
-
 @property (nonatomic, strong) YZHAddBookAddFirendShowModel* userDetailsModel;
 
 @end

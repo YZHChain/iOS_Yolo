@@ -14,12 +14,15 @@
     
     NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:userId];
     YZHTargetUserExtManage* userExtManage = [[self alloc] init];
+    //非好友关系时需要,需要拉取最新.
     if (YZHIsString(user.ext)) {
         userExtManage = [YZHTargetUserExtManage YZH_objectWithKeyValues:user.ext];
     } else {
         if (!user.userInfo) {
             [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-                [self targetUserExtWithUserId:userId];
+                if (!error) {
+                    [self targetUserExtWithUserId:userId];
+                }
             }];
         }
     }

@@ -116,6 +116,7 @@
         [[NIMSDK sharedSDK].userManager addDelegate:self];
         [[NIMSDK sharedSDK].teamManager addDelegate:self];
         [[NIMSDK sharedSDK].loginManager addDelegate:self];
+
     }
     return self;
 }

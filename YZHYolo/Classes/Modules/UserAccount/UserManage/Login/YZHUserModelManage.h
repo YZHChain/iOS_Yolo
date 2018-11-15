@@ -56,14 +56,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray<YZHUserCustomTagModel* > *customTags;
 @property (nonatomic, strong) NSArray<YZHUserGroupTagModel* > *groupTags;
 @property (nonatomic, strong) YZHUserYoloModel* userYolo;
-@property (nonatomic, copy) NSString* qrCode;
 @property (nonatomic, strong) YZHUserPrivateSettingModel* privateSetting;
+@property (nonatomic, copy) NSString* qrCode;
 
 + (instancetype)currentUserInfoExt;
 + (instancetype)targetUserInfoExtWithUserId:(NSString* )userId;
 - (NSString* )userInfoExtString;
-
-@property (nonatomic, assign) BOOL updateFlag;
 
 @end
 

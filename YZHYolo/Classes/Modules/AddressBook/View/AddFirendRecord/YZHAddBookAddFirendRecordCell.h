@@ -15,12 +15,6 @@ typedef enum : NSUInteger {
     YZHAddFirendRecordCellTypeReview,
 } YZHAddFirendRecordCellType;
 
-typedef NS_ENUM(NSInteger, YZHNotificationHandleType) {
-    YZHNotificationHandleTypePending = 0,
-    YZHNotificationHandleTypeOk,
-    YZHNotificationHandleTypeNo,
-    YZHNotificationHandleTypeOutOfDate
-};
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookAddFirendRecordCell : UITableViewCell

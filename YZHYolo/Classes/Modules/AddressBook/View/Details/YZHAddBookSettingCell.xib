@@ -34,6 +34,10 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="Pmh-Uu-RRV">
                         <rect key="frame" x="298" y="19.5" width="9" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Iqe-O0-bZm"/>
+                            <constraint firstAttribute="width" constant="9" id="Qq8-mf-Keu"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UQy-N6-RNA">
                         <rect key="frame" x="259" y="18.5" width="30" height="18"/>
@@ -48,11 +52,10 @@
                 <constraints>
                     <constraint firstItem="UQy-N6-RNA" firstAttribute="centerY" secondItem="zNH-50-xR0" secondAttribute="centerY" id="BNr-Kh-2UO"/>
                     <constraint firstItem="yT0-ah-NKa" firstAttribute="centerY" secondItem="zNH-50-xR0" secondAttribute="centerY" id="HR5-SE-gcA"/>
-                    <constraint firstItem="Pmh-Uu-RRV" firstAttribute="leading" secondItem="UQy-N6-RNA" secondAttribute="trailing" constant="9" id="IG9-Yw-Fvt"/>
-                    <constraint firstAttribute="trailing" secondItem="Pmh-Uu-RRV" secondAttribute="trailing" constant="13" id="NN2-MQ-h5f"/>
-                    <constraint firstItem="Pmh-Uu-RRV" firstAttribute="centerY" secondItem="zNH-50-xR0" secondAttribute="centerY" id="Qwg-9G-z6d"/>
                     <constraint firstItem="yT0-ah-NKa" firstAttribute="leading" secondItem="zNH-50-xR0" secondAttribute="leading" constant="12" id="d4t-qz-gxm"/>
-                    <constraint firstAttribute="trailing" secondItem="UQy-N6-RNA" secondAttribute="trailing" priority="250" constant="12" id="xIq-yR-wsh"/>
+                    <constraint firstAttribute="trailing" secondItem="Pmh-Uu-RRV" secondAttribute="trailing" constant="13" id="qfz-gc-NFB"/>
+                    <constraint firstItem="Pmh-Uu-RRV" firstAttribute="centerY" secondItem="zNH-50-xR0" secondAttribute="centerY" id="ykr-3o-TLX"/>
+                    <constraint firstAttribute="trailing" secondItem="UQy-N6-RNA" secondAttribute="trailing" constant="31" id="ztQ-0w-eDa"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

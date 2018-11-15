@@ -27,6 +27,7 @@
     return self;
 }
 
+
 - (void)configuration {
     
     NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
@@ -60,7 +61,6 @@
     if (self) {
         _userId = userId;
         [self createData];
-        [self updataUserData];
     }
     return self;
 }
@@ -69,24 +69,21 @@
     
     NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
     _user = user;
-//    if (!user.userInfo) {
-//        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-        @weakify(self)
-        [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-            @strongify(self)
-            if (!error) {
-                self.user = users.firstObject;
-                [self createData];
-                self.updataBlock ? self.updataBlock() : NULL;
-            } else {
-                [self createData];
-            }
-        }];
-//    }
+    @weakify(self)
+    [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+        @strongify(self)
+        if (!error) {
+            self.user = users.firstObject;
+            [self createData];
+            self.updataBlock ? self.updataBlock() : NULL;
+        }
+    }];
 }
 
 - (void)createData {
     
+    NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:_userId];
+    _user = user;
     YZHUserInfoExtManage* userInfoExtManage = [YZHUserInfoExtManage targetUserInfoExtWithUserId:_userId];
     _userInfoExt = userInfoExtManage;
     YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:_userId];
@@ -97,9 +94,9 @@
     //详情头部数据
     YZHAddBookHeaderModel* headerModel = [[YZHAddBookHeaderModel alloc] initWithUserId:_userId];
 
-    //添加好友验证消息;
+    //添加好友验证消息; 这里暂时用不到, 因为之前考虑直接用这个类来拼装用户添加好友申请页的数据,后面讲这个业务放到YZHAddBookAddFirendShowModel 来处理.
     YZHAddBookDetailModel* requteAddModel = nil;
-    if (!self.isFriend && self.requstAddFirend) {
+    if (!self.isMyFriend && self.requstAddFirend) {
         YZHAddBookDetailModel* requteAddModel = [[YZHAddBookDetailModel alloc] init];
         requteAddModel.title = @"我";
         requteAddModel.subtitle = userExtManage.requstAddText;
@@ -141,8 +138,7 @@
     placeModel.cellClass = @"YZHAddBookSettingCell";
     placeModel.cellHeight = 55;
     placeModel.subtitle = userInfoExtManage.place.complete;
-    
-    self.isFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:_userId];
+
     self.userAllowAdd = userInfoExtManage.privateSetting.allowAdd;
     self.requstAddFirend = userExtManage.requteAddFirend;
     

@@ -275,7 +275,7 @@
     if (self.requstAddFirendFlag == NO) {
         if (message.session.sessionType == NIMSessionTypeP2P) {
             NSString* fromAccount = message.session.sessionId;
-            if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
+            if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount] && ![[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqual:fromAccount]) {
                 //私聊则检测双发是否为好友状态
                 YZHAddFirendAttachment* addFirendAttachment = [[YZHAddFirendAttachment alloc] init];
                 addFirendAttachment.addFirendTitle = @"您不是对方的好友，请先添加为好友";
@@ -304,39 +304,39 @@
     if (needAddVerify) {
         //跳转至填写验证消息
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                           kYZHRouteSegue:kYZHRouteSegueModal,
                                                                            @"userId": self.session.sessionId,
                                                                            @"isPrivate": @(1),
                                                                            @"session": self.session
                                                                            }];
     } else {
         request.operation = NIMUserOperationAdd;
+        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        @weakify(self)
+        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+            @strongify(self)
+            if (!error) {
+                //添加成功文案;
+                [hud hideWithText:successText];
+                [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
+                    if (!error) {
+                        //发送添加请求成功,则发送一条已添加消息.
+                        YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                        addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
+                        //插入一条添加好友申请回话.
+                        [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+                    } else {
+                        //这里可以提出相应提示等等.
+                    }
+                }];
+            }else{
+                
+                [hud hideWithText:failedText];
+            }
+        }];
     }
-    NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
-    NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-    @weakify(self)
-    [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
-        @strongify(self)
-        if (!error) {
-            //添加成功文案;
-            [hud hideWithText:successText];
-            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
-                if (!error) {
-                    //发送添加请求成功,则发送一条已添加消息.
-                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
-                    addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
-                    //插入一条添加好友申请回话.
-                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
-                } else {
-                    //这里可以提出相应提示等等.
-                }
-            }];
-        }else{
-            
-            [hud hideWithText:failedText];
-        }
-    }];
+
 }
 
 #pragma mark - 录音事件
@@ -525,17 +525,16 @@
     if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
         YZHAddFirendAttachment* addFirendAttachment = (YZHAddFirendAttachment *)attachment;
         NSString* fromAccount = addFirendAttachment.fromAccount;
-        NSLog(@"当前好友关系:%ld", [[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]);
         //判断当前是否为好友,不是则执行添加好友,并且发出一条消息.否认提示等
         if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
             
             [self sendAddFriendMeesage];
-            NIMUserRequest* request = [[NIMUserRequest alloc] init];
-            request.userId = fromAccount;
+//            NIMUserRequest* request = [[NIMUserRequest alloc] init];
+//            request.userId = fromAccount;
             
-            request.operation = NIMUserOperationRequest;
+//            request.operation = NIMUserOperationRequest;
             //TODO: 添加好友,附言,这里需要和产品对一下.
-            request.message = @"";
+//            request.message = @"";
 //            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
 //                if (!error) {
 //                    //发送添加请求成功,则发送一条已添加消息.

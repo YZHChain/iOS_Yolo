@@ -31,7 +31,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
 static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier";
 @interface YZHAddressBookVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, JKRSearchBarDelegate, JKRSearchControllerDelegate, JKRSearchControllerhResultsUpdating, SCTableViewSectionIndexDelegate, NIMUserManagerDelegate,
-NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
+    NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 
 @property (nonatomic, strong) UITableView* defaultTableView;
 @property (nonatomic, strong) UITableView* tagTableView;
@@ -52,6 +52,8 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // 配置云信代理
+    [self setUpNIMDelegate];
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
@@ -64,6 +66,20 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUpNIMDelegate {
+    
+    [[[NIMSDK sharedSDK] userManager] addDelegate:self];
+    [[[NIMSDK sharedSDK] systemNotificationManager] addDelegate:self];
+    [[NIMSDK sharedSDK].subscribeManager addDelegate:self];
+}
+
+- (void)dealloc {
+    
+    [[[NIMSDK sharedSDK] userManager] removeDelegate:self];
+    [[[NIMSDK sharedSDK] systemNotificationManager] removeDelegate:self];
+    [[NIMSDK sharedSDK].subscribeManager removeDelegate:self];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -95,8 +111,8 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
-    [self.view addSubview:self.defaultTableView];
     [self.view addSubview:self.tagTableView];
+    [self.view addSubview:self.defaultTableView];
     //设置右边索引;
     self.defaultTableView.sc_indexViewConfiguration = self.indexViewConfiguration;
     self.defaultTableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
@@ -111,12 +127,6 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
     self.contacts = [[YZHGroupedContacts alloc] init];
     self.tagContactManage = [[YZHTagContactManage alloc] init];
     self.defaultTableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
-    
-    [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
-//    [[NIMSDK sharedSDK].loginManager addDelegate:self];
-    [[NIMSDK sharedSDK].userManager addDelegate:self];
-    [[NIMSDK sharedSDK].subscribeManager addDelegate:self];
-    
 }
 
 - (void)refresh {
@@ -195,8 +205,8 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
         } else {
             memberModel = self.tagContactManage.tagContacts[indexPath.section - 1][indexPath.row];
         }
-        YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
-        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": memberModel.info.infoId, @"userDetailsModel": model}];
+//        YZHAddBookDetailsModel* model = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:memberModel.info.infoId];
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": memberModel.info.infoId}];
     }
 }
 
@@ -368,7 +378,7 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
 
 #pragma mark - 6.Private Methods
 
-#pragma mark - NIMSDK Delegate
+#pragma mark - NIMSDKDelegate
 
 - (void)onUserInfoChanged:(NIMUser *)user
 {
@@ -383,7 +393,10 @@ NIMSystemNotificationManagerDelegate, NIMEventSubscribeManagerDelegate>
     self.tagContactManage = [[YZHTagContactManage alloc] init];
     [self refresh];
 }
-
+//收到系统消息
+- (void)onReceiveSystemNotification:(NIMSystemNotification *)notification {
+    
+}
 
 #pragma mark - 7.GET & SET
 

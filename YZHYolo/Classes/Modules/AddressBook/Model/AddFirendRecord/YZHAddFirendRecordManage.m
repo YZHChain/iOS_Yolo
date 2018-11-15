@@ -52,8 +52,11 @@
 }
 
 - (BOOL )isMySend {
-    
-    if ([self.myUserId isEqualToString:self.addFriendNotification.sourceID]) {
+    //此条消息被处理过, 并且
+    NIMUserAddAttachment* attachment = self.addFriendNotification.attachment;
+    //未操作过的,并且属于通过验证的消息.则可以肯定这条消息是对方同意我发过去的消息。
+    //也可以直接把操作过这个状态直接去掉,因为一般回复的时候才会有 NIMUserOperationVerify 的情况,收到消息时一般是 0 1. 2则都是收到自己发出的回复。
+    if (self.addFriendNotification.handleStatus == YZHNotificationHandleTypePending && attachment.operationType == NIMUserOperationVerify) {
         return YES;
     } else {
         return NO;
@@ -87,7 +90,7 @@ static const NSInteger MaxNotificationCount = 50;
         [addFirendModels addObject:model];
     }
     
-    // 遍历将其月份分隔开。
+    //TODO: 遍历将其月份分隔开。
     self.addFirendListModel = [[NSMutableArray alloc] init];
     [self.addFirendListModel addObject:addFirendModels.mutableCopy];
     

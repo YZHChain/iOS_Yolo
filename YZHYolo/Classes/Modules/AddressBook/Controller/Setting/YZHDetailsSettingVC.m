@@ -35,7 +35,7 @@
     //2.设置view
     [self setupView];
     //3.请求数据
-    [self setupData];
+//    [self setupData];
     //4.设置通知
     [self setupNotification];
     
@@ -61,16 +61,7 @@
     self.removeButton.layer.masksToBounds = YES;
 }
 
-- (void)reloadView {
-    
-}
-
 #pragma mark - 3.Request Data
-
-- (void)setupData {
-    
-    
-}
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
@@ -115,8 +106,8 @@
             NIMDeleteMessagesOption *option = [[NIMDeleteMessagesOption alloc] init];
             option.removeSession = NO;
             option.removeTable = NO;
-            
             [[NIMSDK sharedSDK].conversationManager deleteAllMessages:option];
+            
         }
     }];
 }

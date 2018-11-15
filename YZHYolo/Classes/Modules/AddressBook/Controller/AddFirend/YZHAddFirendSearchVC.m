@@ -74,8 +74,9 @@
             [YZHAlertManage showAlertMessage:@"你不能添加自己到通讯录"];
         } else {
             __block NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:self.viewModel.userId];
-            // 本地无数据
-            if (!user.userInfo) {
+            BOOL myFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.userId];
+            // 确保读取到最新数据.
+            if (!myFriend) {
                 YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
                 @weakify(self)
                 [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
@@ -88,7 +89,7 @@
                         self.searchStatus = YZHAddFirendSearchStatusEmpty;
                     }
                     [self.tableView reloadData];
-                    [hud hideWithText:error.domain];
+                    [hud hideWithText:nil];
                 }];
             } else {
                 self.viewModel.user = user;
@@ -157,10 +158,10 @@
     YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
     detailsVC.userId = self.viewModel.userId;
     NSLog(@"当前跟控制器%@",[UIApplication sharedApplication].keyWindow.rootViewController);
+    //TODO:
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
         
     }];
-//    [[UIApplication sharedApplication].keyWindow.rootViewController.navigationController pushViewController:detailsVC animated:YES];
 }
 
 - (void)onSelectedCellButtonWithModel:(id)model {
@@ -172,7 +173,7 @@
         if (contactModel.needVerfy) {
             request.operation = NIMUserOperationRequest;
             //快速添加文案.
-            request.message = @"请求添加";
+            request.message = @"通过手机号或Yolo号搜索,请求添加好友";
             request.operation = NIMUserOperationRequest;
         } else {
             request.operation = NIMUserOperationAdd;

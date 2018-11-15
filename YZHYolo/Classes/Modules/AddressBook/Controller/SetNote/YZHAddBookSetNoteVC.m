@@ -147,11 +147,9 @@
         [cell.subtitleTextField becomeFirstResponder];
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         // 跳转到设置标签页
-        YZHAddBookSetTagVC* vc = [[YZHAddBookSetTagVC alloc] init];
-        YZHBaseNavigationController* nav = [[YZHBaseNavigationController alloc] initWithRootViewController:vc];
-        [self presentViewController:nav animated:YES completion:^{
-            
-        }];
+        [YZHRouter openURL:kYZHRouterAddressBookSetTag info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+                                               @"userDetailsModel": self.userDetailsModel
+                                               }];
     }
 }
 
@@ -185,23 +183,22 @@
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
         [[[NIMSDK sharedSDK] userManager] updateUser:self.userDetailsModel.user completion:^(NSError * _Nullable error) {
             if (!error) {
-                self.userDetailsModel.userNotePhoneArray.firstObject.subtitle = self.phoneCell.subtitleTextField.text;
-                if (self.userDetailsModel.userNotePhoneArray.count == 1) {
-                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
-
-                        [self.userDetailsModel.userNotePhoneArray addObject:self.
-                         noteModel.lastObject];
-                    } else {
-
-                    }
-                } else {
-                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
-                        self.userDetailsModel.userNotePhoneArray.lastObject.subtitle = self.tagCell.subtitleLabel.text;
-                    } else {
-                        [self.userDetailsModel.userNotePhoneArray removeLastObject];
-                    }
-                }
-//                [self.detailsTableView reloadData];
+//                self.userDetailsModel.userNotePhoneArray.firstObject.subtitle = self.phoneCell.subtitleTextField.text;
+//                if (self.userDetailsModel.userNotePhoneArray.count == 1) {
+//                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
+//
+//                        [self.userDetailsModel.userNotePhoneArray addObject:self.
+//                         noteModel.lastObject];
+//                    } else {
+//
+//                    }
+//                } else {
+//                    if (YZHIsString(self.tagCell.subtitleLabel.text)) {
+//                        self.userDetailsModel.userNotePhoneArray.lastObject.subtitle = self.tagCell.subtitleLabel.text;
+//                    } else {
+//                        [self.userDetailsModel.userNotePhoneArray removeLastObject];
+//                    }
+//                }
                 [self dismissViewControllerAnimated:YES completion:^{
 
                 }];
