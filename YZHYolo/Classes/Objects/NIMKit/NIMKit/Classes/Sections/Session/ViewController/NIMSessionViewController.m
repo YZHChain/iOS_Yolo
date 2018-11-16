@@ -616,7 +616,7 @@
     }
     if (message.messageType == NIMMessageTypeCustom) {
         NIMCustomObject *customObject = (NIMCustomObject*)message.messageObject;
-        if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")]) {
+        if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")] || [customObject.attachment isKindOfClass:NSClassFromString(@"YZHTeamCardAttachment")]) {
             [items addObject:[[UIMenuItem alloc] initWithTitle:@"转发"
                                                         action:@selector(forwarding:)]];
         }

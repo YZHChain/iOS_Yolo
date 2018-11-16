@@ -23,6 +23,8 @@
 #import "NSDictionary+NTESJson.h"
 #import "NTESDevice.h"
  */
+#import "NIMKitInfoFetchOption.h"
+#import "YZHCustomAttachmentDefines.h"
 
 double OnedayTimeIntervalValue = 24*60*60;  //一天的秒数
 
@@ -235,7 +237,7 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
     return [NTESSessionUtil dictByJsonData:data];
 }
 
-/*
+
 + (NSString *)tipOnMessageRevoked:(NIMRevokeMessageNotification *)notificaton
 {
     NSString *fromUid = nil;
@@ -289,7 +291,6 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
     }
     return [NSString stringWithFormat:@"%@撤回了一条消息",tip];
 }
- */
 
 
 //+ (BOOL)canMessageBeForwarded:(NIMMessage *)message
@@ -330,9 +331,13 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
     }
     if ([messageObject isKindOfClass:[NIMCustomObject class]])
     {
-        //
-//        id<NTESCustomAttachmentInfo> attach = (id<NTESCustomAttachmentInfo>)[(NIMCustomObject *)message.messageObject attachment];
-//        return [attach canBeRevoked];
+        if (message.messageType == NIMMessageTypeCustom) {
+            NIMCustomObject *customObject = (NIMCustomObject*)message.messageObject;
+            if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")] || [customObject.attachment isKindOfClass:NSClassFromString(@"YZHTeamCardAttachment")]) {
+                id<YZHCustomAttachmentInfo> attachment = customObject.attachment;
+                return [attachment canBeRevoked];
+            }
+        }
         return NO;
     }
     return YES;

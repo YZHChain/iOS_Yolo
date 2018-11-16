@@ -282,7 +282,7 @@
                 addFirendAttachment.addFirendButtonTitle = @"加为好友";
                 addFirendAttachment.fromAccount = self.session.sessionId;
                 @weakify(self)
-                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithAddFirend:addFirendAttachment] forSession:self.session completion:^(NSError * _Nullable error) {
+                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithAddFirend:addFirendAttachment] forSession:message.session completion:^(NSError * _Nullable error) {
                     if (!error) {
                         //标记, 保持进入回话只会弹出一次.
                         @strongify(self)
@@ -298,16 +298,20 @@
 
 - (void)sendAddFriendMeesage {
     
+    if (self.session.sessionType != NIMSessionTypeP2P) {
+        return;
+    }
     BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerift;
     NIMUserRequest *request = [[NIMUserRequest alloc] init];
     request.userId = self.session.sessionId;
     if (needAddVerify) {
         //跳转至填写验证消息
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                           @"userId": self.session.sessionId,
-                                                                           @"isPrivate": @(1),
-                                                                           @"session": self.session
-                                                                           }];
+                                                                               @"userId": self.session.sessionId,
+                                                                               @"isPrivate": @(1),
+                                                                               @"session": self.session
+                                                                               }];
+
     } else {
         request.operation = NIMUserOperationAdd;
         NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
@@ -319,24 +323,16 @@
             if (!error) {
                 //添加成功文案;
                 [hud hideWithText:successText];
-                [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError * _Nullable error) {
-                    if (!error) {
-                        //发送添加请求成功,则发送一条已添加消息.
-                        YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
-                        addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
-                        //插入一条添加好友申请回话.
-                        [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
-                    } else {
-                        //这里可以提出相应提示等等.
-                    }
-                }];
+                //发送添加请求成功,则发送一条已添加消息.
+                YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
+                //插入一条添加好友申请回话.
+                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
             }else{
-                
                 [hud hideWithText:failedText];
             }
         }];
     }
-
 }
 
 #pragma mark - 录音事件
@@ -609,13 +605,12 @@
             if (error.code == NIMRemoteErrorCodeDomainExpireOld) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"发送时间超过2分钟的消息，不能被撤回" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [alert show];
-            }else{
+            } else {
 //                DDLogError(@"revoke message eror code %zd",error.code);
                 //TODO:超时了但是未返回相应错误.
                 [weakSelf.view makeToast:@"消息撤回失败，请重试" duration:2.0 position:CSToastPositionCenter];
             }
-        }
-        else
+        } else
         {
             NIMMessageModel *model = [self uiDeleteMessage:message];
             NIMMessage *tip = [YZHSessionMsgConverter msgWithTip:[NTESSessionUtil tipOnMessageRevoked:nil]];

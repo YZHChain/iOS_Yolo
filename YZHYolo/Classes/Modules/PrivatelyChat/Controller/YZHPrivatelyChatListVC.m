@@ -250,7 +250,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (NSString *)nameForRecentSession:(NIMRecentSession *)recent{
     if ([recent.session.sessionId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]]) {
-        return @"我的电脑";
+        return @"MySelf"; //
     }
     return [super nameForRecentSession:recent];
 }

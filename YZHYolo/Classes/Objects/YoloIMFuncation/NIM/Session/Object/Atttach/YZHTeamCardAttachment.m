@@ -69,4 +69,14 @@
     return _avatarUrl;
 }
 
+- (BOOL)canBeRevoked {
+    
+    return YES;
+}
+
+- (BOOL)canBeForwarded {
+    
+    return YES;
+}
+
 @end
