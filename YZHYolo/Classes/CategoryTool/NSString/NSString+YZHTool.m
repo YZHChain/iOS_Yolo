@@ -184,6 +184,11 @@
     return YES;
 }
 
+- (NSString *)yzh_clearBeforeAndAfterblankString {
+    
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 
 - (NSMutableAttributedString *)yzh_processStringWithPattern:(NSString *)pattern font:(UIFont *)font color:(UIColor *)color isAll:(BOOL)isall
 {

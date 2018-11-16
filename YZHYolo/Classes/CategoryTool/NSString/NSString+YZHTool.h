@@ -44,6 +44,7 @@
 - (BOOL )yzh_isCorrectMoneyFormat;
 //将百分比字符串转换为float值
 - (float)yzh_formatFloatValue;
+- (NSString *)yzh_clearBeforeAndAfterblankString;
 
 
 /**

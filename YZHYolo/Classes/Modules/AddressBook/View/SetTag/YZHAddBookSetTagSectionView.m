@@ -8,6 +8,7 @@
 
 #import "YZHAddBookSetTagSectionView.h"
 
+#import "UIFont+YZHFontStyle.h"
 @implementation YZHAddBookSetTagSectionView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
@@ -24,7 +25,7 @@
     
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.font = [UIFont systemFontOfSize:13];
+        _titleLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
         _titleLabel.textColor = [UIColor yzh_fontShallowBlack];
         _titleLabel.frame = CGRectMake(12, 6, YZHScreen_Width - 30, 14);
     }

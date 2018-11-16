@@ -11,6 +11,7 @@
 #import "YZHPublic.h"
 #import "NIMKitDataProviderImpl.h"
 #import "NSString+YZHTool.h"
+#import "YZHAlertManage.h"
 
 @interface YZHMyInformationSetNameVC ()<UITextFieldDelegate>
 
@@ -65,6 +66,7 @@
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
+    self.nickNameTextField.returnKeyType = UIReturnKeyDone;
     [self.nickNameTextField becomeFirstResponder];
 }
 
@@ -102,24 +104,45 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if (textField.text.length) {
+        [self saveNickName];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 #pragma mark - 5.Event Response
 
 - (void)saveNickName{
     
-    if (![self.nickNameTextField.text isEqualToString:_userInfo.nickName]) {
-        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-        @weakify(self)
-        [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagNick) : self.nickNameTextField.text} completion:^(NSError *error) {
-            @strongify(self)
-            if (!error) {
-                [hud hideWithText:@"昵称修改成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                [hud hideWithText:error.domain];
-            }
-        }];
+//    && self.nickNameTextField.text
+    if (YZHIsString(self.nickNameTextField.text)) {
+        NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];
+        //加入用户输入名字为空格,则只计算一位。。
+        if (!YZHIsString(nickName)) {
+            nickName = @" ";
+        }
+        if (![nickName isEqualToString:_userInfo.nickName]) {
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+            @weakify(self)
+            [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagNick) : nickName} completion:^(NSError *error) {
+                @strongify(self)
+                if (!error) {
+                    [hud hideWithText:@"昵称修改成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [hud hideWithText:error.domain];
+                }
+            }];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } else {
-        [self.navigationController popViewControllerAnimated:YES];
+        //空限制.
+        [YZHAlertManage showAlertMessage:@"没有输入名字,请重新填写"];
     }
 
 }

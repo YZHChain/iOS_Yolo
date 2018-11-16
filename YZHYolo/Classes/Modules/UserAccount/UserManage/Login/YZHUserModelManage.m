@@ -110,9 +110,9 @@
 
 - (NSArray<YZHUserGroupTagModel *> *)groupTags {
     
-    if (!_groupTags) {
+    if (_groupTags == 0) {
         
-        NSArray* tagNameArray = @[@"☆标准好友", @"家人", @"同事"
+        NSArray* tagNameArray = @[@"工作群", @"亲人群", @"朋友群"
                                   ];
         NSMutableArray* groupTagModel = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {
@@ -124,6 +124,24 @@
         _groupTags = groupTagModel.copy;
     }
     return _groupTags;
+}
+
+- (NSArray<YZHUserCustomTagModel *> *)customTags {
+    
+    if (_customTags.count == 0) {
+        
+        NSArray* tagNameArray = @[@"☆标准好友", @"家人", @"同事"
+                                  ];
+        NSMutableArray* customTagModel = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < 3; i++) {
+            YZHUserGroupTagModel* defaultModel = [[YZHUserGroupTagModel alloc] init];
+            defaultModel.isDefault = YES;
+            defaultModel.tagName = tagNameArray[i];
+            [customTagModel addObject:defaultModel];
+        }
+        _customTags = customTagModel.copy;
+    }
+    return _customTags;
 }
 
 - (NSString *)qrCode {

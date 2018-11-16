@@ -81,9 +81,9 @@
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     
-    [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self.tagNameArray addObject:obj.tagName];
-    }];
+//    [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [self.tagNameArray addObject:obj.tagName];
+//    }];
     
     [userInfoExt.customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self.tagNameArray addObject:obj.tagName];

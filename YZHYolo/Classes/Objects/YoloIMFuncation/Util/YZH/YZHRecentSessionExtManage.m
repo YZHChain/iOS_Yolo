@@ -147,9 +147,9 @@
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     NSMutableArray* tagsArray = [[NSMutableArray alloc] init];
-    for (YZHUserGroupTagModel* groupTags in userInfoExt.groupTags) {
-        [tagsArray addObject:groupTags.tagName];
-    }
+//    for (YZHUserGroupTagModel* groupTags in userInfoExt.groupTags) {
+//        [tagsArray addObject:groupTags.tagName];
+//    }
     for (YZHUserGroupTagModel* customTags in userInfoExt.customTags) {
         [tagsArray addObject:customTags.tagName];
     }

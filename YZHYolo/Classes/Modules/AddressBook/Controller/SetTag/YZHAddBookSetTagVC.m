@@ -72,7 +72,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     //查找之前选中行数
-    self.selectedIndexPath = [self.tagsModel findtargetUserTagName:self.userDetailsModel.classTagModel.title];
+    self.selectedIndexPath = [self.tagsModel findtargetUserTagName:self.userDetailsModel.classTagModel.subtitle];
     
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
     self.tableView.delegate = self;
@@ -150,7 +150,12 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     if (section == 0) {
         view.titleLabel.text = @"选择已有标签";
     } else {
-        view.titleLabel.text = @"自定义标签";
+        if (self.tagsModel.userTagModel.count == 2) {
+           view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（%ld / 8）", self.tagsModel.userTagModel.lastObject.count];
+        } else {
+           view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（0 / 8）"];
+        }
+        
     }
     
     return view;
@@ -195,8 +200,8 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
             [self removeCustomTagName:indexPath.row];
+            [self.tableView reloadData];
         }
-
     } else {
 
     }
@@ -265,7 +270,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     }];
     @weakify(self)
     alertView.YZHButtonExecuteBlock = ^(UITextField * _Nonnull customTagTextField) {
-        if (self.tagsModel.userTagModel.lastObject.count < 30) {
+        if (self.tagsModel.userTagModel.lastObject.count < 8) {
             //先检测当前是否存在此标签,如果不存在则直接去添加.
             if (![self.tagsModel checkoutContainCustomTagName:customTagTextField.text]) {
                 @strongify(self)
@@ -291,6 +296,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         //TODO:文案需产品确认
         [self refreshTags];
         [hud hideWithText:@"标签添加成功"];
+        [self.tableView reloadData];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
         }];

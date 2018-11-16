@@ -9,6 +9,7 @@
 #import "YZHAddBookSetTagAlertView.h"
 
 #import "NSString+YZHTool.h"
+#import "YZHAlertManage.h"
 
 @interface YZHAddBookSetTagAlertView()<UITextFieldDelegate>
 
@@ -31,7 +32,7 @@
     if (string.length == 0) {
         return YES;
     } else {
-        BOOL checkoutStandard = [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:20];
+        BOOL checkoutStandard = [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:12];
         return checkoutStandard;
     }
     
@@ -39,7 +40,23 @@
 
 - (IBAction)clickAffirm:(UIButton *)sender {
     
-    self.YZHButtonExecuteBlock ? self.YZHButtonExecuteBlock(self.customTagTextField) : NULL;
+    if (YZHIsString(self.customTagTextField.text)) {
+        NSString* customTagName = [self.customTagTextField.text yzh_clearBeforeAndAfterblankString];
+        //加入用户输入名字为空格,则只计算一位。。
+        if (!YZHIsString(customTagName)) {
+            customTagName = @" ";
+        }
+        self.customTagTextField.text = customTagName;
+        NSInteger customTagLength = [self.customTagTextField.text yzh_calculateStringLeng];
+        if (customTagLength <= 12) {
+            self.YZHButtonExecuteBlock ? self.YZHButtonExecuteBlock(self.customTagTextField) : NULL;
+        } else {
+            [YZHAlertManage showAlertMessage:@"输入标签过长,请重新填写"];
+        }
+    } else {
+        [YZHAlertManage showAlertMessage:@"没有输入标签,请重新填写"];
+    }
+    
 }
 
 

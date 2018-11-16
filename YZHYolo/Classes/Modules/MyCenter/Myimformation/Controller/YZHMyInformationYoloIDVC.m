@@ -12,6 +12,7 @@
 #import "YZHUserModelManage.h"
 #import "YZHPublic.h"
 #import "YZHUserLoginManage.h"
+#import "YZHAlertManage.h"
 
 @interface YZHMyInformationYoloIDVC ()<UITextFieldDelegate>
 
@@ -64,7 +65,7 @@
     UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveSetting)];
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateNormal];
     [item setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor yzh_separatorLightGray]} forState:UIControlStateDisabled];
-//    item.enabled = NO;
+    item.enabled = NO;
     self.navigationItem.rightBarButtonItem = item;
 }
 
@@ -72,6 +73,7 @@
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
+    self.yoloIDTextField.returnKeyType = UIReturnKeyDone;
     [self.yoloIDTextField becomeFirstResponder];
     
     self.remindLabel.text = @"请注意:\nyolo号支持英文大小写、数字和特殊字符，必须是英文开头 且仅可设置一次，设置后不能再更改.";
@@ -92,7 +94,7 @@
     
     if (string.length == 0) {
         self.checkResultView.hidden = YES;
-//        self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
         return YES;
     }
     if ([string isEqualToString:@"_"] || [string yzh_isSpecialChars]) {
@@ -102,10 +104,16 @@
     BOOL isLegal = [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:30];
     if (isLegal) {
         self.checkResultView.hidden = YES;
-//        self.navigationItem.rightBarButtonItem.enabled = NO;
+        self.navigationItem.rightBarButtonItem.enabled = NO;
         return YES;
     }
     return NO;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [self checkoutYoloID:nil];
+    return YES;
 }
 
 #pragma mark - 5.Event Response
@@ -189,19 +197,25 @@
 
 - (IBAction)checkoutYoloID:(UIButton *)sender {
     
-    self.checkResultView.hidden = NO;
-    NSDictionary* dic = @{
-                          @"yoloNo":self.yoloIDTextField.text
-                          };
-    @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
-        @strongify(self)
-        self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_correct"];
-        self.checkResultLabel.text = @"YOLO号可以正常使用";
-    } failureCompletion:^(NSError *error) {
-        self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_fault"];
-        self.checkResultLabel.text = error.domain;
-    }];
+    if (YZHIsString(self.yoloIDTextField.text)) {
+        self.checkResultView.hidden = NO;
+        NSDictionary* dic = @{
+                              @"yoloNo":self.yoloIDTextField.text.length ? self.yoloIDTextField.text : @""
+                              };
+        @weakify(self)
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
+            @strongify(self)
+            self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_correct"];
+            self.checkResultLabel.text = @"YOLO号可以正常使用";
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+        } failureCompletion:^(NSError *error) {
+            self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_fault"];
+            self.checkResultLabel.text = error.domain;
+        }];
+    } else {
+        [YZHAlertManage showAlertMessage:@"Yolo ID不可为空,请重新输入"];
+    }
+
 }
 
 #pragma mark - 6.Private Methods

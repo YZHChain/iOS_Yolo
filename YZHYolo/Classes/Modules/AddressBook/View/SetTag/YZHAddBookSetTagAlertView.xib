@@ -36,8 +36,8 @@
                         <constraint firstAttribute="height" constant="1" id="DRI-JA-BwE"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不得超过10个汉字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddy-Lt-hgc">
-                    <rect key="frame" x="101.5" y="114" width="97.5" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不得超过6个汉字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddy-Lt-hgc">
+                    <rect key="frame" x="104.5" y="114" width="91" height="12"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="12" id="c4w-YI-LlS"/>
                     </constraints>
