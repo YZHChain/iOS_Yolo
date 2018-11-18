@@ -69,7 +69,7 @@
 - (void)setupNavBar {
     
     self.navigationItem.title = @"扫码";
-    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
+//    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
     
     //TODO
     UIBarButtonItem* leftItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(backPreviousPage)];

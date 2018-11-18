@@ -299,6 +299,27 @@
 		55A286B921747D23004DACEA /* YZHExtensionFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */; };
 		55AA826A2186D8DE00ED73B1 /* YZHCommunityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AA82692186D8DE00ED73B1 /* YZHCommunityListVC.m */; };
 		55AA826D2186D8EC00ED73B1 /* YZHCommunityChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */; };
+		55AB6C97219FDCF0005385A0 /* YZHTeamTagSelectedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6C96219FDCF0005385A0 /* YZHTeamTagSelectedVC.m */; };
+		55AB6CDA219FFA8A005385A0 /* NSDictionary+log.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6C9C219FFA8A005385A0 /* NSDictionary+log.m */; };
+		55AB6CDB219FFA8A005385A0 /* NSArray+log.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6C9F219FFA8A005385A0 /* NSArray+log.m */; };
+		55AB6CE3219FFA8A005385A0 /* CYLDBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CAE219FFA8A005385A0 /* CYLDBManager.m */; };
+		55AB6CE4219FFA8A005385A0 /* UIButton+CollectionCellStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CB4219FFA8A005385A0 /* UIButton+CollectionCellStyle.m */; };
+		55AB6CE5219FFA8A005385A0 /* CYLClassifyMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CB9219FFA8A005385A0 /* CYLClassifyMenuViewController.m */; };
+		55AB6CE6219FFA8A005385A0 /* CYLMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CBA219FFA8A005385A0 /* CYLMainViewController.m */; };
+		55AB6CE7219FFA8A005385A0 /* CYLFilterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CBD219FFA8A005385A0 /* CYLFilterHeaderView.m */; };
+		55AB6CE8219FFA8A005385A0 /* CYLIndexPathButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CBF219FFA8A005385A0 /* CYLIndexPathButton.m */; };
+		55AB6CE9219FFA8A005385A0 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CC0219FFA8A005385A0 /* CollectionViewCell.m */; };
+		55AB6CEA219FFA8A005385A0 /* CYLRightImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CC2219FFA8A005385A0 /* CYLRightImageButton.m */; };
+		55AB6CEB219FFA8A005385A0 /* UIImage+Blur.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CC7219FFA8A005385A0 /* UIImage+Blur.m */; };
+		55AB6CEC219FFA8A005385A0 /* UIView+General.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CC8219FFA8A005385A0 /* UIView+General.m */; };
+		55AB6CED219FFA8A005385A0 /* CYLFilterParamsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CCC219FFA8A005385A0 /* CYLFilterParamsTool.m */; };
+		55AB6CEE219FFA8A005385A0 /* FilterBaseController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AB6CD0219FFA8A005385A0 /* FilterBaseController.xib */; };
+		55AB6CEF219FFA8A005385A0 /* CYLMultipleFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CD2219FFA8A005385A0 /* CYLMultipleFilterController.m */; };
+		55AB6CF0219FFA8A005385A0 /* FilterBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CD3219FFA8A005385A0 /* FilterBaseController.m */; };
+		55AB6CF1219FFA8A005385A0 /* CYLMultipleFilterHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55AB6CD6219FFA8A005385A0 /* CYLMultipleFilterHeaderView.xib */; };
+		55AB6CF2219FFA8A005385A0 /* FilterCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CD7219FFA8A005385A0 /* FilterCollectionCell.m */; };
+		55AB6CF3219FFA8A005385A0 /* CYLMultipleFilterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AB6CD8219FFA8A005385A0 /* CYLMultipleFilterHeaderView.m */; };
+		55AB6CF521A0081E005385A0 /* teamTagData.json in Resources */ = {isa = PBXBuildFile; fileRef = 55AB6CF421A0081E005385A0 /* teamTagData.json */; };
 		55B385F92186EA590057FBEE /* YZHCommunitySearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */; };
 		55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7B2152236D002A04A9 /* YZHDiscoverVC.m */; };
 		55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55B5DB7E21522383002A04A9 /* YZHMyCenterVC.m */; };
@@ -978,6 +999,46 @@
 		55AA82692186D8DE00ED73B1 /* YZHCommunityListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityListVC.m; sourceTree = "<group>"; };
 		55AA826B2186D8EC00ED73B1 /* YZHCommunityChatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommunityChatVC.h; sourceTree = "<group>"; };
 		55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunityChatVC.m; sourceTree = "<group>"; };
+		55AB6C95219FDCF0005385A0 /* YZHTeamTagSelectedVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamTagSelectedVC.h; sourceTree = "<group>"; };
+		55AB6C96219FDCF0005385A0 /* YZHTeamTagSelectedVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamTagSelectedVC.m; sourceTree = "<group>"; };
+		55AB6C9C219FFA8A005385A0 /* NSDictionary+log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+log.m"; sourceTree = "<group>"; };
+		55AB6C9D219FFA8A005385A0 /* NSArray+log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+log.h"; sourceTree = "<group>"; };
+		55AB6C9E219FFA8A005385A0 /* NSDictionary+log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+log.h"; sourceTree = "<group>"; };
+		55AB6C9F219FFA8A005385A0 /* NSArray+log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+log.m"; sourceTree = "<group>"; };
+		55AB6CAE219FFA8A005385A0 /* CYLDBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLDBManager.m; sourceTree = "<group>"; };
+		55AB6CAF219FFA8A005385A0 /* CYLParameterConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLParameterConfiguration.h; sourceTree = "<group>"; };
+		55AB6CB0219FFA8A005385A0 /* CYLDBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLDBManager.h; sourceTree = "<group>"; };
+		55AB6CB4219FFA8A005385A0 /* UIButton+CollectionCellStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+CollectionCellStyle.m"; sourceTree = "<group>"; };
+		55AB6CB5219FFA8A005385A0 /* UIButton+CollectionCellStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+CollectionCellStyle.h"; sourceTree = "<group>"; };
+		55AB6CB7219FFA8A005385A0 /* CYLClassifyMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLClassifyMenuViewController.h; sourceTree = "<group>"; };
+		55AB6CB8219FFA8A005385A0 /* CYLMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLMainViewController.h; sourceTree = "<group>"; };
+		55AB6CB9219FFA8A005385A0 /* CYLClassifyMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLClassifyMenuViewController.m; sourceTree = "<group>"; };
+		55AB6CBA219FFA8A005385A0 /* CYLMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLMainViewController.m; sourceTree = "<group>"; };
+		55AB6CBC219FFA8A005385A0 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		55AB6CBD219FFA8A005385A0 /* CYLFilterHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLFilterHeaderView.m; sourceTree = "<group>"; };
+		55AB6CBE219FFA8A005385A0 /* CYLRightImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLRightImageButton.h; sourceTree = "<group>"; };
+		55AB6CBF219FFA8A005385A0 /* CYLIndexPathButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLIndexPathButton.m; sourceTree = "<group>"; };
+		55AB6CC0219FFA8A005385A0 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		55AB6CC1219FFA8A005385A0 /* CYLFilterHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLFilterHeaderView.h; sourceTree = "<group>"; };
+		55AB6CC2219FFA8A005385A0 /* CYLRightImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLRightImageButton.m; sourceTree = "<group>"; };
+		55AB6CC3219FFA8A005385A0 /* CYLIndexPathButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLIndexPathButton.h; sourceTree = "<group>"; };
+		55AB6CC7219FFA8A005385A0 /* UIImage+Blur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blur.m"; sourceTree = "<group>"; };
+		55AB6CC8219FFA8A005385A0 /* UIView+General.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+General.m"; sourceTree = "<group>"; };
+		55AB6CC9219FFA8A005385A0 /* UIImage+Blur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blur.h"; sourceTree = "<group>"; };
+		55AB6CCA219FFA8A005385A0 /* UIView+General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+General.h"; sourceTree = "<group>"; };
+		55AB6CCC219FFA8A005385A0 /* CYLFilterParamsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLFilterParamsTool.m; sourceTree = "<group>"; };
+		55AB6CCD219FFA8A005385A0 /* CYLFilterParamsTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLFilterParamsTool.h; sourceTree = "<group>"; };
+		55AB6CCF219FFA8A005385A0 /* CYLMultipleFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLMultipleFilterController.h; sourceTree = "<group>"; };
+		55AB6CD0219FFA8A005385A0 /* FilterBaseController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterBaseController.xib; sourceTree = "<group>"; };
+		55AB6CD1219FFA8A005385A0 /* FilterBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterBaseController.h; sourceTree = "<group>"; };
+		55AB6CD2219FFA8A005385A0 /* CYLMultipleFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLMultipleFilterController.m; sourceTree = "<group>"; };
+		55AB6CD3219FFA8A005385A0 /* FilterBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterBaseController.m; sourceTree = "<group>"; };
+		55AB6CD5219FFA8A005385A0 /* CYLMultipleFilterHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLMultipleFilterHeaderView.h; sourceTree = "<group>"; };
+		55AB6CD6219FFA8A005385A0 /* CYLMultipleFilterHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CYLMultipleFilterHeaderView.xib; sourceTree = "<group>"; };
+		55AB6CD7219FFA8A005385A0 /* FilterCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterCollectionCell.m; sourceTree = "<group>"; };
+		55AB6CD8219FFA8A005385A0 /* CYLMultipleFilterHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYLMultipleFilterHeaderView.m; sourceTree = "<group>"; };
+		55AB6CD9219FFA8A005385A0 /* FilterCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterCollectionCell.h; sourceTree = "<group>"; };
+		55AB6CF421A0081E005385A0 /* teamTagData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teamTagData.json; sourceTree = "<group>"; };
 		55B385F72186EA590057FBEE /* YZHCommunitySearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommunitySearchVC.h; sourceTree = "<group>"; };
 		55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommunitySearchVC.m; sourceTree = "<group>"; };
 		55B5DB7A2152236D002A04A9 /* YZHDiscoverVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHDiscoverVC.h; sourceTree = "<group>"; };
@@ -1293,8 +1354,10 @@
 		55128A0121463E480099CC55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55AB6C98219FFA8A005385A0 /* CollectionViewClassifyMenu */,
 				555DA490216C35160057D434 /* JKRSearch */,
 				55EE6D3C215B7683004E092F /* YZHLocation.json */,
+				55AB6CF421A0081E005385A0 /* teamTagData.json */,
 				55DF5D5C218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf */,
 			);
 			path = Resources;
@@ -1625,6 +1688,8 @@
 				55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */,
 				55DF5D52218942F000BFA7E6 /* YZHCreatTeamVC.h */,
 				55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */,
+				55AB6C95219FDCF0005385A0 /* YZHTeamTagSelectedVC.h */,
+				55AB6C96219FDCF0005385A0 /* YZHTeamTagSelectedVC.m */,
 				55DF5D5E2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.h */,
 				55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */,
 				55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */,
@@ -2861,6 +2926,170 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		55AB6C98219FFA8A005385A0 /* CollectionViewClassifyMenu */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6C99219FFA8A005385A0 /* Class */,
+			);
+			path = CollectionViewClassifyMenu;
+			sourceTree = "<group>";
+		};
+		55AB6C99219FFA8A005385A0 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6C9A219FFA8A005385A0 /* Other */,
+				55AB6CB1219FFA8A005385A0 /* ClassifyMenu */,
+				55AB6CC4219FFA8A005385A0 /* MultipleFilter */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		55AB6C9A219FFA8A005385A0 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6C9B219FFA8A005385A0 /* Category */,
+				55AB6CAD219FFA8A005385A0 /* Tool */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		55AB6C9B219FFA8A005385A0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6C9D219FFA8A005385A0 /* NSArray+log.h */,
+				55AB6C9F219FFA8A005385A0 /* NSArray+log.m */,
+				55AB6C9E219FFA8A005385A0 /* NSDictionary+log.h */,
+				55AB6C9C219FFA8A005385A0 /* NSDictionary+log.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		55AB6CAD219FFA8A005385A0 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CB0219FFA8A005385A0 /* CYLDBManager.h */,
+				55AB6CAE219FFA8A005385A0 /* CYLDBManager.m */,
+				55AB6CAF219FFA8A005385A0 /* CYLParameterConfiguration.h */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		55AB6CB1219FFA8A005385A0 /* ClassifyMenu */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CB2219FFA8A005385A0 /* Other */,
+				55AB6CB6219FFA8A005385A0 /* Controller */,
+				55AB6CBB219FFA8A005385A0 /* View */,
+			);
+			path = ClassifyMenu;
+			sourceTree = "<group>";
+		};
+		55AB6CB2219FFA8A005385A0 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CB3219FFA8A005385A0 /* Category */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		55AB6CB3219FFA8A005385A0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CB5219FFA8A005385A0 /* UIButton+CollectionCellStyle.h */,
+				55AB6CB4219FFA8A005385A0 /* UIButton+CollectionCellStyle.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		55AB6CB6219FFA8A005385A0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CB7219FFA8A005385A0 /* CYLClassifyMenuViewController.h */,
+				55AB6CB9219FFA8A005385A0 /* CYLClassifyMenuViewController.m */,
+				55AB6CB8219FFA8A005385A0 /* CYLMainViewController.h */,
+				55AB6CBA219FFA8A005385A0 /* CYLMainViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55AB6CBB219FFA8A005385A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CBC219FFA8A005385A0 /* CollectionViewCell.h */,
+				55AB6CC0219FFA8A005385A0 /* CollectionViewCell.m */,
+				55AB6CC1219FFA8A005385A0 /* CYLFilterHeaderView.h */,
+				55AB6CBD219FFA8A005385A0 /* CYLFilterHeaderView.m */,
+				55AB6CC3219FFA8A005385A0 /* CYLIndexPathButton.h */,
+				55AB6CBF219FFA8A005385A0 /* CYLIndexPathButton.m */,
+				55AB6CBE219FFA8A005385A0 /* CYLRightImageButton.h */,
+				55AB6CC2219FFA8A005385A0 /* CYLRightImageButton.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55AB6CC4219FFA8A005385A0 /* MultipleFilter */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CC5219FFA8A005385A0 /* Other */,
+				55AB6CCE219FFA8A005385A0 /* Controller */,
+				55AB6CD4219FFA8A005385A0 /* View */,
+			);
+			path = MultipleFilter;
+			sourceTree = "<group>";
+		};
+		55AB6CC5219FFA8A005385A0 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CC6219FFA8A005385A0 /* Category */,
+				55AB6CCB219FFA8A005385A0 /* Tool */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		55AB6CC6219FFA8A005385A0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CC9219FFA8A005385A0 /* UIImage+Blur.h */,
+				55AB6CC7219FFA8A005385A0 /* UIImage+Blur.m */,
+				55AB6CCA219FFA8A005385A0 /* UIView+General.h */,
+				55AB6CC8219FFA8A005385A0 /* UIView+General.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		55AB6CCB219FFA8A005385A0 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CCD219FFA8A005385A0 /* CYLFilterParamsTool.h */,
+				55AB6CCC219FFA8A005385A0 /* CYLFilterParamsTool.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		55AB6CCE219FFA8A005385A0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CCF219FFA8A005385A0 /* CYLMultipleFilterController.h */,
+				55AB6CD2219FFA8A005385A0 /* CYLMultipleFilterController.m */,
+				55AB6CD1219FFA8A005385A0 /* FilterBaseController.h */,
+				55AB6CD3219FFA8A005385A0 /* FilterBaseController.m */,
+				55AB6CD0219FFA8A005385A0 /* FilterBaseController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55AB6CD4219FFA8A005385A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55AB6CD5219FFA8A005385A0 /* CYLMultipleFilterHeaderView.h */,
+				55AB6CD8219FFA8A005385A0 /* CYLMultipleFilterHeaderView.m */,
+				55AB6CD6219FFA8A005385A0 /* CYLMultipleFilterHeaderView.xib */,
+				55AB6CD9219FFA8A005385A0 /* FilterCollectionCell.h */,
+				55AB6CD7219FFA8A005385A0 /* FilterCollectionCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		55B5DB9821530EA8002A04A9 /* YZHRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -3414,6 +3643,7 @@
 				552CC897215A6F3900135FDC /* YZHAboutYoloCell.xib in Resources */,
 				55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */,
 				55560241217EFE11000F46DF /* NTESGalleryViewController.xib in Resources */,
+				55AB6CF1219FFA8A005385A0 /* CYLMultipleFilterHeaderView.xib in Resources */,
 				55EAB158215BC88900F4142A /* YZHMyplaceCityVC.xib in Resources */,
 				55C656A4215E5907005E997B /* YZHAddBookSettingCell.xib in Resources */,
 				5593C521216D0AA700A50533 /* YZHAddBookAddFirendRecordCell.xib in Resources */,
@@ -3441,6 +3671,7 @@
 				55B5DB9221527D8D002A04A9 /* YZHMyCenterHeaderView.xib in Resources */,
 				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
 				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
+				55AB6CEE219FFA8A005385A0 /* FilterBaseController.xib in Resources */,
 				55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */,
 				552CC89C215A746D00135FDC /* YZHSettingCenterVC.xib in Resources */,
 				55A286B921747D23004DACEA /* YZHExtensionFunctionView.xib in Resources */,
@@ -3464,6 +3695,7 @@
 				5593C51F216D05FD00A50533 /* Assets.xcassets in Resources */,
 				5562DE35215687D70098FA83 /* YZHMyInformationPhotoVC.xib in Resources */,
 				55DF5D622189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib in Resources */,
+				55AB6CF521A0081E005385A0 /* teamTagData.json in Resources */,
 				55C656D7215F7955005E997B /* YZHAddBookSetTagAlertView.xib in Resources */,
 				55B5DB9721528566002A04A9 /* YZHMyCenterCell.xib in Resources */,
 				55C656CC215F5FAE005E997B /* YZHAddBookSetTagCell.xib in Resources */,
@@ -3546,8 +3778,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				55337DF72150F52E00307B75 /* NSString+YZHTool.m in Sources */,
+				55AB6CEC219FFA8A005385A0 /* UIView+General.m in Sources */,
 				5531458021573C1400A13F96 /* YZHMyInformationYoloIDVC.m in Sources */,
+				55AB6CF2219FFA8A005385A0 /* FilterCollectionCell.m in Sources */,
 				5536421C217EAEC3006F77A5 /* NIMMessageCell.m in Sources */,
+				55AB6CEF219FFA8A005385A0 /* CYLMultipleFilterController.m in Sources */,
 				5556023D217EFC6A000F46DF /* UIActionSheet+YZHBlock.m in Sources */,
 				555DA4AD216C35160057D434 /* UIView+JKRSubView.m in Sources */,
 				552CC89B215A746D00135FDC /* YZHSettingCenterVC.m in Sources */,
@@ -3578,12 +3813,14 @@
 				55364221217EAEC3006F77A5 /* NSString+NIMKit.m in Sources */,
 				553641BE217EAEC2006F77A5 /* NIMKitAuthorizationTool.m in Sources */,
 				553641FE217EAEC3006F77A5 /* NIMTipContentConfig.m in Sources */,
+				55AB6CED219FFA8A005385A0 /* CYLFilterParamsTool.m in Sources */,
 				553641E7217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.m in Sources */,
 				55D580F721635976000A8B55 /* YZHAddBookFirendModel.m in Sources */,
 				553641D7217EAEC2006F77A5 /* NIMAvatarImageView.m in Sources */,
 				553641F0217EAEC3006F77A5 /* NIMTimestampModel.m in Sources */,
 				555DA4BC216C408F0057D434 /* YZHAddBookSearchVC.m in Sources */,
 				553641BD217EAEC2006F77A5 /* NIMKitFileLocationHelper.m in Sources */,
+				55AB6CE3219FFA8A005385A0 /* CYLDBManager.m in Sources */,
 				553641E6217EAEC2006F77A5 /* NIMTeamInfoData.m in Sources */,
 				5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */,
 				55364202217EAEC3006F77A5 /* NIMBaseSessionContentConfig.m in Sources */,
@@ -3591,6 +3828,7 @@
 				55364219217EAEC3006F77A5 /* NIMSessionUnknowContentView.m in Sources */,
 				556F6CFC21476CFA0048171C /* YZHThemeManage.m in Sources */,
 				55BA210A21763A3700F90268 /* NTESSDKConfigDelegate.m in Sources */,
+				55AB6CE4219FFA8A005385A0 /* UIButton+CollectionCellStyle.m in Sources */,
 				553641BA217EAEC2006F77A5 /* NIMContactPickedView.m in Sources */,
 				553641C9217EAEC2006F77A5 /* NIMInputAudioRecordIndicatorView.m in Sources */,
 				552B78F021737E9A00C1DD99 /* YZHUserUtil.m in Sources */,
@@ -3634,6 +3872,7 @@
 				5536421B217EAEC3006F77A5 /* NIMSessionRobotContentView.m in Sources */,
 				5531458521573C4600A13F96 /* YZHMyInformationMyPlaceVC.m in Sources */,
 				5520DE1E218EE4B10042ED56 /* YZHContactMemberModel.m in Sources */,
+				55AB6CDA219FFA8A005385A0 /* NSDictionary+log.m in Sources */,
 				553641D3217EAEC2006F77A5 /* NIMGrowingInternalTextView.m in Sources */,
 				555B80682199D80500168C3C /* YZHTagContactManage.m in Sources */,
 				55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */,
@@ -3643,6 +3882,7 @@
 				55256F2F21588E3300DEEC45 /* UIButton+YZHCountDown.m in Sources */,
 				55337DDE214FEFCA00307B75 /* YZHFindPasswordVC.m in Sources */,
 				55BA210921763A3700F90268 /* NTESDevice.m in Sources */,
+				55AB6CE6219FFA8A005385A0 /* CYLMainViewController.m in Sources */,
 				556F6D112147B9220048171C /* YZHRouter.m in Sources */,
 				55D580DF2163240B000A8B55 /* YZHAddBookSetNoteVC.m in Sources */,
 				55337DC8214F8EC300307B75 /* YZHRegisterView.m in Sources */,
@@ -3676,6 +3916,7 @@
 				553641CB217EAEC2006F77A5 /* NIMInputView.m in Sources */,
 				55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */,
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
+				55AB6CDB219FFA8A005385A0 /* NSArray+log.m in Sources */,
 				553641BF217EAEC2006F77A5 /* NIMKitResourceResizer.m in Sources */,
 				553641FF217EAEC3006F77A5 /* NIMUnsupportContentConfig.m in Sources */,
 				5509F106218228BE004E10D3 /* YZHTeamCardContentView.m in Sources */,
@@ -3686,7 +3927,9 @@
 				5509F1152184442E004E10D3 /* YZHRequstAddFirendContentView.m in Sources */,
 				559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */,
 				553641DA217EAEC2006F77A5 /* NIMCustomLeftBarView.m in Sources */,
+				55AB6C97219FDCF0005385A0 /* YZHTeamTagSelectedVC.m in Sources */,
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
+				55AB6CEA219FFA8A005385A0 /* CYLRightImageButton.m in Sources */,
 				553641EA217EAEC3006F77A5 /* NIMAdvancedTeamMemberCell.m in Sources */,
 				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
 				5509F0FB218218A9004E10D3 /* NSDictionary+NTESJson.m in Sources */,
@@ -3704,9 +3947,11 @@
 				55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */,
 				555B806F219B238D00168C3C /* NTESSystemNotificationCell.m in Sources */,
 				555B806B219ADC4300168C3C /* YZHAddFirendRecordManage.m in Sources */,
+				55AB6CE7219FFA8A005385A0 /* CYLFilterHeaderView.m in Sources */,
 				553641E5217EAEC2006F77A5 /* NIMCardMemberItem.m in Sources */,
 				555B807B219B5AC700168C3C /* YZHAddFriendShowFooterView.m in Sources */,
 				553641C4217EAEC2006F77A5 /* NIMKitDevice.m in Sources */,
+				55AB6CE9219FFA8A005385A0 /* CollectionViewCell.m in Sources */,
 				55D5810121636CFF000A8B55 /* YZHPhoneContactDefaultView.m in Sources */,
 				55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */,
 				5509F0F5218212DE004E10D3 /* YZHUserCardAttachment.m in Sources */,
@@ -3740,6 +3985,7 @@
 				559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */,
 				5536420B217EAEC3006F77A5 /* NIMKitLocationPoint.m in Sources */,
 				552B78F32173ABBD00C1DD99 /* YZHAboutYoloModel.m in Sources */,
+				55AB6CF3219FFA8A005385A0 /* CYLMultipleFilterHeaderView.m in Sources */,
 				553145712157298200A13F96 /* YZHMyInformationSetNameVC.m in Sources */,
 				55364224217EAEC3006F77A5 /* UIView+NIM.m in Sources */,
 				552CC8A9215B149A00135FDC /* UIImage+YZHTool.m in Sources */,
@@ -3761,12 +4007,14 @@
 				553641BC217EAEC2006F77A5 /* NIMContactSelectConfig.m in Sources */,
 				55364206217EAEC3006F77A5 /* NIMSessionMsgDatasource.m in Sources */,
 				553641C6217EAEC2006F77A5 /* NIMPinyinConverter.m in Sources */,
+				55AB6CE5219FFA8A005385A0 /* CYLClassifyMenuViewController.m in Sources */,
 				556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */,
 				553641C2217EAEC2006F77A5 /* NIMKitRobotDefaultTemplateParser.m in Sources */,
 				553641F9217EAEC3006F77A5 /* NIMFileContentConfig.m in Sources */,
 				5520DE27218EE6380042ED56 /* YZHGroupedDataCollection.m in Sources */,
 				553641F7217EAEC3006F77A5 /* NIMSessionListCell.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
+				55AB6CE8219FFA8A005385A0 /* CYLIndexPathButton.m in Sources */,
 				5536420E217EAEC3006F77A5 /* NIMMessageCellFactory.m in Sources */,
 				55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
@@ -3812,6 +4060,7 @@
 				5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */,
 				553641E0217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m in Sources */,
 				558A21482179850F00E892C3 /* NTESSessionPeekViewController.m in Sources */,
+				55AB6CF0219FFA8A005385A0 /* FilterBaseController.m in Sources */,
 				556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */,
 				559F1B1B217EED370028B0E5 /* NTESChatroomTextContentConfig.m in Sources */,
 				553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */,
@@ -3841,6 +4090,7 @@
 				553641BB217EAEC2006F77A5 /* NIMContactSelectTabView.m in Sources */,
 				55337DD6214FE07500307B75 /* YZHWelcomeVC.m in Sources */,
 				5591D7A7215A2BDA00C2AA93 /* YZHPhotoManage.m in Sources */,
+				55AB6CEB219FFA8A005385A0 /* UIImage+Blur.m in Sources */,
 				553641F5217EAEC3006F77A5 /* NIMKitInfo.m in Sources */,
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
 				55364215217EAEC3006F77A5 /* NIMSessionNetChatNotifyContentView.m in Sources */,

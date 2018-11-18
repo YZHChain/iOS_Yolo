@@ -73,7 +73,7 @@ NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendR
 NSString *const kYZHRouterCommunityCreateTeam = @"/community/createTeam";
 NSString *const kYZHRouterCommunityCreateTeamAddition = @"/community/createTeam/addition";
 NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/result";
-
+NSString *const kYZHRouterCommunityCreateTeamTagSelected = @"/community/createTeam/tagSelected";
 
 @implementation YZHRouterConfig
 
@@ -259,6 +259,12 @@ NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/re
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterCommunityCreateTeamTagSelected : @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamTagSelectedVC",
+             kYZHRouteViewControllerNameKey: @"选择群标签",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
              };
 }
 

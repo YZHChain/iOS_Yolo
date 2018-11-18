@@ -31,8 +31,8 @@
     
     self.navigationController.delegate = self;
     self.navigationBar.translucent = NO;
-    [self.navigationBar setBarTintColor:[UIColor yzh_backgroundDarkBlue]];
-    
+//    [self.navigationBar setBarTintColor:[UIColor yzh_backgroundDarkBlue]];
+    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navgationBar_background_image"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 }

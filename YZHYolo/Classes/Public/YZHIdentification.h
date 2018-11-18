@@ -33,6 +33,11 @@ typedef void (^YZHStringBlock)(NSString *result);
  */
 typedef void(^YZHButtonExecuteBlock)(UIButton *sender);
 
+/**
+ * For single button block.
+ */
+typedef void(^YZHExecuteBlock)(id result);
+
 #pragma mark - NetWorkin
 /**
  *    @author Jersey

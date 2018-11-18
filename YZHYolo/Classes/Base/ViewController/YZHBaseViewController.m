@@ -66,7 +66,7 @@
 
 #pragma mark -- Setting View
 
-//设置状态栏颜色
+//设置状态栏颜色statusBarWindow
 //- (void)setStatusBarBackgroundColor:(UIColor *)color {
 //
 //    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];

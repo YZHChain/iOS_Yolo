@@ -79,6 +79,7 @@ extern NSString *const kYZHRouterAddressBookScanQRCode;
 extern NSString *const kYZHRouterCommunityCreateTeam;
 extern NSString *const kYZHRouterCommunityCreateTeamAddition;
 extern NSString *const kYZHRouterCommunityCreateTeamResult;
+extern NSString *const kYZHRouterCommunityCreateTeamTagSelected;
 
 + (NSDictionary* )configInfo;
 

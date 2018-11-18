@@ -28,7 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) YZHCreateTeamType teamType;
 @property (nonatomic, strong) FSTextView* teamSynopsisTextView;
 @property (weak, nonatomic) IBOutlet UILabel *currentTextLengthLabel;
-
+@property (weak, nonatomic) IBOutlet UIView *teamTagView;
+@property (weak, nonatomic) IBOutlet UIView *teamTagTitleView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *teamTagViewLayoutConstraint;
+@property (weak, nonatomic) IBOutlet UIView *teamTagShowView;
 
 @end
 

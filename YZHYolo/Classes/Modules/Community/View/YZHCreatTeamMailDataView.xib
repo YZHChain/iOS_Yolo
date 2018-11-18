@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -188,11 +188,19 @@
                                         <constraint firstItem="gGU-lp-tWE" firstAttribute="leading" secondItem="IzJ-Pc-aZb" secondAttribute="leading" constant="16" id="aKb-pX-Rm5"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-jg-jad">
+                                    <rect key="frame" x="0.0" y="30" width="375" height="50"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="wXi-jg-jad" secondAttribute="trailing" id="9yh-em-oUX"/>
+                                <constraint firstItem="wXi-jg-jad" firstAttribute="top" secondItem="IzJ-Pc-aZb" secondAttribute="bottom" id="EFD-9I-s4w"/>
+                                <constraint firstAttribute="bottom" secondItem="wXi-jg-jad" secondAttribute="bottom" id="YW9-h7-qDq"/>
                                 <constraint firstAttribute="height" constant="80" id="bdo-Ng-eaj"/>
                                 <constraint firstItem="IzJ-Pc-aZb" firstAttribute="top" secondItem="jgA-kk-3Pq" secondAttribute="top" id="g75-YL-2YR"/>
+                                <constraint firstItem="wXi-jg-jad" firstAttribute="leading" secondItem="jgA-kk-3Pq" secondAttribute="leading" id="jiQ-3m-Oe2"/>
                                 <constraint firstItem="IzJ-Pc-aZb" firstAttribute="leading" secondItem="jgA-kk-3Pq" secondAttribute="leading" id="kjc-Rt-fwM"/>
                                 <constraint firstAttribute="trailing" secondItem="IzJ-Pc-aZb" secondAttribute="trailing" id="rHr-h8-MAH"/>
                             </constraints>
@@ -315,6 +323,10 @@
                 <outlet property="scrollView" destination="s2j-0L-Axs" id="Ub7-Jt-9ee"/>
                 <outlet property="teamNameTextFiled" destination="PyL-8Z-MyY" id="nrN-Vu-bbR"/>
                 <outlet property="teamSynopsisView" destination="SJG-U8-NF2" id="5Nq-5Y-4bB"/>
+                <outlet property="teamTagShowView" destination="wXi-jg-jad" id="zeL-wR-Hdu"/>
+                <outlet property="teamTagTitleView" destination="IzJ-Pc-aZb" id="NcI-yL-lC1"/>
+                <outlet property="teamTagView" destination="jgA-kk-3Pq" id="R71-iW-bhK"/>
+                <outlet property="teamTagViewLayoutConstraint" destination="bdo-Ng-eaj" id="Nr0-mW-L0D"/>
                 <outlet property="teamTypeLabel" destination="O7c-kF-o5h" id="brT-0h-cTj"/>
                 <outlet property="teamTypeSwitch" destination="fbK-rK-GJm" id="mQb-3h-ppH"/>
                 <outlet property="updateAvatarButton" destination="OtW-90-sAh" id="Y4h-fc-Wvj"/>
