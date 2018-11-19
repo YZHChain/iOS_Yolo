@@ -76,7 +76,16 @@
     self.yoloIDTextField.returnKeyType = UIReturnKeyDone;
     [self.yoloIDTextField becomeFirstResponder];
     
-    self.remindLabel.text = @"请注意:\nyolo号支持英文大小写、数字和特殊字符，必须是英文开头 且仅可设置一次，设置后不能再更改.";
+    // 调整行间距
+    NSString* remindText = @"请注意:\n yolo号支持英文大小写, 数字和特殊字符, 必须是英文开头 且仅可设置一次, 不能少于4位, 设置后不能再更改";
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:remindText];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    // 设置文字居中
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    [paragraphStyle setLineSpacing:5];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [remindText length])];
+    self.remindLabel.numberOfLines = 0;
+    self.remindLabel.attributedText = attributedString;
     self.checkResultView.hidden = YES;
     
 }
@@ -97,9 +106,13 @@
         self.navigationItem.rightBarButtonItem.enabled = NO;
         return YES;
     }
-    if ([string isEqualToString:@"_"] || [string yzh_isSpecialChars]) {
-    } else {
-        return NO;
+    //开头限制英文.
+    if (textField.text.length == 0) {
+        if ([string yzh_isLowerBigCaseEnglishChars]) {
+            return YES;
+        } else {
+            return NO;
+        }
     }
     BOOL isLegal = [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:30];
     if (isLegal) {
@@ -198,21 +211,23 @@
 - (IBAction)checkoutYoloID:(UIButton *)sender {
     
     if (YZHIsString(self.yoloIDTextField.text)) {
-        self.checkResultView.hidden = NO;
         NSDictionary* dic = @{
                               @"yoloNo":self.yoloIDTextField.text.length ? self.yoloIDTextField.text : @""
                               };
         @weakify(self)
         [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
+            self.checkResultView.hidden = NO;
             @strongify(self)
             self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_correct"];
             self.checkResultLabel.text = @"YOLO号可以正常使用";
             self.navigationItem.rightBarButtonItem.enabled = YES;
         } failureCompletion:^(NSError *error) {
+            self.checkResultView.hidden = NO;
             self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_fault"];
             self.checkResultLabel.text = error.domain;
         }];
     } else {
+        self.checkResultView.hidden = NO;
         [YZHAlertManage showAlertMessage:@"Yolo ID不可为空,请重新输入"];
     }
 

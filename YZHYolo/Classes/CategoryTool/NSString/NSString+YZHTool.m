@@ -46,6 +46,11 @@
     return [self validateWithRegex:@"^[a-z]+$"];
 }
 
+- (BOOL)yzh_isLowerBigCaseEnglishChars
+{
+    return [self validateWithRegex:@"^[A-Za-z]+$"];
+}
+
 - (BOOL)yzh_isSpecialChars
 {
     return [self validateWithRegex:@"^[a-z0-9]+$"];

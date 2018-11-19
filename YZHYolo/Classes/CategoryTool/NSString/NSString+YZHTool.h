@@ -19,6 +19,7 @@
 - (BOOL)yzh_isNumber;
 - (BOOL)yzh_isNumberChars;
 - (BOOL)yzh_isLowercaseEnglishChars;
+- (BOOL)yzh_isLowerBigCaseEnglishChars;
 - (BOOL)yzh_isSpecialChars;
 - (BOOL)yzh_isMoneyNumber;
 - (BOOL)yzh_isIDCardNumber;
