@@ -13,6 +13,7 @@
 #import "YZHAddFirendSearchRemindCell.h"
 #import "YZHPublic.h"
 #import "YZHAddBookDetailsVC.h"
+#import "YZHBaseNavigationController.h"
 
 @interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
 
@@ -155,11 +156,14 @@
 //
 //        }];
     }
+    
     YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
+    YZHBaseNavigationController* nav = [[YZHBaseNavigationController alloc] initWithRootViewController:detailsVC];
+    detailsVC.isSearch = YES;
     detailsVC.userId = self.viewModel.userId;
     NSLog(@"当前跟控制器%@",[UIApplication sharedApplication].keyWindow.rootViewController);
     //TODO:
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
         
     }];
 }

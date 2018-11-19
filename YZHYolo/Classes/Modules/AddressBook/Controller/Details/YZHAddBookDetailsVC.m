@@ -85,6 +85,11 @@
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
+    
+    if (self.isSearch) {
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navgationBar_background_image"] forBarMetrics:UIBarMetricsDefault];
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickCandel:)];
+    }
 }
 
 - (void)setupView
@@ -260,6 +265,13 @@
     [YZHRouter openURL:kYZHRouterAddressBookSetting info:@{
                                                            @"userId": self.userId
                                                            }];
+}
+
+- (void)clickCandel:(UIBarButtonItem *)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)senderMessage:(UIButton *)sender {

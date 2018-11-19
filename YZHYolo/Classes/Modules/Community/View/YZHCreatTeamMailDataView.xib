@@ -242,7 +242,7 @@
                                 <constraint firstAttribute="height" constant="14" id="UjJ-uc-MEf"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="12"/>
-                            <color key="textColor" red="0.20784313725490194" green="0.45098039215686275" blue="0.9882352941176471" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.72941176470588232" blue="0.79607843137254897" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传群图标" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUv-63-hQZ">

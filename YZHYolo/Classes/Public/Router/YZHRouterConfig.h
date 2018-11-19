@@ -80,6 +80,10 @@ extern NSString *const kYZHRouterCommunityCreateTeam;
 extern NSString *const kYZHRouterCommunityCreateTeamAddition;
 extern NSString *const kYZHRouterCommunityCreateTeamResult;
 extern NSString *const kYZHRouterCommunityCreateTeamTagSelected;
+extern NSString *const kYZHRouterCommunityCard;
+extern NSString *const kYZHRouterCommunityCardHeaderEdit;
+extern NSString *const kYZHRouterCommunityCardShared;
+extern NSString *const kYZHRouterCommunityCardSharedCheck;
 
 + (NSDictionary* )configInfo;
 

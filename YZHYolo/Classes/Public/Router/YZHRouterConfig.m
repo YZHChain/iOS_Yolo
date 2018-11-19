@@ -74,6 +74,10 @@ NSString *const kYZHRouterCommunityCreateTeam = @"/community/createTeam";
 NSString *const kYZHRouterCommunityCreateTeamAddition = @"/community/createTeam/addition";
 NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/result";
 NSString *const kYZHRouterCommunityCreateTeamTagSelected = @"/community/createTeam/tagSelected";
+NSString *const kYZHRouterCommunityCard = @"/community/card";
+NSString *const kYZHRouterCommunityCardHeaderEdit = @"/community/headerEdit";
+NSString *const kYZHRouterCommunityCardShared = @"/community/cardShared";
+NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedCheck";
 
 @implementation YZHRouterConfig
 
@@ -264,7 +268,29 @@ NSString *const kYZHRouterCommunityCreateTeamTagSelected = @"/community/createTe
              kYZHRouteViewControllerNameKey: @"选择群标签",
              kYZHRouteViewControllerNotesKey: @"",
              kYZHRouteViewControllerNeedLoginKey:@"1",
-             },
+             },             kYZHRouterCommunityCard : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamCardVC",
+                     kYZHRouteViewControllerNameKey: @"群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },             kYZHRouterCommunityCardHeaderEdit : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamHeaderVC",
+                     kYZHRouteViewControllerNameKey: @"群基本信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },             kYZHRouterCommunityCardShared : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamSharedVC",
+                     kYZHRouteViewControllerNameKey: @"互相申请",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },             kYZHRouterCommunityCardSharedCheck : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamSharedCheckVC",
+                     kYZHRouteViewControllerNameKey: @"互相群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             
+             
              };
 }
 

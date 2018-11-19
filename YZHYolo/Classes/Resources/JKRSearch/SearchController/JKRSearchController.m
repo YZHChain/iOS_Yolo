@@ -64,6 +64,8 @@
     [self.searchBar setValue:@(YES) forKey:@"isEditing"];
     // 这里应该直接调用查找根控制器的导航控制器,直接隐藏.
     if (self.hidesNavigationBarDuringPresentation) {
+        //进来的时候
+        [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
         UINavigationController* navigationController = (UINavigationController*)[UIViewController yzh_findTopViewController].parentViewController;
         if ([navigationController isKindOfClass:[UINavigationController class]]) {
             [navigationController setNavigationBarHidden:YES animated:YES];
@@ -97,6 +99,8 @@
     
     [self.view removeFromSuperview];
     if ([self.delegate respondsToSelector:@selector(didDismissSearchController:)]) [self.delegate didDismissSearchController:self];
+    //出去的时候将导航栏颜色清空
+    [self setStatusBarBackgroundColor:[UIColor clearColor]];
     [self.searchBar setValue:@(NO) forKey:@"isEditing"];
     if (self.searchBar.jkr_viewController.parentViewController && [self.searchBar.jkr_viewController.parentViewController isKindOfClass:[UINavigationController class]] && self.hidesNavigationBarDuringPresentation) {
         [(UINavigationController *)self.searchBar.jkr_viewController.parentViewController setNavigationBarHidden:NO animated:YES];
@@ -104,6 +108,7 @@
 }
 
 - (void)endSearchTextFieldEditing:(UITapGestureRecognizer *)sender {
+
     UITextField *searchTextField = [self.searchBar valueForKey:@"searchTextField"];
     [searchTextField resignFirstResponder];
 }

@@ -11,7 +11,7 @@
 #import "UIViewController+YZHTool.h"
 
 @interface YZHCreateTeamResultVC ()
-
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addShareTeamButton;
 @property (weak, nonatomic) IBOutlet UIButton *addFirendButton;
 @property (weak, nonatomic) IBOutlet UIButton *gotoTeamButton;
@@ -48,16 +48,22 @@
 - (void)setupNavBar {
     self.navigationItem.title = @"群创建成功";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"直接进群" style:UIBarButtonItemStylePlain target:self action:@selector(gotoTeam:)];
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"继续建群" style:UIBarButtonItemStylePlain target:self action:@selector(gotoTeam:)];
 }
 
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
+    
     //如果不是互享则隐藏.
     if (self.teamType != YZHTeamTypeShare) {
+        self.titleLabel.text = @"群已创建成功";
         self.addShareTeamButton.hidden = YES;
     } else {
+        self.titleLabel.text = @"群创建成功，是否要马上向其他互享群发出请求？";
         [self.addShareTeamButton addTarget:self action:@selector(onTouchShare:) forControlEvents:UIControlEventTouchUpInside];
     }
     

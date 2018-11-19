@@ -30,6 +30,11 @@
     return [UIColor colorWithRed: 62.0/ 255.0f green: 58.0/ 255.0f blue: 57.0/ 255.0f alpha: 1.0f];
 }
 
++ (UIColor *)yzh_fontThemeBlue {
+    
+    return [UIColor colorWithRed: 0.0/ 255.0f green: 186.0/ 255.0f blue: 203.0/ 255.0f alpha: 1.0f];
+}
+
 + (UIColor *)yzh_buttonBackgroundGreen {
     
     return [UIColor colorWithRed: 42.0/ 255.0f green: 107.0/ 255.0f blue: 250.0/ 255.0f alpha: 1.0f];
