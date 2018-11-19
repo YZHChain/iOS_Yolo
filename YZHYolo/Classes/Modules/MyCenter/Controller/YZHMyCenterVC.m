@@ -156,7 +156,9 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (void)onUserInfoChanged:(NIMUser *)user {
 
-    [self userInformationUpdateUser:user];
+    if ([user.userId isEqualToString:[[[NIMSDK sharedSDK] loginManager] currentAccount]]) {
+        [self userInformationUpdateUser:user];
+    }
 }
 // 更新
 - (void)userInformationUpdateUser:(NIMUser *)user {

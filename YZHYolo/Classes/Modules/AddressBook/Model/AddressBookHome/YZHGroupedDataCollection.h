@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray *)membersOfGroup:(NSInteger)groupIndex;
 
 - (id<YZHGroupMemberProtocol>)memberOfIndex:(NSIndexPath *)indexPath;
+- (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath;
 //
 - (id<YZHGroupMemberProtocol>)memberOfId:(NSString *)uid;
 

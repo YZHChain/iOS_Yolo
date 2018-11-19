@@ -70,6 +70,7 @@ NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendR
 
 #pragma mark -- Session
 
+NSString *const kYZHRouterSessionSharedCard = @"/community/sharedCard";
 NSString *const kYZHRouterCommunityCreateTeam = @"/community/createTeam";
 NSString *const kYZHRouterCommunityCreateTeamAddition = @"/community/createTeam/addition";
 NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/result";
@@ -245,6 +246,12 @@ NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedChec
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterSessionSharedCard: @{
+                 kYZHRouteViewControllerClassKey: @"YZHSharedContactVC",
+                 kYZHRouteViewControllerNameKey: @"好友或群分享等",
+                 kYZHRouteViewControllerNotesKey: @"",
+                 kYZHRouteViewControllerNeedLoginKey:@"1",
+                 },
              kYZHRouterCommunityCreateTeam: @{
                      kYZHRouteViewControllerClassKey: @"YZHCreatTeamVC",
                      kYZHRouteViewControllerNameKey: @"填写群信息",

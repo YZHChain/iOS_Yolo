@@ -417,7 +417,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         if (!headerView)
         {
             headerView = [[YZHPrivatelyChatListHeaderView alloc] init];
-            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
+//            team_createTeam_selectedTag_show
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
             headerView.currentStatusType = YZHTableViewShowTypeDefault;
@@ -461,13 +462,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     switch (headerView.currentStatusType) {
         case YZHListHeaderStatusTypeDefault:
-            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
             break;
         case YZHListHeaderStatusTypeShow:
-            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_setting_privacy"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
             break;
         case YZHListHeaderStatusTypeClose:
-            headerView.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
+            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
             break;
         default:
             break;

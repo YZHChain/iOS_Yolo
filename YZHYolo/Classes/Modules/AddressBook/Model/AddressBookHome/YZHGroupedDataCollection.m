@@ -141,6 +141,23 @@
         return [members objectAtIndex:indexPath.row];
     }
 }
+
+- (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath {
+    
+    NSArray *members = nil;
+    //由于未将第一个分区加入;
+    NSInteger groupIndex = indexPath.section;
+    if(groupIndex >= 0 && groupIndex < _groups.count) {
+        Pair *pair = [_groups objectAtIndex:groupIndex];
+        members = pair.second;
+    }
+    NSInteger memberIndex = indexPath.row;
+    if (memberIndex < 0 || memberIndex >= members.count) {
+        return nil;
+    } else {
+        return [members objectAtIndex:indexPath.row];
+    }
+}
 // 带标题字符数量
 - (NSInteger)groupTitleCount
 {

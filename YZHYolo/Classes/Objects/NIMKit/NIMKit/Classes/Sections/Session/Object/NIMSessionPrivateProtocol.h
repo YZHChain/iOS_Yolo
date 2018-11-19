@@ -89,10 +89,6 @@
 
 @end
 
-
-
-
-
 @interface NIMSessionViewController(Interactor)
 
 - (void)setInteractor:(id<NIMSessionInteractor>) interactor;

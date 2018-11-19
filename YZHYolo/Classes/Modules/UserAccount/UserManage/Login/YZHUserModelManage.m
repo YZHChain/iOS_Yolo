@@ -130,7 +130,7 @@
     
     if (_customTags.count == 0) {
         
-        NSArray* tagNameArray = @[@"☆标准好友", @"家人", @"同事"
+        NSArray* tagNameArray = @[@"☆标好友", @"家人", @"同事"
                                   ];
         NSMutableArray* customTagModel = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 3; i++) {

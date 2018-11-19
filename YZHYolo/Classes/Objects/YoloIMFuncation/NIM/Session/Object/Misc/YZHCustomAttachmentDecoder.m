@@ -32,6 +32,7 @@
                     break;
                 case CustomMessageTypeTeamCard:
                     attachment = [YZHTeamCardAttachment YZH_objectWithKeyValues:data];
+                    break;
                 case CustomMessageTypeAddFirend:
                     attachment = [YZHAddFirendAttachment YZH_objectWithKeyValues:data];
                     break;

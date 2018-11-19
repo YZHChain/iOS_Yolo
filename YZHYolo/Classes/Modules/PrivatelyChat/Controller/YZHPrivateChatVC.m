@@ -53,6 +53,9 @@
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, assign) BOOL requstAddFirendFlag;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
+@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
+@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
+
 @end
 
 @implementation YZHPrivateChatVC
@@ -230,31 +233,25 @@
 #pragma mark - NIMMeidaButton
 // 联系人
 - (void)onTapMediaItemContact:(NIMMediaItem *)item {
-    // 弹出联系人页面
-//    UIViewController* vc = [[UIViewController alloc] init];
-//    vc.navigationItem.title = @"联系人";
-//    [self.navigationController pushViewController:vc animated:YES];
-    YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
-    userCardAttachment.userName = @"泽西哥";
-    userCardAttachment.yoloID = @"999999";
-    userCardAttachment.account = @"zexi0625";
-//    [userCardAttachment encodeAttachment];
     
-    [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCardAttachment]];
+    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                          @"sharedType": @(1),
+                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+                                                          kYZHRouteSegueNewNavigation: @(YES),
+                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
+                                                          }];
 }
 // 我的社群
 - (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
     // 弹出联系人页面
-//    UIViewController* vc = [[UIViewController alloc] init];
-//    vc.navigationItem.title = @"社群";
-//    [self.navigationController pushViewController:vc animated:YES];
-    YZHTeamCardAttachment* teamCardAttachment = [[YZHTeamCardAttachment alloc] init];
-    teamCardAttachment.groupName = @"商业群名";
-    teamCardAttachment.groupID = @"999999";
-    teamCardAttachment.groupSynopsis = @"群简介群简介群简介群简介群简介群简介群简介群 简介群简介群简介群简介群简介.群简介群简介群简介群简介群简介群简介群简介群 简介群简介群简介群简介群简介.";
-    teamCardAttachment.groupUrl = @"http://www.baidu.com";
+    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                          @"sharedType": @(2),
+                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+                                                          kYZHRouteSegueNewNavigation: @(YES),
+                                                          @"sharedTeamCardBlock": self.sharedTeamCardHandle
+                                                          }];
     
-    [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment]];
+//    [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment]];
 }
 
 #pragma mark - 消息发送时间截获
@@ -343,7 +340,7 @@
     AVURLAsset *urlAsset = [[AVURLAsset alloc]initWithURL:URL options:nil];
     CMTime time = urlAsset.duration;
     CGFloat mediaLength = CMTimeGetSeconds(time);
-    return mediaLength > 2;
+    return mediaLength > 1;
 }
 
 - (void)onRecordFailed:(NSError *)error
@@ -701,4 +698,27 @@
     return _userInfoExtManage;
 }
 
+- (void (^)(YZHUserCardAttachment *))sharedPersonageCardHandle {
+    
+    if (!_sharedPersonageCardHandle) {
+        @weakify(self)
+        _sharedPersonageCardHandle = ^(YZHUserCardAttachment *userCard) {
+            @strongify(self)
+          [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCard]];
+        };
+    }
+    return _sharedPersonageCardHandle;
+}
+
+- (void (^)(YZHTeamCardAttachment *))sharedTeamCardHandle {
+    
+    if (!_sharedTeamCardHandle) {
+        @weakify(self)
+        _sharedTeamCardHandle = ^(YZHTeamCardAttachment *teamCard) {
+            @strongify(self)
+            [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCard]];
+        };
+    }
+    return _sharedTeamCardHandle;
+}
 @end

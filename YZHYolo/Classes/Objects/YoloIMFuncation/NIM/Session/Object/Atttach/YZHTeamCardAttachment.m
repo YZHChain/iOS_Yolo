@@ -63,8 +63,8 @@
         //                self->_avatarUrl = users.firstObject.userInfo.avatarUrl ? users.firstObject.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
         //            }
         //        }];
-        NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_groupID];
-        _avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
+//        NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_groupID];
+        _avatarUrl = @"team_createTeam_avatar_icon_normal";
     }
     return _avatarUrl;
 }

@@ -301,7 +301,6 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 - (NSUInteger)sectionOfTableViewDidScroll:(UITableView *)tableView {
     
-
     NSIndexPath* indexPath = [tableView indexPathForRowAtPoint:tableView.contentOffset];
     NSInteger indexSection = indexPath.section;
     if (indexSection > 0) {
