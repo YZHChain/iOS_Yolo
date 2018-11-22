@@ -61,7 +61,7 @@
 
     if (!_selectedImageView) {
         _selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_information_setName_selected"]];
-        _selectedImageView.right = self.width - 44;
+        _selectedImageView.x = YZHScreen_Width - 36;
         _selectedImageView.y = (self.height / 2) - _selectedImageView.height / 2;
         [_selectedImageView sizeToFit];
     }

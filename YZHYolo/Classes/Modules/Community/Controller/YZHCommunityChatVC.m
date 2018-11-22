@@ -41,6 +41,14 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"社群";
+    
+    UIButton *rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightItemButton addTarget:self action:@selector(gotoUserDetails:) forControlEvents:UIControlEventTouchUpInside];
+    [rightItemButton setImage:[UIImage imageNamed:@"session_rightItemBar_normal"] forState:UIControlStateNormal];
+    //    [rightItemButton setImage:[UIImage imageNamed:@"icon_session_info_pressed"] forState:UIControlStateHighlighted];
+    [rightItemButton sizeToFit];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemButton];
 }
 
 - (void)setupView
@@ -63,6 +71,14 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 #pragma mark - 5.Event Response
+
+- (void)gotoUserDetails:(UIBarButtonItem *)sender {
+    
+    [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                            @"isTeamOwner":@(YES),
+                                                            @"teamId":self.teamId
+                                                            }];
+}
 
 #pragma mark - 6.Private Methods
 

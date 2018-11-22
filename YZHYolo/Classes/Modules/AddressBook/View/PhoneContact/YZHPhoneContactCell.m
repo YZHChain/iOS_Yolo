@@ -73,7 +73,7 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
     
     if (contactModel.status == 0 || contactModel.status == 1) {
         
-        [self.photoImageView yzh_setImageWithString:@"addBook_cover_cell_photo_default" placeholder:contactModel.photoImageName];
+        [self.photoImageView yzh_setImageWithString:contactModel.photoImageName placeholder:@"addBook_cover_cell_photo_default"];
 //        [self.photoImageView yzh_cornerRadiusAdvance:3 rectCornerType:UIRectCornerAllCorners];
     } else {
         self.photoImageView.image = [UIImage imageNamed:@"addBook_phoneContact_cell_unregistered_default"];
@@ -99,7 +99,7 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
         }
     }
     if (YZHIsString(searchModel.memberModel.info.avatarUrlString)) {
-        [self.photoImageView yzh_setImageWithString:@"addBook_cover_cell_photo_default" placeholder:searchModel.memberModel.info.avatarUrlString];
+        [self.photoImageView yzh_setImageWithString:searchModel.memberModel.info.avatarUrlString placeholder:@"addBook_cover_cell_photo_default"];
     }
 
     self.nameLabel.text = searchModel.memberModel.info.showName;

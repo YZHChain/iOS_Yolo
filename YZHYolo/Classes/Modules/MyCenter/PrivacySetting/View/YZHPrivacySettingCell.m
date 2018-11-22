@@ -52,5 +52,4 @@
     self.subtitleLabel.text = self.viewModel.content[_indexPath.row].subTitle;
 }
 
-
 @end

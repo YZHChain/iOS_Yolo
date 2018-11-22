@@ -79,6 +79,12 @@ NSString *const kYZHRouterCommunityCard = @"/community/card";
 NSString *const kYZHRouterCommunityCardHeaderEdit = @"/community/headerEdit";
 NSString *const kYZHRouterCommunityCardShared = @"/community/cardShared";
 NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedCheck";
+NSString *const kYZHRouterCommunityCardQRCodeShared = @"/community/qrCodeShared";
+NSString *const kYZHRouterCommunityCardSetNickName = @"/community/setNickName";
+NSString *const kYZHRouterCommunityCardTeamNotice = @"/community/teamNotice";
+NSString *const kYZHRouterCommunityCardSendTeamNotice = @"/community/teamSendNotice";
+NSString *const kYZHRouterCommunityCardSelectedTeam = @"/community/teamNotice/selectedTeam";
+NSString *const kYZHRouterSessionChatContent = @"/session/chatContent";
 
 @implementation YZHRouterConfig
 
@@ -275,30 +281,68 @@ NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedChec
              kYZHRouteViewControllerNameKey: @"选择群标签",
              kYZHRouteViewControllerNotesKey: @"",
              kYZHRouteViewControllerNeedLoginKey:@"1",
-             },             kYZHRouterCommunityCard : @{
+             },
+             kYZHRouterCommunityCard : @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamCardVC",
                      kYZHRouteViewControllerNameKey: @"群信息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
-                     },             kYZHRouterCommunityCardHeaderEdit : @{
-                     kYZHRouteViewControllerClassKey: @"YZHTeamHeaderVC",
+                     },
+             kYZHRouterCommunityCardHeaderEdit : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamDataEditVC",
                      kYZHRouteViewControllerNameKey: @"群基本信息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
-                     },             kYZHRouterCommunityCardShared : @{
+                     },
+             kYZHRouterCommunityCardShared : @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamSharedVC",
                      kYZHRouteViewControllerNameKey: @"互相申请",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
-                     },             kYZHRouterCommunityCardSharedCheck : @{
+                     },
+             kYZHRouterCommunityCardSharedCheck : @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamSharedCheckVC",
                      kYZHRouteViewControllerNameKey: @"互相群信息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
-             
-             
-             };
+             kYZHRouterCommunityCardQRCodeShared : @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamQRCodeSharedVC",
+             kYZHRouteViewControllerNameKey: @"群二维码分享",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterCommunityCardSetNickName : @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamSetNameVC",
+             kYZHRouteViewControllerNameKey: @"群内昵称",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterCommunityCardTeamNotice : @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamNoticeVC",
+             kYZHRouteViewControllerNameKey: @"群公告内容",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterCommunityCardSendTeamNotice: @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamSendNoticeVC",
+             kYZHRouteViewControllerNameKey: @"发布群公告",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterCommunityCardSelectedTeam: @{
+             kYZHRouteViewControllerClassKey: @"YZHTeamNoticeSelectTeamVC",
+             kYZHRouteViewControllerNameKey: @"我的群",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterSessionChatContent: @{
+             kYZHRouteViewControllerClassKey: @"YZHChatContentVC",
+             kYZHRouteViewControllerNameKey: @"我的群",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             }
+        };
 }
 
 @end

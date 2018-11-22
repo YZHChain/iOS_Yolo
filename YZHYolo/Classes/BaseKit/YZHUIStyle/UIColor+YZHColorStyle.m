@@ -45,6 +45,11 @@
     return [UIColor colorWithRed: 227/255.0 green: 41/255.0 blue: 63/255.0 alpha: 1];
 }
 
++ (UIColor *)yzh_buttonBackgroundPinkRed {
+    
+    return [UIColor colorWithRed: 255/255.0 green: 94/255.0 blue: 134/255.0 alpha: 1];
+}
+
 +(UIColor *)yzh_sessionCellGray {
     
     return [UIColor colorWithRed: 142/255.0 green: 142/255.0 blue: 142/255.0 alpha:1];

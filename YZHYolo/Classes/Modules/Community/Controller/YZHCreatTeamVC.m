@@ -12,12 +12,6 @@
 #import "YZHPublic.h"
 #import "YZHPhotoManage.h"
 
-static NSInteger kTagViewHeight = 21;
-static NSInteger kTagViewSpace = 11;
-static NSInteger kTagViewSuperViewSpace = 18;
-static NSInteger kTagViewRowHeight = 35;
-static NSInteger kTagViewRowSpace = 10;
-
 @interface YZHCreatTeamVC ()<UITextViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) YZHCreatTeamMailDataView* createTeamView;
@@ -166,65 +160,12 @@ static NSInteger kTagViewRowSpace = 10;
 }
 
 - (void)refresh {
-    
-    [self.createTeamView.teamTagShowView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
-    self.createTeamView.teamTagViewLayoutConstraint.constant = 80;
-    UIView* lastView;    // 代表同意行的上一个 TagView. 第一个则为 nil
-    NSInteger level = 0; //代表目前已新增的行数
-    NSInteger lastViewRight = 0;  //上一个 TagView的 X + Widtg
-    
-    for (NSInteger i = 0 ; i < self.selectedLabelArray.count; i++) {
 
-        UIView* labelView = [[UIView alloc] init];
-        labelView.layer.cornerRadius = 3;
-        labelView.layer.borderWidth = 1;
-        labelView.layer.borderColor = [UIColor yzh_backgroundThemeGray].CGColor;
-        
-        UILabel* tagLabel = [[UILabel alloc] init];
-        tagLabel.text = self.selectedLabelArray[i];
-        tagLabel.font = [UIFont yzh_commonStyleWithFontSize:11];
-        CGSize tagSize = [tagLabel sizeThatFits: CGSizeMake([UIScreen mainScreen].bounds.size.width, MAXFLOAT)];
-        [self.createTeamView.teamTagShowView addSubview:labelView];
-        [labelView addSubview:tagLabel];
-        NSInteger viewWidth = tagSize.width + 32;
-        if (lastView) {
-            //如果新增加的 TagViewWide + 左边间距 + 与最右边的间距 超出了 SuperViewWidth 则需要向下新增一行.
-            if (YZHView_Width - lastViewRight < (viewWidth + kTagViewSpace + kTagViewSuperViewSpace)) {
-                lastView = nil;
-                level++;
-            }
-        }
-        // 判断是否有上一个
-        if (lastView) {
-            [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(lastView.mas_right).mas_offset(kTagViewSpace);
-                make.width.mas_equalTo(viewWidth);
-                make.top.bottom.mas_equalTo(lastView);
-            }];
-        } else {
-            [labelView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(kTagViewSuperViewSpace);
-                make.top.mas_equalTo(kTagViewRowSpace + level * kTagViewRowHeight);
-                make.height.mas_equalTo(kTagViewHeight);
-                make.width.mas_equalTo(viewWidth);
-            }];
-        }
-        [tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.mas_equalTo(labelView);
-        }];
-        if (lastView) {
-            lastViewRight += viewWidth + kTagViewSpace;
-        } else {
-            lastViewRight = viewWidth + kTagViewSuperViewSpace; // diydiy
-        }
-        lastView = labelView;
-    }
+    CGFloat showViewHeight =  [self.createTeamView.teamTagShowView refreshLabelViewWithLabelArray:self.selectedLabelArray];
     
-    self.createTeamView.teamTagViewLayoutConstraint.constant +=  (level * kTagViewRowHeight);
+    self.createTeamView.teamTagViewLayoutConstraint.constant = 80 + showViewHeight;
+    
 }
-
 #pragma mark - 7.GET & SET
 
 - (NSMutableArray<NSString *> *)selectedLabelArray {

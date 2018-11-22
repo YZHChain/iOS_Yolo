@@ -1,8 +1,8 @@
 //
-//  YZHTeamHeaderVC.h
+//  YZHChatContentVC.h
 //  YZHYolo
 //
-//  Created by Jersey on 2018/11/19.
+//  Created by Jersey on 2018/11/21.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHTeamHeaderVC : YZHBaseViewController
+@interface YZHChatContentVC : YZHBaseViewController
+
+@property (nonatomic, copy) NSString* targetId;
 
 @end
 

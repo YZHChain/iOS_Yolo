@@ -18,6 +18,7 @@
 #import "YZHCommunitySearchVC.h"
 #import "YZHRecentSessionExtManage.h"
 #import "YZHPrivateChatVC.h"
+#import "YZHCommunityChatVC.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -190,7 +191,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
     YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
-    [self.navigationController pushViewController:privateChatVC animated:YES];
+    
+    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] init];
+    teamchatVC.teamId = recent.session.sessionId;
+    [self.navigationController pushViewController:teamchatVC animated:YES];
 }
 
 - (void)onSelectedAvatar:(NIMRecentSession *)recent

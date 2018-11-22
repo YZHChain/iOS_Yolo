@@ -85,6 +85,12 @@ extern NSString *const kYZHRouterCommunityCard;
 extern NSString *const kYZHRouterCommunityCardHeaderEdit;
 extern NSString *const kYZHRouterCommunityCardShared;
 extern NSString *const kYZHRouterCommunityCardSharedCheck;
+extern NSString *const kYZHRouterCommunityCardQRCodeShared;
+extern NSString *const kYZHRouterCommunityCardSetNickName;
+extern NSString *const kYZHRouterCommunityCardTeamNotice;
+extern NSString *const kYZHRouterCommunityCardSendTeamNotice;
+extern NSString *const kYZHRouterCommunityCardSelectedTeam;
+extern NSString *const kYZHRouterSessionChatContent;
 
 + (NSDictionary* )configInfo;
 

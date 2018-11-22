@@ -138,7 +138,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     YZHSharedContactCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHSharedCellIdentifier forIndexPath:indexPath];
     if (self.sharedType == YZHSharedContactTypePersonageCard) {
         

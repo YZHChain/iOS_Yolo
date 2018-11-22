@@ -125,6 +125,10 @@ static NSString* const kQRCodeCellIdentifier = @"imformationQRCodeCellIdentifier
     YZHMyInformationModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     if ([model.title isEqualToString:@"性别"]) {
         [YZHRouter openURL:model.route info:@{@"userGender": model.subtitle}];
+    } else if ([model.title isEqualToString:@"昵称"]) {
+        [YZHRouter openURL:model.route info:@{kYZHRouteSegue : kYZHRouteSegueModal,
+                                              kYZHRouteSegueNewNavigation: @(YES)
+                                              }];
     } else {
         [YZHRouter openURL:model.route];
     }

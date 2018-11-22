@@ -188,7 +188,7 @@
                                         <constraint firstItem="gGU-lp-tWE" firstAttribute="leading" secondItem="IzJ-Pc-aZb" secondAttribute="leading" constant="16" id="aKb-pX-Rm5"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-jg-jad">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wXi-jg-jad" customClass="YZHLabelShowView">
                                     <rect key="frame" x="0.0" y="30" width="375" height="50"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
@@ -323,7 +323,7 @@
                 <outlet property="scrollView" destination="s2j-0L-Axs" id="Ub7-Jt-9ee"/>
                 <outlet property="teamNameTextFiled" destination="PyL-8Z-MyY" id="nrN-Vu-bbR"/>
                 <outlet property="teamSynopsisView" destination="SJG-U8-NF2" id="5Nq-5Y-4bB"/>
-                <outlet property="teamTagShowView" destination="wXi-jg-jad" id="zeL-wR-Hdu"/>
+                <outlet property="teamTagShowView" destination="wXi-jg-jad" id="mhX-dC-W8W"/>
                 <outlet property="teamTagTitleView" destination="IzJ-Pc-aZb" id="NcI-yL-lC1"/>
                 <outlet property="teamTagView" destination="jgA-kk-3Pq" id="R71-iW-bhK"/>
                 <outlet property="teamTagViewLayoutConstraint" destination="bdo-Ng-eaj" id="Nr0-mW-L0D"/>

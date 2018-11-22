@@ -12,7 +12,9 @@ static NSInteger kYZHTagViewHeight = 21;
 static NSInteger kYZHTagViewSpace = 11;
 static NSInteger kYZHTagViewSuperViewSpace = 18;
 static NSInteger kYZHTagViewRowHeight = 35;
-static NSInteger kYZHTagViewRowSpace = 10;
+static NSInteger kYZHTagViewRowSpace = 8.5;
+
+
 @interface YZHLabelShowView()
 
 @property (nonatomic, strong) NSArray* selectedLabelArray;
@@ -70,6 +72,7 @@ static NSInteger kYZHTagViewRowSpace = 10;
         }
         [tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(labelView);
+            make.height.mas_equalTo(20);
         }];
         if (lastView) {
             lastViewRight += viewWidth + kYZHTagViewSpace;
@@ -79,7 +82,7 @@ static NSInteger kYZHTagViewRowSpace = 10;
         lastView = labelView;
     }
     
-    return (level * kYZHTagViewHeight);
+    return (level * 30);
 }
 
 @end

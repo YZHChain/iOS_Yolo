@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTextView.h"
+#import "YZHLabelShowView.h"
+
 typedef enum : NSUInteger {
     YZHTeamTypePrivacy,
     YZHTeamTypePublic,
     YZHTeamTypeShare,
 } YZHCreateTeamType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHCreatTeamMailDataView : UIView
@@ -31,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *teamTagView;
 @property (weak, nonatomic) IBOutlet UIView *teamTagTitleView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *teamTagViewLayoutConstraint;
-@property (weak, nonatomic) IBOutlet UIView *teamTagShowView;
+@property (weak, nonatomic) IBOutlet YZHLabelShowView *teamTagShowView;
 
 @end
 

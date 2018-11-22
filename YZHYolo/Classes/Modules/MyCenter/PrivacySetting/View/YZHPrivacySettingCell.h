@@ -10,7 +10,7 @@
 
 #import "YZHPrivacySettingModel.h"
 
-@protocol YZHPrivacyProtocol <NSObject>
+@protocol YZHSwitchProtocol <NSObject>
 
 - (void)selectedUISwitch:(UISwitch* )uiSwitch indexPath:(NSIndexPath *)indexPath;
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (nonatomic, strong) YZHPrivacySettingContent* viewModel;
 @property (nonatomic, strong) NSIndexPath* indexPath;
-@property (nonatomic, weak) id<YZHPrivacyProtocol> delegate;
+@property (nonatomic, weak) id<YZHSwitchProtocol> delegate;
 
 @end
 

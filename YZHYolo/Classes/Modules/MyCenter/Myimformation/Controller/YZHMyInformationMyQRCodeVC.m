@@ -70,7 +70,7 @@
         self.nickNameLabel.text = @"Yolo用户";
     }
     if (YZHIsString(user.userInfo.avatarUrl)) {
-        [self.headerPhotoImageView yzh_setImageWithString:user.userInfo.avatarUrl];
+        [self.headerPhotoImageView yzh_setImageWithString:user.userInfo.avatarUrl placeholder:@"my_cover_headPhoto_default"];
         [self.headerPhotoImageView yzh_cornerRadiusAdvance:self.headerPhotoImageView.size.height / 2 rectCornerType: UIRectCornerAllCorners];
     }
     //生成二维码

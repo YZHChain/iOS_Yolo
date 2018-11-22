@@ -12,7 +12,7 @@
 #import "YZHAboutYoloCell.h"
 #import "YZHUserLoginManage.h"
 
-@interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource, YZHPrivacyProtocol>
+@interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource, YZHSwitchProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHPrivacySettingContent* viewModel;
@@ -239,15 +239,11 @@
     userSetting.addVerift = addVerifyModel.isSelected;
     
     NSString* userInfoExtString = [userInfoExt userInfoExtString];
-    static NSInteger number = 0;
     [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{
                                                        @(NIMUserInfoUpdateTagExt): userInfoExtString
                                                        } completion:^(NSError * _Nullable error) {
                                                            if (!error) {
-                                                               NSLog(@"成功");
-                                                               NSLog(@"修改成功%ld", number);
                                                            } else {
-                                                               NSLog(@"修改失败%ld", number);
                                                            }
                                                        }];
 }

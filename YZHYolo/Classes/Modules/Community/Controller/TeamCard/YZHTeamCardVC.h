@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamCardVC : YZHBaseViewController
 
+@property (nonatomic, assign) BOOL isTeamOwner;
+@property (nonatomic, copy) NSString* teamId;
+
 @end
 
 NS_ASSUME_NONNULL_END

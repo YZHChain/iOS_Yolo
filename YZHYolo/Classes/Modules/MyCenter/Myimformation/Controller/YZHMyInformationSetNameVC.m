@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nickNameTextField;
 @property (nonatomic, strong) NIMUserInfo* userInfo;
+@property (nonatomic, copy) NSString* teamNickName;
 
 @end
 
@@ -57,9 +58,13 @@
     self.navigationItem.title = @"设置昵称";
     self.hideNavigationBarLine = YES;
     
-    UIBarButtonItem* item = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNickName)];
+    UIBarButtonItem* cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelSetNickName)];
+    
+    self.navigationItem.leftBarButtonItem = cancelItem;
+    
+    UIBarButtonItem* saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(saveNickName)];
 
-    self.navigationItem.rightBarButtonItem = item;
+    self.navigationItem.rightBarButtonItem = saveItem;
 }
 
 - (void)setupView
@@ -68,6 +73,8 @@
     
     self.nickNameTextField.returnKeyType = UIReturnKeyDone;
     [self.nickNameTextField becomeFirstResponder];
+    
+    self.nickNameTextField.text = self.userInfo.nickName;
 }
 
 - (void)reloadView
@@ -79,17 +86,19 @@
 
 - (void)setupData
 {
-    if (YZHIsString(self.userInfo.nickName)) {
-        self.nickNameTextField.text = _userInfo.nickName;
+    if (YZHIsString(self.teamId)) {
+        self.nickNameTextField.text = self.teamNickName;
     } else {
-        self.nickNameTextField.text = @"Yolo用户";
+        if (YZHIsString(self.userInfo.nickName)) {
+            self.nickNameTextField.text = _userInfo.nickName;
+        }
     }
+
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"将要输入代理方法");
     if (string.length == 0) {
         return YES;
     } else {
@@ -116,9 +125,24 @@
 
 #pragma mark - 5.Event Response
 
+- (void)cancelSetNickName {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 - (void)saveNickName{
     
-//    && self.nickNameTextField.text
+    if (YZHIsString(self.teamId)) {
+        [self saveTeamNickName];
+    } else {
+        [self saveUserNickName];
+    }
+}
+
+- (void)saveUserNickName {
+    
     if (YZHIsString(self.nickNameTextField.text)) {
         NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];
         //加入用户输入名字为空格,则只计算一位。。
@@ -144,7 +168,37 @@
         //空限制.
         [YZHAlertManage showAlertMessage:@"没有输入名字,请重新填写"];
     }
+    
+}
 
+- (void)saveTeamNickName{
+    
+    if (YZHIsString(self.nickNameTextField.text)) {
+        NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];
+        //加入用户输入名字为空格,则只计算一位。。
+        if (!YZHIsString(nickName)) {
+            nickName = @" ";
+        }
+        if (![nickName isEqualToString:self.teamNickName]) {
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+            @weakify(self)
+            NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+            [[NIMSDK sharedSDK].teamManager updateUserNick:userId newNick:nickName inTeam:self.teamId completion:^(NSError * _Nullable error) {
+                @strongify(self)
+                if (!error) {
+                    [hud hideWithText:@"昵称修改成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [hud hideWithText:error.domain];
+                }
+            }];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        //空限制.
+        [YZHAlertManage showAlertMessage:@"没有输入名字,请重新填写"];
+    }
 }
 
 #pragma mark - 6.Private Methods
@@ -163,5 +217,15 @@
         _userInfo = user.userInfo;
     }
     return _userInfo;
+}
+
+- (NSString *)teamNickName {
+    
+    if (!_teamNickName) {
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        NIMTeamMember *teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.teamId];
+        _teamNickName = teamMember.nickname;
+    }
+    return _teamNickName;
 }
 @end

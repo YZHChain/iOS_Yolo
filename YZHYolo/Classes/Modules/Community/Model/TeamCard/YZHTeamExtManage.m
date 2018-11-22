@@ -1,13 +1,13 @@
 //
-//  YZHTeamHeaderVC.m
+//  YZHTeamExtManage.m
 //  YZHYolo
 //
 //  Created by Jersey on 2018/11/19.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHTeamHeaderVC.h"
+#import "YZHTeamExtManage.h"
 
-@implementation YZHTeamHeaderVC
+@implementation YZHTeamExtManage
 
 @end
