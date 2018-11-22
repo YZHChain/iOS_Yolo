@@ -1796,6 +1796,9 @@
 		55128A1F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5537420E21A6392400204972 /* CreatTeam */,
+				5537420B21A638E600204972 /* TeamNotice */,
+				5537420821A6388600204972 /* TeamCardEdit */,
 				5581914B21A1C7B100C74E2E /* TeamCard */,
 				55AA82682186D8DD00ED73B1 /* YZHCommunityListVC.h */,
 				55AA82692186D8DE00ED73B1 /* YZHCommunityListVC.m */,
@@ -1803,16 +1806,6 @@
 				55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */,
 				55B385F72186EA590057FBEE /* YZHCommunitySearchVC.h */,
 				55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */,
-				55DF5D52218942F000BFA7E6 /* YZHCreatTeamVC.h */,
-				55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */,
-				55AB6C95219FDCF0005385A0 /* YZHTeamTagSelectedVC.h */,
-				55AB6C96219FDCF0005385A0 /* YZHTeamTagSelectedVC.m */,
-				55DF5D5E2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.h */,
-				55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */,
-				55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */,
-				55BDA371218AD9F1006400B0 /* YZHCreateTeamResultVC.h */,
-				55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */,
-				55BDA373218AD9F1006400B0 /* YZHCreateTeamResultVC.xib */,
 				5551B34421A58AA600AF3088 /* YZHChatContentVC.h */,
 				5551B34521A58AA600AF3088 /* YZHChatContentVC.m */,
 			);
@@ -1822,6 +1815,9 @@
 		55128A2021463E480099CC55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5537420F21A6393000204972 /* CreatTeam */,
+				5537420C21A6390000204972 /* TeamNotice */,
+				5537420921A6389500204972 /* TeamCardEdit */,
 				5581914C21A1C7CE00C74E2E /* TeamCard */,
 			);
 			path = Model;
@@ -1830,17 +1826,12 @@
 		55128A2121463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5537421021A6393C00204972 /* CreatTeam */,
+				5537420D21A6390C00204972 /* TeamNotice */,
+				5537420A21A638A100204972 /* TeamCardEdit */,
 				5581915D21A2480800C74E2E /* LabelShow */,
 				5581914D21A1C7D800C74E2E /* TeamCard */,
-				55DF5D55218943B200BFA7E6 /* YZHCreatTeamMailDataView.h */,
-				55DF5D56218943B200BFA7E6 /* YZHCreatTeamMailDataView.m */,
-				55DF5D58218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib */,
-				55BDA36E218AA267006400B0 /* YZHImportBoxView.h */,
-				55BDA36F218AA267006400B0 /* YZHImportBoxView.m */,
-				5551B34721A58B1A00AF3088 /* YZHChatContentHeaderView.h */,
-				5551B34821A58B1A00AF3088 /* YZHChatContentHeaderView.m */,
-				5551B34A21A58B2300AF3088 /* YZHChatContentHeaderView.xib */,
-				55BDA36A2189BF27006400B0 /* FSTextView */,
+				55BDA36A2189BF27006400B0 /* Function */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2678,6 +2669,109 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
+		5537420821A6388600204972 /* TeamCardEdit */ = {
+			isa = PBXGroup;
+			children = (
+				556D7E5D21A3F68D00533384 /* YZHTeamDataEditVC.h */,
+				556D7E5E21A3F68D00533384 /* YZHTeamDataEditVC.m */,
+				556D7E5F21A3F68D00533384 /* YZHTeamDataEditVC.xib */,
+				556D7E7021A503BD00533384 /* YZHTeamSetNameVC.h */,
+				556D7E7121A503BD00533384 /* YZHTeamSetNameVC.m */,
+			);
+			path = TeamCardEdit;
+			sourceTree = "<group>";
+		};
+		5537420921A6389500204972 /* TeamCardEdit */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TeamCardEdit;
+			sourceTree = "<group>";
+		};
+		5537420A21A638A100204972 /* TeamCardEdit */ = {
+			isa = PBXGroup;
+			children = (
+				556D7E6B21A4197300533384 /* YZHSharedFunctionView.h */,
+				556D7E6C21A4197300533384 /* YZHSharedFunctionView.m */,
+				556D7E6E21A4197E00533384 /* YZHSharedFunctionView.xib */,
+			);
+			path = TeamCardEdit;
+			sourceTree = "<group>";
+		};
+		5537420B21A638E600204972 /* TeamNotice */ = {
+			isa = PBXGroup;
+			children = (
+				556D7E7521A52A1A00533384 /* YZHTeamNoticeVC.h */,
+				556D7E7621A52A1A00533384 /* YZHTeamNoticeVC.m */,
+				556D7E7721A52A1A00533384 /* YZHTeamNoticeVC.xib */,
+				5551B33221A55B2600AF3088 /* YZHTeamSendNoticeVC.h */,
+				5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */,
+				5551B33421A55B2600AF3088 /* YZHTeamSendNoticeVC.xib */,
+				5551B33721A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.h */,
+				5551B33821A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m */,
+				5551B33921A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.xib */,
+			);
+			path = TeamNotice;
+			sourceTree = "<group>";
+		};
+		5537420C21A6390000204972 /* TeamNotice */ = {
+			isa = PBXGroup;
+			children = (
+				556D7E7A21A52B5300533384 /* YZHTeamNoticeModel.h */,
+				556D7E7B21A52B5300533384 /* YZHTeamNoticeModel.m */,
+				5551B33C21A567A400AF3088 /* YZHTeamNoticeSelectTeamModel.h */,
+				5551B33D21A567A400AF3088 /* YZHTeamNoticeSelectTeamModel.m */,
+			);
+			path = TeamNotice;
+			sourceTree = "<group>";
+		};
+		5537420D21A6390C00204972 /* TeamNotice */ = {
+			isa = PBXGroup;
+			children = (
+				556D7E7D21A52D3D00533384 /* YZHTeamNoticeView.h */,
+				556D7E7E21A52D3D00533384 /* YZHTeamNoticeView.m */,
+				556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */,
+				5551B33F21A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.h */,
+				5551B34021A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.m */,
+				5551B34121A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.xib */,
+			);
+			path = TeamNotice;
+			sourceTree = "<group>";
+		};
+		5537420E21A6392400204972 /* CreatTeam */ = {
+			isa = PBXGroup;
+			children = (
+				55DF5D52218942F000BFA7E6 /* YZHCreatTeamVC.h */,
+				55DF5D53218942F000BFA7E6 /* YZHCreatTeamVC.m */,
+				55AB6C95219FDCF0005385A0 /* YZHTeamTagSelectedVC.h */,
+				55AB6C96219FDCF0005385A0 /* YZHTeamTagSelectedVC.m */,
+				55DF5D5E2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.h */,
+				55DF5D5F2189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m */,
+				55DF5D602189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.xib */,
+				55BDA371218AD9F1006400B0 /* YZHCreateTeamResultVC.h */,
+				55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */,
+				55BDA373218AD9F1006400B0 /* YZHCreateTeamResultVC.xib */,
+			);
+			path = CreatTeam;
+			sourceTree = "<group>";
+		};
+		5537420F21A6393000204972 /* CreatTeam */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreatTeam;
+			sourceTree = "<group>";
+		};
+		5537421021A6393C00204972 /* CreatTeam */ = {
+			isa = PBXGroup;
+			children = (
+				55DF5D55218943B200BFA7E6 /* YZHCreatTeamMailDataView.h */,
+				55DF5D56218943B200BFA7E6 /* YZHCreatTeamMailDataView.m */,
+				55DF5D58218943BB00BFA7E6 /* YZHCreatTeamMailDataView.xib */,
+			);
+			path = CreatTeam;
+			sourceTree = "<group>";
+		};
 		553C53E4216CB471007D46A9 /* AddFirendRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -2932,9 +3026,6 @@
 			children = (
 				5581914E21A1C7FE00C74E2E /* YZHTeamCardVC.h */,
 				5581914F21A1C7FE00C74E2E /* YZHTeamCardVC.m */,
-				556D7E5D21A3F68D00533384 /* YZHTeamDataEditVC.h */,
-				556D7E5E21A3F68D00533384 /* YZHTeamDataEditVC.m */,
-				556D7E5F21A3F68D00533384 /* YZHTeamDataEditVC.xib */,
 				556D7E6621A4111200533384 /* YZHTeamQRCodeSharedVC.h */,
 				556D7E6721A4111200533384 /* YZHTeamQRCodeSharedVC.m */,
 				556D7E6921A4112100533384 /* YZHTeamQRCodeSharedVC.xib */,
@@ -2942,17 +3033,6 @@
 				5581915821A1C89800C74E2E /* YZHTeamSharedVC.m */,
 				5581915A21A1C8C400C74E2E /* YZHTeamSharedCheckVC.h */,
 				5581915B21A1C8C400C74E2E /* YZHTeamSharedCheckVC.m */,
-				556D7E7021A503BD00533384 /* YZHTeamSetNameVC.h */,
-				556D7E7121A503BD00533384 /* YZHTeamSetNameVC.m */,
-				556D7E7521A52A1A00533384 /* YZHTeamNoticeVC.h */,
-				556D7E7621A52A1A00533384 /* YZHTeamNoticeVC.m */,
-				556D7E7721A52A1A00533384 /* YZHTeamNoticeVC.xib */,
-				5551B33221A55B2600AF3088 /* YZHTeamSendNoticeVC.h */,
-				5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */,
-				5551B33421A55B2600AF3088 /* YZHTeamSendNoticeVC.xib */,
-				5551B33721A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.h */,
-				5551B33821A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m */,
-				5551B33921A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.xib */,
 			);
 			path = TeamCard;
 			sourceTree = "<group>";
@@ -2966,13 +3046,6 @@
 				556D7E5521A2F5B500533384 /* YZHTeamExtManage.m */,
 				556D7E5A21A2F5E100533384 /* YZHTeamInfoExtManage.h */,
 				556D7E5B21A2F5E100533384 /* YZHTeamInfoExtManage.m */,
-				556D7E6B21A4197300533384 /* YZHSharedFunctionView.h */,
-				556D7E6C21A4197300533384 /* YZHSharedFunctionView.m */,
-				556D7E6E21A4197E00533384 /* YZHSharedFunctionView.xib */,
-				556D7E7A21A52B5300533384 /* YZHTeamNoticeModel.h */,
-				556D7E7B21A52B5300533384 /* YZHTeamNoticeModel.m */,
-				5551B33C21A567A400AF3088 /* YZHTeamNoticeSelectTeamModel.h */,
-				5551B33D21A567A400AF3088 /* YZHTeamNoticeSelectTeamModel.m */,
 			);
 			path = TeamCard;
 			sourceTree = "<group>";
@@ -2992,12 +3065,6 @@
 				556D7E4F21A2F1C500533384 /* YZHTeamCardSwitchCell.h */,
 				556D7E5021A2F1C500533384 /* YZHTeamCardSwitchCell.m */,
 				556D7E5121A2F1C500533384 /* YZHTeamCardSwitchCell.xib */,
-				556D7E7D21A52D3D00533384 /* YZHTeamNoticeView.h */,
-				556D7E7E21A52D3D00533384 /* YZHTeamNoticeView.m */,
-				556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */,
-				5551B33F21A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.h */,
-				5551B34021A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.m */,
-				5551B34121A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.xib */,
 			);
 			path = TeamCard;
 			sourceTree = "<group>";
@@ -3367,13 +3434,18 @@
 			path = YZH;
 			sourceTree = "<group>";
 		};
-		55BDA36A2189BF27006400B0 /* FSTextView */ = {
+		55BDA36A2189BF27006400B0 /* Function */ = {
 			isa = PBXGroup;
 			children = (
+				55BDA36E218AA267006400B0 /* YZHImportBoxView.h */,
+				55BDA36F218AA267006400B0 /* YZHImportBoxView.m */,
+				5551B34721A58B1A00AF3088 /* YZHChatContentHeaderView.h */,
+				5551B34821A58B1A00AF3088 /* YZHChatContentHeaderView.m */,
+				5551B34A21A58B2300AF3088 /* YZHChatContentHeaderView.xib */,
 				55BDA36B2189BF27006400B0 /* FSTextView.h */,
 				55BDA36C2189BF27006400B0 /* FSTextView.m */,
 			);
-			path = FSTextView;
+			path = Function;
 			sourceTree = "<group>";
 		};
 		55C239D42148E47F00200798 /* UserAccount */ = {

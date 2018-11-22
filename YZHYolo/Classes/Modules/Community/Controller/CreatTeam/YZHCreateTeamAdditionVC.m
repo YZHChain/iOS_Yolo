@@ -103,7 +103,7 @@
     [self.view addSubview:scrollView];
     
     [self setupRecruitView];
-    [self setupSharedView];
+//    [self setupSharedView];
     [self setupFooterView];
     
 }
@@ -130,10 +130,12 @@
     UIButton* recruitSelectedButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.recruitSelectedButton = recruitSelectedButton;
     [self.recruitSelectedButton addTarget:self action:@selector(onTouchRecruit:) forControlEvents:UIControlEventTouchUpInside];
-    [recruitSelectedButton setImage: [UIImage imageNamed:@"team_createTeam_imput_selected"] forState:UIControlStateNormal];
-    [recruitSelectedButton setImage:[UIImage imageNamed:@"team_createTeam_imput_notSelected"] forState:UIControlStateSelected];
+
+    [recruitSelectedButton setImage: [UIImage imageNamed:@"team_createTeam_imput_notSelected"] forState:UIControlStateNormal];
+    [recruitSelectedButton setImage:[UIImage imageNamed:@"team_createTeam_imput_selected"] forState:UIControlStateSelected];
     [recruitSelectedButton sizeToFit];
-    
+    self.recruitSelectedButton.selected = YES;
+    self.selectedCruit = YES;
     [recruitView addSubview:recruitTitleLabel];
     [recruitView addSubview:recruitGuideButton];
     [recruitView addSubview:recruitSelectedButton];
@@ -201,43 +203,34 @@
 }
 
 - (void)reloadView {
-    
-//    self.scrollView.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height);
-//    self.scrollView.contentSize = CGSizeMake(YZHScreen_Width, YZHScreen_Height + 100);
+
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
         make.width.mas_equalTo(self.recruitView);
         make.bottom.equalTo(self.footerLabel.mas_bottom).mas_equalTo(30);
     }];
-    //
+ 
     [self.recruitView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(self.scrollView);
         make.width.equalTo(self.scrollView);
         make.height.mas_equalTo(55);
     }];
-//    self.recruitView.frame = CGRectMake(0, 0, YZHScreen_Width, 55);
     
     [self.recruitTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(16);
         make.centerY.mas_equalTo(0);
     }];
     
-//    self.recruitTitleLabel.centerY = self.recruitView.centerY;
-//    self.recruitTitleLabel.x = 16;
     [self.recruitGuideButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.recruitTitleLabel.mas_right).mas_offset(7);
         make.centerY.mas_equalTo(0);
     }];
     
-//    self.recruitGuideButton.centerY = self.recruitView.centerY;
-//    self.recruitGuideButton.x = self.recruitTitleLabel.right + 7;
-    
     [self.recruitSelectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-21);
         make.centerY.mas_equalTo(0);
     }];
-//    self.recruitSelectedButton.centerY = self.recruitView.centerY;
-//    self.recruitSelectedButton.right = YZHScreen_Width - 21;
+
     [self.recruitImportView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(150);
@@ -245,32 +238,30 @@
         make.top.equalTo(self.recruitView.mas_bottom).mas_offset(1);
     }];
     
-//    self.recruitImportView.frame = CGRectMake(0, self.recruitView.bottom + 1, YZHScreen_Width, 150);
-    
-    [self.sharedView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.top.equalTo(self.recruitImportView.mas_bottom).mas_equalTo(10);
-        make.left.right.equalTo(self.recruitView);
-        make.height.mas_equalTo(55);
-    }];
-    
-    [self.sharedTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(16);
-        make.centerY.mas_equalTo(0);
-    }];
-    
-    [self.sharedGuideButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.sharedTitleLabel.mas_right).mas_offset(7);
-        make.centerY.mas_equalTo(0);
-    }];
-    
-    [self.sharedSelectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-21);
-        make.centerY.mas_equalTo(0);
-    }];
+//    [self.sharedView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(0);
+//        make.top.equalTo(self.recruitImportView.mas_bottom).mas_equalTo(10);
+//        make.left.right.equalTo(self.recruitView);
+//        make.height.mas_equalTo(55);
+//    }];
+//
+//    [self.sharedTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(16);
+//        make.centerY.mas_equalTo(0);
+//    }];
+//
+//    [self.sharedGuideButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.sharedTitleLabel.mas_right).mas_offset(7);
+//        make.centerY.mas_equalTo(0);
+//    }];
+//
+//    [self.sharedSelectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(-21);
+//        make.centerY.mas_equalTo(0);
+//    }];
     
     [self.footerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.sharedView.mas_bottom).mas_equalTo(280);
+        make.top.equalTo(self.recruitView.mas_bottom).mas_equalTo(self.view.height - 110);
         make.left.mas_equalTo(80);
         make.right.mas_equalTo(-80);
     }];
@@ -297,6 +288,7 @@
     
     sender.selected = !sender.isSelected;
     self.selectedCruit = !self.selectedCruit;
+    self.recruitImportView.hidden = !self.selectedCruit;
 }
 
 - (void)onTouchShared:(UIButton *)sender {

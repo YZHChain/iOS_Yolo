@@ -97,11 +97,9 @@
     [self.currentLengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.maximumLengthLabel.mas_left);
         make.top.mas_equalTo(self.maximumLengthLabel.mas_top);
-        
     }];
     
     [self.clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.right.mas_equalTo(self.currentLengthLabel.mas_left).mas_offset(-7);
         make.bottom.mas_equalTo(-9);
         make.width.height.mas_equalTo(16);
