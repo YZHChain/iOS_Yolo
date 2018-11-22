@@ -35,10 +35,11 @@
     return cell;
 }
 
-- (void)setModel:(YZHUserGroupTagModel *)model {
-    
+- (void)setModel:(id)model {
+
     _model = model;
-    self.titleLabel.text = model.tagName;
+    
+    self.titleLabel.text = [model valueForKeyPath:@"tagName"];
 }
 
 @end

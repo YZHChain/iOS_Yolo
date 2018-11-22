@@ -11,6 +11,7 @@ target 'YZHYolo' do
   pod 'DDPageControl'
   pod 'MBProgressHUD', '~> 0.9.2'
   pod 'SVProgressHUD', '~> 2.0.3'
+  pod 'MGSwipeTableCell'
   #pod 'WZLBadge'
   pod 'UICountingLabel'
   pod 'YYText'

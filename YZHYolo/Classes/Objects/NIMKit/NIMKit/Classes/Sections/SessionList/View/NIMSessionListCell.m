@@ -19,27 +19,36 @@
     if (self) {
         
         self.avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-        [self addSubview:self.avatarImageView];
+        [self.contentView addSubview:self.avatarImageView];
+//        [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(15);
+//            make.height.width.mas_equalTo(45);
+//            make.centerY.mas_equalTo(0);
+//        }];
         
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.backgroundColor = [UIColor whiteColor];
         self.nameLabel.font            = [UIFont systemFontOfSize:14.f];
-        [self addSubview:self.nameLabel];
-        
+        [self.contentView addSubview:self.nameLabel];
+//        [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(45);
+//            make.centerY.mas_equalTo(0);
+//        }];
+//
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.messageLabel.backgroundColor = [UIColor whiteColor];
         self.messageLabel.font            = [UIFont systemFontOfSize:12.f];
         self.messageLabel.textColor       = [UIColor lightGrayColor];
-        [self addSubview:self.messageLabel];
-        
+        [self.contentView addSubview:self.messageLabel];
+//
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.timeLabel.backgroundColor = [UIColor whiteColor];
         self.timeLabel.font            = [UIFont systemFontOfSize:11.f];
         self.timeLabel.textColor       = [UIColor grayColor];
-        [self addSubview:self.timeLabel];
+        [self.contentView addSubview:self.timeLabel];
         
         self.badgeView = [NIMBadgeView viewWithBadgeTip:@""];
-        [self addSubview:self.badgeView];
+        [self.contentView addSubview:self.badgeView];
     }
     return self;
 }

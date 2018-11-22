@@ -10,8 +10,9 @@
 @class NIMAvatarImageView;
 @class NIMRecentSession;
 @class NIMBadgeView;
+#import "MGSwipeTableCell.h"
 
-@interface NIMSessionListCell : UITableViewCell
+@interface NIMSessionListCell : MGSwipeTableCell
 
 @property (nonatomic,strong) NIMAvatarImageView *avatarImageView;
 

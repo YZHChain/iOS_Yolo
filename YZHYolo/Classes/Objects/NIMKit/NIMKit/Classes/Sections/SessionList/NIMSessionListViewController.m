@@ -130,7 +130,6 @@
     [self refresh];
 }
 
-
 - (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
               totalUnreadCount:(NSInteger)totalUnreadCount{
     for (NIMRecentSession *recent in self.recentSessions)

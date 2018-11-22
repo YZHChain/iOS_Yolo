@@ -11,19 +11,25 @@
 #import "YZHUserModelManage.h"
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    YZHSetTagModelTypeUser,
+    YZHSetTagModelTypeTeam,
+} YZHSetTagModelType;
 @interface YZHSetTagModel : NSObject
 
-@property (nonatomic, strong) NSMutableArray<NSMutableArray <YZHUserGroupTagModel *>*>* userTagModel;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray <YZHUserCustomTagModel *>*>* userTagModel;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray <YZHUserGroupTagModel *>*>* userTeamTagModel;
 
 
 + (instancetype)sharedSetTagModel;
-- (NSInteger)tagNumberOfRowsInSection:(NSInteger)section;
+- (NSInteger)tagNumberOfRowsInSection:(NSInteger)section type:(YZHSetTagModelType)type;
 
-- (NSIndexPath *)findtargetUserTagName:(NSString *)tagName;
-- (void)addUserCustomTag:(NSString *)tagName WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
-- (void)removeUserCustomTagIndex:(NSInteger)index WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
-- (BOOL)checkoutContainCustomTagName:(NSString *)tagName;
+- (NSIndexPath *)findtargetUserTagName:(NSString *)tagName type:(YZHSetTagModelType)type;
+- (void)addUserCustomTag:(NSString *)tagName type:(YZHSetTagModelType)type WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
+- (void)removeUserCustomTagIndex:(NSInteger)index type:(YZHSetTagModelType)type  WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion;
+- (BOOL)checkoutContainCustomTagName:(NSString *)tagName type:(YZHSetTagModelType)type;
 - (void)updateTargetUserTag;
+- (void)updateTargetTeamTag;
 
 @end
 

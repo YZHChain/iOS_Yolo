@@ -91,6 +91,8 @@ extern NSString *const kYZHRouterCommunityCardTeamNotice;
 extern NSString *const kYZHRouterCommunityCardSendTeamNotice;
 extern NSString *const kYZHRouterCommunityCardSelectedTeam;
 extern NSString *const kYZHRouterSessionChatContent;
+extern NSString *const kYZHRouterCommunitySetTeamTag;
+
 
 + (NSDictionary* )configInfo;
 

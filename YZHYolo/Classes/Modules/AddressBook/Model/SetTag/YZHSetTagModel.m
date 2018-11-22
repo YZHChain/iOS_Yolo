@@ -25,6 +25,7 @@ static id instance = nil;
     self = [super init];
     if (self) {
         [self configurationUserTagModel];
+        [self configurationTeamTagModel];
     }
     return self;
 }
@@ -50,28 +51,50 @@ static id instance = nil;
     } else {
         self.userTagModel = [[NSMutableArray alloc] initWithObjects: defaultTagArray, nil];
     }
-//
+}
 
+- (void)configurationTeamTagModel {
+    
+    self.userTeamTagModel = [[NSMutableArray alloc] init];
+    
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    
+    NSMutableArray* defaultTagArray = [[NSMutableArray alloc] init];
+    NSMutableArray* customTagArray = [[NSMutableArray alloc] init];
+    [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isDefault) {
+            [defaultTagArray addObject:obj];
+        } else {
+            [customTagArray addObject:obj];
+        }
+    }];
+    [self.userTeamTagModel addObjectsFromArray:defaultTagArray];
+    if (customTagArray) {
+        self.userTeamTagModel = [[NSMutableArray alloc] initWithObjects: defaultTagArray, customTagArray, nil];
+    } else {
+        self.userTeamTagModel = [[NSMutableArray alloc] initWithObjects: defaultTagArray, nil];
+    }
+    
 }
 
 #pragma mark --
 
-- (NSIndexPath *)findtargetUserTagName:(NSString *)tagName {
+- (NSIndexPath *)findtargetUserTagName:(NSString *)tagName type:(YZHSetTagModelType)type{
     
     __block NSIndexPath* indexPath = nil;
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    NSArray *customTags;
+    NSInteger defaultTags;
+    if (type == YZHSetTagModelTypeUser) {
+        customTags = userInfoExt.customTags;
+        defaultTags = self.userTagModel.firstObject.count;
+    } else {
+        customTags = userInfoExt.groupTags;
+        defaultTags = self.userTeamTagModel.firstObject.count;
+    }
     if (YZHIsString(tagName)) {
-        
-        YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
-//        if (YZHIsArray(userInfoExt.groupTags)) {
-//            [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                if ([obj.tagName isEqualToString:tagName]) {
-//                    indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
-//                    *stop = YES;
-//                }
-//            }];
-//        }
-        if (YZHIsArray(userInfoExt.customTags)) {
-            [userInfoExt.customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (YZHIsArray(customTags)) {
+            [customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.isDefault) {
                     if ([obj.tagName isEqualToString:tagName]) {
                         indexPath = [NSIndexPath indexPathForRow:idx inSection:0];
@@ -79,11 +102,10 @@ static id instance = nil;
                     }
                 } else {
                     if ([obj.tagName isEqualToString:tagName]) {
-                        indexPath = [NSIndexPath indexPathForRow:idx - self.userTagModel.firstObject.count inSection:1];
+                        indexPath = [NSIndexPath indexPathForRow:idx - defaultTags inSection:1];
                         *stop = YES;
                     }
                 }
-
             }];
         }
     }
@@ -94,39 +116,42 @@ static id instance = nil;
     }
 }
 
--(NSInteger)tagNumberOfRowsInSection:(NSInteger)section {
+-(NSInteger)tagNumberOfRowsInSection:(NSInteger)section type:(YZHSetTagModelType)type {
     
-    if (self.userTagModel.count > section) {
-        return self.userTagModel[section].count;
+    if (type == YZHSetTagModelTypeUser) {
+        if (self.userTagModel.count > section) {
+            return self.userTagModel[section].count;
+        } else {
+            return 0;
+        }
     } else {
-        return 0;
+        if (self.userTeamTagModel.count > section) {
+            return self.userTeamTagModel[section].count;
+        } else {
+            return 0;
+        }
     }
-    
+
 }
 
 #pragma mark -- Add & remove
 
-- (void)addUserCustomTag:(NSString *)tagName WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
+- (void)addUserCustomTag:(NSString *)tagName type:(YZHSetTagModelType)type WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     //创建自定义标签
     YZHUserCustomTagModel* tagsModel = [[YZHUserCustomTagModel alloc] init];
     tagsModel.tagName = tagName;
     tagsModel.isDefault = NO;
-    NSMutableArray* tempCustomTags = userInfoExt.customTags.mutableCopy;
-    [tempCustomTags addObject:tagsModel];
-//    __block BOOL isContainCustom;
-//    __block NSInteger customIndex = 0;
-//    [userInfoExt.customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.isDefault == NO) {
-//            isContainCustom = YES;
-//            [tempCustomTags addObject:obj];
-//            customIndex = idx;
-//        }
-//    }];
-//    [tempCustomTags addObject:tagsModel];
-    
-    userInfoExt.customTags = tempCustomTags.copy;
+    if (type == YZHSetTagModelTypeUser) {
+        NSMutableArray* tempCustomTags = userInfoExt.customTags.mutableCopy;
+        [tempCustomTags addObject:tagsModel];
+        userInfoExt.customTags = tempCustomTags.copy;
+    } else {
+        NSMutableArray* tempCustomTags = userInfoExt.groupTags.mutableCopy;
+        [tempCustomTags addObject:tagsModel];
+        userInfoExt.groupTags = tempCustomTags.copy;
+    }
     NSString* userInfoExtString = [userInfoExt userInfoExtString];
     if (YZHIsString(userInfoExtString)) {
         //可继续封装一层.
@@ -147,23 +172,35 @@ static id instance = nil;
 
 }
 
-- (void)removeUserCustomTagIndex:(NSInteger)index WithsuccessCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
+- (void)removeUserCustomTagIndex:(NSInteger)index type:(YZHSetTagModelType)type WithsuccessCompletion:(nonnull YZHVoidBlock)successCompletion failureCompletion:(nonnull YZHErrorBlock)failureCompletion {
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     
-    NSMutableArray* tempCustomTags = [[NSMutableArray alloc] initWithArray:userInfoExt.customTags.copy];
-    
-    if (self.userTagModel.lastObject.count > index) {
-        [self.userTagModel.lastObject removeObjectAtIndex:index];
-        if (tempCustomTags.count > index + self.userTagModel.firstObject.count) {
-            [tempCustomTags removeObjectAtIndex:index + self.userTagModel.firstObject.count];
+    NSMutableArray* tempCustomTags;
+    if (type == YZHSetTagModelTypeUser) {
+        tempCustomTags = [[NSMutableArray alloc] initWithArray:userInfoExt.customTags.copy];
+        if (self.userTagModel.lastObject.count > index) {
+            [self.userTagModel.lastObject removeObjectAtIndex:index];
+            if (tempCustomTags.count > index + self.userTagModel.firstObject.count) {
+                [tempCustomTags removeObjectAtIndex:index + self.userTagModel.firstObject.count];
+            }
+        } else {
+            return;
         }
+        userInfoExt.customTags = tempCustomTags.copy;
     } else {
-//        failureCompletion()
-        return;
+        tempCustomTags = [[NSMutableArray alloc] initWithArray:userInfoExt.groupTags.copy];
+        if (self.userTeamTagModel.lastObject.count > index) {
+            [self.userTeamTagModel.lastObject removeObjectAtIndex:index];
+            if (tempCustomTags.count > index + self.userTeamTagModel.firstObject.count) {
+                [tempCustomTags removeObjectAtIndex:index + self.userTeamTagModel.firstObject.count];
+            }
+        } else {
+            return;
+        }
+        userInfoExt.groupTags = tempCustomTags.copy;
     }
-    
-    userInfoExt.customTags = tempCustomTags.copy;
+
     NSString* userInfoExtString = [userInfoExt userInfoExtString];
     //可继续封装一层
     [[[NIMSDK sharedSDK] userManager] updateMyUserInfo:@{
@@ -176,32 +213,32 @@ static id instance = nil;
                                                                      failureCompletion(error);
                                                                  }
                                                          }];
-
-    
 }
 
-- (BOOL)checkoutContainCustomTagName:(NSString *)tagName {
+- (BOOL)checkoutContainCustomTagName:(NSString *)tagName type:(YZHSetTagModelType)type{
     
     __block BOOL isContain = NO;
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
     
-//    if (YZHIsArray(userInfoExt.groupTags)) {
-//        [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            if ([obj.tagName isEqualToString:tagName]) {
-//                isContain = YES;
-//                *stop = YES;
-//            }
-//        }];
-//    }
-    if (YZHIsArray(userInfoExt.customTags)) {
-        [userInfoExt.customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.tagName isEqualToString:tagName]) {
-                isContain = YES;
-                *stop = YES;
-            }
-        }];
+    if (type == YZHSetTagModelTypeUser) {
+        if (YZHIsArray(userInfoExt.customTags)) {
+            [userInfoExt.customTags enumerateObjectsUsingBlock:^(YZHUserCustomTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.tagName isEqualToString:tagName]) {
+                    isContain = YES;
+                    *stop = YES;
+                }
+            }];
+        }
+    } else {
+        if (YZHIsArray(userInfoExt.groupTags)) {
+            [userInfoExt.groupTags enumerateObjectsUsingBlock:^(YZHUserGroupTagModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.tagName isEqualToString:tagName]) {
+                    isContain = YES;
+                    *stop = YES;
+                }
+            }];
+        }
     }
-    
     return isContain;
 }
 
@@ -209,6 +246,12 @@ static id instance = nil;
     
     //重新配置.
     [self configurationUserTagModel];
+}
+
+- (void)updateTargetTeamTag {
+    
+    //重新配置.
+    [self configurationTeamTagModel];
 }
 
 

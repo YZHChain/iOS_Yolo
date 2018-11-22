@@ -19,6 +19,8 @@
 #import "YZHRecentSessionExtManage.h"
 #import "YZHPrivateChatVC.h"
 #import "YZHCommunityChatVC.h"
+#import "NIMAvatarImageView.h"
+#import "YZHSessionListCell.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -27,7 +29,7 @@ typedef enum : NSUInteger {
 
 static YZHTableViewShowType currentShowType = YZHTableViewShowTypeDefault;
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
-@interface YZHCommunityListVC ()<NIMTeamManagerDelegate>
+@interface YZHCommunityListVC ()<NIMTeamManagerDelegate, MGSwipeTableCellDelegate>
 
 @property (nonatomic, strong) YZHExtensionFunctionView* extensionView;
 
@@ -38,8 +40,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 @property (nonatomic, strong) JKRSearchController* tagSearchController;
 
 @property (nonatomic, strong) YZHRecentSessionExtManage* recentSessionExtManage;
-
-
 
 @end
 
@@ -134,8 +134,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }
 }
 
-
-
 #pragma mark -- setupNotification
 
 - (void)setupNotification
@@ -228,8 +226,45 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([self hasCommunity]) {
-        NIMSessionListCell* cell;
-        cell = (NIMSessionListCell* )[super tableView:tableView cellForRowAtIndexPath:indexPath];
+        static NSString * cellId = @"cellId";
+        YZHSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!cell) {
+            cell = [[YZHSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+//            [cell.avatarImageView addTarget:self action:@selector(onTouchAvatar:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        NIMRecentSession *recent = self.recentSessions[indexPath.row];
+        cell.nameLabel.text = [self nameForRecentSession:recent];
+        [cell.avatarImageView setAvatarBySession:recent.session];
+        
+        [cell.nameLabel sizeToFit];
+        cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
+        [cell.messageLabel sizeToFit];
+        cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
+        [cell.timeLabel sizeToFit];
+        
+        [cell refresh:recent];
+        
+        cell.delegate = self;
+        MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
+        MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"解锁" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+        cell.leftButtons = @[tipButton, lockButton];
+        cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
+        
+        MGSwipeButton* deleteButton = [MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor yzh_buttonBackgroundPinkRed]];
+        
+        MGSwipeButton* classButton = [MGSwipeButton buttonWithTitle:@"设置分类" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+        [classButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+            [YZHRouter openURL:kYZHRouterCommunitySetTeamTag info:@{
+                                                                    @"teamId": recent.session.sessionId,
+                                                                    kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                    kYZHRouteSegueNewNavigation: @(YES)
+                                                                    }];
+            return YES;
+        }];
+        cell.rightButtons = @[deleteButton, classButton];
+        cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
+        
+        cell.leftAdornImageView.hidden = NO;
         
         return cell;
     } else {
@@ -237,6 +272,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         
         return cell;
     }
+}
+
+-(void) swipeTableCellWillBeginSwiping:(nonnull MGSwipeTableCell *) cell {
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

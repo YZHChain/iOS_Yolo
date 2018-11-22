@@ -16,7 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL team_add_friend;
 @property (nonatomic, assign) BOOL team_p2p_chat;
 @property (nonatomic, assign) BOOL team_lock;
+@property (nonatomic, copy) NSString* team_tagName;
 
++ (instancetype)teamExtWithTeamId:(NSString* )teamId;
++ (instancetype)targetTeamExtWithTeamId:(NSString* )teamId targetId:(NSString *)targetId;
 @end
 
 NS_ASSUME_NONNULL_END
