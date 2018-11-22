@@ -10,9 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHCommunityChatVC : YZHBaseViewController
+@interface YZHCommunityChatVC : NIMSessionViewController
 
-@property (nonatomic, copy) NSString* teamId;
 
 @end
 

@@ -124,8 +124,6 @@
     });
 }
 
-
-
 - (NIMInputAudioRecordIndicatorView *)audioRecordIndicator {
     if(!_audioRecordIndicator) {
         _audioRecordIndicator = [[NIMInputAudioRecordIndicatorView alloc] init];
@@ -519,20 +517,20 @@
                 });
             }
                 break;
-            case NIMSessionTypeP2P:
-            case NIMSessionTypeChatroom:{
-                if (([self.inputConfig respondsToSelector:@selector(enableRobot)] && self.inputConfig.enableRobot) || [NIMSDK sharedSDK].isUsingDemoAppKey)
-                {
-                    NIMContactRobotSelectConfig *config = [[NIMContactRobotSelectConfig alloc] init];
-                    config.needMutiSelected = NO;
-                    NIMContactSelectViewController *vc = [[NIMContactSelectViewController alloc] initWithConfig:config];
-                    vc.delegate = self;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [vc show];
-                    });
-                }
-            }
-                break;
+//            case NIMSessionTypeP2P:
+//            case NIMSessionTypeChatroom:{
+//                if (([self.inputConfig respondsToSelector:@selector(enableRobot)] && self.inputConfig.enableRobot) || [NIMSDK sharedSDK].isUsingDemoAppKey)
+//                {
+//                    NIMContactRobotSelectConfig *config = [[NIMContactRobotSelectConfig alloc] init];
+//                    config.needMutiSelected = NO;
+//                    NIMContactSelectViewController *vc = [[NIMContactSelectViewController alloc] initWithConfig:config];
+//                    vc.delegate = self;
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [vc show];
+//                    });
+//                }
+//            }
+//                break;
             default:
                 break;
         }

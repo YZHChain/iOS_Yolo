@@ -35,7 +35,6 @@
 
 #import "YZHProgressHUD.h"
 
-
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
                                NIMSystemNotificationManagerDelegate,
@@ -250,8 +249,6 @@
                                                           kYZHRouteSegueNewNavigation: @(YES),
                                                           @"sharedTeamCardBlock": self.sharedTeamCardHandle
                                                           }];
-    
-//    [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment]];
 }
 
 #pragma mark - 消息发送时间截获
@@ -622,12 +619,6 @@
 }
 
 #pragma mark - 辅助方法
-
-//- (void)sendImageMessagePath:(NSString *)path
-//{
-
-//    [self sendSnapchatMessagePath:path];
-//}
 
 - (BOOL)checkRTSCondition
 {

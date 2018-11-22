@@ -218,6 +218,8 @@
 		5537421521A66B0900204972 /* YZHSessionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5537421421A66B0900204972 /* YZHSessionListCell.m */; };
 		5537421D21A6796A00204972 /* YZHSetTeamTagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5537421B21A6796A00204972 /* YZHSetTeamTagVC.m */; };
 		5537421E21A6796A00204972 /* YZHSetTeamTagVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537421C21A6796A00204972 /* YZHSetTeamTagVC.xib */; };
+		5537422121A6A3F000204972 /* YZHTeamListDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5537422021A6A3F000204972 /* YZHTeamListDefaultView.m */; };
+		5537422321A6A40100204972 /* YZHTeamListDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5537422221A6A40100204972 /* YZHTeamListDefaultView.xib */; };
 		553C53E7216CB590007D46A9 /* YZHCommanDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53E6216CB590007D46A9 /* YZHCommanDefaultView.m */; };
 		553C53E9216CB5A8007D46A9 /* YZHCommanDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C53E8216CB5A8007D46A9 /* YZHCommanDefaultView.xib */; };
 		553C53EC216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53EB216CE67D007D46A9 /* YZHAddFirendRecordSectionHeader.m */; };
@@ -894,6 +896,9 @@
 		5537421A21A6796A00204972 /* YZHSetTeamTagVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSetTeamTagVC.h; sourceTree = "<group>"; };
 		5537421B21A6796A00204972 /* YZHSetTeamTagVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSetTeamTagVC.m; sourceTree = "<group>"; };
 		5537421C21A6796A00204972 /* YZHSetTeamTagVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSetTeamTagVC.xib; sourceTree = "<group>"; };
+		5537421F21A6A3F000204972 /* YZHTeamListDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamListDefaultView.h; sourceTree = "<group>"; };
+		5537422021A6A3F000204972 /* YZHTeamListDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamListDefaultView.m; sourceTree = "<group>"; };
+		5537422221A6A40100204972 /* YZHTeamListDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamListDefaultView.xib; sourceTree = "<group>"; };
 		553C53E5216CB590007D46A9 /* YZHCommanDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommanDefaultView.h; sourceTree = "<group>"; };
 		553C53E6216CB590007D46A9 /* YZHCommanDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommanDefaultView.m; sourceTree = "<group>"; };
 		553C53E8216CB5A8007D46A9 /* YZHCommanDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCommanDefaultView.xib; sourceTree = "<group>"; };
@@ -1845,6 +1850,9 @@
 				55BDA36A2189BF27006400B0 /* Function */,
 				5537421321A66B0900204972 /* YZHSessionListCell.h */,
 				5537421421A66B0900204972 /* YZHSessionListCell.m */,
+				5537421F21A6A3F000204972 /* YZHTeamListDefaultView.h */,
+				5537422021A6A3F000204972 /* YZHTeamListDefaultView.m */,
+				5537422221A6A40100204972 /* YZHTeamListDefaultView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3996,6 +4004,7 @@
 				5531458B21574B4600A13F96 /* YZHMyInformationMyPlaceCell.xib in Resources */,
 				5531457721572FAD00A13F96 /* YZHMyInformationSetGenderVC.xib in Resources */,
 				556D7E6F21A4197E00533384 /* YZHSharedFunctionView.xib in Resources */,
+				5537422321A6A40100204972 /* YZHTeamListDefaultView.xib in Resources */,
 				5551B33B21A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.xib in Resources */,
 				552CC897215A6F3900135FDC /* YZHAboutYoloCell.xib in Resources */,
 				55DC36B82167B23D00871C2B /* YZHAddBookAddFirendRecordVC.xib in Resources */,
@@ -4346,6 +4355,7 @@
 				5536420F217EAEC3006F77A5 /* NIMSessionTimestampCell.m in Sources */,
 				553641F2217EAEC3006F77A5 /* NIMKitEvent.m in Sources */,
 				55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */,
+				5537422121A6A3F000204972 /* YZHTeamListDefaultView.m in Sources */,
 				55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */,
 				5551B33A21A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m in Sources */,
 				553641E9217EAEC3006F77A5 /* NIMTimePickerView.m in Sources */,

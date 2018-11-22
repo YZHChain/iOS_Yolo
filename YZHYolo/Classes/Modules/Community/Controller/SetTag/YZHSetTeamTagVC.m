@@ -314,7 +314,7 @@
 
 - (void)refreshTags {
     
-    [self.tagsModel updateTargetUserTag];
+    [self.tagsModel updateTargetTeamTag];
     [self.tableView reloadData];
 }
 

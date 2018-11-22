@@ -21,6 +21,8 @@
 #import "YZHCommunityChatVC.h"
 #import "NIMAvatarImageView.h"
 #import "YZHSessionListCell.h"
+#import "YZHTeamListDefaultView.h"
+#import "UIViewController+YZHTool.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -40,6 +42,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 @property (nonatomic, strong) JKRSearchController* tagSearchController;
 
 @property (nonatomic, strong) YZHRecentSessionExtManage* recentSessionExtManage;
+
+@property (nonatomic, strong) YZHTeamListDefaultView* defaultView;
 
 @end
 
@@ -109,6 +113,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)clickRightBarShowExtensionFunction:(UIButton *)sender{
     
     [self.extensionView showExtensionFunctionView];
+    
 }
 
 - (void)setupView
@@ -130,7 +135,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             [self.tagsTableView reloadData];
         }
     } else {
-        
+        [self.view addSubview:self.defaultView];
     }
 }
 
@@ -141,12 +146,25 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
 }
 
+#pragma mark - 5.Event Response
+
+- (void)onTouchfindTeam:(UIButton *)sender {
+    //跳转到广场
+    UITabBarController* tabbarController = self.tabBarController;
+    [tabbarController setSelectedViewController:tabbarController.viewControllers[3]];
+}
+
 #pragma mark -- Private Methods
 
 - (void)refresh
 {
-    [self.tableView reloadData];
-    [self.tagsTableView reloadData];
+    if (self.recentSessions.count) {
+        [self.tableView reloadData];
+        [self.tagsTableView reloadData];
+        [self.defaultView removeFromSuperview];
+    } else {
+        [self.view addSubview:self.defaultView];
+    }
 }
 
 - (void)customSortRecents:(NSMutableArray *)recentSessions
@@ -188,10 +206,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
-    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
-    
-    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] init];
-    teamchatVC.teamId = recent.session.sessionId;
+    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWithSession:recent.session];
     [self.navigationController pushViewController:teamchatVC animated:YES];
 }
 
@@ -290,7 +305,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     if (section == 0) {
-        return 20;
+        return 0;
     } else {
         return 40;
     }
@@ -389,6 +404,15 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     } else {
         return NO;
     }
+}
+
+- (YZHTeamListDefaultView *)defaultView {
+    
+    if (!_defaultView) {
+        _defaultView = [YZHTeamListDefaultView yzh_viewWithFrame:self.view.bounds];
+        [_defaultView.findTeamButton addTarget:self action:@selector(onTouchfindTeam:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _defaultView;
 }
 
 @end
