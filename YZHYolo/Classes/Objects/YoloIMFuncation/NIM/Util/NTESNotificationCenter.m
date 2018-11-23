@@ -119,16 +119,16 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
 
 - (void)checkMessageAt:(NSArray<NIMMessage *> *)messages
 {
-    //一定是同个 session 的消息
+    一定是同个 session 的消息
     NIMSession *session = [messages.firstObject session];
     if ([self.currentSessionViewController.session isEqual:session])
     {
-        //只有在@所属会话页外面才需要标记有人@你
+        只有在@所属会话页外面才需要标记有人@你
         return;
     }
 
     NSString *me = [[NIMSDK sharedSDK].loginManager currentAccount];
-    
+ 
     for (NIMMessage *message in messages) {
         if ([message.apnsMemberOption.userIds containsObject:me]) {
             [NTESSessionUtil addRecentSessionMark:session type:NTESRecentSessionMarkTypeAt];

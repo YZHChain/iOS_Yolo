@@ -36,16 +36,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 //
 - (NSString *)titleOfGroup:(NSInteger)groupIndex;
-//
+
 - (NSArray *)membersOfGroup:(NSInteger)groupIndex;
 
+- (NSArray *)atMembersOfGroup:(NSInteger)groupIndex;
+// 适用于通讯联系人,展示列表. 传入的Section 做了处理.
 - (id<YZHGroupMemberProtocol>)memberOfIndex:(NSIndexPath *)indexPath;
+// 适用于AtManage 联系人,展示列表.
+- (id<YZHGroupMemberProtocol>)atMemberOfIndex:(NSIndexPath *)indexPath;
 - (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath;
-//
 - (id<YZHGroupMemberProtocol>)memberOfId:(NSString *)uid;
 
 - (NSInteger)groupTitleCount;
-
+// 适用于通讯联系人,展示列表. 传入的Section 做了处理.
 - (NSInteger)memberCountOfGroup:(NSInteger)groupIndex;
 
 @end

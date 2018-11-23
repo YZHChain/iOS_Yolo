@@ -21,6 +21,7 @@
 #import "NIMKit.h"
 #import "NIMKitInfoFetchOption.h"
 #import "NIMKitKeyboardInfo.h"
+#import "YZHCommunityAtMemberVC.h"
 
 @interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,NIMContactSelectDelegate>
 {
@@ -510,11 +511,15 @@
                 config.needMutiSelected = NO;
                 config.teamId = self.session.sessionId;
                 config.filterIds = @[[NIMSDK sharedSDK].loginManager.currentAccount];
-                NIMContactSelectViewController *vc = [[NIMContactSelectViewController alloc] initWithConfig:config];
-                vc.delegate = self;
+                NSString* teamManage = [[[NIMSDK sharedSDK] teamManager] teamById:config.teamId].owner;
+                bool isManage = [config.filterIds.firstObject isEqual:teamManage];
+//                NIMContactSelectViewController *vc = [[NIMContactSelectViewController alloc] initWithConfig:config];
+                YZHCommunityAtMemberVC* atMemberVC = [[YZHCommunityAtMemberVC alloc] initWithConfig:config withIsManage:isManage];
+                atMemberVC.delegate = self;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [vc show];
+                    [atMemberVC show];
                 });
+
             }
                 break;
 //            case NIMSessionTypeP2P:
@@ -573,6 +578,11 @@
     [self.toolBar insertText:str];
 }
 
+- (void)didFinishedSelect:(NSArray *)selectedContacts isRespond:(BOOL)isRespond {
+    
+    [self didFinishedSelect:selectedContacts];
+}
+
 #pragma mark - InputEmoticonProtocol
 - (void)selectedEmoticon:(NSString*)emoticonID catalog:(NSString*)emotCatalogID description:(NSString *)description{
     if (!emotCatalogID) { //删除键
@@ -586,8 +596,6 @@
                 [self.actionDelegate onSelectChartlet:emoticonID catalog:emotCatalogID];
             }
         }
-        
-        
     }
 }
 

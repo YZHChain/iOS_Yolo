@@ -28,7 +28,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 @property (nonatomic, strong) NSIndexPath* lastSelectedIndexPath;
 
-
 @end
 
 @implementation YZHSharedContactVC

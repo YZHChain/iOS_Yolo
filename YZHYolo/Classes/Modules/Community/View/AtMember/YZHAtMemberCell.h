@@ -1,8 +1,8 @@
 //
-//  YZHSharedContactCell.h
+//  YZHAtMemberCell.h
 //  YZHYolo
 //
-//  Created by Jersey on 2018/11/19.
+//  Created by Jersey on 2018/11/23.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
@@ -11,12 +11,11 @@
 #import "YZHContactMemberModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHSharedContactCell : UITableViewCell
+@interface YZHAtMemberCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView* selectedImageView;
 
-- (void)refreshUser:(YZHContactMemberModel *)member;
-- (void)refreshTeam:(NIMTeam *)team;
+- (void)refreshAtmember:(YZHContactMemberModel *)member;
 
 @end
 

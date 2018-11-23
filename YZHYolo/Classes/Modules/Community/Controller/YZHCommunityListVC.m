@@ -217,6 +217,25 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }
 }
 
+//TODO:
+- (NSAttributedString *)contentForRecentSession:(NIMRecentSession *)recent{
+    NSAttributedString *content;
+    content = [super contentForRecentSession:recent];
+    NSMutableAttributedString *attContent = [[NSMutableAttributedString alloc] initWithAttributedString:content];
+    [self checkNeedAtTip:recent content:attContent];
+    //        [self checkOnlineState:recent content:attContent];
+    return attContent;
+    
+}
+
+- (void)checkNeedAtTip:(NIMRecentSession *)recent content:(NSMutableAttributedString *)content
+{
+    if ([NTESSessionUtil recentSessionIsMark:recent type:NTESRecentSessionMarkTypeAt]) {
+        NSAttributedString *atTip = [[NSAttributedString alloc] initWithString:@"[有人@你] " attributes:@{NSForegroundColorAttributeName:[UIColor redColor]}];
+        [content insertAttributedString:atTip atIndex:0];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -49,5 +49,4 @@ static NSString* const kYZHFriendsCellIdentifier = @"friendsCellIdentifier";
     self.subtitleLabel.text = showNickName;
 }
 
-
 @end

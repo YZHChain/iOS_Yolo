@@ -107,7 +107,6 @@
     [rightItemButton sizeToFit];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemButton];
-    
 }
 
 - (void)gotoUserDetails:(UIButton *)sender {

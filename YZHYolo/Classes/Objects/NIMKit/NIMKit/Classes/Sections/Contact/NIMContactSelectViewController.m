@@ -132,13 +132,15 @@
 }
 
 - (void)onCancelBtnClick:(id)sender {
+    @weakify(self)
     [self dismissViewControllerAnimated:YES completion:^() {
+        @strongify(self)
         if (self.cancelBlock) {
             self.cancelBlock();
             self.cancelBlock = nil;
         }
-        if([_delegate respondsToSelector:@selector(didCancelledSelect)]) {
-            [_delegate didCancelledSelect];
+        if([self.delegate respondsToSelector:@selector(didCancelledSelect)]) {
+            [self.delegate didCancelledSelect];
         }
     }];
 }

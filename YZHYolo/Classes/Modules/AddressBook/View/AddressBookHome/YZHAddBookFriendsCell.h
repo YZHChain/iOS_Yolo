@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "YZHContactMemberModel.h"
+#import "NIMContactDefines.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookFriendsCell : UITableViewCell

@@ -86,6 +86,7 @@ NSString *const kYZHRouterCommunityCardSendTeamNotice = @"/community/teamSendNot
 NSString *const kYZHRouterCommunityCardSelectedTeam = @"/community/teamNotice/selectedTeam";
 NSString *const kYZHRouterSessionChatContent = @"/session/chatContent";
 NSString *const kYZHRouterCommunitySetTeamTag = @"/community/setTeamTag";
+NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
 
 @implementation YZHRouterConfig
 
@@ -346,6 +347,12 @@ NSString *const kYZHRouterCommunitySetTeamTag = @"/community/setTeamTag";
              kYZHRouterCommunitySetTeamTag: @{
              kYZHRouteViewControllerClassKey: @"YZHSetTeamTagVC",
              kYZHRouteViewControllerNameKey: @"设置群标签",
+             kYZHRouteViewControllerNotesKey: @"",
+             kYZHRouteViewControllerNeedLoginKey:@"1",
+             },
+             kYZHRouterCommunityAtTeamMember: @{
+             kYZHRouteViewControllerClassKey: @"YZHCommunityAtMemberVC",
+             kYZHRouteViewControllerNameKey: @"选择@的人",
              kYZHRouteViewControllerNotesKey: @"",
              kYZHRouteViewControllerNeedLoginKey:@"1",
              },

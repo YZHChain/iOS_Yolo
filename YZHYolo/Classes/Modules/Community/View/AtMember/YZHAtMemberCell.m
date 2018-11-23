@@ -1,15 +1,15 @@
 //
-//  YZHSharedContactCell.m
+//  YZHAtMemberCell.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/11/19.
+//  Created by Jersey on 2018/11/23.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHSharedContactCell.h"
+#import "YZHAtMemberCell.h"
 
 #import "UIImageView+YZHImage.h"
-@interface YZHSharedContactCell()
+@interface YZHAtMemberCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation YZHSharedContactCell
+@implementation YZHAtMemberCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -28,9 +28,10 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    // Configure the view for the selected state
 }
 
-- (void)refreshUser:(YZHContactMemberModel *)member {
+- (void)refreshAtmember:(YZHContactMemberModel *)member {
     
     self.titleLabel.text = member.info.showName;
     NSString *imageUrl = member.info.avatarUrlString ? member.info.avatarUrlString : nil;
@@ -40,24 +41,11 @@
     }
     NSString* showNickName = member.info.nickName ? [NSString stringWithFormat:@"(%@)", member.info.nickName] : nil;
     self.subtitleLabel.text = showNickName;
-}
-
-- (void)refreshTeam:(NIMTeam *)team {
     
-    self.titleLabel.text = team.teamName;
-    NSString *imageUrl = team.avatarUrl ? team.avatarUrl : nil;
-    //TODO: 加载图片方法需优化.
-    if (imageUrl) {
-        [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"team_createTeam_avatar_icon_normal"];
-    } else {
-        [_photoImageView setImage:[UIImage imageNamed:@"team_createTeam_avatar_icon_normal"]];
-    }
-//    NSString* showNickName = member.info.nickName ? [NSString stringWithFormat:@"(%@)", member.info.nickName] : nil;
-    self.subtitleLabel.text = nil;
 }
 
 - (UIImageView *)selectedImageView {
-
+    
     if (!_selectedImageView) {
         _selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"my_information_setName_selected"]];
         _selectedImageView.x = YZHScreen_Width - 36;

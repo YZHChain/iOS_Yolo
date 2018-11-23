@@ -142,10 +142,25 @@
     }
 }
 
+- (id<YZHGroupMemberProtocol>)atMemberOfIndex:(NSIndexPath *)indexPath {
+    NSArray *members = nil;
+    NSInteger groupIndex = indexPath.section;
+    if(groupIndex >= 0 && groupIndex < _groups.count) {
+        Pair *pair = [_groups objectAtIndex:groupIndex];
+        members = pair.second;
+    }
+    NSInteger memberIndex = indexPath.row;
+    if (memberIndex < 0 || memberIndex >= members.count) {
+        return nil;
+    } else {
+        return [members objectAtIndex:indexPath.row];
+    }
+}
+
 - (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath {
     
     NSArray *members = nil;
-    //由于未将第一个分区加入;
+    //由于未将第一个分区加入; 暂时先把逻辑写到这里, 后面需将其拆分出去,否则严重影响复用.
     NSInteger groupIndex = indexPath.section;
     if(groupIndex >= 0 && groupIndex < _groups.count) {
         Pair *pair = [_groups objectAtIndex:groupIndex];
