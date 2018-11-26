@@ -42,6 +42,9 @@ typedef NS_ENUM(NSInteger, NIMAudioRecordPhase) {
 
 @property (assign, nonatomic, getter=isRecording)    BOOL recording;
 
+@property (nonatomic, assign) BOOL isAtAll;
+@property (nonatomic, assign) BOOL needResponse;
+
 @property (strong, nonatomic)  NIMInputToolBar *toolBar;
 @property (strong, nonatomic)  UIView *moreContainer;
 @property (strong, nonatomic)  UIView *emoticonContainer;

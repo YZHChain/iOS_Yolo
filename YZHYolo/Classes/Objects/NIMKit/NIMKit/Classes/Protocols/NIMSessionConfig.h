@@ -114,7 +114,6 @@
  */
 - (id<NIMKitMessageProvider>)messageDataProvider;
 
-
 /**
  *  是否开启机器人
  */

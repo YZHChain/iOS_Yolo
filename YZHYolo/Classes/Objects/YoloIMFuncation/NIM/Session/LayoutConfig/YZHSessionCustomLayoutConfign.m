@@ -25,7 +25,12 @@
 
 - (UIEdgeInsets)contentViewInsets:(NIMMessage *)message {
     
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    id<YZHCustomAttachmentInfo> info = [self infoWithMessage:message];
+    if ([info respondsToSelector:@selector(contentViewInsets:)]) {
+        return [info contentViewInsets:message];
+    } else {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
 }
 
 #pragma mark -- YZHCustomAttachmentInfo

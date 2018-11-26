@@ -8,6 +8,8 @@
 
 #import "NIMInputAtCache.h"
 
+NSString* const kYZHTeamAtMemberAtAllKey  = @"KYZHTeamAtMeberAtAllKey\u2004";
+
 @interface NIMInputAtCache()
 
 @property (nonatomic,strong) NSMutableArray *items;
@@ -31,6 +33,10 @@
     NSMutableArray *uids = [[NSMutableArray alloc] init];
     for (NSString *name in names) {
         NIMInputAtItem *item = [self item:name];
+        //检测
+        if ([item.name isEqualToString:kYZHTeamAtMemberAtAllKey]) {
+            return @[kYZHTeamAtMemberAtAllKey];
+        }
         if (item)
         {
             [uids addObject:item.uid];
@@ -57,6 +63,10 @@
         NIMInputAtItem *object = obj;
         if ([object.name isEqualToString:name])
         {
+            item = object;
+            *stop = YES;
+        }
+        if ([object.name isEqualToString:kYZHTeamAtMemberAtAllKey] && [name isEqualToString:@"All"]) {
             item = object;
             *stop = YES;
         }

@@ -113,10 +113,10 @@
     } else {
     // 采集创建群组相关资料 Model。
         NIMCreateTeamOption* teamOption = [[NIMCreateTeamOption alloc] init];
-        teamOption.name = @"Test";
+        teamOption.name = @"Jersey";
         teamOption.type = NIMTeamTypeAdvanced;
         teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth;
-        NSArray* array = @[@"zexi0625",@"18876789520"];
+        NSArray* array = @[@"zexi0625",@"18876789520", @"18876789522", @"18520821061"];
         //创群成功则跳转至结果页
         [[NIMSDK sharedSDK].teamManager createTeam:teamOption users:array completion:^(NSError * _Nullable error, NSString * _Nullable teamId, NSArray<NSString *> * _Nullable failedUserIds) {
             // 存储相关资料,方便到成功页执行相应逻辑.

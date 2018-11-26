@@ -96,7 +96,7 @@
     customObject.attachment           = attachment;
     message.messageObject             = customObject;
     //推送文案
-    message.apnsContent = [NSString stringWithFormat:@"%@发来了名片", attachment.userName];
+    message.apnsContent = [NSString stringWithFormat:@"%@发来了好友名片", attachment.userName];
     
     return message;
 }
@@ -108,8 +108,22 @@
     customObject.attachment           = attachment;
     message.messageObject             = customObject;
     //推送文案
-    message.apnsContent = [NSString stringWithFormat:@"%@发来了名片", attachment.groupName];
+    message.apnsContent = [NSString stringWithFormat:@"%@发来了社群名片", attachment.groupName];
     return message;
+}
+
++ (NIMMessage *)msgWithSeepdyReponse:(YZHSpeedyResponseAttachment *)attachment text:(NSString *)text{
+    
+    NIMMessage* message = [[NIMMessage alloc] init];
+    message.text = text;
+    NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
+    attachment.titleText = text;
+    customObject.attachment = attachment;
+    message.messageObject = customObject;
+    //推送文案
+    message.apnsContent = [NSString stringWithFormat:@"%@发来了快捷回应消息", attachment.teamNickName];
+    return message;
+    
 }
 
 + (NIMMessage *)msgWithAddFirend:(YZHAddFirendAttachment *)attachment {

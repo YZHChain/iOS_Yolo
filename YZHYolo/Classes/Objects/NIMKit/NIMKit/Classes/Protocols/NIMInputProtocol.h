@@ -20,6 +20,9 @@
 - (void)onSendText:(NSString *)text
            atUsers:(NSArray *)atUsers;
 
+- (void)onSendText:(NSString *)text
+           atUsers:(NSArray *)atUsers needResponed:(BOOL)needResponed;
+
 - (void)onSelectChartlet:(NSString *)chartletId
                  catalog:(NSString *)catalogId;
 

@@ -9,6 +9,7 @@
 #import "YZHBaseViewController.h"
 
 #import "NIMContactSelectConfig.h"
+
 typedef void(^ContactSelectFinishBlock)(NSArray *);
 typedef void(^ContactSelectCancelBlock)(void);
 
@@ -18,7 +19,7 @@ typedef void(^ContactSelectCancelBlock)(void);
 
 - (void)didFinishedSelect:(NSArray *)selectedContacts; // 返回userID
 
-- (void)didFinishedSelect:(NSArray *)selectedContacts isRespond:(BOOL)isRespond;
+- (void)didFinishedSelect:(NSArray *)selectedContacts needRespond:(BOOL)needRespond;
 
 - (void)didCancelledSelect;
 

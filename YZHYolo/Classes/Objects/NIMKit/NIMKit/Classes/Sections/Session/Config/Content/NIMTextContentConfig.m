@@ -43,8 +43,6 @@
     return [[NIMKit sharedKit].config setting:message].contentInsets;
 }
 
-
-
 #pragma mark - Private
 - (M80AttributedLabel *)label
 {

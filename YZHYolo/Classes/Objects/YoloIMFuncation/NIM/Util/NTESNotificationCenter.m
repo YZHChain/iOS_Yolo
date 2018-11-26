@@ -5,36 +5,37 @@
 //  Created by Xuhui on 15/3/25.
 //  Copyright (c) 2015年 Netease. All rights reserved.
 //
-/*
+
 #import "NTESNotificationCenter.h"
 //#import "NTESVideoChatViewController.h"
 //#import "NTESAudioChatViewController.h"
-#import "NTESMainTabController.h"
-#import "NTESSessionViewController.h"
+//#import "NTESSessionViewController.h"
 #import "NSDictionary+NTESJson.h"
-#import "NTESCustomNotificationDB.h"
-#import "NTESCustomNotificationObject.h"
+//#import "NTESCustomNotificationDB.h"
+//#import "NTESCustomNotificationObject.h"
 #import "UIView+Toast.h"
-#import "NTESWhiteboardViewController.h"
-#import "NTESCustomSysNotificationSender.h"
+//#import "NTESWhiteboardViewController.h"
+//#import "NTESCustomSysNotificationSender.h"
 #import "NTESGlobalMacro.h"
 #import <AVFoundation/AVFoundation.h>
-#import "NTESLiveViewController.h"
-#import "NTESSessionMsgConverter.h"
+//#import "NTESLiveViewController.h"
+//#import "NTESSessionMsgConverter.h"
 #import "NTESSessionUtil.h"
-#import "NTESTeamMeetingCallingViewController.h"
-#import "NTESTeamMeetingCalleeInfo.h"
-#import "NTESTeamMeetingViewController.h"
-#import "NTESAVNotifier.h"
-#import "NTESRedPacketTipAttachment.h"
+//#import "NTESTeamMeetingCallingViewController.h"
+//#import "NTESTeamMeetingCalleeInfo.h"
+//#import "NTESTeamMeetingViewController.h"
+//#import "NTESAVNotifier.h"
+//#import "NTESRedPacketTipAttachment.h"
+#import "UIViewController+YZHTool.h"
+#import "NIMChatManagerProtocol.h"
+//#import "NIMSystemNotificationManager.h"
 
 NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChanged";
 
-@interface NTESNotificationCenter () <NIMSystemNotificationManagerDelegate,NIMNetCallManagerDelegate,
-NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
+@interface NTESNotificationCenter () <NIMSystemNotificationManagerDelegate,NIMChatManagerDelegate>
 
 @property (nonatomic,strong) AVAudioPlayer *player; //播放提示音
-@property (nonatomic,strong) NTESAVNotifier *notifier;
+//@property (nonatomic,strong) NTESAVNotifier *notifier;
 
 @end
 
@@ -52,7 +53,8 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
 
 - (void)start
 {
-    DDLogInfo(@"Notification Center Setup");
+//    DDLogInfo(@"Notification Center Setup");
+    NSLog(@"Notification Center Setup");
 }
 
 - (instancetype)init {
@@ -60,13 +62,13 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
     if(self) {
         NSURL *url = [[NSBundle mainBundle] URLForResource:@"message" withExtension:@"wav"];
         _player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-        _notifier = [[NTESAVNotifier alloc] init];
+//        _notifier = [[NTESAVNotifier alloc] init];
         
         [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
-        [[NIMAVChatSDK sharedSDK].netCallManager addDelegate:self];
-        [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
+//        [[NIMAVChatSDK sharedSDK].netCallManager addDelegate:self];
+//        [[NIMAVChatSDK sharedSDK].rtsManager addDelegate:self];
         [[NIMSDK sharedSDK].chatManager addDelegate:self];
-        [[NIMSDK sharedSDK].broadcastManager addDelegate:self];
+//        [[NIMSDK sharedSDK].broadcastManager addDelegate:self];
     }
     return self;
 }
@@ -74,34 +76,37 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
 
 - (void)dealloc{
     [[NIMSDK sharedSDK].systemNotificationManager removeDelegate:self];
-    [[NIMAVChatSDK sharedSDK].netCallManager removeDelegate:self];
-    [[NIMAVChatSDK sharedSDK].rtsManager removeDelegate:self];
+//    [[NIMAVChatSDK sharedSDK].netCallManager removeDelegate:self];
+//    [[NIMAVChatSDK sharedSDK].rtsManager removeDelegate:self];
     [[NIMSDK sharedSDK].chatManager removeDelegate:self];
-    [[NIMSDK sharedSDK].broadcastManager removeDelegate:self];
+//    [[NIMSDK sharedSDK].broadcastManager removeDelegate:self];
 }
 
 #pragma mark - NIMChatManagerDelegate
+//TODO: 收到消息时
 - (void)onRecvMessages:(NSArray *)recvMessages
 {
-    NSArray *messages = [self filterMessages:recvMessages];
-    if (messages.count)
+//    NSArray *messages = [self filterMessages:recvMessages];
+    if (recvMessages.count)
     {
-        static BOOL isPlaying = NO;
-        if (isPlaying) {
-            return;
-        }
-        isPlaying = YES;
-        [self playMessageAudioTip];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            isPlaying = NO;
-        });
-        [self checkMessageAt:messages];
+//        static BOOL isPlaying = NO;
+//        if (isPlaying) {
+//            return;
+//        }
+//        isPlaying = YES;
+//        [self playMessageAudioTip];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            isPlaying = NO;
+//        });
+        [self checkMessageAt:recvMessages];
     }
 }
-
+/*
 - (void)playMessageAudioTip
 {
-    UINavigationController *nav = [NTESMainTabController instance].selectedViewController;
+//    UINavigationController *nav = [NTESMainTabController instance].selectedViewController;
+    //TODO:
+    UINavigationController *nav = [UIViewController yzh_rootViewController].tabBarController.selectedViewController;
     BOOL needPlay = YES;
     for (UIViewController *vc in nav.viewControllers) {
         if ([vc isKindOfClass:[NIMSessionViewController class]] ||  [vc isKindOfClass:[NTESLiveViewController class]] || [vc isKindOfClass:[NTESNetChatViewController class]])
@@ -116,21 +121,22 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
         [self.player play];
     }
 }
+ */
 
 - (void)checkMessageAt:(NSArray<NIMMessage *> *)messages
 {
-    一定是同个 session 的消息
+//    一定是同个 session 的消息
     NIMSession *session = [messages.firstObject session];
     if ([self.currentSessionViewController.session isEqual:session])
     {
-        只有在@所属会话页外面才需要标记有人@你
+//        只有在@所属会话页外面才需要标记有人@你
         return;
     }
-
     NSString *me = [[NIMSDK sharedSDK].loginManager currentAccount];
  
     for (NIMMessage *message in messages) {
-        if ([message.apnsMemberOption.userIds containsObject:me]) {
+        BOOL isAtAll = message.apnsMemberOption.userIds.count == false && message.apnsMemberOption.forcePush == true;
+        if ([message.apnsMemberOption.userIds containsObject:me] || isAtAll) {
             [NTESSessionUtil addRecentSessionMark:session type:NTESRecentSessionMarkTypeAt];
             return;
         }
@@ -138,71 +144,72 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
 }
 
 
-- (NSArray *)filterMessages:(NSArray *)messages
-{
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (NIMMessage *message in messages)
-    {
-        if ([self checkRedPacketTip:message] && ![self canSaveMessageRedPacketTip:message])
-        {
-            [[NIMSDK  sharedSDK].conversationManager deleteMessage:message];
-            [self.currentSessionViewController uiDeleteMessage:message];
-            continue;
-        }
-        [array addObject:message];
-    }
-    return [NSArray arrayWithArray:array];
-}
+//- (NSArray *)filterMessages:(NSArray *)messages
+//{
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    for (NIMMessage *message in messages)
+//    {
+//        if ([self checkRedPacketTip:message] && ![self canSaveMessageRedPacketTip:message])
+//        {
+//            [[NIMSDK  sharedSDK].conversationManager deleteMessage:message];
+//            [self.currentSessionViewController uiDeleteMessage:message];
+//            continue;
+//        }
+//        [array addObject:message];
+//    }
+//    return [NSArray arrayWithArray:array];
+//}
 
 
-- (BOOL)checkRedPacketTip:(NIMMessage *)message
-{
-    NIMCustomObject *object = message.messageObject;
-    if ([object isKindOfClass:[NIMCustomObject class]] && [object.attachment isKindOfClass:[NTESRedPacketTipAttachment class]])
-    {
-        return YES;
-    }
-    return NO;
-}
+//- (BOOL)checkRedPacketTip:(NIMMessage *)message
+//{
+//    NIMCustomObject *object = message.messageObject;
+//    if ([object isKindOfClass:[NIMCustomObject class]] && [object.attachment isKindOfClass:[NTESRedPacketTipAttachment class]])
+//    {
+//        return YES;
+//    }
+//    return NO;
+//}
+//
+//- (BOOL)canSaveMessageRedPacketTip:(NIMMessage *)message
+//{
+//    NIMCustomObject *object = message.messageObject;
+//    NTESRedPacketTipAttachment *attach = (NTESRedPacketTipAttachment *)object.attachment;
+//    NSString *me = [NIMSDK sharedSDK].loginManager.currentAccount;
+//    return [attach.sendPacketId isEqualToString:me] || [attach.openPacketId isEqualToString:me];
+//}
 
-- (BOOL)canSaveMessageRedPacketTip:(NIMMessage *)message
-{
-    NIMCustomObject *object = message.messageObject;
-    NTESRedPacketTipAttachment *attach = (NTESRedPacketTipAttachment *)object.attachment;
-    NSString *me = [NIMSDK sharedSDK].loginManager.currentAccount;
-    return [attach.sendPacketId isEqualToString:me] || [attach.openPacketId isEqualToString:me];
-}
-
-- (void)onRecvRevokeMessageNotification:(NIMRevokeMessageNotification *)notification
-{
-    NIMMessage *tipMessage = [NTESSessionMsgConverter msgWithTip:[NTESSessionUtil tipOnMessageRevoked:notification]];
-    NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
-    setting.shouldBeCounted = NO;
-    tipMessage.setting = setting;
-    tipMessage.timestamp = notification.timestamp;
-    
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
-    UINavigationController *nav = tabVC.selectedViewController;
-
-    for (NTESSessionViewController *vc in nav.viewControllers) {
-        if ([vc isKindOfClass:[NTESSessionViewController class]]
-            && [vc.session.sessionId isEqualToString:notification.session.sessionId]) {
-            NIMMessageModel *model = [vc uiDeleteMessage:notification.message];
-            if (model) {
-                [vc uiInsertMessages:@[tipMessage]];
-            }
-            break;
-        }
-    }
-    
-    // saveMessage 方法执行成功后会触发 onRecvMessages: 回调，但是这个回调上来的 NIMMessage 时间为服务器时间，和界面上的时间有一定出入，所以要提前先在界面上插入一个和被删消息的界面时间相符的 Tip, 当触发 onRecvMessages: 回调时，组件判断这条消息已经被插入过了，就会忽略掉。
-    [[NIMSDK sharedSDK].conversationManager saveMessage:tipMessage
-                                             forSession:notification.session
-                                             completion:nil];
-}
+//- (void)onRecvRevokeMessageNotification:(NIMRevokeMessageNotification *)notification
+//{
+//    NIMMessage *tipMessage = [NTESSessionMsgConverter msgWithTip:[NTESSessionUtil tipOnMessageRevoked:notification]];
+//    NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
+//    setting.shouldBeCounted = NO;
+//    tipMessage.setting = setting;
+//    tipMessage.timestamp = notification.timestamp;
+//
+//    NTESMainTabController *tabVC = [NTESMainTabController instance];
+//    UINavigationController *nav = tabVC.selectedViewController;
+//
+//    for (NTESSessionViewController *vc in nav.viewControllers) {
+//        if ([vc isKindOfClass:[NTESSessionViewController class]]
+//            && [vc.session.sessionId isEqualToString:notification.session.sessionId]) {
+//            NIMMessageModel *model = [vc uiDeleteMessage:notification.message];
+//            if (model) {
+//                [vc uiInsertMessages:@[tipMessage]];
+//            }
+//            break;
+//        }
+//    }
+//
+//    // saveMessage 方法执行成功后会触发 onRecvMessages: 回调，但是这个回调上来的 NIMMessage 时间为服务器时间，和界面上的时间有一定出入，所以要提前先在界面上插入一个和被删消息的界面时间相符的 Tip, 当触发 onRecvMessages: 回调时，组件判断这条消息已经被插入过了，就会忽略掉。
+//    [[NIMSDK sharedSDK].conversationManager saveMessage:tipMessage
+//                                             forSession:notification.session
+//                                             completion:nil];
+//}
 
 
 #pragma mark - NIMSystemNotificationManagerDelegate
+/*
 - (void)onReceiveCustomSystemNotification:(NIMCustomSystemNotification *)notification{
     
     NSString *content = notification.content;
@@ -255,8 +262,10 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
         }
     }
 }
+ */
 
 #pragma mark - NIMNetCallManagerDelegate
+/*
 - (void)onReceive:(UInt64)callID from:(NSString *)caller type:(NIMNetCallMediaType)type message:(NSString *)extendMessage{
     
     NTESMainTabController *tabVC = [NTESMainTabController instance];
@@ -308,13 +317,14 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
         [nav pushViewController:vc animated:NO];
     }
 }
+ */
 
-- (void)onHangup:(UInt64)callID
-              by:(NSString *)user
-{
-    [_notifier stop];
-}
-
+//- (void)onHangup:(UInt64)callID
+//              by:(NSString *)user
+//{
+//    [_notifier stop];
+//}
+/*
 - (void)onRTSRequest:(NSString *)sessionID
                 from:(NSString *)caller
             services:(NSUInteger)types
@@ -336,68 +346,69 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
         [self presentModelViewController:vc];
     }
 }
+ */
 
 
-- (void)presentModelViewController:(UIViewController *)vc
-{
-    NTESMainTabController *tab = [NTESMainTabController instance];
-    [tab.view endEditing:YES];
-    if (tab.presentedViewController) {
-        __weak NTESMainTabController *wtabVC = tab;
-        [tab.presentedViewController dismissViewControllerAnimated:NO completion:^{
-            [wtabVC presentViewController:vc animated:NO completion:nil];
-        }];
-    }else{
-        [tab presentViewController:vc animated:NO completion:nil];
-    }
-}
-
-- (void)onRTSTerminate:(NSString *)sessionID
-                    by:(NSString *)user
-{
-    [_notifier stop];
-}
-
-- (BOOL)shouldResponseBusy
-{
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
-    UINavigationController *nav = tabVC.selectedViewController;
-    return [nav.topViewController isKindOfClass:[NTESNetChatViewController class]] ||
-    [tabVC.presentedViewController isKindOfClass:[NTESWhiteboardViewController class]] ||
-    [tabVC.presentedViewController isKindOfClass:[NTESTeamMeetingCallingViewController class]] ||
-    [tabVC.presentedViewController isKindOfClass:[NTESTeamMeetingViewController class]];
-}
+//- (void)presentModelViewController:(UIViewController *)vc
+//{
+//    NTESMainTabController *tab = [NTESMainTabController instance];
+//    [tab.view endEditing:YES];
+//    if (tab.presentedViewController) {
+//        __weak NTESMainTabController *wtabVC = tab;
+//        [tab.presentedViewController dismissViewControllerAnimated:NO completion:^{
+//            [wtabVC presentViewController:vc animated:NO completion:nil];
+//        }];
+//    }else{
+//        [tab presentViewController:vc animated:NO completion:nil];
+//    }
+//}
+//
+//- (void)onRTSTerminate:(NSString *)sessionID
+//                    by:(NSString *)user
+//{
+//    [_notifier stop];
+//}
+//
+//- (BOOL)shouldResponseBusy
+//{
+//    NTESMainTabController *tabVC = [NTESMainTabController instance];
+//    UINavigationController *nav = tabVC.selectedViewController;
+//    return [nav.topViewController isKindOfClass:[NTESNetChatViewController class]] ||
+//    [tabVC.presentedViewController isKindOfClass:[NTESWhiteboardViewController class]] ||
+//    [tabVC.presentedViewController isKindOfClass:[NTESTeamMeetingCallingViewController class]] ||
+//    [tabVC.presentedViewController isKindOfClass:[NTESTeamMeetingViewController class]];
+//}
 
 #pragma mark - NIMBroadcastManagerDelegate
-- (void)onReceiveBroadcastMessage:(NIMBroadcastMessage *)broadcastMessage
-{
-    [self makeToast:broadcastMessage.content];
-}
+//- (void)onReceiveBroadcastMessage:(NIMBroadcastMessage *)broadcastMessage
+//{
+//    [self makeToast:broadcastMessage.content];
+//}
 
 #pragma mark - format
-- (NSString *)textByCaller:(NSString *)caller type:(NIMNetCallMediaType)type
-{
-    NSString *action = type == NIMNetCallMediaTypeAudio ? @"音频":@"视频";
-    NSString *text = [NSString stringWithFormat:@"你收到了一个%@聊天请求",action];
-    NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:caller option:nil];
-    if ([info.showName length])
-    {
-        text = [NSString stringWithFormat:@"%@向你发起了一个%@聊天请求",info.showName,action];
-    }
-    return text;
-}
+//- (NSString *)textByCaller:(NSString *)caller type:(NIMNetCallMediaType)type
+//{
+//    NSString *action = type == NIMNetCallMediaTypeAudio ? @"音频":@"视频";
+//    NSString *text = [NSString stringWithFormat:@"你收到了一个%@聊天请求",action];
+//    NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:caller option:nil];
+//    if ([info.showName length])
+//    {
+//        text = [NSString stringWithFormat:@"%@向你发起了一个%@聊天请求",info.showName,action];
+//    }
+//    return text;
+//}
 
 
-- (NSString *)textByCaller:(NSString *)caller
-{
-    NSString *text = @"你收到了一个白板请求";
-    NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:caller option:nil];
-    if ([info.showName length])
-    {
-        text = [NSString stringWithFormat:@"%@向你发起了一个白板请求",info.showName];
-    }
-    return text;
-}
+//- (NSString *)textByCaller:(NSString *)caller
+//{
+//    NSString *text = @"你收到了一个白板请求";
+//    NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:caller option:nil];
+//    if ([info.showName length])
+//    {
+//        text = [NSString stringWithFormat:@"%@向你发起了一个白板请求",info.showName];
+//    }
+//    return text;
+//}
 
 - (BOOL)shouldFireNotification:(NSString *)callerId
 {
@@ -442,21 +453,24 @@ NIMRTSManagerDelegate,NIMChatManagerDelegate,NIMBroadcastManagerDelegate>
 #pragma mark - Misc
 - (NIMSessionViewController *)currentSessionViewController
 {
-    UINavigationController *nav = [NTESMainTabController instance].selectedViewController;
-    for (UIViewController *vc in nav.viewControllers)
-    {
+//    UINavigationController *nav = [NTESMainTabController instance].selectedViewController;
+    UIViewController* vc = (UINavigationController *)[UIViewController yzh_findTopViewController];
+//    for (UIViewController *vc in nav.viewControllers)
+//    {
         if ([vc isKindOfClass:[NIMSessionViewController class]])
         {
             return (NIMSessionViewController *)vc;
+        } else {
+            return nil;
         }
-    }
-    return nil;
+//    }
+    
 }
 
-- (void)makeToast:(NSString *)content
-{
-    [[NTESMainTabController instance].selectedViewController.view makeToast:content duration:2.0 position:CSToastPositionCenter];
-}
+//- (void)makeToast:(NSString *)content
+//{
+//    [[NTESMainTabController instance].selectedViewController.view makeToast:content duration:2.0 position:CSToastPositionCenter];
+//}
 
 @end
-*/
+

@@ -10,6 +10,7 @@
 
 #define NIMInputAtStartChar  @"@"
 #define NIMInputAtEndChar    @"\u2004"
+extern NSString* const kYZHTeamAtMemberAtAllKey;
 
 @interface NIMInputAtItem : NSObject
 

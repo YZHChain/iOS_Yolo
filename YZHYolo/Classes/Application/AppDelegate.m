@@ -11,6 +11,7 @@
 #import "YZHRootTabBarViewController.h"
 #import "YZHCellLayoutConfign.h"
 #import "YZHCustomAttachmentDecoder.h"
+#import "NTESNotificationCenter.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,7 @@
     
     //云信配置
     [self setupNIMSDK];
+    [self setupServices];
     
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
@@ -60,6 +62,14 @@
 }
 
 #pragma mark -- IM Configuration
+
+- (void)setupServices
+{
+//    [[NTESLogManager sharedManager] start];
+    [[NTESNotificationCenter sharedCenter] start];
+//    [[NTESSubscribeManager sharedManager] start];
+//    [[NTESRedPacketManager sharedManager] start];
+}
 
 - (void)setupNIMSDK {
     

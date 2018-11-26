@@ -38,7 +38,6 @@
     
     [self.textLabel nim_setText:text];
     
-
 }
 
 - (void)layoutSubviews{

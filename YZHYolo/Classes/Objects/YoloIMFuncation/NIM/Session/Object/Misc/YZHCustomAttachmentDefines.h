@@ -16,8 +16,9 @@ typedef NS_ENUM(NSInteger,YZHCustomMessageType){
     CustomMessageTypeWhiteboard = 4, //白板会话
     CustomMessageTypeRedPacket  = 5, //红包消息
     CustomMessageTypeRedPacketTip = 6, //红包提示消息
-    CustomMessageTypeUserCard    = 10, //用户名片分享
-    CustomMessageTypeTeamCard    = 11, //群名片分享
+    CustomMessageTypeUserCard     = 10, //用户名片分享
+    CustomMessageTypeTeamCard     = 11, //群名片分享
+    CustomMessageTypeSpeedyRespond    = 12, //At 快捷回应消息
     
     CustomMessageTypeAddFirend   = 30, //添加好友
     CustomMessageTypeRequstAddFirend   = 31,

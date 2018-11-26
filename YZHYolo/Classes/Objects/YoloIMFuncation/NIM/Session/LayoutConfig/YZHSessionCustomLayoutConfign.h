@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSessionCustomLayoutConfign : NSObject<NIMSessionContentConfig, YZHCustomAttachmentInfo>
 
+- (id<YZHCustomAttachmentInfo>)infoWithMessage:(NIMMessage *)message;
+
 @end
 
 NS_ASSUME_NONNULL_END

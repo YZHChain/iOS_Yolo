@@ -10,6 +10,8 @@
 #import "NIMMessageModel.h"
 #import "NIMMessageCellFactory.h"
 #import "UIView+NIM.h"
+#import "YZHSpeedyResponseAttachment.h"
+#import "YZHCustomAttachmentDefines.h"
 
 @interface NIMSessionTableAdapter()
 
@@ -77,12 +79,15 @@
     if ([modelInArray isKindOfClass:[NIMMessageModel class]])
     {
         NIMMessageModel *model = (NIMMessageModel *)modelInArray;
-        
+        //计算 Cell 高度.先计算ContentView 高度, 然后在加上Cell 内边距和 ContentView 内边距
         CGSize size = [model contentSize:tableView.nim_width];
-        
         UIEdgeInsets contentViewInsets = model.contentViewInsets;
         UIEdgeInsets bubbleViewInsets  = model.bubbleViewInsets;
         cellHeight = size.height + contentViewInsets.top + contentViewInsets.bottom + bubbleViewInsets.top + bubbleViewInsets.bottom;
+        //暂时写死。
+        if (model.message.messageType == NIMMessageTypeCustom) {
+            cellHeight += 23;
+        }
     }
     else if ([modelInArray isKindOfClass:[NIMTimestampModel class]])
     {

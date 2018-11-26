@@ -72,7 +72,6 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
     [vc presentViewController:[[YZHBaseNavigationController alloc] initWithRootViewController:self] animated:YES completion:nil];
 }
 
-
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
@@ -239,11 +238,9 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
                         [self.selectedAtMembers addObject:memberModel.info.infoId];
                 }
             } else {
-//                [YZHProgressHUD showLoadingOnView:YZHAppWindow text:@"无法找到此用户信息,请稍后再试"];
                 [YZHProgressHUD showText:@"无法找到此用户信息,请稍后再试" onView:YZHAppWindow completion:nil];
             }
         }
-
     } else {
         memberModel = (YZHContactMemberModel*)[self.atMemberModel atMemberOfIndex:indexPath];
         if (YZHIsString(memberModel.info.infoId)) {
@@ -303,17 +300,19 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
 }
 
 - (void)clickConfirm:(UIBarButtonItem *)sender {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     if (self.isManage) {
         if (self.isAtAll) {
             //选中所有 选中所有处理.
-            if ([self.delegate respondsToSelector:@selector(didFinishedSelect:isRespond:)]) {
-                [self.delegate didFinishedSelect:self.selectedAtMembers isRespond:self.headerView.respondSwitch.isOn];
+            if ([self.delegate respondsToSelector:@selector(didFinishedSelect:needRespond:)]) {
+                //传入nil 代表@All
+                [self.delegate didFinishedSelect:@[kYZHTeamAtMemberAtAllKey] needRespond:self.headerView.respondSwitch.isOn];
             }
         } else {
             if (self.selectedAtMembers.count) {
-                if ([self.delegate respondsToSelector:@selector(didFinishedSelect:isRespond:)]) {
-                    [self.delegate didFinishedSelect:self.selectedAtMembers isRespond:self.headerView.respondSwitch.isOn];
+                if ([self.delegate respondsToSelector:@selector(didFinishedSelect:needRespond:)]) {
+                    [self.delegate didFinishedSelect:self.selectedAtMembers needRespond:self.headerView.respondSwitch.isOn];
                 }
             } else {
                 //无选择.
@@ -321,8 +320,8 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
         }
     } else {
         if (self.selectedAtMembers.count) {
-            if ([self.delegate respondsToSelector:@selector(didFinishedSelect:isRespond:)]) {
-                [self.delegate didFinishedSelect:self.selectedAtMembers isRespond:self.headerView.respondSwitch.isOn];
+            if ([self.delegate respondsToSelector:@selector(didFinishedSelect:needRespond:)]) {
+                [self.delegate didFinishedSelect:self.selectedAtMembers needRespond:self.headerView.respondSwitch.isOn];
             }
         } else {
             //无选择.

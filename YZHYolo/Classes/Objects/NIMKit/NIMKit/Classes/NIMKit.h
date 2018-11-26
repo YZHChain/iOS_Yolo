@@ -80,12 +80,12 @@ FOUNDATION_EXPORT const unsigned char NIMKitVersionString[];
 - (void)registerLayoutConfig:(NIMCellLayoutConfig *)layoutConfig;
 
 /**
- *  返回当前的排版配置
+ *  返回当前的排版配置 //可注册.  CellContent
  */
 - (id<NIMCellLayoutConfig>)layoutConfig;
 
 /**
- *  UI 配置器
+ *  UI 配置器 //可自定义配置   Cell 见 NIMKit Classes Sections -> Session Config Content
  */
 @property (nonatomic,strong) NIMKitConfig *config;
 

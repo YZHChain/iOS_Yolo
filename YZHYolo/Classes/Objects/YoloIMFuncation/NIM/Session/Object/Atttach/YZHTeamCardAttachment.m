@@ -44,6 +44,11 @@
     return CGSizeMake(250, 123);
 }
 
+- (UIEdgeInsets)contentViewInsets:(NIMMessage *)message {
+    
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
 #pragma mark Get Set
 
 - (NSString *)titleName {

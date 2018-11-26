@@ -36,7 +36,12 @@
 
 - (CGSize)contentSize:(NIMMessage *)message cellWidth:(CGFloat)width {
     
-    return CGSizeMake(YZHScreen_Width, 50);
+    return CGSizeMake(width, 50);
+}
+
+- (UIEdgeInsets)contentViewInsets:(NIMMessage *)message {
+    
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 - (BOOL)shouldShowAvatar:(NIMMessage *)message {

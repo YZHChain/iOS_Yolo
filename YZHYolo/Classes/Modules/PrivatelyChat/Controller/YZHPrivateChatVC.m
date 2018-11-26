@@ -83,8 +83,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NIMSDK sharedSDK].mediaManager stopRecord];
-    [[NIMSDK sharedSDK].mediaManager stopPlay];
 }
 
 - (id<NIMSessionConfig>)sessionConfig {

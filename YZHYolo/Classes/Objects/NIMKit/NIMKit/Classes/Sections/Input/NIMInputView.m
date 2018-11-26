@@ -23,7 +23,8 @@
 #import "NIMKitKeyboardInfo.h"
 #import "YZHCommunityAtMemberVC.h"
 
-@interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,NIMContactSelectDelegate>
+
+@interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,YZHContactSelectDelegate>
 {
     UIView  *_emoticonView;
 }
@@ -54,6 +55,7 @@
         _recordPhase = AudioRecordPhaseEnd;
         _atCache = [[NIMInputAtCache alloc] init];
         _inputConfig = config;
+        _isAtAll = NO;
         self.backgroundColor = [UIColor whiteColor];
     }
     return self;
@@ -556,7 +558,7 @@
     [self sizeToFit];
 }
 
-#pragma mark - NIMContactSelectDelegate
+#pragma mark - YZHContactSelectDelegate
 - (void)didFinishedSelect:(NSArray *)selectedContacts
 {
     NSMutableString *str = [[NSMutableString alloc] initWithString:@""];
@@ -578,9 +580,34 @@
     [self.toolBar insertText:str];
 }
 
-- (void)didFinishedSelect:(NSArray *)selectedContacts isRespond:(BOOL)isRespond {
+- (void)didFinishedSelect:(NSArray *)selectedContacts needRespond:(BOOL)needRespond {
     
-    [self didFinishedSelect:selectedContacts];
+    NSMutableString *str = [[NSMutableString alloc] initWithString:@""];
+    NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+    option.session = self.session;
+    option.forbidaAlias = YES;
+    self.needResponse = needRespond;
+    if ([selectedContacts.firstObject isEqualToString:kYZHTeamAtMemberAtAllKey]) {
+        str = [NSString stringWithFormat:@"All%@",NIMInputAtEndChar].mutableCopy;
+        NIMInputAtItem *item = [[NIMInputAtItem alloc] init];
+        item.name = kYZHTeamAtMemberAtAllKey;
+        [self.atCache addAtItem:item];
+    } else {
+        for (NSString *uid in selectedContacts) {
+            NSString *nick = [[NIMKit sharedKit].provider infoByUser:uid option:option].showName;
+            [str appendString:nick];
+            [str appendString:NIMInputAtEndChar];
+            if (![selectedContacts.lastObject isEqualToString:uid]) {
+                [str appendString:NIMInputAtStartChar];
+            }
+            NIMInputAtItem *item = [[NIMInputAtItem alloc] init];
+            item.uid  = uid;
+            item.name = nick;
+            [self.atCache addAtItem:item];
+        }
+    }
+    [self.toolBar insertText:str];
+    
 }
 
 #pragma mark - InputEmoticonProtocol
@@ -602,14 +629,21 @@
 - (void)didPressSend:(id)sender{
     if ([self.actionDelegate respondsToSelector:@selector(onSendText:atUsers:)] && [self.toolBar.contentText length] > 0) {
         NSString *sendText = self.toolBar.contentText;
-        [self.actionDelegate onSendText:sendText atUsers:[self.atCache allAtUid:sendText]];
+        if (self.needResponse) {
+           if (self.actionDelegate && [self.actionDelegate respondsToSelector:@selector(onSendText:atUsers:needResponed:)]) {
+                  [self.actionDelegate onSendText:sendText atUsers:[self.atCache allAtUid:sendText] needResponed:self.needResponse];
+           } else {
+               [self.actionDelegate onSendText:sendText atUsers:[self.atCache allAtUid:sendText]];
+           }
+           self.needResponse = NO;
+        } else {
+          [self.actionDelegate onSendText:sendText atUsers:[self.atCache allAtUid:sendText]];
+        }
         [self.atCache clean];
         self.toolBar.contentText = @"";
         [self.toolBar layoutIfNeeded];
     }
 }
-
-
 
 - (BOOL)onTextDelete
 {

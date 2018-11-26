@@ -66,8 +66,6 @@
     _topLineView.frame = CGRectMake(38, 0, self.width - 38 * 2, 1);
     _bottomLineView.frame = CGRectMake(38, self.height - 1, self.width - 38 * 2, 1);
     
-    
 }
     
-
 @end

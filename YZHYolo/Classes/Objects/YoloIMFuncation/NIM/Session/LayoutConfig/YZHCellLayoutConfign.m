@@ -26,6 +26,7 @@
         _messageTypes = @[
                           @"YZHUserCardAttachment",
                           @"YZHTeamCardAttachment",
+                          @"YZHSpeedyResponseAttachment",
                           @"YZHAddFirendAttachment",
                           @"YZHRequstAddFirendAttachment",
                           ];
@@ -35,12 +36,12 @@
 }
 
 #pragma mark - NIMCellLayoutConfig
-
+//Cell 大小
 - (CGSize)contentSize:(NIMMessageModel *)model cellWidth:(CGFloat)width{
     
     NIMMessage *message = model.message;
     //检查是不是当前支持的自定义消息类型
-    if ([self isSupportedUserCardMessage:message])
+    if ([self isSupportedUserCustomMessage:message] && [[_sessionCustomLayoutConfign infoWithMessage:message] respondsToSelector:@selector(contentSize:cellWidth:)])
     {
         return [_sessionCustomLayoutConfign contentSize:width message:message];
     }
@@ -48,17 +49,15 @@
     //如果没有特殊需求，就走默认处理流程
     return [super contentSize:model
                     cellWidth:width];
-    
 }
 
 - (NSString *)cellContent:(NIMMessageModel *)model{
     
     NIMMessage *message = model.message;
     //检查是不是当前支持的自定义消息类型
-    if ([self isSupportedUserCardMessage:message]) {
+    if ([self isSupportedUserCustomMessage:message] && [[_sessionCustomLayoutConfign infoWithMessage:message] respondsToSelector:@selector(cellContent:)]) {
         return [_sessionCustomLayoutConfign cellContent:message];
     }
-    
     //如果没有特殊需求，就走默认处理流程
     return [super cellContent:model];
 }
@@ -67,11 +66,17 @@
 {
     NIMMessage *message = model.message;
     //检查是不是当前支持的自定义消息类型
-    if ([self isSupportedUserCardMessage:message]) {
+    if ([self isSupportedUserCustomMessage:message] && [[_sessionCustomLayoutConfign infoWithMessage:message] respondsToSelector:@selector(contentViewInsets:)]) {
         return [_sessionCustomLayoutConfign contentViewInsets:message];
     }
     //如果没有特殊需求，就走默认处理流程
     return [super contentViewInsets:model];
+}
+
+//Jersey IM:设置气泡在 Cell 的间距.
+- (UIEdgeInsets)cellInsets:(NIMMessageModel *)model
+{
+   return [super cellInsets:model];
 }
 
 // 是否展示头像.
@@ -79,28 +84,16 @@
     
     NIMMessage *message = model.message;
     //检查是不是当前支持的自定义消息类型
-    if ([self isSupportedUserCardMessage:message]) {
+    if ([self isSupportedUserCustomMessage:message]) {
         return [_sessionCustomLayoutConfign shouldShowAvatar:message];
     }
     //如果没有特殊需求，就走默认处理流程
     return [super shouldShowAvatar:model];
 }
 
-//// 设置 Cell 间距
-//- (UIEdgeInsets)cellInsets:(NIMMessageModel *)model {
-//
-//    NIMMessage *message = model.message;
-//    //检查是不是当前支持的自定义消息类型
-//    if ([self isSupportedUserCardMessage:message] && message ) {
-//        return [_sessionCustomLayoutConfign cellInsets:message];
-//    }
-//    //如果没有特殊需求，就走默认处理流程
-//    return [super cellInsets:model];
-//}
-
 #pragma mark - misc
 
-- (BOOL)isSupportedUserCardMessage:(NIMMessage *)message
+- (BOOL)isSupportedUserCustomMessage:(NIMMessage *)message
 {
     NIMCustomObject *object = (NIMCustomObject* )message.messageObject;
     return [object isKindOfClass:[NIMCustomObject class]] &&

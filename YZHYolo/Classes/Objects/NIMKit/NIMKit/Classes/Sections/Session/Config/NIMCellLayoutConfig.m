@@ -59,8 +59,8 @@
     {
         return UIEdgeInsetsMake(cellTopToBubbleTop,otherBubbleOriginX,cellBubbleButtomToCellButtom, 0);
     }
-
 }
+
 
 - (BOOL)shouldShowAvatar:(NIMMessageModel *)model
 {

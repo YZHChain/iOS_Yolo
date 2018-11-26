@@ -12,6 +12,8 @@
 #import "YZHUserCardAttachment.h"
 #import "YZHTeamCardAttachment.h"
 #import "YZHSessionMsgConverter.h"
+#import "YZHSpeedyResponseAttachment.h"
+
 
 #import "NTESSessionUtil.h"
 #import "NTESSessionSnapchatContentView.h"
@@ -24,6 +26,8 @@
 #import "NIMKitMediaFetcher.h"
 #import "NIMSessionViewController.h"
 #import "UIView+Toast.h"
+#import "NIMMessageMaker.h"
+#import "NIMKitInfoFetchOption.h"
 
 #import "YZHPrivateChatConfig.h"
 #import "YZHUserCardAttachment.h"
@@ -31,6 +35,7 @@
 #import "YZHAddFirendAttachment.h"
 #import "YZHSessionMsgConverter.h"
 #import "YZHRequstAddFirendAttachment.h"
+#import "YZHSpeedyResponseAttachment.h"
 
 #import "NTESSessionUtil.h"
 #import "NTESTimerHolder.h"
@@ -42,12 +47,12 @@
 #import "Reachability.h"
 #import <CoreServices/UTCoreTypes.h>
 #import "YZHUserModelManage.h"
+#import "YZHCommunityAtMemberVC.h"
 
 #import "YZHProgressHUD.h"
 #import "YZHPrivateChatVC.h"
 
-
-@interface YZHCommunityChatVC ()
+@interface YZHCommunityChatVC ()<NIMInputActionDelegate>
 
 @property (nonatomic, strong) YZHPrivateChatConfig *sessionConfig;
 
@@ -84,8 +89,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [[NIMSDK sharedSDK].mediaManager stopRecord];
-    [[NIMSDK sharedSDK].mediaManager stopPlay];
 }
 
 - (id<NIMSessionConfig>)sessionConfig {
@@ -113,6 +116,9 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    //删除最近会话列表中有人@你的标记
+    [NTESSessionUtil removeRecentSessionMark:self.session type:NTESRecentSessionMarkTypeAt];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -120,6 +126,7 @@
     return UIStatusBarStyleLightContent;
 }
 
+#pragma mark -- ImputView
 // 设置输入框
 - (void)setupInputView
 {
@@ -144,8 +151,56 @@
     return should;
 }
 
-- (void)reloadView
+- (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers
 {
+    NIMMessage* message = [NIMMessageMaker msgWithText:text];
+    
+    if (atUsers.count)
+    {
+        NIMMessageApnsMemberOption *apnsOption = [[NIMMessageApnsMemberOption alloc] init];
+        apnsOption.forcePush = YES;
+        if ([atUsers.firstObject isEqualToString:kYZHTeamAtMemberAtAllKey]) {
+            apnsOption.userIds = nil;
+        } else {
+            apnsOption.userIds = atUsers;
+        }
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = self.session;
+        
+        NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
+        apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
+        message.apnsMemberOption = apnsOption;
+    }
+    [self sendMessage:message];
+}
+
+- (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers needResponed:(BOOL)needResponed {
+    
+    NIMMessage* message = [NIMMessageMaker msgWithText:text];
+    
+    if (atUsers.count)
+    {
+        NIMMessageApnsMemberOption *apnsOption = [[NIMMessageApnsMemberOption alloc] init];
+        apnsOption.forcePush = YES;
+        if ([atUsers.firstObject isEqualToString:kYZHTeamAtMemberAtAllKey]) {
+            apnsOption.userIds = nil;
+        } else {
+            apnsOption.userIds = atUsers;
+        }
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = self.session;
+        
+        NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
+        apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
+        message.apnsMemberOption = apnsOption;
+    }
+    if (needResponed) {
+        //如果需要快捷回应时,则需要对消息进行封装成自定义消息
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        YZHSpeedyResponseAttachment* attachment = [[YZHSpeedyResponseAttachment alloc] initWithTitleText:text senderUserId:userId teamNickName:@"泽西"];
+        message = [YZHSessionMsgConverter msgWithSeepdyReponse:attachment text:text];
+    }
+    [self sendMessage:message];
     
 }
 
@@ -275,8 +330,18 @@
                 SuppressPerformSelectorLeakWarning([self performSelector:selector withObject:message]);
                 handled = YES;
             }
-        }
-    }//打开网页.跳转
+        } //暂时先将这三种类型独立在外层处理
+    } else if ([eventName isEqualToString:NIMKitEventNameReceive]) {
+        [self executeSpeedyResponseMessageModel:event.messageModel type:0];
+        handled = YES;
+    } else if ([eventName isEqualToString:NIMKitEventNameResponse]) {
+        [self executeSpeedyResponseMessageModel:event.messageModel type:1];
+        handled = YES;
+    } else if ([eventName isEqualToString:NIMKitEventNameHandle]) {
+        [self executeSpeedyResponseMessageModel:event.messageModel type:2];
+        handled = YES;
+    }
+    //打开网页.跳转
     else if([eventName isEqualToString:NIMKitEventNameTapLabelLink])
     {
         NSString *link = event.data;
@@ -377,8 +442,21 @@
         //判断当前是否为好友,不是则执行添加好友,并且发出一条消息.否认提示等
         if (![[NIMSDK sharedSDK].userManager isMyFriend:fromAccount]) {
         }
+    } else if ([attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) { // 处理快捷相应消息
+        
     }
     //普通的自定义消息点击事件可以在这里做哦~
+}
+// 0 为收到, 1 为回复, 2 为处理完成
+- (void)executeSpeedyResponseMessageModel:(NIMMessageModel *)messageModel type:(NSInteger)type {
+    
+    if (type == 0) {
+        NSLog(@"收到了");
+    } else if (type == 1) {
+        NSLog(@"快捷回复");
+    } else {
+        NSLog(@"处理完成");
+    }
 }
 
 - (void)openSafari:(NSString *)link

@@ -45,6 +45,11 @@
     return CGSizeMake(250, 97);
 }
 
+- (UIEdgeInsets)contentViewInsets:(NIMMessage *)message {
+    
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
 #pragma mark -- GET SET
 
 -(NSString *)avatarUrl {

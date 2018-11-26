@@ -10,6 +10,7 @@
 
 #import "YZHUserCardAttachment.h"
 #import "YZHTeamCardAttachment.h"
+#import "YZHSpeedyResponseAttachment.h"
 #import "YZHAddFirendAttachment.h"
 #import "YZHRequstAddFirendAttachment.h"
 NS_ASSUME_NONNULL_BEGIN
@@ -36,9 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NIMMessage *)msgWithTeamCard:(YZHTeamCardAttachment* )attachment;
 
++ (NIMMessage *)msgWithSeepdyReponse:(YZHSpeedyResponseAttachment* )attachment text:(NSString *)text;
+
 + (NIMMessage *)msgWithAddFirend:(YZHAddFirendAttachment* )attachment;
 
 + (NIMMessage *)msgWithRequstAddFirend:(YZHRequstAddFirendAttachment* )attachment;
+
 @end
 
 

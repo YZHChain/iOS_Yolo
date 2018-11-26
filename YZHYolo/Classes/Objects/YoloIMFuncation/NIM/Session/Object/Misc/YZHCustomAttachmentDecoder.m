@@ -11,6 +11,7 @@
 #import "YZHUserCardAttachment.h"
 #import "NSDictionary+NTESJson.h"
 #import "YZHTeamCardAttachment.h"
+#import "YZHSpeedyResponseAttachment.h"
 #import "YZHAddFirendAttachment.h"
 #import "YZHRequstAddFirendAttachment.h"
 
@@ -33,12 +34,16 @@
                 case CustomMessageTypeTeamCard:
                     attachment = [YZHTeamCardAttachment YZH_objectWithKeyValues:data];
                     break;
+                case CustomMessageTypeSpeedyRespond:
+                    attachment = [YZHSpeedyResponseAttachment YZH_objectWithKeyValues:data];
+                    break;
                 case CustomMessageTypeAddFirend:
                     attachment = [YZHAddFirendAttachment YZH_objectWithKeyValues:data];
                     break;
                 case CustomMessageTypeRequstAddFirend:
                     attachment = [YZHRequstAddFirendAttachment YZH_objectWithKeyValues:data];
                     break;
+
                 default:
                     //TODO: 有空可以添加个父类消息解析器,这样在遇到自定义消息的时候,未处理的可以放这里进行处理并且展示. 附件返回 nil 直接super 的未知消息处理.
                     break;
@@ -51,7 +56,7 @@
     return attachment;
     
 }
-
+//暂时
 - (BOOL)checkAttachment:(id<NIMCustomAttachment>)attachment{
     
     return YES;
