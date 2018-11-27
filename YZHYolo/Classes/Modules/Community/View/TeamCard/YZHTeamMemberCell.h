@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "YZHContactMemberModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamMemberCell : UITableViewCell
 
-- (void)refresh:(id)model;
+@property (nonatomic, strong) YZHContactMemberModel* member;
+- (void)refresh:(YZHContactMemberModel *)member;
 
 @end
 

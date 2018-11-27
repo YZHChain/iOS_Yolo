@@ -5,18 +5,18 @@
 //  Created by Jersey on 2018/11/27.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
+#import "YZHGroupedDataCollection.h"
 
-#import <Foundation/Foundation.h>
-
+#import "YZHContactMemberModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHTeamMember : NSObject
+@interface YZHTeamMemberModel : YZHGroupedDataCollection
 
-@end
+@property (nonatomic, copy) NSString* teamId;
+@property (nonatomic, assign) BOOL isManage;
+@property (nonatomic, strong) NSMutableArray<YZHContactMemberModel *>* memberArray;
 
-@interface YZHTeamMemberModel : NSObject
-
-@property (nonatomic, strong) NSArray<YZHTeamMember* >* members;
+- (instancetype)initWithTeamId:(NSString *)teamId;
 
 @end
 

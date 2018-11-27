@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHSharedContactVC : YZHBaseViewController
 
 @property (nonatomic, assign) YZHSharedContactType sharedType;
+@property (nonatomic, strong) NSString* teamId;
 @property (nonatomic, copy) void (^sharedPersonageCardBlock)(YZHUserCardAttachment* );
 @property (nonatomic, copy) void (^sharedTeamCardBlock)(YZHTeamCardAttachment* );
 

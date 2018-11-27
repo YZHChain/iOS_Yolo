@@ -10,6 +10,7 @@
 #import "NIMKitInfo.h"
 #import "YZHContactMemberModel.h"
 #import "YZHAtMemberModel.h"
+#import "YZHTeamMemberModel.h"
 
 /**
  *  联系人选择器数据回调
@@ -17,6 +18,8 @@
 typedef void(^NIMContactDataProviderHandler)(NSDictionary *contentDic, NSArray *titles);
 
 typedef void(^YZHAtMemberDataProviderHandler)(YZHAtMemberModel *atMemberModel);
+
+typedef void(^YZHTeamMemberDataProviderHandler)(YZHTeamMemberModel *teamMemberModel);
 
 @protocol NIMContactSelectConfig <NSObject>
 
@@ -70,9 +73,14 @@ typedef void(^YZHAtMemberDataProviderHandler)(YZHAtMemberModel *atMemberModel);
 - (void)getContactData:(NIMContactDataProviderHandler)handler;
 
 /**
- *  提供联系人选择期的昵称，title信息,昵称。
+ *  提供联系人选择期的昵称，title信息,昵称。头像
  */
 - (void)getAtMemberData:(YZHAtMemberDataProviderHandler)handle;
+
+/**
+ *  //获取群成员列表信息。 显示名为群昵称
+ */
+- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle;
 
 /**
  *  提供联系人id、显示名、头像等信息
@@ -80,7 +88,7 @@ typedef void(^YZHAtMemberDataProviderHandler)(YZHAtMemberModel *atMemberModel);
 - (NIMKitInfo *)getInfoById:(NSString *)selectedId;
 
 /**
- *   提供联系id、显示名、昵称、头像等信息.
+ *   提供联系id、显示名、昵称、头像等信息. 传入群成员昵称
  */
 - (YZHContactMemberModel *)getMemberInfoById:(NSString *)selectedId;
 

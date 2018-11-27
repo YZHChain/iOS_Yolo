@@ -219,7 +219,7 @@
         }
     }];
 }
-
+// 获取At 群成员列表信息. 首显示名为备注,其次昵称
 - (void)getAtMemberData:(YZHAtMemberDataProviderHandler)handle {
     
     YZHAtMemberModel* atMemberModel = [[YZHAtMemberModel alloc] initWithTeamId:self.teamId];
@@ -235,10 +235,32 @@
                     YZHContactMemberModel* memberModel = [[YZHContactMemberModel alloc] initWithInfo:kitInfo];
                     [contacts addObject:memberModel];
                 }
-
             }
             [atMemberModel setMembers:contacts];
             handle ? handle(atMemberModel) : NULL;
+        }
+    }];
+}
+//获取群成员列表信息。 显示名为群昵称
+- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle {
+    
+    YZHTeamMemberModel* teamMemberModel = [[YZHTeamMemberModel alloc] initWithTeamId:self.teamId];
+    NSString *teamID = self.teamId;
+    [[NIMSDK sharedSDK].teamManager fetchTeamMembers:teamID completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+        if (!error) {
+            NSMutableArray *contacts = [NSMutableArray array];
+            for (NIMTeamMember* teamMember in members) {
+                NIMKitInfoFetchOption* infoFetchOption = [[NIMKitInfoFetchOption alloc] initWithIsAddressBook:NO];
+                //过滤掉自己
+                if (![teamMember.userId isEqualToString:self.filterIds.firstObject]) {
+                    NIMKitInfo* kitInfo = [[NIMKit sharedKit] infoByUser:teamMember.userId option:infoFetchOption];
+                    YZHContactMemberModel* memberModel = [[YZHContactMemberModel alloc] initWithInfo:kitInfo];
+                    [contacts addObject:memberModel];
+                }
+                
+            }
+            [teamMemberModel setMembers:contacts];
+            handle ? handle(teamMemberModel) : NULL;
         }
     }];
 }

@@ -16,6 +16,7 @@
 #import "YZHAlertManage.h"
 #import "YZHUserModelManage.h"
 #import "YZHTeamModel.h"
+#import "YZHProgressHUD.h"
 
 static NSString* kYZHSharedCellIdentifier = @"YZHSharedContactCell";
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
@@ -27,6 +28,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 @property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
 @property (nonatomic, strong) NSIndexPath* selectedIndexPath;
 @property (nonatomic, strong) NSIndexPath* lastSelectedIndexPath;
+@property (nonatomic, strong) NSMutableArray* selectedFirendIndexPath;
 
 @end
 
@@ -101,7 +103,10 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     } else if (self.sharedType == YZHSharedContactTypeTeamCard) {
         self.teamDataSource = [[YZHTeamModel alloc] init].allTeamModel;
     } else {
-        self.navigationItem.title = @"添加好友进群";
+        self.contacts = [[YZHGroupedContacts alloc] init];
+        //设置右边索引;
+        self.tableView.sc_indexViewConfiguration = self.indexViewConfiguration;
+        self.tableView.sc_indexViewDataSource = self.contacts.sortedGroupTitles;
     }
 
     [self.tableView reloadData];
@@ -111,20 +116,19 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if (self.sharedType == YZHSharedContactTypePersonageCard) {
+    if (self.sharedType == YZHSharedContactTypePersonageCard || self.sharedType == YZHSharedContactTypeTeamAddFriend) {
         
         return self.contacts.groupTitleCount;
     } else if (self.sharedType == YZHSharedContactTypeTeamCard) {
         
         return 1;
-    } else {
-        return 0;
     }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.sharedType == YZHSharedContactTypePersonageCard) {
+    if (self.sharedType == YZHSharedContactTypePersonageCard  || self.sharedType == YZHSharedContactTypeTeamAddFriend) {
         
         return [self.contacts memberCountOfGroup:section];
     } else if (self.sharedType == YZHSharedContactTypeTeamCard) {
@@ -138,7 +142,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YZHSharedContactCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHSharedCellIdentifier forIndexPath:indexPath];
-    if (self.sharedType == YZHSharedContactTypePersonageCard) {
+    if (self.sharedType == YZHSharedContactTypePersonageCard || self.sharedType == YZHSharedContactTypeTeamAddFriend) {
         
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:indexPath];
         [cell refreshUser:memberModel];
@@ -146,8 +150,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         
         NIMTeam* team = self.teamDataSource[indexPath.row];
         [cell refreshTeam:team];
-    } else {
-        return 0;
     }
     if (self.sharedType == YZHSharedContactTypePersonageCard || self.sharedType == YZHSharedContactTypeTeamCard) {
         if ([self.selectedIndexPath isEqual: indexPath]) {
@@ -155,7 +157,14 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         } else {
             [cell.selectedImageView removeFromSuperview];
         }
+    } else {
+        if ([self.selectedFirendIndexPath containsObject:indexPath]) {
+            [cell addSubview:cell.selectedImageView];
+        } else {
+            [cell.selectedImageView removeFromSuperview];
+        }
     }
+
     return cell;
 }
 
@@ -167,7 +176,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (self.sharedType == YZHSharedContactTypePersonageCard) {
+    if (self.sharedType == YZHSharedContactTypePersonageCard || self.sharedType == YZHSharedContactTypeTeamAddFriend) {
         
         return 20;
     } else {
@@ -192,6 +201,14 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     if (self.sharedType == YZHSharedContactTypePersonageCard || self.sharedType == YZHSharedContactTypeTeamCard) {
         self.selectedIndexPath = indexPath;
         [tableView reloadData];
+    } else {
+        if ([self.selectedFirendIndexPath containsObject:indexPath]) {
+            [self.selectedFirendIndexPath removeObject:indexPath];
+            
+        } else {
+            [self.selectedFirendIndexPath addObject:indexPath];
+        }
+        [self.tableView reloadData];
     }
 }
 
@@ -241,7 +258,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             return;
         }
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
-        NSString* yoloId = [YZHUserInfoExtManage targetUserInfoExtWithUserId:memberModel.info.infoId].userYolo.yoloID;
+        NSString* yoloId = memberModel.info.infoId;
         YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
         userCardAttachment.userName = memberModel.info.showName;
         userCardAttachment.yoloID = yoloId;
@@ -269,6 +286,36 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             [self dismissViewControllerAnimated:YES completion:^{
 
             }];
+    } else if (self.sharedType == YZHSharedContactTypeTeamAddFriend) {
+        if (!self.selectedFirendIndexPath.count) {
+            [YZHAlertManage showAlertMessage:@"请选择一位好友"];
+            return;
+        }
+        NSMutableArray* userIdArray = [[NSMutableArray alloc] init];
+        @weakify(self)
+        [self.selectedFirendIndexPath enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            @strongify(self)
+            YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[self.contacts sharedMemberOfIndex:obj];
+            NSString* yoloId = memberModel.info.infoId;
+            if (YZHIsString(yoloId)) {
+                [userIdArray addObject:yoloId];
+            }
+        }];
+        //邀请好友入群附言.
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        NSString* userName = [[[NIMSDK sharedSDK] userManager] userInfo: userId].userInfo.nickName;
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        [[[NIMSDK sharedSDK] teamManager] addUsers:userIdArray toTeam:self.teamId postscript:[NSString stringWithFormat:@"%@ 邀请你加入群聊", userName] completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+            @strongify(self)
+            if (!error) {
+                [hud hideWithText:@"成功邀请好友入群" completion:^{
+                    @strongify(self)
+                    [self dismissViewControllerAnimated:YES completion:^{
+                          
+                    }];
+                }];
+            }
+        }];
     }
 }
 
@@ -292,4 +339,11 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     return _indexViewConfiguration;
 }
 
+- (NSMutableArray *)selectedFirendIndexPath {
+    
+    if (!_selectedFirendIndexPath) {
+        _selectedFirendIndexPath = [[NSMutableArray alloc] init];
+    }
+    return _selectedFirendIndexPath;
+}
 @end

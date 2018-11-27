@@ -157,6 +157,13 @@
     }
 }
 
+- (id<YZHGroupMemberProtocol>)teamMemberOfIndex:(NSIndexPath *)indexPath {
+    
+    NSArray *members = nil;
+    
+    return members.firstObject;
+}
+
 - (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath {
     
     NSArray *members = nil;
@@ -172,6 +179,28 @@
     } else {
         return [members objectAtIndex:indexPath.row];
     }
+}
+
+- (NSMutableArray *)teamMemberArray {
+    
+    NSMutableArray* teamMutableArray = [[NSMutableArray alloc] init];
+    [_groups enumerateObjectsUsingBlock:^(Pair*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj.second enumerateObjectsUsingBlock:^(id  _Nonnull member, NSUInteger idx, BOOL * _Nonnull stop) {
+            [teamMutableArray addObject:member];
+        }];
+    }];
+    return teamMutableArray;
+}
+// 包含的所有成员个数
+- (NSInteger)groupMemberCount {
+
+    NSInteger memberCount = 0;
+    for (NSInteger i = 0; i < _groups.count ; i ++) {
+        Pair *pair = [_groups objectAtIndex:i];
+        NSArray* titleMembers = pair.second;
+        memberCount += titleMembers.count;
+    }
+    return memberCount;
 }
 // 带标题字符数量
 - (NSInteger)groupTitleCount
