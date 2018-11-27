@@ -10,7 +10,6 @@
 
 @interface YZHBaseViewController : UIViewController
 
-@property (nonatomic, strong) UIScrollView *textFieldScrollView;
 @property (nonatomic, assign) BOOL hideNavigationBarLine;
 @property (nonatomic, assign) BOOL hideNavigationBar;
 

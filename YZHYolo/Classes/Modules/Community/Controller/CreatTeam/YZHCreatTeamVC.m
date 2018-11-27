@@ -11,12 +11,19 @@
 #import "YZHCreatTeamMailDataView.h"
 #import "YZHPublic.h"
 #import "YZHPhotoManage.h"
+#import "UIImage+NIMKit.h"
+#import "NIMInputEmoticonDefine.h"
+#import "NIMKit.h"
+#import "NIMKitDevice.h"
+#import "NIMKitFileLocationHelper.h"
+#import "YZHTeamInfoExtManage.h"
 
 @interface YZHCreatTeamVC ()<UITextViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) YZHCreatTeamMailDataView* createTeamView;
 @property (nonatomic, copy) YZHExecuteBlock selectedLabelSaveHandle;
 @property (nonatomic, strong) NSMutableArray<NSString *>* selectedLabelArray;
+@property (nonatomic, copy) NSString* avatarUrl;
 
 @end
 
@@ -64,7 +71,7 @@
         @strongify(self)
         [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
             @strongify(self)
-            self.createTeamView.avatarImageView.image = image;
+            [self updatePhotoToIMDataWithImage:image];
         }];
     };
     
@@ -113,19 +120,33 @@
     } else {
     // 采集创建群组相关资料 Model。
         NIMCreateTeamOption* teamOption = [[NIMCreateTeamOption alloc] init];
-        teamOption.name = @"Jersey";
+        if (YZHIsString(self.createTeamView.teamNameTextFiled.text)) {
+            teamOption.name = self.createTeamView.teamNameTextFiled.text;
+        } else {
+            teamOption.name = @"群聊";
+        }
+        if (YZHIsString(self.avatarUrl)) {
+            teamOption.avatarUrl = self.avatarUrl;
+        }
+        if (YZHIsString(self.createTeamView.teamSynopsisTextView.text)) {
+            teamOption.intro = self.createTeamView.teamSynopsisTextView.text;
+        }
+//        teamOption.clientCustomInfo =
         teamOption.type = NIMTeamTypeAdvanced;
         teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth;
-        NSArray* array = @[@"zexi0625",@"18876789520", @"18876789522", @"18520821061"];
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        NSArray* array = @[userId];
         //创群成功则跳转至结果页
         [[NIMSDK sharedSDK].teamManager createTeam:teamOption users:array completion:^(NSError * _Nullable error, NSString * _Nullable teamId, NSArray<NSString *> * _Nullable failedUserIds) {
-            // 存储相关资料,方便到成功页执行相应逻辑.
+            // 存储相关资料,方便到成功页执行相应逻辑. 创建完群组之后需要将回话添加到列表中.
             if (!error) {
                 [YZHRouter openURL:kYZHRouterCommunityCreateTeamResult info:@{
                                                                               @"teamType": @(YZHTeamTypePrivacy),
                                                                               @"teamID": teamId,
                                                                               kYZHRouteBackIndex: kYZHRouteIndexRoot
                                                                               }];
+                //通知后台
+                
             }
         }];
         
@@ -166,6 +187,37 @@
     self.createTeamView.teamTagViewLayoutConstraint.constant = 80 + showViewHeight;
     
 }
+
+- (void)updatePhotoToIMDataWithImage:(UIImage* )image {
+    
+    UIImage *imageForAvatarUpload = [image nim_imageForAvatarUpload];
+    NSString *fileName = [NIMKitFileLocationHelper genFilenameWithExt:@"jpg"];
+    NSString *filePath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
+    BOOL success = data && [data writeToFile:filePath atomically:YES];
+    @weakify(self)
+    if (success) {
+        [SVProgressHUD show];
+        [[NIMSDK sharedSDK].resourceManager upload:filePath progress:nil completion:^(NSString *urlString, NSError *error) {
+            [SVProgressHUD dismiss];
+            @strongify(self)
+            if (!error && self) {
+                self.avatarUrl = urlString;
+                self.createTeamView.avatarImageView.image = image;
+                [self.view makeToast:nil];
+            } else {
+                [self.view makeToast:@"图片上传失败，请重试"
+                            duration:2
+                            position:CSToastPositionCenter];
+            }
+        }];
+    } else {
+        [self.view makeToast:@"图片上传失败，请重试"
+                    duration:2
+                    position:CSToastPositionCenter];
+    }
+}
+    
 #pragma mark - 7.GET & SET
 
 - (NSMutableArray<NSString *> *)selectedLabelArray {

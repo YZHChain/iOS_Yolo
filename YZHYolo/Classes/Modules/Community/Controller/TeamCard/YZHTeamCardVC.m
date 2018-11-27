@@ -16,6 +16,9 @@
 #import "YZHPrivacySettingCell.h"
 #import "YZHTeamCardSwitchCell.h"
 #import "YZHProgressHUD.h"
+#import "NIMContactDefines.h"
+#import "NIMContactSelectConfig.h"
+#import "YZHTeamMemberVC.h"
 
 static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 @interface YZHTeamCardVC ()<UITableViewDataSource, UITableViewDelegate, YZHSwitchProtocol>
@@ -162,7 +165,20 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YZHTeamDetailModel* model = self.viewModel.modelList[indexPath.section][indexPath.row];
     
-    [YZHRouter openURL:model.router info:model.routetInfo];
+    if ([model.title isEqualToString:@"群成员"]) {
+        NIMContactTeamMemberSelectConfig *config = [[NIMContactTeamMemberSelectConfig alloc] init];
+        config.enableRobot = NO;
+        config.needMutiSelected = NO;
+        config.teamId = self.teamId;
+        config.filterIds = @[[NIMSDK sharedSDK].loginManager.currentAccount];
+        NSString* teamManage = [[[NIMSDK sharedSDK] teamManager] teamById:config.teamId].owner;
+        bool isManage = [config.filterIds.firstObject isEqual:teamManage];
+        
+        YZHTeamMemberVC* teamMemberVC = [[YZHTeamMemberVC alloc] initWithConfig:config withIsManage:isManage];
+        [self.navigationController pushViewController:teamMemberVC animated:YES];
+    } else {
+       [YZHRouter openURL:model.router info:model.routetInfo];
+    }
 }
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {

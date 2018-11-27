@@ -9,6 +9,7 @@
 #import "YZHCreateTeamResultVC.h"
 
 #import "UIViewController+YZHTool.h"
+#import "YZHCommunityChatVC.h"
 
 @interface YZHCreateTeamResultVC ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -63,8 +64,10 @@
         self.titleLabel.text = @"群已创建成功";
         self.addShareTeamButton.hidden = YES;
     } else {
-        self.titleLabel.text = @"群创建成功，是否要马上向其他互享群发出请求？";
-        [self.addShareTeamButton addTarget:self action:@selector(onTouchShare:) forControlEvents:UIControlEventTouchUpInside];
+//        self.titleLabel.text = @"群创建成功，是否要马上向其他互享群发出请求？";
+        self.titleLabel.text = @"群已创建成功";
+        self.addShareTeamButton.hidden = YES;
+//        [self.addShareTeamButton addTarget:self action:@selector(onTouchShare:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     [self.addFirendButton addTarget:self action:@selector(onTouchAddFirend:) forControlEvents:UIControlEventTouchUpInside];
@@ -94,9 +97,9 @@
     UITabBarController* topViewController = (UITabBarController *)[UIViewController yzh_rootViewController];
     [topViewController setSelectedIndex:0];
     UINavigationController* communityNav = topViewController.viewControllers.firstObject;
-    UIViewController* vc = [[UIViewController alloc] init];
-    [communityNav pushViewController:vc animated:YES];
-    
+    NIMSession* teamSession = [NIMSession session:self.teamID type:NIMSessionTypeTeam];
+    YZHCommunityChatVC* teamVC = [[YZHCommunityChatVC alloc] initWithSession:teamSession];
+    [communityNav pushViewController:teamVC animated:YES];
     
 }
 

@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isManage;
 
 - (instancetype)initWithTeamId:(NSString *)teamId;
-- (void)configuraData;
 
 @end
 
