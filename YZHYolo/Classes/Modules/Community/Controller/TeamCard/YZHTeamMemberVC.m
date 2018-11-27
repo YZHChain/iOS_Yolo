@@ -29,7 +29,7 @@
         _config = config;
         _isManage = isManage;
         _teamId = config.teamId;
-        _member = [[YZHTeamMemberModel alloc] init];
+        _viewModel = [[YZHTeamMemberModel alloc] init];
         [self makeData];
     }
     return self;
