@@ -419,6 +419,7 @@
 		55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */; };
 		55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */; };
 		55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */; };
+		55BD97AE21AEC10500E761F5 /* YZHMyIntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD97AD21AEC10500E761F5 /* YZHMyIntegralVC.m */; };
 		55BDA36D2189BF27006400B0 /* FSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36C2189BF27006400B0 /* FSTextView.m */; };
 		55BDA370218AA267006400B0 /* YZHImportBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36F218AA267006400B0 /* YZHImportBoxView.m */; };
 		55BDA374218AD9F1006400B0 /* YZHCreateTeamResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */; };
@@ -1274,6 +1275,8 @@
 		55BD866C215E22DB00D23ED1 /* YZHAddressBookFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookFootView.h; sourceTree = "<group>"; };
 		55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookFootView.m; sourceTree = "<group>"; };
 		55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddressBookFootView.xib; sourceTree = "<group>"; };
+		55BD97AC21AEC10500E761F5 /* YZHMyIntegralVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyIntegralVC.h; sourceTree = "<group>"; };
+		55BD97AD21AEC10500E761F5 /* YZHMyIntegralVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyIntegralVC.m; sourceTree = "<group>"; };
 		55BDA36B2189BF27006400B0 /* FSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextView.h; sourceTree = "<group>"; };
 		55BDA36C2189BF27006400B0 /* FSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextView.m; sourceTree = "<group>"; };
 		55BDA36E218AA267006400B0 /* YZHImportBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHImportBoxView.h; sourceTree = "<group>"; };
@@ -1664,6 +1667,9 @@
 		55128A0E21463E480099CC55 /* MyCenter */ = {
 			isa = PBXGroup;
 			children = (
+				55BD97A221AEC00000E761F5 /* Server */,
+				55BD97A121AEBFE900E761F5 /* Discount */,
+				55BD97A021AEBF8C00E761F5 /* MyIntegral */,
 				552CC87E215A691300135FDC /* Myimformation */,
 				552CC886215A691300135FDC /* PrivacySetting */,
 				552CC882215A691300135FDC /* AboutYolo */,
@@ -3583,6 +3589,101 @@
 			path = YZH;
 			sourceTree = "<group>";
 		};
+		55BD97A021AEBF8C00E761F5 /* MyIntegral */ = {
+			isa = PBXGroup;
+			children = (
+				55BD97A421AEC05B00E761F5 /* Controller */,
+				55BD97A521AEC05B00E761F5 /* Model */,
+				55BD97A321AEC05B00E761F5 /* View */,
+			);
+			path = MyIntegral;
+			sourceTree = "<group>";
+		};
+		55BD97A121AEBFE900E761F5 /* Discount */ = {
+			isa = PBXGroup;
+			children = (
+				55BD97A821AEC06600E761F5 /* Controller */,
+				55BD97A621AEC06500E761F5 /* Model */,
+				55BD97A721AEC06600E761F5 /* View */,
+			);
+			path = Discount;
+			sourceTree = "<group>";
+		};
+		55BD97A221AEC00000E761F5 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				55BD97AA21AEC06D00E761F5 /* Controller */,
+				55BD97A921AEC06D00E761F5 /* Model */,
+				55BD97AB21AEC06D00E761F5 /* View */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		55BD97A321AEC05B00E761F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55BD97A421AEC05B00E761F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				55BD97AC21AEC10500E761F5 /* YZHMyIntegralVC.h */,
+				55BD97AD21AEC10500E761F5 /* YZHMyIntegralVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55BD97A521AEC05B00E761F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55BD97A621AEC06500E761F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55BD97A721AEC06600E761F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55BD97A821AEC06600E761F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55BD97A921AEC06D00E761F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		55BD97AA21AEC06D00E761F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		55BD97AB21AEC06D00E761F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		55BDA36A2189BF27006400B0 /* Function */ = {
 			isa = PBXGroup;
 			children = (
@@ -4284,6 +4385,7 @@
 				55E7A364214CAF9F0063F7C4 /* UIViewController+YZHTool.m in Sources */,
 				5575787121980A8B00EB5BDD /* YZHTargetUserDataManage.m in Sources */,
 				552B78F921742CD000C1DD99 /* YZHSettingCenterModel.m in Sources */,
+				55BD97AE21AEC10500E761F5 /* YZHMyIntegralVC.m in Sources */,
 				557578762198544000EB5BDD /* YZHSetTagModel.m in Sources */,
 				5531457B21573BB600A13F96 /* YZHMyInformationMyQRCodeVC.m in Sources */,
 				55364200217EAEC3006F77A5 /* NIMTextContentConfig.m in Sources */,
