@@ -19,20 +19,20 @@
 #import "NIMContactDefines.h"
 #import "NIMContactSelectConfig.h"
 #import "YZHTeamMemberVC.h"
+#import "YZHAlertManage.h"
 
 static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
-@interface YZHTeamCardVC ()<UITableViewDataSource, UITableViewDelegate, YZHSwitchProtocol>
+@interface YZHTeamCardVC ()<UITableViewDataSource, UITableViewDelegate, YZHSwitchProtocol, NIMTeamManagerDelegate>
 
 @property (nonatomic, strong) YZHTeamCardModel* viewModel;
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHTeamCardHeaderView* headerView;
-@property (nonatomic, copy) YZHVoidBlock headerTeamDataUpdataHandle;
 @property (nonatomic, strong) UITableViewHeaderFooterView* footerView;
 @property (nonatomic, assign) NSTimeInterval timerInterval;
 @property (nonatomic, strong) NSDate* lastDate;
 @property (nonatomic, assign) BOOL hasLastClick;
 @property (nonatomic, assign) BOOL executeDelayUpdate;
-
+@property (nonatomic, copy)   YZHVoidBlock headerTeamDataUpdataHandle;
 
 @end
 
@@ -53,6 +53,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     //4.设置通知
     [self setupNotification];
     
+    [[[NIMSDK sharedSDK] teamManager] addDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +73,12 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     [self.view addSubview:self.tableView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(YZHScreen_Width);
+        make.width.mas_equalTo(YZHScreen_Height - 64);
+    }];
 }
 
 - (void)reloadView {
@@ -83,7 +91,14 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     [self.headerView refreshWithModel:self.viewModel.headerModel];
-    self.tableView.tableHeaderView = self.headerView;
+    self.headerView.height = self.headerView.height;
+//    self.tableView.tableHeaderView = self.headerView;
+    [self.tableView setTableHeaderView:self.headerView];
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.width.mas_equalTo(YZHScreen_Width);
+        make.height.mas_equalTo(self.headerView.height);
+    }];
     [self configurationFooterView];
     if (self.viewModel.isManage) {
         UIButton* headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -94,6 +109,21 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
         [headerButton addTarget:self action:@selector(onTouchHeaderView:) forControlEvents:UIControlEventTouchUpInside];
     }
     [self.tableView reloadData];
+}
+
+- (void)refresh {
+    
+    if (self.viewModel.updateSucceed) {
+        
+    } else {
+        self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.headerView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(self.headerView.height);
+            }];
+            [self.tableView reloadData];
+        });
+    }
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -112,7 +142,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     
     YZHTeamDetailModel* model = self.viewModel.modelList[indexPath.section][indexPath.row];
     
-    YZHTeamCardSwitchCell* cell = [tableView dequeueReusableCellWithIdentifier:model.cellClass];
+    YZHTeamCardSwitchCell* cell = [tableView dequeueReusableCellWithIdentifier:model.cellClass forIndexPath:indexPath];
     [cell refreshWithModel:model];
     if ([model.cellClass isEqualToString:@"YZHTeamCardSwitchCell"]) {
         cell.delegate = self;
@@ -176,8 +206,20 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
         
         YZHTeamMemberVC* teamMemberVC = [[YZHTeamMemberVC alloc] initWithConfig:config withIsManage:isManage];
         [self.navigationController pushViewController:teamMemberVC animated:YES];
+    } else if ([model.title isEqualToString:@"清空聊天记录"]) {
+        @weakify(self)
+        [YZHAlertManage showAlertTitle:@"确定要清空本群的聊天记录么?" message:@"此操作不可逆,请谨慎操作" actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            @strongify(self)
+            if (buttonIndex == 1) {
+                NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
+                option.removeTable = NO;
+                NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
+                [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
+                [YZHProgressHUD showText:@"聊天记录已清除" onView:nil];
+            }
+        }];
     } else {
-       [YZHRouter openURL:model.router info:model.routetInfo];
+        [YZHRouter openURL:model.router info:model.routetInfo];
     }
 }
 
@@ -206,6 +248,56 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     }
 }
 
+#pragma mark NIMTeamManagerDelegate
+
+/**
+ *  群组增加回调
+ *
+ *  @param team 添加的群组
+ */
+- (void)onTeamAdded:(NIMTeam *)team {
+    
+    if ([_teamId isEqualToString:team.teamId]) {
+        [self refresh];
+    }
+}
+
+/**
+ *  群组更新回调
+ *
+ *  @param team 更新的群组
+ */
+- (void)onTeamUpdated:(NIMTeam *)team {
+    
+    if ([_teamId isEqualToString:team.teamId]) {
+        [self refresh];
+    }
+}
+
+/**
+ *  群组移除回调
+ *
+ *  @param team 被移除的群组
+ */
+- (void)onTeamRemoved:(NIMTeam *)team {
+    
+    if ([_teamId isEqualToString:team.teamId]) {
+        [self refresh];
+    }
+}
+
+/**
+ *  群组成员变动回调,包括数量增减以及成员属性变动
+ *
+ *  @param team 变动的群组
+ */
+- (void)onTeamMemberChanged:(NIMTeam *)team {
+    
+    if ([_teamId isEqualToString:team.teamId]) {
+        [self refresh];
+    }
+}
+
 #pragma mark - 5.Event Response
 
 - (void)onTouchHeaderView:(UIButton *)sender {
@@ -218,7 +310,61 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)removeTeam:(UIButton* )sender {
     
-    
+    //解散并退出社群
+    @weakify(self)
+    [YZHAlertManage showAlertTitle:@"确定要解散并删除本群么？" message:@"(您将失去所有群成员)\n\n 此操作不可逆,请谨慎操作" actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            @strongify(self)
+            NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
+            option.removeTable = YES;
+            option.removeSession = YES;
+            NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
+            [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            [[[NIMSDK sharedSDK] teamManager] dismissTeam:self.teamId completion:^(NSError * _Nullable error) {
+                if (!error) {
+                    @strongify(self)
+                    [hud hideWithText:nil];
+                    //通知后台
+                    NSDictionary* dic = @{
+                                          @"groupId": self.teamId
+                                          };
+                    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_DELETEGROUP params:dic successCompletion:^(id obj) {
+                        
+                        
+                    } failureCompletion:^(NSError *error) {
+                        
+                    }];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [hud hideWithText:@"网络异常,请重试"];
+                }
+            }];
+        }
+    }];
+}
+
+- (void)exitTeam:(UIButton* )sender {
+    //删除并退出社群
+    @weakify(self)
+    [YZHAlertManage showAlertTitle:@"确定要退出群以及删除聊天记录么？" message:nil actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            @strongify(self)
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
+            option.removeTable = YES;
+            option.removeSession = YES;
+            NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
+            [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
+            [[[NIMSDK sharedSDK] teamManager] quitTeam:self.teamId completion:^(NSError * _Nullable error) {
+                if (!error) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    [hud hideWithText:@"网络异常,请重试"];
+                }
+            }];
+        }
+    }];
 }
 // 处理延迟更新逻辑
 - (void)executeDelayUpdateLogic {
@@ -246,13 +392,11 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 }
 
 - (void)updateTeamSwitchSetting {
+    
+    self.viewModel.updateSucceed = NO;
     //TODO: 需修改
-    NSDictionary* dic = self.viewModel.teamInfos;
-    [[[NIMSDK sharedSDK] teamManager] updateTeamInfos:dic teamId:self.teamId completion:^(NSError * _Nullable error) {
-                                                            
-                                                        }];
+    [self.viewModel updata];
 }
-
 
 #pragma mark - 6.Private Methods
 
@@ -289,7 +433,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     }
     return _headerView;
 }
-
+//TODO:
 - (YZHVoidBlock)headerTeamDataUpdataHandle {
     
     if (!_headerTeamDataUpdataHandle) {
@@ -318,7 +462,12 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [removeButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:20]];
     [removeButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundPinkRed] forState:UIControlStateNormal];
     [removeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [removeButton addTarget:self action:@selector(removeTeam:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.isTeamOwner) {
+        [removeButton addTarget:self action:@selector(removeTeam:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [removeButton addTarget:self action:@selector(exitTeam:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     
     [self.footerView addSubview:removeButton];
     

@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 
-
 @end
 
 @implementation YZHTeamCardTextCell
@@ -43,6 +42,7 @@
     self.titleLabel.text = model.title;
     self.subtitleLabel.text = model.subtitle;
     
+    self.guideImageView.hidden = model.notInteraction;
 }
 
 @end

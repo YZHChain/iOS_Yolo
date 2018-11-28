@@ -34,12 +34,10 @@
 }
 
 - (void)changeStatus:(UISwitch *)sender {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedUISwitch:indexPath:)]) {
-        [self.delegate selectedUISwitch:sender indexPath:_indexPath];
-    }
+    //TODO修改成使用 Switch
+    NSLog(@"选中当前ModelTitle:%@---状态:%ld",self.model.title, sender.isOn);
     if ([self.model.title isEqualToString:@"是否公开本群"]) {
-        self.model.subtitle = sender.isOn ? @"私密" : @"公开";
+        self.model.subtitle = sender.isOn ? @"公开" : @"私密";
     } else if ([self.model.title isEqualToString:@"允许群成员添加好友进群"]) {
         self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
     } else if ([self.model.title isEqualToString:@"是否可互享"]) {
@@ -58,6 +56,9 @@
         self.model.subtitle = sender.isOn ? @"上锁" : @"不上锁";
     }
     self.model.isOpenStatus = sender.isOn;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedUISwitch:indexPath:)]) {
+        [self.delegate selectedUISwitch:sender indexPath:_indexPath];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -74,11 +75,16 @@
     self.functionSwitch.on = model.isOpenStatus;
     
     if ([model.title isEqualToString:@"是否可互享"]) {
+        [self.titleTipLabel removeFromSuperview];
         [self.contentView addSubview:self.tipButton];
     } else if ([model.title isEqualToString:@"群上锁"]) {
         self.titleTipLabel.text = model.titleTip;
         [self.titleTipLabel sizeToFit];
         [self.contentView addSubview:self.titleTipLabel];
+        [self.tipButton removeFromSuperview];
+    } else {
+        [self.tipButton removeFromSuperview];
+        [self.titleTipLabel removeFromSuperview];
     }
 }
 

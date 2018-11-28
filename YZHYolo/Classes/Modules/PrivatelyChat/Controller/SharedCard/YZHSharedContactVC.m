@@ -319,7 +319,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     }
 }
 
-
 #pragma mark - 6.Private Methods
 
 - (void)setupNotification {

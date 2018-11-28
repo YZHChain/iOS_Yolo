@@ -8,7 +8,7 @@
 
 #import "YZHTeamInviteFirendVC.h"
 
-@interface YZHTeamInviteFirendVC ()<UITabBarDelegate, UITableViewDataSource>
+@interface YZHTeamInviteFirendVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

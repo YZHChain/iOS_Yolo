@@ -14,6 +14,11 @@
 #import "UIImageView+YZHImage.h"
 #import "NSString+YZHTool.h"
 #import "YZHProgressHUD.h"
+#import "YZHTeamInfoExtManage.h"
+#import "NIMKitDevice.h"
+#import "NIMKitFileLocationHelper.h"
+#import "NIMInputEmoticonDefine.h"
+#import "UIImage+NIMKit.h"
 
 @interface YZHTeamDataEditVC ()
 
@@ -29,11 +34,11 @@
 @property (weak, nonatomic) IBOutlet YZHImportBoxView *synopsisView;
 @property (nonatomic, copy) YZHExecuteBlock selectedLabelSaveHandle;
 @property (nonatomic, strong) NSMutableArray<NSString *>* selectedLabelArray;
+@property (nonatomic, copy) NSString* avatarUrl;
 
 @end
 
 @implementation YZHTeamDataEditVC
-
 
 #pragma mark - 1.View Controller Life Cycle
 
@@ -87,7 +92,7 @@
         @strongify(self)
         [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
             @strongify(self)
-            self.avatarImageView.image = image;
+            [self updatePhotoToIMDataWithImage:image];
         }];
     };
     
@@ -120,7 +125,7 @@
     } else {
         self.selectedLabelArray = [[NSMutableArray alloc] init];
     }
-    [self.teamTagShowView refreshLabelViewWithLabelArray:self.selectedLabelArray];
+    [self refresh];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -143,6 +148,7 @@
     NSDictionary* avatarImageDic;
     NSDictionary* synopsisDic;
     NSDictionary* teamExt;
+//    NSDictionary<NSNumber *,NSString *> *updateTeamInfos = [[NSMutableDictionary alloc] init];
     if (YZHIsString(self.teamNameTextFiled.text)){
         NSString* newTeamName = [self.teamNameTextFiled.text yzh_clearBeforeAndAfterblankString];
         //加入用户输入名字为空格,则只计算一位。。
@@ -151,14 +157,16 @@
         }
         if (![self.viewModel.teamName isEqualToString:newTeamName]) {
             teamNameDic = @{
-                         @(NIMTeamUpdateTagName): newTeamName
+                            @(NIMTeamUpdateTagName): newTeamName
                          };
         }
     }
     //群头像
-//    if (YZHIsString(self.avatarImageView.image)) {
-//        <#statements#>
-//    }
+    if (YZHIsString(self.avatarUrl)) {
+        avatarImageDic = @{
+                           @(NIMTeamUpdateTagAvatar): self.avatarUrl
+                           };
+    }
     if (YZHIsString(self.synopsisView.importTextView.text)) {
         NSString* newSynopsis = [self.synopsisView.importTextView.text yzh_clearBeforeAndAfterblankString];
         if (!YZHIsString(newSynopsis)) {
@@ -171,39 +179,46 @@
         }
     }
     if (![self.selectedLabelArray isEqualToArray:self.viewModel.labelArray] ) {
-        teamExt = @{
-                    @(NIMTeamUpdateTagClientCustom): self.selectedLabelArray
-                    };
+        YZHTeamInfoExtManage* teamInfoExt = [[YZHTeamInfoExtManage alloc] initTeamExtWithTeamId:self.viewModel.teamId];
+        teamInfoExt.labelArray = self.selectedLabelArray;
+        NSString* extString = [teamInfoExt mj_JSONString];
+        if (YZHIsString(extString)) {
+            teamExt = @{
+                        @(NIMTeamUpdateTagClientCustom): extString
+                        };
+        }
     }
     
-    NSDictionary* updateTeamInfos = [NSMutableDictionary mutableCopy];
+    NSMutableDictionary* updateTeamInfos = [[NSMutableDictionary alloc] init];
     if (YZHIsDictionary(teamNameDic)) {
-        [updateTeamInfos setValuesForKeysWithDictionary:teamNameDic];
+        [updateTeamInfos addEntriesFromDictionary:teamNameDic];
     }
     if (YZHIsDictionary(avatarImageDic)) {
-        [updateTeamInfos setValuesForKeysWithDictionary:avatarImageDic];
+        [updateTeamInfos addEntriesFromDictionary:avatarImageDic];
     }
     if (YZHIsDictionary(synopsisDic)) {
-        [updateTeamInfos setValuesForKeysWithDictionary:synopsisDic];
+        [updateTeamInfos addEntriesFromDictionary:synopsisDic];
     }
     if (YZHIsDictionary(teamExt)) {
-        [updateTeamInfos setValuesForKeysWithDictionary:teamExt];
+        [updateTeamInfos addEntriesFromDictionary:teamExt];
     }
-    
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-    @weakify(self)
-    [[[NIMSDK sharedSDK] teamManager] updateTeamInfos:updateTeamInfos teamId:self.viewModel.teamId completion:^(NSError * _Nullable error) {
-        @strongify(self)
-        if (!error) {
-            [hud hideWithText:@"修改群信息成功"];
-            self.teamDataSaveSucceedBlock ? self.teamDataSaveSucceedBlock() : NULL;
-            [self dismissViewControllerAnimated:YES completion:^{
-                //执行信息变更回调
-            }];
-        } else {
-            [hud hideWithText:@"修改群信息失败,请重试"];
-        }
-    }];
+    if (updateTeamInfos.allKeys.count) {
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        @weakify(self)
+        [[[NIMSDK sharedSDK] teamManager] updateTeamInfos:updateTeamInfos teamId:self.viewModel.teamId completion:^(NSError * _Nullable error) {
+            @strongify(self)
+            if (!error) {
+                [hud hideWithText:@"修改群信息成功"];
+                self.teamDataSaveSucceedBlock ? self.teamDataSaveSucceedBlock() : NULL;
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [hud hideWithText:@"修改群信息失败,请重试"];
+            }
+        }];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+ 
 }
 
 - (void)selectedTeamTag:(UIButton *)sender {
@@ -236,6 +251,36 @@
 
 #pragma mark - 6.Private Methods
 
+- (void)updatePhotoToIMDataWithImage:(UIImage* )image {
+    
+    UIImage *imageForAvatarUpload = [image nim_imageForAvatarUpload];
+    NSString *fileName = [NIMKitFileLocationHelper genFilenameWithExt:@"jpg"];
+    NSString *filePath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
+    NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
+    BOOL success = data && [data writeToFile:filePath atomically:YES];
+    @weakify(self)
+    if (success) {
+        [SVProgressHUD show];
+        [[NIMSDK sharedSDK].resourceManager upload:filePath progress:nil completion:^(NSString *urlString, NSError *error) {
+            [SVProgressHUD dismiss];
+            @strongify(self)
+            if (!error && self) {
+                self.avatarUrl = urlString;
+                self.avatarImageView.image = image;
+                [self.view makeToast:nil];
+            } else {
+                [self.view makeToast:@"图片上传失败，请重试"
+                            duration:2
+                            position:CSToastPositionCenter];
+            }
+        }];
+    } else {
+        [self.view makeToast:@"图片上传失败，请重试"
+                    duration:2
+                    position:CSToastPositionCenter];
+    }
+}
+    
 - (void)setupNotification {
     
 }

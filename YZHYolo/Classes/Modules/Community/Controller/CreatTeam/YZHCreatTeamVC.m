@@ -17,6 +17,7 @@
 #import "NIMKitDevice.h"
 #import "NIMKitFileLocationHelper.h"
 #import "YZHTeamInfoExtManage.h"
+#import "YZHTeamUpdataModel.h"
 
 @interface YZHCreatTeamVC ()<UITextViewDelegate, UIScrollViewDelegate>
 
@@ -116,40 +117,32 @@
 - (void)createTeam:(UIBarButtonItem* )item {
     // 如果是公开群则跳转至填写宣传页,否则直接创建群
     if (self.createTeamView.teamType == YZHTeamTypePublic) {
-        [YZHRouter openURL:kYZHRouterCommunityCreateTeamAddition];
+        
+//        @weakify(self)
+//        self.creatTeamHandle = ^(NSString *recruitText) {
+//            @strongify(self)
+//            if (YZHIsString(recruitText)) {
+//                [self creatTeamWithRecruitText:recruitText];
+//            } else {
+//                [self creatTeamWithRecruitText:nil];
+//            }
+//        };
+        @weakify(self)
+        void (^creatTeamHandle) (NSString *recruitText) = ^(NSString* recuitText){
+            @strongify(self)
+            if (YZHIsString(recuitText)) {
+                [self creatTeamWithRecruitText:recuitText];
+            } else {
+                [self creatTeamWithRecruitText:nil];
+            }
+        };
+        [YZHRouter openURL:kYZHRouterCommunityCreateTeamAddition info:@{
+                                                                        @"clickCreatTeamBlock":
+                                                                            creatTeamHandle
+                                                                        }];
     } else {
     // 采集创建群组相关资料 Model。
-        NIMCreateTeamOption* teamOption = [[NIMCreateTeamOption alloc] init];
-        if (YZHIsString(self.createTeamView.teamNameTextFiled.text)) {
-            teamOption.name = self.createTeamView.teamNameTextFiled.text;
-        } else {
-            teamOption.name = @"群聊";
-        }
-        if (YZHIsString(self.avatarUrl)) {
-            teamOption.avatarUrl = self.avatarUrl;
-        }
-        if (YZHIsString(self.createTeamView.teamSynopsisTextView.text)) {
-            teamOption.intro = self.createTeamView.teamSynopsisTextView.text;
-        }
-//        teamOption.clientCustomInfo =
-        teamOption.type = NIMTeamTypeAdvanced;
-        teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth;
-        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        NSArray* array = @[userId];
-        //创群成功则跳转至结果页
-        [[NIMSDK sharedSDK].teamManager createTeam:teamOption users:array completion:^(NSError * _Nullable error, NSString * _Nullable teamId, NSArray<NSString *> * _Nullable failedUserIds) {
-            // 存储相关资料,方便到成功页执行相应逻辑. 创建完群组之后需要将回话添加到列表中.
-            if (!error) {
-                [YZHRouter openURL:kYZHRouterCommunityCreateTeamResult info:@{
-                                                                              @"teamType": @(YZHTeamTypePrivacy),
-                                                                              @"teamID": teamId,
-                                                                              kYZHRouteBackIndex: kYZHRouteIndexRoot
-                                                                              }];
-                //通知后台
-                
-            }
-        }];
-        
+        [self creatTeamWithRecruitText:nil];
     }
 }
 
@@ -216,6 +209,81 @@
                     duration:2
                     position:CSToastPositionCenter];
     }
+}
+- (void)creatTeamWithRecruitText:(NSString *)recruitText;
+{
+    NIMCreateTeamOption* teamOption = [[NIMCreateTeamOption alloc] init];
+    if (self.createTeamView.teamType == YZHTeamTypePublic) {
+        teamOption.joinMode = NIMTeamJoinModeNoAuth;
+    } else if (self.createTeamView.teamType == YZHTeamTypePrivacy) {
+        teamOption.joinMode = NIMTeamJoinModeNeedAuth;
+    }
+    YZHTeamRecruit* teamRecruit = nil;
+    if (YZHIsString(recruitText)) {
+        teamRecruit = [[YZHTeamRecruit alloc] initWithContent:recruitText];
+    }
+    if (YZHIsString(self.createTeamView.teamNameTextFiled.text)) {
+        teamOption.name = self.createTeamView.teamNameTextFiled.text;
+    } else {
+        teamOption.name = @"群聊";
+    }
+    if (YZHIsString(self.avatarUrl)) {
+        teamOption.avatarUrl = self.avatarUrl;
+    }
+    if (YZHIsString(self.createTeamView.teamSynopsisTextView.text)) {
+        teamOption.intro = self.createTeamView.teamSynopsisTextView.text;
+    }
+    YZHTeamInfoExtManage* teamInfo = [[YZHTeamInfoExtManage alloc] initCreatTeamWithTeamLabel:self.selectedLabelArray.count ? self.selectedLabelArray : nil recruit:teamRecruit];
+    NSString* teamInfoString = [teamInfo mj_JSONString];
+    teamOption.clientCustomInfo = teamInfoString;
+    teamOption.type = NIMTeamTypeAdvanced; 
+//    teamOption.joinMode = NIMTeamJoinModeNoAuth; // 默认是公开群.
+    teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth; // 默认不需要验证
+    teamOption.inviteMode = NIMTeamInviteModeAll; // 默认是允许成员添加好友进群.
+//    /**
+//     *  群验证模式
+//     *  @discussion 只有高级群有效，默认为 NIMTeamJoinModeNoAuth
+//     */
+//    @property (nonatomic,assign)    NIMTeamJoinMode joinMode;
+//
+//    /**
+//     *  群邀请权限
+//     *  @discussion 只有高级群有效，默认为 NIMTeamInviteModeManager
+//     */
+//    @property (nonatomic,assign)    NIMTeamInviteMode inviteMode;
+//
+//
+//    /**
+//     *  被邀请模式
+//     *  @discussion 只有高级群有效，默认为 NIMTeamBeInviteModeNeedAuth
+//     */
+//    @property (nonatomic,assign)    NIMTeamBeInviteMode beInviteMode;
+    NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    NSArray* array = @[userId];
+    //创群成功则跳转至结果页
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    [[NIMSDK sharedSDK].teamManager createTeam:teamOption users:array completion:^(NSError * _Nullable error, NSString * _Nullable teamId, NSArray<NSString *> * _Nullable failedUserIds) {
+        // 存储相关资料,方便到成功页执行相应逻辑. 创建完群组之后需要将回话添加到列表中.
+        if (!error) {
+            [hud hideWithText:nil];
+            [YZHRouter openURL:kYZHRouterCommunityCreateTeamResult info:@{
+                                                                          @"teamType": @(self.createTeamView.teamType),
+                                                                          @"teamID": teamId,
+                                                                          kYZHRouteBackIndex: kYZHRouteIndexRoot
+                                                                          }];
+            YZHTeamUpdataModel* model = [[YZHTeamUpdataModel alloc] initWithTeamId:teamId isCreatTeam:YES];
+            //通知后台
+            [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_ADDUPDATEGROUP params:model.params successCompletion:^(id obj) {
+                
+                NSLog(@"成功");
+            } failureCompletion:^(NSError *error) {
+                NSLog(@"失败");
+            }];
+        } else {
+            [hud hideWithText:@"网络异常,请重试"];
+        }
+    }];
+
 }
     
 #pragma mark - 7.GET & SET

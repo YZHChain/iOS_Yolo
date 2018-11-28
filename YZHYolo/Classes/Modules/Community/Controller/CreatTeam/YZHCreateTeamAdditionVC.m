@@ -10,6 +10,7 @@
 #import "UIView+NIM.h"
 #import "YZHImportBoxView.h"
 #import "YZHCreatTeamMailDataView.h"
+#import "YZHAlertManage.h"
 
 @interface YZHCreateTeamAdditionVC ()<UIScrollViewDelegate>
 
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) UILabel* recruitTitleLabel;
 @property (nonatomic, strong) UIButton* recruitGuideButton;
 @property (nonatomic, strong) UIButton* recruitSelectedButton;
-@property (nonatomic, strong) UIView* recruitImportView;
+@property (nonatomic, strong) YZHImportBoxView* recruitImportView;
 @property (nonatomic, assign) YZHCreateTeamType teamType;
 @property (nonatomic, strong) UIView* sharedView;
 @property (nonatomic, strong) UILabel* sharedTitleLabel;
@@ -83,11 +84,16 @@
 }
 
 - (void)completeCreate:(UIBarButtonItem *)sender {
-    
-    [YZHRouter openURL:kYZHRouterCommunityCreateTeamResult info:@{
-                                                                  @"teamType": @(YZHTeamTypeShare),
-                                                         kYZHRouteBackIndex: kYZHRouteIndexRoot
-                                                                  }];
+
+    if (self.recruitSelectedButton.selected) {
+        if (YZHIsString(self.recruitImportView.importTextView.text)) {
+            self.clickCreatTeamBlock ? self.clickCreatTeamBlock(self.recruitImportView.importTextView.text) : UUID_NULL;
+        } else {
+            [YZHAlertManage showAlertMessage:@"请填写广播招募信息"];
+        }
+    } else {
+        self.clickCreatTeamBlock ? self.clickCreatTeamBlock(nil) : UUID_NULL;
+    }
 }
 
 - (void)setupView {

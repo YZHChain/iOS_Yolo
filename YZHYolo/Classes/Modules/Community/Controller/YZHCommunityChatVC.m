@@ -103,7 +103,7 @@
 
 - (void)setupNav
 {
-    self.navigationItem.title = @"社群";
+    self.navigationItem.title = [super sessionTitle];
     
     UIButton *rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightItemButton addTarget:self action:@selector(gotoUserDetails:) forControlEvents:UIControlEventTouchUpInside];

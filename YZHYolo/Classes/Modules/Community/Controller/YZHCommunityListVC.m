@@ -348,7 +348,37 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)onTeamMemberChanged:(NIMTeam *)team {
     
+    [self refresh];
+}
+
+/**
+ *  群组增加回调
+ *
+ *  @param team 添加的群组
+ */
+- (void)onTeamAdded:(NIMTeam *)team {
+ 
+    [self refresh];
+}
+
+/**
+ *  群组更新回调
+ *
+ *  @param team 更新的群组
+ */
+- (void)onTeamUpdated:(NIMTeam *)team {
     
+    [self refresh];
+}
+
+/**
+ *  群组移除回调
+ *
+ *  @param team 被移除的群组
+ */
+- (void)onTeamRemoved:(NIMTeam *)team {
+    
+    [self refresh];
 }
 
 #pragma mark - GET & SET

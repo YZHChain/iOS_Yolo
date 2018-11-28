@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 @property (weak, nonatomic) IBOutlet YZHLabelShowView *labelShowView;
 @property (weak, nonatomic) IBOutlet UIButton *headerButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelViewLayoutConstraint;
 
 @end
 
@@ -27,7 +28,12 @@
     
     [super awakeFromNib];
     self.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
-    
+    [self.avatarImageView yzh_cornerRadiusAdvance:5 rectCornerType:UIRectCornerAllCorners];
+    self.nameLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
+    self.nameLabel.textColor = [UIColor yzh_fontShallowBlack];
+    self.synopisisLabel.font = [UIFont systemFontOfSize:11];
+    self.synopisisLabel.textColor = [UIColor yzh_sessionCellGray];
+    self.synopisisLabel.numberOfLines = 2;
 }
 
 - (void)refreshWithModel:(YZHTeamHeaderModel *)model {
@@ -43,7 +49,10 @@
     if (!model.canEdit) {
         [self.guideImageView removeFromSuperview];
     }
-    [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    
+    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    
+    self.height = 115 + labelAddHeight;
 }
 
 @end

@@ -105,9 +105,15 @@
 
 - (void)onTouchAddFirend:(UIButton *)sender {
     
-    
+    //邀请好友进群
+    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                          @"sharedType": @(3),
+                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+                                                          kYZHRouteSegueNewNavigation: @(YES),
+                                                          @"teamId": self.teamID.length ? self.teamID : NULL
+                                                          }];
 }
-
+//互享
 - (void)onTouchShare:(UIButton *)sender {
     
     

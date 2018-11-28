@@ -359,7 +359,6 @@
     }
 }
 
-
 #pragma mark - Notification
 - (void)onUserInfoHasUpdatedNotification:(NSNotification *)notification{
     [self refresh];

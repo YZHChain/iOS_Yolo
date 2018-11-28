@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHCreateTeamAdditionVC : YZHBaseViewController
 
+@property (nonatomic, copy) void (^clickCreatTeamBlock)(NSString* _Nullable recruitText);
+
 @end
 
 NS_ASSUME_NONNULL_END
