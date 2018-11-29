@@ -13,6 +13,7 @@
 #import "YZHPhotoManage.h"
 #import "UIImage+YZHTool.h"
 #import "YZHScanQRCodeMaskView.h"
+#import "YZHAlertManage.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -123,7 +124,7 @@
             NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
             NSDictionary* dic = [scannedResult mj_JSONObject];
             if (YZHIsDictionary(dic)) {
-                //0为用户 1 为群聊
+                //0为用户 1 为群聊 TODO:封装
                 if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:0]]) {
                     if (!self.isSkip) {
                         self.isSkip = YES;
@@ -131,8 +132,13 @@
                                                                                @"userId": dic[@"accid"]
                                                                                }];
                     }
-                } else {
+                } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:1]]) {
                     
+                    
+                } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:2]]) {
+                    
+                } else {
+                    [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
                 }
             }
 

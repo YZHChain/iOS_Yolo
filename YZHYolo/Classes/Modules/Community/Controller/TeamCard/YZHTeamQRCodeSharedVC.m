@@ -12,6 +12,7 @@
 #import "YZHPublic.h"
 #import "ZXingObjC.h"
 #import "YZHTeamExtManage.h"
+#import "YZHAlertManage.h"
 
 @interface YZHTeamQRCodeSharedVC()
 
@@ -100,10 +101,10 @@
     }
     
     self.sharedFunctionView.firendSharedBlock = ^(UIButton *sender) {
-        
+        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
     };
     self.sharedFunctionView.teamSharedBlock = ^(UIButton *sender) {
-
+        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
     };
 }
 
