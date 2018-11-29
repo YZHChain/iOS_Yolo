@@ -18,6 +18,7 @@
 #import "YZHUserModelManage.h"
 #import "YZHProgressHUD.h"
 #import "UIButton+YZHTool.h"
+#import "YZHTeamExtManage.h"
 
 @interface YZHAddBookDetailsVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate>
 
@@ -125,33 +126,81 @@
 
 - (void)setupData
 {
-    if (!self.isMySelf) {
-        //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
-        self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
-        _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
-        if (_isMyFriend) {
+    _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+    //从群聊进来, 并且非好友关系。
+    if (self.isTeam && !self.isMyFriend) {
+        [self fetchUserData];
+    } else { //非群聊进入
+        if (!self.isMySelf && !self.isMyFriend) {
+            //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
+            [self fetchUserData];
         } else {
-            //拉取最新
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-            @weakify(self)
-            [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-                @strongify(self)
-                if (!error) {
-                    [self refresh];
-                }
-                [hud hideWithText:nil];
-            }];
+            [self refresh];
         }
-    } else {
-        _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
     }
+}
+// 拉取用户最新数据, 并且刷新
+- (void)fetchUserData {
+    //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
+    _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+    //拉取最新
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
+    [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+        @strongify(self)
+        if (!error) {
+            [self refresh];
+        }
+        [hud hideWithText:nil];
+    }];
 }
 
 - (void)refresh {
     
+    if (self.isTeam && !self.isMyFriend) { // 刷新从群聊页面进入的个人详情
+        [self teamMemberDeailsRefresh];
+    } else { //刷新从非群聊页面进入的个人详情
+        [self userDeailsRefresh];
+    }
+}
+
+- (void)teamMemberDeailsRefresh {
+    
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage targetTeamExtWithTeamId:_teamId targetId:_userId];
+    if (teamExt.team_add_friend) {
+        UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
+        addFriendButton.x = self.userAskFooterView.sendMessageButton.x;
+        addFriendButton.y = self.userAskFooterView.sendMessageButton.bottom + 10;
+        addFriendButton.layer.cornerRadius = 5;
+        addFriendButton.layer.masksToBounds = YES;
+        [addFriendButton addTarget:self action:@selector(addFriendRequst:) forControlEvents:UIControlEventTouchUpInside];
+        [addFriendButton setTitle:@"加好友" forState:UIControlStateNormal];
+        [addFriendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:18]];
+        [addFriendButton setTintColor:[UIColor yzh_fontShallowBlack]];
+        [addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
+        self.addFriendButton = addFriendButton;
+        
+        [self.userAskFooterView addSubview:addFriendButton];
+        self.tableView.tableFooterView = self.userAskFooterView;
+    } else {
+        [self.addFriendButton removeFromSuperview];
+    }
+    if (teamExt.team_p2p_chat) {
+        
+        self.userAskFooterView.sendMessageButton.hidden = NO;
+        //区别临时聊天功能.
+        
+    } else {
+        self.userAskFooterView.sendMessageButton.hidden = YES;
+    }
+}
+
+- (void)userDeailsRefresh {
+    
     if (!self.isMySelf) {
         [self setupNavBar];
-        
         self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
         // 判断是否为好友,
         self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
@@ -276,6 +325,7 @@
 
 - (void)senderMessage:(UIButton *)sender {
     
+    //TODO: 需要区分,是否是群进来的, 如果是群进来, 并且处于非好友状态则需要给这个回话添加一个标记, 表示其是临时会话.
     NIMSession *session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
     YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:session];
     [self.navigationController pushViewController:privateChatVC animated:YES];
@@ -361,6 +411,11 @@
     } else {
         return NO;
     }
+}
+
+- (BOOL)isMyFriend {
+    
+    return [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
 }
 
 @end

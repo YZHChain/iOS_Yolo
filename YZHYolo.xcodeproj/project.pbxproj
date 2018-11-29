@@ -424,6 +424,7 @@
 		55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD8669215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib */; };
 		55BD866E215E22DB00D23ED1 /* YZHAddressBookFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */; };
 		55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */; };
+		55BD97B121AF783E00E761F5 /* YZHTeamMemberDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BD97B021AF783E00E761F5 /* YZHTeamMemberDetailsVC.m */; };
 		55BDA36D2189BF27006400B0 /* FSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36C2189BF27006400B0 /* FSTextView.m */; };
 		55BDA370218AA267006400B0 /* YZHImportBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA36F218AA267006400B0 /* YZHImportBoxView.m */; };
 		55BDA374218AD9F1006400B0 /* YZHCreateTeamResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BDA372218AD9F1006400B0 /* YZHCreateTeamResultVC.m */; };
@@ -1288,6 +1289,8 @@
 		55BD866C215E22DB00D23ED1 /* YZHAddressBookFootView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddressBookFootView.h; sourceTree = "<group>"; };
 		55BD866D215E22DB00D23ED1 /* YZHAddressBookFootView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookFootView.m; sourceTree = "<group>"; };
 		55BD866F215E22E300D23ED1 /* YZHAddressBookFootView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddressBookFootView.xib; sourceTree = "<group>"; };
+		55BD97AF21AF783E00E761F5 /* YZHTeamMemberDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamMemberDetailsVC.h; sourceTree = "<group>"; };
+		55BD97B021AF783E00E761F5 /* YZHTeamMemberDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamMemberDetailsVC.m; sourceTree = "<group>"; };
 		55BDA36B2189BF27006400B0 /* FSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTextView.h; sourceTree = "<group>"; };
 		55BDA36C2189BF27006400B0 /* FSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTextView.m; sourceTree = "<group>"; };
 		55BDA36E218AA267006400B0 /* YZHImportBoxView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHImportBoxView.h; sourceTree = "<group>"; };
@@ -3185,6 +3188,8 @@
 				558C54D721ACD4C000CC10D1 /* YZHTeamMemberVC.m */,
 				558C54E421AD1F5700CC10D1 /* YZHTeamMemberManageVC.h */,
 				558C54E521AD1F5700CC10D1 /* YZHTeamMemberManageVC.m */,
+				55BD97AF21AF783E00E761F5 /* YZHTeamMemberDetailsVC.h */,
+				55BD97B021AF783E00E761F5 /* YZHTeamMemberDetailsVC.m */,
 				5581915721A1C89800C74E2E /* YZHTeamSharedVC.h */,
 				5581915821A1C89800C74E2E /* YZHTeamSharedVC.m */,
 				5581915A21A1C8C400C74E2E /* YZHTeamSharedCheckVC.h */,
@@ -4318,6 +4323,7 @@
 				5520584B2199894000591A4A /* YZHAddFirendSearchRemindCell.m in Sources */,
 				55364216217EAEC3006F77A5 /* NIMSessionImageContentView.m in Sources */,
 				55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */,
+				55BD97B121AF783E00E761F5 /* YZHTeamMemberDetailsVC.m in Sources */,
 				55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */,
 				55364222217EAEC3006F77A5 /* UITableView+NIMScrollToBottom.m in Sources */,
 				556D7E6021A3F68D00533384 /* YZHTeamDataEditVC.m in Sources */,

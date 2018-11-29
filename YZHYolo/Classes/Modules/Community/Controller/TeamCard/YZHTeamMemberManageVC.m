@@ -169,6 +169,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
+    //跳转用户资料.
+    NSDictionary* info = @{
+                           @"userId": member.info.infoId,
+                           @"isTeam": @(YES),
+                           @"teamId": self.viewModel.teamId,
+                           };
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
     
 }
 // 禁言和移出群按钮回调;

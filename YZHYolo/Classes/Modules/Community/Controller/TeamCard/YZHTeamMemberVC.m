@@ -145,8 +145,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
     //跳转至群成员, 非好友时需要有临时会话功能
+    //跳转用户资料.
+    NSDictionary* info = @{
+                           @"userId": member.info.infoId,
+                           @"isTeam": @(YES),
+                           @"teamId": _teamId,
+                           };
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
 }
 
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
