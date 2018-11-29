@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YZHBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHMyIntegralVC : UIViewController
-
+@interface YZHMyIntegralVC : YZHBaseViewController
+@property (nonatomic,strong) NSString* url;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -78,7 +78,12 @@
         
         layer.frame = statusBar.frame;
         //        [statusBar.layer addSublayer:layer];
-        [statusBar.layer insertSublayer:layer atIndex:0];
+//        [statusBar.layer insertSublayer:layer atIndex:0];
+        CGRect rect = statusBar.frame;
+        UIView* view = [[UIView alloc] initWithFrame:rect];
+        [view.layer addSublayer:layer];
+        [self.view addSubview:view];
+//        [self.view.layer insertSublayer:layer atIndex:0];
     }
 }
 
