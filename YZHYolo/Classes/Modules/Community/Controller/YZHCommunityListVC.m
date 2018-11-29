@@ -63,7 +63,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self setupNotification];
     
     [[NIMSDK sharedSDK].teamManager addDelegate:self];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,7 +112,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)clickRightBarShowExtensionFunction:(UIButton *)sender{
     
     [self.extensionView showExtensionFunctionView];
-    
 }
 
 - (void)setupView
@@ -206,7 +204,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
-    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWithSession:recent.session];
+    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
     [self.navigationController pushViewController:teamchatVC animated:YES];
 }
 
@@ -254,7 +252,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     } else {
         return 3;
     }
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

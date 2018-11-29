@@ -76,6 +76,11 @@
     }
 }
 
+- (void)resetUnreadNumber:(NSInteger )number Messages:(void(^)(NSError *error)) handler {
+    self.items              = [NSMutableArray array];
+    self.msgIdDict         = [NSMutableDictionary dictionary];
+}
+
 
 /**
  *  从头插入消息
@@ -199,6 +204,47 @@
         NSArray *messages = [[[NIMSDK sharedSDK] conversationManager] messagesInSession:_currentSession
                                                                                 message:currentOldestMsg.message
                                                                                   limit:self.messageLimit];
+        index = [self insertMessages:messages];
+        if (handler) {
+            NIMKit_Dispatch_Async_Main(^{
+                handler(index,messages,nil);
+            });
+        }
+    }
+}
+//新增
+- (void)loadHistoryMessagesNumber:(NSInteger)number WithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler
+{
+    __block NIMMessageModel *currentOldestMsg = nil;
+    [self.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[NIMMessageModel class]]) {
+            currentOldestMsg = (NIMMessageModel*)obj;
+            *stop = YES;
+        }
+    }];
+    NSInteger index = 0;
+    if ([self.dataProvider respondsToSelector:@selector(pullDown:handler:)])
+    {
+        __weak typeof(self) wself = self;
+        [self.dataProvider pullDown:currentOldestMsg.message handler:^(NSError *error, NSArray *messages) {
+            NIMKit_Dispatch_Async_Main(^{
+                NSInteger index = [wself insertMessages:messages];
+                if (handler) {
+                    handler(index,messages,error);
+                }
+            });
+        }];
+        return;
+    }
+    else
+    {
+        //TODO: 暂时注释掉
+//        NSArray *messages = [[[NIMSDK sharedSDK] conversationManager] messagesInSession:_currentSession
+//                                                                                message:currentOldestMsg.message
+//                                                                                  limit:(number - _messageLimit)];
+                NSArray *messages = [[[NIMSDK sharedSDK] conversationManager] messagesInSession:_currentSession
+                                                                                        message:currentOldestMsg.message
+                                                                                          limit:number];
         index = [self insertMessages:messages];
         if (handler) {
             NIMKit_Dispatch_Async_Main(^{

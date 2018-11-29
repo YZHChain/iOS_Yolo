@@ -244,6 +244,25 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
         }
     }];
 }
+//新增
+- (void)loadMessagesWithNumber:(NSInteger)number handler:(void (^)(NSArray *messages, NSError *error))handler {
+    __weak typeof(self) wself = self;
+    [self.dataSource loadHistoryMessagesNumber:number WithComplete:^(NSInteger index, NSArray *messages, NSError *error) {
+        if (messages.count) {
+            [wself.layout layoutAfterRefresh];
+            NSInteger firstRow = [self findMessageIndex:messages[0]] - 1;
+            [wself.layout adjustOffset:firstRow];
+            
+            if (![self.sessionConfig respondsToSelector:@selector(autoFetchAttachment)]
+                || self.sessionConfig.autoFetchAttachment) {
+                [wself.dataSource checkAttachmentState:messages];
+            }
+        }
+        if (handler) {
+            handler(messages,error);
+        }
+    }];
+}
 
 - (void)pullUp {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didPullUpMessageData)]) {
@@ -462,6 +481,24 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
 {
     __weak typeof(self) wself = self;
     [self loadMessages:^(NSArray *messages, NSError *error) {
+        [wself.layout layoutAfterRefresh];
+        if (messages.count) {
+            NSInteger row = [self findMessageIndex:messages[0]] - 1;
+            [wself.layout adjustOffset:row];
+        }
+        if (messages.count)
+        {
+            [wself checkReceipts:nil];
+            [wself markRead];
+        }
+    }];
+}
+
+//新增 Jersey
+- (void)resetLayoutNumber:(NSInteger)number {
+    
+    __weak typeof(self) wself = self;
+    [self loadMessagesWithNumber:number handler:^(NSArray *messages, NSError *error) {
         [wself.layout layoutAfterRefresh];
         if (messages.count) {
             NSInteger row = [self findMessageIndex:messages[0]] - 1;

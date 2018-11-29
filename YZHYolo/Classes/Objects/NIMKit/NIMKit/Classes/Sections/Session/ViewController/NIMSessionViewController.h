@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong)  NIMSession *session;
 
+@property (nonatomic, strong) NIMRecentSession* recentSession;
+
 /**
  *  当前当初的菜单所关联的消息
  *
@@ -52,6 +54,7 @@
  */
 - (instancetype)initWithSession:(NIMSession *)session;
 
+- (instancetype)initWitRecentSession:(NIMRecentSession *)recentSession;
 
 #pragma mark - 界面
 /**
@@ -165,5 +168,14 @@
  *  @discussion 不会触发 DB 操作，请手动调用 SDK 里 updateMessage:forSession:completion: 接口
  */
 - (void)uiUpdateMessage:(NIMMessage *)message;
+
+/**
+ *  拉取未读消息数.
+ *
+ *  @param message 消息
+ *
+ *  @discussion 直接把未读消息数量传入即可.
+ */
+- (NSInteger)uiReadUnreadMessage:(NSInteger)number;
 
 @end

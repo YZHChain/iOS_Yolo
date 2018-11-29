@@ -44,6 +44,8 @@
 
 - (void)loadHistoryMessagesWithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler;
 
+- (void)loadHistoryMessagesNumber:(NSInteger)number WithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler;
+
 - (void)loadNewMessagesWithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler;
 
 - (void)checkAttachmentState:(NSArray *)messages;
@@ -60,6 +62,7 @@
 @protocol NIMSessionLayoutDelegate <NSObject>
 
 - (void)onRefresh;
+- (void)onRefreshNumber:(NSInteger)number;
 
 @end
 

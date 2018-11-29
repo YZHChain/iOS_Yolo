@@ -118,6 +118,10 @@
 - (void)loadHistoryMessagesWithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler{
     [self.dataSource loadHistoryMessagesWithComplete:handler];
 }
+//新增
+- (void)loadHistoryMessagesNumber:(NSInteger)number WithComplete:(void (^)(NSInteger, NSArray *, NSError *))handler {
+    [self.dataSource loadHistoryMessagesNumber:number WithComplete:handler];
+}
 
 - (void)loadNewMessagesWithComplete:(void (^)(NSInteger, NSArray *, NSError *))handler {
     [self.dataSource loadPullUpMessagesWithComplete:handler];

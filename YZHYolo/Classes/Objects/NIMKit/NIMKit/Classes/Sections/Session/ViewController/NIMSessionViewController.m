@@ -39,6 +39,16 @@
 
 @implementation NIMSessionViewController
 
+- (instancetype)initWitRecentSession:(NIMRecentSession *)recentSession {
+    
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _recentSession = recentSession;
+        _session = recentSession.session;
+    }
+    return self;
+}
+
 - (instancetype)initWithSession:(NIMSession *)session{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
@@ -275,6 +285,7 @@
     if ([message.session isEqual:_session])
     {
         [self.interactor updateMessage:message];
+        
     }
 }
 
@@ -707,6 +718,18 @@
 - (void)uiCheckReceipts:(NSArray<NIMMessageReceipt *> *)receipts
 {
     [self.interactor checkReceipts:receipts];
+}
+
+- (NSInteger)uiReadUnreadMessage:(NSInteger)number {
+    
+    // 20 为一页
+    NSInteger messageCount = (number / 20 + 1) * 20;
+    NSInteger count = number - 20;
+//    [self.interactor resetLayoutNumber:messageCount];
+    //滚动到指定条数.
+    [self.interactor resetLayoutNumber:count];
+    
+    return messageCount;
 }
 
 #pragma mark - NIMMeidaButton

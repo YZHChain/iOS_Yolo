@@ -51,6 +51,7 @@
 
 #import "YZHProgressHUD.h"
 #import "YZHPrivateChatVC.h"
+#import "YZHUnreadMessageView.h"
 
 @interface YZHCommunityChatVC ()<NIMInputActionDelegate>
 
@@ -60,6 +61,8 @@
 @property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
+@property (nonatomic, assign) NSInteger unreadNumber;
+@property (nonatomic, strong) YZHUnreadMessageView* unreadMessageView;
 
 @end
 
@@ -67,7 +70,17 @@
 
 #pragma mark - 1.View Controller Life Cycle
 
+- (instancetype)initWitRecentSession:(NIMRecentSession *)recentSession {
+    
+    self = [super initWitRecentSession:recentSession];
+    if (self) {
+        _unreadNumber = recentSession.unreadCount;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -88,6 +101,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    
     [super viewWillDisappear:animated];
 }
 
@@ -119,6 +133,28 @@
     
     //删除最近会话列表中有人@你的标记
     [NTESSessionUtil removeRecentSessionMark:self.session type:NTESRecentSessionMarkTypeAt];
+    
+    if (self.unreadNumber > 20) {
+        YZHUnreadMessageView* unreadView =  [[YZHUnreadMessageView alloc] initWithUnreadNumber:self.unreadNumber];
+        self.unreadMessageView = unreadView;
+        [self.unreadMessageView.readButton addTarget:self action:@selector(onTouchReadMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:unreadView];
+        [unreadView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-13);
+            make.top.mas_equalTo(40);
+            make.width.mas_equalTo(88);
+            make.height.mas_equalTo(25);
+        }];
+        [unreadView.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(0);
+            make.height.mas_equalTo(13);
+        }];
+
+        [unreadView.readButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(0);
+        }];
+
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -278,6 +314,23 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 #pragma mark - 5.Event Response
+
+- (void)onTouchReadMessage:(UIButton *)sender {
+    //滚动到指定消息条数.
+    if (self.unreadNumber <= 20) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:20 - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }  else {
+        NSInteger messageCount = [self uiReadUnreadMessage: self.unreadNumber];
+        NSLog(@"%ld 滚到到行数 %ld", messageCount, messageCount - self.unreadNumber);
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messageCount - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        // 上面的方法滚动不到指定行数, 暂时先这样处理。
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    // 移除
+    self.unreadNumber = 0;
+    [self.unreadMessageView removeFromSuperview];
+    self.unreadMessageView = nil;
+}
 
 - (void)gotoUserDetails:(UIBarButtonItem *)sender {
     

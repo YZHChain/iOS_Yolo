@@ -34,6 +34,7 @@
 #import "YZHUserModelManage.h"
 
 #import "YZHProgressHUD.h"
+#import "YZHUnreadMessageView.h"
 
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
@@ -54,14 +55,26 @@
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
 @property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
 @property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
+@property (nonatomic, assign) NSInteger unreadNumber;
+@property (nonatomic, strong) YZHUnreadMessageView* unreadMessageView;
 
 @end
 
 @implementation YZHPrivateChatVC
 
+- (instancetype)initWitRecentSession:(NIMRecentSession *)recentSession {
+    
+    self = [super initWitRecentSession:recentSession];
+    if (self) {
+        _unreadNumber = recentSession.unreadCount;
+    }
+    return self;
+}
+
 #pragma mark - 1.View Controller Life Cycle
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -128,6 +141,29 @@
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    if (self.unreadNumber > 20) {
+        
+        YZHUnreadMessageView* unreadView = [[YZHUnreadMessageView alloc] initWithUnreadNumber:self.unreadNumber];
+        self.unreadMessageView = unreadView;
+        [self.unreadMessageView.readButton addTarget:self action:@selector(onTouchReadMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:unreadView];
+        
+        [unreadView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-13);
+            make.top.mas_equalTo(40);
+            make.width.mas_equalTo(88);
+            make.height.mas_equalTo(25);
+        }];
+        
+        [unreadView.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(0);
+        }];
+        
+        [unreadView.readButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(0);
+        }];
+    }
 }
 // 设置输入框
 - (void)setupInputView
@@ -665,6 +701,23 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 #pragma mark - 5.Event Response
+
+- (void)onTouchReadMessage:(UIButton *)sender {
+    //滚动到指定消息条数.
+    if (self.unreadNumber <= 20) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:20 - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    }  else {
+        NSInteger messageCount = [self uiReadUnreadMessage: self.unreadNumber];
+        NSLog(@"%ld 滚到到行数 %ld", messageCount, messageCount - self.unreadNumber);
+        //        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messageCount - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        // 上面的方法滚动不到指定行数, 暂时先这样处理。
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    // 移除
+    self.unreadNumber = 0;
+    [self.unreadMessageView removeFromSuperview];
+    self.unreadMessageView = nil;
+}
 
 #pragma mark - 6.Private Methods
 

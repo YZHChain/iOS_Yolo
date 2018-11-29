@@ -31,6 +31,8 @@
 
 //数据对外接口
 - (void)loadHistoryMessagesWithComplete:(void(^)(NSInteger index , NSArray *messages ,NSError *error))handler;
+//数据对外接口 新增.可传入数量
+- (void)loadHistoryMessagesNumber:(NSInteger)number WithComplete:(void(^)(NSInteger index, NSArray *messages , NSError *error))handler;
 
 //数据load接口
 - (void)loadPullUpMessagesWithComplete:(void(^)(NSInteger index, NSArray *messages, NSError *error))handler;
