@@ -15,12 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* sendTime;
 @property (nonatomic, copy) NSString* announcement;
 @property (nonatomic, copy) NSString* endTime;
+@property (nonatomic, copy) NSString* groupId;
+@property (nonatomic, copy) NSString* createNoticeId;
+@property (nonatomic, copy) NSString* noticeId;
 
 @end
 
 @interface YZHTeamNoticeList : NSObject
 
 @property (nonatomic, strong) NSMutableArray<YZHTeamNoticeModel *>* noticeArray;
+@property (nonatomic, assign) NSInteger total;
+@property (nonatomic, assign) NSInteger totalPages;
 
 @end
 

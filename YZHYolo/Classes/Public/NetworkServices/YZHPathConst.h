@@ -9,7 +9,8 @@
 #ifndef YZHPathConst_h
 #define YZHPathConst_h
 
-#define PATH_YOLOIP  @"http://192.168.3.47"
+#define PATH_YOLOIP   @"http://192.168.3.47"
+#define PATH_YOLOPROT @"9091"
 
 #define PATH_USER_REGISTERED_SENDSMSCODE        @"http://192.168.3.47:8084/sms/sendSMSVerifyCode"   //短信验证码发送
 #define PATH_USER_REGISTERED_SMSVERIFYCODE      @"http://192.168.3.47:8084/sms/verifySMSVerifyCode" //短信验证码校验
@@ -31,6 +32,9 @@
 #define PATH_TEAM_SEARCH_MYRECRUITS             @"http://192.168.3.47:8082/ymRecruit/search_myRecruits"// 招募信息管理列表
 #define PATH_TEAM_SEARCH_RECRUITS               @"http://192.168.3.47:8082/ymRecruit/search_recruits"// 招募信息列表
 
+#define PATH_TEAM_NOTICE_ADD                    @"http://139.129.208.242:9091/groupNotice/add" //新增
+#define PATH_TEAM_NOTICE_DELETE                 @"http://139.129.208.242:9091/groupNotice/delete" //删除
+#define PATH_TEAM_NOTICE_LIST                    @"http://139.129.208.242:9091/groupNotice/list" //展示
 
 
 #endif /* YZHPathConst_h */

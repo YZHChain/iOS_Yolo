@@ -15,6 +15,7 @@
                 <outlet property="informAllSwitch" destination="3IQ-nc-U8Y" id="Xof-1C-miH"/>
                 <outlet property="noticeAllLabel" destination="hOK-UB-AH5" id="kak-LN-dHh"/>
                 <outlet property="noticeImportBoxView" destination="pxF-LL-5cJ" id="1qT-hP-pbb"/>
+                <outlet property="scrollView" destination="2m1-Em-fAC" id="0cn-OV-Nrr"/>
                 <outlet property="sendNoticeButton" destination="KAK-ui-pqW" id="fEd-0g-Lxc"/>
                 <outlet property="sendTeamsLabel" destination="kCd-uo-biq" id="EIe-xv-vFl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

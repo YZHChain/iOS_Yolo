@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamNoticeModel* model;
 - (void)refresh:(YZHTeamNoticeModel *)model;
 @property (nonatomic, weak) id<YZHTeamNoticeProtecol> delegete;
+//-(void)setLabelSpace:(UILabel*)label withValue:(NSString*)str withFont:(UIFont*)font;
+
 
 @end
 

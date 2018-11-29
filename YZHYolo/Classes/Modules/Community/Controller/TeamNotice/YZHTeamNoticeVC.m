@@ -45,6 +45,13 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //3.请求数据
+    [self setupData];
+}
+
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
@@ -73,8 +80,19 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
 
 - (void)setupData {
     
-    self.dataSource = [[YZHTeamNoticeList alloc] init];
-    [self.tableView reloadData];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    NSDictionary* params = @{
+                              @"group_id": _teamId ? _teamId : nil,
+                              @"pageSize": [NSNumber numberWithInteger:100],
+                              @"pn": [NSNumber numberWithInteger:0]
+                           };
+    [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_NOTICE_LIST params:params successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
+        [self.tableView reloadData];
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -143,8 +161,19 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
         @strongify(self)
         if (buttonIndex == 1) {
             //执行删除. TODO: 需后台提供接口.
-            [self.dataSource.noticeArray removeObject:modle];
-            [self.tableView reloadData];
+            NSDictionary* params = @{
+                                     @"noticeId": modle.noticeId.length ? modle.noticeId : @""
+                                     };
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_DELETEGROUP params:params successCompletion:^(id obj) {
+                @strongify(self)
+                [hud hideWithText:nil];
+                self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
+                [self.tableView reloadData];
+                //云信删除
+            } failureCompletion:^(NSError * error) {
+                [hud hideWithText:@"网络异常, 请重试"];
+            }];
         }
     }];
 }

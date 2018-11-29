@@ -100,6 +100,24 @@ static id instance;
         }];
     }];
 }
+// 规范与前面不同意的接口暂时先调这里.
+- (void)POSTGDLNetworkingResource:(NSString *)path params:(NSDictionary *)params successCompletion:(void (^)(id))successCompletion failureCompletion:(void (^)(NSError *))failureCompletion{
+    //添加公共参数，例如缓存时间、设备信息等
+    NSDictionary *finalParams = [self appendingGeneralParams:params path:path];
+    
+    [YZHNetworkConfig POSTNetworkingResource:path params:finalParams successCompletion:^(id responseObject) {
+        // 统一处理返回成功逻辑.
+//        [self processResponse:responseObject path:path success:successCompletion failure:failureCompletion];
+        successCompletion ? successCompletion(responseObject) : NULL;
+    } failureCompletion:^(NSError *error) {
+        // 统一处理返回失败逻辑.
+        failureCompletion ? failureCompletion(error) : NULL;
+//        [self processError:error failure:failureCompletion refreshToken:^{
+//            // 执行错误逻辑
+//
+//        }];
+    }];
+}
 
 #pragma mark -- ResponUniftManage
 
@@ -145,7 +163,7 @@ static id instance;
         NSString* detail = [finalResponse objectForKey:kYZHResponeMessageKey];
         //可能是空的
         id value = [finalResponse objectForKey:kYZHResponeDataKey];
-        if ([value isKindOfClass:[NSNull class]]) {
+        if ([value isKindOfClass:[NSNull class]] || [value isEqual:[NSNull null]]) {
             value = nil;
         } else {
             
@@ -173,8 +191,8 @@ static id instance;
                 ((NSObject*)successObj).yzh_apiEmptyValue = YES;
             }
         } else  { // 这里最好和后台协商, 根据 Code 码来弹出相应的框
-            // 非成功状态统一弹框处理.
-            failureError = [NSError errorWithDomain:detail code:[code integerValue] userInfo:nil];
+            // 非成功状态统一弹框处理. TODO:
+            failureError = [NSError errorWithDomain:detail ? detail : @"网络异常" code:[code integerValue] userInfo:nil];
         }
         
         if (failureError) {

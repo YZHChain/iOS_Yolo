@@ -52,6 +52,8 @@
 #import "YZHProgressHUD.h"
 #import "YZHPrivateChatVC.h"
 #import "YZHUnreadMessageView.h"
+#import "YZHTeamNoticeShowView.h"
+#import "YZHTeamNoticeModel.h"
 
 @interface YZHCommunityChatVC ()<NIMInputActionDelegate>
 
@@ -63,6 +65,7 @@
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
 @property (nonatomic, assign) NSInteger unreadNumber;
 @property (nonatomic, strong) YZHUnreadMessageView* unreadMessageView;
+@property (nonatomic, strong) YZHTeamNoticeShowView* noticeView;
 
 @end
 
@@ -134,6 +137,75 @@
     //删除最近会话列表中有人@你的标记
     [NTESSessionUtil removeRecentSessionMark:self.session type:NTESRecentSessionMarkTypeAt];
     
+    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.session.sessionId];
+    
+    if (YZHIsString(team.announcement)) {
+        self.noticeView = [[YZHTeamNoticeShowView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, 33)];
+        NSDictionary* noticeDic = [team.announcement mj_JSONObject];
+        NSString* announTitle = noticeDic[@"announcement"];
+        if ([announTitle hasPrefix:@"@All "]) {
+            announTitle = [announTitle componentsSeparatedByString:@" "].lastObject;
+        }
+        
+        self.noticeView.titleLabel.text = [NSString stringWithFormat:@"[群主]发布了新公告: %@",announTitle];
+        self.noticeView.contentLabel.text = announTitle;
+        
+        [self.noticeView.showButton addTarget:self action:@selector(onTouchTeamShowNoticeView:) forControlEvents:UIControlEventTouchUpInside];
+        [self.noticeView.shadowButton addTarget:self action:@selector(onTouchTeamCloseNoticeView:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:self.noticeView];
+        
+        [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.mas_equalTo(0);
+            make.height.mas_equalTo(33);
+            make.width.mas_equalTo(YZHScreen_Width);
+        }];
+        
+        [self.noticeView.shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.mas_equalTo(0);
+        }];
+        
+        [self.noticeView.shadowButton mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.mas_equalTo(0);
+        }];
+        
+        [self.noticeView.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.mas_equalTo(0);
+            make.height.mas_equalTo(33);
+        }];
+        
+        [self.noticeView.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(14);
+            make.right.mas_equalTo(-14);
+            make.centerY.mas_equalTo(0);
+            make.height.mas_equalTo(14);
+        }];
+        
+        [self.noticeView.showButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(0);
+        }];
+        
+        [self.noticeView.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.top.equalTo(self.noticeView.titleView.mas_bottom).mas_equalTo(0);
+            make.height.mas_equalTo(83);
+        }];
+        
+        [self.noticeView.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.mas_equalTo(0);
+            make.height.mas_equalTo(1);
+        }];
+        
+        [self.noticeView.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(19);
+            make.right.mas_equalTo(-19);
+            make.top.mas_equalTo(11);
+            make.bottom.mas_equalTo(-11);
+        }];
+        self.noticeView.contentView.hidden = YES;
+        self.noticeView.shadowView.hidden = YES;
+    }
+    
     if (self.unreadNumber > 20) {
         YZHUnreadMessageView* unreadView =  [[YZHUnreadMessageView alloc] initWithUnreadNumber:self.unreadNumber];
         self.unreadMessageView = unreadView;
@@ -153,7 +225,6 @@
         [unreadView.readButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.mas_equalTo(0);
         }];
-
     }
 }
 
@@ -344,6 +415,39 @@
                                                             @"isTeamOwner":@(isTeamOwner),
                                                             @"teamId":self.session.sessionId
                                                             }];
+}
+
+- (void)onTouchTeamShowNoticeView:(UIButton*)sender {
+
+    self.noticeView.shadowView.hidden = NO;
+    self.noticeView.contentView.hidden = NO;
+    [self.noticeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+    }];
+    [self.noticeView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_equalTo(0);
+//        make.left.right.top.mas_equalTo(0);
+    }];
+//    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.top.bottom.mas_equalTo(0);
+//    }];
+}
+
+- (void)onTouchTeamCloseNoticeView:(UIButton*)sender {
+    
+    self.noticeView.shadowView.hidden = YES;
+    self.noticeView.contentView.hidden = YES;
+    [self.noticeView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+    }];
+    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.height.mas_equalTo(33);
+    }];
+//    [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.top.mas_equalTo(0);
+//        
+//    }];
 }
 
 #pragma mark - Cell事件

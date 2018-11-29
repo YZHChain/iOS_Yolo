@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *sendTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *noticeTextLabel;
 
 @end
@@ -44,8 +43,13 @@
     
     _model = model;
     
-    self.sendTimeLabel.text = model.sendTime;
-    self.endTimeLabel.text = model.endTime;
+    self.sendTimeLabel.text = [NSString stringWithFormat:@"发布时间: %@", model.sendTime];
+    if (YZHIsString(model.endTime)) {
+       self.endTimeLabel.text = [NSString stringWithFormat:@"结束时间: %@", model.endTime];
+    } else {
+       self.endTimeLabel.text = nil;
+    }
+    
     [self setLabelSpace:self.noticeTextLabel withValue:model.announcement withFont:[UIFont systemFontOfSize:13]];
 }
 
