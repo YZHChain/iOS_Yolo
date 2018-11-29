@@ -129,11 +129,18 @@
                     if (!self.isSkip) {
                         self.isSkip = YES;
                         [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
-                                                                               @"userId": dic[@"accid"]
+                                                                               @"userId": dic[@"accid"] ? dic[@"accid"] : @""
                                                                                }];
                     }
                 } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:1]]) {
-                    
+                    if (!self.isSkip) {
+                        self.isSkip = YES;
+                        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                                               @"teamId": dic[@"accid"] ? dic[@"accid"] : @"",
+                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                               kYZHRouteSegueNewNavigation: @(YES)
+                                                                               }];
+                    }
                     
                 } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:2]]) {
                     
@@ -165,6 +172,7 @@
         @strongify(self)
         [self.manage stopScanVideo];
         [UIImage yzh_readQRCodeFromImage:image successfulBlock:^(CIFeature * _Nonnull feature) {
+            NSLog(@"扫描到资料%@", feature);
             
         }];
         self.scanImageView.image = image;

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="YZHTeamCardIntro">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群成员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txc-67-gfb">
+                        <rect key="frame" x="13" y="11.5" width="52" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azi-Q6-LAF">
+                        <rect key="frame" x="248" y="11.5" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Txc-67-gfb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="Gss-UN-3je"/>
+                    <constraint firstAttribute="trailing" secondItem="azi-Q6-LAF" secondAttribute="trailing" constant="37" id="cKW-yn-KYc"/>
+                    <constraint firstItem="Txc-67-gfb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qMn-88-WKa"/>
+                    <constraint firstItem="azi-Q6-LAF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="qca-S8-hw5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatarImageView" destination="fyo-y2-VTz" id="se2-qw-tLR"/>
+                <outlet property="nameLabel" destination="8ge-nx-dFc" id="IHW-2H-hjT"/>
+                <outlet property="subtitleLabel" destination="azi-Q6-LAF" id="Z6p-8i-wLV"/>
+                <outlet property="titleLabel" destination="Txc-67-gfb" id="czO-bW-vct"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="-68"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="OMO-BY-0at" customClass="YZHTeamCardIntro">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OMO-BY-0at" id="kbj-yL-3Zw">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群主" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcT-fj-9pX">
+                        <rect key="frame" x="13" y="11.5" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_photo_default" translatesAutoresizingMaskIntoConstraints="NO" id="fyo-y2-VTz">
+                        <rect key="frame" x="267" y="6.5" width="35" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="dI5-lP-f6n"/>
+                            <constraint firstAttribute="width" constant="35" id="oq5-wE-dyo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ge-nx-dFc">
+                        <rect key="frame" x="221" y="11.5" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fyo-y2-VTz" firstAttribute="centerY" secondItem="kbj-yL-3Zw" secondAttribute="centerY" id="bW1-qb-Dew"/>
+                    <constraint firstItem="gcT-fj-9pX" firstAttribute="leading" secondItem="kbj-yL-3Zw" secondAttribute="leading" constant="13" id="hFE-cO-fld"/>
+                    <constraint firstItem="fyo-y2-VTz" firstAttribute="leading" secondItem="8ge-nx-dFc" secondAttribute="trailing" constant="11" id="mGI-wg-swG"/>
+                    <constraint firstItem="gcT-fj-9pX" firstAttribute="centerY" secondItem="kbj-yL-3Zw" secondAttribute="centerY" id="nB8-D0-Vgi"/>
+                    <constraint firstItem="8ge-nx-dFc" firstAttribute="centerY" secondItem="kbj-yL-3Zw" secondAttribute="centerY" id="t2C-0t-MF7"/>
+                    <constraint firstAttribute="trailing" secondItem="fyo-y2-VTz" secondAttribute="trailing" constant="18" id="wUW-32-NBb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="gcT-fj-9pX" id="M6k-bv-c28"/>
+            </connections>
+            <point key="canvasLocation" x="137.59999999999999" y="31.484257871064472"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="addBook_cover_cell_photo_default" width="35" height="35"/>
+    </resources>
+</document>

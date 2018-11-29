@@ -76,6 +76,7 @@ NSString *const kYZHRouterCommunityCreateTeamAddition = @"/community/createTeam/
 NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/result";
 NSString *const kYZHRouterCommunityCreateTeamTagSelected = @"/community/createTeam/tagSelected";
 NSString *const kYZHRouterCommunityCard = @"/community/card";
+NSString *const kYZHRouterCommunityCardIntro = @"/community/cardIntro";
 NSString *const kYZHRouterCommunityCardHeaderEdit = @"/community/headerEdit";
 NSString *const kYZHRouterCommunityCardShared = @"/community/cardShared";
 NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedCheck";
@@ -287,6 +288,12 @@ NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
              kYZHRouterCommunityCard : @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamCardVC",
                      kYZHRouteViewControllerNameKey: @"群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterCommunityCardIntro : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamCardIntroVC",
+                     kYZHRouteViewControllerNameKey: @"非群成员群信息",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
