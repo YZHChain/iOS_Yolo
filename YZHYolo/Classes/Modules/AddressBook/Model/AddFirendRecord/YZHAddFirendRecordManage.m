@@ -8,7 +8,7 @@
 
 #import "YZHAddFirendRecordManage.h"
 
-#import "NIMSystemNotification.h"
+//#import "NIMSystemNotification.h"
 #import "NIMKitInfoFetchOption.h"
 
 @implementation YZHAddFriendRecordModel

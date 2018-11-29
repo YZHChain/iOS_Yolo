@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NIMSystemNotificationManagerProtocol.h"
+//#import "NIMSystemNotificationManagerProtocol.h"
 #import "YZHContactMemberModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
