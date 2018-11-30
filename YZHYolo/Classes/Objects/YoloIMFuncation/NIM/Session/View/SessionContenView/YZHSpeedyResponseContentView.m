@@ -103,12 +103,12 @@
         self.textLabel.textColor = setting.textColor;;
         self.textLabel.font      = setting.font;
         [self.textLabel nim_setText:attachment.titleText];
-        
-//        if (attachment.isSender) {
-//            [self.receiveButton removeFromSuperview];
-//            [self.responseButton removeFromSuperview];
-//            [self.handleButton removeFromSuperview];
-//        }
+        //如果是自己发送的则需要将其删除掉.不需要显示.
+        if (attachment.isSender) {
+            [self.receiveButton removeFromSuperview];
+            [self.responseButton removeFromSuperview];
+            [self.handleButton removeFromSuperview];
+        }
         self.receiveButton.selected = attachment.isReceive;
         self.responseButton.selected = attachment.isResponse;
         self.handleButton.selected = attachment.isHandle;

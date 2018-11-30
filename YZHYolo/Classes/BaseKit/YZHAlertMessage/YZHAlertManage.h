@@ -15,4 +15,7 @@
 //UIAlertController 提醒框
 + (void)showAlertTitle:(NSString *)title message:(NSString *)message actionButtons:(NSArray<NSString *> *)actionButtons actionHandler:(void (^)(UIAlertController *alertController, NSInteger buttonIndex))block;
 
+//UIAlertController 提醒框
++ (void)showTextAlertTitle:(NSString *)title message:(NSString *)message textFieldPlaceholder:(NSString *)textFieldPlaceholder actionButtons:(NSArray<NSString *> *)actionButtons actionHandler:(void (^)(UIAlertController *alertController, UITextField *textField,NSInteger buttonIndex))block;
+
 @end

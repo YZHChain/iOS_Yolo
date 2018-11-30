@@ -36,8 +36,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     //3.请求数据
     [self setupData];
     //4.设置通知
-    [self setupNotification];
-    
+    [self setupNotification];    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -170,12 +169,20 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
                 [hud hideWithText:nil];
                 self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
                 [self.tableView reloadData];
-                //云信删除
             } failureCompletion:^(NSError * error) {
                 [hud hideWithText:@"网络异常, 请重试"];
             }];
+            //同时删除掉云信
+            [[[NIMSDK sharedSDK] teamManager] updateTeamAnnouncement:@"" teamId:self.teamId completion:^(NSError * _Nullable error) {
+                if (!error) {
+//                    [hud hideWithText:@"删除成功"];
+                } else {
+//                    [hud hideWithText:@"网络异常, 请重试"];
+                }
+            }];
         }
     }];
+    
 }
 
 #pragma mark - 5.Event Response

@@ -474,16 +474,24 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             break;
     }
     [headerView.guideImageView sizeToFit];
+    //TODO: 有个异常Bug, 当进入此页面第一次点击的是分区 0 则闪退, 优先点击其他分区则不会触发.
     NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
-    [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
+    //暂时先这样处理, 避免崩溃:https://stackoverflow.com/questions/10134841/assertion-failure-in-uitableview-endcellanimationswithcontext
+    if (section == 0) {
+        [self.tagsTableView reloadData];
+    } else {
+        [self.tagsTableView beginUpdates];
+        [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
+        [self.tagsTableView endUpdates];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    if (![tableView isEqual:self.tableView]) {
-        return 40;
-    } else {
+    if ([tableView isEqual:self.tableView]) {
         return 0;
+    } else {
+        return 40;
     }
 }
 
@@ -495,11 +503,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (![tableView isEqual:self.recentSessionExtManage.tagsRecentSession]) {
-        return 10;
-    } else {
-        return 0;
-    }
+    return 0.1;
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

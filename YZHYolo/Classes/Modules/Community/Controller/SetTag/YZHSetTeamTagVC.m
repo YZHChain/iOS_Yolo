@@ -16,6 +16,7 @@
 #import "YZHSetTagModel.h"
 #import "YZHTeamExtManage.h"
 #import "YZHAlertManage.h"
+#import "YZHTeamExtManage.h"
 
 @interface YZHSetTeamTagVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -65,7 +66,7 @@
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
-    self.navigationItem.title = @"设置群标签";
+    self.navigationItem.title = @"设置群分类";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBarItem:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarItem:)];
@@ -148,12 +149,12 @@
     
     YZHAddBookSetTagSectionView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kYZHCommonCellIdentifier];
     if (section == 0) {
-        view.titleLabel.text = @"选择已有标签";
+        view.titleLabel.text = @"选择已有分类";
     } else {
         if (self.tagsModel.userTeamTagModel.count == 2) {
-            view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（%ld / 8）", self.tagsModel.userTeamTagModel.lastObject.count];
+            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（%ld / 8）", self.tagsModel.userTeamTagModel.lastObject.count];
         } else {
-            view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（0 / 8）"];
+            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（0 / 8）"];
         }
         
     }
@@ -178,7 +179,7 @@
     if (indexPath.section == 1) {
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
-            [YZHAlertManage showAlertTitle:nil message:@"仅删除标签， 被该标签标记的好友会恢复成无标签 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            [YZHAlertManage showAlertTitle:nil message:@"仅删除分类, 被该分类标记的好友会恢复成无标签 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     [self removeCustomTagName:indexPath.row];
                     [self.tableView reloadData];
@@ -219,23 +220,23 @@
         YZHAddBookSetTagCell* cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
         NSString* selectedTag = cell.titleLabel.text;
         if (![selectedTag isEqualToString:self.teamExt.team_tagName]) {
-//            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
-//            @weakify(self)
-//            [[[NIMSDK sharedSDK] userManager] updateUser:user completion:^(NSError * _Nullable error) {
-//                @strongify(self)
-//                if (!error) {
-//                    [hud hideWithText:@"保存成功"];
-//                    [self dismissViewControllerAnimated:YES completion:^{
-//                        //TODO: 需要更新上层 Model,刷新
-//                    }];
-//                } else {
-//                    //TODO:失败文案
-//                    [hud hideWithText:error.domain];
-//                }
-//            }];
-                [self dismissViewControllerAnimated:YES completion:^{
-                    //TODO: 需要更新上层 Model,刷新
-                }];
+            YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:_teamId];
+            teamExtManage.team_tagName = selectedTag;
+            NSString* teamExtString = [teamExtManage mj_JSONString];
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+            @weakify(self)
+            [[[NIMSDK sharedSDK] teamManager] updateMyCustomInfo:teamExtString inTeam:_teamId completion:^(NSError * _Nullable error) {
+                @strongify(self)
+                if (!error) {
+                    [hud hideWithText:@"保存成功"];
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        //TODO: 需要更新上层 Model,刷新
+                    }];
+                } else {
+                    //TODO:失败文案
+                    [hud hideWithText:error.domain];
+                }
+            }];
         } else {
             [self dismissViewControllerAnimated:YES completion:^{
             }];
@@ -259,11 +260,11 @@
                 [self addCustomTagName:customTagTextField.text];
             } else {
                 //TODO:文案需产品确认
-                [YZHProgressHUD showText:@"当前标签已包含,请您重新输入" onView:self.tableView];
+                [YZHProgressHUD showText:@"当前分类已包含,请您重新输入" onView:self.tableView];
             }
         } else {
             //TODO:文案需产品确认
-            [YZHProgressHUD showText:@"当前标签已满,请您删除无用标签" onView:self.tableView];
+            [YZHProgressHUD showText:@"当前分类已满,请您删除无用分类" onView:self.tableView];
         }
         
     };
@@ -277,7 +278,7 @@
         @strongify(self)
         //TODO:文案需产品确认
         [self refreshTags];
-        [hud hideWithText:@"标签添加成功"];
+        [hud hideWithText:@"分类添加成功"];
         [self.tableView reloadData];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
@@ -296,7 +297,7 @@
         @strongify(self)
         //TODO:文案需产品确认
         [self refreshTags];
-        [hud hideWithText:@"标签删除成功"];
+        [hud hideWithText:@"分类删除成功"];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
         }];

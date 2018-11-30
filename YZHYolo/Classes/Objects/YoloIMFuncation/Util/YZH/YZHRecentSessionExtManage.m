@@ -10,6 +10,7 @@
 #import "NTESSessionUtil.h"
 #import "YZHTargetUserDataManage.h"
 #import "YZHUserModelManage.h"
+#import "YZHTeamExtManage.h"
 
 @implementation YZHRecentSeesionExtModel
 
@@ -83,6 +84,120 @@
     };
 }
 
+#pragma mark -- Team
+
+- (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
+    
+    [self updateTeamDefaultTags];
+    
+    [self.lockTeamRecentSession removeAllObjects];
+    //用于保存,存在标签的回话.
+    _tagsTeamRecentSession = [self defaultTeamTagsRecentSession];
+    
+    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+    //检查本地扩展字段.
+    for (NSInteger i = 0; i < allRecentSession.count; i++) {
+        NIMRecentSession* recentSession = allRecentSession[i];
+        YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+        //不比较未分类,直接存到到最后
+        NSInteger tagCount = self.tagsTeamRecentSession.count;
+        // BUG
+        for (NSInteger y = 0; y < tagCount; y++) {
+            //先检查是否包含置顶,如果包含则不需要考虑标签,之前假如到第一组
+            if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES || teamExt.team_top) {
+                [self.tagsTeamRecentSession.firstObject addObject:recentSession];
+                break;
+            } else {
+                [self.tagsTeamRecentSession.firstObject removeObject:recentSession];
+            }
+            //如果群属于上锁, 并且非置顶, 则加入到第二个分区.
+            if (teamExt.team_lock && [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO) {
+                //直接添加到上锁群回话列表中
+                if (self.lockTeamRecentSession) {
+                    [self.lockTeamRecentSession addObject:recentSession];
+                } else {
+                    self.lockTeamRecentSession = [[NSMutableArray alloc] init];
+                    [self.lockTeamRecentSession addObject:recentSession];
+                }
+                self.tagsTeamRecentSession[1] = self.lockTeamRecentSession; //添加上锁列表
+                break;
+            } else {
+                [self.tagsTeamRecentSession[1] removeObject:recentSession];
+                [self.lockTeamRecentSession removeObject:recentSession];
+            }
+            NSString* tagName = self.teamDefaultTags[y];
+            NSString* sessionTagName = [self getSessionExtTagNameWithTeamRecentSession:recentSession];
+            BOOL isSessionTypeTeam = recentSession.session.sessionType == NIMSessionTypeTeam;
+            // 查找到之后终止循环,防止重复添加。
+            if ([tagName isEqualToString:sessionTagName] && isSessionTypeTeam) {
+                
+                [self.tagsTeamRecentSession[y] addObject:recentSession];
+                break;
+            } else if(sessionTagName.length == 0 && isSessionTypeTeam) { //未设置标签的群则直接添加到最后一组.
+                [self.tagsTeamRecentSession.lastObject addObject:recentSession];
+                break;
+            }
+        }
+    }
+    // 去掉不包含回话的空标签数组.
+    for (NSInteger i = 0; i < self.tagsTeamRecentSession.count; ) {
+        if (self.tagsTeamRecentSession[i].count == 0) {
+            [self.tagsTeamRecentSession removeObjectAtIndex:i];
+        } else {
+            i++;
+        }
+    }
+}
+// 社群列表时间排序.
+- (void)sortTagTeamRecentSession {
+    
+    NSMutableArray* recentSessionArray;
+    for (NSInteger i = 0; i < self.tagsTeamRecentSession.count; i++) {
+            //将每个标签包含的会话取出进行排序.
+            recentSessionArray = self.tagsTeamRecentSession[i];
+            [recentSessionArray sortUsingComparator:^NSComparisonResult(NIMRecentSession *obj1, NIMRecentSession *obj2) {
+                //每个标签内只比较最后一条消息时间
+                if ([obj1 isKindOfClass:[NIMRecentSession class]] && [obj2 isKindOfClass:[NIMRecentSession class]]) {
+                    if (obj1.lastMessage.timestamp > obj2.lastMessage.timestamp) {
+                        return NSOrderedAscending;
+                    } else if (obj1.lastMessage.timestamp < obj2.lastMessage.timestamp) {
+                        return NSOrderedDescending;
+                    } else {
+                        return NSOrderedSame;
+                    }
+                } else {
+                    //TODO:上锁群排序. 还需要往里面继续循一圈
+                    return NSOrderedAscending;
+                }
+            }];
+    };
+}
+//TODO:
+- (void)checkSessionUserTagWithTeamRecentSession:(NIMRecentSession* )recentSession {
+    
+    if (recentSession.session.sessionType == NIMSessionTypeTeam) {
+        YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+        NSString* userExt = teamExt.team_tagName;
+        if (YZHIsString(userExt)) {
+            NSData* jsonData = [userExt dataUsingEncoding:NSUTF8StringEncoding];
+            NSError* error;
+            NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&error];
+            if (!error) {
+                if (dic[@"team_tagName"]) {
+                    NSDictionary *localExt = recentSession.localExt?:@{};
+                    NSMutableDictionary *dict = [localExt mutableCopy];
+                    [dict setObject:dic[@"team_tagName"] forKey:@"team_tagName"];
+                    localExt = dict.copy;
+                    NSDictionary* recentSessionLocExt = recentSession.localExt;
+                    if (![recentSessionLocExt isEqualToDictionary:localExt]) {
+                        [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:localExt recentSession:recentSession];
+                    }
+                }
+            }
+        }
+    }
+}
+
 #pragma mark -- updateRecentSession
 
 - (void)checkSessionUserTagWithRecentSession:(NIMRecentSession* )recentSession {
@@ -109,7 +224,6 @@
             }
         }
     }
-    
 }
 
 #pragma SET & GET
@@ -122,7 +236,6 @@
         [_tagsRecentSession addObject:recentSessionArray];
     }
     return _tagsRecentSession;
-    // 昨天的话主要在做分类标签扩展这块, 找了下云信的技术对接, 讨论了下相关接口的问题和方案可行性相关问题. 目前写了一半了 今天早上继续完善下. 在做私聊模块。
 }
 
 - (NSMutableArray<NSDictionary *> *)defaultCurrentSessionTags {
@@ -135,13 +248,35 @@
     return _currentSessionTags;
 }
 
-- (NSArray<NIMUser *> *)myFriends {
+//群聊
+- (NSMutableArray<NSMutableArray<NIMRecentSession *> *> *)defaultTeamTagsRecentSession {
     
-    if (!_myFriends) {
-        _myFriends = [[NIMSDK sharedSDK].userManager myFriends];
+    _tagsTeamRecentSession = [[NSMutableArray alloc] initWithCapacity:self.teamDefaultTags.count];
+    for (NSInteger i = 0; i < self.teamDefaultTags.count; i++) {
+        NSMutableArray<NIMRecentSession* >*  recentSessionArray = [[NSMutableArray alloc] init];
+        [_tagsTeamRecentSession addObject:recentSessionArray];
     }
-    return _myFriends;
+    return _tagsTeamRecentSession;
 }
+
+- (NSMutableArray<NSDictionary *> *)defaultTeamCurrentSessionTags {
+    
+    _teamCurrentSessionTags = [[NSMutableArray alloc] initWithCapacity:self.teamDefaultTags.count];
+    for (NSInteger i = 0; i < self.teamDefaultTags.count; i++) {
+        NSDictionary * dic = [NSDictionary dictionary];
+        [_teamCurrentSessionTags addObject:dic];
+    }
+    return _teamCurrentSessionTags;
+}
+
+
+//- (NSArray<NIMUser *> *)myFriends {
+//    
+//    if (!_myFriends) {
+//        _myFriends = [[NIMSDK sharedSDK].userManager myFriends];
+//    }
+//    return _myFriends;
+//}
 
 - (void)updataDefaultTags {
     
@@ -159,12 +294,62 @@
     self.defaultTags = tagsArray.copy;
 }
 
+- (void)updateTeamDefaultTags {
+    
+    YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+    NSMutableArray* tagsArray = [[NSMutableArray alloc] init];
+    for (YZHUserGroupTagModel* customTags in userInfoExt.groupTags) {
+        [tagsArray addObject:customTags.tagName];
+    }
+    [tagsArray insertObject:@"置顶" atIndex:0];
+    [tagsArray insertObject:@"上锁群" atIndex:1];
+    [tagsArray addObject:@"无分类社群"];
+    
+    self.teamDefaultTags = tagsArray.copy;
+}
+
 - (NSString* )getSessionExtTagNameWithRecentSession:(NIMRecentSession* )recentSession {
     // 优化
     YZHRecentSeesionExtModel* extModel = [[YZHRecentSeesionExtModel alloc] init];
     extModel.tagName = recentSession.localExt[@"friend_tagName"];
     
     return extModel.tagName;
+}
+
+- (NSString* )getSessionExtTagNameWithTeamRecentSession:(NIMRecentSession* )recentSession {
+    // 优化
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+    
+    return teamExt.team_tagName;
+}
+
+- (BOOL)checkoutContainLockTeamRecentSessions:(NSMutableArray<NIMRecentSession *> *)recentSessions {
+    
+    NIMRecentSession* recentSession = recentSessions.firstObject;
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+    //最近回话或者群成员自定义信息 的置顶字段为 NO 时,则
+    if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO || teamExt.team_top == NO) {
+        if (teamExt.team_lock) {
+            return YES;
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)checkoutContainTopOrLockTeamRecentSession:(NIMRecentSession* )recentSession {
+    
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+    
+    if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES || teamExt.team_top  || teamExt.team_lock) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 @end

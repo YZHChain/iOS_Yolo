@@ -148,14 +148,14 @@
     informModel.isOpenStatus = isOpen;
     informModel.cellClass = @"YZHTeamCardSwitchCell";
     
-    NIMSession* session = [NIMSession session:_teamId type:NIMSessionTypeTeam];
-    NIMRecentSession *recent = [[NIMSDK sharedSDK].conversationManager recentSessionBySession:session];
-    
     YZHTeamDetailModel* topModel = [[YZHTeamDetailModel alloc] init];
-    BOOL top = [NTESSessionUtil recentSessionIsMark:recent type:NTESRecentSessionMarkTypeTop];
+//    NIMSession* session = [NIMSession session:_teamId type:NIMSessionTypeTeam];
+//    NIMRecentSession *recent = [[NIMSDK sharedSDK].conversationManager recentSessionBySession:session];
+//    BOOL top = [NTESSessionUtil recentSessionIsMark:recent type:NTESRecentSessionMarkTypeTop];
+    BOOL top2 = teamExtManage.team_top;
     self.topModel = topModel;
     topModel.title = @"群置顶";
-    topModel.isOpenStatus = top;
+    topModel.isOpenStatus = top2;
     topModel.cellClass = @"YZHTeamCardSwitchCell";
     
     YZHTeamDetailModel* addFriendModel = [[YZHTeamDetailModel alloc] init];
@@ -303,6 +303,7 @@
     teamExt.team_add_friend = self.addFriendModel.isOpenStatus;
     teamExt.team_p2p_chat = self.allowChatModel.isOpenStatus;
     teamExt.team_lock = self.lockModel.isOpenStatus;
+    teamExt.team_top = self.topModel.isOpenStatus;
     self.teamExts = [teamExt mj_JSONString];
     
     NSString* teamClientExtInfo = [teamInfoExt mj_JSONString];

@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHSessionListCell : NIMSessionListCell
 
 @property (nonatomic, strong) UIImageView* leftAdornImageView;
+@property (nonatomic, strong) NIMRecentSession* session;
+
+
 
 @end
 

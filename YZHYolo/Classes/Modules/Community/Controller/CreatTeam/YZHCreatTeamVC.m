@@ -91,7 +91,6 @@
     [tagViewButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
     }];
-    
 }
 
 - (void)reloadView {
@@ -240,24 +239,6 @@
 //    teamOption.joinMode = NIMTeamJoinModeNoAuth; // 默认是公开群.
     teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth; // 默认不需要验证
     teamOption.inviteMode = NIMTeamInviteModeAll; // 默认是允许成员添加好友进群.
-//    /**
-//     *  群验证模式
-//     *  @discussion 只有高级群有效，默认为 NIMTeamJoinModeNoAuth
-//     */
-//    @property (nonatomic,assign)    NIMTeamJoinMode joinMode;
-//
-//    /**
-//     *  群邀请权限
-//     *  @discussion 只有高级群有效，默认为 NIMTeamInviteModeManager
-//     */
-//    @property (nonatomic,assign)    NIMTeamInviteMode inviteMode;
-//
-//
-//    /**
-//     *  被邀请模式
-//     *  @discussion 只有高级群有效，默认为 NIMTeamBeInviteModeNeedAuth
-//     */
-//    @property (nonatomic,assign)    NIMTeamBeInviteMode beInviteMode;
     NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     NSArray* array = @[userId];
     //创群成功则跳转至结果页
@@ -283,7 +264,6 @@
             [hud hideWithText:@"网络异常,请重试"];
         }
     }];
-
 }
     
 #pragma mark - 7.GET & SET

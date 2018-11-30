@@ -35,7 +35,7 @@
 
 - (void)changeStatus:(UISwitch *)sender {
     //TODO修改成使用 Switch
-    NSLog(@"选中当前ModelTitle:%@---状态:%ld",self.model.title, sender.isOn);
+
     if ([self.model.title isEqualToString:@"是否公开本群"]) {
         self.model.subtitle = sender.isOn ? @"公开" : @"私密";
     } else if ([self.model.title isEqualToString:@"允许群成员添加好友进群"]) {

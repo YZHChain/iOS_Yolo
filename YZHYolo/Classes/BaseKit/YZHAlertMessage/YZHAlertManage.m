@@ -51,4 +51,35 @@ static NSString* const YMAlertMessageActionTitle = @"知道了";
     });
 }
 
++ (void)showTextAlertTitle:(NSString *)title message:(NSString *)message textFieldPlaceholder:(NSString *)textFieldPlaceholder actionButtons:(NSArray<NSString *> *)actionButtons actionHandler:(void (^)(UIAlertController *alertController,UITextField *textField ,NSInteger buttonIndex))block {
+    
+    //防止title 为空字符串时创建提示框使 message 字体变小。
+    if (!title.length) {
+        title = nil;
+    }
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    __block UITextField* textField;
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        textField = textField;
+        textField.placeholder = textFieldPlaceholder;
+    }];
+    
+    [actionButtons enumerateObjectsUsingBlock:^(NSString * _Nonnull buttonTitle, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIAlertAction* action = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            block ? block(alertController, textField, idx) : NULL;
+        }];
+        [alertController addAction:action];
+    }];
+    
+    //防止alertView动画跟键盘动画冲突
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIViewController* topVC = [UIViewController yzh_findTopViewController];
+        topVC = topVC ? topVC : [UIViewController yzh_rootViewController];
+        [topVC presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
 @end

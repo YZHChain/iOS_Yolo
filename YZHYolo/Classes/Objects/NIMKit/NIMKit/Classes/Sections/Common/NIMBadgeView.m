@@ -43,10 +43,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor  = [UIColor clearColor];
-        _badgeBackgroundColor = [UIColor redColor];
+//        _badgeBackgroundColor = [UIColor redColor];
+        // 背景颜色
+        _badgeBackgroundColor = YZHColorWithRGB(110, 193, 201);
         _badgeTextColor       = [UIColor whiteColor];
         _badgeTextFont        = [UIFont boldSystemFontOfSize:12];
-        _whiteCircleWidth     = 2.f;
+        _whiteCircleWidth     = 0.5f;
     }
     return self;
 }
@@ -158,7 +160,7 @@
 
 - (void)drawWithOutContent:(CGRect)rect context:(CGContextRef)context{
     CGRect bodyFrame = self.bounds;
-    CGContextSetFillColorWithColor(context, [[UIColor redColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [YZHColorWithRGB(110, 193, 201) CGColor]);
     CGContextFillEllipseInRect(context, bodyFrame);
 }
 

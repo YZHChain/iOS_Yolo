@@ -13,6 +13,8 @@
 #import "ZXingObjC.h"
 #import "YZHTeamExtManage.h"
 #import "YZHAlertManage.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHSessionMsgConverter.h"
 
 @interface YZHTeamQRCodeSharedVC()
 
@@ -24,6 +26,9 @@
 @property (nonatomic, copy) NSString* QRCodeResult;
 @property (strong, nonatomic) IBOutlet UIView *saveSharedView;
 @property (nonatomic, strong) YZHSharedFunctionView* sharedFunctionView;
+//@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
+//@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
+
 
 @end
 
@@ -54,7 +59,7 @@
 
 - (void)setupNavBar {
     
-    self.navigationItem.title = @"群地址";
+    self.navigationItem.title = @"分享群地址";
     
 }
 
@@ -210,5 +215,16 @@
     }
     return _QRCodeResult;
 }
+
+//- (void (^)(YZHTeamCardAttachment *))sharedTeamCardHandle {
+//
+//    if (!_sharedTeamCardHandle) {
+//        _sharedTeamCardHandle = ^(YZHTeamCardAttachment *teamCard) {
+////            @strongify(self)
+////            [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCard]];
+//        };
+//    }
+//    return _sharedTeamCardHandle;
+//}
 
 @end

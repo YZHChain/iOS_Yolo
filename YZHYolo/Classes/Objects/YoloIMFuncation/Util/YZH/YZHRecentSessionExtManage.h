@@ -18,10 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHRecentSessionExtManage : NSObject
 
-@property (nonatomic, strong) NSMutableArray<NSMutableArray<NIMRecentSession*>* >* tagsRecentSession;
-@property (nonatomic, strong) NSArray<NIMUser* >* myFriends;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<NIMRecentSession*>* >* tagsRecentSession; //私聊
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<NIMRecentSession*>* >* tagsTeamRecentSession; //群聊
+@property (nonatomic, strong) NSMutableArray<NSMutableArray<NIMRecentSession*>* >* TeamRecentSession; //群聊默认列表回话.
+@property (nonatomic, strong) NSMutableArray<NIMRecentSession* >* lockTeamRecentSession;
+
+//@property (nonatomic, strong) NSArray<NIMUser* >* myFriends;
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> * currentSessionTags;
 @property (nonatomic, strong) NSArray* defaultTags;
+
+@property (nonatomic, strong) NSMutableArray<NSDictionary *> * teamCurrentSessionTags;
+@property (nonatomic, strong) NSArray* teamDefaultTags;
 
 // 对最近回话进行标签分类
 - (void)screeningTagSessionAllRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
@@ -32,6 +39,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 //检查当前回话的目标用户是否包含扩展标签,包含则更新到回话本地扩展。
 - (void)checkSessionUserTagWithRecentSession:(NIMRecentSession* )recentSession;
+
+
+// 对群聊最近回话进行标签分类
+- (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
+
+- (void)sortTagTeamRecentSession;
+- (void)checkSessionUserTagWithTeamRecentSession:(NIMRecentSession* )recentSession;
+
+- (BOOL)checkoutContainLockTeamRecentSessions:(NSMutableArray<NIMRecentSession* >*)recentSessions;
+- (BOOL)checkoutContainTopOrLockTeamRecentSession:(NIMRecentSession* )recentSession;
 
 @end
 

@@ -27,22 +27,24 @@
 //        }];
         
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.nameLabel.backgroundColor = [UIColor whiteColor];
+//        self.nameLabel.backgroundColor = [UIColor whiteColor];
+        //Jersey
+        self.nameLabel.backgroundColor = [UIColor clearColor];
         self.nameLabel.font            = [UIFont systemFontOfSize:14.f];
         [self.contentView addSubview:self.nameLabel];
-//        [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(45);
-//            make.centerY.mas_equalTo(0);
-//        }];
 //
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.messageLabel.backgroundColor = [UIColor whiteColor];
+//        self.messageLabel.backgroundColor = [UIColor whiteColor];
+        //Jersey
+        self.messageLabel.backgroundColor = [UIColor clearColor];
         self.messageLabel.font            = [UIFont systemFontOfSize:12.f];
         self.messageLabel.textColor       = [UIColor lightGrayColor];
         [self.contentView addSubview:self.messageLabel];
 //
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.timeLabel.backgroundColor = [UIColor whiteColor];
+//        self.timeLabel.backgroundColor = [UIColor whiteColor];
+        //Jersey
+        self.timeLabel.backgroundColor = [UIColor clearColor];
         self.timeLabel.font            = [UIFont systemFontOfSize:11.f];
         self.timeLabel.textColor       = [UIColor grayColor];
         [self.contentView addSubview:self.timeLabel];

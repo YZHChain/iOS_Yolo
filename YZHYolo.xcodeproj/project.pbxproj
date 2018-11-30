@@ -362,6 +362,8 @@
 		55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2F21B03E5400309740 /* YZHTeamCardIntro.m */; };
 		55977D3221B03E5400309740 /* YZHTeamCardIntro.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55977D3021B03E5400309740 /* YZHTeamCardIntro.xib */; };
 		55977D3921B0D38700309740 /* YZHScanQRCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D3821B0D38700309740 /* YZHScanQRCodeModel.m */; };
+		55977D3C21B1175300309740 /* YZHSessionListLockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D3B21B1175300309740 /* YZHSessionListLockCell.m */; };
+		55977D3F21B13CEE00309740 /* YZHLockCommunityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D3E21B13CEE00309740 /* YZHLockCommunityListVC.m */; };
 		559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B89DC2169AA5700249688 /* YZHIdentification.m */; };
 		559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */; };
 		559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F196B217EED340028B0E5 /* NTESSessionCustomContentConfig.m */; };
@@ -1180,6 +1182,10 @@
 		55977D3021B03E5400309740 /* YZHTeamCardIntro.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamCardIntro.xib; sourceTree = "<group>"; };
 		55977D3721B0D38700309740 /* YZHScanQRCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHScanQRCodeModel.h; sourceTree = "<group>"; };
 		55977D3821B0D38700309740 /* YZHScanQRCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHScanQRCodeModel.m; sourceTree = "<group>"; };
+		55977D3A21B1175300309740 /* YZHSessionListLockCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSessionListLockCell.h; sourceTree = "<group>"; };
+		55977D3B21B1175300309740 /* YZHSessionListLockCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSessionListLockCell.m; sourceTree = "<group>"; };
+		55977D3D21B13CEE00309740 /* YZHLockCommunityListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLockCommunityListVC.h; sourceTree = "<group>"; };
+		55977D3E21B13CEE00309740 /* YZHLockCommunityListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLockCommunityListVC.m; sourceTree = "<group>"; };
 		559B89DB2169AA5700249688 /* YZHIdentification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHIdentification.h; sourceTree = "<group>"; };
 		559B89DC2169AA5700249688 /* YZHIdentification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHIdentification.m; sourceTree = "<group>"; };
 		559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESCellLayoutConfig.m; sourceTree = "<group>"; };
@@ -1909,6 +1915,8 @@
 				5581914B21A1C7B100C74E2E /* TeamCard */,
 				55AA82682186D8DD00ED73B1 /* YZHCommunityListVC.h */,
 				55AA82692186D8DE00ED73B1 /* YZHCommunityListVC.m */,
+				55977D3D21B13CEE00309740 /* YZHLockCommunityListVC.h */,
+				55977D3E21B13CEE00309740 /* YZHLockCommunityListVC.m */,
 				55AA826B2186D8EC00ED73B1 /* YZHCommunityChatVC.h */,
 				55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */,
 				55B385F72186EA590057FBEE /* YZHCommunitySearchVC.h */,
@@ -1944,6 +1952,8 @@
 				55BDA36A2189BF27006400B0 /* Function */,
 				5537421321A66B0900204972 /* YZHSessionListCell.h */,
 				5537421421A66B0900204972 /* YZHSessionListCell.m */,
+				55977D3A21B1175300309740 /* YZHSessionListLockCell.h */,
+				55977D3B21B1175300309740 /* YZHSessionListLockCell.m */,
 				5537421F21A6A3F000204972 /* YZHTeamListDefaultView.h */,
 				5537422021A6A3F000204972 /* YZHTeamListDefaultView.m */,
 				5537422221A6A40100204972 /* YZHTeamListDefaultView.xib */,
@@ -4399,6 +4409,7 @@
 				552B78F021737E9A00C1DD99 /* YZHUserUtil.m in Sources */,
 				55C656A7215E6982005E997B /* YZHAddBookUserAskFooterView.m in Sources */,
 				555DA4B1216C35160057D434 /* UIView+JKRTouch.m in Sources */,
+				55977D3F21B13CEE00309740 /* YZHLockCommunityListVC.m in Sources */,
 				556C3CCF2165CAE1007AEA39 /* YZHScanQRCodeVC.m in Sources */,
 				55364227217EAEC3006F77A5 /* NIMKitDataProviderImpl.m in Sources */,
 				553641D6217EAEC2006F77A5 /* NIMKitMediaFetcher.m in Sources */,
@@ -4477,6 +4488,7 @@
 				55C656A3215E5907005E997B /* YZHAddBookSettingCell.m in Sources */,
 				553641EF217EAEC3006F77A5 /* NIMAdvancedTeamCardViewController.m in Sources */,
 				55D580F221635871000A8B55 /* YZHAddBookAddFirendCell.m in Sources */,
+				55977D3C21B1175300309740 /* YZHSessionListLockCell.m in Sources */,
 				553641FB217EAEC3006F77A5 /* NIMVideoContentConfig.m in Sources */,
 				55364208217EAEC3006F77A5 /* NIMSessionLayoutImpl.m in Sources */,
 				55BA210D21763A3700F90268 /* NTESService.m in Sources */,

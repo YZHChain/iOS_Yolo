@@ -44,6 +44,7 @@
         _team_p2p_chat = YES;
         _team_lock = NO;
         _team_tagName = nil;
+        _team_top = NO;
     }
     return self;
 }
