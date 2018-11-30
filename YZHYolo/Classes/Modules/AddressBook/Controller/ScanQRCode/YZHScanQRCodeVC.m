@@ -14,6 +14,7 @@
 #import "UIImage+YZHTool.h"
 #import "YZHScanQRCodeMaskView.h"
 #import "YZHAlertManage.h"
+#import "YZHScanQRCodeModel.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -58,6 +59,7 @@
     [super viewWillAppear:animated];
     
     self.isSkip = NO;
+    self.scanImageView.image = nil;
 }
 
 - (void)dealloc {
@@ -122,34 +124,9 @@
     for (AVMetadataObject *current in metadataObjects) {
         if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
-            NSDictionary* dic = [scannedResult mj_JSONObject];
-            if (YZHIsDictionary(dic)) {
-                //0为用户 1 为群聊 TODO:封装
-                if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:0]]) {
-                    if (!self.isSkip) {
-                        self.isSkip = YES;
-                        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
-                                                                               @"userId": dic[@"accid"] ? dic[@"accid"] : @""
-                                                                               }];
-                    }
-                } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:1]]) {
-                    if (!self.isSkip) {
-                        self.isSkip = YES;
-                        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
-                                                                               @"teamId": dic[@"accid"] ? dic[@"accid"] : @"",
-                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
-                                                                               kYZHRouteSegueNewNavigation: @(YES)
-                                                                               }];
-                    }
-                    
-                } else if ([dic[@"type"] isEqual:[NSNumber numberWithInteger:2]]) {
-                    
-                } else {
-                    [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
-                }
-            }
-
-//            [self stopScanWithLineAnimation];
+            //执行二维码跳转逻辑
+            YZHScanQRCodeModel* qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:scannedResult];
+            [self handleQRCodeModel:qrCodeModel];
             
             break;
         }
@@ -170,10 +147,11 @@
     @weakify(self)
     [YZHPhotoManage presentWithViewController:self sourceType:YZHImagePickerSourceTypePhotoLibrary finishPicking:^(UIImage * _Nonnull image) {
         @strongify(self)
-        [self.manage stopScanVideo];
-        [UIImage yzh_readQRCodeFromImage:image successfulBlock:^(CIFeature * _Nonnull feature) {
-            NSLog(@"扫描到资料%@", feature);
-            
+        [UIImage yzh_readQRCodeFromImage:image successfulBlock:^(CIQRCodeFeature * _Nonnull feature) {
+            @strongify(self)
+            //执行二维码跳转逻辑
+            YZHScanQRCodeModel* qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:feature.messageString];
+            [self handleQRCodeModel:qrCodeModel];
         }];
         self.scanImageView.image = image;
     }];
@@ -184,6 +162,56 @@
     [self.manage startLight];
     
     sender.selected = !sender.isSelected;
+}
+
+- (void)handleQRCodeModel:(YZHScanQRCodeModel *)codeModel {
+    
+    if (YZHIsString(codeModel.accid)) {
+        switch (codeModel.type) {
+            case 0: // 用户
+                if (!self.isSkip) {
+                    self.isSkip = YES;
+                    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+                                                                           @"userId": codeModel.accid
+                                                                           }];
+                }
+                    break;
+                case 1: // 群聊
+                    if (!self.isSkip) {
+                        self.isSkip = YES;
+                        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                                               @"teamId": codeModel.accid,
+                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                               kYZHRouteSegueNewNavigation: @(YES)
+                                                                               }];
+                    }
+                        break;
+                    case 2:  // 支付
+    
+                        break;
+                    default:
+                    // Value Accid 为空
+                    if (!self.isSkip) {
+                        self.isSkip = YES;
+                        [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
+                        //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            self.isSkip = NO;
+                        });
+                    }
+                        break;
+        }
+    } else {
+        // Value Accid 为空
+        if (!self.isSkip) {
+            self.isSkip = YES;
+            [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
+            //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.isSkip = NO;
+            });
+        }
+    }
 }
 
 

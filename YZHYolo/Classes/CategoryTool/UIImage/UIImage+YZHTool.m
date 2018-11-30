@@ -7,6 +7,7 @@
 //
 
 #import "UIImage+YZHTool.h"
+#import "YZHAlertManage.h"
 
 @implementation UIImage (YZHTool)
 
@@ -44,9 +45,12 @@
     // 二维码识别
     // 注意这里的CIDetectorTypeQRCode
     NSArray<CIFeature *> *features = [detector featuresInImage:ciImage];
-    NSLog(@"features = %@",features);
     // 识别后的结果集,默认读取第一个
-    successfulBlock ? successfulBlock(features.firstObject) : NULL;
+    if ([features.firstObject isKindOfClass:[CIQRCodeFeature class]]) {
+        successfulBlock ? successfulBlock(features.firstObject) : NULL;
+    } else {
+        [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
+    }
     
     return features;
 }

@@ -361,6 +361,7 @@
 		55977D2D21B0339800309740 /* YZHTeamCardIntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2C21B0339800309740 /* YZHTeamCardIntroModel.m */; };
 		55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2F21B03E5400309740 /* YZHTeamCardIntro.m */; };
 		55977D3221B03E5400309740 /* YZHTeamCardIntro.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55977D3021B03E5400309740 /* YZHTeamCardIntro.xib */; };
+		55977D3921B0D38700309740 /* YZHScanQRCodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D3821B0D38700309740 /* YZHScanQRCodeModel.m */; };
 		559B89DD2169AA5700249688 /* YZHIdentification.m in Sources */ = {isa = PBXBuildFile; fileRef = 559B89DC2169AA5700249688 /* YZHIdentification.m */; };
 		559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */; };
 		559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F196B217EED340028B0E5 /* NTESSessionCustomContentConfig.m */; };
@@ -1177,6 +1178,8 @@
 		55977D2E21B03E5400309740 /* YZHTeamCardIntro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardIntro.h; sourceTree = "<group>"; };
 		55977D2F21B03E5400309740 /* YZHTeamCardIntro.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamCardIntro.m; sourceTree = "<group>"; };
 		55977D3021B03E5400309740 /* YZHTeamCardIntro.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamCardIntro.xib; sourceTree = "<group>"; };
+		55977D3721B0D38700309740 /* YZHScanQRCodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHScanQRCodeModel.h; sourceTree = "<group>"; };
+		55977D3821B0D38700309740 /* YZHScanQRCodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHScanQRCodeModel.m; sourceTree = "<group>"; };
 		559B89DB2169AA5700249688 /* YZHIdentification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHIdentification.h; sourceTree = "<group>"; };
 		559B89DC2169AA5700249688 /* YZHIdentification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHIdentification.m; sourceTree = "<group>"; };
 		559F1969217EED340028B0E5 /* NTESCellLayoutConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESCellLayoutConfig.m; sourceTree = "<group>"; };
@@ -1825,6 +1828,7 @@
 		55128A1821463E480099CC55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55977D3321B0D31C00309740 /* ScanQRCode */,
 				55757873219853F900EB5BDD /* SetTag */,
 				5593C525216D92CA00A50533 /* AddFirendRecord */,
 				5593C524216D928C00A50533 /* PhoneContact */,
@@ -3379,6 +3383,15 @@
 			path = ScanQRCode;
 			sourceTree = "<group>";
 		};
+		55977D3321B0D31C00309740 /* ScanQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				55977D3721B0D38700309740 /* YZHScanQRCodeModel.h */,
+				55977D3821B0D38700309740 /* YZHScanQRCodeModel.m */,
+			);
+			path = ScanQRCode;
+			sourceTree = "<group>";
+		};
 		559F1968217EED340028B0E5 /* LayoutConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -4578,6 +4591,7 @@
 				55BA210C21763A3700F90268 /* NTESClientUtil.m in Sources */,
 				556F6CF4214769EC0048171C /* YZHRootTabBarViewController.m in Sources */,
 				553641BC217EAEC2006F77A5 /* NIMContactSelectConfig.m in Sources */,
+				55977D3921B0D38700309740 /* YZHScanQRCodeModel.m in Sources */,
 				55364206217EAEC3006F77A5 /* NIMSessionMsgDatasource.m in Sources */,
 				55BD97B421AF8FC500E761F5 /* YZHUnreadMessageView.m in Sources */,
 				556D7E6D21A4197300533384 /* YZHSharedFunctionView.m in Sources */,

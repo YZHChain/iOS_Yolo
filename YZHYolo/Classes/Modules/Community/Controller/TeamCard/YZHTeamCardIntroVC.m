@@ -14,6 +14,7 @@
 #import "UIButton+YZHTool.h"
 #import "YZHProgressHUD.h"
 #import "YZHTeamCardIntro.h"
+#import "UIImageView+YZHImage.h"
 
 @interface YZHTeamCardIntroVC()<UITableViewDelegate, UITableViewDataSource>
 
@@ -87,7 +88,25 @@
     [self configurationFooterView];
     
     self.tableView.tableFooterView = self.footerView;
-    
+
+    //非好友关系时, 拉取用户最新资料.
+    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner]) {
+         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+            if (!error) {
+                [self.viewModel updataTeamOwnerData];
+                [self.tableView reloadData];
+            }
+        }];
+    }
+    //不是自己的群时, 需更新.
+    if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.viewModel.teamId]) {
+        [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.viewModel.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+            if (!error) {
+                [self.viewModel updataHeaderModel];
+                [self.tableView reloadData];
+            }
+        }];
+    }
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -115,6 +134,9 @@
         cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardIntro" owner:nil options:nil].lastObject;
         cell.titleLabel.text = @"群主";
         cell.nameLabel.text = self.viewModel.teamOwnerName;
+        if (YZHIsString(self.viewModel.teamOwnerAvatarUrl)) {
+            [cell.avatarImageView yzh_setImageWithString:self.viewModel.teamOwnerAvatarUrl placeholder:@"addBook_cover_cell_photo_default"];
+        }
     }
     return cell;
 }
@@ -139,6 +161,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 0 && indexPath.row == 1) {
+        NSDictionary* info = @{
+                               @"userId": self.viewModel.teamOwner
+                               };
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
+    }
 }
 
 #pragma mark - 5.Event Response

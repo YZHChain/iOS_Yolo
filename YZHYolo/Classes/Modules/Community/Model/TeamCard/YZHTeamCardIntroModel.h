@@ -17,10 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamHeaderModel* headerModel;
 @property (nonatomic, copy) NSString* teamId;
 @property (nonatomic, copy) NSString* teamOwner;
+@property (nonatomic, copy) NSString* teamOwnerAvatarUrl;
 @property (nonatomic, strong) NIMTeam* teamModel;
 @property (nonatomic, copy) NSString* teamOwnerName;
 
 - (instancetype)initWithTeamId:(NSString *)teamId;
+
+- (void)updataTeamOwnerData;
+- (void)updataHeaderModel;
 
 @end
 

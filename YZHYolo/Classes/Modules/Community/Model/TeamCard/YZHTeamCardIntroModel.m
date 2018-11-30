@@ -31,6 +31,7 @@
     self.teamModel = team;
     self.teamOwner = team.owner;
     NIMUser* teamOwner = [[[NIMSDK sharedSDK] userManager] userInfo:self.teamOwnerName];
+    self.teamOwnerAvatarUrl = teamOwner.userInfo.avatarUrl;
     self.teamOwnerName = teamOwner.userInfo.nickName;
     
     YZHTeamHeaderModel* headerModel = [[YZHTeamHeaderModel alloc] init];
@@ -43,6 +44,26 @@
     headerModel.teamId = _teamId;
     
     self.headerModel = headerModel;
+}
+
+- (void)updataHeaderModel {
+    
+    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:_teamId];
+    YZHTeamInfoExtManage* teamInfoExtManage = [YZHTeamInfoExtManage YZH_objectWithKeyValues:team.clientCustomInfo];
+    self.headerModel.teamName = team.teamName;
+    self.headerModel.teamSynopsis = team.intro;
+    self.headerModel.avatarImageName = team.avatarUrl;
+    self.headerModel.labelArray = teamInfoExtManage.labelArray;
+    self.headerModel.canEdit = NO;
+    self.headerModel.viewClass = @"YZHTeamCardHeaderView";
+    self.headerModel.teamId = _teamId;
+}
+
+- (void)updataTeamOwnerData {
+    
+    NIMUser* teamOwner = [[[NIMSDK sharedSDK] userManager] userInfo:self.teamOwnerName];
+    self.teamOwnerName = teamOwner.userInfo.nickName;
+    self.teamOwnerAvatarUrl = teamOwner.userInfo.avatarUrl;
 }
 
 @end

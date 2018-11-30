@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^readQRCodeComplete)(CIFeature * feature);
+typedef void(^readQRCodeComplete)(CIQRCodeFeature * feature);
 @interface UIImage (YZHTool)
 
 + (UIImage *)yzh_getImageWithColor:(UIColor *)color;

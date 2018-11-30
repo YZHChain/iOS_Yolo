@@ -247,11 +247,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.recentSessionExtManage sortTagRecentSession];
     [self.tableView reloadData];
 }
-
+// 用户自己和自己聊天显示名字.
 - (NSString *)nameForRecentSession:(NIMRecentSession *)recent{
-    if ([recent.session.sessionId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]]) {
-        return @"MySelf"; //
-    }
+//    if ([recent.session.sessionId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]]) {
+//        return @"我自己"; //
+//    }
     return [super nameForRecentSession:recent];
 }
 
