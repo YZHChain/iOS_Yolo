@@ -121,7 +121,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 15;
+    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -180,7 +180,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
         _tableView.tableHeaderView = self.headerView;
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.rowHeight = 60;
-        _tableView.separatorInset = UIEdgeInsetsMake(0, 38, 0, 38);
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorColor = [UIColor yzh_separatorLightGray];
         [_tableView.tableHeaderView setUserInteractionEnabled:YES];

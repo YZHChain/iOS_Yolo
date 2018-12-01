@@ -34,7 +34,25 @@
 - (NSMutableArray<YZHMyCenterContentModel *> *)list {
     
     if (!_list) {
-        NSArray* list = @[
+        NSArray* list = @[@{@"content": @[@{
+                                              @"title":@"我的YOLO积分",
+                                              @"image":@"my_cover_cell_integral",
+                                              @"route":kYZHRouterMyIntegral,
+                                              @"type" :@"1",
+                                              @"subtitle": @"9999",
+                                              },
+                                          @{
+                                              @"title":@"优惠卷消费",
+                                              @"image":@"my_cover_cell_discounts",
+                                              @"route":kYZHRouterAboutYolo,
+                                              @"type" :@"1",
+                                              },
+                                          @{
+                                              @"title":@"便民服务",
+                                              @"image":@"my_cover_cell_server",
+                                              @"route":kYZHRouterAboutYolo,
+                                              @"type" :@"1",
+                                              }]},
                               @{@"content": @[@{
                                         @"title":@"隐私设置",
                                         @"image":@"my_cover_cell_setting_privacy",
