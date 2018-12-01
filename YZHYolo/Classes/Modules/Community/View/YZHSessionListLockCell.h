@@ -9,10 +9,12 @@
 #import "NIMSessionListCell.h"
 
 #import "NIMBadgeView.h"
+#import "MGSwipeTableCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHSessionListLockCell : UITableViewCell
+
+@interface YZHSessionListLockCell : MGSwipeTableCell
 
 @property (nonatomic, strong) UIImageView* leftAdornImageView;
 @property (nonatomic, strong) UIImageView* avatarImageView;

@@ -36,9 +36,11 @@ typedef enum : NSUInteger {
 
 static YZHTableViewShowType currentShowType = YZHTableViewShowTypeDefault;
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
+static NSString* const kYZHDefaultRecentSessionsKey = @"TeamRecentSession";
 static NSString* const kYZHDefaultCellIdentifie = @"defaultCellIdentifie";
 static NSString* const kYZHTagCellIdentifie = @"tagCellIdentifie";
 static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
+static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie";
 
 @interface YZHCommunityListVC ()<NIMTeamManagerDelegate, MGSwipeTableCellDelegate>
 
@@ -138,14 +140,18 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.tableHeaderView = self.searchController.searchBar;
     [self.tableView registerClass:[YZHSessionListCell class] forCellReuseIdentifier:kYZHDefaultCellIdentifie];
+    [self.tableView registerClass:[YZHSessionListLockCell class] forCellReuseIdentifier:kYZHLockCellIdentifie];
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
     
     if (self.recentSessions.count) {
         [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
         [self.recentSessionExtManage sortTagTeamRecentSession];
+        [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+        [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
         if (self.recentSessionExtManage.teamCurrentSessionTags.firstObject.count) {
             [self.tagsTableView reloadData];
+            [self.tableView reloadData];
         }
     } else {
         [self.view addSubview:self.defaultView];
@@ -170,7 +176,7 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
         [self.navigationController pushViewController:lockListVC animated:YES];
     }
 }
-
+//TODO:
 - (void)clickLockTeam {
     
     @weakify(self)
@@ -200,10 +206,97 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     }];
 }
 
-- (void)onTouchfindTeam:(UIButton *)sender {
+- (void)onTouchfindTeam:(UIButton *)sender{
     //TODO: 跳转到广场 第一次跳转时
     UITabBarController* tabbarController = self.tabBarController;
     [tabbarController setSelectedViewController:tabbarController.viewControllers[3]];
+}
+
+- (void)configurationDefaultCell:(YZHSessionListCell *)cell recent:(NIMRecentSession *)recent{
+    
+    cell.delegate = self;
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    cell.leftButtons = @[tipButton, lockButton];
+    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
+    
+    [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //
+        return YES;
+    }];
+    [lockButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //跳转至群信息
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        BOOL isTeamOwner = NO;
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:recent.session.sessionId];
+        if ([userId isEqualToString:team.owner]) {
+            isTeamOwner = YES;
+        }
+        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                          @"isTeamOwner":@(isTeamOwner),
+                                                          @"teamId":recent.session.sessionId
+                                                          }];
+        return YES;
+    }];
+    
+    MGSwipeButton* deleteButton = [MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor yzh_buttonBackgroundPinkRed]];
+    [deleteButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //删除掉此列表
+        [self.recentSessions removeObject:recent];
+        //TODO:
+        [self customSortRecents:self.recentSessions];
+        //TODO: 有空了在单独封装一个新增,接口.
+        [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+        [self.recentSessionExtManage sortTagTeamRecentSession];
+        [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+        [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
+        [self refresh];
+        return YES;
+    }];
+    
+    MGSwipeButton* classButton = [MGSwipeButton buttonWithTitle:@"设置分类" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    [classButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        [YZHRouter openURL:kYZHRouterCommunitySetTeamTag info:@{
+                                                                @"teamId": recent.session.sessionId,
+                                                                kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                kYZHRouteSegueNewNavigation: @(YES)
+                                                                }];
+        return YES;
+    }];
+    cell.rightButtons = @[deleteButton, classButton];
+    cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
+}
+
+- (void)configurationLockCell:(YZHSessionListLockCell *)cell recent:(NIMRecentSession *)recent {
+    
+    cell.delegate = self;
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"解锁" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    cell.leftButtons = @[tipButton, lockButton];
+    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
+    
+    [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //
+        return YES;
+    }];
+    [lockButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //解散上锁群.
+        if (self.teamLock) {
+            [self clickLockTeam];
+        } else {
+            [self gotoLockTeamList];
+        }
+        return YES;
+    }];
+    
+    MGSwipeButton* deleteButton = [MGSwipeButton buttonWithTitle:@"移除所有群" backgroundColor:[UIColor yzh_buttonBackgroundPinkRed]];
+    
+    [deleteButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //解散上锁群.
+        return YES;
+    }];
+    cell.rightButtons = @[deleteButton];
+    cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
 }
 
 #pragma mark -- Private Methods
@@ -254,12 +347,52 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     [self setValue:array forKey:kYZHRecentSessionsKey];
 }
 
+- (void)customSortTeamRecents:(NSMutableArray *)recentSessions
+{
+    // 这里只需要遍历一次即可.然后等收到群通知时,在进行编译.
+    for (NSInteger i = 0 ; i < recentSessions.count; i++) {
+        NIMRecentSession* recentSession = recentSessions[i];
+        BOOL isSessionTypeTeam = NO;
+        if (recentSession.session.sessionType == NIMSessionTypeTeam) {
+            isSessionTypeTeam = YES;
+        }
+        if (!isSessionTypeTeam) {
+            [recentSessions removeObjectAtIndex:i];
+            i--;
+        }
+    }
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[recentSessions copy]];
+    [array sortUsingComparator:^NSComparisonResult(NIMRecentSession *obj1, NIMRecentSession *obj2) {
+        NSInteger score1 = [NTESSessionUtil recentSessionIsMark:obj1 type:NTESRecentSessionMarkTypeTop]? 10 : 0;
+        NSInteger score2 = [NTESSessionUtil recentSessionIsMark:obj2 type:NTESRecentSessionMarkTypeTop]? 10 : 0;
+        if (obj1.lastMessage.timestamp > obj2.lastMessage.timestamp)
+        {
+            score1 += 1;
+        }
+        else if (obj1.lastMessage.timestamp < obj2.lastMessage.timestamp)
+        {
+            score2 += 1;
+        }
+        if (score1 == score2)
+        {
+            return NSOrderedSame;
+        }
+        return score1 > score2? NSOrderedAscending : NSOrderedDescending;
+    }];
+    [self.recentSessionExtManage setValue:array forKey:kYZHDefaultRecentSessionsKey];
+}
+
+
 #pragma mark -- TableViewCell Interaction Function
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
-    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
-    [self.navigationController pushViewController:teamchatVC animated:YES];
+//    if ([[[NIMSDK sharedSDK] teamManager] isMyTeam:recent.session.sessionId]) {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+//    } else {
+//        NSLog(@"不在此群");
+//    }
 }
 
 - (void)onSelectedAvatar:(NIMRecentSession *)recent
@@ -300,38 +433,75 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if ([tableView isEqual:self.tagsTableView] && self.recentSessionExtManage.tagsTeamRecentSession.count) {
-        // 先读缓存
+        //TODO: 先读缓存 会出问题, 待优化
         YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (headerView) {
+            //如果此行为上锁群则直接返回1.
+            if ([self.recentSessionExtManage checkoutContainLockTeamRecentSessions:self.recentSessionExtManage.tagsTeamRecentSession[section]]) {
+                return 1;
+            }
             if (headerView.currentStatusType == YZHListHeaderStatusTypeDefault) {
                 NSInteger row = [self.recentSessionExtManage.tagsTeamRecentSession[section] count] < 3 ? [self.recentSessionExtManage.tagsTeamRecentSession[section] count] : 3;
+//                if (row <= 3) {
+//                    headerView.currentStatusType = YZHListHeaderStatusTypeDefault;
+//                } else {
+//                    headerView.currentStatusType = YZHListHeaderStatusTypeShow;
+//                }
                 return row;
             } else if (headerView.currentStatusType == YZHListHeaderStatusTypeShow) {
-                return [self.recentSessionExtManage.tagsTeamRecentSession[section] count];
+                NSInteger row = [self.recentSessionExtManage.tagsTeamRecentSession[section] count];
+//                if (row <= 3) {
+//                    headerView.currentStatusType = YZHListHeaderStatusTypeDefault;
+//                } else {
+//                    headerView.currentStatusType = YZHListHeaderStatusTypeShow;
+//                }
+                return row;
             } else {
+                headerView.currentStatusType = YZHListHeaderStatusTypeClose;
                 return 0;
             }
-        }
-        // 判断是否是上锁.如果是上锁群则只返回一个.
-        // 判断一个分区内回话是否属于上锁.
-        if ([self.recentSessionExtManage checkoutContainLockTeamRecentSessions:self.recentSessionExtManage.tagsTeamRecentSession[section]]) {
-            return 1;
         } else {
-            return [self.recentSessionExtManage.tagsTeamRecentSession[section] count];
+            // 判断是否是上锁.如果是上锁群则只返回一个.
+            // 判断一个分区内回话是否属于上锁.
+            if ([self.recentSessionExtManage checkoutContainLockTeamRecentSessions:self.recentSessionExtManage.tagsTeamRecentSession[section]]) {
+                return 1;
+            } else {
+                return [self.recentSessionExtManage.tagsTeamRecentSession[section] count];
+            }
         }
+
     } else {
-        return self.recentSessions.count;
+        if (self.recentSessionExtManage.TeamRecentSession.count) {
+            return self.recentSessionExtManage.TeamRecentSession.count + 1;
+        } else {
+            return 0;
+        }
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([tableView isEqual:self.tableView]) {
+        NIMRecentSession *recent;
+        if (indexPath.row < self.recentSessionExtManage.topTeamCount) {
+            recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row];
+        } else if (indexPath.row == self.recentSessionExtManage.topTeamCount) {
+            
+            YZHSessionListLockCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHLockCellIdentifie forIndexPath:indexPath];
+            if (!cell) {
+                cell = [[YZHSessionListLockCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHLockCellIdentifie];
+            }
+            [cell refreshTeamLockRecentSeesions:self.recentSessionExtManage.lockTeamRecentSession isLock:self.teamLock];
+            [self configurationLockCell:cell recent:recent];
+            
+            return cell;
+        } else {
+            recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row - 1];
+        }
         YZHSessionListCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHDefaultCellIdentifie forIndexPath:indexPath];
         if (!cell) {
             cell = [[YZHSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHDefaultCellIdentifie];
         }
-        NIMRecentSession *recent = self.recentSessions[indexPath.row];
         cell.nameLabel.text = [self nameForRecentSession:recent];
         [cell.avatarImageView setAvatarBySession:recent.session];
         
@@ -341,27 +511,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
         cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
         [cell.timeLabel sizeToFit];
         [cell refresh:recent];
-        cell.delegate = self;
-        MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
-        MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"解锁" backgroundColor:YZHColorWithRGB(207, 211, 217)];
-        cell.leftButtons = @[tipButton, lockButton];
-        cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
-        
-        MGSwipeButton* deleteButton = [MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor yzh_buttonBackgroundPinkRed]];
-        
-        MGSwipeButton* classButton = [MGSwipeButton buttonWithTitle:@"设置分类" backgroundColor:YZHColorWithRGB(207, 211, 217)];
-        [classButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
-            [YZHRouter openURL:kYZHRouterCommunitySetTeamTag info:@{
-                                                                    @"teamId": recent.session.sessionId,
-                                                                    kYZHRouteSegue: kYZHRouteSegueModal,
-                                                                    kYZHRouteSegueNewNavigation: @(YES)
-                                                                    }];
-            return YES;
-        }];
-        cell.rightButtons = @[deleteButton, classButton];
-        cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
+        //默认列表左右滑动
+        [self configurationDefaultCell:cell recent:recent];
         cell.leftAdornImageView.hidden = NO;
-        if ([self.recentSessionExtManage checkoutContainTopOrLockTeamRecentSession:recent]) {
+        if ([self.recentSessionExtManage checkoutContainTopTeamRecentSession:recent]) {
             cell.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
             cell.backgroundColor = YZHColorWithRGB(255, 255, 255);
@@ -377,6 +530,7 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
                 cell = [[YZHSessionListLockCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHLockCellIdentifie];
             }
             [cell refreshTeamLockRecentSeesions:self.recentSessionExtManage.tagsTeamRecentSession[indexPath.section] isLock:self.teamLock];
+            [self configurationLockCell:cell recent:recent];
             
             return cell;
         } else {
@@ -400,7 +554,7 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
             } else {
                 cell.backgroundColor = YZHColorWithRGB(255, 255, 255);
             }
-            
+            [self configurationDefaultCell:cell recent:recent];
             return cell;
         }
     }
@@ -415,8 +569,24 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     if (self.recentSessions.count) {
         if ([self.tableView isEqual:tableView]) {
             //暂时不考虑上锁群.
-            NIMRecentSession *recentSession = self.recentSessions[indexPath.row];
-            [self onSelectedRecent:recentSession atIndexPath:indexPath];
+            NIMRecentSession* recent;
+            if (indexPath.row < self.recentSessionExtManage.topTeamCount) {
+                recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row];
+                [self onSelectedRecent:recent atIndexPath:indexPath];
+            } else if (indexPath.row == self.recentSessionExtManage.topTeamCount) {
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+                //处理打开上锁群逻辑
+                if (self.teamLock) {
+                    //密码弹框
+                    [self clickLockTeam];
+                } else {
+                    //跳转至上锁群列表
+                    [self gotoLockTeamList];
+                }
+            } else {
+                recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row - 1];
+                [self onSelectedRecent:recent atIndexPath:indexPath];
+            }
         } else {
              if ([self.recentSessionExtManage checkoutContainLockTeamRecentSessions:self.recentSessionExtManage.tagsTeamRecentSession[indexPath.section]]) {
                  [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -591,8 +761,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     //TODO:
     [self customSortRecents:self.recentSessions];
     //TODO: 有空了在单独封装一个新增,接口.
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 //TODO:
@@ -618,8 +790,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     [self.recentSessions insertObject:recentSession atIndex:insert];
     //TODO:
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -637,8 +811,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
                                                           completion:nil];
     }
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -647,8 +823,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
     
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -656,8 +834,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
     
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -665,8 +845,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
 {
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -674,8 +856,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
 
 - (void)onTeamMemberChanged:(NIMTeam *)team {
     
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -686,8 +870,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
  */
 - (void)onTeamAdded:(NIMTeam *)team {
  
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -698,8 +884,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
  */
 - (void)onTeamUpdated:(NIMTeam *)team {
     
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 
@@ -710,8 +898,10 @@ static NSString* const kYZHLockCellIdentifie = @"lockCellIdentifie";
  */
 - (void)onTeamRemoved:(NIMTeam *)team {
     
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
     [self.recentSessionExtManage sortTagTeamRecentSession];
+    [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
     [self refresh];
 }
 

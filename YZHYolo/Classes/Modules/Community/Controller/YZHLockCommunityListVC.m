@@ -29,6 +29,7 @@
 
 static NSString* const kYZHDefaultCellIdentifie = @"defaultCellIdentifie";
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
+
 @interface YZHLockCommunityListVC()<NIMTeamManagerDelegate, MGSwipeTableCellDelegate>
 
 @end
@@ -42,7 +43,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     self = [super init];
     if (self) {
         self.recentSessionExtManage = recentSessionExtManage;
-        self.recentSessions = recentSessionExtManage.lockTeamRecentSession;
+        self.recentSessions = [recentSessionExtManage.lockTeamRecentSession mutableCopy];
     }
     return self;
 }
@@ -88,7 +89,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     [self.tableView registerClass:[YZHSessionListCell class] forCellReuseIdentifier:kYZHDefaultCellIdentifie];
     
-    self.recentSessions = self.recentSessionExtManage.lockTeamRecentSession;
+    self.recentSessions = [self.recentSessionExtManage.lockTeamRecentSession mutableCopy];
     
     [self refresh];
 }
@@ -108,7 +109,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.recentSessionExtManage.lockTeamRecentSession.count;
+    return self.recentSessions.count;
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,7 +124,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    NIMRecentSession *recentSession = self.recentSessions[indexPath.row];
+    [self onSelectedRecent:recentSession atIndexPath:indexPath];
 }
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -209,9 +211,12 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
-    //TODO: 需要修改
-    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
-    [self.navigationController pushViewController:teamchatVC animated:YES];
+    if ([[[NIMSDK sharedSDK] teamManager] isMyTeam:recent.session.sessionId]) {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+    } else {
+        NSLog(@"不在此群");
+    }
 }
 
 - (void)onSelectedAvatar:(NIMRecentSession *)recent
@@ -228,7 +233,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self checkNeedAtTip:recent content:attContent];
     //        [self checkOnlineState:recent content:attContent];
     return attContent;
-    
 }
 
 - (void)checkNeedAtTip:(NIMRecentSession *)recent content:(NSMutableAttributedString *)content
@@ -263,19 +267,14 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)didAddRecentSession:(NIMRecentSession *)recentSession
            totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self.recentSessionExtManage checkSessionUserTagWithTeamRecentSession:recentSession];
     [self.recentSessions addObject:recentSession];
     //TODO:
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
-    //TODO: 有空了在单独封装一个新增,接口.
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
     [self refresh];
 }
 //TODO:
 - (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
               totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self.recentSessionExtManage checkSessionUserTagWithRecentSession:recentSession];
     for (NIMRecentSession *recent in self.recentSessions)
     {
         if ([recentSession.session.sessionId isEqualToString:recent.session.sessionId])
@@ -294,7 +293,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.recentSessions insertObject:recentSession atIndex:insert];
     //TODO:
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
     [self refresh];
 }
 
@@ -311,27 +309,21 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         [[NIMSDK sharedSDK].conversationManager deleteRemoteSessions:@[recentSession.session]
                                                           completion:nil];
     }
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
     [self refresh];
 }
 
 - (void)messagesDeletedInSession:(NIMSession *)session{
     
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
     [self refresh];
 }
 
 - (void)allMessagesDeleted{
     
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
     [self refresh];
 }
 
@@ -339,7 +331,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 {
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:self.recentSessions];
     [self refresh];
 }
 

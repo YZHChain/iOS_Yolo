@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView* leftAdornImageView;
 @property (nonatomic, strong) NIMRecentSession* session;
 
-
-
 @end
 
 NS_ASSUME_NONNULL_END

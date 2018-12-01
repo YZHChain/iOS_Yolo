@@ -113,7 +113,7 @@
             //如果群属于上锁, 并且非置顶, 则加入到第二个分区.
             if (teamExt.team_lock && [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO) {
                 //直接添加到上锁群回话列表中
-                if (self.lockTeamRecentSession) {
+                if (self.lockTeamRecentSession.count) {
                     [self.lockTeamRecentSession addObject:recentSession];
                 } else {
                     self.lockTeamRecentSession = [[NSMutableArray alloc] init];
@@ -147,6 +147,59 @@
             i++;
         }
     }
+}
+// 对默认列表进行排序, 
+- (void)screeningDefaultSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
+    
+    NSInteger number = 0;
+    if (number == 0) {
+        NSLog(@"所有回话%ld", allRecentSession.count);
+        NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
+        NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
+        [self.lockTeamRecentSession removeAllObjects];
+        //将最新回话里面所有设置上锁, 非置顶的群回话抽取出来.
+        self.TeamRecentSession = [allRecentSession mutableCopy];
+        self.topTeamCount = 0;
+        //计算置顶个数.
+        
+        //置顶只使用 用户对群自定义字段 team_top 判断
+//        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+        @weakify(self)
+        [self.TeamRecentSession enumerateObjectsUsingBlock:^(NIMRecentSession * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            @strongify(self)
+            //需要计算当前回话一共有多少个置顶群,
+            YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:obj.session.sessionId];
+//             || [[obj.localExt objectForKey:markTypeTopkey] boolValue] == YES
+            if (teamExt.team_top) {
+                ++ self.topTeamCount;
+            }
+//            [[obj.localExt objectForKey:markTypeTopkey] boolValue] == NO ||
+            if ((teamExt.team_lock && (teamExt.team_top == NO))) {
+                [self.TeamRecentSession removeObject:obj];
+                //直接添加到上锁群回话列表中
+                if (self.lockTeamRecentSession.count) {
+                    [self.lockTeamRecentSession addObject:obj];
+                } else {
+                    self.lockTeamRecentSession = [[NSMutableArray alloc] init];
+                    [self.lockTeamRecentSession addObject:obj];
+                }
+                NSLog(@"总个数:%ld", allRecentSession.count);
+            }
+        }];
+        if (self.topTeamCount) {
+            self.tagsTeamRecentSession[1] = self.lockTeamRecentSession;
+        } else {
+            self.tagsTeamRecentSession[0] = self.lockTeamRecentSession;
+        }
+        NSLog(@"所有回话%ld", allRecentSession.count);
+        NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
+        NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
+        //置顶群有个专门的地方保存.
+//        ++number;
+    } else {
+        
+    }
+    
 }
 // 社群列表时间排序.
 - (void)sortTagTeamRecentSession {
@@ -218,8 +271,6 @@
                     if (![recentSessionLocExt isEqualToDictionary:localExt]) {
                         [[NIMSDK sharedSDK].conversationManager updateRecentLocalExt:localExt recentSession:recentSession];
                     }
-
-
                 }
             }
         }
@@ -268,7 +319,6 @@
     }
     return _teamCurrentSessionTags;
 }
-
 
 //- (NSArray<NIMUser *> *)myFriends {
 //    
@@ -327,9 +377,10 @@
     
     NIMRecentSession* recentSession = recentSessions.firstObject;
     YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
-    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+//    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+//    [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO ||
     //最近回话或者群成员自定义信息 的置顶字段为 NO 时,则
-    if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO || teamExt.team_top == NO) {
+    if (teamExt.team_top == NO) {
         if (teamExt.team_lock) {
             return YES;
         } else {
@@ -343,9 +394,21 @@
 - (BOOL)checkoutContainTopOrLockTeamRecentSession:(NIMRecentSession* )recentSession {
     
     YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
-    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+//    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+//    [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES ||
+    if (teamExt.team_top || teamExt.team_lock) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+- (BOOL)checkoutContainTopTeamRecentSession:(NIMRecentSession* )recentSession {
     
-    if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES || teamExt.team_top  || teamExt.team_lock) {
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+//    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+//    [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES ||
+    if (teamExt.team_top) {
         return YES;
     } else {
         return NO;

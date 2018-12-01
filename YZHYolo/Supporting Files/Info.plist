@@ -31,6 +31,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>App需要您的同意,才能使用相机</string>
+	<key>NSContactsUsageDescription</key>
+	<string>App需要您的同意,才能访问通讯录</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App需要您的同意,才能始终访问位置</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -41,8 +43,6 @@
 	<string>App需要您的同意,才能访问相册哈</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要您的同意,才能访问相册</string>
-	<key>NSContactsUsageDescription</key>
-	<string>App需要您的同意,才能访问通讯录</string>
 	<key>Status Bar Style</key>
 	<string>Light</string>
 	<key>UIAppFonts</key>
