@@ -20,8 +20,8 @@
     
     self = [super initWithFrame:frame];
     if (self) {
-        NSMutableArray* tempButtonArray = [[NSMutableArray alloc] initWithCapacity:3];
-        for (NSInteger i = 0; i < 3; i++) {
+        NSMutableArray* tempButtonArray = [[NSMutableArray alloc] initWithCapacity:4];
+        for (NSInteger i = 0; i < 4; i++) {
             
             UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0 + 33 * i + i * 19, 0, 33, 10)];
             [tempButtonArray addObject:button];

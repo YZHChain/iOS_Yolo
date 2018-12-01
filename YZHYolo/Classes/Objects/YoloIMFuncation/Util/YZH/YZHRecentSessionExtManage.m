@@ -139,20 +139,18 @@
             }
         }
     }
-    // 去掉不包含回话的空标签数组.
-    for (NSInteger i = 0; i < self.tagsTeamRecentSession.count; ) {
-        if (self.tagsTeamRecentSession[i].count == 0) {
-            [self.tagsTeamRecentSession removeObjectAtIndex:i];
-        } else {
-            i++;
-        }
-    }
+//    // 去掉不包含回话的空标签数组.
+//    for (NSInteger i = 0; i < self.tagsTeamRecentSession.count; ) {
+//        if (self.tagsTeamRecentSession[i].count == 0) {
+//            [self.tagsTeamRecentSession removeObjectAtIndex:i];
+//        } else {
+//            i++;
+//        }
+//    }
 }
 // 对默认列表进行排序, 
 - (void)screeningDefaultSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
     
-    NSInteger number = 0;
-    if (number == 0) {
         NSLog(@"所有回话%ld", allRecentSession.count);
         NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
         NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
@@ -186,19 +184,27 @@
                 NSLog(@"总个数:%ld", allRecentSession.count);
             }
         }];
+        //先检查是否存在置顶,如果存在并且有上锁群,则插入到第二行,否则在最前
         if (self.topTeamCount) {
-            self.tagsTeamRecentSession[1] = self.lockTeamRecentSession;
+            if (self.lockTeamRecentSession.count) {
+                self.tagsTeamRecentSession[1] = self.lockTeamRecentSession;
+            }
         } else {
-            self.tagsTeamRecentSession[0] = self.lockTeamRecentSession;
+            if (self.lockTeamRecentSession.count) {
+                self.tagsTeamRecentSession[0] = self.lockTeamRecentSession;
+            }
         }
         NSLog(@"所有回话%ld", allRecentSession.count);
         NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
         NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
-        //置顶群有个专门的地方保存.
-//        ++number;
-    } else {
-        
-    }
+    // 去掉不包含回话的数组.
+        for (NSInteger i = 0; i < self.tagsTeamRecentSession.count;) {
+            if (self.tagsTeamRecentSession[i].count == 0) {
+                [self.tagsTeamRecentSession removeObjectAtIndex:i];
+            } else {
+                i++;
+            }
+        }
     
 }
 // 社群列表时间排序.
@@ -224,6 +230,52 @@
                 }
             }];
     };
+}
+
+- (void)customSortTeamRecents:(NSMutableArray *)recentSessions
+{
+    // 这里只需要遍历一次即可.然后等收到群通知时,在进行编译.
+    for (NSInteger i = 0 ; i < recentSessions.count; i++) {
+        NIMRecentSession* recentSession = recentSessions[i];
+        BOOL isSessionTypeTeam = NO;
+        if (recentSession.session.sessionType == NIMSessionTypeTeam) {
+            isSessionTypeTeam = YES;
+        }
+        if (!isSessionTypeTeam) {
+            [recentSessions removeObjectAtIndex:i];
+            i--;
+        }
+    }
+    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:[recentSessions copy]];
+    [array sortUsingComparator:^NSComparisonResult(NIMRecentSession *obj1, NIMRecentSession *obj2) {
+        NSInteger score1 = [NTESSessionUtil recentSessionIsMark:obj1 type:NTESRecentSessionMarkTypeTop]? 10 : 0;
+        NSInteger score2 = [NTESSessionUtil recentSessionIsMark:obj2 type:NTESRecentSessionMarkTypeTop]? 10 : 0;
+        if (obj1.lastMessage.timestamp > obj2.lastMessage.timestamp)
+        {
+            score1 += 1;
+        }
+        else if (obj1.lastMessage.timestamp < obj2.lastMessage.timestamp)
+        {
+            score2 += 1;
+        }
+        if (score1 == score2)
+        {
+            return NSOrderedSame;
+        }
+        return score1 > score2? NSOrderedAscending : NSOrderedDescending;
+    }];
+    [self setValue:array forKey:@"TeamRecentSession"];
+}
+
+
+- (void)screeningAllTeamRecentSession:(NSMutableArray<NIMRecentSession *> *)allRecentSession {
+    
+    if (allRecentSession.count) {
+        [self screeningTagSessionAllTeamRecentSession:allRecentSession];
+        [self sortTagTeamRecentSession];
+        [self screeningDefaultSessionAllTeamRecentSession:allRecentSession];
+        [self customSortTeamRecents:allRecentSession];
+    }
 }
 //TODO:
 - (void)checkSessionUserTagWithTeamRecentSession:(NIMRecentSession* )recentSession {

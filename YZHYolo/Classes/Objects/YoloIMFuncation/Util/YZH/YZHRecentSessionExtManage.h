@@ -44,7 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 对群聊最近回话进行标签分类
 - (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
 - (void)sortTagTeamRecentSession;
-- (void)screeningDefaultSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession; // 对默认列表进行排序, 
+- (void)screeningDefaultSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession; // 对默认列表进行排序,
+
+- (void)screeningAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
 
 - (void)checkSessionUserTagWithTeamRecentSession:(NIMRecentSession* )recentSession;//暂时用不着
 

@@ -106,7 +106,7 @@
 
 - (NSArray*)imagesForBanner{
     
-    return @[@"welcome_background_cover",@"welcome_background_cover",@"welcome_background_cover"];
+    return @[@"welcome_background_cover1",@"welcome_background_cover2",@"welcome_background_cover3",@"welcome_background_cover4"];
 }
 
 - (void)keyboardNotification{
