@@ -10,4 +10,6 @@
 
 @interface YZHDiscoverVC : YZHBaseViewController
 
+@property (nonatomic,strong) NSString* url;
+
 @end

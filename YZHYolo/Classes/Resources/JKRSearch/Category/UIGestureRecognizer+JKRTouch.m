@@ -19,7 +19,7 @@
 static const char * JKR_GESTURE_UN_TOUCH_KEY = "JKR_GESTURE_UN_TOUCH_KEY";
 
 + (void)load {
-    method_exchangeImplementations(class_getInstanceMethod([UIGestureRecognizer class], @selector(initWithTarget:action:)), class_getInstanceMethod([UIGestureRecognizer class], @selector(jkr_initWithTarget:action:)));
+//    method_exchangeImplementations(class_getInstanceMethod([UIGestureRecognizer class], @selector(initWithTarget:action:)), class_getInstanceMethod([UIGestureRecognizer class], @selector(jkr_initWithTarget:action:)));
 }
 
 - (instancetype)jkr_initWithTarget:(id)target action:(SEL)action {

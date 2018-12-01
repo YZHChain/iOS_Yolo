@@ -13,4 +13,7 @@
 @property (nonatomic, assign) BOOL hideNavigationBarLine;
 @property (nonatomic, assign) BOOL hideNavigationBar;
 
+- (void)setStatusBarBackgroundColor:(UIColor *)color;
+- (void)setStatusBarBackgroundGradientColorFromLeftToRight:(UIColor *)color withEndColor:(UIColor*) endColor;
+
 @end

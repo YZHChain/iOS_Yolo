@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NIMUserManagerProtocol.h"
+//#import "NIMUserManagerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

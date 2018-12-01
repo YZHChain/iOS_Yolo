@@ -12,8 +12,8 @@
 #import "UIButton+YZHTool.h"
 #import "NIMKitFileLocationHelper.h"
 #import "UIView+Toast.h"
-#import "NIMGlobalDefs.h"
-#import "NIMResourceManagerProtocol.h"
+//#import "NIMGlobalDefs.h"
+//#import "NIMResourceManagerProtocol.h"
 #import "UIImage+NIMKit.h"
 #import "UIImageView+YZHImage.h"
 

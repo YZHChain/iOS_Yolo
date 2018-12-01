@@ -27,7 +27,7 @@
 //#import "NTESAVNotifier.h"
 //#import "NTESRedPacketTipAttachment.h"
 #import "UIViewController+YZHTool.h"
-#import "NIMChatManagerProtocol.h"
+//#import "NIMChatManagerProtocol.h"
 //#import "NIMSystemNotificationManager.h"
 
 NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChanged";

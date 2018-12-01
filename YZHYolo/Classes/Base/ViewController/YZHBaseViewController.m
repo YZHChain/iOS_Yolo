@@ -66,14 +66,34 @@
 
 #pragma mark -- Setting View
 
+- (void)setStatusBarBackgroundGradientColorFromLeftToRight:(UIColor *)startColor withEndColor:(UIColor*) endColor{
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        CAGradientLayer *layer = [CAGradientLayer new];
+        //存放渐变的颜色的数组
+        layer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
+        //起点和终点表示的坐标系位置，(0,0)表示左上角，(1,1)表示右下角
+        layer.startPoint = CGPointMake(0.0, 0.0);
+        layer.endPoint = CGPointMake(1, 0.0);
+        
+        layer.frame = statusBar.frame;
+        //        [statusBar.layer addSublayer:layer];
+//        [statusBar.layer insertSublayer:layer atIndex:0];
+        CGRect rect = statusBar.frame;
+        UIView* view = [[UIView alloc] initWithFrame:rect];
+        [view.layer addSublayer:layer];
+        [self.view addSubview:view];
+//        [self.view.layer insertSublayer:layer atIndex:0];
+    }
+}
+
 //设置状态栏颜色statusBarWindow
-//- (void)setStatusBarBackgroundColor:(UIColor *)color {
-//
-//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-//    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-//        statusBar.backgroundColor = color;
-//    }
-//}
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
+}
 
 #pragma mark setting Notifaction
 
@@ -99,5 +119,7 @@
 
     return UIStatusBarStyleLightContent;
 }
+
+
 
 @end
