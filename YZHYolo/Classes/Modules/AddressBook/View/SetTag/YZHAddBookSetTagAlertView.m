@@ -48,13 +48,13 @@
         }
         self.customTagTextField.text = customTagName;
         NSInteger customTagLength = [self.customTagTextField.text yzh_calculateStringLeng];
-        if (customTagLength <= 12) {
+        if (customTagLength <= 16) {
             self.YZHButtonExecuteBlock ? self.YZHButtonExecuteBlock(self.customTagTextField) : NULL;
         } else {
-            [YZHAlertManage showAlertMessage:@"输入标签过长,请重新填写"];
+            [YZHAlertManage showAlertMessage:@"输入分类字数过长,请重新填写"];
         }
     } else {
-        [YZHAlertManage showAlertMessage:@"没有输入标签,请重新填写"];
+        [YZHAlertManage showAlertMessage:@"没有输入分类,请重新填写"];
     }
     
 }

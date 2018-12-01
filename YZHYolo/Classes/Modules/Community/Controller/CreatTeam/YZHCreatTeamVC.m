@@ -255,10 +255,7 @@
             YZHTeamUpdataModel* model = [[YZHTeamUpdataModel alloc] initWithTeamId:teamId isCreatTeam:YES];
             //通知后台
             [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_ADDUPDATEGROUP params:model.params successCompletion:^(id obj) {
-                
-                NSLog(@"成功");
             } failureCompletion:^(NSError *error) {
-                NSLog(@"失败");
             }];
         } else {
             [hud hideWithText:@"网络异常,请重试"];

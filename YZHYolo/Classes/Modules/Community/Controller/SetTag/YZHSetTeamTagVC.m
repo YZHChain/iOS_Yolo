@@ -253,7 +253,7 @@
     }];
     @weakify(self)
     alertView.YZHButtonExecuteBlock = ^(UITextField * _Nonnull customTagTextField) {
-        if (self.tagsModel.userTagModel.lastObject.count < 8) {
+        if (self.tagsModel.userTagModel.lastObject.count < 6) {
             //先检测当前是否存在此标签,如果不存在则直接去添加.
             if (![self.tagsModel checkoutContainCustomTagName:customTagTextField.text  type:YZHSetTagModelTypeTeam]) {
                 @strongify(self)

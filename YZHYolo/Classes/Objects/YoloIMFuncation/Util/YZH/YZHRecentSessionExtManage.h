@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 // 对最近回话进行标签分类
 - (void)screeningTagSessionAllRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
 - (void)sortTagRecentSession;
+- (void)screeningAllPrivateRecebtSessionRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession;
 // 当回话发送变动时,会最近回话进行新增与删除
 
 // 置顶.

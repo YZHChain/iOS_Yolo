@@ -144,8 +144,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.view addSubview:self.tagsTableView];
     
     if (self.recentSessions.count) {
-        [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
-        [self.recentSessionExtManage sortTagRecentSession];
+        [self.recentSessionExtManage screeningAllPrivateRecebtSessionRecentSession:self.recentSessions];
         if (self.recentSessionExtManage.tagsRecentSession.firstObject.count) {
             [self.tagsTableView reloadData];
         }
@@ -439,11 +438,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             headerView.tagNameLabel.text = @"置顶";
             headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
-            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"无好友标签";
+            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"其他";
             headerView.backgroundColor = [UIColor whiteColor];
         }
     } else {
-        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"无好友标签";
+        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"其他";
     }
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
@@ -669,10 +668,9 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.recentSessionExtManage checkSessionUserTagWithRecentSession:recentSession];
     [self.recentSessions addObject:recentSession];
     //TODO:
-//    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
     //TODO: 有空了在单独封装一个新增,接口.
-    [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningAllPrivateRecebtSessionRecentSession:self.recentSessions];
     [self refresh];
 }
 
@@ -717,7 +715,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)messagesDeletedInSession:(NIMSession *)session{
 
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
     [self refresh];
@@ -726,7 +723,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)allMessagesDeleted{
 
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
     [self refresh];

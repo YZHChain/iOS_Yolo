@@ -84,6 +84,14 @@
     };
 }
 
+- (void)screeningAllPrivateRecebtSessionRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
+    
+    if (allRecentSession.count) {
+        [self screeningTagSessionAllRecentSession:allRecentSession];
+        [self sortTagTeamRecentSession];
+    }
+}
+
 #pragma mark -- Team
 
 - (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {

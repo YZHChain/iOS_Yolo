@@ -213,9 +213,10 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
             if (buttonIndex == 1) {
                 NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
                 option.removeTable = NO;
+                option.removeSession = NO;
                 NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
                 [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
-                [YZHProgressHUD showText:@"聊天记录已清除" onView:nil];
+                [YZHProgressHUD showText:@"聊天记录已清空" onView:YZHAppWindow completion:nil];
             }
         }];
     } else {
@@ -309,7 +310,6 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 }
 
 - (void)removeTeam:(UIButton* )sender {
-    
     //解散并退出社群
     @weakify(self)
     [YZHAlertManage showAlertTitle:@"确定要解散并删除本群么？" message:@"(您将失去所有群成员)\n\n 此操作不可逆,请谨慎操作" actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {

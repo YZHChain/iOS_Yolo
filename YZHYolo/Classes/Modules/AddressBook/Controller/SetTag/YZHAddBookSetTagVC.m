@@ -64,7 +64,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
-    self.navigationItem.title = @"设置标签";
+    self.navigationItem.title = @"设置分类";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickLeftBarItem:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarItem:)];
 }
@@ -147,12 +147,12 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     
     YZHAddBookSetTagSectionView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kSetTagCellSectionIdentifier];
     if (section == 0) {
-        view.titleLabel.text = @"选择已有标签";
+        view.titleLabel.text = @"选择已有分类";
     } else {
         if (self.tagsModel.userTagModel.count == 2) {
-           view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（%ld / 8）", self.tagsModel.userTagModel.lastObject.count];
+           view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（%ld / 6）", self.tagsModel.userTagModel.lastObject.count];
         } else {
-           view.titleLabel.text = [NSString stringWithFormat:@"自定义标签（0 / 8）"];
+           view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（0 / 6）"];
         }
         
     }
@@ -194,7 +194,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
             @weakify(self)
-            [YZHAlertManage showAlertTitle:nil message:@"仅删除标签， 被该标签标记的好友会恢复成无标签 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            [YZHAlertManage showAlertTitle:nil message:@"仅删除分类， 被该标签标记的好友会恢复成无分类 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
                 @strongify(self)
                 if (buttonIndex == 1) {
                     [self removeCustomTagName:indexPath.row];
@@ -268,20 +268,20 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     // TODO: 待重新封装.
     [alertView yzh_showOnWindowAnimations:^{
     }];
-    @weakify(self)
+    @weakify(self) //分类个数限制
     alertView.YZHButtonExecuteBlock = ^(UITextField * _Nonnull customTagTextField) {
-        if (self.tagsModel.userTagModel.lastObject.count < 8) {
+        if (self.tagsModel.userTagModel.lastObject.count < 6) {
             //先检测当前是否存在此标签,如果不存在则直接去添加.
             if (![self.tagsModel checkoutContainCustomTagName:customTagTextField.text  type:YZHSetTagModelTypeUser]) {
                 @strongify(self)
                 [self addCustomTagName:customTagTextField.text];
             } else {
                 //TODO:文案需产品确认
-                [YZHProgressHUD showText:@"当前标签已包含,请您重新输入" onView:self.tableView];
+                [YZHProgressHUD showText:@"当前分类已包含,请您重新输入" onView:self.tableView];
             }
         } else {
             //TODO:文案需产品确认
-            [YZHProgressHUD showText:@"当前标签已满,请您删除无用标签" onView:self.tableView];
+            [YZHProgressHUD showText:@"当前分类已满,请您删除无用分类" onView:self.tableView];
         }
 
     };
@@ -295,7 +295,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         @strongify(self)
         //TODO:文案需产品确认
         [self refreshTags];
-        [hud hideWithText:@"标签添加成功"];
+        [hud hideWithText:@"分类添加成功"];
         [self.tableView reloadData];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
@@ -314,7 +314,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         @strongify(self)
         //TODO:文案需产品确认
         [self refreshTags];
-        [hud hideWithText:@"标签删除成功"];
+        [hud hideWithText:@"分类删除成功"];
         [self.alertView yzh_hideFromWindowAnimations:^{
             
         }];
