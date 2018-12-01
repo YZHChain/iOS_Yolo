@@ -206,7 +206,7 @@
 
 - (void)updateUserPrivacySetting {
     
-    NSString* userId = [YZHUserLoginManage sharedManager].currentLoginData.account;
+    NSString* userId = [YZHUserLoginManage sharedManager].currentLoginData.userId;
     YZHPrivacySettingModel* addFirendModel = self.viewModel.content[0];
     YZHPrivacySettingModel* addVerifyModel = self.viewModel.content[1];
     YZHPrivacySettingModel* phoneAddModel = self.viewModel.content[2];

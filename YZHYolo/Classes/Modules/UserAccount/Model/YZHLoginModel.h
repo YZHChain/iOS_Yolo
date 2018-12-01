@@ -12,11 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHLoginModel : NSObject
 
-@property (nonatomic, copy) NSString* appKey;
-@property (nonatomic, copy) NSString* userId;
-@property (nonatomic, copy) NSString* acctId;
-@property (nonatomic, copy) NSString* token;
+@property (nonatomic, copy) NSString* appKey; //第三方平台分配的appkey
+@property (nonatomic, copy) NSString* userId; //用户 Id
+@property (nonatomic, copy) NSString* mnemonicWord; //助记词
+@property (nonatomic, copy) NSString* acctId; //用户对应第三方平台acctId
+@property (nonatomic, copy) NSString* token; //用户对应第三方平台token
 @property (nonatomic, copy) NSString* orderFlag;
+@property (nonatomic, copy) NSString* yoloNo; //yoloNo 平台号码
 @property (nonatomic, copy) NSString* phone;
 
 @end

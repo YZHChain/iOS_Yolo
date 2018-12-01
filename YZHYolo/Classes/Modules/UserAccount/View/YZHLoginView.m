@@ -17,6 +17,9 @@
 
     [super awakeFromNib];
     
+    self.confirmButton.layer.cornerRadius = 4;
+    self.confirmButton.layer.masksToBounds = YES;
+    
     [self setupNotification];
 }
 

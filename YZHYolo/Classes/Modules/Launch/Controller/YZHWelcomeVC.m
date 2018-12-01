@@ -74,8 +74,8 @@
     CGRect frame = welcomeView.bannerView.frame;
     SDCycleScrollView* scroollView = [SDCycleScrollView cycleScrollViewWithFrame:frame imageNamesGroup:images];
     scroollView.showPageControl = NO;
-    scroollView.autoScroll = NO;
-    scroollView.autoScrollTimeInterval = 10;
+    scroollView.autoScroll = YES;
+    scroollView.autoScrollTimeInterval = 2.5;
     _cycleScrollView = scroollView;
     
     [self.welcomeView addSubview:scroollView];
@@ -132,13 +132,27 @@
     @weakify(self)
     self.welcomeView.regesterButtonBlock = ^(UIButton *sender) {
         @strongify(self)
-        [self setupRegistEvent];
+        [self gotoRigister];
     };
     self.welcomeView.loginButtonBlock = ^(UIButton *sender) {
         @strongify(self)
         [self setupLoginEvent];
     };
 }
+
+#pragma mark - 新版注册登录
+
+- (void)gotoRigister {
+    
+    [YZHRouter openURL:kYZHRouterRegister info: @{@"hiddenBack": @(YES), kYZHRouteBackIndex: @(1)}];
+}
+
+- (void)gotoLogin {
+    
+    [YZHRouter openURL:kYZHRouterLogin info: @{kYZHRouteBackIndex: @(1)}];
+}
+
+#pragma mark --
 
 - (void)setupRegistEvent {
     // 检测 ID 是否可用. TODO

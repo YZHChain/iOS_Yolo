@@ -6,17 +6,16 @@
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-NSString* kYZHFontStyleSHSCN_Regular = @"SourceHanSansCN-Regular"; //常用字体风格名,通过外部导入到项目中
-NSString* kYZHFontStyleSHSCN_Light = @"SourceHanSansCN-Light";
-
-NSString* kYZHFontStyleSHSCN_Normal = @"SourceHanSansCN-Normal";
+NSString* kYZHFontStyleSHSCN_Regular = @"SourceHanSansCN-Regular";
+NSString* kYZHFontStyleSHSCN_Light = @"SourceHanSansCN-Light";   //细字体风格名,通过外部导入到项目中
+NSString* kYZHFontStyleSHSCN_Normal = @"SourceHanSansCN-Normal"; //粗体字体风格名,通过外部导入到项目中
 #import "UIFont+YZHFontStyle.h"
 
 @implementation UIFont (YZHFontStyle)
 
 + (UIFont *)yzh_commonFontStyle {
     
-    UIFont * font = [UIFont fontWithName:kYZHFontStyleSHSCN_Regular size: 15];
+    UIFont * font = [UIFont fontWithName:kYZHFontStyleSHSCN_Normal size: 15];
     
     return font;
 }
@@ -24,6 +23,13 @@ NSString* kYZHFontStyleSHSCN_Normal = @"SourceHanSansCN-Normal";
 + (UIFont *)yzh_commonStyleWithFontSize:(CGFloat)fontSize {
     
     UIFont* font = [UIFont fontWithName:kYZHFontStyleSHSCN_Normal size:fontSize];
+    
+    return font;
+}
+
++ (UIFont *)yzh_commonLightStyleWithFontSize:(CGFloat)fontSize {
+    
+    UIFont* font = [UIFont fontWithName:kYZHFontStyleSHSCN_Light size:fontSize];
     
     return font;
 }

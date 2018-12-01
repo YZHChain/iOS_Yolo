@@ -96,7 +96,7 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.account;
+        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
         if (self.url==nil) {
             self.url = [NSString stringWithFormat:@"http://192.168.3.31:8091/html/integral/index_page.html?yolo_no=%@&platform=ios",yolo_no];
         }

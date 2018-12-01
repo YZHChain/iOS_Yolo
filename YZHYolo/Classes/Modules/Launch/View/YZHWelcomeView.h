@@ -12,6 +12,8 @@
 
 @property (nonatomic, copy) YZHButtonExecuteBlock regesterButtonBlock;
 @property (nonatomic, copy) YZHButtonExecuteBlock loginButtonBlock;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+
 @property (weak, nonatomic) IBOutlet UIView *bannerView;
 @property (weak, nonatomic) IBOutlet UIView *LoginRigesterView;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;

@@ -14,9 +14,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHIMLoginData : NSObject
 
-@property (nonatomic, copy) NSString *account;
-@property (nonatomic, copy) NSString *token;
-@property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, copy) NSString *account; // IM平台登录账号
+@property (nonatomic, copy) NSString *token;   // IM平台Token
+@property (nonatomic, copy) NSString *yoloId;  // Yolo 号.
+@property (nonatomic, copy) NSString *mnemonicWord; //助记词
+@property (nonatomic, copy) NSString *userId;  // Yolo 账号 与 自己后台交互时使用
+@property (nonatomic, copy) NSString *phoneNumber; //电话号码.
+@property (nonatomic, copy) NSString *appKey; // IM Appkey
 @property (nonatomic, assign) BOOL isAutoLogin;
 
 @end

@@ -116,7 +116,8 @@ static NSString* subTitleAlreadyInviteText = @"已邀请";
         }
     }
     self.namePhones = phoneContactArray.copy;
-    self.userId = [YZHUserLoginManage sharedManager].currentLoginData.account;
+    //UserId
+    self.userId = [YZHUserLoginManage sharedManager].currentLoginData.userId;
     if (YZHIsString(_userId) && YZHIsArray(self.namePhones)) {
         self.params = @{
                              @"namePhones": self.namePhones,

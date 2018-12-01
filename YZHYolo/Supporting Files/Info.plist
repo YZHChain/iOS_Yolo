@@ -47,8 +47,8 @@
 	<string>Light</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SourceHanSansCN-Regular.ttf</string>
 		<string>SourceHanSansCN-Normal.ttf</string>
+		<string>SourceHanSansCN-Light.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>

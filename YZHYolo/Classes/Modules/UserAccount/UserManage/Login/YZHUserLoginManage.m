@@ -13,6 +13,9 @@
 
 static NSString* kYZHIMAccountKey     = @"account";
 static NSString* kYZHIMTokenKey       = @"token";
+static NSString* kYZHIMYoloNoKey       = @"yoloId";
+static NSString* kYZHServerUserIdKey       = @"userId"; //
+static NSString* kYZHServerUserWordKey       = @"mnemonicWord"; // 助记词
 static NSString* kYZHUserPhoneNumberKey = @"phoneNumber";
 static NSString* kYZHIMAutoLoginKey   = @"kYZHIMAutoLogin";
 static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
@@ -22,10 +25,13 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
-        _account = [aDecoder decodeObjectForKey:kYZHIMAccountKey];
-        _token = [aDecoder decodeObjectForKey:kYZHIMTokenKey];
-        _isAutoLogin = [[aDecoder decodeObjectForKey:kYZHIMAutoLoginKey] boolValue];
-        _phoneNumber = [aDecoder decodeObjectForKey:kYZHUserPhoneNumberKey];
+        _account      = [aDecoder decodeObjectForKey:kYZHIMAccountKey];
+        _token        = [aDecoder decodeObjectForKey:kYZHIMTokenKey];
+        _yoloId       = [aDecoder decodeObjectForKey:kYZHIMYoloNoKey];
+        _userId       = [aDecoder decodeObjectForKey:kYZHServerUserIdKey];
+        _isAutoLogin  = [[aDecoder decodeObjectForKey:kYZHIMAutoLoginKey] boolValue];
+        _mnemonicWord = [aDecoder decodeObjectForKey:kYZHServerUserWordKey];
+        _phoneNumber  = [aDecoder decodeObjectForKey:kYZHUserPhoneNumberKey];
     }
     return self;
 }
@@ -41,6 +47,18 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     if ([_phoneNumber length]) {
         [encoder encodeObject:_phoneNumber forKey:kYZHUserPhoneNumberKey];
     }
+    if ([_yoloId length]) {
+        [encoder encodeObject:_yoloId forKey:kYZHIMYoloNoKey];
+    }
+    if ([_mnemonicWord length]) {
+        [encoder encodeObject:_mnemonicWord forKey:kYZHServerUserWordKey];
+    }
+//    if (_userId != 0) {
+//        [encoder encodeInteger:_userId forKey:kYZHServerUserIdKey];
+//    }
+    if ([_userId length]) {
+        [encoder encodeObject:_userId forKey:kYZHServerUserIdKey];
+    }
     [encoder encodeObject:@(self.isAutoLogin) forKey:kYZHIMAutoLoginKey];
     
 }
@@ -48,14 +66,6 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 - (BOOL)isAutoLogin {
 
     return YES;
-}
-
-- (NSString *)phoneNumber {
-    
-    if (!_phoneNumber) {
-        _phoneNumber = @"18888888888";
-    }
-    return _phoneNumber;
 }
 
 @end
@@ -217,13 +227,15 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
         }
     }];
 }
-
-// 网易IM信登录成功处理
+// 网易IM信登录成功处理  //每次登录成功之后数据持久化处理.
 - (void)IMServerLoginSuccessWithAccount:(NSString *)account token:(NSString *)token userLoginModel:(YZHLoginModel* )userLoginModel {
-    //TODO:开启子线程异步执行保存登录数据.
+    //TODO:开启子线程异步执行保存登录数据. //
     YZHIMLoginData* currentLoginData = [[YZHIMLoginData alloc] init];
     currentLoginData.account = account;
     currentLoginData.token = token;
+    currentLoginData.userId = currentLoginData.userId;
+    currentLoginData.yoloId = currentLoginData.yoloId;
+    currentLoginData.mnemonicWord = currentLoginData.mnemonicWord; //助记词.
     currentLoginData.isAutoLogin = YES;
     currentLoginData.phoneNumber = userLoginModel.phone;
     // 赋值, 并且保存.

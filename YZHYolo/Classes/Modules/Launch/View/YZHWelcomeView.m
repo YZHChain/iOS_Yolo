@@ -18,6 +18,11 @@
     
     [super awakeFromNib];
     
+    self.registerButton.layer.cornerRadius = 4;
+    self.registerButton.layer.masksToBounds = YES;
+    [self.registerButton.titleLabel setFont:[UIFont yzh_commonLightStyleWithFontSize:15]];
+    self.registerButton.titleLabel.textColor = [UIColor whiteColor];
+    
     [self setupNotification];
 }
 

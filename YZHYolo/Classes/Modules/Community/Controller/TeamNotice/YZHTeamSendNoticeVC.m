@@ -129,7 +129,7 @@
 //    }
     //TODO: 同步群问题. IM 没提供多个群接口,  需要多次调用. 不合适.
     if (YZHIsString(self.noticeImportBoxView.importTextView.text)) {
-        NSString* userId = [[[YZHUserLoginManage sharedManager] currentLoginData] account];
+        NSString* userId = [[[YZHUserLoginManage sharedManager] currentLoginData] userId];
         NSMutableString* groupIds = [[NSMutableString alloc] init];
         [self.selectedTeamArray enumerateObjectsUsingBlock:^(NSString*  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (idx) {
