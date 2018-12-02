@@ -83,7 +83,7 @@
                 self.codeTipLabel.text = nil;
             } failureCompletion:^(NSError *error) {
                 self.codeTipLabel.hidden = NO;
-                self.codeTipLabel.text = error.domain;
+                self.codeTipLabel.text = @"邀请码输入错误";
             }];
         }
     }

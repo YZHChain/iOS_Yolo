@@ -96,13 +96,13 @@
 
 - (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
     
+    NSLog(@"开始排序");
     [self updateTeamDefaultTags];
     
     [self.lockTeamRecentSession removeAllObjects];
     //用于保存,存在标签的回话.
     _tagsTeamRecentSession = [self defaultTeamTagsRecentSession];
     
-    NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
     //检查本地扩展字段.
     for (NSInteger i = 0; i < allRecentSession.count; i++) {
         NIMRecentSession* recentSession = allRecentSession[i];
@@ -112,14 +112,14 @@
         // BUG
         for (NSInteger y = 0; y < tagCount; y++) {
             //先检查是否包含置顶,如果包含则不需要考虑标签,之前假如到第一组
-            if ([[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == YES || teamExt.team_top) {
+            if (teamExt.team_top) {
                 [self.tagsTeamRecentSession.firstObject addObject:recentSession];
                 break;
             } else {
                 [self.tagsTeamRecentSession.firstObject removeObject:recentSession];
             }
             //如果群属于上锁, 并且非置顶, 则加入到第二个分区.
-            if (teamExt.team_lock && [[recentSession.localExt objectForKey:markTypeTopkey] boolValue] == NO) {
+            if (teamExt.team_lock && teamExt.team_top == NO) {
                 //直接添加到上锁群回话列表中
                 if (self.lockTeamRecentSession.count) {
                     [self.lockTeamRecentSession addObject:recentSession];
@@ -138,7 +138,6 @@
             BOOL isSessionTypeTeam = recentSession.session.sessionType == NIMSessionTypeTeam;
             // 查找到之后终止循环,防止重复添加。
             if ([tagName isEqualToString:sessionTagName] && isSessionTypeTeam) {
-                
                 [self.tagsTeamRecentSession[y] addObject:recentSession];
                 break;
             } else if(sessionTagName.length == 0 && isSessionTypeTeam) { //未设置标签的群则直接添加到最后一组.
@@ -159,39 +158,29 @@
 // 对默认列表进行排序, 
 - (void)screeningDefaultSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
     
-        NSLog(@"所有回话%ld", allRecentSession.count);
-        NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
-        NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
         [self.lockTeamRecentSession removeAllObjects];
+    
         //将最新回话里面所有设置上锁, 非置顶的群回话抽取出来.
         self.TeamRecentSession = [allRecentSession mutableCopy];
         self.topTeamCount = 0;
-        //计算置顶个数.
-        
-        //置顶只使用 用户对群自定义字段 team_top 判断
-//        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
-        @weakify(self)
-        [self.TeamRecentSession enumerateObjectsUsingBlock:^(NIMRecentSession * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            @strongify(self)
-            //需要计算当前回话一共有多少个置顶群,
-            YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:obj.session.sessionId];
-//             || [[obj.localExt objectForKey:markTypeTopkey] boolValue] == YES
+        //计算置顶个数.与上锁群个数
+        for (NSInteger i = 0; i < self.TeamRecentSession.count; i++) {
+            NIMRecentSession* recentSession = self.TeamRecentSession[i];
+            YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
             if (teamExt.team_top) {
                 ++ self.topTeamCount;
-            }
-//            [[obj.localExt objectForKey:markTypeTopkey] boolValue] == NO ||
-            if ((teamExt.team_lock && (teamExt.team_top == NO))) {
-                [self.TeamRecentSession removeObject:obj];
+            } else if (teamExt.team_lock) {
                 //直接添加到上锁群回话列表中
                 if (self.lockTeamRecentSession.count) {
-                    [self.lockTeamRecentSession addObject:obj];
+                    [self.lockTeamRecentSession addObject:recentSession];
                 } else {
                     self.lockTeamRecentSession = [[NSMutableArray alloc] init];
-                    [self.lockTeamRecentSession addObject:obj];
+                    [self.lockTeamRecentSession addObject:recentSession];
                 }
-                NSLog(@"总个数:%ld", allRecentSession.count);
+                [self.TeamRecentSession removeObject:recentSession];
+                i--;
             }
-        }];
+        }
         //先检查是否存在置顶,如果存在并且有上锁群,则插入到第二行,否则在最前
         if (self.topTeamCount) {
             if (self.lockTeamRecentSession.count) {
@@ -202,10 +191,7 @@
                 self.tagsTeamRecentSession[0] = self.lockTeamRecentSession;
             }
         }
-        NSLog(@"所有回话%ld", allRecentSession.count);
-        NSLog(@"所有锁回话%ld", self.lockTeamRecentSession.count);
-        NSLog(@"所有默认回话%ld", self.TeamRecentSession.count);
-    // 去掉不包含回话的数组.
+        // 去掉不包含回话的数组.
         for (NSInteger i = 0; i < self.tagsTeamRecentSession.count;) {
             if (self.tagsTeamRecentSession[i].count == 0) {
                 [self.tagsTeamRecentSession removeObjectAtIndex:i];
@@ -213,6 +199,7 @@
                 i++;
             }
         }
+    NSLog(@"排序结束");
     
 }
 // 社群列表时间排序.
@@ -282,7 +269,7 @@
         [self screeningTagSessionAllTeamRecentSession:allRecentSession];
         [self sortTagTeamRecentSession];
         [self screeningDefaultSessionAllTeamRecentSession:allRecentSession];
-        [self customSortTeamRecents:allRecentSession];
+        [self customSortTeamRecents:self.TeamRecentSession];
     }
 }
 //TODO:

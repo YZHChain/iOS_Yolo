@@ -111,7 +111,7 @@
 - (void)setupLoginEvent {
     
     BOOL isIMTest = NO;
-    if (isIMTest) {
+    if (!isIMTest) {
         NSDictionary* obj = @{
                                   @"appKey" : @"2828b3cd20e9263f914344c284588b60",
                                   @"userId" : @"",
@@ -178,7 +178,7 @@
         [hud hideWithText:@"登录成功"];
     } failureCompletion:^(NSError *error) {
         // TODO云信登录错误
-        [hud hideWithText:error.domain];
+        [hud hideWithText:@"登录失败, 请重试"];
     }];
 }
 
