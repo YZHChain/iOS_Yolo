@@ -13,6 +13,13 @@ NSString* kYZHFontStyleSHSCN_Normal = @"SourceHanSansCN-Normal"; //粗体字体�
 
 @implementation UIFont (YZHFontStyle)
 
++ (UIFont *)yzh_commonFontStyleFontSize:(CGFloat )fontSize {
+    
+    UIFont * font = [UIFont fontWithName:@"PingFang HK" size:fontSize];
+    
+    return font;
+}
+
 + (UIFont *)yzh_commonFontStyle {
     
     UIFont * font = [UIFont fontWithName:kYZHFontStyleSHSCN_Normal size: 15];

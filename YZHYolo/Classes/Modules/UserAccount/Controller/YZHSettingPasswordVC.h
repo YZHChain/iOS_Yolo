@@ -14,7 +14,9 @@ typedef enum : NSUInteger {
 } YZHSettingPasswordType;
 @interface YZHSettingPasswordVC : YZHBaseViewController
 
-@property(nonatomic, copy)NSString* phoneNum;
+@property(nonatomic, copy)NSString* phoneNum; //原先是手机号码, 新版注册流程统一都是 YoloId
+@property(nonatomic, copy)NSString* inviteCode; //邀请码.
 @property(nonatomic, assign)YZHSettingPasswordType settingPasswordType;
+
 
 @end

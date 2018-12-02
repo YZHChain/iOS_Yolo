@@ -146,7 +146,7 @@
                     <rect key="frame" x="0.0" y="514" width="375" height="153"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CW9-wd-TJZ">
-                            <rect key="frame" x="127.5" y="93" width="120" height="16"/>
+                            <rect key="frame" x="130" y="93" width="115" height="16"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有账号," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RY-cg-0a8">
                                     <rect key="frame" x="0.0" y="0.0" width="64" height="21"/>
@@ -158,12 +158,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-sU-SG0">
-                                    <rect key="frame" x="70" y="-7" width="50" height="34"/>
+                                    <rect key="frame" x="70" y="-7" width="45" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="34" id="xT8-rb-epf"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="15"/>
-                                    <state key="normal" title="去 登录">
+                                    <state key="normal" title="去登录">
                                         <color key="titleColor" red="0.094117647058823528" green="0.19607843137254902" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -176,7 +176,7 @@
                                 <constraint firstAttribute="trailing" secondItem="1XO-sU-SG0" secondAttribute="trailing" id="3Y2-dr-89n"/>
                                 <constraint firstAttribute="height" constant="16" id="CGH-b0-ARD"/>
                                 <constraint firstItem="1XO-sU-SG0" firstAttribute="top" secondItem="CW9-wd-TJZ" secondAttribute="top" constant="-7" id="GU8-L0-QN8"/>
-                                <constraint firstAttribute="width" constant="120" id="mJA-zB-bpN"/>
+                                <constraint firstAttribute="width" constant="115" id="mJA-zB-bpN"/>
                                 <constraint firstItem="1RY-cg-0a8" firstAttribute="leading" secondItem="CW9-wd-TJZ" secondAttribute="leading" id="tRZ-WP-eeM"/>
                                 <constraint firstItem="1RY-cg-0a8" firstAttribute="top" secondItem="CW9-wd-TJZ" secondAttribute="top" id="wOo-Lz-hPc"/>
                             </constraints>

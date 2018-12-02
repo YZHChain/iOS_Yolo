@@ -18,6 +18,7 @@
 #define PATH_USER_MODIFI_PASSWORD               @"http://139.129.208.242:8084/user/updatePassword"     // 客户端用户修改密码
 #define PATH_USER_LOGIN_LOGINVERIFY             @"http://139.129.208.242:8084/user/login"              // 客户端用户登录
 #define PATH_USER_REGISTERED_REGISTEREDNVERIFY  @"http://139.129.208.242:8084/user/register"           // 客户端用户注册
+#define PATH_USER_REGISTERED_CHECKINVITECODE  @"http://139.129.208.242:8084/user/checkInviteCode"    // 检测邀请码
 #define PATH_USER_CHECKOUTYOLOID                @"http://139.129.208.242:8084/user/checkYoloNo"        // 检测YoloID 是否可用包括手机号
 #define PATH_USER_UPDATELOGIN                   @"http://139.129.208.242:8084/user/updateLogin"        //修改 Yolo 号
 #define PATH_USER_CHECKOUPHONE                  @"http://139.129.208.242:8084/user/checkPhone"         //检测Phone 是否已经注册

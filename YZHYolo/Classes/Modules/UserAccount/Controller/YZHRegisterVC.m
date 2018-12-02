@@ -80,18 +80,20 @@
     if (self.phoneNumberString.length > 0) {
         self.registerView.phoneTextField.text = self.phoneNumberString;
     }
-    @weakify(self)
-    [self.registerView.getCodeButton bk_addEventHandler:^(id sender) {
-        @strongify(self)
-        // 获取短信
-        [self getMessagingVerificationWithSender:sender];
-    } forControlEvents:UIControlEventTouchUpInside];
+//    @weakify(self)
+//    [self.registerView.getCodeButton bk_addEventHandler:^(id sender) {
+//        @strongify(self)
+//        // 获取短信
+//        [self getMessagingVerificationWithSender:sender];
+//    } forControlEvents:UIControlEventTouchUpInside];
     
-    [self.registerView.confirmButton bk_addEventHandler:^(id sender) {
-        @strongify(self)
-        //注册
-        [self postRegister];
-    } forControlEvents:UIControlEventTouchUpInside];
+//    [self.registerView.confirmButton bk_addEventHandler:^(id sender) {
+//        @strongify(self)
+//        //注册
+//        [self postRegister];
+//    } forControlEvents:UIControlEventTouchUpInside];
+    [self.registerView.registerButton addTarget:self action:@selector(clickRegister:) forControlEvents:UIControlEventTouchUpInside];
+    [self.registerView.protocolButton addTarget:self action:@selector(clickReadProtocol:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.registerView];
     
     [self.registerView.phoneTextField becomeFirstResponder];
@@ -155,7 +157,30 @@
     }
     
 }
+// 新版注册. 
+- (void)clickRegister:(UIButton *)sender {
 
+    NSDictionary* dic = @{
+                          @"yoloNo":self.registerView.phoneTextField.text.length ? self.registerView.phoneTextField.text : @""
+                          };
+    //检测 Yolo 号是否可用
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
+        @strongify(self)
+        // 跳转至设置密码,并且带 YoloID,和邀请码.
+        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text, @"settingPasswordType": @(0), @"inviteCode": self.registerView.codeTextField.text.length ? self.registerView.codeTextField.text : @""}];
+        
+    } failureCompletion:^(NSError *error) {
+        
+        [hud hideWithText:error.domain];
+    }];
+}
+// 阅读协议.
+- (void)clickReadProtocol:(UIButton *)sender {
+    
+    
+}
 #pragma mark - 6.Private Methods
 
 - (void)setupNotification

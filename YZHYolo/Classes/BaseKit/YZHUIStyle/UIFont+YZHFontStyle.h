@@ -14,6 +14,7 @@ extern NSString* kYZHFontStyleSHSCN_Normal;
 
 @interface UIFont (YZHFontStyle)
 
++ (UIFont *)yzh_commonFontStyleFontSize:(CGFloat )fontSize; //PingFang
 + (UIFont *)yzh_commonFontStyle;
 + (UIFont *)yzh_commonStyleWithFontSize:(CGFloat)fontSize;
 + (UIFont *)yzh_commonLightStyleWithFontSize:(CGFloat)fontSize;
