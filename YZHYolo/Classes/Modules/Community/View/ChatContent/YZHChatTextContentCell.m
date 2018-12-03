@@ -14,15 +14,24 @@
 @end
 
 @implementation YZHChatTextContentCell
+{
+    UILongPressGestureRecognizer *_longPressGesture;
+    UIMenuController             *_menuController;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 //        [self makeComponents];
-//        [self makeGesture];
+        [self makeGesture];
     }
     return self;
+}
+
+- (void)makeGesture{
+    _longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longGesturePress:)];
+    [self addGestureRecognizer:_longPressGesture];
 }
 
 - (void)refreshData:(NIMMessageModel *)data
@@ -106,5 +115,15 @@
     }
 }
 
+- (void)longGesturePress:(UIGestureRecognizer *)gestureRecognizer
+{
+    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]] &&
+        gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onLongPressCell:inView:)]) {
+            [self.delegate onLongPressCell:self.model.message
+                                    inView:_bubbleView];
+        }
+    }
+}
 
 @end

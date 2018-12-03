@@ -71,6 +71,11 @@
     return [self validateWithRegex:@"[1-9][0-9]{4,}"];
 }
 
+- (BOOL)yzh_isHTTP {
+    
+    return [self validateWithRegex:@"((http|https)://)?(([a-zA-Z0-9\\._-]+\\.[a-zA-Z]{2,6})|([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}))(:[0-9]{1,4})*(/[^<|^>]*)?"];
+}
+
 + (BOOL)yzh_isEmptyString:(id)string
 {
     

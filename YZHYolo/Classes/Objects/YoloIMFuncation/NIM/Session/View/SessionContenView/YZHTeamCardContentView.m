@@ -10,6 +10,8 @@
 
 #import "YZHTeamCardAttachment.h"
 #import "UIImageView+YZHImage.h"
+#import "YZHTeamInfoExtManage.h"
+#import "YZHProgressHUD.h"
 
 @interface YZHTeamCardContentView()
 
@@ -50,6 +52,9 @@
         _contentView.backgroundColor = [UIColor whiteColor];
         
         _avatarImageView = [[UIImageView alloc] init];
+        _avatarImageView.image = [UIImage imageNamed:@"team_cell_photoImage_default"];
+        _avatarImageView.layer.cornerRadius = 2.5;
+        _avatarImageView.layer.masksToBounds = YES;
         
         _teamNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _teamNameLabel.font = [UIFont systemFontOfSize:14];
@@ -80,6 +85,7 @@
         [_contentView addSubview:_teamSynopsisLabel];
         
         _showButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _showButton.backgroundColor = [UIColor clearColor];
         [_showButton addTarget:self action:@selector(onTouchTeamUpInside:) forControlEvents:UIControlEventTouchUpInside];
         
         _addTeamButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -102,10 +108,11 @@
     [super refresh:data];
     NIMCustomObject *customObject = (NIMCustomObject*)data.message.messageObject;
     YZHTeamCardAttachment* attachment = (YZHTeamCardAttachment *)customObject.attachment;
+    self.attachment = attachment;
     if ([attachment isKindOfClass:[YZHTeamCardAttachment class]]) {
         _titleLabel.text = attachment.titleName;
-        [_avatarImageView yzh_setImageWithString:attachment.avatarUrl placeholder:@"addBook_cover_cell_photo_default"];
-        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
+        [_avatarImageView yzh_setImageWithString:attachment.avatarUrl placeholder:@"team_cell_photoImage_default"];
+//        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
         _teamNameLabel.text = attachment.groupName;
         _teamUrlLabel.text = attachment.groupUrl;
         _teamSynopsisLabel.text = attachment.groupSynopsis;
@@ -164,11 +171,46 @@
 
 - (void)onTouchTeamUpInside:(id)sender
 {
+    //判断当前账号与此群关系
+    BOOL isMyTeam = [[[NIMSDK sharedSDK] teamManager] isMyTeam:self.attachment.groupID];
+    BOOL isOwner = NO;
     
+    if (isMyTeam) {
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        NSString* teamOwner = [[[NIMSDK sharedSDK] teamManager] teamById:self.attachment.groupID].owner;
+        if ([userId isEqualToString:teamOwner]) {
+            isOwner = YES;
+        } else {
+            isOwner = NO;
+        }
+        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                          @"isTeamOwner":@(isOwner),
+                                                          @"teamId":self.attachment.groupID ? self.attachment.groupID : @""
+                                                          }];
+    } else {
+        
+        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                               @"teamId": self.attachment.groupID ? self.attachment.groupID : @""
+                                                               }];
+    }
 }
 
 - (void)onTouchAddTeamUpInside:(id)sender {
     
+    //判断当前账号与此群关系
+    BOOL isMyTeam = [[[NIMSDK sharedSDK] teamManager] isMyTeam:self.attachment.groupID];
+    NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    if (!isMyTeam) {
+        //是否还需要再判断此群是公开或者私密等.
+        [[[NIMSDK sharedSDK] teamManager] addUsers:@[userId] toTeam:self.attachment.groupID postscript:@"通过群名片分享加入" completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+            if (!error) {
+                [YZHProgressHUD showText:@"您已成功加入社群" onView:YZHAppWindow];
+            }
+        }];
+    } else {
+        //已在本群
+        [YZHProgressHUD showText:@"您已是本社群成员" onView:YZHAppWindow];
+    }
     
 }
 

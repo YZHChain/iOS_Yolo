@@ -59,9 +59,9 @@
             obj.selected = NO;
         }
     }];
-    
     if (self.contentType != sender.tag) {
         self.switchTypeBlock(sender.tag);
+        self.contentType = sender.tag;
     }
 }
 

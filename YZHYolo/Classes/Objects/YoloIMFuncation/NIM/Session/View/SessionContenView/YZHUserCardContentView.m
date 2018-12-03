@@ -44,6 +44,9 @@
         _contentView.backgroundColor = [UIColor whiteColor];
         
         _avatarImageView = [[UIImageView alloc] init];
+        _avatarImageView.image = [UIImage imageNamed:@"addBook_cover_cell_photo_default"];
+        _avatarImageView.layer.cornerRadius = 2.5;
+        _avatarImageView.layer.masksToBounds = YES;
         
         _nickNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _nickNameLabel.font = [UIFont systemFontOfSize:14];
@@ -67,6 +70,7 @@
         [_contentView addSubview:_yoloIDLaebl];
         
         _showButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _showButton.backgroundColor = [UIColor clearColor];
         [_showButton addTarget:self action:@selector(onTouchCardUpInside:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_showButton];
         
@@ -87,7 +91,7 @@
         
         _titleLabel.text = attachment.titleName;
         [_avatarImageView yzh_setImageWithString:attachment.avatarUrl placeholder:@"addBook_cover_cell_photo_default"];
-        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
+//        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
         _nickNameLabel.text = attachment.userName;
         _yoloIDLaebl.text = attachment.yoloID;
         [_avatarImageView setSize:CGSizeMake(45, 45)];

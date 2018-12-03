@@ -26,6 +26,7 @@
 - (BOOL)yzh_isChinese;
 - (BOOL)yzh_isEmail;
 - (BOOL)yzh_isQQ;
+- (BOOL)yzh_isHTTP;
 
 + (BOOL)yzh_isEmptyString:(id)string;
 //是否为整数
