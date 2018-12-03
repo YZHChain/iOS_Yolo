@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHUserCardContentView : NIMSessionMessageContentView
 
+//- (void)refresh:(NIMMessageModel *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

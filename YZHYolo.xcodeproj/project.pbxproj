@@ -357,6 +357,8 @@
 		5593C529216D947A00A50533 /* YZHAddFirendSubtitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593C527216D947A00A50533 /* YZHAddFirendSubtitleCell.m */; };
 		5593C52A216D947A00A50533 /* YZHAddFirendSubtitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */; };
 		5593C52E216DFCE900A50533 /* YZHScanQRCodeMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5593C52D216DFCE900A50533 /* YZHScanQRCodeMaskView.m */; };
+		559754D121B42367009AC4D1 /* YZHChatTextContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 559754D021B42367009AC4D1 /* YZHChatTextContentCell.m */; };
+		559754D421B43809009AC4D1 /* YZHCardContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 559754D321B43809009AC4D1 /* YZHCardContentCell.m */; };
 		55977D2A21B0330200309740 /* YZHTeamCardIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2921B0330200309740 /* YZHTeamCardIntroVC.m */; };
 		55977D2D21B0339800309740 /* YZHTeamCardIntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2C21B0339800309740 /* YZHTeamCardIntroModel.m */; };
 		55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = 55977D2F21B03E5400309740 /* YZHTeamCardIntro.m */; };
@@ -1174,6 +1176,10 @@
 		5593C528216D947A00A50533 /* YZHAddFirendSubtitleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddFirendSubtitleCell.xib; sourceTree = "<group>"; };
 		5593C52C216DFCE900A50533 /* YZHScanQRCodeMaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHScanQRCodeMaskView.h; sourceTree = "<group>"; };
 		5593C52D216DFCE900A50533 /* YZHScanQRCodeMaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHScanQRCodeMaskView.m; sourceTree = "<group>"; };
+		559754CF21B42367009AC4D1 /* YZHChatTextContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHChatTextContentCell.h; sourceTree = "<group>"; };
+		559754D021B42367009AC4D1 /* YZHChatTextContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHChatTextContentCell.m; sourceTree = "<group>"; };
+		559754D221B43809009AC4D1 /* YZHCardContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCardContentCell.h; sourceTree = "<group>"; };
+		559754D321B43809009AC4D1 /* YZHCardContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCardContentCell.m; sourceTree = "<group>"; };
 		55977D2821B0330200309740 /* YZHTeamCardIntroVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardIntroVC.h; sourceTree = "<group>"; };
 		55977D2921B0330200309740 /* YZHTeamCardIntroVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamCardIntroVC.m; sourceTree = "<group>"; };
 		55977D2B21B0339800309740 /* YZHTeamCardIntroModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardIntroModel.h; sourceTree = "<group>"; };
@@ -1912,6 +1918,7 @@
 		55128A1F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				559754CC21B42211009AC4D1 /* ChatContent */,
 				5537422521A6D3B800204972 /* AtMember */,
 				5537421621A6791F00204972 /* SetTag */,
 				5537421121A64C5B00204972 /* TeamClass */,
@@ -1927,8 +1934,6 @@
 				55AA826C2186D8EC00ED73B1 /* YZHCommunityChatVC.m */,
 				55B385F72186EA590057FBEE /* YZHCommunitySearchVC.h */,
 				55B385F82186EA590057FBEE /* YZHCommunitySearchVC.m */,
-				5551B34421A58AA600AF3088 /* YZHChatContentVC.h */,
-				5551B34521A58AA600AF3088 /* YZHChatContentVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1936,6 +1941,7 @@
 		55128A2021463E480099CC55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				559754CE21B42234009AC4D1 /* ChatContent */,
 				5537422C21A6D4B100204972 /* AtMember */,
 				5537421221A64C6C00204972 /* TeamClass */,
 				5537420F21A6393000204972 /* CreatTeam */,
@@ -1949,6 +1955,7 @@
 		55128A2121463E480099CC55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				559754CD21B42226009AC4D1 /* ChatContent */,
 				5537422B21A6D4A400204972 /* AtMember */,
 				5537421021A6393C00204972 /* CreatTeam */,
 				5537420D21A6390C00204972 /* TeamNotice */,
@@ -3399,6 +3406,33 @@
 			path = ScanQRCode;
 			sourceTree = "<group>";
 		};
+		559754CC21B42211009AC4D1 /* ChatContent */ = {
+			isa = PBXGroup;
+			children = (
+				5551B34421A58AA600AF3088 /* YZHChatContentVC.h */,
+				5551B34521A58AA600AF3088 /* YZHChatContentVC.m */,
+			);
+			path = ChatContent;
+			sourceTree = "<group>";
+		};
+		559754CD21B42226009AC4D1 /* ChatContent */ = {
+			isa = PBXGroup;
+			children = (
+				559754D221B43809009AC4D1 /* YZHCardContentCell.h */,
+				559754D321B43809009AC4D1 /* YZHCardContentCell.m */,
+				559754CF21B42367009AC4D1 /* YZHChatTextContentCell.h */,
+				559754D021B42367009AC4D1 /* YZHChatTextContentCell.m */,
+			);
+			path = ChatContent;
+			sourceTree = "<group>";
+		};
+		559754CE21B42234009AC4D1 /* ChatContent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatContent;
+			sourceTree = "<group>";
+		};
 		55977D3321B0D31C00309740 /* ScanQRCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -4599,6 +4633,7 @@
 				55560234217EF8A0000F46DF /* NSString+NTES.m in Sources */,
 				5537423421A6DA6700204972 /* YZHTeamMembers.m in Sources */,
 				5551B34221A56CED00AF3088 /* YZHTeamNoticeSelectedTeamCell.m in Sources */,
+				559754D121B42367009AC4D1 /* YZHChatTextContentCell.m in Sources */,
 				55B5DB9B21530EDA002A04A9 /* UIScrollView+YZHRefresh.m in Sources */,
 				553641D4217EAEC2006F77A5 /* NIMBadgeView.m in Sources */,
 				553641CB217EAEC2006F77A5 /* NIMInputView.m in Sources */,
@@ -4743,6 +4778,7 @@
 				553641B8217EAEC2006F77A5 /* NIMGroupedUsrInfo.m in Sources */,
 				553641F4217EAEC3006F77A5 /* NIMMessageModel.m in Sources */,
 				555B8074219B455000168C3C /* YZHAddBookAddFirendShowVC.m in Sources */,
+				559754D421B43809009AC4D1 /* YZHCardContentCell.m in Sources */,
 				555B8078219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m in Sources */,
 				55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */,
 				553641DC217EAEC2006F77A5 /* NIMKitNotificationFirer.m in Sources */,

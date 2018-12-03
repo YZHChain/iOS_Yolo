@@ -33,8 +33,6 @@
 
 @end
 
-
-
 @implementation NIMMessageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
