@@ -192,6 +192,7 @@
                 <outlet property="protocolLabel" destination="UHU-kr-YII" id="Jq8-UP-fOg"/>
                 <outlet property="registerButton" destination="EMA-wF-DKz" id="3dH-tn-XP2"/>
                 <outlet property="titleLabel" destination="yZ6-b8-OsQ" id="p40-un-kOt"/>
+                <outlet property="topContentView" destination="pw8-il-aa2" id="Zax-5e-UpP"/>
             </connections>
             <point key="canvasLocation" x="28" y="-1021"/>
         </view>

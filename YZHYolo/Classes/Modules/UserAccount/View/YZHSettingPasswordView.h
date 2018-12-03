@@ -20,4 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIView *securityIndexView;
 @property (weak, nonatomic) IBOutlet UILabel *securityIndexLable;
 
+@property (weak, nonatomic) IBOutlet UILabel *yoloLabel;
+@property (weak, nonatomic) IBOutlet UILabel *yoloIdLabel;
+
+
 @end

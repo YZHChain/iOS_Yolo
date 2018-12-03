@@ -1,29 +1,25 @@
 //
-//  YZHFindPasswordVC.m
+//  YZHPhoneFindPasswordVC.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/9/17.
+//  Created by Jersey on 2018/12/3.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHFindPasswordVC.h"
+#import "YZHPhoneFindPasswordVC.h"
 
 #import "YZHFindPasswordView.h"
 #import "YZHPublic.h"
 #import "UIButton+YZHCountDown.h"
 #import "NSString+YZHTool.h"
-#import "YZHPhoneFindPasswordVC.h"
 
-@interface YZHFindPasswordVC ()<UIGestureRecognizerDelegate>
+@interface YZHPhoneFindPasswordVC ()<UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong)YZHFindPasswordView* findPasswordView;
 
 @end
 
-@implementation YZHFindPasswordVC
-
-
-#pragma mark - 1.View Controller Life Cycle
+@implementation YZHPhoneFindPasswordVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +43,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-
+    
     [super viewWillAppear:animated];
 }
 
@@ -56,26 +52,22 @@
 - (void)setupNavBar
 {
     self.navigationItem.title = @"忘记密码";
- self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.hideNavigationBar = YES;
 }
 
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.findPasswordView = [[NSBundle mainBundle] loadNibNamed:@"YZHFindPasswordView" owner:nil options:nil].lastObject;
+    self.findPasswordView = [[NSBundle mainBundle] loadNibNamed:@"YZHFindPasswordView" owner:nil options:nil].firstObject;
     self.findPasswordView.frame = self.view.bounds;
-    self.findPasswordView.accountTextField.text = self.phoneNumberString;
     [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.findPasswordView.getSMSCodeButton addTarget:self action:@selector(getMessagingVerificationWithSender:) forControlEvents:UIControlEventTouchUpInside];
     //新版本
-    [self.findPasswordView.nextButton addTarget:self action:@selector(onTouchNext:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.findPasswordView.tipButton addTarget:self action:@selector(onTouchPhone:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:self.findPasswordView];
     
-    [self.findPasswordView.passwordTextView becomeFirstResponder];
+    [self.findPasswordView.accountTextField becomeFirstResponder];
 }
 
 - (void)reloadView
@@ -93,25 +85,23 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 #pragma mark - 5.Event Response
-
+// 获取密钥.
 - (void)requestRetrievePassword:(UIButton*) sender{
     
     NSDictionary* parameter = @{
-                                @"phoneNum": self.findPasswordView.accountTextField.text ? self.findPasswordView.accountTextField.text : @"",
-                                @"type":@(1),
+                                @"phoneNum": self.findPasswordView.accountTextField.text,
+                                @"type":@(0),
                                 @"verifyCode":self.findPasswordView.SMSCodeTextField.text
                                 };
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
         @strongify(self)
         // 请求后台 成功则跳转至设置新密码 枚举
-        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordType": @(1),
-                                                            @"phoneNum":self.findPasswordView.accountTextField.text}];
+        
     } failureCompletion:^(NSError *error) {
-        //        error.code = -102;
         [YZHProgressHUD showAPIError:error];
     }];
-
+    
     
 }
 
@@ -121,7 +111,7 @@
     if ([self.findPasswordView.accountTextField.text yzh_isPhone]) {
         //TODO:
         NSDictionary* parameter = @{
-                                    @"phoneNum": self.findPasswordView.accountTextField.text ? self.findPasswordView.accountTextField.text : @"",
+                                    @"phoneNum": self.findPasswordView.accountTextField.text,
                                     @"type":@(1),
                                     };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.findPasswordView text:@""];
@@ -132,35 +122,8 @@
         } failureCompletion:^(NSError *error) {
             [YZHProgressHUD showAPIError:error];
         }];
-
+        
     }
-}
-
-// 下一步
-- (void)onTouchNext:(UIButton *)sender {
-    
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-    NSDictionary *dic = @{
-                          @"secretKey": self.findPasswordView.passwordTextView.text
-                          };
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKSECRETKEY params:dic successCompletion:^(id obj) {
-        [hud hideWithText:nil];
-        //跳转至重新设置密码
-        // 请求后台 成功则跳转至设置新密码 枚举
-        [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordType": @(1),
-                                                            @"phoneNum":obj}];
-    } failureCompletion:^(NSError *error) {
-        [hud hideWithText:error.domain];
-    }];
-   
-}
-
-// 手机号码获取密钥
-- (void)onTouchPhone:(UIButton *)sender {
-    
-    YZHPhoneFindPasswordVC* findVC = [[YZHPhoneFindPasswordVC alloc] init];
-    [self.navigationController pushViewController:findVC animated:YES];
-    
 }
 
 #pragma mark - 6.Private Methods
@@ -175,13 +138,13 @@
 
 #pragma mark - 7.GET & SET
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

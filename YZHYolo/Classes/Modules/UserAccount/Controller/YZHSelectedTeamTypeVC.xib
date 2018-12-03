@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Normal.ttf">
+            <string>SourceHanSansCN-Normal</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHSelectedTeamTypeVC">
+            <connections>
+                <outlet property="confirmButton" destination="UCi-n2-rCE" id="shC-Uz-t4U"/>
+                <outlet property="skipButton" destination="bTC-9r-Qf6" id="EoL-4O-i7x"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择感兴趣的群类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG8-65-jrv">
+                    <rect key="frame" x="15" y="25" width="135" height="21"/>
+                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="15"/>
+                    <color key="textColor" red="0.22352941176470587" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（可以多选）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFH-jG-wPc">
+                    <rect key="frame" x="15" y="50.5" width="72" height="17"/>
+                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="12"/>
+                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTC-9r-Qf6">
+                    <rect key="frame" x="325" y="25" width="45" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Lvh-1E-e1N"/>
+                        <constraint firstAttribute="width" constant="45" id="U2n-nT-eCR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                    <state key="normal" title="跳过">
+                        <color key="titleColor" red="0.22352941176470587" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onTouchSkip:" destination="-1" eventType="touchUpInside" id="ccA-Vo-KuK"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k9q-1f-egT">
+                    <rect key="frame" x="0.0" y="67.5" width="375" height="519.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGg-uG-P2o">
+                            <rect key="frame" x="228" y="50" width="94" height="94"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="94" id="B47-gf-g8Z"/>
+                                <constraint firstAttribute="height" constant="94" id="f20-1X-pcA"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="股票、经济" backgroundImage="stock_ellipse_image">
+                                <color key="titleColor" red="0.44313725490196076" green="0.82352941176470584" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gET-kR-kL3">
+                            <rect key="frame" x="82" y="64.5" width="87" height="87"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="87" id="qTR-gP-OY3"/>
+                                <constraint firstAttribute="height" constant="87" id="wNK-g2-2Ke"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="影视、 娱乐" backgroundImage="movie">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIn-EZ-oSC">
+                            <rect key="frame" x="22" y="151.5" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="SEX-Vi-RRq"/>
+                                <constraint firstAttribute="height" constant="80" id="yb2-sz-wgU"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="摄影、旅游" backgroundImage="travel">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yV9-nF-3cY">
+                            <rect key="frame" x="123.5" y="131.5" width="128" height="128"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="128" id="8jD-aN-pmH"/>
+                                <constraint firstAttribute="width" constant="128" id="ibS-0E-zSO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="运动、休闲" backgroundImage="exercise_ellipse_image">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pkx-fJ-VbA">
+                            <rect key="frame" x="284" y="182" width="76" height="76"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="wVY-2g-9EQ"/>
+                                <constraint firstAttribute="height" constant="76" id="wgj-yi-fpa"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="科技、学术" backgroundImage="stock_ellipse_image">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7V-IX-lCD">
+                            <rect key="frame" x="57" y="231.5" width="171" height="171"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="171" id="F4n-PS-xV2"/>
+                                <constraint firstAttribute="height" constant="171" id="wsw-Hz-d9h"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="区块链" backgroundImage="block_ellipse_image">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogw-1t-nLQ">
+                            <rect key="frame" x="261.5" y="268" width="94" height="94"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="94" id="YAf-es-ruu"/>
+                                <constraint firstAttribute="width" constant="94" id="p4g-Fg-RFZ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="设计、美术" backgroundImage="arts">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1C-Hb-wk0">
+                            <rect key="frame" x="22" y="399.5" width="86" height="86"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="86" id="Cl4-zd-g5E"/>
+                                <constraint firstAttribute="height" constant="86" id="N6C-46-xoG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="汽车" backgroundImage="car">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b48-wX-6e4">
+                            <rect key="frame" x="204" y="394.5" width="105" height="105"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="105" id="SbR-pn-ccr"/>
+                                <constraint firstAttribute="height" constant="105" id="gGI-hZ-4JG"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                            <state key="normal" title="购物" backgroundImage="shop">
+                                <color key="titleColor" red="0.4431372549" green="0.82352941180000006" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="tIn-EZ-oSC" firstAttribute="leading" secondItem="k9q-1f-egT" secondAttribute="leading" constant="22" id="4Se-dX-yg9"/>
+                        <constraint firstItem="S7V-IX-lCD" firstAttribute="top" secondItem="tIn-EZ-oSC" secondAttribute="bottom" id="95u-kz-oQi"/>
+                        <constraint firstItem="OGg-uG-P2o" firstAttribute="top" secondItem="k9q-1f-egT" secondAttribute="top" priority="750" constant="50" id="B2B-PL-0bk"/>
+                        <constraint firstItem="tIn-EZ-oSC" firstAttribute="top" secondItem="gET-kR-kL3" secondAttribute="bottom" id="JT5-dq-Hcb"/>
+                        <constraint firstAttribute="trailing" secondItem="Pkx-fJ-VbA" secondAttribute="trailing" constant="15" id="Jaj-HX-i9l"/>
+                        <constraint firstItem="Ogw-1t-nLQ" firstAttribute="leading" secondItem="yV9-nF-3cY" secondAttribute="trailing" constant="10" id="KGH-To-Gtp"/>
+                        <constraint firstAttribute="bottom" secondItem="T1C-Hb-wk0" secondAttribute="bottom" constant="34" id="MOs-DZ-Lom"/>
+                        <constraint firstItem="yV9-nF-3cY" firstAttribute="centerX" secondItem="k9q-1f-egT" secondAttribute="centerX" id="Qf9-il-3fH"/>
+                        <constraint firstItem="b48-wX-6e4" firstAttribute="top" secondItem="Ogw-1t-nLQ" secondAttribute="bottom" constant="32.5" id="UGm-gF-kz5"/>
+                        <constraint firstItem="gET-kR-kL3" firstAttribute="leading" secondItem="k9q-1f-egT" secondAttribute="leading" constant="82" id="Wks-3b-Rn1"/>
+                        <constraint firstAttribute="trailing" secondItem="OGg-uG-P2o" secondAttribute="trailing" constant="53" id="Xaq-8l-7TI"/>
+                        <constraint firstItem="gET-kR-kL3" firstAttribute="top" secondItem="k9q-1f-egT" secondAttribute="top" priority="750" constant="64.5" id="YAa-KF-PxJ"/>
+                        <constraint firstItem="T1C-Hb-wk0" firstAttribute="leading" secondItem="tIn-EZ-oSC" secondAttribute="leading" id="Z5f-Si-ieA"/>
+                        <constraint firstItem="Pkx-fJ-VbA" firstAttribute="top" secondItem="OGg-uG-P2o" secondAttribute="bottom" constant="38" id="drd-QJ-YKk"/>
+                        <constraint firstItem="yV9-nF-3cY" firstAttribute="top" secondItem="gET-kR-kL3" secondAttribute="bottom" constant="-20" id="eqP-TZ-F1C"/>
+                        <constraint firstAttribute="trailing" secondItem="b48-wX-6e4" secondAttribute="trailing" constant="66" id="hsT-oj-C7f"/>
+                        <constraint firstItem="Ogw-1t-nLQ" firstAttribute="top" secondItem="Pkx-fJ-VbA" secondAttribute="bottom" constant="10" id="pxy-mk-hIr"/>
+                        <constraint firstItem="S7V-IX-lCD" firstAttribute="leading" secondItem="k9q-1f-egT" secondAttribute="leading" constant="57" id="rCb-Q0-Wsf"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UCi-n2-rCE">
+                    <rect key="frame" x="68" y="597" width="239" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="c3I-CZ-utl"/>
+                    </constraints>
+                    <state key="normal" title="确定" backgroundImage="button_background_optional">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="onTouchConfirm:" destination="-1" eventType="touchUpInside" id="mOi-Zv-kuj"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="k9q-1f-egT" secondAttribute="trailing" id="58i-ZH-7js"/>
+                <constraint firstItem="UCi-n2-rCE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="68" id="63I-8p-Dot"/>
+                <constraint firstAttribute="trailing" secondItem="UCi-n2-rCE" secondAttribute="trailing" constant="68" id="Af7-Cu-FAu"/>
+                <constraint firstItem="CG8-65-jrv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Rja-Nk-R9j"/>
+                <constraint firstAttribute="trailing" secondItem="bTC-9r-Qf6" secondAttribute="trailing" constant="5" id="Z46-zf-zcb"/>
+                <constraint firstItem="CG8-65-jrv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="fIy-M9-EH6"/>
+                <constraint firstItem="k9q-1f-egT" firstAttribute="top" secondItem="vFH-jG-wPc" secondAttribute="bottom" id="mku-vh-sJy"/>
+                <constraint firstAttribute="bottom" secondItem="UCi-n2-rCE" secondAttribute="bottom" constant="30" id="pzS-rn-bma"/>
+                <constraint firstItem="UCi-n2-rCE" firstAttribute="top" secondItem="k9q-1f-egT" secondAttribute="bottom" constant="10" id="tmr-8G-bX6"/>
+                <constraint firstItem="vFH-jG-wPc" firstAttribute="leading" secondItem="CG8-65-jrv" secondAttribute="leading" id="u8Q-5b-OCg"/>
+                <constraint firstItem="vFH-jG-wPc" firstAttribute="top" secondItem="CG8-65-jrv" secondAttribute="bottom" constant="4.5" id="vof-dm-0hQ"/>
+                <constraint firstItem="k9q-1f-egT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wkX-Ih-5bf"/>
+                <constraint firstItem="bTC-9r-Qf6" firstAttribute="top" secondItem="CG8-65-jrv" secondAttribute="top" id="zAP-I7-Qzh"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="arts" width="93" height="93"/>
+        <image name="block_ellipse_image" width="171" height="171"/>
+        <image name="button_background_optional" width="120" height="20"/>
+        <image name="car" width="85" height="85"/>
+        <image name="exercise_ellipse_image" width="127" height="127"/>
+        <image name="movie" width="86" height="86"/>
+        <image name="shop" width="105" height="105"/>
+        <image name="stock_ellipse_image" width="94" height="94"/>
+        <image name="travel" width="75" height="75"/>
+    </resources>
+</document>

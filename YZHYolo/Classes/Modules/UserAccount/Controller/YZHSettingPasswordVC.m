@@ -11,7 +11,9 @@
 #import "YZHSettingPasswordView.h"
 #import "YZHRootTabBarViewController.h"
 #import "YZHProgressHUD.h"
+#import "UIViewController+YZHTool.h"
 #import "YZHUserLoginManage.h"
+#import "YZHRegisterBackupsVC.h"
 
 @interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
@@ -59,8 +61,12 @@
     //根据不同类型切换文案
     if (self.settingPasswordType == YZHSettingPasswordTypeFind) {
         self.settingPasswordView.navigationTitleLaebl.text = @"忘记密码";
-        self.settingPasswordView.tileTextLabel.text = @"设置新密码";
+        self.settingPasswordView.tileTextLabel.text = @"设置登录密码";
         [self.settingPasswordView.confirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        self.settingPasswordView.yoloIdLabel.text = self.phoneNum;
+    } else {
+        self.settingPasswordView.yoloLabel.hidden = YES;
+        self.settingPasswordView.yoloIdLabel.hidden = YES;
     }
     [self.settingPasswordView.confirmButton addTarget:self action:@selector(requestSettingPassword) forControlEvents:UIControlEventTouchUpInside];
     
@@ -113,9 +119,18 @@
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
-        @strongify(self)
-        // 设置完密码一律直接走登录// 此流程需要修改一下. 找回密码直接找登录, 注册则走助记词。
-        [self autoLoginWithResponse:obj progressHUD:hud];
+        @strongify(self) //注册则走助记词。
+        if (self.settingPasswordType == YZHSettingPasswordTypeRegister) {
+            YZHLoginModel* logModel = [YZHLoginModel YZH_objectWithKeyValues:obj];
+//            UIViewController* topViewController = [UIViewController yzh_rootViewController];
+            YZHRegisterBackupsVC* backupsVC = [[YZHRegisterBackupsVC alloc] init];
+            backupsVC.logModel = logModel;
+//            [topViewController presentViewController:backupsVC animated:NO completion:nil];
+            [self.navigationController pushViewController:backupsVC animated:YES];
+            
+        } else {//找回密码直接找登录,
+           [self autoLoginWithResponse:obj progressHUD:hud];
+        }
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];
     }];

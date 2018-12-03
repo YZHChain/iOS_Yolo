@@ -11,6 +11,7 @@
 #import "UIViewController+YZHTool.h"
 #import "NSString+YZHTool.h"
 @interface YZHRegisterView()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIView *topContentView;
 
 @end
 @implementation YZHRegisterView
@@ -45,6 +46,23 @@
     self.registerButton.enabled = NO;
     
     self.protocolSlectedButton.selected = NO;
+    //
+    UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
+    UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
+    CAGradientLayer *layer = [CAGradientLayer new];
+    //存放渐变的颜色的数组
+    layer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
+    //起点和终点表示的坐标系位置，(0,0)表示左上角，(1,1)表示右下角
+    layer.startPoint = CGPointMake(0.0, 0.0);
+    layer.endPoint = CGPointMake(1, 0.0);
+    
+    layer.frame = _topContentView.frame;
+    CGRect rect = _topContentView.frame;
+    UIView* view = [[UIView alloc] initWithFrame:rect];
+    [view.layer addSublayer:layer];
+    
+    [_topContentView insertSubview:view atIndex:0];
+    
 }
 
 - (void)setupNotification{

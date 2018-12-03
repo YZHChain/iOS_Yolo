@@ -58,6 +58,7 @@
 
 - (void)setupNavBar {
     self.navigationItem.title = @"修改密码";
+    
 }
 
 - (void)setupView {
