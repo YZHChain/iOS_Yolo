@@ -19,6 +19,7 @@ static NSString* kYZHServerUserWordKey       = @"mnemonicWord"; // 助记词
 static NSString* kYZHUserPhoneNumberKey = @"phoneNumber";
 static NSString* kYZHIMAutoLoginKey   = @"kYZHIMAutoLogin";
 static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
+static NSString* kYZHUserAccountKey   = @"userAccount";
 
 @implementation YZHIMLoginData
 
@@ -32,6 +33,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
         _isAutoLogin  = [[aDecoder decodeObjectForKey:kYZHIMAutoLoginKey] boolValue];
         _mnemonicWord = [aDecoder decodeObjectForKey:kYZHServerUserWordKey];
         _phoneNumber  = [aDecoder decodeObjectForKey:kYZHUserPhoneNumberKey];
+        _userAccount  = [aDecoder decodeObjectForKey:kYZHUserAccountKey];
     }
     return self;
 }
@@ -58,6 +60,9 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 //    }
     if ([_userId length]) {
         [encoder encodeObject:_userId forKey:kYZHServerUserIdKey];
+    }
+    if ([_userAccount length]) {
+        [encoder encodeObject:_userAccount forKey:kYZHUserAccountKey];
     }
     [encoder encodeObject:@(self.isAutoLogin) forKey:kYZHIMAutoLoginKey];
     
@@ -198,7 +203,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
         @strongify(self)
-        [self serverloginSuccessWithResponData:obj successCompletion:successCompletion failureCompletion:failureCompletion];
+        [self serverloginSuccessWithResponData:obj userAccount:account successCompletion:successCompletion failureCompletion:failureCompletion];
     } failureCompletion:^(NSError *error) {
         //TODO: 失败处理
         failureCompletion ? failureCompletion(error) : NULL;
@@ -206,9 +211,10 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
 }
 
 // 后台登录成功处理
-- (void)serverloginSuccessWithResponData:(id)responData successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
+- (void)serverloginSuccessWithResponData:(id)responData userAccount:(NSString *)userAccount successCompletion:(YZHVoidBlock)successCompletion failureCompletion:(YZHErrorBlock)failureCompletion {
     // 缓存.
     YZHLoginModel* userLoginModel = [YZHLoginModel YZH_objectWithKeyValues:responData];
+    userLoginModel.userAccount = userAccount;
     NSString* account = userLoginModel.acctId;
     NSString* token = userLoginModel.token;
     [self IMServerLoginWithAccount:account token:token userLoginModel:userLoginModel successCompletion:successCompletion failureCompletion:failureCompletion];
@@ -243,6 +249,7 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     currentLoginData.mnemonicWord = userLoginModel.mnemonicWord; //助记词.
     currentLoginData.isAutoLogin = YES;
     currentLoginData.phoneNumber = userLoginModel.phone;
+    currentLoginData.userAccount = userLoginModel.userAccount;
     // 赋值, 并且保存.
     self.currentLoginData = currentLoginData;
     //暂时先到主要,后面还需要加上从云信获取信息的逻辑

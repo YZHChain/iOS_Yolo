@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) CGFloat delayTime;
 @property (nonatomic, strong) YZHProgressHUD* hud;
+@property (nonatomic, strong) NSString* userId;
+@property (nonatomic, assign) BOOL isMyTeam;
 
 @end
 
@@ -86,6 +88,7 @@
         [userContentController addScriptMessageHandler:self name:@"SelectRecuire"];
         [userContentController addScriptMessageHandler:self name:@"AddRecuire"];
         [userContentController addScriptMessageHandler:self name:@"SelectActiveGroup"];
+        [userContentController addScriptMessageHandler:self name:@"GetTeamLabel"];
         
         configuration.userContentController = userContentController;
         
@@ -103,7 +106,7 @@
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?yolo_no=%@&platform=ios",yolo_no];
         }
         NSURL* url = [[NSURL alloc] initWithString:self.url];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:url ] ];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
@@ -124,6 +127,7 @@
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SelectRecuire"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"AddRecuire"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SelectActiveGroup"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GetTeamLabel"];
 }
 
 
@@ -157,7 +161,22 @@
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:@"AddGroup"]) { //公开群-加入
         NSNumber* value = message.body;
-        NSLog(@"%@", [value stringValue]);
+        NSString* teamId = value.stringValue;
+        NSLog(@"%@", teamId);
+        if (![self isMyTeamWothTeamId:teamId]) {
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.webView text:nil];
+            
+            [[[NIMSDK sharedSDK] teamManager] addUsers:@[self.userId] toTeam:teamId postscript:@"通过广场公开群加入" completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+                if (!error) {
+                    [hud hideWithText:@"成功加入群聊"];
+                } else {
+                    [hud hideWithText:@"加入社群失败, 请重试"];
+                }
+            }];
+        } else {
+            [YZHProgressHUD showText:@"你已属于该群群成员" onView:self.webView];
+        }
+
         return;
     }
     
@@ -168,11 +187,14 @@
     
     if ([message.name isEqualToString:@"CreateGroup"]) { //招募管理-立即创建
         NSLog(@"CreateGroup");
+        
+        [YZHRouter openURL:kYZHRouterCommunityCreateTeam];
         return;
     }
     
     if ([message.name isEqualToString:@"SelectMyGroup"]) { //招募管理里面的搜索
         NSLog(@"SelectMyGroup");
+        
         return;
     }
     
@@ -198,11 +220,14 @@
         return;
     }
     
-    if ([message.name isEqualToString:@"SelectActiveGroup"]) { //活跃群里面的查找
-        NSLog(@"SelectActiveGroup");
+//    if ([message.name isEqualToString:@"SelectActiveGroup"]) { //活跃群里面的查找
+//        NSLog(@"SelectActiveGroup");
+//        return;
+//    }
+    if ([message.name isEqualToString:@"GetTeamLabel"]) { //活跃群里面的查找
+        NSLog(@"GetTeamLabel");
         return;
     }
-    
     
     
 }
@@ -214,16 +239,17 @@
 
 //这个是网页加载完成，导航的变化
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    [self hideHUD];
+    [self hideHUDError:nil];
 }
 
 //跳转失败的时候调用
 -(void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    [self hideHUD];
+    
+    [self hideHUDError:error];
 }
 
-
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
    self.hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
 }
 
@@ -232,7 +258,8 @@
 }
 // 内容加载失败时候调用
 -(void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    [self hideHUD];
+    
+    [self hideHUDError:error];
 }
 
 //服务器开始请求的时候调用
@@ -275,7 +302,6 @@
 -(void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
     
 }
-
 
 //请求链接处理
 -(Boolean)pushCurrentSnapshotViewWithRequest:(NSURLRequest*)request{
@@ -359,12 +385,29 @@
     }
 }
 
--(void)hideHUD{
+-(void)hideHUDError:(NSError *)error{
     if (self.hud!=nil) {
-        [self.hud hideWithText:nil];
+        if (error) {
+            [self.hud hideWithText:error.domain];
+        } else {
+            [self.hud hideWithText:nil];
+        }
+        
     }
 }
 
+- (NSString *)userId {
+    
+    if (!_userId) {
+        _userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    }
+    return _userId;
+}
 
+- (BOOL)isMyTeamWothTeamId:(NSString *)teamId {
+    
+    return [[[NIMSDK sharedSDK] teamManager] isMyTeam:teamId];
+    
+}
 
 @end

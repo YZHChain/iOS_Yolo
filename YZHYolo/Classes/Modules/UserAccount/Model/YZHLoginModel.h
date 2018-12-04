@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* orderFlag;
 @property (nonatomic, copy) NSString* yoloNo; //yoloNo 平台号码
 @property (nonatomic, copy) NSString* phone;
+@property (nonatomic, copy) NSString* userAccount;   // 用户直接登录账号
+@property (nonatomic, copy) NSString* userPassword;  // 用户直接登录密码
 
 @end
 

@@ -197,7 +197,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
                     [self.tableView reloadData];
                 }
             } else {
-                [YZHAlertManage showAlertMessage:@"请输入阅读上锁群密码"];
+                [YZHAlertManage showAlertMessage:@"密码不可为空,请输入阅读上锁群密码"];
             }
         }
     }];

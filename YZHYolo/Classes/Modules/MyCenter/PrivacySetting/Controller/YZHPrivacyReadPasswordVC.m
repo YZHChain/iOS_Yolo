@@ -100,7 +100,7 @@
     if (self.havaReadPassword) {
         
         YZHIMLoginData* loginManage = [[YZHUserLoginManage sharedManager] currentLoginData];
-        NSString* account = loginManage.userId;
+        NSString* account = loginManage.userAccount;
         NSString* password = self.passwrodView.accountPasswordTextField.text;
         NSDictionary* dic = @{
                               @"account": account ? account : @"",

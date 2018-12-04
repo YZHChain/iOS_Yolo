@@ -92,6 +92,7 @@
         CGImageRelease(image);
     } else {
         
+        [YZHProgressHUD showText:@"二维码图像处理失败, 请重试" onView:self.view];
     }
     
 }
@@ -141,14 +142,18 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error == nil) {
-        [self.view makeToast:@"图片已经保存到相册"
-                    duration:1
-                    position:CSToastPositionCenter];
+//        [self.view makeToast:@"图片已经保存到相册"
+//                    duration:1
+//                    position:CSToastPositionCenter];
+        [YZHProgressHUD showText:@"图片已经保存到相册" onView:self.view];
     }else{
-        [self.view makeToast:@"图片保存失败,请重试"
-                    duration:1
-                    position:CSToastPositionCenter];
+//        [self.view makeToast:@"图片保存失败,请重试"
+//                    duration:1
+//                    position:CSToastPositionCenter];
+        [YZHProgressHUD showText:@"图片保存失败,请重试" onView:self.view];
     }
+    
+
 }
 
 #pragma mark - 7.GET & SET

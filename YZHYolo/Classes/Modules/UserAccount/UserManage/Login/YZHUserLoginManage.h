@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *phoneNumber; //电话号码.
 @property (nonatomic, copy) NSString *appKey; // IM Appkey
 @property (nonatomic, assign) BOOL isAutoLogin;
+@property (nonatomic, copy) NSString *userAccount; // 用户直接登录账号
+@property (nonatomic, copy) NSString *userPassword;  // 用户直接登录密码
 
 @end
 

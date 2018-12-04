@@ -10,12 +10,14 @@
 #import <WebKit/WebKit.h>
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
+#import "ZXingObjC.h"
 
 @interface YZHMyIntegralVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
-@property (nonatomic,strong) WKWebView* webView;
+@property (nonatomic, strong) WKWebView* webView;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) CGFloat delayTime;
-@property (nonatomic,strong) YZHProgressHUD* hud ;
+@property (nonatomic, strong) YZHProgressHUD* hud;
+@property (nonatomic, strong) NSString* userId;
 @end
 
 @implementation YZHMyIntegralVC
@@ -51,7 +53,6 @@
     }
 }
 
-
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar
@@ -61,9 +62,9 @@
 
 - (void)setupView
 {
-    super.hideNavigationBar = true ;
+    super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[self wkWebVie] ];
+    [self.view addSubview:[self wkWebVie]];
     
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
@@ -96,9 +97,9 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
+        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.account;
         if (self.url==nil) {
-            self.url = [NSString stringWithFormat:@"http://192.168.3.31:8091/html/integral/index_page.html?yolo_no=%@&platform=ios",yolo_no];
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/html/integral/index_page.html?yolo_no=%@&platform=ios", yolo_no];
         }
         NSURL* url = [[NSURL alloc] initWithString:self.url];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ] ];
@@ -142,6 +143,51 @@
     
 }
 
+- (void)saveImageToPhotos:(UIImage*)savedImage {
+    // TODO: 先检查设备是否授权访问相册
+    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+//        [self.view makeToast:@"图片已经保存到相册"
+//                    duration:1
+//                    position:CSToastPositionCenter];
+        [YZHProgressHUD showText:@"图片已经保存到相册" onView:self.webView];
+    }else{
+//        [self.view makeToast:@"图片保存失败,请重试"
+//                    duration:1
+//                    position:CSToastPositionCenter];
+        [YZHProgressHUD showText:@"图片保存失败,请重试" onView:self.webView];
+    }
+}
+
+- (void)creatQRCodeAndSavaToPotosWithQRString:(NSString *)qrString  {
+    //生成二维码
+    NSError *error = nil;
+    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
+    CGSize imageSize = CGSizeMake(217, 217);
+    ZXBitMatrix* result = [writer encode:qrString
+                                  format:kBarcodeFormatQRCode
+                                   width:imageSize.width
+                                  height:imageSize.height
+                                   error:&error];
+    if (result) {
+        CGImageRef image = CGImageRetain([[ZXImage imageWithMatrix:result] cgimage]);
+        
+        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
+        //保存图片
+        [self saveImageToPhotos:[UIImage imageWithCGImage:image]];
+        
+        CGImageRelease(image);
+    } else {
+        
+        [YZHProgressHUD showText:@"二维码图像处理失败, 请重试" onView:self.webView];
+    }
+}
+
+
+
 #pragma mark - 7.GET & SET
 
 #pragma mark - WKScriptMessageHandler
@@ -155,19 +201,23 @@
     
     if ([message.name isEqualToString:@"InvitePhoneContact"]) { //邀请手机联系人
         NSLog(@"InvitePhoneContact");
+        [YZHRouter openURL:kYZHRouterAddressBookPhoneContact];
         return;
     }
     
     if ([message.name isEqualToString:@"SaveQR"]) { //邀请码界面-保存二维码
-        NSString* qr = @"";
+        NSString* qrString = @"";
         if([message.body isKindOfClass:[NSString class]]){
-            qr = message.body;
+            qrString = message.body;
         }else if([message.body isKindOfClass:[NSNumber class]]){
             NSNumber* body = message.body;
-            qr = body.stringValue;
+            qrString = body.stringValue;
         }
-        NSLog(@"%@", qr);
-        NSLog(@"SaveQR");
+        if (YZHIsString(qrString)) {
+            [self creatQRCodeAndSavaToPotosWithQRString:qrString];
+        } else {
+            [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];
+        }
         return;
     }
     
@@ -182,12 +232,12 @@
 
 //这个是网页加载完成，导航的变化
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    [self hideHUD];
+    [self hideHUDError:nil];
 }
 
 //跳转失败的时候调用
 -(void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    [self hideHUD];
+    [self hideHUDError:error];
 }
 
 
@@ -200,7 +250,7 @@
 }
 // 内容加载失败时候调用
 -(void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error{
-    [self hideHUD];
+    [self hideHUDError:error];
 }
 
 //服务器开始请求的时候调用
@@ -319,14 +369,23 @@
     }
 }
 
-
-
--(void)hideHUD{
+-(void)hideHUDError:(NSError *)error{
     if (self.hud!=nil) {
-        [self.hud hideWithText:nil];
+        if (error) {
+            [self.hud hideWithText:error.domain];
+        } else {
+            [self.hud hideWithText:nil];
+        }
+        
     }
 }
 
-
+- (NSString *)userId {
+    
+    if (!_userId) {
+        _userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    }
+    return _userId;
+}
 
 @end
