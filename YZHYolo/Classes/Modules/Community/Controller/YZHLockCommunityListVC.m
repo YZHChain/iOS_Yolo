@@ -114,7 +114,27 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+     NIMRecentSession *recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row];
+    YZHSessionListCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHDefaultCellIdentifie forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[YZHSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHDefaultCellIdentifie];
+    }
+    cell.nameLabel.text = [self nameForRecentSession:recent];
+    [cell.avatarImageView setAvatarBySession:recent.session];
+    
+    [cell.nameLabel sizeToFit];
+    cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
+    [cell.messageLabel sizeToFit];
+    cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
+    [cell.timeLabel sizeToFit];
+    [cell refresh:recent];
+    //默认列表左右滑动
+    [self configurationDefaultCell:cell recent:recent];
+    cell.leftAdornImageView.hidden = NO;
+    
+    return cell;
+    
+//    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -151,6 +171,61 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     view.backgroundColor = [UIColor clearColor];
     return view;
 }
+
+- (void)configurationDefaultCell:(YZHSessionListCell *)cell recent:(NIMRecentSession *)recent{
+    
+    cell.delegate = self;
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    cell.leftButtons = @[tipButton, lockButton];
+    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
+    
+    [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //
+        return YES;
+    }];
+    [lockButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //跳转至群信息
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        BOOL isTeamOwner = NO;
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:recent.session.sessionId];
+        if ([userId isEqualToString:team.owner]) {
+            isTeamOwner = YES;
+        }
+        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                          @"isTeamOwner":@(isTeamOwner),
+                                                          @"teamId":recent.session.sessionId
+                                                          }];
+        return YES;
+    }];
+    
+    MGSwipeButton* deleteButton = [MGSwipeButton buttonWithTitle:@"删除" backgroundColor:[UIColor yzh_buttonBackgroundPinkRed]];
+    [deleteButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        //删除掉此列表
+        //        [self.recentSessions removeObject:recent];
+        [[[NIMSDK sharedSDK] conversationManager] deleteRecentSession:recent];
+        //        //TODO: 有空了在单独封装一个新增,接口.
+        //        [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+        //        [self.recentSessionExtManage sortTagTeamRecentSession];
+        //        [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
+        //        [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
+        [self refresh];
+        return YES;
+    }];
+    
+    MGSwipeButton* classButton = [MGSwipeButton buttonWithTitle:@"设置分类" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    [classButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
+        [YZHRouter openURL:kYZHRouterCommunitySetTeamTag info:@{
+                                                                @"teamId": recent.session.sessionId,
+                                                                kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                kYZHRouteSegueNewNavigation: @(YES)
+                                                                }];
+        return YES;
+    }];
+    cell.rightButtons = @[deleteButton, classButton];
+    cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
+}
+
 
 #pragma mark - 5.Event Response
 

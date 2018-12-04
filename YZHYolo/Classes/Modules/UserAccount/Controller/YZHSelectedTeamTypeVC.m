@@ -47,11 +47,18 @@
 
 - (void)setupNavBar {
     self.navigationItem.title = @"";
+    
+    self.hideNavigationBar = YES;
+    
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 - (void)setupView {
     
-    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.confirmButton.layer.cornerRadius = 4;
     self.confirmButton.layer.masksToBounds = YES;
@@ -91,6 +98,11 @@
 }
 
 #pragma mark - 6.Private Methods
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    
+    return UIStatusBarStyleDefault;
+}
 
 - (void)setupNotification {
     

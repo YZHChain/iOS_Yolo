@@ -160,6 +160,40 @@
 // 新版注册. 
 - (void)clickRegister:(UIButton *)sender {
 
+    if (YZHIsString(self.registerView.codeTextField.text)) {
+        
+        [self checkoutInviteCode];
+    } else {
+        [self checkoutYoloNo];
+    }
+}
+//SuccessCompletion:(YZHVoidBlock)successCompletion
+- (void)checkoutInviteCode {
+    
+    NSDictionary* dic = @{
+                          @"inviteCode":self.registerView.codeTextField.text
+                          };
+    @weakify(self)
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_CHECKINVITECODE params:dic successCompletion:^(id obj) {
+        @strongify(self)
+        [hud hideWithText:nil];
+        self.registerView.codeTipLabel.hidden = YES;
+        self.registerView.codeTipLabel.text = nil;
+        [self checkoutYoloNo];
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+        self.registerView.codeTipLabel.hidden = NO;
+        if (error.domain) {
+            self.registerView.codeTipLabel.text = error.domain;
+        } else {
+            self.registerView.codeTipLabel.text = @"邀请码输入错误";
+        }
+    }];
+}
+
+- (void)checkoutYoloNo {
+    
     NSDictionary* dic = @{
                           @"yoloNo":self.registerView.phoneTextField.text.length ? self.registerView.phoneTextField.text : @""
                           };
@@ -168,6 +202,7 @@
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
         @strongify(self)
+        [hud hideWithText:nil];
         // 跳转至设置密码,并且带 YoloID,和邀请码.
         [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"phoneNum":self.registerView.phoneTextField.text, @"settingPasswordType": @(0), @"inviteCode": self.registerView.codeTextField.text.length ? self.registerView.codeTextField.text : @""}];
         
@@ -176,6 +211,8 @@
         [hud hideWithText:error.domain];
     }];
 }
+
+
 // 阅读协议.
 - (void)clickReadProtocol:(UIButton *)sender {
     

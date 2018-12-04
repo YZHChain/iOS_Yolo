@@ -104,14 +104,17 @@
         self.textLabel.font      = setting.font;
         [self.textLabel nim_setText:attachment.titleText];
         //如果是自己发送的则需要将其删除掉.不需要显示.
-        if (attachment.isSender) {
-            [self.receiveButton removeFromSuperview];
-            [self.responseButton removeFromSuperview];
-            [self.handleButton removeFromSuperview];
-        }
+//        if (attachment.isSender) {
+//            [self.receiveButton removeFromSuperview];
+//            [self.responseButton removeFromSuperview];
+//            [self.handleButton removeFromSuperview];
+//        }
         self.receiveButton.selected = attachment.isReceive;
-        self.responseButton.selected = attachment.isResponse;
+//        self.responseButton.selected = attachment.isResponse;
         self.handleButton.selected = attachment.isHandle;
+        self.receiveButton.enabled = !attachment.isReceive;
+//        self.responseButton.enabled = !attachment.isResponse;
+        self.handleButton.enabled = !attachment.isResponse;
     }
 }
 
@@ -144,8 +147,9 @@
 
 - (void)onTouchReceiveUpInside:(UIButton *)sender {
     
-    if (sender.isSelected == NO) {
+    if (sender.isSelected == YES) {
         sender.selected = YES;
+        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameReceive;
         event.messageModel = self.model;
@@ -157,6 +161,7 @@
     
     if (sender.isSelected == NO) {
         sender.selected = YES;
+//        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameResponse;
         event.messageModel = self.model;
@@ -166,8 +171,9 @@
 
 - (void)onTouchHandleUpInside:(UIButton *)sender {
     
-    if (sender.isSelected == NO) {
+    if (sender.isSelected == YES) {
         sender.selected = YES;
+        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameHandle;
         event.messageModel = self.model;

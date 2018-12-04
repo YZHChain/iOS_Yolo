@@ -12,6 +12,7 @@
 #import "YZHPublic.h"
 #import "UIButton+YZHCountDown.h"
 #import "NSString+YZHTool.h"
+#import "YZHGetSecreKeyVC.h"
 
 @interface YZHPhoneFindPasswordVC ()<UIGestureRecognizerDelegate>
 
@@ -94,12 +95,15 @@
                                 @"verifyCode":self.findPasswordView.SMSCodeTextField.text
                                 };
     @weakify(self)
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
         @strongify(self)
-        // 请求后台 成功则跳转至设置新密码 枚举
+        [hud hideWithText:nil];
+        YZHGetSecreKeyVC* secreKeyVC = [[YZHGetSecreKeyVC alloc] init];
+        [self.navigationController pushViewController:secreKeyVC animated:YES];
         
     } failureCompletion:^(NSError *error) {
-        [YZHProgressHUD showAPIError:error];
+        [hud hideWithText:error.domain];
     }];
     
     

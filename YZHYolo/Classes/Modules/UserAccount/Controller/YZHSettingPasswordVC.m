@@ -108,12 +108,12 @@
     NSDictionary* parameters;
     if (YZHIsString(_inviteCode)) {
         parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
-                                     @"phoneNum":self.phoneNum,
+                                     @"yoloNo":self.phoneNum,
                                      @"inviteCode": _inviteCode
                                          };
     } else {
         parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
-                           @"phoneNum":self.phoneNum,
+                           @"yoloNo":self.phoneNum,
                        };
     }
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];
@@ -121,11 +121,10 @@
     [[YZHNetworkService shareService] POSTNetworkingResource:requestURL params:parameters successCompletion:^(id obj) {
         @strongify(self) //注册则走助记词。
         if (self.settingPasswordType == YZHSettingPasswordTypeRegister) {
+            [hud hideWithText:nil];
             YZHLoginModel* logModel = [YZHLoginModel YZH_objectWithKeyValues:obj];
-//            UIViewController* topViewController = [UIViewController yzh_rootViewController];
             YZHRegisterBackupsVC* backupsVC = [[YZHRegisterBackupsVC alloc] init];
             backupsVC.logModel = logModel;
-//            [topViewController presentViewController:backupsVC animated:NO completion:nil];
             [self.navigationController pushViewController:backupsVC animated:YES];
             
         } else {//找回密码直接找登录,

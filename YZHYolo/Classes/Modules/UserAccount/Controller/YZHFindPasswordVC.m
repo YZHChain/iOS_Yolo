@@ -76,6 +76,8 @@
     [self.view addSubview:self.findPasswordView];
     
     [self.findPasswordView.passwordTextView becomeFirstResponder];
+    
+    self.findPasswordView.tipButton.hidden = YES;
 }
 
 - (void)reloadView
@@ -132,7 +134,6 @@
         } failureCompletion:^(NSError *error) {
             [YZHProgressHUD showAPIError:error];
         }];
-
     }
 }
 

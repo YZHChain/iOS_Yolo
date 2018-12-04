@@ -279,7 +279,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             teamCardAttachment.groupName = teamCard.teamName;
             teamCardAttachment.groupID = teamCard.teamId;
             teamCardAttachment.groupSynopsis = teamCard.intro;
-            teamCardAttachment.groupUrl = @"群URL数据还未定, 暂时写死!!!!!";
+            teamCardAttachment.groupUrl = teamCard.intro;
             teamCardAttachment.avatarUrl = teamCard.avatarUrl ? teamCard.avatarUrl : @"team_createTeam_avatar_icon_normal";
             self.sharedTeamCardBlock ? self.sharedTeamCardBlock(teamCardAttachment) : NULL;
 

@@ -422,6 +422,7 @@
                 <outlet property="backIconButton" destination="WCZ-0F-GMz" id="4Ew-tN-EhX"/>
                 <outlet property="backTextButton" destination="RsH-Tk-7iC" id="MYd-ep-6vo"/>
                 <outlet property="codeTextField" destination="wed-4f-kPF" id="NYh-UV-tOs"/>
+                <outlet property="codeTipLabel" destination="nMi-JW-AwC" id="zdI-0c-Uag"/>
                 <outlet property="contentView" destination="EWV-nj-Dhw" id="UuN-g9-4Ur"/>
                 <outlet property="phoneTextField" destination="9Hv-Hy-n0z" id="vTo-9Z-Kfk"/>
                 <outlet property="protocolSlectedButton" destination="swg-gS-1AX" id="pyA-Gh-dwS"/>

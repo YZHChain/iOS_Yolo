@@ -25,9 +25,11 @@
     NSDictionary* dict = @{
                            CustomMessageType: @(CustomMessageTypeSpeedyRespond),
                            CustomMessageData: @{
-                                   @"content": self.titleText ? self.titleText : @"",
+                                   
+                                   @"titleText": self.titleText ? self.titleText : @"",
                                    @"senderUserId": self.senderUserId ? self.senderUserId : @"",
                                    @"teamNickName": self.teamNickName? self.teamNickName : @"",
+                                   @"sendUserName": self.senderUserName? self.senderUserName : @"",
                                    @"isSender": [NSNumber numberWithBool:self.isSender],
                                    @"canGet": [NSNumber numberWithBool:_isReceive],
                                    @"isResponse": [NSNumber numberWithBool:_isResponse],
@@ -43,13 +45,13 @@
     return content;
 }
 
-- (instancetype)initWithTitleText:(NSString *)titleText senderUserId:(NSString *)senderUserId teamNickName:(nonnull NSString *)teamNickName{
-    
+- (instancetype)initWithTitleText:(NSString *)titleText senderUserId:(NSString *)senderUserId teamNickName:(nonnull NSString *)teamNickName senderUserName:(NSString *)senderUserName {
     self = [super init];
     if (self) {
         _titleText = titleText;
         _senderUserId = senderUserId;
         _teamNickName = teamNickName;
+        _senderUserId = senderUserName;
         _isReceive = NO;
         _isResponse = NO;
         _isHandle = NO;

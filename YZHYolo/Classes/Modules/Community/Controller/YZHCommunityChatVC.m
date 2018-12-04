@@ -304,7 +304,25 @@
     if (needResponed) {
         //如果需要快捷回应时,则需要对消息进行封装成自定义消息
         NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        YZHSpeedyResponseAttachment* attachment = [[YZHSpeedyResponseAttachment alloc] initWithTitleText:text senderUserId:userId teamNickName:@"泽西"];
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.session.sessionId];
+        NIMTeamMember* member = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.session.sessionId];
+        NSString* senderUserName;
+        if (YZHIsString(member.nickname)) {
+            senderUserName = member.nickname;
+        } else {
+            NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
+            senderUserName = user.userInfo.nickName;
+        }
+        //跟去 @人数 数量,去掉 带 @Text  TODO: 拼接 @
+        NSArray* array =  [text componentsSeparatedByString:@" "];
+        NSMutableString* contentMutable = [[NSMutableString alloc] init];
+        for (NSInteger i = 0; i < array.count; i++) {
+            NSString* text = array[i];
+            if (![text hasPrefix:@"@"] && text.length > 15 ) {
+                [contentMutable appendString:text];
+            }
+        }
+        YZHSpeedyResponseAttachment* attachment = [[YZHSpeedyResponseAttachment alloc] initWithTitleText:text senderUserId:userId teamNickName:team.teamName senderUserName:senderUserName];
         message = [YZHSessionMsgConverter msgWithSeepdyReponse:attachment text:text];
     }
     [self sendMessage:message];
@@ -607,27 +625,60 @@
 // 0 为收到, 1 为回复, 2 为处理完成
 - (void)executeSpeedyResponseMessageModel:(NIMMessageModel *)messageModel type:(NSInteger)type {
     
+    NIMCustomObject *customObject = (NIMCustomObject*)messageModel.message.messageObject;
+    YZHSpeedyResponseAttachment *attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
+    NSString* userId = attachment.senderUserId;
     if (type == 0) {
-        NSLog(@"收到了");
+        
+//        NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.session.sessionId];
+        [self onSendText:[NSString stringWithFormat:@"@\%@ 收到", attachment.teamNickName] atUsers:@[userId]];
+//        messageModel.message.isReceivedMsg
+//        [[[NIMSDK sharedSDK] conversationManager] updateMessage:messageModel.message forSession:self.session completion:^(NSError * _Nullable error) {
+//            if (!error) {
+//                [self.tableView reloadData];
+//            } else {
+//            }
+//        }];
     } else if (type == 1) {
         NSLog(@"快捷回复");
+        NIMInputAtItem* atItem = [[NIMInputAtItem alloc] init];
+//        @property (nonatomic,copy) NSString *name;
+//
+//        @property (nonatomic,copy) NSString *uid;
+//
+//        @property (nonatomic,assign) NSRange range;
+        atItem.name = @"嘿嘿";
+        atItem.uid = @"挂机";
+        atItem.range = NSMakeRange(0, atItem.name.length);
+        [self.sessionInputView.atCache addAtItem:atItem];
+        [self.sessionInputView reset];
+        
     } else {
         NSLog(@"处理完成");
+        NSArray* array =  [attachment.titleText componentsSeparatedByString:@" "];
+        NSMutableString* contentMutable = [[NSMutableString alloc] init];
+        for (NSInteger i = 0; i < array.count; i++) {
+            NSString* text = array[i];
+            if (![text hasPrefix:@"@"]) {
+                [contentMutable appendString:text];
+            }
+        }
+        [self onSendText:[NSString stringWithFormat:@"@\%@ 你说的 \"\%@\" 已处理完成 ", attachment.teamNickName, attachment.titleText] atUsers:@[userId]];
     }
 }
 
 - (void)openSafari:(NSString *)link
 {
-    NSURLComponents *components = [[NSURLComponents alloc] initWithString:link];
-    if (components)
-    {
-        if (!components.scheme)
-        {
-            //默认添加 http
-            components.scheme = @"http";
-        }
-        [[UIApplication sharedApplication] openURL:[components URL]];
-    }
+//    NSURLComponents *components = [[NSURLComponents alloc] initWithString:link];
+//    if (components)
+//    {
+//        if (!components.scheme)
+//        {
+//            //默认添加 http
+//            components.scheme = @"http";
+//        }
+//        [[UIApplication sharedApplication] openURL:[components URL]];
+//    }
 }
 //TODO: 需修改.
 - (NSDictionary *)cellActions

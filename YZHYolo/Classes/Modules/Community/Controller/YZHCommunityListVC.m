@@ -181,6 +181,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         if (buttonIndex == 1) {
             self.teamLock = NO;
             [self gotoLockTeamList];
+            [self.tableView reloadData];
 //            @strongify(self)
 //            NSDictionary* dic = @{
 //                                  @"account": [[YZHUserLoginManage sharedManager] currentLoginData].account ? [[YZHUserLoginManage sharedManager] currentLoginData].account : @"",
@@ -267,7 +268,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     cell.delegate = self;
     MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
-    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"解锁" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    NSString* title = self.teamLock ? @"解锁": @"上锁";
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:title backgroundColor:YZHColorWithRGB(207, 211, 217)];
     cell.leftButtons = @[tipButton, lockButton];
     cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
     
@@ -275,12 +277,16 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         //
         return YES;
     }];
+    @weakify(self)
     [lockButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //解散上锁群.
+        @strongify(self)
         if (self.teamLock) {
             [self clickLockTeam];
         } else {
-            [self gotoLockTeamList];
+//            [self gotoLockTeamList];
+            self.teamLock = YES;
+            [self.tableView reloadData];
         }
         return YES;
     }];

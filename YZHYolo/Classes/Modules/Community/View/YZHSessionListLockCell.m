@@ -28,8 +28,10 @@
         
         self.avatarImageView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.avatarImageView];
-        [self.avatarImageView yzh_cornerRadiusAdvance:2 rectCornerType:UIRectCornerAllCorners];
+//        [self.avatarImageView yzh_cornerRadiusAdvance:2 rectCornerType:UIRectCornerAllCorners];
         self.avatarImageView.image = [UIImage imageNamed:@"team_sessionList_lockCell_avataricon"];
+        self.avatarImageView.layer.cornerRadius = 4;
+        self.avatarImageView.layer.masksToBounds = YES;
         [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
             make.left.equalTo(self.leftAdornImageView.mas_right).mas_equalTo(13);

@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="backupsButton" destination="U57-WY-kz9" id="8LM-p3-UUN"/>
                 <outlet property="passwordLabel" destination="sUp-yW-qHk" id="9D8-B2-roE"/>
-                <outlet property="passwordView" destination="TQZ-kP-VsI" id="Pzu-nX-JG9"/>
+                <outlet property="passwordView" destination="TQZ-kP-VsI" id="bYr-o8-zHU"/>
                 <outlet property="startButton" destination="Bdh-D6-HrG" id="cFu-xC-hPc"/>
                 <outlet property="titleLabel" destination="BSh-cP-q5J" id="2Fi-7C-pdy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,24 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSh-cP-q5J">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为了保证用户的隐私安全，每个YOLO账号都有加密的唯一ID，下面是加密ID的密钥，请抄写备份并妥善保存，可以用于找回账号和密码，如丢失，平台也无法为您找回信息。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BSh-cP-q5J">
                     <rect key="frame" x="18" y="50" width="339" height="85"/>
-                    <attributedString key="attributedText">
-                        <fragment content="为了保证用户的隐私安全，每个YOLO账号都有加密的唯一ID，下面是加密ID的密钥，请抄写备份并妥善保存，可以用于找回账号和密码">
-                            <attributes>
-                                <color key="NSColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="15" name="PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="，如丢失，平台也无法为您找回信息。">
-                            <attributes>
-                                <color key="NSColor" red="0.55686000000000002" green="0.55686000000000002" blue="0.55686000000000002" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="15" name="PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
+                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="15"/>
+                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="shadowColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
                 </label>

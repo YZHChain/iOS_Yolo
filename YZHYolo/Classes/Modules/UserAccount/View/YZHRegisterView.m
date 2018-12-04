@@ -89,20 +89,27 @@
             self.registerButton.enabled = NO;
         }
         //当邀请码输入大于等于 4 时对邀请码进行后台校验.
-        if (self.codeTextField.text.length >= 4) {
-            // 校验邀请码
-            NSDictionary* dic = @{
-                                  @"inviteCode":self.codeTextField.text
-                                  };
-            @weakify(self)
-            [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_CHECKINVITECODE params:dic successCompletion:^(id obj) {
-                @strongify(self)
-                self.codeTipLabel.hidden = YES;
-                self.codeTipLabel.text = nil;
-            } failureCompletion:^(NSError *error) {
-                self.codeTipLabel.hidden = NO;
-                self.codeTipLabel.text = @"邀请码输入错误";
-            }];
+//        if (self.codeTextField.text.length >= 4) {
+//            // 校验邀请码
+//            NSDictionary* dic = @{
+//                                  @"inviteCode":self.codeTextField.text
+//                                  };
+//            @weakify(self)
+//             [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_CHECKINVITECODE params:dic successCompletion:^(id obj) {
+//                 @strongify(self)
+//                 self.codeTipLabel.hidden = YES;
+//                 self.codeTipLabel.text = nil;
+//             } failureCompletion:^(NSError *error) {
+//                 self.codeTipLabel.hidden = NO;
+//                 if (error.domain) {
+//                     self.codeTipLabel.text = error.domain;
+//                 } else {
+//                     self.codeTipLabel.text = @"邀请码输入错误";
+//                 }
+//             }];
+//        }
+        if (self.codeTextField.text.length == 0) {
+            self.codeTipLabel.hidden = YES;
         }
     }
 }
