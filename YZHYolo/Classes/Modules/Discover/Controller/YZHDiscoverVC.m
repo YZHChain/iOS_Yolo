@@ -12,10 +12,12 @@
 #import "YZHProgressHUD.h"
 
 @interface YZHDiscoverVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
-@property (nonatomic,strong) WKWebView* webView;
+
+@property (nonatomic, strong) WKWebView* webView;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) CGFloat delayTime;
-@property (nonatomic,strong) YZHProgressHUD* hud ;
+@property (nonatomic, strong) YZHProgressHUD* hud;
+
 @end
 
 @implementation YZHDiscoverVC
@@ -35,9 +37,6 @@
     [self setupData];
     //4.设置通知
     [self setupNotification];
-
- 
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -99,9 +98,9 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
+        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.account;
         if (self.url==nil) {
-            self.url = [NSString stringWithFormat:@"http://192.168.3.31:8091?yolo_no=%@&platform=ios",yolo_no];
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?yolo_no=%@&platform=ios",yolo_no];
         }
         NSURL* url = [[NSURL alloc] initWithString:self.url];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ] ];
@@ -154,7 +153,8 @@
 #pragma mark - 7.GET & SET
 
 #pragma mark - WKScriptMessageHandler
--(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+
+-(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:@"AddGroup"]) { //公开群-加入
         NSNumber* value = message.body;
         NSLog(@"%@", [value stringValue]);

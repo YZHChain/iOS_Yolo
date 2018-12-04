@@ -329,7 +329,7 @@
                                         <color key="titleColor" red="0.094117647060000004" green="0.1960784314" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="backThePreviousPage:" destination="HvH-OP-0qG" eventType="touchUpInside" id="kQJ-Wi-R5X"/>
+                                        <action selector="gotoLogin:" destination="HvH-OP-0qG" eventType="touchUpInside" id="AgE-DE-7F9"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -428,7 +428,7 @@
                 <outlet property="protocolSlectedButton" destination="swg-gS-1AX" id="pyA-Gh-dwS"/>
                 <outlet property="registerButton" destination="EMA-wF-DKz" id="qJx-BJ-cSv"/>
             </connections>
-            <point key="canvasLocation" x="6" y="193"/>
+            <point key="canvasLocation" x="-401" y="212"/>
         </view>
     </objects>
     <resources>

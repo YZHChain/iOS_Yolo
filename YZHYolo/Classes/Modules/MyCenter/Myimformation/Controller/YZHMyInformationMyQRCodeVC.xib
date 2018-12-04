@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,7 +32,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSZ-x8-246">
                     <rect key="frame" x="30" y="142" width="315" height="376"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="EMn-Cm-12I">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_photo_default" translatesAutoresizingMaskIntoConstraints="NO" id="EMn-Cm-12I">
                             <rect key="frame" x="129" y="17" width="57" height="57"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="57" id="UOO-xH-7o4"/>
@@ -121,7 +121,7 @@
         </view>
     </objects>
     <resources>
-        <image name="my_cover_headPhoto_default" width="63" height="63"/>
+        <image name="addBook_cover_cell_photo_default" width="35" height="35"/>
         <image name="my_information_myQRCode_imageView" width="216" height="215"/>
     </resources>
 </document>

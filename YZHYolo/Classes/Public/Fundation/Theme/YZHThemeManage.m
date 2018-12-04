@@ -23,31 +23,31 @@
                             @"image": @"tabBar_community_default",
                             @"selectedImage":  @"tabBar_community_selected",
                             @"color": @"#8E8E8E",
-                            @"selectedColor": @"#3573fc",
+                            @"selectedColor": @"#00BACB",
                             },
                           @{
                             @"image": @"tabBar_chat_default",
                             @"selectedImage":  @"tabBar_chat_selected",
                             @"color": @"#8E8E8E",
-                            @"selectedColor": @"#3573fc",
+                            @"selectedColor": @"#00BACB",
                             },
                           @{
                             @"image": @"tabBar_address_default",
                             @"selectedImage":  @"tabBar_address_selected",
                             @"color": @"#8E8E8E",
-                            @"selectedColor": @"#3573fc",
+                            @"selectedColor": @"#00BACB",
                             },
                           @{
                             @"image": @"tabBar_discover_default",
                             @"selectedImage":  @"tabBar_discover_selected",
                             @"color": @"#8E8E8E",
-                            @"selectedColor": @"#3573fc",
+                            @"selectedColor": @"#00BACB",
                             },
                             @{
                             @"image": @"tabBar_mycenter_default",
                             @"selectedImage":  @"tabBar_mycenter_selected",
                             @"color": @"#8E8E8E",
-                            @"selectedColor": @"#3573fc",},];
+                            @"selectedColor": @"#00BACB",},];
     
     return themeArray;
     

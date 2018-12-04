@@ -28,6 +28,7 @@
 #import "YZHSessionListLockCell.h"
 #import "YZHUserLoginManage.h"
 #import "YZHLockCommunityListVC.h"
+#import "YZHUserModelManage.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeDefault = 0,
@@ -144,6 +145,12 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
     
+    //默认上锁
+    self.teamLock = YES;
+}
+
+- (void)refreshTeamListView {
+    
     if (self.recentSessions.count) {
         [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
         if (self.recentSessionExtManage.teamCurrentSessionTags.firstObject.count) {
@@ -152,9 +159,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         }
     } else {
         [self.view addSubview:self.defaultView];
+        BOOL teamAcount = [[[NIMSDK sharedSDK] teamManager] allMyTeams].count;
+        if (!teamAcount) {
+            [self.view addSubview:self.defaultView];
+        }
     }
-    //默认上锁
-    self.teamLock = YES;
 }
 
 #pragma mark -- setupNotification
@@ -179,27 +188,17 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     @weakify(self)
     [YZHAlertManage showTextAlertTitle:@"输入阅读密码解锁查看" message:nil textFieldPlaceholder:nil  actionButtons:@[@"取消", @"确认"] actionHandler:^(UIAlertController *alertController, UITextField *textField, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
-            self.teamLock = NO;
-            [self gotoLockTeamList];
-            [self.tableView reloadData];
-//            @strongify(self)
-//            NSDictionary* dic = @{
-//                                  @"account": [[YZHUserLoginManage sharedManager] currentLoginData].account ? [[YZHUserLoginManage sharedManager] currentLoginData].account : @"",
-//                                  @"password": textField.text ? textField.text : @"",
-//                                  };
-//            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-//            [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:dic successCompletion:^(id obj) {
-//                @strongify(self)
-//                [hud hideWithText:nil];
-//                //跳转至上锁群列表
-//                self.teamLock = NO;
-//                [self gotoLockTeamList];
-//                [self.tagsTableView reloadData];
-//            } failureCompletion:^(NSError *error) {
-//                //跳转至上锁群列表
-//                [hud hideWithText:error.domain];
-//
-//            }];
+            @strongify(self)
+            YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+            if (YZHIsString(textField.text)) {
+                if ([textField isEqual:userInfoExt.privateSetting.groupPassword]) {
+                    self.teamLock = NO;
+                    [self gotoLockTeamList];
+                    [self.tableView reloadData];
+                }
+            } else {
+                [YZHAlertManage showAlertMessage:@"请输入阅读上锁群密码"];
+            }
         }
     }];
 }
@@ -243,10 +242,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 //        [self.recentSessions removeObject:recent];
         [[[NIMSDK sharedSDK] conversationManager] deleteRecentSession:recent];
 //        //TODO: 有空了在单独封装一个新增,接口.
-//        [self.recentSessionExtManage screeningTagSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
-//        [self.recentSessionExtManage sortTagTeamRecentSession];
-//        [self.recentSessionExtManage screeningDefaultSessionAllTeamRecentSession:[self.recentSessions mutableCopy]];
-//        [self customSortTeamRecents:self.recentSessionExtManage.TeamRecentSession];
         [self refresh];
         return YES;
     }];
@@ -284,7 +279,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         if (self.teamLock) {
             [self clickLockTeam];
         } else {
-//            [self gotoLockTeamList];
             self.teamLock = YES;
             [self.tableView reloadData];
         }
@@ -822,6 +816,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)onTeamAdded:(NIMTeam *)team {
     
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -833,6 +828,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)onTeamUpdated:(NIMTeam *)team {
     
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    
     [self refresh];
 }
 
@@ -844,6 +840,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)onTeamRemoved:(NIMTeam *)team {
     
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 

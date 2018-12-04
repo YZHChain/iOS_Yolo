@@ -37,8 +37,10 @@
     layer.startPoint = CGPointMake(0.0, 0.0);
     layer.endPoint = CGPointMake(1, 0.0);
     
-    layer.frame = _topContentView.frame;
-    CGRect rect = _topContentView.frame;
+//    layer.frame = _topContentView.frame;
+//    CGRect rect = _topContentView.frame;
+    layer.frame = CGRectMake(0, 0, YZHScreen_Width, 135);
+    CGRect rect = CGRectMake(0, 0, YZHScreen_Width, 135);
     UIView* view = [[UIView alloc] initWithFrame:rect];
     [view.layer addSublayer:layer];
     

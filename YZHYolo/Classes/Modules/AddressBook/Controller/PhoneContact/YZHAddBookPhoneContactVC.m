@@ -15,6 +15,7 @@
 #import "YZHAddBookPhoneContactModel.h"
 #import "YZHPublic.h"
 #import "YZHAddBookSectionView.h"
+#import "YZHUserLoginManage.h"
 
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
 @interface YZHAddBookPhoneContactVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
@@ -226,8 +227,10 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         
     } else if (contactModel.status == 2) {
         //邀请当前用户
+        NSString* userId = [[YZHUserLoginManage sharedManager] currentLoginData].userId;
         NSDictionary* dic = @{
-                              @"phoneNum": contactModel.phone
+                              @"phoneNum": contactModel.phone,
+                              @"userId": userId
                               };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
         [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_INVITE_SENDSMS params:dic successCompletion:^(NSObject* obj) {

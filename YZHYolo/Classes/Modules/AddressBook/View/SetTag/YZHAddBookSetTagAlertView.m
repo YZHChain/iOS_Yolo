@@ -48,7 +48,7 @@
         }
         self.customTagTextField.text = customTagName;
         NSInteger customTagLength = [self.customTagTextField.text yzh_calculateStringLeng];
-        if (customTagLength <= 16) {
+        if (customTagLength <= 12) {
             self.YZHButtonExecuteBlock ? self.YZHButtonExecuteBlock(self.customTagTextField) : NULL;
         } else {
             [YZHAlertManage showAlertMessage:@"输入分类字数过长,请重新填写"];

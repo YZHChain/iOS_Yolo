@@ -32,7 +32,7 @@
     if (viewModel.image.length) {
         NSString* placeholderImageName;
         if ([viewModel.title isEqualToString:@"头像"]) {
-            placeholderImageName = @"my_informationCell_headPhoto_default";
+            placeholderImageName = @"addBook_cover_cell_photo_default";
         } else {
             placeholderImageName = nil;
         }
@@ -42,7 +42,8 @@
             return;
         }
         [self.photoImageView yzh_setImageWithString:viewModel.image placeholder:placeholderImageName];
-        CGFloat radius = self.photoImageView.size.height / 2;
+//        CGFloat radius = self.photoImageView.size.height / 2;
+        CGFloat radius = 2;
         [self.photoImageView yzh_cornerRadiusAdvance:radius rectCornerType:UIRectCornerAllCorners];
     }
 }

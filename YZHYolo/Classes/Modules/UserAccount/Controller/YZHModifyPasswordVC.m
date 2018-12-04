@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *securityIndexLable;
 @property (nonatomic, assign) YZHModifyPasswordType currentType;
 @property (nonatomic, strong) NSString* phoneNumber;
+@property (weak, nonatomic) IBOutlet UIView *contentView;//暂时先隐藏
+
+@property (weak, nonatomic) IBOutlet UIButton *secretKeyButton;
 
 @end
 
@@ -62,6 +65,8 @@
 }
 
 - (void)setupView {
+    
+    self.contentView.hidden = YES;
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
@@ -103,6 +108,12 @@
 }
 
 #pragma mark - 5.Event Response
+
+- (IBAction)onTouchSecretKey:(UIButton *)sender {
+    
+    [YZHRouter openURL:kYZHRouterFindPassword];
+}
+
 
 -(void)clickBackView
 {

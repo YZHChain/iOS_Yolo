@@ -56,13 +56,14 @@
     layer.startPoint = CGPointMake(0.0, 0.0);
     layer.endPoint = CGPointMake(1, 0.0);
     
-    layer.frame = _topContentView.frame;
-    CGRect rect = _topContentView.frame;
+//    layer.frame = _topContentView.frame;
+//    CGRect rect = _topContentView.frame;
+    layer.frame = CGRectMake(0, 0, YZHScreen_Width, 135);
+    CGRect rect = CGRectMake(0, 0, YZHScreen_Width, 135);
     UIView* view = [[UIView alloc] initWithFrame:rect];
     [view.layer addSublayer:layer];
     
     [_topContentView insertSubview:view atIndex:0];
-    
 }
 
 - (void)setupNotification{
@@ -163,6 +164,14 @@
     
         [[UIViewController yzh_findTopViewController].navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)gotoLogin:(UIButton *)sender {
+    
+    [YZHRouter openURL:kYZHRouterLogin info:@{
+                                              @"phoneString": self.phoneTextField.text ? self.phoneTextField.text : @""
+                                              }];
+}
+
 //根据输入框长度和是否选择协议改变注册按钮状态
 - (IBAction)selectedProtocol:(UIButton *)sender {
     

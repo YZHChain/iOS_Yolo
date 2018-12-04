@@ -10,6 +10,8 @@
 
 #import "UIViewController+YZHTool.h"
 #import "YZHSelectedTeamTypeVC.h"
+#import "YZHUserLoginManage.h"
+#import "YZHProgressHUD.h"
 
 @interface YZHRegisterBackupsVC ()
 
@@ -125,10 +127,19 @@
     
 //    UIViewController* topViewController = [UIViewController yzh_rootViewController];
     
-    YZHSelectedTeamTypeVC* selectedTypeVC = [[YZHSelectedTeamTypeVC alloc] init];
-    selectedTypeVC.logModel = self.logModel;
+//    YZHSelectedTeamTypeVC* selectedTypeVC = [[YZHSelectedTeamTypeVC alloc] init];
+//    selectedTypeVC.logModel = self.logModel;
+//
+//    [self.navigationController pushViewController:selectedTypeVC animated:YES];
     
-    [self.navigationController pushViewController:selectedTypeVC animated:YES];
+    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [manage IMServerLoginWithAccount:_logModel.acctId token:_logModel.token userLoginModel:_logModel successCompletion:^{
+        [hud hideWithText:@"nil"];
+    } failureCompletion:^(NSError *error) {
+        // TODO云信登录错误
+        [hud hideWithText:error.domain];
+    }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

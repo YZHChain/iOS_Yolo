@@ -111,7 +111,7 @@
 - (void)setupLoginEvent {
     
     BOOL isIMTest = NO;
-    if (!isIMTest) {
+    if (isIMTest) {
         NSDictionary* obj = @{
                                   @"appKey" : @"2828b3cd20e9263f914344c284588b60",
                                   @"userId" : @"",
@@ -139,7 +139,7 @@
             [hud hideWithText:nil];
         } failureCompletion:^(NSError *error) {
             //TODO: 失败处理
-            [hud hideWithAPIError:error];
+            [hud hideWithText:error.domain];
         }];
     }
 }

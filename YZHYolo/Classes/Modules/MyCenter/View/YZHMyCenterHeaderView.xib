@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -20,15 +20,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="FZy-27-BLj">
-                    <rect key="frame" x="34" y="66" width="63" height="63"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_photo_default" translatesAutoresizingMaskIntoConstraints="NO" id="FZy-27-BLj">
+                    <rect key="frame" x="13" y="59" width="52" height="52"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="63" id="mEA-eN-YPd"/>
-                        <constraint firstAttribute="width" constant="63" id="xYs-XG-inZ"/>
+                        <constraint firstAttribute="height" constant="52" id="mEA-eN-YPd"/>
+                        <constraint firstAttribute="width" constant="52" id="xYs-XG-inZ"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-iv-AN8">
-                    <rect key="frame" x="109" y="74" width="45" height="18"/>
+                    <rect key="frame" x="77" y="59" width="45" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Ymh-6e-hvO"/>
                     </constraints>
@@ -36,28 +36,17 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-2f-vyb">
-                    <rect key="frame" x="109" y="113" width="50" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="12" id="6bZ-8k-L5v"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="X4q-1J-n6W"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="10"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOLO ID：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3A-UM-oPB">
-                    <rect key="frame" x="109" y="97" width="48" height="12"/>
+                    <rect key="frame" x="77" y="92" width="48" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="12" id="8Ja-OA-Lsk"/>
-                        <constraint firstAttribute="height" constant="12" id="Re9-7M-Qt9"/>
+                        <constraint firstAttribute="height" constant="14" id="qo8-Qu-Kuu"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_code" translatesAutoresizingMaskIntoConstraints="NO" id="Fuq-rW-hrF">
-                    <rect key="frame" x="318" y="88" width="23" height="23"/>
+                    <rect key="frame" x="339" y="73.5" width="23" height="23"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="23" id="xj0-g9-h7K"/>
                         <constraint firstAttribute="width" constant="23" id="zRZ-km-Es6"/>
@@ -70,7 +59,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaJ-1J-ZmB">
-                    <rect key="frame" x="310" y="80" width="40" height="40"/>
+                    <rect key="frame" x="330" y="65" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="6K4-90-fb4"/>
                         <constraint firstAttribute="width" constant="40" id="pmZ-wy-iRZ"/>
@@ -79,40 +68,47 @@
                         <action selector="clickQRCode:" destination="iN0-l3-epB" eventType="touchUpInside" id="OTB-yG-pbX"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bEo-Zh-Ci0">
+                    <rect key="frame" x="128" y="60" width="14" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="Vid-4p-cBx"/>
+                        <constraint firstAttribute="width" constant="14" id="lB8-xY-cs7"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0039215686274509803" green="0.074509803921568626" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="vaJ-1J-ZmB" secondAttribute="bottom" constant="50" id="0ia-8m-ZRH"/>
-                <constraint firstItem="ZOb-2f-vyb" firstAttribute="top" relation="lessThanOrEqual" secondItem="J3A-UM-oPB" secondAttribute="bottom" constant="4" id="4jd-j6-Nqz"/>
                 <constraint firstAttribute="trailing" secondItem="Anp-ex-N3Q" secondAttribute="trailing" id="5VO-Cx-Fca"/>
                 <constraint firstItem="jPY-iv-AN8" firstAttribute="leading" secondItem="FZy-27-BLj" secondAttribute="trailing" constant="12" id="5kC-aZ-zJF"/>
                 <constraint firstItem="Anp-ex-N3Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6Vi-fv-tpY"/>
-                <constraint firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="41" id="CHF-B2-inV"/>
-                <constraint firstItem="J3A-UM-oPB" firstAttribute="top" secondItem="jPY-iv-AN8" secondAttribute="bottom" constant="5" id="DNz-45-nnK"/>
-                <constraint firstItem="jPY-iv-AN8" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" constant="8" id="JfV-I6-HLN"/>
+                <constraint firstItem="bEo-Zh-Ci0" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" constant="1" id="8E7-qK-cra"/>
+                <constraint firstItem="J3A-UM-oPB" firstAttribute="top" secondItem="jPY-iv-AN8" secondAttribute="bottom" priority="750" constant="20" id="DNz-45-nnK"/>
+                <constraint firstItem="jPY-iv-AN8" firstAttribute="top" secondItem="FZy-27-BLj" secondAttribute="top" id="JfV-I6-HLN"/>
                 <constraint firstItem="J3A-UM-oPB" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="KAA-WU-sEn"/>
+                <constraint firstItem="FZy-27-BLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="O34-EP-2sm"/>
+                <constraint firstItem="bEo-Zh-Ci0" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="trailing" constant="6" id="PHH-Tx-7tX"/>
                 <constraint firstItem="Anp-ex-N3Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TTi-Rt-BwR"/>
-                <constraint firstItem="FZy-27-BLj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="34" id="Wct-Jp-Ffn"/>
-                <constraint firstItem="ZOb-2f-vyb" firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="-4" id="bVa-zp-jcJ"/>
-                <constraint firstItem="ZOb-2f-vyb" firstAttribute="leading" secondItem="jPY-iv-AN8" secondAttribute="leading" id="iCS-ru-WxU"/>
-                <constraint firstAttribute="trailing" secondItem="vaJ-1J-ZmB" secondAttribute="trailing" constant="25" id="ifR-cP-fdS"/>
-                <constraint firstAttribute="bottom" secondItem="Fuq-rW-hrF" secondAttribute="bottom" constant="59" id="rLb-3d-Pyh"/>
+                <constraint firstItem="FZy-27-BLj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bS9-zc-kox"/>
+                <constraint firstAttribute="trailing" secondItem="vaJ-1J-ZmB" secondAttribute="trailing" constant="5" id="ifR-cP-fdS"/>
+                <constraint firstItem="Fuq-rW-hrF" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ok5-uI-uE7"/>
+                <constraint firstItem="J3A-UM-oPB" firstAttribute="bottom" secondItem="FZy-27-BLj" secondAttribute="bottom" constant="-5" id="pz4-Ym-Xov"/>
+                <constraint firstItem="vaJ-1J-ZmB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sVv-BN-FP2"/>
                 <constraint firstAttribute="bottom" secondItem="Anp-ex-N3Q" secondAttribute="bottom" id="t9P-6H-3wm"/>
-                <constraint firstAttribute="trailing" secondItem="Fuq-rW-hrF" secondAttribute="trailing" constant="34" id="wK8-xi-7Bf"/>
+                <constraint firstAttribute="trailing" secondItem="Fuq-rW-hrF" secondAttribute="trailing" constant="13" id="wK8-xi-7Bf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="QRCodeImageView" destination="Fuq-rW-hrF" id="xT9-cP-rG9"/>
+                <outlet property="genderImageView" destination="bEo-Zh-Ci0" id="7zK-cv-fVH"/>
                 <outlet property="nickNameLabel" destination="jPY-iv-AN8" id="B8r-GP-3YV"/>
-                <outlet property="phoneNumLabel" destination="ZOb-2f-vyb" id="4Kg-PI-Nl0"/>
                 <outlet property="photoImageView" destination="FZy-27-BLj" id="Ukn-D9-foz"/>
                 <outlet property="userYoloIDLabel" destination="J3A-UM-oPB" id="tnG-1Z-y0M"/>
             </connections>
-            <point key="canvasLocation" x="50" y="-122"/>
+            <point key="canvasLocation" x="48.799999999999997" y="-122.33883058470765"/>
         </view>
     </objects>
     <resources>
+        <image name="addBook_cover_cell_photo_default" width="35" height="35"/>
         <image name="my_cover_code" width="22" height="22"/>
-        <image name="my_cover_headPhoto_default" width="63" height="63"/>
     </resources>
 </document>

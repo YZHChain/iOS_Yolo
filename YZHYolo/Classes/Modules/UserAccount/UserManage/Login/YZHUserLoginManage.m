@@ -223,6 +223,11 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
             [self IMServerLoginSuccessWithAccount:account token:token userLoginModel:userLoginModel];
         } else {
             // 错误提示 TODO:
+            NSString *appKey        = userLoginModel.appKey;
+            NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
+            option.apnsCername      = nil;
+            option.pkCername        = nil;
+            [[NIMSDK sharedSDK] registerWithOption:option];
             failureCompletion ? failureCompletion(error) : NULL;
         }
     }];
@@ -233,9 +238,9 @@ static NSString* kYZHIMloginFilePath  = @"YZHIMloginFilePath";
     YZHIMLoginData* currentLoginData = [[YZHIMLoginData alloc] init];
     currentLoginData.account = account;
     currentLoginData.token = token;
-    currentLoginData.userId = currentLoginData.userId;
-    currentLoginData.yoloId = currentLoginData.yoloId;
-    currentLoginData.mnemonicWord = currentLoginData.mnemonicWord; //助记词.
+    currentLoginData.userId = userLoginModel.userId;
+    currentLoginData.yoloId = userLoginModel.yoloNo;
+    currentLoginData.mnemonicWord = userLoginModel.mnemonicWord; //助记词.
     currentLoginData.isAutoLogin = YES;
     currentLoginData.phoneNumber = userLoginModel.phone;
     // 赋值, 并且保存.

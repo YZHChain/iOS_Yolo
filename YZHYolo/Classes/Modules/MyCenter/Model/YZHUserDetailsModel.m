@@ -35,10 +35,10 @@
         if (YZHIsString(_userInfoExt.userYolo.yoloID)) {
             _yoloID = _userInfoExt.userYolo.yoloID;
         } else {
-            _yoloID = @"YOLO默认用户";
+//            _yoloID = @"YOLO默认用户";
         }
     } else {
-            _yoloID = @"YOLO默认用户";
+//            _yoloID = @"YOLO默认用户";
     }
     return _yoloID;
 }

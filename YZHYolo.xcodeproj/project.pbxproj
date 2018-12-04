@@ -516,6 +516,9 @@
 		55ED310B2171C6FD005BFD3E /* YZHUserDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED310A2171C6FD005BFD3E /* YZHUserDetailsModel.m */; };
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
+		55F7F8DA21B633AC00402189 /* YZHPrivacyReadPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */; };
+		55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */; };
+		55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */; };
 		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
@@ -1468,6 +1471,11 @@
 		55EE6D3C215B7683004E092F /* YZHLocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YZHLocation.json; sourceTree = "<group>"; };
 		55EE6D3E215B76FD004E092F /* YZHMyinformationMyplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyinformationMyplaceModel.h; sourceTree = "<group>"; };
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
+		55F7F8D821B633AC00402189 /* YZHPrivacyReadPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivacyReadPasswordVC.h; sourceTree = "<group>"; };
+		55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivacyReadPasswordVC.m; sourceTree = "<group>"; };
+		55F7F8DB21B633EE00402189 /* YZHReadPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHReadPasswordView.h; sourceTree = "<group>"; };
+		55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHReadPasswordView.m; sourceTree = "<group>"; };
+		55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHReadPasswordView.xib; sourceTree = "<group>"; };
 		55F912D421661F4300EDF190 /* YZHQRCodeManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHQRCodeManage.h; sourceTree = "<group>"; };
 		55F912D521661F4300EDF190 /* YZHQRCodeManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHQRCodeManage.m; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2218,6 +2226,8 @@
 				552CC89D215A782000135FDC /* YZHPrivacySettingVC.h */,
 				552CC89E215A782000135FDC /* YZHPrivacySettingVC.m */,
 				552CC89F215A782000135FDC /* YZHPrivacySettingVC.xib */,
+				55F7F8D821B633AC00402189 /* YZHPrivacyReadPasswordVC.h */,
+				55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2237,6 +2247,9 @@
 				552CC8A2215A798E00135FDC /* YZHPrivacySettingCell.h */,
 				552CC8A3215A798E00135FDC /* YZHPrivacySettingCell.m */,
 				552CC8A4215A798E00135FDC /* YZHPrivacySettingCell.xib */,
+				55F7F8DB21B633EE00402189 /* YZHReadPasswordView.h */,
+				55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */,
+				55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4374,6 +4387,7 @@
 				5593C521216D0AA700A50533 /* YZHAddBookAddFirendRecordCell.xib in Resources */,
 				55C656B1215F2614005E997B /* YZHCommonStyleTableViewCell.xib in Resources */,
 				55C6569F215E587A005E997B /* YZHAddBookUserIDCell.xib in Resources */,
+				55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */,
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
 				556D7E6A21A4112100533384 /* YZHTeamQRCodeSharedVC.xib in Resources */,
@@ -4702,6 +4716,7 @@
 				553641EA217EAEC3006F77A5 /* NIMAdvancedTeamMemberCell.m in Sources */,
 				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
 				5509F0FB218218A9004E10D3 /* NSDictionary+NTESJson.m in Sources */,
+				55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */,
 				5536420D217EAEC3006F77A5 /* NIMKitMessageAtModel.m in Sources */,
 				55DC36BB2168997E00871C2B /* UIButton+YZHClickHandle.m in Sources */,
 				553641DF217EAEC2006F77A5 /* NIMNormalTeamCardViewController.m in Sources */,
@@ -4828,6 +4843,7 @@
 				555B8078219B45FC00168C3C /* YZHAddBookAddFirendShowModel.m in Sources */,
 				55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */,
 				553641DC217EAEC2006F77A5 /* NIMKitNotificationFirer.m in Sources */,
+				55F7F8DA21B633AC00402189 /* YZHPrivacyReadPasswordVC.m in Sources */,
 				556F6CEE214766E10048171C /* NSObject+YZHExtension.m in Sources */,
 				555DA4AF216C35160057D434 /* UINavigationBar+JKR_BackgroundColor.m in Sources */,
 				5536422D217EAEC3006F77A5 /* NIMKitColorButtonCell.m in Sources */,

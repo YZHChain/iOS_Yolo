@@ -147,6 +147,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == 1) {
+        YZHUserInfoExtManage* userManage = [YZHUserInfoExtManage currentUserInfoExt];
+        [YZHRouter openURL:kYZHRouterPrivacyPassword info:@{
+                                                           @"userManage": userManage
+                                                           }];
+    }
 }
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {

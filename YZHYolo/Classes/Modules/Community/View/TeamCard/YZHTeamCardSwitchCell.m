@@ -8,6 +8,7 @@
 
 #import "YZHTeamCardSwitchCell.h"
 
+#import "YZHUserModelManage.h"
 @interface YZHTeamCardSwitchCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -54,6 +55,14 @@
         
     } else if ([self.model.title isEqualToString:@"群上锁"]) {
         self.model.subtitle = sender.isOn ? @"上锁" : @"不上锁";
+        //如果切换为群上锁时,需要检测当前是否有上锁密码.如果无则引导去设置
+        if (sender.isOn) {
+            YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+            BOOL havaReadPassword = YZHIsString(userInfoExt.privateSetting.groupPassword);
+            if (!havaReadPassword) {
+                [YZHRouter openURL:kYZHRouterPrivacySetting];
+            }
+        }
     }
     self.model.isOpenStatus = sender.isOn;
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedUISwitch:indexPath:)]) {

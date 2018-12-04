@@ -152,9 +152,9 @@
         view.titleLabel.text = @"选择已有分类";
     } else {
         if (self.tagsModel.userTeamTagModel.count == 2) {
-            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（%ld / 8）", self.tagsModel.userTeamTagModel.lastObject.count];
+            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（%ld / 5）", self.tagsModel.userTeamTagModel.lastObject.count];
         } else {
-            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（0 / 8）"];
+            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（0 / 5）"];
         }
         
     }
@@ -253,7 +253,7 @@
     }];
     @weakify(self)
     alertView.YZHButtonExecuteBlock = ^(UITextField * _Nonnull customTagTextField) {
-        if (self.tagsModel.userTagModel.lastObject.count < 6) {
+        if (self.tagsModel.userTagModel.lastObject.count < 5) {
             //先检测当前是否存在此标签,如果不存在则直接去添加.
             if (![self.tagsModel checkoutContainCustomTagName:customTagTextField.text  type:YZHSetTagModelTypeTeam]) {
                 @strongify(self)
