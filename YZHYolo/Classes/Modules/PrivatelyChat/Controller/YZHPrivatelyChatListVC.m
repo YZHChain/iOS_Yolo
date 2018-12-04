@@ -22,11 +22,11 @@
 #import "YZHPrivateChatVC.h"
 
 typedef enum : NSUInteger {
-    YZHTableViewShowTypeDefault = 0,
-    YZHTableViewShowTypeTags,
+    YZHTableViewShowTypeTags = 0,
+    YZHTableViewShowTypeDefault,
 } YZHTableViewShowType;
 
-static YZHTableViewShowType currentShowType = YZHTableViewShowTypeDefault;
+static YZHTableViewShowType currentShowType = YZHTableViewShowTypeTags;
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 @interface YZHPrivatelyChatListVC ()<NIMLoginManagerDelegate, NIMEventSubscribeManagerDelegate, UIViewControllerPreviewingDelegate, NIMUserManagerDelegate, NIMConversationManagerDelegate>
@@ -98,7 +98,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     self.navigationItem.title = @"私聊";
     
     @weakify(self)
-    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithStateNormalImageName:@"addBook_cover_leftBarButtonItem_default" stateSelectedImageName:@"addBook_cover_leftBarButtonItem_catogory" tapCallBlock:^(UIButton *sender) {
+    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithStateNormalImageName:@"addBook_cover_leftBarButtonItem_catogory" stateSelectedImageName:@"addBook_cover_leftBarButtonItem_default" tapCallBlock:^(UIButton *sender) {
         @strongify(self)
         [self clickLeftBarSwitchType:sender];
     }];
@@ -149,6 +149,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             [self.tagsTableView reloadData];
         }
     }
+    self.tableView.hidden = YES;
+    self.tagsTableView.hidden = NO;
 }
 
 #pragma mark -- setupNotification

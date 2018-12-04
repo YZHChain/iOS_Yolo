@@ -31,11 +31,11 @@
 #import "YZHUserModelManage.h"
 
 typedef enum : NSUInteger {
-    YZHTableViewShowTypeDefault = 0,
-    YZHTableViewShowTypeTags,
+    YZHTableViewShowTypeTags = 0,
+    YZHTableViewShowTypeDefault,
 } YZHTableViewShowType;
 
-static YZHTableViewShowType currentShowType = YZHTableViewShowTypeDefault;
+static YZHTableViewShowType currentShowType = YZHTableViewShowTypeTags;
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 static NSString* const kYZHDefaultRecentSessionsKey = @"TeamRecentSession";
 static NSString* const kYZHDefaultCellIdentifie = @"defaultCellIdentifie";
@@ -99,7 +99,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     self.navigationItem.title = @"社群";
     
     @weakify(self)
-    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithStateNormalImageName:@"addBook_cover_leftBarButtonItem_default" stateSelectedImageName:@"addBook_cover_leftBarButtonItem_catogory" tapCallBlock:^(UIButton *sender) {
+    UIButton* leftButton = [UIButton yzh_setBarButtonItemWithStateNormalImageName:@"addBook_cover_leftBarButtonItem_catogory" stateSelectedImageName:@"addBook_cover_leftBarButtonItem_default" tapCallBlock:^(UIButton *sender) {
         @strongify(self)
         [self clickLeftBarSwitchType:sender];
     }];
@@ -147,6 +147,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     //默认上锁
     self.teamLock = YES;
+    self.tableView.hidden = YES;
+    self.tagsTableView.hidden = NO;
 }
 
 - (void)refreshTeamListView {
@@ -289,6 +291,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     [deleteButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //解散上锁群.
+        [YZHAlertManage showAlertMessage:@"此功能暂未开放, 请到群信息设置移除"];
         return YES;
     }];
     cell.rightButtons = @[deleteButton];
