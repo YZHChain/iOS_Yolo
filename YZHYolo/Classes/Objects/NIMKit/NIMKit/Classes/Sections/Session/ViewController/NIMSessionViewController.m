@@ -175,7 +175,6 @@
     [_sessionInputView endEditing:YES];
 }
 
-
 #pragma mark - NIMSessionConfiguratorDelegate
 
 - (void)didFetchMessageData

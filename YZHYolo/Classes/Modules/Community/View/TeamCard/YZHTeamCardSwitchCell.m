@@ -9,6 +9,8 @@
 #import "YZHTeamCardSwitchCell.h"
 
 #import "YZHUserModelManage.h"
+#import "YZHAlertManage.h"
+
 @interface YZHTeamCardSwitchCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -43,6 +45,9 @@
         self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
     } else if ([self.model.title isEqualToString:@"是否可互享"]) {
         self.model.subtitle = sender.isOn ? @"可互享" : @"不可互享";
+        if (sender.isOn) {
+            [YZHAlertManage showAlertMessage:@"此功能暂未开放, 尽请期待"];
+        }
     } else if ([self.model.title isEqualToString:@"允许向群里分享其他群名片"]) {
         self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
     } else if ([self.model.title isEqualToString:@"群消息免打扰"]) {

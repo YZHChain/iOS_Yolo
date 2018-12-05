@@ -83,19 +83,6 @@
     
 }
 
-- (void)completeCreate:(UIBarButtonItem *)sender {
-
-    if (self.recruitSelectedButton.selected) {
-        if (YZHIsString(self.recruitImportView.importTextView.text)) {
-            self.clickCreatTeamBlock ? self.clickCreatTeamBlock(self.recruitImportView.importTextView.text) : UUID_NULL;
-        } else {
-            [YZHAlertManage showAlertMessage:@"请填写广播招募信息"];
-        }
-    } else {
-        self.clickCreatTeamBlock ? self.clickCreatTeamBlock(nil) : UUID_NULL;
-    }
-}
-
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
@@ -140,7 +127,8 @@
     [recruitSelectedButton setImage: [UIImage imageNamed:@"team_createTeam_imput_notSelected"] forState:UIControlStateNormal];
     [recruitSelectedButton setImage:[UIImage imageNamed:@"team_createTeam_imput_selected"] forState:UIControlStateSelected];
     [recruitSelectedButton sizeToFit];
-    self.recruitSelectedButton.selected = YES;
+    //默认为不勾选.
+    self.recruitSelectedButton.selected = NO;
     self.selectedCruit = YES;
     [recruitView addSubview:recruitTitleLabel];
     [recruitView addSubview:recruitGuideButton];
@@ -289,6 +277,19 @@
 }
 
 #pragma mark - 5.Event Response
+
+- (void)completeCreate:(UIBarButtonItem *)sender {
+    
+    if (self.recruitSelectedButton.selected) {
+        if (YZHIsString(self.recruitImportView.importTextView.text)) {
+            self.clickCreatTeamBlock ? self.clickCreatTeamBlock(self.recruitImportView.importTextView.text) : UUID_NULL;
+        } else {
+            [YZHAlertManage showAlertMessage:@"请填写广播招募信息"];
+        }
+    } else {
+        self.clickCreatTeamBlock ? self.clickCreatTeamBlock(nil) : UUID_NULL;
+    }
+}
 
 - (void)onTouchRecruit:(UIButton *)sender {
     

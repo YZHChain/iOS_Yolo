@@ -19,6 +19,7 @@ target 'YZHYolo' do
   #pod 'MWPhotoBrowser'
   pod 'Masonry'
   pod 'SDCycleScrollView'
+  pod 'BRPickerView', '~> 2.2.1'
 
   #功能
   pod 'BlocksKit'

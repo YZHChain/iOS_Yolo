@@ -149,6 +149,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     self.teamLock = YES;
     self.tableView.hidden = YES;
     self.tagsTableView.hidden = NO;
+    [self refreshTeamListView];
 }
 
 - (void)refreshTeamListView {

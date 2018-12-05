@@ -98,7 +98,7 @@
         [cell.selectedImageView removeFromSuperview];
     }
     if ([self.viewModel.currentTeamPath isEqual:indexPath]) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@(本群)",team.teamName];
+        cell.teamNameLabel.text = [NSString stringWithFormat:@"%@(本群)",team.teamName];
     }
     
     return cell;
@@ -147,8 +147,11 @@
     
     if (YZHIsArray(self.selectedIndexPathArray)) {
         NSMutableArray* teamIdArray = [[NSMutableArray alloc] init];
+        @weakify(self)
         [self.selectedIndexPathArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [teamIdArray addObject:self.viewModel.allMyOnwerTeam[idx]];
+            @strongify(self)
+            NIMTeam* team = self.viewModel.allMyOnwerTeam[idx];
+            [teamIdArray addObject:team.teamId];
         }];
         self.selectedTeamBlock ? self.selectedTeamBlock(teamIdArray) : NULL;
     }

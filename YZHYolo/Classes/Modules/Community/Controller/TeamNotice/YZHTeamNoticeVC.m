@@ -88,6 +88,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_NOTICE_LIST params:params successCompletion:^(id obj) {
         [hud hideWithText:nil];
         self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
+        [self.dataSource.noticeArray mutableCopy];
         [self.tableView reloadData];
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];
@@ -116,6 +117,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
         [cell.removeButton removeFromSuperview];
     } else {
         cell.delegete = self;
+        cell.section = indexPath.section;
     }
     
     return cell;
@@ -153,7 +155,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)onTouchRemove:(YZHTeamNoticeModel *)modle {
+- (void)onTouchRemove:(YZHTeamNoticeModel *)modle section:(NSInteger)section {
     
     @weakify(self)
     [YZHAlertManage showAlertTitle:@"温馨提示" message:@"你确定要删除掉此条公告吗？此操作不可逆" actionButtons:@[@"取消", @"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
@@ -168,6 +170,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
                 @strongify(self)
                 [hud hideWithText:nil];
                 self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
+                [self.dataSource.noticeArray removeObjectAtIndex:section];
                 [self.tableView reloadData];
             } failureCompletion:^(NSError * error) {
                 [hud hideWithText:@"网络异常, 请重试"];

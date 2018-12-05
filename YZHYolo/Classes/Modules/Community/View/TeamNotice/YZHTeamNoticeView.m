@@ -77,8 +77,8 @@
 
 - (void)clickRemove:(UIButton *)sender {
     
-    if (self.delegete && [self.delegete respondsToSelector:@selector(onTouchRemove:)]) {
-        [self.delegete onTouchRemove:self.model];
+    if (self.delegete && [self.delegete respondsToSelector:@selector(onTouchRemove: section:)]) {
+        [self.delegete onTouchRemove:self.model section:self.section];
     }
     
 }

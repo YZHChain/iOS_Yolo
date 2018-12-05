@@ -116,16 +116,6 @@
 - (void)createTeam:(UIBarButtonItem* )item {
     // 如果是公开群则跳转至填写宣传页,否则直接创建群
     if (self.createTeamView.teamType == YZHTeamTypePublic) {
-        
-//        @weakify(self)
-//        self.creatTeamHandle = ^(NSString *recruitText) {
-//            @strongify(self)
-//            if (YZHIsString(recruitText)) {
-//                [self creatTeamWithRecruitText:recruitText];
-//            } else {
-//                [self creatTeamWithRecruitText:nil];
-//            }
-//        };
         @weakify(self)
         void (^creatTeamHandle) (NSString *recruitText) = ^(NSString* recuitText){
             @strongify(self)

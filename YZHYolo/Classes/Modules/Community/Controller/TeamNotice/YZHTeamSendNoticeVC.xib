@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Light.ttf">
+            <string>SourceHanSansCN-Light</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHTeamSendNoticeVC">
             <connections>
@@ -54,10 +59,10 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="WV9-rQ-GRX">
                                     <rect key="frame" x="348" y="19.5" width="9" height="16"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-fu-70c">
-                                    <rect key="frame" x="312" y="27.5" width="0.0" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-fu-70c">
+                                    <rect key="frame" x="324.5" y="9" width="13.5" height="37.5"/>
+                                    <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="13"/>
+                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -70,7 +75,7 @@
                                 <constraint firstItem="ZqJ-t0-Gxg" firstAttribute="centerY" secondItem="kUR-iw-5ui" secondAttribute="centerY" id="Wmy-27-G4L"/>
                                 <constraint firstItem="ZqJ-t0-Gxg" firstAttribute="leading" secondItem="kUR-iw-5ui" secondAttribute="leading" constant="20" id="aFJ-fi-mcn"/>
                                 <constraint firstAttribute="trailing" secondItem="WV9-rQ-GRX" secondAttribute="trailing" constant="18" id="cKD-OV-tsy"/>
-                                <constraint firstItem="WV9-rQ-GRX" firstAttribute="leading" secondItem="OVH-fu-70c" secondAttribute="trailing" constant="36" id="jiY-Uk-ypt"/>
+                                <constraint firstItem="WV9-rQ-GRX" firstAttribute="leading" secondItem="OVH-fu-70c" secondAttribute="trailing" constant="10" id="jiY-Uk-ypt"/>
                                 <constraint firstItem="PXC-LB-gam" firstAttribute="top" secondItem="kUR-iw-5ui" secondAttribute="top" id="lkG-Jt-TBg"/>
                                 <constraint firstAttribute="trailing" secondItem="PXC-LB-gam" secondAttribute="trailing" id="uEg-tD-NOe"/>
                                 <constraint firstItem="PXC-LB-gam" firstAttribute="leading" secondItem="kUR-iw-5ui" secondAttribute="leading" id="wa6-uR-tPc"/>

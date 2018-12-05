@@ -33,6 +33,7 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
+  - BRPickerView (2.2.1)
   - DDPageControl (0.3.2)
   - JLRoutes (1.6)
   - M80AttributedLabel (1.6.3)
@@ -74,6 +75,7 @@ DEPENDENCIES:
   - "AFNetworking+RetryPolicy (= 1.0.4)"
   - Aspects
   - BlocksKit
+  - BRPickerView (~> 2.2.1)
   - DDPageControl
   - JLRoutes (= 1.6)
   - M80AttributedLabel (~> 1.6.3)
@@ -105,6 +107,7 @@ SPEC REPOS:
     - "AFNetworking+RetryPolicy"
     - Aspects
     - BlocksKit
+    - BRPickerView
     - DDPageControl
     - JLRoutes
     - M80AttributedLabel
@@ -144,6 +147,7 @@ SPEC CHECKSUMS:
   "AFNetworking+RetryPolicy": 3c0e09e525b8bc74ec788e337b12ea97d952ef10
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  BRPickerView: 0590a8c5de9bd98c6b4e4f117a3dff6de287d5b2
   DDPageControl: 0649cdb188fb9045e7b80ba63c15e0a277fbdf5f
   JLRoutes: 435d791422e96c9b9b5e1c4db1aedb3ae1b1a08f
   M80AttributedLabel: d06543195d3e451d2ea62ad76d04aa9cea7661d4
@@ -170,6 +174,6 @@ SPEC CHECKSUMS:
   ZXingObjC: 4ed7bbb878b2cff73b3c02f6f87be9baf65097ef
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 9fc69d0625f43d60d79429bc66f774ab9acdcc84
+PODFILE CHECKSUM: ab293c5d9c41135cfaf92ae270893ec053d2563a
 
 COCOAPODS: 1.5.3

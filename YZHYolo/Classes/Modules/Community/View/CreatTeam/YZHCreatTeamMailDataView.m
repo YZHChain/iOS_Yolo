@@ -66,6 +66,7 @@
 //    [self.teamSynopsisTextView setFont:[UIFont systemFontOfSize:15]];
     
     [self.avatarImageView yzh_cornerRadiusAdvance:3 rectCornerType:UIRectCornerAllCorners];
+    self.teamType = YZHTeamTypePublic;
     
 }
 

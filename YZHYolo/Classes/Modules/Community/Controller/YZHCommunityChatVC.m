@@ -55,7 +55,7 @@
 #import "YZHTeamNoticeShowView.h"
 #import "YZHTeamNoticeModel.h"
 
-@interface YZHCommunityChatVC ()<NIMInputActionDelegate>
+@interface YZHCommunityChatVC ()<NIMInputActionDelegate, NIMTeamManagerDelegate, NIMInputDelegate>
 
 @property (nonatomic, strong) YZHPrivateChatConfig *sessionConfig;
 
@@ -96,6 +96,8 @@
     //4.设置通知
     [self setupNotification];
     
+    [[[NIMSDK sharedSDK] teamManager] addDelegate:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,6 +116,11 @@
         _sessionConfig.session = self.session;
     }
     return _sessionConfig;
+}
+
+- (void)dealloc {
+  
+    [[[NIMSDK sharedSDK] teamManager] removeDelegate:self];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -136,15 +143,39 @@
     
     //删除最近会话列表中有人@你的标记
     [NTESSessionUtil removeRecentSessionMark:self.session type:NTESRecentSessionMarkTypeAt];
-    
+    [self refreshTeamNoticeAndUnMessage];
+}
+
+- (void)refreshTeamNoticeAndUnMessage {
+    //刷新群公告展示
     NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.session.sessionId];
     
     if (YZHIsString(team.announcement)) {
-        self.noticeView = [[YZHTeamNoticeShowView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, 33)];
         NSDictionary* noticeDic = [team.announcement mj_JSONObject];
         NSString* announTitle = noticeDic[@"announcement"];
         if ([announTitle hasPrefix:@"@All "]) {
             announTitle = [announTitle componentsSeparatedByString:@" "].lastObject;
+        }
+        NSString* noticeEndTime = noticeDic[@"endTime"];
+        //如果设置未设置结束时间,则始终展示, 否则需要判断当前时间与结束时间差.
+        if (!YZHIsString(noticeEndTime) || [noticeEndTime isEqualToString:@"0"]) {
+            self.noticeView = [[YZHTeamNoticeShowView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, 33)];
+            [self.view addSubview:self.noticeView];
+        } else {
+            NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+            fmt.dateFormat = @"yyyy-MM-dd HH:mm";
+            
+            NSDate* endTime = [fmt dateFromString:noticeEndTime];
+            NSDate* currentTime = [NSDate date];
+            NSTimeInterval currentTimeinter = [currentTime timeIntervalSince1970] * 1;
+            NSTimeInterval endTimeInter = [endTime timeIntervalSince1970] * 1;
+            NSTimeInterval timeDifference = endTimeInter - currentTimeinter;
+            if (timeDifference > 0) {
+                self.noticeView = [[YZHTeamNoticeShowView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, 33)];
+                [self.view addSubview:self.noticeView];
+            } else {
+                [self.noticeView removeFromSuperview];
+            }
         }
         
         self.noticeView.titleLabel.text = [NSString stringWithFormat:@"[群主]发布了新公告: %@",announTitle];
@@ -152,8 +183,6 @@
         
         [self.noticeView.showButton addTarget:self action:@selector(onTouchTeamShowNoticeView:) forControlEvents:UIControlEventTouchUpInside];
         [self.noticeView.shadowButton addTarget:self action:@selector(onTouchTeamCloseNoticeView:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:self.noticeView];
         
         [self.noticeView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(0);
@@ -211,17 +240,23 @@
         self.unreadMessageView = unreadView;
         [self.unreadMessageView.readButton addTarget:self action:@selector(onTouchReadMessage:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:unreadView];
+        __block CGFloat topConstraint = 40;
+        if (self.noticeView.superview) {
+            topConstraint += self.noticeView.height;
+        } else {
+        }
         [unreadView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-13);
-            make.top.mas_equalTo(40);
+            make.top.mas_equalTo(topConstraint);
             make.width.mas_equalTo(88);
             make.height.mas_equalTo(25);
         }];
+
         [unreadView.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.mas_equalTo(0);
             make.height.mas_equalTo(13);
         }];
-
+        
         [unreadView.readButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.mas_equalTo(0);
         }];
@@ -242,7 +277,7 @@
         self.sessionInputView = [[NIMInputView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,0) config:self.sessionConfig];
         self.sessionInputView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         [self.sessionInputView setSession:self.session];
-//        [self.sessionInputView setInputDelegate:self];
+        [self.sessionInputView setInputDelegate:self];
         [self.sessionInputView setInputActionDelegate:self];
         [self.sessionInputView refreshStatus:NIMInputStatusText];
         [self.view addSubview:self.sessionInputView];
@@ -698,6 +733,25 @@
 
 #pragma mark - 导航按钮
 
+#pragma mark - NIMTeamManagerDelegate
+
+- (void)onTeamUpdated:(NIMTeam *)team {
+  
+    [self refreshTeamNoticeAndUnMessage];
+}
+
+- (void)onTeamAdded:(NIMTeam *)team {
+    
+    
+}
+
+- (void)onTeamRemoved:(NIMTeam *)team {
+    
+}
+
+- (void)onTeamMemberChanged:(NIMTeam *)team {
+    
+}
 #pragma mark - 菜单
 //支持 转文字,转发等
 - (NSArray *)menusItems:(NIMMessage *)message

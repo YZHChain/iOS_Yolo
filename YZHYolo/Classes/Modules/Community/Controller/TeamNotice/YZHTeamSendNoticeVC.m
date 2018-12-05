@@ -11,6 +11,9 @@
 #import "YZHImportBoxView.h"
 #import "YZHPublic.h"
 #import "YZHUserLoginManage.h"
+#import "BRPickerView.h"
+#import "NSDate+BRPickerView.h"
+
 @interface YZHTeamSendNoticeVC ()<UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet YZHImportBoxView *noticeImportBoxView;
@@ -107,8 +110,21 @@
 }
 - (IBAction)selectedEndTime:(id)sender {
     
-    
-    
+    //获取当前时间日期
+    NSDate* minDate = [NSDate date];
+    @weakify(self);
+    [BRDatePickerView showDatePickerWithTitle:@"公告结束时间" dateType:BRDatePickerModeYMDHM defaultSelValue:nil minDate:minDate maxDate:nil isAutoSelect:YES themeColor:nil resultBlock:^(NSString *selectValue) {
+        @strongify(self);
+        if (YZHIsString(selectValue)) {
+           self.endTimeLabel.text = selectValue;
+           self.endTime = selectValue;
+        } else {
+            if (!YZHIsString(self.endTimeLabel.text)) {
+                self.endTimeLabel.text = @"无";
+            }
+        }
+    } cancelBlock:^{
+    }];
 }
 
 - (IBAction)selectedTeam:(id)sender {
@@ -123,10 +139,6 @@
 }
 - (IBAction)sendTeamNotice:(id)sender {
     
-//    if (YZHIsString(_endTime)) {
-//        [YZHAlertManage showAlertMessage:@"请选择结束时间"];
-//        return;
-//    }
     //TODO: 同步群问题. IM 没提供多个群接口,  需要多次调用. 不合适.
     if (YZHIsString(self.noticeImportBoxView.importTextView.text)) {
         NSString* userId = [[[YZHUserLoginManage sharedManager] currentLoginData] userId];
@@ -139,18 +151,23 @@
             }
         }];
         NSDictionary* params;
+        NSString* noticeContent;
         if (self.informAllSwitch.isOn) {
+            noticeContent = [NSString stringWithFormat:@"@All %@", self.noticeImportBoxView.importTextView.text];
+        } else {
+            noticeContent = self.noticeImportBoxView.importTextView.text;
+        }
+        if (YZHIsString(self.endTime)) {
             params = @{
-                       @"endTime": _endTime.length ? _endTime : @"2018-12-30 00:00",
+                       @"endTime": self.endTime,
                        @"grouIds": groupIds.length ? groupIds.copy : _teamId,
-                       @"noticeContent": [NSString stringWithFormat:@"@All %@", self.noticeImportBoxView.importTextView.text],
+                       @"noticeContent": noticeContent,
                        @"userId": userId ? [NSNumber numberWithInteger:userId.integerValue] : @"",
                        };
         } else {
             params = @{
-                       @"endTime": _endTime.length ? _endTime : @"2018-12-30 00:00",
                        @"grouIds": groupIds.length ? groupIds.copy : _teamId,
-                       @"noticeContent": self.noticeImportBoxView.importTextView.text,
+                       @"noticeContent": noticeContent,
                        @"userId": userId ? [NSNumber numberWithInteger:userId.integerValue] : @"",
                        };
         }
@@ -171,10 +188,8 @@
                 }
             }
         } failureCompletion:^(NSError *error) {
-            [hud hideWithText:@"网络异常, 请重试"];
+            [hud hideWithText:error.domain];
         }];
-        
-        [self IMSendNotice];
     } else {
         [YZHAlertManage showAlertMessage:@"请填写群公告内容"];
     }
@@ -186,19 +201,23 @@
     if (self.informAllSwitch.isOn) {
         noticeDic = @{
                       @"announcement": [NSString stringWithFormat:@"@All %@", self.noticeImportBoxView.importTextView.text],
-                      @"endTime": _endTime.length ? _endTime : @"2018-12-30 00:00",
+                      @"endTime": _endTime.length ? _endTime : @"0",
                       };
     } else {
         noticeDic = @{
                       @"announcement": self.noticeImportBoxView.importTextView.text,
-                      @"endTime": _endTime.length ? _endTime : @"2018-12-30 00:00",
+                      @"endTime": _endTime.length ? _endTime : @"0",
                       };
     };
     
     NSString* noticeString = [noticeDic mj_JSONString];
-    [[[NIMSDK sharedSDK] teamManager] updateTeamAnnouncement:noticeString teamId:_teamId completion:^(NSError * _Nullable error) {
+    //发布到多个群组.
+    for (NSString* teamId in self.selectedTeamArray) {
+        [[[NIMSDK sharedSDK] teamManager] updateTeamAnnouncement:noticeString teamId:teamId completion:^(NSError * _Nullable error) {
+            
+        }];
+    }
 
-    }];
     
 }
 
@@ -227,6 +246,11 @@
         _selectedTeamBlock = ^(NSArray *selectedArray){
             @strongify(self)
             self.selectedTeamArray = selectedArray;
+            if (self.selectedTeamArray.count > 1) {
+                self.sendTeamsLabel.text = @"同步到多个群";
+            } else {
+                self.sendTeamsLabel.text = @"只发本群";
+            }
             //刷新同步发送我的其他群列表
         };
     }

@@ -151,6 +151,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }
     self.tableView.hidden = YES;
     self.tagsTableView.hidden = NO;
+    
 }
 
 #pragma mark -- setupNotification

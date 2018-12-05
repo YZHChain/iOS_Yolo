@@ -84,7 +84,8 @@
 - (void)setupLayoutSubviews {
     
     [self.importTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(17);
+        make.left.mas_equalTo(17);
+        make.right.mas_equalTo(-17);
         make.top.mas_equalTo(5);
         make.bottom.mas_equalTo(0);
     }];

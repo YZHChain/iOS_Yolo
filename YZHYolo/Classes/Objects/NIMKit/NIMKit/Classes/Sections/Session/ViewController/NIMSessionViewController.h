@@ -178,4 +178,6 @@
  */
 - (NSInteger)uiReadUnreadMessage:(NSInteger)number;
 
+- (void)setupInputView;
+
 @end

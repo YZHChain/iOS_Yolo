@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol YZHTeamNoticeProtecol <NSObject>
 
-- (void)onTouchRemove:(YZHTeamNoticeModel* )modle;
+- (void)onTouchRemove:(YZHTeamNoticeModel* )modle section:(NSInteger)section;
 
 @end
 
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamNoticeModel* model;
 - (void)refresh:(YZHTeamNoticeModel *)model;
 @property (nonatomic, weak) id<YZHTeamNoticeProtecol> delegete;
+@property (nonatomic, assign) NSInteger section;
 //-(void)setLabelSpace:(UILabel*)label withValue:(NSString*)str withFont:(UIFont*)font;
 
 
