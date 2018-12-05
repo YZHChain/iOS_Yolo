@@ -26,14 +26,14 @@
                            CustomMessageType: @(CustomMessageTypeSpeedyRespond),
                            CustomMessageData: @{
                                    
-                                   @"titleText": self.titleText ? self.titleText : @"",
+                                   @"content": self.content ? self.content : @"",
                                    @"senderUserId": self.senderUserId ? self.senderUserId : @"",
                                    @"teamNickName": self.teamNickName? self.teamNickName : @"",
                                    @"sendUserName": self.senderUserName? self.senderUserName : @"",
                                    @"isSender": [NSNumber numberWithBool:self.isSender],
-                                   @"canGet": [NSNumber numberWithBool:_isReceive],
+                                   @"canGet": [NSNumber numberWithBool:_canGet],
                                    @"isResponse": [NSNumber numberWithBool:_isResponse],
-                                   @"canFinish": [NSNumber numberWithBool:_isHandle],
+                                   @"canFinish": [NSNumber numberWithBool:_canFinish],
                                    }
                            };
     NSData* data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
@@ -48,13 +48,13 @@
 - (instancetype)initWithTitleText:(NSString *)titleText senderUserId:(NSString *)senderUserId teamNickName:(nonnull NSString *)teamNickName senderUserName:(NSString *)senderUserName {
     self = [super init];
     if (self) {
-        _titleText = titleText;
+        _content = titleText;
         _senderUserId = senderUserId;
         _teamNickName = teamNickName;
         _senderUserId = senderUserName;
-        _isReceive = NO;
+        _canGet = NO;
         _isResponse = NO;
-        _isHandle = NO;
+        _canFinish = NO;
         _isSender = YES;
     }
     return self;

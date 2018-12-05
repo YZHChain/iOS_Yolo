@@ -156,13 +156,13 @@
                 @strongify(self)
                 if (!error) {
                     [hud hideWithText:@"昵称修改成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [self dismissViewControllerAnimated:YES completion:nil];
                 }else{
                     [hud hideWithText:error.domain];
                 }
             }];
         } else {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     } else {
         //空限制.
@@ -187,13 +187,13 @@
                 @strongify(self)
                 if (!error) {
                     [hud hideWithText:@"昵称修改成功"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [self dismissViewControllerAnimated:YES completion:nil];
                 } else {
                     [hud hideWithText:error.domain];
                 }
             }];
         } else {
-            [self.navigationController popViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     } else {
         //空限制.

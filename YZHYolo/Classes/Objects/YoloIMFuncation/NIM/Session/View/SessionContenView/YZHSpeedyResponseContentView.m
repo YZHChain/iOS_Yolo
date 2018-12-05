@@ -102,17 +102,17 @@
         NIMKitSetting *setting = [[NIMKit sharedKit].config setting:data.message];
         self.textLabel.textColor = setting.textColor;;
         self.textLabel.font      = setting.font;
-        [self.textLabel nim_setText:attachment.titleText];
+        [self.textLabel nim_setText:attachment.content];
         //如果是自己发送的则需要将其删除掉.不需要显示.
-//        if (attachment.isSender) {
-//            [self.receiveButton removeFromSuperview];
-//            [self.responseButton removeFromSuperview];
-//            [self.handleButton removeFromSuperview];
-//        }
-        self.receiveButton.selected = attachment.isReceive;
+        if (attachment.isSender) {
+            [self.receiveButton removeFromSuperview];
+            [self.responseButton removeFromSuperview];
+            [self.handleButton removeFromSuperview];
+        }
+        self.receiveButton.selected = attachment.canGet;
 //        self.responseButton.selected = attachment.isResponse;
-        self.handleButton.selected = attachment.isHandle;
-        self.receiveButton.enabled = !attachment.isReceive;
+        self.handleButton.selected = attachment.canFinish;
+        self.receiveButton.enabled = !attachment.canGet;
 //        self.responseButton.enabled = !attachment.isResponse;
         self.handleButton.enabled = !attachment.isResponse;
     }

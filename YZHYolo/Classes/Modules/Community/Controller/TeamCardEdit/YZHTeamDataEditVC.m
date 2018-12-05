@@ -20,7 +20,7 @@
 #import "NIMInputEmoticonDefine.h"
 #import "UIImage+NIMKit.h"
 
-@interface YZHTeamDataEditVC ()
+@interface YZHTeamDataEditVC ()<UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *teamNameTextFiled;
@@ -102,6 +102,8 @@
     [tagViewButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.mas_equalTo(0);
     }];
+    
+    self.scrollView.delegate = self;
 }
 
 - (void)reloadView {
@@ -129,6 +131,11 @@
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    [self.scrollView endEditing:YES];
+}
 
 #pragma mark - 5.Event Response
 

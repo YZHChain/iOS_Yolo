@@ -10,7 +10,6 @@
 
 @interface YZHMyInformationSetNameVC : YZHBaseViewController
 
-
 @property (nonatomic, strong) NSString* teamId;
 
 - (void)setupView;

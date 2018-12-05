@@ -117,7 +117,7 @@
     NIMMessage* message = [[NIMMessage alloc] init];
     message.text = text;
     NIMCustomObject *customObject     = [[NIMCustomObject alloc] init];
-    attachment.titleText = text;
+    attachment.content = text;
     customObject.attachment = attachment;
     message.messageObject = customObject;
     //推送文案

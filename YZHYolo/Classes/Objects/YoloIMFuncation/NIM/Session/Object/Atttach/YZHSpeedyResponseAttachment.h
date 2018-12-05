@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSpeedyResponseAttachment : NSObject<NIMCustomAttachment, YZHCustomAttachmentInfo>
 
-@property (nonatomic, copy) NSString* titleText;
+@property (nonatomic, copy) NSString* content;
 
 @property (nonatomic, copy) NSString* senderUserId;
 
@@ -23,11 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isSender; // 是否为发送方
 
-@property (nonatomic, assign) BOOL isReceive; // 已收到
+@property (nonatomic, assign) BOOL canGet; // 已收到
 
 @property (nonatomic, assign) BOOL isResponse;// 已回应
 
-@property (nonatomic, assign) BOOL isHandle; // 已处理
+@property (nonatomic, assign) BOOL canFinish; // 已处理
 
 - (instancetype)initWithTitleText:(NSString *)titleText senderUserId:(NSString *)senderUserId teamNickName:(NSString *)teamNickName senderUserName:(NSString *)senderUserName;
 

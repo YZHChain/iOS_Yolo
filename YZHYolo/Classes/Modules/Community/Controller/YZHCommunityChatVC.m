@@ -690,7 +690,7 @@
         
     } else {
         NSLog(@"处理完成");
-        NSArray* array =  [attachment.titleText componentsSeparatedByString:@" "];
+        NSArray* array =  [attachment.content componentsSeparatedByString:@" "];
         NSMutableString* contentMutable = [[NSMutableString alloc] init];
         for (NSInteger i = 0; i < array.count; i++) {
             NSString* text = array[i];
@@ -698,7 +698,7 @@
                 [contentMutable appendString:text];
             }
         }
-        [self onSendText:[NSString stringWithFormat:@"@\%@ 你说的 \"\%@\" 已处理完成 ", attachment.teamNickName, attachment.titleText] atUsers:@[userId]];
+        [self onSendText:[NSString stringWithFormat:@"@\%@ 你说的 \"\%@\" 已处理完成 ", attachment.teamNickName, attachment.content] atUsers:@[userId]];
     }
 }
 
