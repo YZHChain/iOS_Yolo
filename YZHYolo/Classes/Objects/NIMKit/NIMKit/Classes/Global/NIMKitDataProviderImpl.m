@@ -363,7 +363,7 @@
 {
     if (!_defaultTeamAvatar)
     {
-        _defaultTeamAvatar = [UIImage nim_imageInKit:@"addBook_cover_cell_photo_default"];
+        _defaultTeamAvatar = [UIImage nim_imageInKit:@"team_teamDetails_photoImage_default"];
     }
     return _defaultTeamAvatar;
 }

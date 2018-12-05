@@ -185,10 +185,16 @@
     BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:self.viewModel.teamId inTeam:member.info.infoId].isMuted;
     
     NSString* title;
+    NSString* succeedTitle;
     if (isBanned) {
-        title = [NSString stringWithFormat:@"确定要对 %@ 解除禁言么?", member.info.showName];
+        title = [NSString stringWithFormat:@"确定要对用户: (%@) 解除禁言么?", member.info.showName];
     } else {
-        title = [NSString stringWithFormat:@"确定要对 %@ 禁言么?", member.info.showName];
+        title = [NSString stringWithFormat:@"确定要对用户: (%@) 禁言么?", member.info.showName];
+    }
+    if (isBanned) {
+        succeedTitle = [NSString stringWithFormat:@"已解除用户: (%@) 禁言", member.info.showName];
+    } else {
+//        succeedTitle = [NSString stringWithFormat:@"已对用户: (%@) 禁言", member.info.showName];
     }
     [YZHAlertManage showAlertTitle:nil message:title actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
@@ -197,7 +203,7 @@
             [[[NIMSDK sharedSDK] teamManager] updateMuteState:!isBanned userId:member.info.infoId inTeam:self.viewModel.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
                     @strongify(self)
-                    [hud hideWithText:nil];
+                    [hud hideWithText:succeedTitle];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                     });
@@ -211,7 +217,7 @@
 
 - (void)onTouchKickOutWithMember:(nonnull YZHContactMemberModel *)member {
 
-    [YZHAlertManage showAlertTitle:nil message:[NSString stringWithFormat:@"确定要把 %@ 踢出群么?", member.info.showName] actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+    [YZHAlertManage showAlertTitle:nil message:[NSString stringWithFormat:@"确定要把用户: (%@) 踢出群么?", member.info.showName] actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             //执行移出群操作
             @weakify(self)
@@ -219,7 +225,7 @@
             [[[NIMSDK sharedSDK] teamManager] kickUsers:@[member.info.infoId] fromTeam:self.viewModel.teamId completion:^(NSError * _Nullable error) {
                 @strongify(self)
                 if (!error) {
-                    [hud hideWithText:nil];
+                    [hud hideWithText:[NSString stringWithFormat:@"已将用户: (%@) 移出群聊", member.info.showName]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView reloadData];
                     });

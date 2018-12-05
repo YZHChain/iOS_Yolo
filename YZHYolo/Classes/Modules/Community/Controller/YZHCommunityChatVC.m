@@ -662,7 +662,7 @@
     
     NIMCustomObject *customObject = (NIMCustomObject*)messageModel.message.messageObject;
     YZHSpeedyResponseAttachment *attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
-    NSString* userId = attachment.senderUserId;
+    NSString* userId = attachment.account;
     if (type == 0) {
         
 //        NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.session.sessionId];

@@ -212,8 +212,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_addFirendLog" translatesAutoresizingMaskIntoConstraints="NO" id="t0p-8r-594">
-                            <rect key="frame" x="25" y="10" width="23" height="27"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreFoundation_scan_addTeam" translatesAutoresizingMaskIntoConstraints="NO" id="t0p-8r-594">
+                            <rect key="frame" x="25" y="11" width="25" height="25"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTU-Gf-tqf">
                             <rect key="frame" x="0.0" y="0.0" width="179" height="46.5"/>
@@ -250,8 +250,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_addFirendLog" translatesAutoresizingMaskIntoConstraints="NO" id="zD2-vo-ScD">
-                            <rect key="frame" x="25" y="10" width="23" height="27"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreFoundation_scan_addFriend" translatesAutoresizingMaskIntoConstraints="NO" id="zD2-vo-ScD">
+                            <rect key="frame" x="25" y="11" width="25" height="25"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2L9-de-1bv">
                             <rect key="frame" x="0.0" y="0.0" width="179" height="47"/>
@@ -288,8 +288,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBook_cover_cell_addFirendLog" translatesAutoresizingMaskIntoConstraints="NO" id="YvN-oC-WQp">
-                            <rect key="frame" x="25" y="9.5" width="23" height="27"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moreFoundation_scan_qrCode" translatesAutoresizingMaskIntoConstraints="NO" id="YvN-oC-WQp">
+                            <rect key="frame" x="25" y="10.5" width="25" height="25"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7g8-Pm-uAc">
                             <rect key="frame" x="0.0" y="0.0" width="179" height="46.5"/>
@@ -342,5 +342,8 @@
     </objects>
     <resources>
         <image name="addBook_cover_cell_addFirendLog" width="23" height="27"/>
+        <image name="moreFoundation_scan_addFriend" width="25" height="25"/>
+        <image name="moreFoundation_scan_addTeam" width="25" height="25"/>
+        <image name="moreFoundation_scan_qrCode" width="25" height="25"/>
     </resources>
 </document>

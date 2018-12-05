@@ -13,6 +13,7 @@
 #import "NIMAvatarImageView.h"
 #import "NIMKitUtil.h"
 #import "NIMKit.h"
+#import "NIMCustomObject.h"
 
 @interface NIMSessionListViewController ()
 
@@ -303,6 +304,7 @@
             break;
         case NIMMessageTypeCustom:
             //TODO:增加自定义消息解析.识别不同自定义消息格式
+            
             text = @"自定义消息";
             break;
         default:

@@ -13,13 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSpeedyResponseAttachment : NSObject<NIMCustomAttachment, YZHCustomAttachmentInfo>
 
-@property (nonatomic, copy) NSString* content;
+@property (nonatomic, copy) NSString* content; //内容
 
-@property (nonatomic, copy) NSString* senderUserId;
+@property (nonatomic, copy) NSString* account; //发送者账号
 
 @property (nonatomic, strong) NSString* teamNickName; //此群对应发送者昵称
 
-@property (nonatomic, strong) NSString* senderUserName;
+@property (nonatomic, strong) NSString* userName; //发送者名字
 
 @property (nonatomic, assign) BOOL isSender; // 是否为发送方
 

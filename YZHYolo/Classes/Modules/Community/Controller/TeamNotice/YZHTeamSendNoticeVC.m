@@ -160,13 +160,13 @@
         if (YZHIsString(self.endTime)) {
             params = @{
                        @"endTime": self.endTime,
-                       @"grouIds": groupIds.length ? groupIds.copy : _teamId,
+                       @"groupIds": groupIds.length ? groupIds.copy : _teamId,
                        @"noticeContent": noticeContent,
                        @"userId": userId ? [NSNumber numberWithInteger:userId.integerValue] : @"",
                        };
         } else {
             params = @{
-                       @"grouIds": groupIds.length ? groupIds.copy : _teamId,
+                       @"groupIds": groupIds.length ? groupIds.copy : _teamId,
                        @"noticeContent": noticeContent,
                        @"userId": userId ? [NSNumber numberWithInteger:userId.integerValue] : @"",
                        };

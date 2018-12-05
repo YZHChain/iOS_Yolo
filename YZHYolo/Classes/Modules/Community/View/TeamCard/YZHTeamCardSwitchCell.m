@@ -65,7 +65,9 @@
             YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
             BOOL havaReadPassword = YZHIsString(userInfoExt.privateSetting.groupPassword);
             if (!havaReadPassword) {
-                [YZHRouter openURL:kYZHRouterPrivacySetting];
+                [YZHRouter openURL:kYZHRouterPrivacyPassword info:@{
+                                                                    @"userManage": userInfoExt
+                                                                    }];
             }
         }
     }

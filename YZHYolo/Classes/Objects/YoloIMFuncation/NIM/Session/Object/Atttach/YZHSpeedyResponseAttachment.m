@@ -27,9 +27,9 @@
                            CustomMessageData: @{
                                    
                                    @"content": self.content ? self.content : @"",
-                                   @"senderUserId": self.senderUserId ? self.senderUserId : @"",
+                                   @"account": self.account ? self.account : @"",
                                    @"teamNickName": self.teamNickName? self.teamNickName : @"",
-                                   @"sendUserName": self.senderUserName? self.senderUserName : @"",
+                                   @"userName": self.userName? self.userName : @"",
                                    @"isSender": [NSNumber numberWithBool:self.isSender],
                                    @"canGet": [NSNumber numberWithBool:_canGet],
                                    @"isResponse": [NSNumber numberWithBool:_isResponse],
@@ -49,9 +49,9 @@
     self = [super init];
     if (self) {
         _content = titleText;
-        _senderUserId = senderUserId;
+        _account = senderUserId;
         _teamNickName = teamNickName;
-        _senderUserId = senderUserName;
+        _userName = teamNickName;
         _canGet = NO;
         _isResponse = NO;
         _canFinish = NO;
@@ -98,7 +98,7 @@
 - (BOOL)isSender {
     
     NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-    if ([self.senderUserId isEqualToString:userId]) {
+    if ([self.account isEqualToString:userId]) {
         return YES;
     } else {
         return NO;

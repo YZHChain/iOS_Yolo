@@ -116,6 +116,7 @@
     
     sender.selected = !sender.isSelected;
     
+    
     if (sender.isSelected) {
         self.startButton.enabled = YES;
     } else {

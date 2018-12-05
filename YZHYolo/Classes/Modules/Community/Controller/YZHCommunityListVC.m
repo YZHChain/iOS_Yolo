@@ -198,9 +198,17 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
                     self.teamLock = NO;
                     [self gotoLockTeamList];
                     [self.tableView reloadData];
+                    [self.tagsTableView reloadData];
                 }
             } else {
-                [YZHAlertManage showAlertMessage:@"密码不可为空,请输入阅读上锁群密码"];
+                if (YZHIsString(userInfoExt.privateSetting.groupPassword)) {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
+                } else {
+                    self.teamLock = NO;
+                    [self gotoLockTeamList];
+                    [self.tableView reloadData];
+                    [self.tagsTableView reloadData];
+                }
             }
         }
     }];
@@ -284,6 +292,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         } else {
             self.teamLock = YES;
             [self.tableView reloadData];
+            [self.tagsTableView reloadData];
         }
         return YES;
     }];
