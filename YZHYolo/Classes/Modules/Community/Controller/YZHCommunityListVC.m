@@ -194,11 +194,13 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             @strongify(self)
             YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
             if (YZHIsString(textField.text)) {
-                if ([textField isEqual:userInfoExt.privateSetting.groupPassword]) {
+                if ([textField.text isEqual:userInfoExt.privateSetting.groupPassword]) {
                     self.teamLock = NO;
                     [self gotoLockTeamList];
                     [self.tableView reloadData];
                     [self.tagsTableView reloadData];
+                } else {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
                 }
             } else {
                 if (YZHIsString(userInfoExt.privateSetting.groupPassword)) {

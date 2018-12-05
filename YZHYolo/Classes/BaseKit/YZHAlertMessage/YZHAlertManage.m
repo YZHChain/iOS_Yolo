@@ -59,17 +59,18 @@ static NSString* const YMAlertMessageActionTitle = @"知道了";
     }
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    __block UITextField* textField;
+    __block UITextField* pwTextField;
     
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         
-        textField = textField;
-        textField.placeholder = textFieldPlaceholder;
+        pwTextField = textField;
+        pwTextField.placeholder = textFieldPlaceholder;
+        pwTextField.secureTextEntry = YES;
     }];
     
     [actionButtons enumerateObjectsUsingBlock:^(NSString * _Nonnull buttonTitle, NSUInteger idx, BOOL * _Nonnull stop) {
         UIAlertAction* action = [UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            block ? block(alertController, textField, idx) : NULL;
+            block ? block(alertController, pwTextField, idx) : NULL;
         }];
         [alertController addAction:action];
     }];

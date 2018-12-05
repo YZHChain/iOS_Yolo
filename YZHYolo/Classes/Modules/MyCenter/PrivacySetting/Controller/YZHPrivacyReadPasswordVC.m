@@ -120,6 +120,7 @@
                                                                          
                                                                          [hud hideWithText:@"重置阅读密码成功"];
                                                                          [self refreshViewStatus:NO];
+                                                                         [self.navigationController popViewControllerAnimated:YES];
                                                                          
                                                                      } else {
                                                                          [hud hideWithText:@"重置失败, 请稍后重试"];
@@ -142,6 +143,7 @@
                                                                  if (!error) {
                                                                      
                                                                      [hud hideWithText:@"设置阅读密码成功"];
+                                                                     [self.navigationController popViewControllerAnimated:YES];
                                                                      [self refreshViewStatus:NO];
                                                                  
                                                                  } else {
