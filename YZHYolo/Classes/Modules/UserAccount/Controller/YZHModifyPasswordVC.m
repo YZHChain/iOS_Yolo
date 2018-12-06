@@ -12,6 +12,7 @@
 #import "NSString+YZHTool.h"
 #import "UIButton+YZHCountDown.h"
 #import "YZHUserLoginManage.h"
+#import "YZHLoginModel.h"
 
 @interface YZHModifyPasswordVC ()<UITextFieldDelegate>
 
@@ -67,6 +68,7 @@
 - (void)setupView {
     
     self.contentView.hidden = YES;
+    self.confirmButton.hidden = YES;
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
@@ -139,8 +141,26 @@
                 };
     }
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+//    @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_MODIFI_PASSWORD params:dic successCompletion:^(id obj) {
+//        @strongify(self)
+        [[YZHUserLoginManage sharedManager] setCurrentLoginData:nil];
+        //TODO:开启子线程异步执行保存登录数据. //
+        
+        YZHLoginModel* loginModel = [YZHLoginModel YZH_objectWithKeyValues:obj];
+        YZHIMLoginData* currentLoginData = [[YZHIMLoginData alloc] init];
+        currentLoginData.account = loginModel.acctId;
+        currentLoginData.token = loginModel.token;
+        currentLoginData.userId = loginModel.userId;
+        currentLoginData.yoloId = loginModel.yoloNo;
+        currentLoginData.mnemonicWord = loginModel.mnemonicWord; //助记词.
+        currentLoginData.isAutoLogin = YES;
+        currentLoginData.phoneNumber = loginModel.phone;
+        currentLoginData.userAccount = loginModel.userAccount;
+        // 赋值, 并且保存.
+        [[YZHUserLoginManage sharedManager] setCurrentLoginData:currentLoginData];
         [hud hideWithText:@"密码修改成功"];
+        
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];
     }];
