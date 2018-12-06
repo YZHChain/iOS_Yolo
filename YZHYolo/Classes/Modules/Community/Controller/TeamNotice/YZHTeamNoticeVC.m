@@ -171,17 +171,19 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
                 [hud hideWithText:nil];
                 self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
                 [self.dataSource.noticeArray removeObjectAtIndex:section];
+                if (section == 0) {
+                    //同时删除掉云信
+                    [[[NIMSDK sharedSDK] teamManager] updateTeamAnnouncement:@"" teamId:self.teamId completion:^(NSError * _Nullable error) {
+                        if (!error) {
+                            //                    [hud hideWithText:@"删除成功"];
+                        } else {
+                            //                    [hud hideWithText:@"网络异常, 请重试"];
+                        }
+                    }];
+                }
                 [self.tableView reloadData];
             } failureCompletion:^(NSError * error) {
                 [hud hideWithText:@"网络异常, 请重试"];
-            }];
-            //同时删除掉云信
-            [[[NIMSDK sharedSDK] teamManager] updateTeamAnnouncement:@"" teamId:self.teamId completion:^(NSError * _Nullable error) {
-                if (!error) {
-//                    [hud hideWithText:@"删除成功"];
-                } else {
-//                    [hud hideWithText:@"网络异常, 请重试"];
-                }
             }];
         }
     }];
@@ -218,7 +220,6 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     CGSize size = [str boundingRectWithSize:CGSizeMake(width, 500) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     return size.height;
 }
-
 
 - (void)setupNotification {
     
