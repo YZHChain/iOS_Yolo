@@ -50,12 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NIMUser* user;
 @property (nonatomic, strong) YZHTargetUserExtManage* targetUserExt;
+@property (nonatomic, strong) NSMutableArray* remarkContentsArray;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExt;
 @property (nonatomic, strong) YZHAddBookDetailModel* classTagModel;
 @property (nonatomic, strong) YZHAddBookDetailModel* placeModel;
+@property (nonatomic, strong) YZHAddBookDetailModel* chatModel;
 @property (nonatomic, strong) NSMutableArray<YZHAddBookDetailModel*>* userNotePhoneArray;
 @property (nonatomic, strong) YZHAddBookDetailModel* requteAddModel;
-
 
 @property (nonatomic, assign) BOOL isMyFriend;
 @property (nonatomic, assign) BOOL hasPhoneNumber;

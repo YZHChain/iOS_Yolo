@@ -229,7 +229,7 @@
 - (NSMutableArray<YZHAddBookDetailModel *> *)noteModel {
     
     if (!_noteModel) {
-        _noteModel = self.userDetailsModel.viewModel[self.userDetailsModel.viewModel.count - 2];
+        _noteModel = self.userDetailsModel.remarkContentsArray;
         //如果未设置过手机号,则临时添加一个Model 为了展示.
         if (_noteModel.count == 1) {
             YZHAddBookDetailModel* phoneModel = [[YZHAddBookDetailModel alloc] init];
@@ -245,7 +245,7 @@
 -  (YZHAddBookDetailModel *)classTagModel {
     
     if (!_classTagModel) {
-       _classTagModel = self.userDetailsModel.viewModel.lastObject.firstObject;
+        _classTagModel = self.userDetailsModel.classTagModel;
     }
     return _classTagModel;
 }

@@ -35,6 +35,7 @@
 
 #import "YZHProgressHUD.h"
 #import "YZHUnreadMessageView.h"
+#import "YZHAlertManage.h"
 
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
@@ -53,8 +54,8 @@
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, assign) BOOL requstAddFirendFlag;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
-@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
-@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
+//@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
+//@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
 @property (nonatomic, assign) NSInteger unreadNumber;
 @property (nonatomic, strong) YZHUnreadMessageView* unreadMessageView;
 
@@ -263,26 +264,26 @@
 #pragma mark - 红包
 #pragma mark - 群已读回执
 #pragma mark - NIMMeidaButton
-// 联系人
-- (void)onTapMediaItemContact:(NIMMediaItem *)item {
-    
-    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
-                                                          @"sharedType": @(1),
-                                                          kYZHRouteSegue: kYZHRouteSegueModal,
-                                                          kYZHRouteSegueNewNavigation: @(YES),
-                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
-                                                          }];
-}
-// 我的社群
-- (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
-    // 弹出联系人页面
-    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
-                                                          @"sharedType": @(2),
-                                                          kYZHRouteSegue: kYZHRouteSegueModal,
-                                                          kYZHRouteSegueNewNavigation: @(YES),
-                                                          @"sharedTeamCardBlock": self.sharedTeamCardHandle
-                                                          }];
-}
+//// 联系人
+//- (void)onTapMediaItemContact:(NIMMediaItem *)item {
+//
+//    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+//                                                          @"sharedType": @(1),
+//                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+//                                                          kYZHRouteSegueNewNavigation: @(YES),
+//                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
+//                                                          }];
+//}
+//// 我的社群
+//- (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
+//    // 弹出联系人页面
+//    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+//                                                          @"sharedType": @(2),
+//                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+//                                                          kYZHRouteSegueNewNavigation: @(YES),
+//                                                          @"sharedTeamCardBlock": self.sharedTeamCardHandle
+//                                                          }];
+//}
 
 #pragma mark - 消息发送时间截获
 
@@ -537,6 +538,8 @@
 
 - (void)showVideo:(NIMMessage *)message {
     
+    [YZHAlertManage showAlertMessage:@"暂不支持播放视频"];
+    
 }
 //处理自定义消息事件
 - (void)showCustom:(NIMMessage *)message
@@ -739,27 +742,4 @@
     return _userInfoExtManage;
 }
 
-- (void (^)(YZHUserCardAttachment *))sharedPersonageCardHandle {
-    
-    if (!_sharedPersonageCardHandle) {
-        @weakify(self)
-        _sharedPersonageCardHandle = ^(YZHUserCardAttachment *userCard) {
-            @strongify(self)
-          [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCard]];
-        };
-    }
-    return _sharedPersonageCardHandle;
-}
-
-- (void (^)(YZHTeamCardAttachment *))sharedTeamCardHandle {
-    
-    if (!_sharedTeamCardHandle) {
-        @weakify(self)
-        _sharedTeamCardHandle = ^(YZHTeamCardAttachment *teamCard) {
-            @strongify(self)
-            [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCard]];
-        };
-    }
-    return _sharedTeamCardHandle;
-}
 @end

@@ -324,6 +324,11 @@
 		556F6D112147B9220048171C /* YZHRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D102147B9220048171C /* YZHRouter.m */; };
 		556F6D142147B97A0048171C /* YZHRouter+Skip.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D132147B97A0048171C /* YZHRouter+Skip.m */; };
 		556F6D172147B9F30048171C /* YZHRouterConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6D162147B9F30048171C /* YZHRouterConfig.m */; };
+		5574311221B815C9006AAED0 /* NTESVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5574311021B815C9006AAED0 /* NTESVideoViewController.xib */; };
+		5574311321B815C9006AAED0 /* NTESVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311121B815C9006AAED0 /* NTESVideoViewController.m */; };
+		5574311621B81694006AAED0 /* NTESNavigationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311421B81694006AAED0 /* NTESNavigationHandler.m */; };
+		5574311921B816CE006AAED0 /* UIResponder+NTESFirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311821B816CD006AAED0 /* UIResponder+NTESFirstResponder.m */; };
+		5574311C21B816E7006AAED0 /* NTESNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311B21B816E7006AAED0 /* NTESNavigationAnimator.m */; };
 		5575787121980A8B00EB5BDD /* YZHTargetUserDataManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575787021980A8A00EB5BDD /* YZHTargetUserDataManage.m */; };
 		557578762198544000EB5BDD /* YZHSetTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557578752198544000EB5BDD /* YZHSetTagModel.m */; };
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
@@ -1130,6 +1135,15 @@
 		556F6D132147B97A0048171C /* YZHRouter+Skip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YZHRouter+Skip.m"; sourceTree = "<group>"; };
 		556F6D152147B9F30048171C /* YZHRouterConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHRouterConfig.h; sourceTree = "<group>"; };
 		556F6D162147B9F30048171C /* YZHRouterConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHRouterConfig.m; sourceTree = "<group>"; };
+		5574310F21B815C9006AAED0 /* NTESVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESVideoViewController.h; sourceTree = "<group>"; };
+		5574311021B815C9006AAED0 /* NTESVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESVideoViewController.xib; sourceTree = "<group>"; };
+		5574311121B815C9006AAED0 /* NTESVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESVideoViewController.m; sourceTree = "<group>"; };
+		5574311421B81694006AAED0 /* NTESNavigationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESNavigationHandler.m; sourceTree = "<group>"; };
+		5574311521B81694006AAED0 /* NTESNavigationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESNavigationHandler.h; sourceTree = "<group>"; };
+		5574311721B816CD006AAED0 /* UIResponder+NTESFirstResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+NTESFirstResponder.h"; sourceTree = "<group>"; };
+		5574311821B816CD006AAED0 /* UIResponder+NTESFirstResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+NTESFirstResponder.m"; sourceTree = "<group>"; };
+		5574311A21B816E6006AAED0 /* NTESNavigationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESNavigationAnimator.h; sourceTree = "<group>"; };
+		5574311B21B816E7006AAED0 /* NTESNavigationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESNavigationAnimator.m; sourceTree = "<group>"; };
 		5575786F21980A8A00EB5BDD /* YZHTargetUserDataManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTargetUserDataManage.h; sourceTree = "<group>"; };
 		5575787021980A8A00EB5BDD /* YZHTargetUserDataManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTargetUserDataManage.m; sourceTree = "<group>"; };
 		557578742198544000EB5BDD /* YZHSetTagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSetTagModel.h; sourceTree = "<group>"; };
@@ -3227,6 +3241,22 @@
 			path = Theme;
 			sourceTree = "<group>";
 		};
+		5574310E21B815C9006AAED0 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				5574310F21B815C9006AAED0 /* NTESVideoViewController.h */,
+				5574311121B815C9006AAED0 /* NTESVideoViewController.m */,
+				5574311021B815C9006AAED0 /* NTESVideoViewController.xib */,
+				5574311A21B816E6006AAED0 /* NTESNavigationAnimator.h */,
+				5574311B21B816E7006AAED0 /* NTESNavigationAnimator.m */,
+				5574311521B81694006AAED0 /* NTESNavigationHandler.h */,
+				5574311421B81694006AAED0 /* NTESNavigationHandler.m */,
+				5574311721B816CD006AAED0 /* UIResponder+NTESFirstResponder.h */,
+				5574311821B816CD006AAED0 /* UIResponder+NTESFirstResponder.m */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		55757873219853F900EB5BDD /* SetTag */ = {
 			isa = PBXGroup;
 			children = (
@@ -4238,6 +4268,7 @@
 			children = (
 				55BA210E21763EED00F90268 /* NIM */,
 				5509F0DB218205F2004E10D3 /* Session */,
+				5574310E21B815C9006AAED0 /* Video */,
 				5509F0DA218205C6004E10D3 /* View */,
 				552B78ED21737E3900C1DD99 /* Util */,
 				55ED310721709513005BFD3E /* Sections */,
@@ -4367,6 +4398,7 @@
 				55C656D2215F7077005E997B /* YZHAddBookSetTagFooterView.xib in Resources */,
 				55B5DBA02153374A002A04A9 /* YZHMyInformationCell.xib in Resources */,
 				553E313321B26945002AF339 /* SourceHanSansCN-Light.ttf in Resources */,
+				5574311221B815C9006AAED0 /* NTESVideoViewController.xib in Resources */,
 				556D7E5321A2F1C500533384 /* YZHTeamCardSwitchCell.xib in Resources */,
 				5551B34B21A58B2300AF3088 /* YZHChatContentHeaderView.xib in Resources */,
 				5531458121573C1400A13F96 /* YZHMyInformationYoloIDVC.xib in Resources */,
@@ -4552,6 +4584,7 @@
 				5537421521A66B0900204972 /* YZHSessionListCell.m in Sources */,
 				553641DD217EAEC2006F77A5 /* NIMLoadProgressView.m in Sources */,
 				55BDA374218AD9F1006400B0 /* YZHCreateTeamResultVC.m in Sources */,
+				5574311921B816CE006AAED0 /* UIResponder+NTESFirstResponder.m in Sources */,
 				55BD866A215E0CA700D23ED1 /* YZHAddBookAdditionalCell.m in Sources */,
 				55364228217EAEC3006F77A5 /* NIMKitSetting.m in Sources */,
 				55337DE1215085C900307B75 /* UIView+YZHTool.m in Sources */,
@@ -4861,6 +4894,7 @@
 				5520584321995DEE00591A4A /* YZHAddFirendSearchVC.m in Sources */,
 				553641D9217EAEC2006F77A5 /* NIMPageView.m in Sources */,
 				5581915321A1C81B00C74E2E /* YZHTeamCardModel.m in Sources */,
+				5574311321B815C9006AAED0 /* NTESVideoViewController.m in Sources */,
 				559754DA21B50851009AC4D1 /* YZHImageReusableView.m in Sources */,
 				5581915921A1C89800C74E2E /* YZHTeamSharedVC.m in Sources */,
 				553641DB217EAEC2006F77A5 /* NIMKitKeyboardInfo.m in Sources */,
@@ -4868,6 +4902,7 @@
 				55364214217EAEC3006F77A5 /* NIMSessionNotificationContentView.m in Sources */,
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				55AA826D2186D8EC00ED73B1 /* YZHCommunityChatVC.m in Sources */,
+				5574311621B81694006AAED0 /* NTESNavigationHandler.m in Sources */,
 				5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */,
 				5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */,
 				553641E0217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m in Sources */,
@@ -4934,6 +4969,7 @@
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55364209217EAEC3006F77A5 /* NIMSessionConfigurator.m in Sources */,
 				553641C5217EAEC2006F77A5 /* NIMKitUtil.m in Sources */,
+				5574311C21B816E7006AAED0 /* NTESNavigationAnimator.m in Sources */,
 				55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */,
 				553641C1217EAEC2006F77A5 /* NIMKitRobotTemplate.m in Sources */,
 				553641C8217EAEC2006F77A5 /* NIMInputEmoticonParser.m in Sources */,

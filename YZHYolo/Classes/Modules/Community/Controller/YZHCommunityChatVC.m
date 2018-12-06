@@ -28,6 +28,7 @@
 #import "UIView+Toast.h"
 #import "NIMMessageMaker.h"
 #import "NIMKitInfoFetchOption.h"
+#import "NTESVideoViewController.h"
 
 #import "YZHPrivateChatConfig.h"
 #import "YZHUserCardAttachment.h"
@@ -54,13 +55,12 @@
 #import "YZHUnreadMessageView.h"
 #import "YZHTeamNoticeShowView.h"
 #import "YZHTeamNoticeModel.h"
+#import "YZHAlertManage.h"
 
 @interface YZHCommunityChatVC ()<NIMInputActionDelegate, NIMTeamManagerDelegate, NIMInputDelegate>
 
 @property (nonatomic, strong) YZHPrivateChatConfig *sessionConfig;
 
-@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
-@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
 @property (nonatomic, assign) NSInteger unreadNumber;
@@ -400,27 +400,6 @@
     }
 }
 
-// 联系人
-- (void)onTapMediaItemContact:(NIMMediaItem *)item {
-    
-    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
-                                                          @"sharedType": @(1),
-                                                          kYZHRouteSegue: kYZHRouteSegueModal,
-                                                          kYZHRouteSegueNewNavigation: @(YES),
-                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
-                                                          }];
-}
-// 我的社群
-- (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
-    // 弹出联系人页面
-    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
-                                                          @"sharedType": @(2),
-                                                          kYZHRouteSegue: kYZHRouteSegueModal,
-                                                          kYZHRouteSegueNewNavigation: @(YES),
-                                                          @"sharedTeamCardBlock": self.sharedTeamCardHandle
-                                                          }];
-}
-
 #pragma mark - 消息发送时间截获
 
 - (void)sendMessage:(NIMMessage *)message didCompleteWithError:(NSError *)error {
@@ -504,7 +483,7 @@
 }
 
 #pragma mark - Cell事件
-/*
+
 - (BOOL)onTapAvatar:(NIMMessage *)message{
     //TODO目前两种,一种是好友,一种是临时 非好友,不知道非好友状态聊天对方 id 字段是否也是
     NSString* userId;
@@ -520,7 +499,48 @@
     [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
     return YES;
 }
- */
+
+- (BOOL)onLongPressAvatar:(NIMMessage *)message
+{
+    NSString *userId = [self messageSendSource:message];
+//    if (YZHIsString(userId)) {
+        if (self.session.sessionType == NIMSessionTypeTeam && ![userId isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount])
+        {
+            NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+            option.session = self.session;
+            option.forbidaAlias = YES;
+            
+            NSString *nick = [[NIMKit sharedKit].provider infoByUser:userId option:option].showName;
+            NSString *text = [NSString stringWithFormat:@"%@%@%@",NIMInputAtStartChar,nick,NIMInputAtEndChar];
+            
+            NIMInputAtItem *item = [[NIMInputAtItem alloc] init];
+            item.uid  = userId;
+            item.name = nick;
+            [self.sessionInputView.atCache addAtItem:item];
+            
+            [self.sessionInputView.toolBar insertText:text];
+        }
+        return YES;
+//    }
+}
+
+- (NSString *)messageSendSource:(NIMMessage *)message
+{
+    NSString *from = nil;
+    if (message.messageType == NIMMessageTypeRobot)
+    {
+        NIMRobotObject *object = (NIMRobotObject *)message.messageObject;
+        if (object.isFromRobot)
+        {
+            from = object.robotId;
+        }
+    }
+    if (!from)
+    {
+        from = message.from;
+    }
+    return from;
+}
 
 #pragma mark - Cell Actions
 
@@ -637,6 +657,8 @@
 
 - (void)showVideo:(NIMMessage *)message {
     
+    [YZHAlertManage showAlertMessage:@"暂不支持播放视频"];
+    
 }
 
 //处理自定义消息事件
@@ -675,18 +697,8 @@
 //            }
 //        }];
     } else if (type == 1) {
-        NSLog(@"快捷回复");
-        NIMInputAtItem* atItem = [[NIMInputAtItem alloc] init];
-//        @property (nonatomic,copy) NSString *name;
-//
-//        @property (nonatomic,copy) NSString *uid;
-//
-//        @property (nonatomic,assign) NSRange range;
-        atItem.name = @"嘿嘿";
-        atItem.uid = @"挂机";
-        atItem.range = NSMakeRange(0, atItem.name.length);
-        [self.sessionInputView.atCache addAtItem:atItem];
-        [self.sessionInputView reset];
+        
+        [self onLongPressAvatar:messageModel.message];
         
     } else {
         NSLog(@"处理完成");
@@ -852,28 +864,5 @@
     return !self.currentSingleSnapView;
 }
 
-- (void (^)(YZHUserCardAttachment *))sharedPersonageCardHandle {
-    
-    if (!_sharedPersonageCardHandle) {
-        @weakify(self)
-        _sharedPersonageCardHandle = ^(YZHUserCardAttachment *userCard) {
-            @strongify(self)
-            [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCard]];
-        };
-    }
-    return _sharedPersonageCardHandle;
-}
-
-- (void (^)(YZHTeamCardAttachment *))sharedTeamCardHandle {
-    
-    if (!_sharedTeamCardHandle) {
-        @weakify(self)
-        _sharedTeamCardHandle = ^(YZHTeamCardAttachment *teamCard) {
-            @strongify(self)
-            [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCard]];
-        };
-    }
-    return _sharedTeamCardHandle;
-}
 
 @end

@@ -299,12 +299,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     YZHAddBookDetailModel* model = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
-    if (model.canSkip) {
-        
-        [YZHRouter openURL:model.router info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
-                                               @"userDetailsModel": self.userDetailsModel
+    if ([model.title isEqualToString:@"聊天内容"]) {
+        [YZHRouter openURL:model.router info:@{
+                                                @"targetId": self.userId,
                                                }];
+        
+    } else {
+        if (model.canSkip) {
+            
+            [YZHRouter openURL:model.router info:@{kYZHRouteSegue: kYZHRouteSegueModal, kYZHRouteSegueNewNavigation: @(YES),
+                                                   @"userDetailsModel": self.userDetailsModel
+                                                   }];
+        }
     }
+
 }
 
 #pragma mark - 5.Event Response

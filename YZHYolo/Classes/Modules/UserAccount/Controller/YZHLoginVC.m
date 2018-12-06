@@ -111,7 +111,7 @@
 - (void)setupLoginEvent {
     
     BOOL isIMTest = NO;
-    if (isIMTest) {
+    if (!isIMTest) {
         NSDictionary* obj = @{
                                   @"appKey" : @"2828b3cd20e9263f914344c284588b60",
                                   @"userId" : @"",

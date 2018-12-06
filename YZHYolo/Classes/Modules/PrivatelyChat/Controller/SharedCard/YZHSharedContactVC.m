@@ -68,7 +68,12 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         self.navigationItem.title = @"添加好友进群";
     }
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(onTouchCancel:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(onTouchConfirm:)];
+    if (self.isForward) {
+      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(onTouchConfirmForward:)];
+    } else {
+       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(onTouchConfirm:)];
+    }
+
 }
 
 - (void)setupView {
@@ -248,6 +253,26 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+//TODO: 有时间在封装.
+- (void)onTouchConfirmForward:(UIBarButtonItem *)sender {
+    
+    if (self.forwardType == YZHForwardContactTypePersonageCard) {
+        if (!self.selectedIndexPath) {
+            [YZHAlertManage showAlertMessage:@"请选择一位联系人"];
+            return;
+        }
+        YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
+        NSString* yoloId = memberModel.info.infoId;
+        self.forwardMessageToUserBlock ? self.forwardMessageToUserBlock(yoloId) : NULL;
+    } else {
+        if (!self.selectedIndexPath) {
+            [YZHAlertManage showAlertMessage:@"请选择一个群名片"];
+            return;
+        }
+        NIMTeam* teamCard = self.teamDataSource[self.selectedIndexPath.row];
+        self.forwardMessageToTeamBlock ? self.forwardMessageToTeamBlock(teamCard.teamId) : NULL;
+    }
 }
 
 - (void)onTouchConfirm:(UIBarButtonItem *)sender {

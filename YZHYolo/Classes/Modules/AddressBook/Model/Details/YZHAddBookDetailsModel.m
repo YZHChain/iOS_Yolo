@@ -138,6 +138,14 @@
     placeModel.cellClass = @"YZHAddBookSettingCell";
     placeModel.cellHeight = 55;
     placeModel.subtitle = userInfoExtManage.place.complete;
+    
+    YZHAddBookDetailModel* chatModel = [[YZHAddBookDetailModel alloc] init];
+    chatModel.title = @"聊天内容";
+    chatModel.canSkip = YES;
+    chatModel.cellClass = @"YZHAddBookSettingCell";
+    chatModel.cellHeight = 55;
+    chatModel.subtitle = @"图片、名片、链接等聊天记录";
+    chatModel.router = kYZHRouterSessionChatContent;
 
     self.userAllowAdd = userInfoExtManage.privateSetting.allowAdd;
     self.requstAddFirend = userExtManage.requteAddFirend;
@@ -158,8 +166,11 @@
     self.userNotePhoneArray = remarkContentsArray;
     //标签与地址
     NSArray* classTagArray = @[classTagModel, placeModel];
+    NSArray* chatArray = @[chatModel];
     self.classTagModel = classTagModel;
     self.placeModel = placeModel;
+    self.chatModel = chatModel;
+    self.remarkContentsArray = remarkContentsArray;
     // 拼装数据
     if (requteAddModel) {
        self.viewModel = @[
@@ -172,7 +183,8 @@
         self.viewModel = @[
                            headerContentsArray,
                            remarkContentsArray,
-                           classTagArray
+                           classTagArray,
+                           chatArray
                            ].mutableCopy;
     }
     

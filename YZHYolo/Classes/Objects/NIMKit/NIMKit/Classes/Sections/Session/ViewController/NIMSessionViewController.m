@@ -20,6 +20,11 @@
 #import "NIMKitInfoFetchOption.h"
 #import "NIMKitTitleView.h"
 #import "NIMKitKeyboardInfo.h"
+#import "YZHAlertManage.h"
+#import "UIActionSheet+YZHBlock.h"
+#import "YZHUserCardAttachment.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHSessionMsgConverter.h"
 
 @interface NIMSessionViewController ()<NIMMediaManagerDelegate,NIMInputDelegate>
 
@@ -34,6 +39,12 @@
 @property (nonatomic,strong)  NIMSessionConfigurator *configurator;
 
 @property (nonatomic,weak)    id<NIMSessionInteractor> interactor;
+
+@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
+@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
+
+@property (nonatomic, copy) void (^forwardPersonageCardHandle)(NSString*);
+@property (nonatomic, copy) void (^forwardTeamCardHandle)(NSString*);
 
 @end
 
@@ -628,7 +639,7 @@
         NIMCustomObject *customObject = (NIMCustomObject*)message.messageObject;
         if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")] || [customObject.attachment isKindOfClass:NSClassFromString(@"YZHTeamCardAttachment")]) {
             [items addObject:[[UIMenuItem alloc] initWithTitle:@"转发"
-                                                        action:@selector(forwarding:)]];
+                                                        action:@selector(forwardMessage:)]];
         }
     }
     [items addObject:[[UIMenuItem alloc] initWithTitle:@"删除"
@@ -671,10 +682,55 @@
         [pasteboard setString:message.text];
     }
 }
-
-- (void)forwarding:(id)sender {
-    
-    
+//转发事件
+- (void)forwardMessage:(id)sender
+{
+    [YZHAlertManage showAlertMessage:@"暂时不支持此功能"];
+    return;
+    NIMMessage *message = [self messageForMenu];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"选择会话类型" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"个人",@"群组", nil];
+    @weakify(self)
+    message.setting.teamReceiptEnabled = NO;
+    [sheet showInView:self.view completionHandler:^(NSInteger index) {
+        switch (index) {
+            case 0:{
+                @strongify(self)
+                self.forwardPersonageCardHandle = ^(NSString *userId) {
+                    @strongify(self)
+                    NIMSession *session = [NIMSession session:userId type:NIMSessionTypeP2P];
+                    [self forwardMessage:message toSession:session];
+                };
+                [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                                      @"forwardType": @(0),
+                                                                      @"sharedType": @(0),                 kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                      kYZHRouteSegueNewNavigation: @(YES),
+                                                                      @"forwardMessageToUserBlock": self.forwardPersonageCardHandle,
+                                                                      @"isForward": @(YES)
+                                                                      }];
+                
+            }
+                break;
+            case 1:{
+                @strongify(self)
+                self.forwardTeamCardHandle = ^(NSString *teamId) {
+                    @strongify(self)
+                    NIMSession *session = [NIMSession session:teamId type:NIMSessionTypeTeam];
+                    [self forwardMessage:message toSession:session];
+                };
+                [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                                      @"forwardType": @(1),
+                                                    @"sharedType": @(1),               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                      kYZHRouteSegueNewNavigation: @(YES),
+                                                                      @"forwardMessageToTeamBlock": self.forwardTeamCardHandle,@"isForward": @(YES)
+                                                                      }];
+            }
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+    }];
 }
 
 - (void)deleteMsg:(id)sender
@@ -688,6 +744,30 @@
 {
     [UIMenuController sharedMenuController].menuItems = nil;
 }
+
+- (void)forwardMessage:(NIMMessage *)message toSession:(NIMSession *)session
+{
+    NSString *name;
+    if (session.sessionType == NIMSessionTypeP2P)
+    {
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = session;
+        name = [[NIMKit sharedKit] infoByUser:session.sessionId option:option].showName;
+    }
+    else
+    {
+        name = [[NIMKit sharedKit] infoByTeam:session.sessionId option:nil].showName;
+    }
+    __weak typeof(self) weakSelf = self;
+    [YZHAlertManage showAlertTitle:@"温馨提示" message:[NSString stringWithFormat:@"确认转发给 %@ ?",name] actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            [[NIMSDK sharedSDK].chatManager forwardMessage:message toSession:session error:nil];
+            [weakSelf.view makeToast:@"已发送" duration:2.0 position:CSToastPositionCenter];
+        }
+    }];
+    
+}
+
 
 
 #pragma mark - 操作接口
@@ -746,6 +826,28 @@
 {
     [self.interactor mediaLocationPressed];
 }
+
+// 联系人
+- (void)onTapMediaItemContact:(NIMMediaItem *)item {
+    
+    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                          @"sharedType": @(1),
+                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+                                                          kYZHRouteSegueNewNavigation: @(YES),
+                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
+                                                          }];
+}
+// 我的社群
+- (void)onTapMediaItemMyGroup:(NIMMediaItem *)item {
+    // 弹出联系人页面
+    [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
+                                                          @"sharedType": @(2),
+                                                          kYZHRouteSegue: kYZHRouteSegueModal,
+                                                          kYZHRouteSegueNewNavigation: @(YES),
+                                                          @"sharedTeamCardBlock": self.sharedTeamCardHandle
+                                                          }];
+}
+
 
 #pragma mark - 旋转处理 (iOS8 or above)
 - (void)viewWillTransitionToSize:(CGSize)size
@@ -840,6 +942,31 @@
     [self setUpTitleView];
 }
 
+#pragma GET -- SET
+
+- (void (^)(YZHUserCardAttachment *))sharedPersonageCardHandle {
+    
+    if (!_sharedPersonageCardHandle) {
+        @weakify(self)
+        _sharedPersonageCardHandle = ^(YZHUserCardAttachment *userCard) {
+            @strongify(self)
+            [self sendMessage:[YZHSessionMsgConverter msgWithUserCard:userCard]];
+        };
+    }
+    return _sharedPersonageCardHandle;
+}
+
+- (void (^)(YZHTeamCardAttachment *))sharedTeamCardHandle {
+    
+    if (!_sharedTeamCardHandle) {
+        @weakify(self)
+        _sharedTeamCardHandle = ^(YZHTeamCardAttachment *teamCard) {
+            @strongify(self)
+            [self sendMessage:[YZHSessionMsgConverter msgWithTeamCard:teamCard]];
+        };
+    }
+    return _sharedTeamCardHandle;
+}
 
 @end
 
