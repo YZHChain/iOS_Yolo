@@ -29,6 +29,8 @@
 @property (nonatomic, assign) YZHModifyPasswordType currentType;
 @property (nonatomic, strong) NSString* phoneNumber;
 @property (weak, nonatomic) IBOutlet UIView *contentView;//暂时先隐藏
+@property (weak, nonatomic) IBOutlet UILabel *modifyTypeLabel;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *secretKeyButton;
 
@@ -68,7 +70,8 @@
 - (void)setupView {
     
     self.contentView.hidden = YES;
-    self.confirmButton.hidden = YES;
+    self.modifyTypeButton.hidden = YES;
+    self.modifyTypeLabel.hidden = YES;
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
@@ -183,21 +186,21 @@
     }];
 }
 
-- (IBAction)switchModifyPasswordType:(UIButton *)sender {
-    
-    if ([sender.titleLabel.text isEqualToString:@"原密码"]) {
-        [sender setTitle:@"验证码" forState:UIControlStateNormal];
-        self.currentType = YZHModifyPasswordTypePhone;
-        self.modifyTypeTextField.placeholder = @"验证码";
-        self.sendVerifyCodeButton.hidden = NO;
-    } else {
-        [sender setTitle:@"原密码" forState:UIControlStateNormal];
-        self.currentType = YZHModifyPasswordTypeOriginalPW;
-        self.modifyTypeTextField.placeholder = @"原密码";
-        self.sendVerifyCodeButton.hidden = YES;
-    }
-    [sender layoutIfNeeded];
-}
+//- (IBAction)switchModifyPasswordType:(UIButton *)sender {
+//    
+//    if ([sender.titleLabel.text isEqualToString:@"原密码"]) {
+//        [sender setTitle:@"验证码" forState:UIControlStateNormal];
+//        self.currentType = YZHModifyPasswordTypePhone;
+//        self.modifyTypeTextField.placeholder = @"验证码";
+//        self.sendVerifyCodeButton.hidden = NO;
+//    } else {
+//        [sender setTitle:@"原密码" forState:UIControlStateNormal];
+//        self.currentType = YZHModifyPasswordTypeOriginalPW;
+//        self.modifyTypeTextField.placeholder = @"原密码";
+//        self.sendVerifyCodeButton.hidden = YES;
+//    }
+//    [sender layoutIfNeeded];
+//}
 
 
 #pragma mark - 6.Private Methods
