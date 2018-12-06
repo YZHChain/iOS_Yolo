@@ -12,8 +12,13 @@
 #import "YZHCellLayoutConfign.h"
 #import "YZHCustomAttachmentDecoder.h"
 #import "NTESNotificationCenter.h"
+#import "NTESClientUtil.h"
+#import "YZHUserLoginManage.h"
+#import <UserNotifications/UserNotifications.h>
+#import <PushKit/PushKit.h>
 
-@interface AppDelegate ()
+NSString* const kYZHNotificationLogout            = @"NotificationLogout";
+@interface AppDelegate ()<NIMLoginManagerDelegate>
 
 @end
 
@@ -27,6 +32,8 @@
     [self setupNIMSDK];
     [self setupServices];
     
+//    [self registerPushService];
+    [self commonInitListenEvents];
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
     [self.window makeKeyAndVisible];
@@ -61,6 +68,85 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark PKPushRegistryDelegate
+
+//- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
+//{
+//    if ([type isEqualToString:PKPushTypeVoIP])
+//    {
+//        [[NIMSDK sharedSDK] updatePushKitToken:credentials.token];
+//    }
+//}
+//
+//- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
+//{
+////    DDLogInfo(@"receive payload %@ type %@",payload.dictionaryPayload,type);
+//    NSNumber *badge = payload.dictionaryPayload[@"aps"][@"badge"];
+//    if ([badge isKindOfClass:[NSNumber class]])
+//    {
+//        [UIApplication sharedApplication].applicationIconBadgeNumber = [badge integerValue];
+//    }
+//}
+//
+//- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type
+//{
+////    DDLogInfo(@"registry %@ invalidate %@",registry,type);
+//}
+
+
+#pragma mark - openURL
+
+//- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+////    [[NTESRedPacketManager sharedManager] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+//    return YES;
+//}
+//
+//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+//{
+////    [[NTESRedPacketManager sharedManager] application:app openURL:url options:options];
+//    return YES;
+//}
+//
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    //目前只有红包跳转
+////    return [[NTESRedPacketManager sharedManager] application:application handleOpenURL:url];
+//}
+
+#pragma mark - misc
+- (void)registerPushService
+{
+    if (@available(iOS 11.0, *))
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!granted)
+            {
+                dispatch_async_main_safe(^{
+                    [[UIApplication sharedApplication].keyWindow makeToast:@"请开启推送功能否则无法收到推送通知" duration:2.0 position:CSToastPositionCenter];
+                })
+            }
+        }];
+    }
+    else
+    {
+        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
+    //pushkit
+    PKPushRegistry *pushRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
+//    pushRegistry.delegate = self;
+    pushRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
+    
+}
+
+
 #pragma mark -- IM Configuration
 
 - (void)setupServices
@@ -90,6 +176,62 @@
     NIMKitConfig* config = [[NIMKitConfig alloc] init];
     config.avatarType = NIMKitAvatarTypeRadiusCorner;
     [NIMKit sharedKit].config = config;
+}
+
+#pragma mark -- NIMLoginManagerDelegate
+
+-(void)onKick:(NIMKickReason)code clientType:(NIMLoginClientType)clientType
+{
+    NSString *reason = @"你被踢下线";
+    switch (code) {
+        case NIMKickReasonByClient:
+        case NIMKickReasonByClientManually:{
+            NSString *clientName = [NTESClientUtil clientName:clientType];
+            reason = clientName.length ? [NSString stringWithFormat:@"你的帐号被%@端踢出下线，请注意帐号信息安全",clientName] : @"你的帐号被踢出下线，请注意帐号信息安全";
+            break;
+        }
+        case NIMKickReasonByServer:
+            reason = @"你被服务器踢下线";
+            break;
+        default:
+            break;
+    }
+    [[[NIMSDK sharedSDK] loginManager] logout:^(NSError *error) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kYZHNotificationLogout object:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下线通知" message:reason delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+    }];
+}
+
+- (void)commonInitListenEvents
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(logout:)
+                                                 name:kYZHNotificationLogout
+                                               object:nil];
+    
+    [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
+}
+
+- (void)setupLoginViewController
+{
+    YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
+    // 清空缓存用户信息
+    [manage setCurrentLoginData:nil];
+    // 跳转至登录页
+    [manage executeHandInputLogin];
+}
+
+#pragma mark - 注销
+
+-(void)logout:(NSNotification *)note
+{
+    [self doLogout];
+}
+
+- (void)doLogout
+{
+    [self setupLoginViewController];
 }
 
 @end
