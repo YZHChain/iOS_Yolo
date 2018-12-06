@@ -160,8 +160,8 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 - (void)setupNIMSDK {
     
     // 初始化云信 NIMSDK  TODO: Packaging
-    //   云信45c6af3c98409b18a84451215d0bdd6e, d62461f3a67a1f9eb1d8604b9ebea576 测试   e974623a3785de54fcdc3df292077058 生产
-    NSString *appKey        = @"45c6af3c98409b18a84451215d0bdd6e";
+    //   云信45c6af3c98409b18a84451215d0bdd6e, d62461f3a67a1f9eb1d8604b9ebea576 生产   e974623a3785de54fcdc3df292077058 测试
+    NSString *appKey        = @"e974623a3785de54fcdc3df292077058";
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
     option.apnsCername      = nil;
     option.pkCername        = nil;

@@ -61,7 +61,7 @@
 {
     super.hideNavigationBar = true ;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[self wkWebVie] ];
+    [self.view addSubview:[self wkWebView]];
     
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
@@ -74,7 +74,7 @@
     
 }
 
--(WKWebView*)wkWebVie{
+-(WKWebView*)wkWebView{
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
@@ -101,9 +101,9 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.account;
-        if (self.url==nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?yolo_no=%@&platform=ios",yolo_no];
+        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
+        if (self.url == nil) {
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?userId=%@&platform=ios",yolo_no];
         }
         NSURL* url = [[NSURL alloc] initWithString:self.url];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
@@ -312,7 +312,7 @@
         return false;
     }
     
-    if([[self wkWebVie].URL.absoluteString isEqualToString: request.URL.absoluteString]){
+    if([[self wkWebView].URL.absoluteString isEqualToString: request.URL.absoluteString]){
         return false;
     }
     

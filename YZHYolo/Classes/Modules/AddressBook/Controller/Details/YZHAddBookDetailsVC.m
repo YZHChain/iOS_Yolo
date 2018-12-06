@@ -229,6 +229,8 @@
                 
                 [self.userAskFooterView addSubview:addFriendButton];
                 self.tableView.tableFooterView = self.userAskFooterView;
+            } else {
+                [self.tableView.tableFooterView removeFromSuperview];
             }
         }
         [self.tableView reloadData];

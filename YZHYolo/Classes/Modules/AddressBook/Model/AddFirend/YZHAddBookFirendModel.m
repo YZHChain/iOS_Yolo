@@ -39,7 +39,7 @@
                         @"route": kYZHRouterAddressBookPhoneContact
                         },
                       @{@"title": @"搜索进群",
-                        @"route": @"",
+                        @"route": kYZHRouterAddressBookSearchTeam,
                         }];
     return list;
 }

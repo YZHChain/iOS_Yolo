@@ -84,6 +84,10 @@
 
 - (void)setupData {
     
+    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamID];
+    [[[NIMSDK sharedSDK] teamManager] updateTeamName:team.teamName teamId:self.teamID completion:^(NSError * _Nullable error) {
+        
+    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate

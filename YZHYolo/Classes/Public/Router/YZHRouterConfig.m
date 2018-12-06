@@ -69,6 +69,7 @@ NSString* const kYZHRouterAddressBookAddFirendSendVerify = @"/addressBook/addFri
 NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
 NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
 NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendRecord";
+NSString *const kYZHRouterAddressBookSearchTeam = @"/addressBook/searchTeam";
 
 #pragma mark -- Session
 
@@ -266,6 +267,12 @@ NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
              kYZHRouterAddressBookScanQRCode: @{
                      kYZHRouteViewControllerClassKey: @"YZHScanQRCodeVC",
                      kYZHRouteViewControllerNameKey: @"扫码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookSearchTeam: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSearchTeamVC",
+                     kYZHRouteViewControllerNameKey: @"社群搜索",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

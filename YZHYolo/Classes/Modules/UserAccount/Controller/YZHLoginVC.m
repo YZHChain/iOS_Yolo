@@ -111,7 +111,7 @@
 - (void)setupLoginEvent {
     
     BOOL isIMTest = NO;
-    if (!isIMTest) {
+    if (isIMTest) {
         NSDictionary* obj = @{
                                   @"appKey" : @"2828b3cd20e9263f914344c284588b60",
                                   @"userId" : @"",
@@ -119,14 +119,6 @@
                                   @"token" : @"b0af18bc4c86fb38f668a4dfd1c26481",
                                   @"orderFlag" : @""
                                   };
-//        NSDictionary* obj2 = @{
-//                              @"appKey" : @"2828b3cd20e9263f914344c284588b60",
-//                              @"userId" : @"",
-//                              @"acctId" : @"zexi0625",
-//                              @"token" : @"b0af18bc4c86fb38f668a4dfd1c26481",
-//                              @"orderFlag" : @""
-//                              };
-    
         [self serverloginSuccessWithResponData:obj];
     } else {
         YZHUserLoginManage *loginManage = [YZHUserLoginManage sharedManager];

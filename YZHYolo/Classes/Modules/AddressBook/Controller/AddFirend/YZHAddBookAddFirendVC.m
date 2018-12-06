@@ -133,6 +133,8 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 //    }
     if ([model.title isEqualToString:@"扫一扫"]) {
         [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+    } else if ([model.title isEqualToString:@"搜索进群"]) {
+        [YZHRouter openURL:model.route info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
     } else {
         [YZHRouter openURL:model.route];
     }
