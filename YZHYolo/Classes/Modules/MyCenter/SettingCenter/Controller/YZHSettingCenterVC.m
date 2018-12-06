@@ -161,7 +161,10 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
         [YZHAlertManage showAlertTitle:kYZHEmptyLogAlertTitle message:kYZHEmptyLogAlertMessage actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 //TODO: 执行删除聊天记录
-                
+                NIMDeleteMessagesOption* messageOption = [[NIMDeleteMessagesOption alloc] init];
+                messageOption.removeTable = NO;
+                messageOption.removeSession = NO;
+                [[[NIMSDK sharedSDK] conversationManager] deleteAllMessages:messageOption];
             }
         }];
     }
