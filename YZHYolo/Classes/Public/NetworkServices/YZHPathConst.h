@@ -32,9 +32,10 @@
 #define PATH_TEAM_ADDUPDATEGROUP                @"https://yolotest.yzhchain.com/yolo-square/ymGroup/addGroup"// 增加或修改群资料
 #define PATH_TEAM_DELETEGROUP                   @"https://yolotest.yzhchain.com/yolo-square/ymGroup/delete"// 删除群
 #define PATH_TEAM_DELETEMYRECRUITS              @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/deleteMyRecruits"// 删除我的招募信息
+#define PATH_TEAM_GETMYRECRUITS              @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/myRecruitInfo"// 获取我的招募信息
 #define PATH_TEAM_PUBLISHMYRECRUITS             @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/publishMyRecruits"// 发布或编辑招募信息
-#define PATH_TEAM_SEARCH_MYRECRUITS             @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_myRecruits"// 招募信息管理列表
-#define PATH_TEAM_SEARCH_RECRUITS               @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_recruits"// 招募信息列表
+#define PATH_TEAM_SEARCH_MYRECRUITS             @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_myRecruits"// 招募管理列表
+#define PATH_TEAM_SEARCH_RECRUITS               @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_recruits"// 社群招募列表
 
 #define PATH_TEAM_NOTICE_ADD                    @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/add" //新增
 #define PATH_TEAM_NOTICE_DELETE                 @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/delete" //删除

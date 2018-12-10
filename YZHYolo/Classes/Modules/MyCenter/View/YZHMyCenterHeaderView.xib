@@ -30,6 +30,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPY-iv-AN8">
                     <rect key="frame" x="77" y="59" width="45" height="18"/>
                     <constraints>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="0Cc-YT-SyG"/>
                         <constraint firstAttribute="height" constant="18" id="Ymh-6e-hvO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>

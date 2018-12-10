@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
+#import "YZHUserDataManage.h"
 
 @interface YZHDiscoverVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) YZHProgressHUD* hud;
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, assign) BOOL isMyTeam;
+@property (nonatomic, strong) NSMutableArray* selectedTeamArray;
 
 @end
 
@@ -100,13 +102,19 @@
             frame.size.height = frame.size.height - self.tabBarController.tabBar.frame.size.height;
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
+        self.webView.allowsBackForwardNavigationGestures = YES;
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
+        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.account;
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?userId=%@&platform=ios",yolo_no];
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?useraccout=%@&platform=ios",yolo_no];
         }
+//        &label=""
         NSURL* url = [[NSURL alloc] initWithString:self.url];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
+        NSString* teamLabel = [[YZHUserDataManage sharedManager].currentUserData.teamLabel mj_JSONString];
+        if (!YZHIsString(teamLabel)) {
+            teamLabel = nil;
+        }
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
@@ -147,6 +155,39 @@
 
 #pragma mark - 5.Event Response
 
+- (void)addTean:(NSString *)teamId {
+    
+    if (![self isMyTeamWothTeamId:teamId]) {
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.webView text:nil];
+        
+        [[[NIMSDK sharedSDK] teamManager] applyToTeam:teamId message:@"通过广场公开群加入" completion:^(NSError * _Nullable error, NIMTeamApplyStatus applyStatus) {
+            if (!error) {
+                [hud hideWithText:@"成功加入群聊"];
+            } else {
+                [hud hideWithText:@"加入社群失败, 请重试"];
+            }
+        }];
+    } else {
+        [YZHProgressHUD showText:@"你已属于该群群成员" onView:self.webView];
+    }
+}
+
+- (void)switchTeamRange {
+    
+    @weakify(self)
+    void(^selectedLabelSaveHandle)(NSMutableArray *) = ^(NSMutableArray *selectedTeamLabel) {
+        @strongify(self)
+        self.selectedTeamArray = selectedTeamLabel;
+        [self.webView reload];
+    };
+    [YZHRouter openURL:kYZHRouterCommunityCreateTeamTagSelected info:@{
+                                                                       kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                       kYZHRouteSegueNewNavigation : @(YES),
+                                                                       @"selectedLabelSaveHandle": selectedLabelSaveHandle,
+                                                                       @"selectedLabelArray":self.selectedTeamArray
+                                                                       }];
+}
+
 #pragma mark - 6.Private Methods
 
 - (void)setupNotification
@@ -163,20 +204,7 @@
         NSNumber* value = message.body;
         NSString* teamId = value.stringValue;
         NSLog(@"%@", teamId);
-        if (![self isMyTeamWothTeamId:teamId]) {
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.webView text:nil];
-            
-            [[[NIMSDK sharedSDK] teamManager] addUsers:@[self.userId] toTeam:teamId postscript:@"通过广场公开群加入" completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
-                if (!error) {
-                    [hud hideWithText:@"成功加入群聊"];
-                } else {
-                    [hud hideWithText:@"加入社群失败, 请重试"];
-                }
-            }];
-        } else {
-            [YZHProgressHUD showText:@"你已属于该群群成员" onView:self.webView];
-        }
-
+        [self addTean:teamId];
         return;
     }
     
@@ -192,19 +220,21 @@
         return;
     }
     
-    if ([message.name isEqualToString:@"SelectMyGroup"]) { //招募管理里面的搜索
+    if ([message.name isEqualToString:@"SelectMyGroup"]) { //招募管理里面的搜索。 新搜索接口
         NSLog(@"SelectMyGroup");
-        
         return;
     }
     
     if ([message.name isEqualToString:@"SelectGroup"]) { //公开群-搜索
         NSLog(@"SelectGroup");
+        [YZHRouter openURL:kYZHRouterAddressBookSearchTeam info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
         return;
     }
     
-    if ([message.name isEqualToString:@"ChangeRecommend"]) { //更换推荐
-        NSLog(@"ChangeRecommend");
+    if ([message.name isEqualToString:@"ChangeRecommend"]) { //公开群和招募群都是统一 更换推荐范围
+        
+        [self switchTeamRange];
+        NSLog(@"点击更换推荐范围");
         return;
     }
     
@@ -216,20 +246,31 @@
     if ([message.name isEqualToString:@"AddRecuire"]) { //社群招募-加入
         NSLog(@"AddRecuire");
         NSNumber* value = message.body;
-        NSLog(@"%@", [value stringValue]);
+        NSString* teamId = value.stringValue;
+        [self addTean:teamId];
         return;
     }
     
-//    if ([message.name isEqualToString:@"SelectActiveGroup"]) { //活跃群里面的查找
-//        NSLog(@"SelectActiveGroup");
-//        return;
-//    }
-    if ([message.name isEqualToString:@"GetTeamLabel"]) { //活跃群里面的查找
-        NSLog(@"GetTeamLabel");
+    if ([message.name isEqualToString:@"SelectActiveGroup"]) { //活跃群里面的查找
+        [YZHRouter openURL:kYZHRouterAddressBookSearchTeam info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
         return;
     }
-    
-    
+    if ([message.name isEqualToString:@"GetTeamLabel"]) { //
+
+        NSString* teamLabelJS = message.body;
+        
+        NSLog(@"获取用户标签%@", teamLabelJS);
+        NSString* teamLabel = [self.selectedTeamArray mj_JSONString];
+        if (!YZHIsString(teamLabel)) {
+            teamLabel = nil;
+        }
+        //接收标签的方法。
+        NSString *callbackJs = [NSString stringWithFormat:@"%@", teamLabel];
+        [self.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            NSLog(@"%@----%@",result, error);
+        }];
+        return;
+    }
 }
 
 //内容返回时调用
@@ -240,6 +281,15 @@
 //这个是网页加载完成，导航的变化
 -(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
     [self hideHUDError:nil];
+
+//    NSString* teamLabel = [self.selectedTeamArray mj_JSONString];
+//    if (!YZHIsString(teamLabel)) {
+//        teamLabel = nil;
+//    }
+//    NSString *jsStr = [NSString stringWithFormat:@"GetTeamLabel('%@')",teamLabel];
+//    [self.webView evaluateJavaScript:jsStr completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//        NSLog(@"%@----%@",result, error);
+//    }];
 }
 
 //跳转失败的时候调用
@@ -408,6 +458,14 @@
     
     return [[[NIMSDK sharedSDK] teamManager] isMyTeam:teamId];
     
+}
+
+- (NSMutableArray *)selectedTeamArray {
+    
+    if (!_selectedTeamArray) {
+        _selectedTeamArray = [[NSMutableArray alloc] init];
+    }
+    return _selectedTeamArray;
 }
 
 @end

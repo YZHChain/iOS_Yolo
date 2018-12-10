@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -33,6 +33,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yl4-cB-Q25">
                         <rect key="frame" x="59" y="19" width="42" height="17"/>
                         <constraints>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="YTy-XG-Hd3"/>
                             <constraint firstAttribute="height" constant="17" id="nOF-Z1-i4D"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="14"/>
@@ -43,6 +44,7 @@
                         <rect key="frame" x="108" y="20.5" width="24" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="NfZ-Dk-T40"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="qo0-Fe-YWN"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,6 +53,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ze9-85-PDY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3Ba-Oa-AXq"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="d5E-4P-IQU" secondAttribute="trailing" constant="15" id="6ay-yk-TBe"/>
                     <constraint firstItem="Yl4-cB-Q25" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ed2-Ug-e1l"/>
                     <constraint firstItem="d5E-4P-IQU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Rn1-mD-pCd"/>
                     <constraint firstItem="d5E-4P-IQU" firstAttribute="leading" secondItem="Yl4-cB-Q25" secondAttribute="trailing" constant="7" id="ioD-vI-GVL"/>

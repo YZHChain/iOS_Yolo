@@ -18,6 +18,7 @@
 #import "NIMKitFileLocationHelper.h"
 #import "YZHTeamInfoExtManage.h"
 #import "YZHTeamUpdataModel.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHCreatTeamVC ()<UITextViewDelegate, UIScrollViewDelegate>
 
@@ -225,15 +226,16 @@
     YZHTeamInfoExtManage* teamInfo = [[YZHTeamInfoExtManage alloc] initCreatTeamWithTeamLabel:self.selectedLabelArray.count ? self.selectedLabelArray : nil recruit:teamRecruit];
     NSString* teamInfoString = [teamInfo mj_JSONString];
     teamOption.clientCustomInfo = teamInfoString;
-    teamOption.type = NIMTeamTypeAdvanced; 
-//    teamOption.joinMode = NIMTeamJoinModeNoAuth; // 默认是公开群.
+    teamOption.type = NIMTeamTypeAdvanced;
     teamOption.beInviteMode = NIMTeamBeInviteModeNoAuth; // 默认不需要验证
     teamOption.inviteMode = NIMTeamInviteModeAll; // 默认是允许成员添加好友进群.
     NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     NSArray* array = @[userId];
     //创群成功则跳转至结果页
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
     [[NIMSDK sharedSDK].teamManager createTeam:teamOption users:array completion:^(NSError * _Nullable error, NSString * _Nullable teamId, NSArray<NSString *> * _Nullable failedUserIds) {
+        @strongify(self)
         // 存储相关资料,方便到成功页执行相应逻辑. 创建完群组之后需要将回话添加到列表中.
         if (!error) {
             [hud hideWithText:nil];
@@ -247,10 +249,30 @@
             [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_ADDUPDATEGROUP params:model.params successCompletion:^(id obj) {
             } failureCompletion:^(NSError *error) {
             }];
+            //发布招募
+            [self postTeamRecruits:teamRecruit];
         } else {
             [hud hideWithText:@"网络异常,请重试"];
         }
     }];
+}
+
+- (void)postTeamRecruits:(YZHTeamRecruit *)teamRecruit {
+    
+    if (teamRecruit) {
+        NSString* accid = [[[YZHUserLoginManage sharedManager] currentLoginData] userId];
+        NSString* info = teamRecruit.content;
+        NSDictionary* dic = @{
+                              @"accid": accid ? accid : @"",
+                              @"info": info ? info : @"",
+                              };
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_PUBLISHMYRECRUITS params:dic successCompletion:^(id obj) {
+            
+        } failureCompletion:^(NSError *error) {
+            
+        }];
+    }
+
 }
     
 #pragma mark - 7.GET & SET

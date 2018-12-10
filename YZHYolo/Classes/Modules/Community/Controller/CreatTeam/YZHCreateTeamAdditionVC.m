@@ -136,6 +136,7 @@
     
     YZHImportBoxView* importBoxView = [[YZHImportBoxView alloc] init];
     self.recruitImportView = importBoxView;
+    self.recruitImportView.hidden = YES; // 默认也是隐藏
     
     [self.scrollView addSubview:importBoxView];
 }
@@ -295,7 +296,7 @@
     
     sender.selected = !sender.isSelected;
     self.selectedCruit = !self.selectedCruit;
-    self.recruitImportView.hidden = !self.selectedCruit;
+    self.recruitImportView.hidden = self.selectedCruit;
 }
 
 - (void)onTouchShared:(UIButton *)sender {
