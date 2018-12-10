@@ -8,7 +8,7 @@
 
 #import "YZHSearchModel.h"
 
-@implementation YZHTTTTeamModel
+@implementation YZHSearchModel
 
 + (NSDictionary *)YZH_replacedKeyFromPropertyName {
     
@@ -21,19 +21,21 @@
 
 @end
 
-@implementation YZHSearchModel
+@implementation YZHSearchListModel
 
 + (NSDictionary *)YZH_objectClassInArray {
     
     return @{
-             @"recommendArray": [YZHTTTTeamModel class]
+             @"recommendArray": [YZHSearchModel class],
+             @"searchArray": [YZHSearchModel class]
              };
 }
 
 + (NSDictionary *)YZH_replacedKeyFromPropertyName {
     
     return @{
-             @"recommendArray": @"beans"
+             @"recommendArray": @"beans",
+             @"searchArray": @"beans"
              };
 }
 

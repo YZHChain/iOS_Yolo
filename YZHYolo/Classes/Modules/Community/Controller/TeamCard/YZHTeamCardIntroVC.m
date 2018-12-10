@@ -51,7 +51,7 @@
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
-    self.navigationItem.title = @"群信息";
+    self.navigationItem.title = @"群详情";
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:self action:@selector(onTouchClose)];
 }
@@ -61,37 +61,32 @@
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-//    self.tableView.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     
     [self.view addSubview:self.tableView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 
 }
 
 - (void)reloadView {
     
-}
-
-#pragma mark - 3.Request Data
-
-- (void)setupData {
-
-    self.viewModel = [[YZHTeamCardIntroModel alloc] initWithTeamId:_teamId];
-    
-    [self.tableView setTableHeaderView:self.headerView];
     [self.headerView refreshWithModel:self.viewModel.headerModel];
+    [self.tableView setTableHeaderView:self.headerView];
     
-    [self.tableView reloadData];
     [self configurationFooterView];
+    [self.tableView reloadData];
     
     self.tableView.tableFooterView = self.footerView;
-
+    
     //非好友关系时, 拉取用户最新资料.
-    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner]) {
-         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner] && YZHIsString(self.viewModel.teamOwner)) {
+        [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
             if (!error) {
                 [self.viewModel updataTeamOwnerData];
                 [self.tableView reloadData];
@@ -109,16 +104,31 @@
     }
 }
 
+#pragma mark - 3.Request Data
+
+- (void)setupData {
+
+    if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.teamId]) {
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+             [hud hideWithText:nil];
+             //如果请求失败,或者找不到此群,或者此群解散,按这个逻辑处理,默认都是展示此群已解散。
+             self.viewModel = [[YZHTeamCardIntroModel alloc] initWithTeam:team];
+             [self reloadView];
+        }];
+    }
+}
+
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
+    return self.viewModel.haveTeamData ? 1 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return 2; //暂时写死
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -129,13 +139,15 @@
     if (indexPath.row == 0) {
         cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardIntro" owner:nil options:nil].firstObject;
         cell.titleLabel.text = @"群成员";
-        cell.subtitleLabel.text = [NSString stringWithFormat:@"%ld人",self.viewModel.teamModel.memberNumber];
+        cell.subtitleLabel.text = [NSString stringWithFormat:@"%ld人",self.viewModel.team.memberNumber];
     } else {
         cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardIntro" owner:nil options:nil].lastObject;
         cell.titleLabel.text = @"群主";
         cell.nameLabel.text = self.viewModel.teamOwnerName;
         if (YZHIsString(self.viewModel.teamOwnerAvatarUrl)) {
             [cell.avatarImageView yzh_setImageWithString:self.viewModel.teamOwnerAvatarUrl placeholder:@"addBook_cover_cell_photo_default"];
+        } else {
+            [cell.avatarImageView setImage:[UIImage imageNamed:@"addBook_cover_cell_photo_default"]];
         }
     }
     return cell;
@@ -163,10 +175,12 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 0 && indexPath.row == 1) {
-        NSDictionary* info = @{
-                               @"userId": self.viewModel.teamOwner
-                               };
-        [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
+        if (YZHIsString(self.viewModel.teamOwner)) {
+            NSDictionary* info = @{
+                                   @"userId": self.viewModel.teamOwner
+                                   };
+            [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
+        }
     }
 }
 
@@ -175,18 +189,20 @@
 - (void)onTouchClose{
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)addTeam:(UIButton* )sender {
     
-    NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    // 添加入群附言.
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-    [[[NIMSDK sharedSDK] teamManager] addUsers:@[userId] toTeam:_teamId postscript:@"通过二维码申请入群" completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+    [[[NIMSDK sharedSDK] teamManager] applyToTeam:self.teamId message:@"" completion:^(NSError * _Nullable error, NIMTeamApplyStatus applyStatus) {
         if (!error) {
-            [hud hideWithText:@"已成功加入社群"];
+            [hud hideWithText:@"已成功加入群聊"];
         } else {
-            [hud hideWithText:@"申请入群失败,请重试"];
+            [hud hideWithText:@"申请入群失败"];
         }
+        
     }];
 }
 
@@ -212,15 +228,21 @@
     self.tableView.tableFooterView = _footerView;
     _footerView.frame = CGRectMake(0, 0, self.tableView.width, 110);
     UIButton* addTeamButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [addTeamButton setTitle:@"加入群聊" forState:UIControlStateNormal];
     addTeamButton.layer.cornerRadius = 4;
     addTeamButton.layer.masksToBounds = YES;
     [addTeamButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:20]];
     [addTeamButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundPinkRed] forState:UIControlStateNormal];
+    [addTeamButton yzh_setBackgroundColor:[UIColor yzh_separatorLightGray] forState:UIControlStateDisabled];
+    [addTeamButton setTitle:@"加入群聊" forState:UIControlStateNormal];
+    [addTeamButton setTitle:@"该群已被解散" forState:UIControlStateDisabled];
     [addTeamButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
-//    [addTeamButton addTarget:self action:@selector(exitTeam:) forControlEvents:UIControlEventTouchUpInside];
+    if (self.viewModel.haveTeamData) {
+        [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [self.tableView.tableHeaderView removeFromSuperview];
+        addTeamButton.enabled = NO;
+    }
     [self.footerView addSubview:addTeamButton];
     
     [addTeamButton mas_makeConstraints:^(MASConstraintMaker *make) {

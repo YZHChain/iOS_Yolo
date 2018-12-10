@@ -8,6 +8,7 @@
 
 #import "YZHTargetUserDataManage.h"
 
+
 @implementation YZHTargetUserExtManage
 
 + (instancetype)targetUserExtWithUserId:(NSString *)userId {

@@ -190,7 +190,9 @@
     } else {
         
         [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
-                                                               @"teamId": self.attachment.groupID ? self.attachment.groupID : @""
+                                                               @"teamId": self.attachment.groupID ? self.attachment.groupID : @"",
+                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                               kYZHRouteSegueNewNavigation: @(YES)
                                                                }];
     }
 }

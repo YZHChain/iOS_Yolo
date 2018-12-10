@@ -12,6 +12,7 @@
 #import "YZHAlertManage.h"
 #import "UIButton+YZHTool.h"
 #import "YZHUserLoginManage.h"
+#import "YZHUserDataManage.h"
 
 static NSString* const kYZHCellPasswordTitle = @"修改密码";
 static NSString* const kYZHCellChatLogTitle  = @"清空聊天记录";
@@ -181,6 +182,7 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
                     YZHUserLoginManage* manage = [YZHUserLoginManage sharedManager];
                     // 清空缓存用户信息
                     [manage setCurrentLoginData:nil];
+                    //TODO:
                     // 跳转至登录页
                     [manage executeHandInputLogin];
                 } else {

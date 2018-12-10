@@ -12,7 +12,7 @@
 #import "YZHLoginModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHIMLoginData : NSObject
+@interface YZHIMLoginData : NSObject <NSSecureCoding>
 
 @property (nonatomic, copy) NSString *account; // IM平台登录账号
 @property (nonatomic, copy) NSString *token;   // IM平台Token

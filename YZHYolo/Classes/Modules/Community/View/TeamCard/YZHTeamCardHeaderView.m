@@ -34,6 +34,12 @@
     self.synopisisLabel.font = [UIFont systemFontOfSize:11];
     self.synopisisLabel.textColor = [UIColor yzh_sessionCellGray];
     self.synopisisLabel.numberOfLines = 2;
+    
+    self.backgroundView = ({
+        UIView* view = [[UIView alloc] initWithFrame:self.bounds];
+        view.backgroundColor = [UIColor whiteColor];
+        view;
+    });
 }
 
 - (void)refreshWithModel:(YZHTeamHeaderModel *)model {

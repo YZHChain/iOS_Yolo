@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHTTTTeamModel : NSObject
+@interface YZHSearchModel : NSObject
 
 @property (nonatomic, strong) NSString* teamIcon;
 @property (nonatomic, strong) NSString* teamName;
@@ -18,10 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface YZHSearchModel : NSObject
+@interface YZHSearchListModel : NSObject
 
-@property (nonatomic, strong) NSMutableArray<YZHTTTTeamModel *>* searchArray;
-@property (nonatomic, strong) NSMutableArray<YZHTTTTeamModel *>* recommendArray;
+@property (nonatomic, strong) NSMutableArray<YZHSearchModel *>* searchArray;
+@property (nonatomic, strong) NSMutableArray<YZHSearchModel *>* recommendArray;
+@property (nonatomic, assign) int pageTotal; //总页数
 
 @end
 

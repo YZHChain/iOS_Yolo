@@ -9,19 +9,22 @@
 #import <Foundation/Foundation.h>
 
 #import "YZHTeamCardModel.h"
+#import "YZHTeamCardModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamCardIntroModel : NSObject
 
 @property (nonatomic, strong) YZHTeamHeaderModel* headerModel;
+@property (nonatomic, strong) NSMutableArray<NSMutableArray <YZHTeamDetailModel *> *>* modelList;
 @property (nonatomic, copy) NSString* teamId;
+@property (nonatomic, strong) NIMTeam* team;
 @property (nonatomic, copy) NSString* teamOwner;
 @property (nonatomic, copy) NSString* teamOwnerAvatarUrl;
-@property (nonatomic, strong) NIMTeam* teamModel;
 @property (nonatomic, copy) NSString* teamOwnerName;
+@property (nonatomic, assign) BOOL haveTeamData;
 
-- (instancetype)initWithTeamId:(NSString *)teamId;
+- (instancetype)initWithTeam:(NIMTeam *)team;
 
 - (void)updataTeamOwnerData;
 - (void)updataHeaderModel;

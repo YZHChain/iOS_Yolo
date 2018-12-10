@@ -23,6 +23,10 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
 
 @implementation YZHIMLoginData
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {

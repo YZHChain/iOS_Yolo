@@ -11,39 +11,42 @@
 #import "YZHTeamInfoExtManage.h"
 @implementation YZHTeamCardIntroModel
 
-- (instancetype)initWithTeamId:(NSString *)teamId {
+- (instancetype)initWithTeam:(NIMTeam *)team {
     
     self = [super init];
     if (self) {
-        _teamId = [teamId copy];
-        
-        [self configuration];
+        if (team) {
+            _teamId = team.teamId;
+            _team = team;
+            [self configuration];
+            _haveTeamData = YES;
+        } else {
+            _haveTeamData = NO;
+        }
     }
     return self;
 }
 
 - (void)configuration {
  
-    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:_teamId];
-//    NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-//    NIMTeamMember* member = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:_teamId];
-    YZHTeamInfoExtManage* teamInfoExtManage = [YZHTeamInfoExtManage YZH_objectWithKeyValues:team.clientCustomInfo];
-    self.teamModel = team;
-    self.teamOwner = team.owner;
-    NIMUser* teamOwner = [[[NIMSDK sharedSDK] userManager] userInfo:self.teamOwnerName];
+    YZHTeamInfoExtManage* teamInfoExtManage = [YZHTeamInfoExtManage YZH_objectWithKeyValues:_team.clientCustomInfo];
+    self.teamOwner = _team.owner;
+    NIMUser* teamOwner = [[[NIMSDK sharedSDK] userManager] userInfo:self.teamOwner];
     self.teamOwnerAvatarUrl = teamOwner.userInfo.avatarUrl;
     self.teamOwnerName = teamOwner.userInfo.nickName;
     
     YZHTeamHeaderModel* headerModel = [[YZHTeamHeaderModel alloc] init];
-    headerModel.teamName = team.teamName;
-    headerModel.teamSynopsis = team.intro;
-    headerModel.avatarImageName = team.avatarUrl;
+    headerModel.teamName = _team.teamName;
+    headerModel.teamSynopsis = _team.intro;
+    headerModel.avatarImageName = _team.avatarUrl;
     headerModel.labelArray = teamInfoExtManage.labelArray;
     headerModel.canEdit = NO;
     headerModel.viewClass = @"YZHTeamCardHeaderView";
     headerModel.teamId = _teamId;
     
     self.headerModel = headerModel;
+    
+    //
 }
 
 - (void)updataHeaderModel {

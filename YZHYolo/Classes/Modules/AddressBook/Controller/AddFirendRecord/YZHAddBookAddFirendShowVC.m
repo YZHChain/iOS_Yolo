@@ -74,6 +74,7 @@
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] style:UIBarButtonItemStylePlain target:self action:@selector(clickRightItemGotoSetting)];
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }

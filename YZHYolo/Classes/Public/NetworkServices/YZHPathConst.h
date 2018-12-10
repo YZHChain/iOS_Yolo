@@ -40,5 +40,6 @@
 #define PATH_TEAM_NOTICE_DELETE                 @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/delete" //删除
 #define PATH_TEAM_NOTICE_LIST                    @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/list" //展示
 #define PATH_TEAM_RECOMMENDEDGROUP               @"https://yolotest.yzhchain.com/yolo-square/ymGroup/recommendedGroup" //推荐群列表
+#define PATH_TEAM_SEARCHGROUP               @"https://yolotest.yzhchain.com/yolo-square/ymGroup/search_group" //搜索群列表
 
 #endif /* YZHPathConst_h */

@@ -25,6 +25,9 @@
     
     self.avatarImageView.layer.cornerRadius = 2;
     self.avatarImageView.layer.masksToBounds = YES;
+    
+    [self.joinButton.titleLabel setFont:[UIFont yzh_commonLightStyleWithFontSize:12]];
+    self.joinButton.titleLabel.textColor = [UIColor yzh_sessionCellGray];
     self.joinButton.layer.cornerRadius = 2;
     self.joinButton.layer.masksToBounds = YES;
     self.joinButton.layer.borderWidth = 1;
@@ -40,10 +43,13 @@
     // Configure the view for the selected state
 }
 
-- (void)refresh:(YZHTTTTeamModel *)model {
+- (void)refresh:(YZHSearchModel *)model {
     
+    self.model = model;
     if (YZHIsString(model.teamIcon)) {
         [self.avatarImageView yzh_setImageWithString:model.teamIcon placeholder:@"team_cell_photoImage_default"];
+    } else {
+        self.avatarImageView.image = [UIImage imageNamed:@"team_cell_photoImage_default"];
     }
     self.titleLabel.text = model.teamName ? model.teamName : @"群聊";
     

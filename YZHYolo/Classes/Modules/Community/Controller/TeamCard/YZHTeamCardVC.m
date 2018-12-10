@@ -75,9 +75,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(YZHScreen_Width);
-        make.width.mas_equalTo(YZHScreen_Height - 64);
+        make.edges.equalTo(self.view);
+        make.size.equalTo(self.view);
     }];
 }
 
@@ -91,14 +90,15 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     [self.headerView refreshWithModel:self.viewModel.headerModel];
-    self.headerView.height = self.headerView.height;
-//    self.tableView.tableHeaderView = self.headerView;
     [self.tableView setTableHeaderView:self.headerView];
+    //TODO:
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(0);
-        make.width.mas_equalTo(YZHScreen_Width);
+//        make.left.right.top.bottom.mas_equalTo(0);
+        make.width.equalTo(self.view);
         make.height.mas_equalTo(self.headerView.height);
     }];
+    [self.tableView layoutIfNeeded];
+    
     [self configurationFooterView];
     if (self.viewModel.isManage) {
         UIButton* headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -412,7 +412,6 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
         
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
 //        [_tableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
-        _tableView.frame = CGRectMake(0, 0, YZHView_Width, YZHView_Height - 64);
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
@@ -467,7 +466,6 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     } else {
         [removeButton addTarget:self action:@selector(exitTeam:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
     
     [self.footerView addSubview:removeButton];
     

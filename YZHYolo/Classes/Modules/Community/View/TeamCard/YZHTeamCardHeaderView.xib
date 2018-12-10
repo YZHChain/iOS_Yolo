@@ -71,7 +71,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Fbz-dR-YPl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="55A-Ev-8CQ"/>
                 <constraint firstItem="4eL-OI-XY8" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="bottom" id="MeI-ih-fJw"/>

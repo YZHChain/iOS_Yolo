@@ -82,7 +82,7 @@ static NSInteger kYZHTagViewRowSpace = 8.5;
         lastView = labelView;
     }
     
-    return (level * 30);
+    return (level * kYZHTagViewRowHeight);
 }
 
 @end

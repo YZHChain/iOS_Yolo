@@ -78,7 +78,15 @@
 {
     self.navigationItem.title = @"详情资料";
     // 不是自己,并且是我的好友时,才会有更多选项
-    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
+//    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
+//        UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
+//        [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//    } else {
+//        self.navigationItem.rightBarButtonItem = nil;
+//    }
+    if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
@@ -102,6 +110,7 @@
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.showsVerticalScrollIndicator = NO;
+    
     
     //TODO: 计算高度.
     self.tableView.tableFooterView = self.userAskFooterView;
@@ -200,7 +209,8 @@
 - (void)userDeailsRefresh {
     
     if (!self.isMySelf) {
-        [self setupNavBar];
+//        [self setupNavBar];
+        self.navigationItem.rightBarButtonItem = nil;
         self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
         // 判断是否为好友,
         self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];

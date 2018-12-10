@@ -11,17 +11,17 @@
 #import "YZHSearchModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol YZHSearchTeamProtocol <NSObject>
+@protocol YZHSearchTeamCellProtocol <NSObject>
 
-- (void)onTouchJoinTeam:(YZHTTTTeamModel *)model;
+- (void)onTouchJoinTeam:(YZHSearchModel *)model;
 
 @end
 
 @interface YZHSearchTeamCell : UITableViewCell
 
-@property (nonatomic, strong) YZHTTTTeamModel* model;
-- (void)refresh:(YZHTTTTeamModel* )model;
-@property (nonatomic, weak) id<YZHSearchTeamProtocol> delegate;
+@property (nonatomic, strong) YZHSearchModel* model;
+- (void)refresh:(YZHSearchModel* )model;
+@property (nonatomic, weak) id<YZHSearchTeamCellProtocol> delegate;
 
 @end
 
