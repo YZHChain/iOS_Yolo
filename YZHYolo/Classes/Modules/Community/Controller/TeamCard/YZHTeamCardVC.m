@@ -75,8 +75,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-        make.size.equalTo(self.view);
+        make.left.right.top.bottom.mas_equalTo(0);
+        make.width.height.equalTo(self.view);
     }];
 }
 

@@ -387,8 +387,10 @@
 		559F1B1B217EED370028B0E5 /* NTESChatroomTextContentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1970217EED340028B0E5 /* NTESChatroomTextContentConfig.m */; };
 		559F1B1C217EED370028B0E5 /* NTESDemoFetchChatroomTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1973217EED340028B0E5 /* NTESDemoFetchChatroomTask.m */; };
 		559F1B1E217EED370028B0E5 /* NTESDemoRegisterTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 559F1977217EED340028B0E5 /* NTESDemoRegisterTask.m */; };
+		55A0AF5121BE9250004EAEE3 /* YZHSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF5021BE9250004EAEE3 /* YZHSearchView.m */; };
+		55A0AF5321BE925C004EAEE3 /* YZHSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0AF5221BE925C004EAEE3 /* YZHSearchView.xib */; };
+		55A0AF5621BEC24E004EAEE3 /* YZHSearchLabelSelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF5521BEC24E004EAEE3 /* YZHSearchLabelSelectedView.m */; };
 		55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */; };
-		55A286B421746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */; };
 		55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */; };
 		55A286B921747D23004DACEA /* YZHExtensionFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */; };
 		55AA826A2186D8DE00ED73B1 /* YZHCommunityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55AA82692186D8DE00ED73B1 /* YZHCommunityListVC.m */; };
@@ -1258,9 +1260,13 @@
 		559F1977217EED340028B0E5 /* NTESDemoRegisterTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESDemoRegisterTask.m; sourceTree = "<group>"; };
 		559F1978217EED340028B0E5 /* NTESDemoServiceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESDemoServiceTask.h; sourceTree = "<group>"; };
 		559F1BD0217EEE180028B0E5 /* NTESGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGlobalMacro.h; sourceTree = "<group>"; };
+		55A0AF4F21BE9250004EAEE3 /* YZHSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchView.h; sourceTree = "<group>"; };
+		55A0AF5021BE9250004EAEE3 /* YZHSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchView.m; sourceTree = "<group>"; };
+		55A0AF5221BE925C004EAEE3 /* YZHSearchView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSearchView.xib; sourceTree = "<group>"; };
+		55A0AF5421BEC24E004EAEE3 /* YZHSearchLabelSelectedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchLabelSelectedView.h; sourceTree = "<group>"; };
+		55A0AF5521BEC24E004EAEE3 /* YZHSearchLabelSelectedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchLabelSelectedView.m; sourceTree = "<group>"; };
 		55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatSearchVC.h; sourceTree = "<group>"; };
 		55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatSearchVC.m; sourceTree = "<group>"; };
-		55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHPrivatelyChatSearchVC.xib; sourceTree = "<group>"; };
 		55A286B521747CFC004DACEA /* YZHExtensionFunctionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHExtensionFunctionView.h; sourceTree = "<group>"; };
 		55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHExtensionFunctionView.m; sourceTree = "<group>"; };
 		55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHExtensionFunctionView.xib; sourceTree = "<group>"; };
@@ -1854,7 +1860,6 @@
 				558A213E217965E800E892C3 /* YZHPrivatelyChatListVC.m */,
 				55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */,
 				55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */,
-				55A286B221746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib */,
 				558A21462179850F00E892C3 /* NTESSessionPeekViewController.h */,
 				558A21472179850F00E892C3 /* NTESSessionPeekViewController.m */,
 				558A2156217B285100E892C3 /* YZHPrivateChatVC.h */,
@@ -1879,6 +1884,9 @@
 				55A286B521747CFC004DACEA /* YZHExtensionFunctionView.h */,
 				55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */,
 				55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */,
+				55A0AF4F21BE9250004EAEE3 /* YZHSearchView.h */,
+				55A0AF5021BE9250004EAEE3 /* YZHSearchView.m */,
+				55A0AF5221BE925C004EAEE3 /* YZHSearchView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3396,6 +3404,8 @@
 			children = (
 				5581915E21A2483A00C74E2E /* YZHLabelShowView.h */,
 				5581915F21A2483A00C74E2E /* YZHLabelShowView.m */,
+				55A0AF5421BEC24E004EAEE3 /* YZHSearchLabelSelectedView.h */,
+				55A0AF5521BEC24E004EAEE3 /* YZHSearchLabelSelectedView.m */,
 			);
 			path = LabelShow;
 			sourceTree = "<group>";
@@ -4452,7 +4462,7 @@
 				556D7E4E21A2F13D00533384 /* YZHTeamCardTextCell.xib in Resources */,
 				55BD8661215DFCEC00D23ED1 /* YZHAddBookFriendsCell.xib in Resources */,
 				552CC8A1215A782000135FDC /* YZHPrivacySettingVC.xib in Resources */,
-				55A286B421746F7F004DACEA /* YZHPrivatelyChatSearchVC.xib in Resources */,
+				55A0AF5321BE925C004EAEE3 /* YZHSearchView.xib in Resources */,
 				553641B4217EAEC2006F77A5 /* NIMKitEmoticon.bundle in Resources */,
 				555B8084219BC25300168C3C /* YZHAddFirendSendVerifyVC.xib in Resources */,
 				55E506E321BCD9320052E0F4 /* YZHSearchRecommendSectionView.xib in Resources */,
@@ -4834,6 +4844,7 @@
 				5537422921A6D3D800204972 /* YZHCommunityAtMemberVC.m in Sources */,
 				555B806B219ADC4300168C3C /* YZHAddFirendRecordManage.m in Sources */,
 				55AB6CE7219FFA8A005385A0 /* CYLFilterHeaderView.m in Sources */,
+				55A0AF5121BE9250004EAEE3 /* YZHSearchView.m in Sources */,
 				553641E5217EAEC2006F77A5 /* NIMCardMemberItem.m in Sources */,
 				555B807B219B5AC700168C3C /* YZHAddFriendShowFooterView.m in Sources */,
 				553641C4217EAEC2006F77A5 /* NIMKitDevice.m in Sources */,
@@ -5040,6 +5051,7 @@
 				55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */,
 				553641C1217EAEC2006F77A5 /* NIMKitRobotTemplate.m in Sources */,
 				553641C8217EAEC2006F77A5 /* NIMInputEmoticonParser.m in Sources */,
+				55A0AF5621BEC24E004EAEE3 /* YZHSearchLabelSelectedView.m in Sources */,
 				55337DE5215086E500307B75 /* YYLabel+YMTool.m in Sources */,
 				5581915021A1C7FE00C74E2E /* YZHTeamCardVC.m in Sources */,
 				552B78EC21735F8400C1DD99 /* UIImage+YZHImage.m in Sources */,

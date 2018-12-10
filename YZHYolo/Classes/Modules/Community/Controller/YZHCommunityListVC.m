@@ -29,6 +29,7 @@
 #import "YZHUserLoginManage.h"
 #import "YZHLockCommunityListVC.h"
 #import "YZHUserModelManage.h"
+#import "YZHSearchView.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -49,10 +50,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 @property (nonatomic, strong) UITableView* tagsTableView;
 
-@property (nonatomic, strong) JKRSearchController* searchController;
-
-@property (nonatomic, strong) JKRSearchController* tagSearchController;
-
 @property (nonatomic, strong) YZHRecentSessionExtManage* recentSessionExtManage;
 
 @property (nonatomic, strong) YZHTeamListDefaultView* defaultView;
@@ -60,6 +57,9 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 @property (nonatomic, strong) NSMutableDictionary* headerViewDictionary;
 
 @property (nonatomic, assign) BOOL teamLock;
+
+@property (nonatomic, strong) YZHSearchView* searchView;
+@property (nonatomic, strong) YZHSearchView* tagSearchView;
 
 @end
 
@@ -139,12 +139,26 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    [self.tableView setTableHeaderView:self.searchView];
     [self.tableView registerClass:[YZHSessionListCell class] forCellReuseIdentifier:kYZHDefaultCellIdentifie];
     [self.tableView registerClass:[YZHSessionListLockCell class] forCellReuseIdentifier:kYZHLockCellIdentifie];
+    
+    
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
+    [self.tagsTableView setTableHeaderView:self.tagSearchView];
     
+    [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(50);
+        make.width.mas_offset(YZHScreen_Width);
+    }];
+    [self.tableView layoutIfNeeded];
+    
+    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(50);
+        make.width.mas_offset(YZHScreen_Width);
+    }];
+    [self.tagsTableView layoutIfNeeded];
     //默认上锁
     self.teamLock = YES;
     self.tableView.hidden = YES;
@@ -177,6 +191,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 }
 
 #pragma mark - 5.Event Response
+
+- (void)onTouchSearch:(UIButton *)sender {
+    
+    [YZHRouter openURL:kYZHRouterTeamChatSearch info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+}
 
 - (void)gotoLockTeamList {
     
@@ -875,7 +894,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         _tagsTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tagsTableView.hidden = YES;
         _tagsTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tagsTableView.tableHeaderView = self.tagSearchController.searchBar;
     }
     return _tagsTableView;
 }
@@ -886,36 +904,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         _extensionView = [YZHExtensionFunctionView yzh_viewWithFrame:CGRectMake(0, 0, 154, 188)];
     }
     return _extensionView;
-}
-
-- (JKRSearchController *)searchController {
-    
-    if (!_searchController) {
-        YZHCommunitySearchVC* communitySearchVC = [[YZHCommunitySearchVC alloc] init];
-        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:communitySearchVC];
-        _searchController.searchBar.placeholder = @"搜索";
-        _searchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        //        _searchController.searchResultsUpdater = self;
-        //        _searchController.searchBar.delegate = self;
-        //        _searchController.delegate = self;
-    }
-    return _searchController;
-}
-
-- (JKRSearchController *)tagSearchController {
-    
-    if (!_tagSearchController) {
-        YZHCommunitySearchVC* communitySearchVC = [[YZHCommunitySearchVC alloc] init];
-        _tagSearchController = [[JKRSearchController alloc] initWithSearchResultsController:communitySearchVC];
-        _tagSearchController.searchBar.placeholder = @"搜索";
-        _tagSearchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        //        _tagSearchController.searchResultsUpdater = self;
-        //        _tagSearchController.searchBar.delegate = self;
-        //        _tagSearchController.delegate = self;
-    }
-    return _tagSearchController;
 }
 
 - (YZHRecentSessionExtManage *)recentSessionExtManage {
@@ -950,6 +938,24 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         _headerViewDictionary = [[NSMutableDictionary alloc] init];
     }
     return _headerViewDictionary;
+}
+
+- (YZHSearchView *)searchView {
+    
+    if (!_searchView) {
+        _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _searchView;
+}
+
+- (YZHSearchView *)tagSearchView {
+    
+    if (!_tagSearchView) {
+        _tagSearchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _tagSearchView;
 }
 
 @end

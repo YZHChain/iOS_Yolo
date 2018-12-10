@@ -17,7 +17,7 @@
 
 static int kYZHRecommendTeamPageSize = 20; // 默认每页个数
 static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionView";
-@interface YZHSearchTeamVC ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, YZHSearchRecommendViewProtocol, YZHSearchTeamCellProtocol>
+@interface YZHSearchTeamVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, YZHSearchRecommendViewProtocol, YZHSearchTeamCellProtocol>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -399,6 +399,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+//        _tableView.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
         [_tableView registerNib:[UINib nibWithNibName:@"YZHSearchTeamCell" bundle:nil] forCellReuseIdentifier: kYZHCommonCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHSearchRecommendSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHSearchRecommendSectionView];
         _tableView.frame = self.view.bounds;

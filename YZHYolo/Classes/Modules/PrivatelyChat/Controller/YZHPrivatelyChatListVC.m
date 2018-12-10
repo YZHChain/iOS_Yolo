@@ -20,6 +20,7 @@
 #import "YZHPrivatelyChatListHeaderView.h"
 #import "YZHPrivatelyChatSearchVC.h"
 #import "YZHPrivateChatVC.h"
+#import "YZHSearchView.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -29,7 +30,7 @@ typedef enum : NSUInteger {
 static YZHTableViewShowType currentShowType = YZHTableViewShowTypeTags;
 static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
-@interface YZHPrivatelyChatListVC ()<NIMLoginManagerDelegate, NIMEventSubscribeManagerDelegate, UIViewControllerPreviewingDelegate, NIMUserManagerDelegate, NIMConversationManagerDelegate>
+@interface YZHPrivatelyChatListVC ()<NIMLoginManagerDelegate, NIMEventSubscribeManagerDelegate, UIViewControllerPreviewingDelegate, NIMUserManagerDelegate, NIMConversationManagerDelegate, UISearchBarDelegate>
 
 @property (nonatomic,assign) BOOL supportsForceTouch;
 
@@ -45,8 +46,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 @property (nonatomic, strong) YZHExtensionFunctionView* extensionView;
 
-@property (nonatomic, strong) JKRSearchController* searchController;
-@property (nonatomic, strong) JKRSearchController* tagSearchController;
+@property (nonatomic, strong) YZHSearchView* searchView;
+@property (nonatomic, strong) YZHSearchView* tagSearchView;
 
 @end
 
@@ -139,9 +140,20 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    [self.tableView setTableHeaderView:self.searchView];
+    [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(50);
+        make.width.mas_offset(YZHScreen_Width);
+    }];
+    [self.tableView layoutIfNeeded];
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
+    self.tagsTableView.tableHeaderView = self.tagSearchView;
+    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_offset(50);
+        make.width.mas_offset(YZHScreen_Width);
+    }];
+    [self.tagsTableView layoutIfNeeded];
     
     if (self.recentSessions.count) {
         [self.recentSessionExtManage screeningAllPrivateRecebtSessionRecentSession:self.recentSessions];
@@ -222,7 +234,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }];
     [self setValue:array forKey:kYZHRecentSessionsKey];
 }
-
 
 - (void)onDeleteRecentAtIndexPath:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath
 {
@@ -740,51 +751,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 }
 
 #pragma mark - Private
-/*
-- (void)refreshSubview{
-    [self.titleLabel sizeToFit];
-    self.titleLabel.centerX   = self.navigationItem.titleView.width * .5f;
-    if (@available(iOS 11.0, *))
-    {
-        self.header.top = self.view.safeAreaInsets.top;
-        self.tableView.top = self.header.bottom;
-        CGFloat offset = self.view.safeAreaInsets.bottom;
-        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, offset, 0);
-    }
-    else
-    {
-        self.tableView.top = self.header.height;
-        self.header.bottom    = self.tableView.top + self.tableView.contentInset.top;
-    }
-    self.tableView.height = self.view.height - self.tableView.top;
-    
-    self.emptyTipLabel.centerX = self.view.width * .5f;
-    self.emptyTipLabel.centerY = self.tableView.height * .5f;
-}
 
-- (UIView*)titleView:(NSString*)userID{
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.titleLabel.text =  SessionListTitle;
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:15.f];
-    [self.titleLabel sizeToFit];
-    UILabel *subLabel  = [[UILabel alloc] initWithFrame:CGRectZero];
-    subLabel.textColor = [UIColor grayColor];
-    subLabel.font = [UIFont systemFontOfSize:12.f];
-    subLabel.text = userID;
-    subLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [subLabel sizeToFit];
+- (void)onTouchSearch:(UIButton *)sender {
     
-    UIView *titleView = [[UIView alloc] init];
-    titleView.width  = subLabel.width;
-    titleView.height = self.titleLabel.height + subLabel.height;
-    
-    subLabel.bottom = titleView.height;
-    [titleView addSubview:self.titleLabel];
-    [titleView addSubview:subLabel];
-    return titleView;
+    [YZHRouter openURL:kYZHRouterPrivateChatSearch info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
 }
-*/
 
 #pragma mark -- SET GET
 
@@ -800,7 +771,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         _tagsTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tagsTableView.hidden = YES;
         _tagsTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tagsTableView.tableHeaderView = self.tagSearchController.searchBar;
     }
     return _tagsTableView;
 }
@@ -837,34 +807,22 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     return _extensionView;
 }
 
-- (JKRSearchController *)searchController {
-    
-    if (!_searchController) {
-        YZHPrivatelyChatSearchVC* chatSearchVC = [[YZHPrivatelyChatSearchVC alloc] init];
-        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:chatSearchVC];
-        _searchController.searchBar.placeholder = @"搜索YOLO ID,手机号";
-        _searchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        //        _searchController.searchResultsUpdater = self;
-        //        _searchController.searchBar.delegate = self;
-        //        _searchController.delegate = self;
+- (YZHSearchView *)searchView {
+   
+    if (!_searchView) {
+        _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _searchController;
+    return _searchView;
 }
 
-- (JKRSearchController *)tagSearchController {
+- (YZHSearchView *)tagSearchView {
     
-    if (!_tagSearchController) {
-        YZHPrivatelyChatSearchVC* chatSearchVC = [[YZHPrivatelyChatSearchVC alloc] init];
-        _tagSearchController = [[JKRSearchController alloc] initWithSearchResultsController:chatSearchVC];
-        _tagSearchController.searchBar.placeholder = @"搜索YOLO ID,手机号";
-        _tagSearchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        //        _tagSearchController.searchResultsUpdater = self;
-        //        _tagSearchController.searchBar.delegate = self;
-        //        _tagSearchController.delegate = self;
+    if (!_tagSearchView) {
+        _tagSearchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _tagSearchController;
+    return _tagSearchView;
 }
 
 @end

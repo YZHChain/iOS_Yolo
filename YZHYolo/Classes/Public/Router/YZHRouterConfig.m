@@ -91,6 +91,8 @@ NSString *const kYZHRouterCommunityCardSelectedTeam = @"/community/teamNotice/se
 NSString *const kYZHRouterSessionChatContent = @"/session/chatContent";
 NSString *const kYZHRouterCommunitySetTeamTag = @"/community/setTeamTag";
 NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
+NSString *const kYZHRouterPrivateChatSearch = @"/privateChat/search";
+NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
 
 @implementation YZHRouterConfig
 
@@ -384,7 +386,20 @@ NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
              kYZHRouteViewControllerNotesKey: @"",
              kYZHRouteViewControllerNeedLoginKey:@"1",
              },
+             kYZHRouterPrivateChatSearch: @{
+                     kYZHRouteViewControllerClassKey: @"YZHPrivatelyChatSearchVC",
+                     kYZHRouteViewControllerNameKey: @"私聊搜索",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterTeamChatSearch:  @{
+                     kYZHRouteViewControllerClassKey: @"YZHCommunitySearchVC",
+                     kYZHRouteViewControllerNameKey: @"群聊搜索",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
         };
+    
 }
 
 @end

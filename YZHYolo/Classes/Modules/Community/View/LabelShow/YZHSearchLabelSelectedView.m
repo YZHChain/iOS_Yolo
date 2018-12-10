@@ -1,12 +1,12 @@
 //
-//  YZHLabelShowView.m
+//  YZHSearchLabelSelectedView.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/11/19.
+//  Created by Jersey on 2018/12/10.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHLabelShowView.h"
+#import "YZHSearchLabelSelectedView.h"
 
 static NSInteger kYZHTagViewHeight = 21;
 static NSInteger kYZHTagViewSpace = 11;
@@ -14,21 +14,25 @@ static NSInteger kYZHTagViewSuperViewSpace = 18;
 static NSInteger kYZHTagViewRowHeight = 35;
 static NSInteger kYZHTagViewRowSpace = 8.5;
 
-@interface YZHLabelShowView()
+@interface YZHSearchLabelSelectedView()
 
 @property (nonatomic, strong) NSArray* selectedLabelArray;
 
 @end
 
-@implementation YZHLabelShowView
+@implementation YZHSearchLabelSelectedView
 
-- (CGFloat)refreshLabelViewWithLabelArray:(NSArray *)labelArray {
-
+- (CGFloat)refreshLabelButtonWithLabelArray:(NSArray *)labelArray {
+    
+    if (labelArray.count == 0) {
+        return 50;
+    }
+    
     self.selectedLabelArray = labelArray;
     [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj removeFromSuperview];
     }];
-//    self.createTeamView.teamTagViewLayoutConstraint.constant = 80;
+    //    self.createTeamView.teamTagViewLayoutConstraint.constant = 80;
     UIView* lastView;    // 代表同意行的上一个 TagView. 第一个则为 nil
     NSInteger level = 0; //代表目前已新增的行数
     NSInteger lastViewRight = 0;  //上一个 TagView的 X + Widtg
@@ -39,10 +43,14 @@ static NSInteger kYZHTagViewRowSpace = 8.5;
         labelView.layer.cornerRadius = 3;
         labelView.layer.borderWidth = 1;
         labelView.layer.borderColor = [UIColor yzh_backgroundThemeGray].CGColor;
+        labelView.backgroundColor = [UIColor whiteColor];
         
-        UILabel* tagLabel = [[UILabel alloc] init];
-        tagLabel.text = self.selectedLabelArray[i];
-        tagLabel.font = [UIFont yzh_commonStyleWithFontSize:11];
+        UIButton* tagLabel = [UIButton buttonWithType:UIButtonTypeSystem];
+        tagLabel.tag = i;
+        [tagLabel addTarget:self action:@selector(clickTag:) forControlEvents:UIControlEventTouchUpInside];
+        [tagLabel setTitle:self.selectedLabelArray[i] forState:UIControlStateNormal];
+        [tagLabel.titleLabel setFont:[UIFont yzh_commonFontStyleFontSize:12]];
+        [tagLabel setTitleColor:[UIColor yzh_sessionCellGray] forState:UIControlStateNormal];
         CGSize tagSize = [tagLabel sizeThatFits: CGSizeMake([UIScreen mainScreen].bounds.size.width, MAXFLOAT)];
         [self addSubview:labelView];
         [labelView addSubview:tagLabel];
@@ -82,6 +90,13 @@ static NSInteger kYZHTagViewRowSpace = 8.5;
     }
     
     return (level * kYZHTagViewRowHeight);
+}
+
+- (void)clickTag:(UIButton* )sender {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedTagLabel:)]) {
+        [self.delegate selectedTagLabel:sender];
+    }
 }
 
 @end
