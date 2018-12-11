@@ -380,7 +380,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 - (void)onTouchSearch:(UIButton *)sender {
     
-//    [YZHRouter openURL:kYZHRouterAddressBookSearchFirend info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+    [YZHRouter openURL:kYZHRouterAddressBookSearchFirend info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
 }
 
 #pragma mark - NIMSDKDelegate

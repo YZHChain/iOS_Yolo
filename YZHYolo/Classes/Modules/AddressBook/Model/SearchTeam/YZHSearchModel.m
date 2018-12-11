@@ -92,6 +92,14 @@
     }
 }
 
+- (void)searchFirendTag:(NSString *)tagName {
+    
+    [self.searchFirends removeAllObjects];
+    
+    NSMutableArray* searchResult = [self.contacts searchFirendTagName:tagName];
+    self.searchFirends = searchResult.count ? searchResult : nil;
+}
+
 - (void)searchFirendKeyText:(NSString *)keyText {
     
     [self.searchFirends removeAllObjects];

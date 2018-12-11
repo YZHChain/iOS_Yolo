@@ -202,7 +202,6 @@
 //    [sender layoutIfNeeded];
 //}
 
-
 #pragma mark - 6.Private Methods
 
 - (void)setupNotification {

@@ -8,6 +8,7 @@
 
 #import "YZHGroupedDataCollection.h"
 
+#import "YZHTargetUserDataManage.h"
 @interface Pair : NSObject
 
 @property (nonatomic, strong) id first;
@@ -190,6 +191,28 @@
             if ([member.info.nickName containsString:keyText] || [member.info.showName containsString:keyText]) {
                 [searchResult addObject:member];
             }
+        }
+    }
+    return searchResult;
+}
+
+- (NSMutableArray<YZHContactMemberModel *>*)searchFirendTagName:(NSString *)tagName {
+    
+    NSMutableArray* searchResult = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < _groups.count; i++) {
+        Pair *pair = [_groups objectAtIndex:i];
+        for (YZHContactMemberModel* member in pair.second) {
+            YZHTargetUserExtManage* userInfo = [YZHTargetUserExtManage targetUserExtWithUserId:member.info.infoId];
+            if ([tagName isEqualToString:@"无分类好友"]) {
+                if (!YZHIsString(userInfo.friend_tagName)) {
+                    [searchResult addObject:member];
+                }
+            } else {
+                if (YZHIsString(userInfo.friend_tagName) && [userInfo.friend_tagName isEqualToString:tagName]) {
+                    [searchResult addObject:member];
+                }
+            }
+            
         }
     }
     return searchResult;

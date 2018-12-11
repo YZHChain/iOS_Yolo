@@ -394,6 +394,8 @@
 		55A0AF6121BF95DA004EAEE3 /* YZHCommandSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0AF6021BF95DA004EAEE3 /* YZHCommandSectionView.xib */; };
 		55A0AF6421BF98B3004EAEE3 /* YZHCommandTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF6321BF98B3004EAEE3 /* YZHCommandTipView.m */; };
 		55A0AF6621BF98BE004EAEE3 /* YZHCommandTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0AF6521BF98BE004EAEE3 /* YZHCommandTipView.xib */; };
+		55A0AF6921BFB1B3004EAEE3 /* YZHCommandTipLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF6821BFB1B3004EAEE3 /* YZHCommandTipLabelView.m */; };
+		55A0AF6B21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0AF6A21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib */; };
 		55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */; };
 		55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */; };
 		55A286B921747D23004DACEA /* YZHExtensionFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */; };
@@ -1276,6 +1278,9 @@
 		55A0AF6221BF98B3004EAEE3 /* YZHCommandTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommandTipView.h; sourceTree = "<group>"; };
 		55A0AF6321BF98B3004EAEE3 /* YZHCommandTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommandTipView.m; sourceTree = "<group>"; };
 		55A0AF6521BF98BE004EAEE3 /* YZHCommandTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCommandTipView.xib; sourceTree = "<group>"; };
+		55A0AF6721BFB1B3004EAEE3 /* YZHCommandTipLabelView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCommandTipLabelView.h; sourceTree = "<group>"; };
+		55A0AF6821BFB1B3004EAEE3 /* YZHCommandTipLabelView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCommandTipLabelView.m; sourceTree = "<group>"; };
+		55A0AF6A21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHCommandTipLabelView.xib; sourceTree = "<group>"; };
 		55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatSearchVC.h; sourceTree = "<group>"; };
 		55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatSearchVC.m; sourceTree = "<group>"; };
 		55A286B521747CFC004DACEA /* YZHExtensionFunctionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHExtensionFunctionView.h; sourceTree = "<group>"; };
@@ -2394,6 +2399,9 @@
 				55A0AF6221BF98B3004EAEE3 /* YZHCommandTipView.h */,
 				55A0AF6321BF98B3004EAEE3 /* YZHCommandTipView.m */,
 				55A0AF6521BF98BE004EAEE3 /* YZHCommandTipView.xib */,
+				55A0AF6721BFB1B3004EAEE3 /* YZHCommandTipLabelView.h */,
+				55A0AF6821BFB1B3004EAEE3 /* YZHCommandTipLabelView.m */,
+				55A0AF6A21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4564,6 +4572,7 @@
 				55DF5D5D218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf in Resources */,
 				553641B3217EAEC2006F77A5 /* NIMKitResource.bundle in Resources */,
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
+				55A0AF6B21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib in Resources */,
 				55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */,
 				55E506DE21B91BDE0052E0F4 /* YZHSearchTeamCell.xib in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
@@ -4717,6 +4726,7 @@
 				55AB6CE3219FFA8A005385A0 /* CYLDBManager.m in Sources */,
 				553641E6217EAEC2006F77A5 /* NIMTeamInfoData.m in Sources */,
 				558C54D421AC3A3C00CC10D1 /* YZHTeamInviteFirendVC.m in Sources */,
+				55A0AF6921BFB1B3004EAEE3 /* YZHCommandTipLabelView.m in Sources */,
 				5562DE2321549FF40098FA83 /* YZHMyInformationModel.m in Sources */,
 				55364202217EAEC3006F77A5 /* NIMBaseSessionContentConfig.m in Sources */,
 				55AA826A2186D8DE00ED73B1 /* YZHCommunityListVC.m in Sources */,

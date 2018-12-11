@@ -34,6 +34,8 @@
     self.bannedButton.layer.masksToBounds = YES;
     [self.bannedButton yzh_setBackgroundColor:[UIColor yzh_separatorLightGray] forState:UIControlStateSelected];
     [self.bannedButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundPinkRed] forState:UIControlStateNormal];
+    [self.bannedButton setTitle:@"禁言" forState:UIControlStateNormal];
+    [self.bannedButton setTitle:@"解除禁言" forState:UIControlStateSelected];
     
     [self.kickOutButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:12]];
     [self.kickOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

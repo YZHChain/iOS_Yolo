@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)searchFirendKeyText:(NSString *)keyText;
 - (void)searchTeamKeyText:(NSString *)keyText;
 - (void)searchTeamTag:(NSString *)tagName;
+- (void)searchFirendTag:(NSString *)tagName;
 
 @end
 

@@ -59,6 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)memberCountOfGroup:(NSInteger)groupIndex;
 // 通讯录好友列表搜索
 - (NSMutableArray<YZHContactMemberModel *>*)searchFirendKeyText:(NSString *)keyText;
+- (NSMutableArray<YZHContactMemberModel *>*)searchFirendTagName:(NSString *)tagName;
 
 @end
 

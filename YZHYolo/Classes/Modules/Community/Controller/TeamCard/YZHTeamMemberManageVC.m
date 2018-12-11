@@ -142,12 +142,13 @@
     YZHTeamMemberManageCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
     [cell refresh:member];
     BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:self.viewModel.teamId inTeam:member.info.infoId].isMuted;
+    NSLog(@"成员名%@ iD:%@禁言状态%d", member.info.showName, member.info.infoId, isBanned);
     cell.bannedButton.selected = isBanned;
-    if (isBanned) {
-        cell.bannedButton.titleLabel.text = @"解除禁言";
-    } else {
-        cell.bannedButton.titleLabel.text = @"禁言";
-    }
+//    if (isBanned) {
+//        cell.bannedButton.titleLabel.text = @"解除禁言";
+//    } else {
+//        cell.bannedButton.titleLabel.text = @"禁言";
+//    }
     cell.delegete = self;
     
     return cell;
@@ -194,7 +195,7 @@
     if (isBanned) {
         succeedTitle = [NSString stringWithFormat:@"已解除用户: (%@) 禁言", member.info.showName];
     } else {
-//        succeedTitle = [NSString stringWithFormat:@"已对用户: (%@) 禁言", member.info.showName];
+        succeedTitle = [NSString stringWithFormat:@"已对用户: (%@) 禁言", member.info.showName];
     }
     [YZHAlertManage showAlertTitle:nil message:title actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
@@ -260,7 +261,7 @@
             [[[NIMSDK sharedSDK] teamManager] updateMuteState:!self.isAllBanned inTeam:self.viewModel.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
                     @strongify(self)
-                    [hud hideWithText:nil];
+                    [hud hideWithText:@"已对全体成员禁言"];
                     self.isAllBanned = !self.isAllBanned;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.allBannedButton.selected = self.isAllBanned;
@@ -311,7 +312,7 @@
 - (void)onTeamMemberChanged:(NIMTeam *)team {
     
     if ([self.viewModel.teamId isEqualToString:team.teamId]) {
-        
+        [self.tableView reloadData];
     }
 }
 
