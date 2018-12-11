@@ -154,7 +154,7 @@
 //    BOOL top = [NTESSessionUtil recentSessionIsMark:recent type:NTESRecentSessionMarkTypeTop];
     BOOL top2 = teamExtManage.team_top;
     self.topModel = topModel;
-    topModel.title = @"群置顶";
+    topModel.title = @"群聊置顶";
     topModel.isOpenStatus = top2;
     topModel.cellClass = @"YZHTeamCardSwitchCell";
     

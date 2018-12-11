@@ -87,6 +87,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _unreadNumber = self.recentSession.unreadCount;
     //1.设置导航栏
     [self setupNav];
     //2.设置view

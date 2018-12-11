@@ -52,7 +52,7 @@
         self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
     } else if ([self.model.title isEqualToString:@"群消息免打扰"]) {
         
-    } else if ([self.model.title isEqualToString:@"群置顶"]) {
+    } else if ([self.model.title isEqualToString:@"群聊置顶"]) {
         
     } else if ([self.model.title isEqualToString:@"允许群成员加好友"]) {
         

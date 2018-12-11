@@ -22,6 +22,7 @@
 #import "YZHContactMemberModel.h"
 #import "YZHAddBookDetailsModel.h"
 #import "YZHTagContactManage.h"
+#import "YZHSearchView.h"
 
 typedef enum : NSUInteger {
     YZHAddressBookShowTypeDefault = 0,
@@ -35,8 +36,8 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 @property (nonatomic, strong) UITableView* defaultTableView;
 @property (nonatomic, strong) UITableView* tagTableView;
-@property (nonatomic, strong) JKRSearchController* searchController;
-@property (nonatomic, strong) JKRSearchController* tagSearchController;
+@property (nonatomic, strong) YZHSearchView* searchView;
+@property (nonatomic, strong) YZHSearchView* tagSearchView;
 @property (nonatomic, strong) SCIndexViewConfiguration* indexViewConfiguration;
 @property (nonatomic, strong) YZHGroupedContacts* contacts;
 @property (nonatomic, strong) YZHTagContactManage* tagContactManage;
@@ -377,6 +378,11 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 
 #pragma mark - 6.Private Methods
 
+- (void)onTouchSearch:(UIButton *)sender {
+    
+//    [YZHRouter openURL:kYZHRouterAddressBookSearchFirend info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+}
+
 #pragma mark - NIMSDKDelegate
 
 - (void)onUserInfoChanged:(NIMUser *)user
@@ -395,6 +401,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 //收到系统消息
 - (void)onReceiveSystemNotification:(NIMSystemNotification *)notification {
     
+    
 }
 
 #pragma mark - 7.GET & SET
@@ -410,7 +417,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _defaultTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _defaultTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _defaultTableView.rowHeight = kYZHCellHeight;
-        _defaultTableView.tableHeaderView = self.searchController.searchBar;
+        _defaultTableView.tableHeaderView = self.searchView;
         _defaultTableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 10, self.view.width, 48)];
         [_defaultTableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_defaultTableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
@@ -431,7 +438,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
         _tagTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tagTableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _tagTableView.rowHeight = kYZHCellHeight;
-        _tagTableView.tableHeaderView = self.tagSearchController.searchBar;
+        _tagTableView.tableHeaderView = self.tagSearchView;
         _tagTableView.tableFooterView = [YZHAddressBookFootView yzh_viewWithFrame:CGRectMake(0, 0, self.view.width, 48)];
         [_tagTableView registerNib:[UINib nibWithNibName:@"YZHAddBookSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHAddBookSectionViewIdentifier];
         [_tagTableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
@@ -452,34 +459,23 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     return _indexViewConfiguration;
 }
 
-- (JKRSearchController *)tagSearchController {
+- (YZHSearchView *)searchView {
     
-    if (!_tagSearchController) {
-        YZHAddBookSearchVC* addBookSearchVC = [[YZHAddBookSearchVC alloc] init];
-        _tagSearchController = [[JKRSearchController alloc] initWithSearchResultsController:addBookSearchVC];
-        _tagSearchController.searchBar.placeholder = @"搜索";
-        _tagSearchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        _tagSearchController.searchResultsUpdater = self;
-        _tagSearchController.searchBar.delegate = self;
-        _tagSearchController.delegate = self;
+    if (!_searchView) {
+        _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _tagSearchController;
+    return _searchView;
 }
 
-- (JKRSearchController *)searchController {
+- (YZHSearchView *)tagSearchView {
     
-    if (!_searchController) {
-        YZHAddBookSearchVC* addBookSearchVC = [[YZHAddBookSearchVC alloc] init];
-        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:addBookSearchVC];
-        _searchController.searchBar.placeholder = @"搜索";
-        _searchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        _searchController.searchResultsUpdater = self;
-        _searchController.searchBar.delegate = self;
-        _searchController.delegate = self;
+    if (!_tagSearchView) {
+        _tagSearchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
-    return _searchController;
+    return _tagSearchView;
 }
+
 
 @end

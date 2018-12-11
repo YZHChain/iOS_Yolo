@@ -76,7 +76,7 @@ extern NSString *const kYZHRouterAddressBookPhoneContact;
 extern NSString *const kYZHRouterAddressBookAddFirendRecord;
 extern NSString *const kYZHRouterAddressBookScanQRCode;
 extern NSString *const kYZHRouterAddressBookSearchTeam;
-
+extern NSString *const kYZHRouterAddressBookSearchFirend;
 #pragma mark -- Session
 
 extern NSString *const kYZHRouterSessionSharedCard;

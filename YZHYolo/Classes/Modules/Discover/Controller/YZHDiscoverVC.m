@@ -11,6 +11,7 @@
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
 #import "YZHUserDataManage.h"
+#import <JavaScriptCore/JSContext.h>
 
 @interface YZHDiscoverVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
@@ -110,6 +111,8 @@
         }
 //        &label=""
         NSURL* url = [[NSURL alloc] initWithString:self.url];
+//        [self deleteWebCache];
+//        [self deleteAllWebCache];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         NSString* teamLabel = [[YZHUserDataManage sharedManager].currentUserData.teamLabel mj_JSONString];
         if (!YZHIsString(teamLabel)) {
@@ -257,18 +260,6 @@
     }
     if ([message.name isEqualToString:@"GetTeamLabel"]) { //
 
-        NSString* teamLabelJS = message.body;
-        
-        NSLog(@"获取用户标签%@", teamLabelJS);
-        NSString* teamLabel = [self.selectedTeamArray mj_JSONString];
-        if (!YZHIsString(teamLabel)) {
-            teamLabel = nil;
-        }
-        //接收标签的方法。
-        NSString *callbackJs = [NSString stringWithFormat:@"%@", teamLabel];
-        [self.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-            NSLog(@"%@----%@",result, error);
-        }];
         return;
     }
 }
@@ -279,17 +270,19 @@
 }
 
 //这个是网页加载完成，导航的变化
--(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+-(void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self hideHUDError:nil];
 
-//    NSString* teamLabel = [self.selectedTeamArray mj_JSONString];
-//    if (!YZHIsString(teamLabel)) {
-//        teamLabel = nil;
-//    }
-//    NSString *jsStr = [NSString stringWithFormat:@"GetTeamLabel('%@')",teamLabel];
-//    [self.webView evaluateJavaScript:jsStr completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-//        NSLog(@"%@----%@",result, error);
-//    }];
+    NSString* teamLabel = [self.selectedTeamArray mj_JSONString];
+    if (YZHIsString(teamLabel)) {
+    } else {
+        teamLabel = nil;
+    }
+    
+    NSString *callbackJs = [NSString stringWithFormat:@"iosLabel('%@')", teamLabel];
+    [self.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+        NSLog(@"%@----%@",result, error);
+    }];
 }
 
 //跳转失败的时候调用
@@ -466,6 +459,54 @@
         _selectedTeamArray = [[NSMutableArray alloc] init];
     }
     return _selectedTeamArray;
+}
+
+//自定义清除缓存
+- (void)deleteWebCache {
+    /*
+     在磁盘缓存上。
+     WKWebsiteDataTypeDiskCache,
+     
+     html离线Web应用程序缓存。
+     WKWebsiteDataTypeOfflineWebApplicationCache,
+     
+     内存缓存。
+     WKWebsiteDataTypeMemoryCache,
+     
+     本地存储。
+     WKWebsiteDataTypeLocalStorage,
+     
+     Cookies
+     WKWebsiteDataTypeCookies,
+     
+     会话存储
+     WKWebsiteDataTypeSessionStorage,
+     
+     IndexedDB数据库。
+     WKWebsiteDataTypeIndexedDBDatabases,
+     
+     查询数据库。
+     WKWebsiteDataTypeWebSQLDatabases
+     */
+    NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage];
+    
+    NSSet *websiteDataTypes= [NSSet setWithArray:types];
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        
+    }];
+}
+
+- (void)deleteAllWebCache {
+    //allWebsiteDataTypes清除所有缓存
+    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+    
+    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+    
+    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        
+    }];
 }
 
 @end

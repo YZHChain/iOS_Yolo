@@ -41,7 +41,7 @@
                                UINavigationControllerDelegate,
                                NIMSystemNotificationManagerDelegate,
                                NIMMediaManagerDelegate,
-                               NTESTimerHolderDelegate,
+//                               NTESTimerHolderDelegate,
                                NIMContactSelectDelegate,
                                NIMEventSubscribeManagerDelegate,
                                NIMNormalTeamCardVCProtocol,
@@ -78,6 +78,8 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _unreadNumber = self.recentSession.unreadCount;
     
     //1.设置导航栏 重写覆盖父类方法.
     [self setupNav];
