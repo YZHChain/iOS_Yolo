@@ -99,7 +99,7 @@
             requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
             break;
         case YZHSettingPasswordTypeFind:
-            requestURL = PATH_USER_LOGIN_FORGETPASSWORD;
+            requestURL = PATH_USER_SECRETKEYUPDATEPWD;
             break;
         default:
             requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;

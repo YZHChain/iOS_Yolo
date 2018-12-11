@@ -10,7 +10,7 @@
 
 typedef enum : NSUInteger {
     YZHSettingPasswordTypeRegister = 0,
-    YZHSettingPasswordTypeFind,
+    YZHSettingPasswordTypeFind, //通过助记词
 } YZHSettingPasswordType;
 @interface YZHSettingPasswordVC : YZHBaseViewController
 
@@ -18,5 +18,6 @@ typedef enum : NSUInteger {
 @property(nonatomic, copy)NSString* inviteCode; //邀请码.
 @property(nonatomic, assign)YZHSettingPasswordType settingPasswordType;
 
+//PATH_USER_SECRETKEYUPDATEPWD
 
 @end

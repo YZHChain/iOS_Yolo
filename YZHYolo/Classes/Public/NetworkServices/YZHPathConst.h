@@ -23,6 +23,7 @@
 #define PATH_USER_CHECKOUTYOLOID              @"https://yolotest.yzhchain.com/yolo-login/user/checkYoloNo"        // 检测YoloID 是否可用包括手机号
 #define PATH_USER_CHECKSECRETKEY              @"https://yolotest.yzhchain.com/yolo-login/user/verifySecretKey"              // 校验密钥
 #define PATH_USER_GETECRETKEY                 @"https:/yolotest.yzhchain.com/yolo-login/user/getSecretKey"                // 获取密钥
+#define PATH_USER_SECRETKEYUPDATEPWD          @"https:/yolotest.yzhchain.com/yolo-login/user/secretKeyUpdatePwd" //用户密钥修改密钥接口
 #define PATH_USER_UPDATELOGIN                   @"https://yolotest.yzhchain.com/yolo-login/user/updateLogin"        //修改 Yolo 号
 #define PATH_USER_CHECKOUPHONE                  @"https://yolotest.yzhchain.com/yolo-login/user/checkPhone"         //检测Phone 是否已经注册
 #define PATH_USER_SETTINGSPRIVACY               @"https://yolotest.yzhchain.com/yolo-login/user/settingsPrivacy" //隐私设置

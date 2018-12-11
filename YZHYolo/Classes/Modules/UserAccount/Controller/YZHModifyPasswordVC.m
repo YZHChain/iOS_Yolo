@@ -13,6 +13,7 @@
 #import "UIButton+YZHCountDown.h"
 #import "YZHUserLoginManage.h"
 #import "YZHLoginModel.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHModifyPasswordVC ()<UITextFieldDelegate>
 
@@ -128,12 +129,12 @@
 - (IBAction)executeModification:(UIButton *)sender {
     
     NSDictionary* dic;
+    NSString* yoloNo = [[[YZHUserLoginManage sharedManager] currentLoginData] yoloId];
     if (self.currentType == YZHModifyPasswordTypeOriginalPW) {
         dic = @{
-                @"phoneNum":self.phoneNumber ? self.phoneNumber : @"",
-                @"newPassword":self.passwordTextField.text,
-                @"password":self.modifyTypeTextField.text,
-                @"type": @(self.currentType)
+                @"newPassword": self.confirmPasswordTextField.text,
+                @"password": self.modifyTypeTextField.text,
+                @"yoloNo": yoloNo
                 };
     } else {
         dic = @{
