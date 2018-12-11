@@ -181,6 +181,20 @@
     }
 }
 
+- (NSMutableArray<YZHContactMemberModel *>*)searchFirendKeyText:(NSString *)keyText {
+    
+    NSMutableArray* searchResult = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < _groups.count; i++) {
+        Pair *pair = [_groups objectAtIndex:i];
+        for (YZHContactMemberModel* member in pair.second) {
+            if ([member.info.nickName containsString:keyText] || [member.info.showName containsString:keyText]) {
+                [searchResult addObject:member];
+            }
+        }
+    }
+    return searchResult;
+}
+
 - (NSMutableArray *)teamMemberArray {
     
     NSMutableArray* teamMutableArray = [[NSMutableArray alloc] init];

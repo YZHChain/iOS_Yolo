@@ -607,6 +607,11 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
             }
         }
         searchbar.delegate = self;
+        if (@available(iOS 9.0, *)) {
+            [[searchbar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
+        } else {
+            // Fallback on earlier versions
+        }
         self.navigationItem.titleView = searchbar;
         
         _searchBar = searchbar;

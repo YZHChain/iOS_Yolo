@@ -309,6 +309,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //点击头像
+    if (indexPath.section == 0) {
+        return;
+    }
     
     YZHAddBookDetailModel* model = self.userDetailsModel.viewModel[indexPath.section][indexPath.row];
     if ([model.title isEqualToString:@"聊天内容"]) {

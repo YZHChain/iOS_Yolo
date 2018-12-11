@@ -33,7 +33,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="备注名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yl4-cB-Q25">
                         <rect key="frame" x="59" y="19" width="42" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="YTy-XG-Hd3"/>
                             <constraint firstAttribute="height" constant="17" id="nOF-Z1-i4D"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="14"/>
@@ -44,7 +43,6 @@
                         <rect key="frame" x="108" y="20.5" width="24" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="NfZ-Dk-T40"/>
-                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="qo0-Fe-YWN"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

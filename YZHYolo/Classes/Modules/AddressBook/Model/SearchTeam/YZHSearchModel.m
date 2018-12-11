@@ -10,6 +10,7 @@
 
 #import "NTESSessionUtil.h"
 #import "YZHTeamExtManage.h"
+#import "YZHGroupedContacts.h"
 
 @implementation YZHSearchModel
 
@@ -28,6 +29,7 @@
 
 @property (nonatomic, strong) NSMutableArray<NIMRecentSession *>*  allPrivateRecentSession;
 @property (nonatomic, strong) NSMutableArray<NIMRecentSession *>*  allTeamRecentSession;
+@property (nonatomic, strong) YZHGroupedContacts* contacts;
 
 @end
 
@@ -88,6 +90,14 @@
             [self.searchRecentSession addObject:recentSession];
         }
     }
+}
+
+- (void)searchFirendKeyText:(NSString *)keyText {
+    
+    [self.searchFirends removeAllObjects];
+    
+    NSMutableArray* searchResult = [self.contacts searchFirendKeyText:keyText];
+    self.searchFirends = searchResult.count ? searchResult : nil;
 }
 
 - (NSMutableArray<NIMRecentSession *> *)searchRecentSession {
@@ -161,4 +171,21 @@
         self.allPrivateRecentSession = array;
     }
 }
+
+- (YZHGroupedContacts *)contacts {
+    
+    if (!_contacts) {
+        _contacts = [[YZHGroupedContacts alloc] init];
+    }
+    return _contacts;
+}
+
+- (NSMutableArray<YZHContactMemberModel *> *)searchFirends {
+    
+    if (!_searchFirends) {
+        _searchFirends = [[NSMutableArray alloc] init];
+    }
+    return _searchFirends;
+}
+
 @end

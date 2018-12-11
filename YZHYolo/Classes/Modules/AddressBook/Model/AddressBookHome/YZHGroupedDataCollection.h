@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YZHContactMemberModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol YZHGroupMemberProtocol <NSObject>
@@ -34,11 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addGroupAboveWithTitle:(NSString *)title members:(NSArray *)members;
 
-- (NSString *)titleOfGroup:(NSInteger)groupIndex;
-
-- (NSArray *)membersOfGroup:(NSInteger)groupIndex;
-
-- (NSArray *)atMembersOfGroup:(NSInteger)groupIndex;
+//- (NSString *)titleOfGroup:(NSInteger)groupIndex;
+//
+//- (NSArray *)membersOfGroup:(NSInteger)groupIndex;
+//
+//- (NSArray *)atMembersOfGroup:(NSInteger)groupIndex;
 // 获取所有群联系人列表
 - (NSMutableArray *)teamMemberArray;
 // 适用于通讯联系人,展示列表. 传入的Section 做了处理.
@@ -50,12 +51,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id<YZHGroupMemberProtocol>)sharedMemberOfIndex:(NSIndexPath *)indexPath;
 
-- (id<YZHGroupMemberProtocol>)memberOfId:(NSString *)uid;
+//- (id<YZHGroupMemberProtocol>)memberOfId:(NSString *)uid;
 
 - (NSInteger)groupMemberCount;
 - (NSInteger)groupTitleCount;
 // 适用于通讯联系人,展示列表. 传入的Section 做了处理.
 - (NSInteger)memberCountOfGroup:(NSInteger)groupIndex;
+// 通讯录好友列表搜索
+- (NSMutableArray<YZHContactMemberModel *>*)searchFirendKeyText:(NSString *)keyText;
 
 @end
 
