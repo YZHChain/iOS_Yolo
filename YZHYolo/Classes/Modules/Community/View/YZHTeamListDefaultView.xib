@@ -15,6 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6x-nU-LNH" customClass="YZHSearchView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="PHi-jr-aNB"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGD-BE-RAp">
                     <rect key="frame" x="68" y="561" width="239" height="40"/>
                     <color key="backgroundColor" red="0.074509803921568626" green="0.59999999999999998" blue="0.65490196078431373" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -53,15 +60,19 @@
                 <constraint firstItem="MGD-BE-RAp" firstAttribute="top" secondItem="1ui-br-jSb" secondAttribute="bottom" constant="114" id="7CQ-TU-VCa"/>
                 <constraint firstAttribute="trailing" secondItem="MGD-BE-RAp" secondAttribute="trailing" constant="68" id="Bxv-Is-YVl"/>
                 <constraint firstItem="9da-Ya-PId" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ORH-kv-Tov"/>
+                <constraint firstItem="n6x-nU-LNH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rdo-fT-LPB"/>
+                <constraint firstItem="n6x-nU-LNH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Z6o-EV-l9c"/>
                 <constraint firstItem="1ui-br-jSb" firstAttribute="top" secondItem="9da-Ya-PId" secondAttribute="bottom" constant="35" id="aW2-LO-tB6"/>
                 <constraint firstItem="1ui-br-jSb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ct2-VH-HXN"/>
                 <constraint firstAttribute="bottom" secondItem="MGD-BE-RAp" secondAttribute="bottom" constant="66" id="my2-v0-KkV"/>
+                <constraint firstAttribute="trailing" secondItem="n6x-nU-LNH" secondAttribute="trailing" id="njc-66-bKP"/>
                 <constraint firstItem="MGD-BE-RAp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="qFF-F3-MuA"/>
             </constraints>
             <connections>
                 <outlet property="findTeamButton" destination="MGD-BE-RAp" id="0Xn-tl-Bth"/>
                 <outlet property="publictyImageView" destination="9da-Ya-PId" id="I2Q-98-07i"/>
-                <outlet property="titleLabel" destination="1ui-br-jSb" id="EgA-Nn-0mx"/>
+                <outlet property="searchView" destination="n6x-nU-LNH" id="trn-Rg-Odc"/>
+                <outlet property="titleLabel" destination="1ui-br-jSb" id="DKf-Bd-JJX"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="154.27286356821591"/>
         </view>

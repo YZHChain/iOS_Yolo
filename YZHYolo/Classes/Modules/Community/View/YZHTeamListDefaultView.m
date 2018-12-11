@@ -11,8 +11,6 @@
 #import "UIButton+YZHTool.h"
 @interface YZHTeamListDefaultView()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *publictyImageView;
 
 @end
@@ -29,6 +27,13 @@
     
     self.findTeamButton.layer.cornerRadius = 4;
     self.findTeamButton.layer.masksToBounds = YES;
+    
+    _searchView = [YZHSearchView yzh_viewWithFrame:CGRectMake(0, 0, YZHScreen_Width, 50)];
+    [self addSubview:_searchView];
+    [_searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(0);
+        make.height.mas_equalTo(50);
+    }];
     
 }
 

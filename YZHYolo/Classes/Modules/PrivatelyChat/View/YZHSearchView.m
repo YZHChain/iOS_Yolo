@@ -16,6 +16,15 @@
 
 @implementation YZHSearchView
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     
     [super awakeFromNib];

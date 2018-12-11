@@ -176,9 +176,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         }
     } else {
         [self.view addSubview:self.defaultView];
+        self.defaultView.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"您还没有最近回话, 广场有很多优质的群 快去看一下吧"];
         BOOL teamAcount = [[[NIMSDK sharedSDK] teamManager] allMyTeams].count;
         if (!teamAcount) {
             [self.view addSubview:self.defaultView];
+            self.defaultView.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"您还没有群, 广场有很多优质的群 快去看一下吧"];
         }
     }
 }
@@ -928,6 +930,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     if (!_defaultView) {
         _defaultView = [YZHTeamListDefaultView yzh_viewWithFrame:self.view.bounds];
         [_defaultView.findTeamButton addTarget:self action:@selector(onTouchfindTeam:) forControlEvents:UIControlEventTouchUpInside];
+        [_defaultView.searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _defaultView;
 }
