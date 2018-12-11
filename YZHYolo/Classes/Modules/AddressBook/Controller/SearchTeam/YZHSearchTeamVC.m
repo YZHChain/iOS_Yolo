@@ -296,7 +296,11 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         if (!error) {
             [self addTeamWith:team hud:hud];
         } else {
-            [hud hideWithText:@"此群已解散"];
+            if (error.code == 803) {
+                [hud hideWithText:@"该群已解散"];
+            } else {
+                [hud hideWithText:@"未找到该群"];
+            }
         }
     }];
 }

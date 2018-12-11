@@ -90,13 +90,13 @@
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
+        [rightButton sizeToFit];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
     
     if (self.isSearch) {
-//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navgationBar_background_image"] forBarMetrics:UIBarMetricsDefault];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickCandel:)];
     }
 }

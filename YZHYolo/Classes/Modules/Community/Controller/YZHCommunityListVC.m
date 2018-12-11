@@ -173,6 +173,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         if (self.recentSessionExtManage.teamCurrentSessionTags.firstObject.count) {
             [self.tagsTableView reloadData];
             [self.tableView reloadData];
+            [self.defaultView removeFromSuperview];
         }
     } else {
         [self.view addSubview:self.defaultView];

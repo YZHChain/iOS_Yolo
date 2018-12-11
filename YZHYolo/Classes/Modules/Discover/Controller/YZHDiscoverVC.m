@@ -109,7 +109,9 @@
         if (self.url == nil) {
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?useraccout=%@&platform=ios",yolo_no];
         }
-        NSURL* url = [[NSURL alloc] initWithString:self.url];
+        NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL* url = [[NSURL alloc] initWithString: urlStr];
+        [self deleteAllWebCache];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         NSString* teamLabel = [[YZHUserDataManage sharedManager].currentUserData.teamLabel mj_JSONString];
         if (!YZHIsString(teamLabel)) {

@@ -132,7 +132,7 @@
     
     UIButton *rightItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [rightItemButton addTarget:self action:@selector(gotoUserDetails:) forControlEvents:UIControlEventTouchUpInside];
-    [rightItemButton setImage:[UIImage imageNamed:@"session_rightItemBar_normal"] forState:UIControlStateNormal];
+    [rightItemButton setImage:[UIImage imageNamed:@"teamSession_rightItemBar_normal"] forState:UIControlStateNormal];
     [rightItemButton sizeToFit];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemButton];
