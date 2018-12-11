@@ -13,14 +13,16 @@
 #import "JKRSearchController.h"
 #import "YZHAddFirendSearchVC.h"
 #import "YZHPublic.h"
+#import "YZHSearchView.h"
 
 static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 @interface YZHAddBookAddFirendVC ()<UITableViewDelegate, UITableViewDataSource, JKRSearchControllerhResultsUpdating, JKRSearchControllerDelegate, JKRSearchBarDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHFirendContentModel* model;
 @property (nonatomic, strong) JKRSearchController* searchController;
 @property (nonatomic, weak) YZHAddFirendSearchVC* searchResultVC;
+@property (nonatomic, strong) YZHSearchView* searchView;
 
 @end
 
@@ -57,14 +59,7 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 - (void)setupView {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
-    self.tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAddFirendCell" bundle:nil] forCellReuseIdentifier:kaddFirendCellIdentifier];
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-    self.tableView.rowHeight = kYZHCellHeight;
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    [self.view addSubview:self.tableView];
     
 }
 
@@ -142,67 +137,17 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 
 #pragma mark - 5.Event Response
 
+- (void)onTouchSearch:(UIButton *)sender {
+    
+    [YZHRouter openURL:kYZHRouterAddressBookAddFirendSearch info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
+}
+
 #pragma mark - 6.Private Methods
 
 - (void)setupNotification {
     
 }
 
-#pragma mark - JKRSearchControllerhResultsUpdating
-
-- (void)updateSearchResultsForSearchController:(JKRSearchController *)searchController {
-    NSString *searchText = searchController.searchBar.text;
-    if (YZHIsString(searchText)) {
-        
-    } else {
-        self.searchResultVC.searchStatus = YZHAddFirendSearchStatusNotImput;
-        [self.searchResultVC.tableView reloadData];
-    }
-}
-
-#pragma mark - JKRSearchControllerDelegate
-- (void)willPresentSearchController:(JKRSearchController *)searchController {
-    
-    self.searchResultVC.searchStatus = YZHAddFirendSearchStatusNotImput;
-    [self.searchResultVC.tableView reloadData];
-}
-
-- (void)didPresentSearchController:(JKRSearchController *)searchController {
-    NSLog(@"didPresentSearchController, %@", searchController);
-}
-
-#pragma mark - JKRSearchBarDelegate
-// 点击搜索时。
-- (void)searchBarTextFieldShouldReturn:(JKRSearchBar *)searchBar textDidChange:(NSString *)searchText {
-    
-    if (YZHIsString(searchText)) {
-        [searchBar endEditing:YES];
-        NSDictionary* dic = @{
-                              @"searchUser": searchText
-                              };
-        YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.searchResultVC.tableView text:nil];
-        @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(NSObject* obj) {
-            @strongify(self)
-            //后台能不能别瞎返回状态码???????
-            if (!obj.yzh_apiEmptyValue) {
-                self.searchResultVC.viewModel = [YZHAddFirendSearchModel YZH_objectWithKeyValues:obj];
-                self.searchResultVC.searchStatus = YZHAddFirendSearchStatusSucceed;
-                [hud hideWithText:nil];
-                [self.searchResultVC refreshData];
-            } else {
-                self.searchResultVC.searchStatus = YZHAddFirendSearchStatusEmpty;
-                [self.searchResultVC.tableView reloadData];
-                [hud hideWithText:nil];
-            }
-        } failureCompletion:^(NSError *error) {
-            
-            //相关状态展示
-            [hud hideWithText:error.domain];
-        }];
-    }
-    
-}
 
 #pragma mark - 7.GET & SET
 
@@ -214,20 +159,30 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     return _model;
 }
 
-- (JKRSearchController *)searchController {
+- (UITableView *)tableView{
     
-    if (!_searchController) {
-        YZHAddFirendSearchVC* addFirendSearchVC = [[YZHAddFirendSearchVC alloc] init];
-        _searchResultVC = addFirendSearchVC;
-        _searchController = [[JKRSearchController alloc] initWithSearchResultsController:addFirendSearchVC];
-        _searchController.searchBar.placeholder = @"搜索 YOLO ID,手机号";
-        _searchController.hidesNavigationBarDuringPresentation = YES;
-        // 代理方法都是设计业务, 可以单独抽取出来.
-        _searchController.searchResultsUpdater = self;
-        _searchController.searchBar.delegate = self;
-        _searchController.delegate = self;
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAddFirendCell" bundle:nil] forCellReuseIdentifier:kaddFirendCellIdentifier];
+        _tableView.tableFooterView = [[UIView alloc] init];
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
+        _tableView.tableHeaderView = self.searchView;
+        _tableView.rowHeight = kYZHCellHeight;
     }
-    return _searchController;
+    return _tableView;
+}
+
+- (YZHSearchView *)searchView {
+    
+    if (!_searchView) {
+        _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
+        [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        _searchView.searchLabel.text = @"搜索 YOLO ID";
+    }
+    return _searchView;
 }
 
 @end

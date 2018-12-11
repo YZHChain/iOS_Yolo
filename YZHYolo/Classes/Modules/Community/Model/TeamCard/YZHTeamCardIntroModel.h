@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString* teamOwnerAvatarUrl;
 @property (nonatomic, copy) NSString* teamOwnerName;
 @property (nonatomic, assign) BOOL haveTeamData;
+@property (nonatomic, strong) NSError* error; // 拉取数据时,返回的错误信息
 
 - (instancetype)initWithTeam:(NIMTeam *)team;
 

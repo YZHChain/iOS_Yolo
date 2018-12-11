@@ -116,7 +116,11 @@
         [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
              [hud hideWithText:nil];
              //如果请求失败,或者找不到此群,或者此群解散,按这个逻辑处理,默认都是展示此群已解散。
+            
              self.viewModel = [[YZHTeamCardIntroModel alloc] initWithTeam:team];
+             if (error) {
+                 self.viewModel.error = error;
+             }
              [self reloadView];
         }];
     }
@@ -267,6 +271,11 @@
         [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         [self.tableView.tableHeaderView removeFromSuperview];
+        if (self.viewModel.error.code == 803) {
+            [addTeamButton setTitle:@"该群已解散" forState:UIControlStateNormal];
+        } else {
+            [addTeamButton setTitle:@"未找到该群" forState:UIControlStateNormal];
+        }
         addTeamButton.enabled = NO;
     }
     [self.footerView addSubview:addTeamButton];

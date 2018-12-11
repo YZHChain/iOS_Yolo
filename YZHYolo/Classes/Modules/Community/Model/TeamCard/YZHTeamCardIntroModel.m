@@ -45,8 +45,7 @@
     headerModel.teamId = _teamId;
     
     self.headerModel = headerModel;
-    
-    //
+
 }
 
 - (void)updataHeaderModel {

@@ -68,6 +68,7 @@
             <connections>
                 <outlet property="searchButton" destination="n9q-n5-Hqi" id="b0N-gA-UrP"/>
                 <outlet property="searchContentView" destination="aJd-6D-CYV" id="R3m-bU-HRc"/>
+                <outlet property="searchLabel" destination="c4J-6W-E2D" id="QXh-tn-VB0"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="154.72263868065968"/>
         </view>

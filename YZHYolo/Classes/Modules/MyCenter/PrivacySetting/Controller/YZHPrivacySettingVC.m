@@ -250,6 +250,7 @@
                                                        @(NIMUserInfoUpdateTagExt): userInfoExtString
                                                        } completion:^(NSError * _Nullable error) {
                                                            if (!error) {
+                                                               
                                                            } else {
                                                            }
                                                        }];

@@ -72,6 +72,7 @@ extern NSString *const kYZHRouterAddressBookSetNote;
 extern NSString *const kYZHRouterAddressBookSetTag;
 extern NSString *const kYZHRouterAddressBookSetting;
 extern NSString *const kYZHRouterAddressBookAddFirend;
+extern NSString *const kYZHRouterAddressBookAddFirendSearch;
 extern NSString *const kYZHRouterAddressBookAddFirendSendVerify;
 extern NSString *const kYZHRouterAddressBookPhoneContact;
 extern NSString *const kYZHRouterAddressBookAddFirendRecord;

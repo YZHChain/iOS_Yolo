@@ -15,7 +15,10 @@
 #import "YZHAddBookDetailsVC.h"
 #import "YZHBaseNavigationController.h"
 
-@interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol>
+@interface YZHAddFirendSearchVC ()<UITableViewDelegate, UITableViewDataSource, YZHPhoneContactCellProtocol, UISearchBarDelegate>
+
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UITextField* textField;
 
 @end
 
@@ -43,6 +46,9 @@
 
 - (void)setupNavBar {
     self.navigationItem.title = @"";
+ 
+    [self searchBar];
+    [self.searchBar becomeFirstResponder];
 }
 
 - (void)setupView {
@@ -89,8 +95,8 @@
                         @strongify(self)
                         self.searchStatus = YZHAddFirendSearchStatusEmpty;
                     }
-                    [self.tableView reloadData];
                     [hud hideWithText:nil];
+                    [self.tableView reloadData];
                 }];
             } else {
                 self.viewModel.user = user;
@@ -141,31 +147,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.searchStatus == YZHAddFirendSearchStatusSucceed) {
-        //跳转至用户详情页
-    }
-    if (self.searchStatus == 0 && self.viewModel.allowAdd) {
-       //跳转至用户详情页
-//        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
-//                                                               @"userId":self.viewModel.userId
-//                                                               }];
-        
-//        YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
-//        detailsVC.userId = self.viewModel.userId;
-//        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:detailsVC animated:YES completion:^{
-//
-//        }];
-    }
-    
-    YZHAddBookDetailsVC* detailsVC = [[YZHAddBookDetailsVC alloc] init];
-    YZHBaseNavigationController* nav = [[YZHBaseNavigationController alloc] initWithRootViewController:detailsVC];
-    detailsVC.isSearch = YES;
-    detailsVC.userId = self.viewModel.userId;
-    NSLog(@"当前跟控制器%@",[UIApplication sharedApplication].keyWindow.rootViewController);
-    //TODO:
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:^{
-        
-    }];
+    NSDictionary* info = @{
+                           @"userId": self.viewModel.userId
+                           };
+    //这里要到我们的用户详情页里
+    [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
 }
 
 - (void)onSelectedCellButtonWithModel:(id)model {
@@ -197,7 +183,70 @@
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    [self.searchBar endEditing:YES];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    [searchBar endEditing:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [searchBar endEditing:YES];
+    if (YZHIsString(searchBar.text)) {
+        [self searchTeamListWithKeyText:searchBar.text];
+    } else {
+    }
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (!YZHIsString(searchBar.text)) {
+        
+        self.searchStatus = YZHAddFirendSearchStatusNotImput;
+        [self.tableView reloadData];
+    }
+}
+
 #pragma mark - 5.Event Response
+
+- (void)searchTeamListWithKeyText:(NSString*)keyText {
+    
+    if (YZHIsString(keyText)) {
+        NSDictionary* dic = @{
+                              @"searchUser": keyText
+                              };
+        YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        @weakify(self)
+        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(NSObject* obj) {
+            @strongify(self)
+            [hud hideWithText:nil];
+            //后台能不能别瞎返回状态码???????
+            if (!obj.yzh_apiEmptyValue) {
+                self.searchStatus = YZHAddFirendSearchStatusSucceed;
+                self.viewModel = [YZHAddFirendSearchModel YZH_objectWithKeyValues:obj];
+                [self refreshData];
+                [self.tableView reloadData];
+            } else {
+                self.searchStatus = YZHAddFirendSearchStatusEmpty;
+                [self.tableView reloadData];
+                
+                [hud hideWithText:nil];
+            }
+        } failureCompletion:^(NSError *error) {
+            
+            //相关状态展示
+            [hud hideWithText:error.domain];
+        }];
+    }
+}
 
 #pragma mark - 6.Private Methods
 
@@ -209,6 +258,44 @@
         _viewModel = [[YZHAddFirendSearchModel alloc] init];
     }
     return _viewModel;
+}
+
+- (UISearchBar *)searchBar {
+    
+    if (!_searchBar) {
+        
+        UISearchBar * searchbar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-80,33)];
+        searchbar.placeholder = @"搜索 YOLO ID";
+        searchbar.searchBarStyle = UISearchBarStyleDefault;
+        searchbar.showsCancelButton = YES;
+        //通过KVC拿到textField
+        UITextField  *seachTextFild = [searchbar valueForKey:@"searchField"];
+        seachTextFild.textColor = [UIColor yzh_fontShallowBlack];
+        seachTextFild.font = [UIFont yzh_commonFontStyleFontSize:14];
+        //修改光标颜色
+        [seachTextFild setTintColor:[UIColor blueColor]];
+        
+        self.textField = seachTextFild;
+        for (id cencelButton in [searchbar.subviews[0] subviews])
+        {
+            if([cencelButton isKindOfClass:[UIButton class]])
+            {
+                UIButton *btn = (UIButton *)cencelButton;
+                [btn setTitle:@"取消"  forState:UIControlStateNormal];
+                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }
+        }
+        searchbar.delegate = self;
+        if (@available(iOS 9.0, *)) {
+            [[searchbar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
+        } else {
+            // Fallback on earlier versions
+        }
+        self.navigationItem.titleView = searchbar;
+        
+        _searchBar = searchbar;
+    }
+    return _searchBar;
 }
 
 @end

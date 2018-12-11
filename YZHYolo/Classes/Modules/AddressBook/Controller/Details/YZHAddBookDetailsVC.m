@@ -153,12 +153,16 @@
     //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
     _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
     //拉取最新
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
     @weakify(self)
     [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
         @strongify(self)
         if (!error) {
             [self refresh];
+        } else {
+//            if (error.code != 408) {
+            [self refreshErrorUserDeailsRefreshWithError:error];
+//            }
         }
         [hud hideWithText:nil];
     }];
@@ -249,6 +253,12 @@
         _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
         [self.tableView reloadData];
     }
+}
+
+- (void)refreshErrorUserDeailsRefreshWithError:(NSError* )error {
+    
+    [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
+    self.userAskFooterView.sendMessageButton.enabled = NO;
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate

@@ -66,6 +66,7 @@ NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote"
 NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
 NSString* const kYZHRouterAddressBookSetting   = @"/addressBook/details/setting";
 NSString* const kYZHRouterAddressBookAddFirend   = @"/addressBook/addFriend";
+NSString* const kYZHRouterAddressBookAddFirendSearch   = @"/addressBook/addFriend/search";
 NSString* const kYZHRouterAddressBookAddFirendSendVerify = @"/addressBook/addFriend/sendVerify";
 NSString* const kYZHRouterAddressBookPhoneContact  = @"/addressBook/phoneContact";
 NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
@@ -258,6 +259,12 @@ NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterAddressBookAddFirendSearch: @{
+                 kYZHRouteViewControllerClassKey: @"YZHAddFirendSearchVC",
+                 kYZHRouteViewControllerNameKey: @"搜索添加好友",
+                 kYZHRouteViewControllerNotesKey: @"",
+                 kYZHRouteViewControllerNeedLoginKey:@"1",
+                 },
              kYZHRouterAddressBookAddFirendSendVerify: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddFirendSendVerifyVC",
                      kYZHRouteViewControllerNameKey: @"添加好友验证消息",
