@@ -200,7 +200,6 @@
         
         self.userAskFooterView.sendMessageButton.hidden = NO;
         //区别临时聊天功能.
-        
     } else {
         self.userAskFooterView.sendMessageButton.hidden = YES;
     }
@@ -214,14 +213,16 @@
         self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
         // 判断是否为好友,
         self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
-        
         if (self.isMyFriend) {
             if (self.addFriendButton.superview) {
                 [self.addFriendButton removeFromSuperview];
                 self.tableView.tableFooterView = self.userAskFooterView;
             }
+            self.userAskFooterView.sendMessageButton.hidden = NO;
         } else {
             BOOL allowAdd = self.userInfoExtManage.privateSetting.allowAdd;
+            //非好友时, 隐藏发消息
+            self.userAskFooterView.sendMessageButton.hidden = YES;
             if (allowAdd) {
                 UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
                 addFriendButton.size = self.userAskFooterView.sendMessageButton.size;

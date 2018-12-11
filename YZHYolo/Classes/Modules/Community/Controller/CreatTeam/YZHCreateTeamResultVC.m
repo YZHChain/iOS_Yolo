@@ -50,7 +50,7 @@
     self.navigationItem.title = @"群创建成功";
     
     self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"继续建群" style:UIBarButtonItemStylePlain target:self action:@selector(gotoTeam:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"继续建群" style:UIBarButtonItemStylePlain target:self action:@selector(onCreatTeam:)];
 }
 
 - (void)setupView {
@@ -121,6 +121,15 @@
 - (void)onTouchShare:(UIButton *)sender {
     
     
+}
+
+- (void)onCreatTeam:(UIButton *)sender {
+    
+    [self.navigationController popViewControllerAnimated:NO];
+    //销毁掉前面所有控制器.
+    UITabBarController* topViewController = (UITabBarController *)[UIViewController yzh_rootViewController];
+    [topViewController setSelectedIndex:0];
+    [YZHRouter openURL:kYZHRouterCommunityCreateTeam];
 }
 
 
