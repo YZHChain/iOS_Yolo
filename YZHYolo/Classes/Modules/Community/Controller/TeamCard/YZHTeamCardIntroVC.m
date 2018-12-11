@@ -15,6 +15,8 @@
 #import "YZHProgressHUD.h"
 #import "YZHTeamCardIntro.h"
 #import "UIImageView+YZHImage.h"
+#import "YZHCommunityChatVC.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHTeamCardIntroVC()<UITableViewDelegate, UITableViewDataSource>
 
@@ -22,6 +24,7 @@
 @property (nonatomic, strong) YZHTeamCardHeaderView* headerView;
 @property (nonatomic, strong) YZHTeamCardIntroModel* viewModel;
 @property (nonatomic, strong) UITableViewHeaderFooterView* footerView;
+@property (nonatomic, strong) UIButton* addTeamButton;
 
 @end
 
@@ -196,14 +199,35 @@
     
     // 添加入群附言.
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
     [[[NIMSDK sharedSDK] teamManager] applyToTeam:self.teamId message:@"" completion:^(NSError * _Nullable error, NIMTeamApplyStatus applyStatus) {
         if (!error) {
             [hud hideWithText:@"已成功加入群聊"];
+            @strongify(self)
+            [self.addTeamButton setTitle:@"进入群聊" forState:UIControlStateNormal];
+            [self.addTeamButton removeTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+            [self.addTeamButton addTarget:self action:@selector(gotoTeam:) forControlEvents:UIControlEventTouchUpInside];
+            
         } else {
             [hud hideWithText:@"申请入群失败"];
         }
         
     }];
+}
+
+- (void)gotoTeam:(UIButton* )sender {
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//    //销毁掉前面所有控制器.
+//    UITabBarController* topViewController = (UITabBarController *)[UIViewController yzh_rootViewController];
+//    [topViewController setSelectedIndex:0];
+//    UINavigationController* communityNav = topViewController.viewControllers.firstObject;
+//    NIMSession* teamSession = [NIMSession session:self.teamId type:NIMSessionTypeTeam];
+//    YZHCommunityChatVC* teamVC = [[YZHCommunityChatVC alloc] initWithSession:teamSession];
+//    [communityNav pushViewController:teamVC animated:YES];
+
+      NIMSession* teamSession = [NIMSession session:self.teamId type:NIMSessionTypeTeam];
+      YZHCommunityChatVC* teamVC = [[YZHCommunityChatVC alloc] initWithSession:teamSession];
+      [self.navigationController pushViewController:teamVC animated:YES];
 }
 
 #pragma mark - 6.Private Methods
@@ -238,6 +262,7 @@
     [addTeamButton setTitle:@"未找到该群" forState:UIControlStateDisabled];
     [addTeamButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
+    self.addTeamButton = addTeamButton;
     if (self.viewModel.haveTeamData) {
         [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
     } else {
