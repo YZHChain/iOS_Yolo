@@ -23,6 +23,7 @@
 #import "YZHAddBookDetailsModel.h"
 #import "YZHTagContactManage.h"
 #import "YZHSearchView.h"
+#import "YZHAddBookPhoneContactVC.h"
 
 typedef enum : NSUInteger {
     YZHAddressBookShowTypeDefault = 0,
@@ -196,6 +197,8 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     if (indexPath.section == 0 && indexPath.row == 0) {
         //TODO: 分两种推出方式, 如果用户已授权手机号信息,则Push. 否则 Presen.
         [YZHRouter openURL:kYZHRouterAddressBookPhoneContact];
+//        YZHAddBookPhoneContactVC* vc = [[YZHAddBookPhoneContactVC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         //TODO:
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendRecord];

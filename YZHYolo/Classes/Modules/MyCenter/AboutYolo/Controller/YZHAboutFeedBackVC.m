@@ -1,20 +1,18 @@
 //
-//  YZHDiscountVC.m
+//  YZHAboutFeedBackVC.m
 //  YZHYolo
 //
 //  Created by Jersey on 2018/12/11.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHDiscountVC.h"
-
+#import "YZHAboutFeedBackVC.h"
 #import <WebKit/WebKit.h>
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
 #import "ZXingObjC.h"
 
-@interface YZHDiscountVC ()<WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
-
+@interface YZHAboutFeedBackVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 @property (nonatomic, strong) WKWebView* webView;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) CGFloat delayTime;
@@ -22,7 +20,7 @@
 @property (nonatomic, strong) NSString* userId;
 @end
 
-@implementation YZHDiscountVC
+@implementation YZHAboutFeedBackVC
 
 
 #pragma mark - 1.View Controller Life Cycle
@@ -59,7 +57,7 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"异业联盟";
+    self.navigationItem.title = @"投诉反馈";
 }
 
 - (void)setupView
@@ -73,15 +71,14 @@
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
 }
 
--(WKWebView*)wkWebVie{
-    
+-(WKWebView*)wkWebVie {
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         WKUserContentController *userContentController = [[WKUserContentController alloc] init];
-
+        [userContentController addScriptMessageHandler:self name:@"InvitePhoneContact"];
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
-        [userContentController addScriptMessageHandler:self name:@"SAVEQR"];
+        
         configuration.userContentController = userContentController;
         
         WKPreferences *preferences = [WKPreferences new];
@@ -97,14 +94,11 @@
         NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
         NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
         NSString* userNick = user.userInfo.nickName;
-        NSString* userPic = user.userInfo.avatarUrl;
-        //
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios", yolo_no, userNick];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
- 
         [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
         
@@ -117,8 +111,8 @@
 }
 
 -(void)removeScriptMessageHandler{
+    
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOBACK"];
-    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SAVEQR"];
 }
 
 
@@ -145,75 +139,14 @@
     
 }
 
-- (void)saveImageToPhotos:(UIImage*)savedImage {
-    // TODO: 先检查设备是否授权访问相册
-    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    if (error == nil) {
-        //        [self.view makeToast:@"图片已经保存到相册"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
-        [YZHProgressHUD showText:@"图片已经保存到相册" onView:self.webView];
-    }else{
-        //        [self.view makeToast:@"图片保存失败,请重试"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
-        [YZHProgressHUD showText:@"图片保存失败,请重试" onView:self.webView];
-    }
-}
-
-- (void)creatQRCodeAndSavaToPotosWithQRString:(NSString *)qrString  {
-    //生成二维码
-    NSError *error = nil;
-    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
-    CGSize imageSize = CGSizeMake(217, 217);
-    ZXBitMatrix* result = [writer encode:qrString
-                                  format:kBarcodeFormatQRCode
-                                   width:imageSize.width
-                                  height:imageSize.height
-                                   error:&error];
-    if (result) {
-        CGImageRef image = CGImageRetain([[ZXImage imageWithMatrix:result] cgimage]);
-        
-        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
-        //保存图片
-        [self saveImageToPhotos:[UIImage imageWithCGImage:image]];
-        
-        CGImageRelease(image);
-    } else {
-        
-        [YZHProgressHUD showText:@"二维码图像处理失败, 请重试" onView:self.webView];
-    }
-}
-
-#pragma mark - 7.GET & SET
-
 #pragma mark - WKScriptMessageHandler
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
-    
     
     if ([message.name isEqualToString:@"GOBACK"]) { //返回
         [self.navigationController popViewControllerAnimated:true];
         return;
     }
-    
-    if ([message.name isEqualToString:@"SAVEQR"]) { //邀请码界面-保存二维码
-        NSString* qrString = @"";
-        if([message.body isKindOfClass:[NSString class]]){
-            qrString = message.body;
-        }else if([message.body isKindOfClass:[NSNumber class]]){
-            NSNumber* body = message.body;
-            qrString = body.stringValue;
-        }
-        if (YZHIsString(qrString)) {
-            [self creatQRCodeAndSavaToPotosWithQRString:qrString];
-        } else {
-            [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];
-        }
-        return;
-    }
+    return;
 }
 
 //内容返回时调用
@@ -243,6 +176,7 @@
 -(void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error{
     [self hideHUDError:error];
 }
+
 //服务器开始请求的时候调用
 -(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
     Boolean flag = false;
@@ -299,12 +233,11 @@
         return false;
     }
     
-    YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
-    vc.url =[ [NSString alloc] initWithFormat:@"%@",request.URL.absoluteString]  ;
+    YZHAboutFeedBackVC* vc = [[YZHAboutFeedBackVC alloc] init];
+    vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];
     
     return true;
-    
 }
 
 //提示框
@@ -349,14 +282,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
-        //        [self.progressView setProgress:[self wkWebVie].estimatedProgress animated:YES];
-        //        if ([self wkWebVie].estimatedProgress < 1.0) {
-        //            self.delayTime = 1 - self.webView.estimatedProgress;
-        //            return;
-        //        }
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //            self.progressView.progress = 0;
-        //        });
+        
     }
 }
 
@@ -377,17 +303,6 @@
         _userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     }
     return _userId;
-}
-
-- (void)deleteAllWebCache {
-    //allWebsiteDataTypes清除所有缓存
-    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-    
-    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-    
-    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-        
-    }];
 }
 
 @end

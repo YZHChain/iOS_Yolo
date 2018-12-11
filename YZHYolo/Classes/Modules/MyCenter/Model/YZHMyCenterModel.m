@@ -44,15 +44,10 @@
                                           @{
                                               @"title":@"优惠卷消费",
                                               @"image":@"my_cover_cell_discounts",
-                                              @"route":kYZHRouterAboutYolo,
+                                              @"route":kYZHRouterDiscount,
                                               @"type" :@"1",
                                               },
-                                          @{
-                                              @"title":@"便民服务",
-                                              @"image":@"my_cover_cell_server",
-                                              @"route":kYZHRouterAboutYolo,
-                                              @"type" :@"1",
-                                              }]},
+                                          ]},
                               @{@"content": @[@{
                                         @"title":@"隐私设置",
                                         @"image":@"my_cover_cell_setting_privacy",

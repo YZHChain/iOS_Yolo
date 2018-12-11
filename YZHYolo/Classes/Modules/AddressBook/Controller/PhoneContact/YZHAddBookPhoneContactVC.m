@@ -45,8 +45,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     //4.设置通知
     [self setupNotification];
     //TODO:在进入这个页面时,应该异步去请求所有在平台内成员信息
-    
-    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -307,9 +306,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        //减掉导航栏高度.与 super View 保持一致.
-        _tableView.height = _tableView.height - 64;
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.delegate = self;
         _tableView.dataSource = self;

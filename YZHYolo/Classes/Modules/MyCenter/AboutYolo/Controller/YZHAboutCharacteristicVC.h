@@ -1,5 +1,5 @@
 //
-//  YZHDiscountVC.h
+//  YZHAboutCharacteristicVC.h
 //  YZHYolo
 //
 //  Created by Jersey on 2018/12/11.
@@ -10,10 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHDiscountVC : YZHBaseViewController
+@interface YZHAboutCharacteristicVC : YZHBaseViewController
 
 @property (nonatomic,strong) NSString* url;
-@property (nonatomic, assign) BOOL isPlay;
 
 @end
 

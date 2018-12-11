@@ -88,6 +88,9 @@
     YZHAboutYoloModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
     YZHAboutYoloCell* cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
     cell.model = model;
+    if ([model.title isEqualToString:@"当前版本"]) {
+        cell.subtitleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:14];
+    }
     
     return cell;
 }
@@ -122,10 +125,15 @@
     return view;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YZHAboutYoloModel* model = self.viewModel.list[indexPath.section].content[indexPath.row];
+    if (YZHIsString(model.route)) {
+        id viewController = [[[NSClassFromString(model.route) class] alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+    
 }
 
 #pragma mark - 5.Event Response

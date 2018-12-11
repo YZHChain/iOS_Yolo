@@ -58,6 +58,7 @@ extern NSString *const kYZHRouterMyInformationYoloID;
 extern NSString *const kYZHRouterMyInformationMyPlace;
 extern NSString *const kYZHRouterMyPlaceCity;
 extern NSString *const kYZHRouterAboutYolo;
+extern NSString *const kYZHRouterDiscount;
 extern NSString *const kYZHRouterSettingCenter;
 extern NSString *const kYZHRouterPrivacySetting;
 extern NSString *const kYZHRouterPrivacyPassword;

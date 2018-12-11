@@ -15,6 +15,7 @@
 #import "YZHScanQRCodeMaskView.h"
 #import "YZHAlertManage.h"
 #import "YZHScanQRCodeModel.h"
+#import "YZHDiscountVC.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -187,7 +188,12 @@
                     }
                         break;
                     case 2:  // 支付
-    
+                    if (!self.isSkip) {
+                        self.isSkip = YES;
+                        YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
+                        discountVC.url = codeModel.accid;
+                        [self.navigationController pushViewController:discountVC animated:YES];
+                    }
                         break;
                     default:
                     // Value Accid 为空

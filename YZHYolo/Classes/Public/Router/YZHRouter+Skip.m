@@ -74,7 +74,9 @@
     
     id viewController = [[NSClassFromString(class) alloc] init];
     // 防止控制器类名传输错误.
+
     NSAssert([viewController isKindOfClass:[UIViewController class]] , @"%s: %@ is not kind of UIViewController class",__func__ ,class);
+
     if ([viewController isKindOfClass:[UIViewController class]]) {
         [self setupViewControllerParamsWithObject:viewController fromParams:info];
     }

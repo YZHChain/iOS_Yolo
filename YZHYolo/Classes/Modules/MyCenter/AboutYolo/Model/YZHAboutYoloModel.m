@@ -38,7 +38,7 @@
         NSArray* contenArray = @[
                                  @{@"content": @[@{@"title": @"关于YOLO",
                                                    @"subtitle":@"",
-                                                   @"route": @""
+                                                   @"route": @"YZHAboutYoloWebVC"
                                                    },
                                                  @{@"title": @"当前版本",
                                                    @"subtitle":version,
@@ -47,14 +47,19 @@
                                                    }]},
                                  @{@"content": @[@{@"title": @"特色介绍",
                                                    @"subtitle":@"",
-                                                   @"route": @""
+                                                   @"route": @"YZHAboutCharacteristicVC"
                                                    
                                                    },
                                                  @{@"title": @"常见问题",
                                                    @"subtitle":@"",
-                                                   @"route": @""
+                                                   @"route": @"YZHAboutCommonVC"
                                                    
-                                                   }]}
+                                                   }],},
+                                 @{@"content": @[@{@"title": @"投诉反馈",
+                                                   @"subtitle":@"",
+                                                   @"route": @"YZHAboutFeedBackVC"
+                                                   
+                                                   },],}
                                  ];
         _list = [YZHAboutYoloContentModel YZH_objectArrayWithKeyValuesArray:contenArray];
         
