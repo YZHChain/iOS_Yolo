@@ -358,6 +358,10 @@
         return false;
     }
     
+    if (![request.URL.absoluteString containsString:@"https://yolo"]) {
+        return false;
+    }
+    
     YZHDiscoverVC* vc = [[YZHDiscoverVC alloc] init];
     vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];

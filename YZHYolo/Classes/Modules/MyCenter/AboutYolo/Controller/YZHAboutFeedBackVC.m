@@ -225,7 +225,7 @@
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) {
         return false;
     }
-    if (![request.URL.absoluteString isEqualToString:@"https://yolo"]) {
+    if (![request.URL.absoluteString containsString:@"https://yolo"]) {
         return false;
     }
     

@@ -49,6 +49,7 @@
 
 //防止内存泄漏
 -(void)dealloc{
+    
     if (self.webView!=nil) {
         [self removeScriptMessageHandler];
         [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
@@ -102,9 +103,9 @@
         if (self.url == nil) {
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
         }
+        
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
- 
         [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
         
@@ -291,20 +292,18 @@
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) {
         return false;
     }
-    if (![request.URL.absoluteString isEqualToString:@"https://yolo"]) {
+    if([[self wkWebVie].URL.absoluteString isEqualToString: request.URL.absoluteString]){
         return false;
     }
-    
-    if([[self wkWebVie].URL.absoluteString isEqualToString: request.URL.absoluteString]){
+    if (![request.URL.absoluteString containsString:@"https://yolo"]) {
         return false;
     }
     
     YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
-    vc.url =[ [NSString alloc] initWithFormat:@"%@",request.URL.absoluteString]  ;
+    vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];
     
     return true;
-    
 }
 
 //提示框
