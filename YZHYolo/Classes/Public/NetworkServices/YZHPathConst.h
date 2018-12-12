@@ -26,6 +26,8 @@
 #define PATH_USER_SECRETKEYUPDATEPWD          @"https:/yolotest.yzhchain.com/yolo-login/user/secretKeyUpdatePwd" //用户密钥修改密钥接口
 #define PATH_USER_UPDATELOGIN                   @"https://yolotest.yzhchain.com/yolo-login/user/updateLogin"        //修改 Yolo 号
 #define PATH_USER_CHECKOUPHONE                  @"https://yolotest.yzhchain.com/yolo-login/user/checkPhone"         //检测Phone 是否已经注册
+#define PATH_USER_CHECKOUAPPUPDATE  @"https://yolotest.yzhchain.com/yolo-login/update/searchuser"  // 检测 App 更新
+
 #define PATH_USER_SETTINGSPRIVACY               @"https://yolotest.yzhchain.com/yolo-login/user/settingsPrivacy" //隐私设置
 #define PATH_FRIENDS_MOBILEFRIENDS              @"https://yolotest.yzhchain.com/yolo-person/friendsManage/getMobileFriends" //获取通讯录好友
 #define PATH_FRIENDS_SEARCHUSER                 @"https://yolotest.yzhchain.com/yolo-login/user/searchuser"         //用户搜索
@@ -36,7 +38,7 @@
 #define PATH_TEAM_GETMYRECRUITS              @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/myRecruitInfo"// 获取我的招募信息
 #define PATH_TEAM_PUBLISHMYRECRUITS             @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/publishMyRecruits"// 发布或编辑招募信息
 #define PATH_TEAM_SEARCH_MYRECRUITS             @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_myRecruits"// 招募管理列表
-#define PATH_TEAM_SEARCH_RECRUITS               @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_recruits"// 社群招募列表
+#define PATH_TEAM_SEARCH_RECRUITS               @"https://yolotest.yzhchain.com/yolo-square/ymRecruit/search_recruits"// 社群招募搜索列表
 
 #define PATH_TEAM_NOTICE_ADD                    @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/add" //新增
 #define PATH_TEAM_NOTICE_DELETE                 @"https://yolotest.yzhchain.com/yolo-chat/groupNotice/delete" //删除

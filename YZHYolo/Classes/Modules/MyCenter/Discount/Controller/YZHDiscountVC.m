@@ -103,8 +103,8 @@
         if (self.url == nil) {
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
         }
-        
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [self deleteAllWebCache];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
@@ -253,10 +253,11 @@
             break;
         }
         case WKNavigationTypeFormSubmitted: {
-            flag = [self pushCurrentSnapshotViewWithRequest:navigationAction.request];
             break;
         }
         case WKNavigationTypeBackForward: {
+            NSLog(@"返回上一个页面类型");
+//            [self.navigationController popViewControllerAnimated:YES];
             break;
         }
         case WKNavigationTypeReload: {
@@ -299,6 +300,11 @@
         return false;
     }
     
+    if ([request.URL.query containsString:@"goback=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        return false;
+    }
     YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
     vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];

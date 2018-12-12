@@ -85,6 +85,7 @@ NSString *const kYZHRouterCommunityCreateTeamResult = @"/community/createTeam/re
 NSString *const kYZHRouterCommunityCreateTeamTagSelected = @"/community/createTeam/tagSelected";
 NSString *const kYZHRouterCommunityCard = @"/community/card";
 NSString *const kYZHRouterCommunityCardIntro = @"/community/cardIntro";
+NSString *const kYZHRouterCommunityRecruitCardIntro = @"/community/cardIntro/recruit";
 NSString *const kYZHRouterCommunityCardHeaderEdit = @"/community/headerEdit";
 NSString *const kYZHRouterCommunityCardShared = @"/community/cardShared";
 NSString *const kYZHRouterCommunityCardSharedCheck = @"/community/cardSharedCheck";
@@ -98,6 +99,7 @@ NSString *const kYZHRouterCommunitySetTeamTag = @"/community/setTeamTag";
 NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
 NSString *const kYZHRouterPrivateChatSearch = @"/privateChat/search";
 NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
+NSString *const kYZHRouterTeamRecruitSearch = @"/teamRecruit/search";
 
 @implementation YZHRouterConfig
 
@@ -344,6 +346,13 @@ NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterCommunityRecruitCardIntro : @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamRecruitCardIntroVC",
+                     kYZHRouteViewControllerNameKey: @"非群成员招募群信息",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             
              kYZHRouterCommunityCardHeaderEdit : @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamDataEditVC",
                      kYZHRouteViewControllerNameKey: @"群基本信息",
@@ -416,9 +425,15 @@ NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
-             kYZHRouterTeamChatSearch:  @{
+             kYZHRouterTeamChatSearch: @{
                      kYZHRouteViewControllerClassKey: @"YZHCommunitySearchVC",
                      kYZHRouteViewControllerNameKey: @"群聊搜索",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterTeamRecruitSearch: @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamRecruitSearch",
+                     kYZHRouteViewControllerNameKey: @"招募搜索",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

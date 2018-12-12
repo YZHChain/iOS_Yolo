@@ -42,7 +42,7 @@
                                               @"subtitle": @"9999",
                                               },
                                           @{
-                                              @"title":@"优惠卷消费",
+                                              @"title":@"E卡通积分使用",
                                               @"image":@"my_cover_cell_discounts",
                                               @"route":kYZHRouterDiscount,
                                               @"type" :@"1",

@@ -88,6 +88,7 @@ extern NSString *const kYZHRouterCommunityCreateTeamResult;
 extern NSString *const kYZHRouterCommunityCreateTeamTagSelected;
 extern NSString *const kYZHRouterCommunityCard;
 extern NSString *const kYZHRouterCommunityCardIntro;
+extern NSString *const kYZHRouterCommunityRecruitCardIntro;
 extern NSString *const kYZHRouterCommunityCardHeaderEdit;
 extern NSString *const kYZHRouterCommunityCardShared;
 extern NSString *const kYZHRouterCommunityCardSharedCheck;
@@ -101,6 +102,7 @@ extern NSString *const kYZHRouterCommunitySetTeamTag;
 extern NSString *const kYZHRouterCommunityAtTeamMember;
 extern NSString *const kYZHRouterPrivateChatSearch;
 extern NSString *const kYZHRouterTeamChatSearch;
+extern NSString *const kYZHRouterTeamRecruitSearch;
 
 + (NSDictionary* )configInfo;
 

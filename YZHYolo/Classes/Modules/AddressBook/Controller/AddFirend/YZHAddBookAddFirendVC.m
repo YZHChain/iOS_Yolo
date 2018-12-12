@@ -16,7 +16,7 @@
 #import "YZHSearchView.h"
 
 static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
-@interface YZHAddBookAddFirendVC ()<UITableViewDelegate, UITableViewDataSource, JKRSearchControllerhResultsUpdating, JKRSearchControllerDelegate, JKRSearchBarDelegate>
+@interface YZHAddBookAddFirendVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHFirendContentModel* model;
@@ -180,7 +180,7 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     if (!_searchView) {
         _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
-        _searchView.searchLabel.text = @"搜索 YOLO ID";
+        _searchView.searchLabel.text = @"搜索";
     }
     return _searchView;
 }

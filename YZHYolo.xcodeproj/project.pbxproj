@@ -400,6 +400,13 @@
 		55A0AF7121BFD2B7004EAEE3 /* YZHAboutCharacteristicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF7021BFD2B7004EAEE3 /* YZHAboutCharacteristicVC.m */; };
 		55A0AF7421BFD2D8004EAEE3 /* YZHAboutFeedBackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF7321BFD2D8004EAEE3 /* YZHAboutFeedBackVC.m */; };
 		55A0AF7521BFF527004EAEE3 /* YZHAddBookPhoneContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580F921636AF2000A8B55 /* YZHAddBookPhoneContactVC.m */; };
+		55A0AF7921C0CE3D004EAEE3 /* YZHTeamRecruitSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF7821C0CE3D004EAEE3 /* YZHTeamRecruitSearch.m */; };
+		55A0AF7D21C0D355004EAEE3 /* YZHCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF7C21C0D355004EAEE3 /* YZHCheckVersion.m */; };
+		55A0AF8121C0D595004EAEE3 /* YZHStartInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF8021C0D595004EAEE3 /* YZHStartInfo.m */; };
+		55A0AF8421C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF8321C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.m */; };
+		55A0AF8721C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF8621C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m */; };
+		55A0AF8B21C0EEE8004EAEE3 /* YZHTeamRecruitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A0AF8921C0EEE8004EAEE3 /* YZHTeamRecruitCell.m */; };
+		55A0AF8C21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A0AF8A21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib */; };
 		55A286B321746F7F004DACEA /* YZHPrivatelyChatSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */; };
 		55A286B721747CFC004DACEA /* YZHExtensionFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55A286B621747CFC004DACEA /* YZHExtensionFunctionView.m */; };
 		55A286B921747D23004DACEA /* YZHExtensionFunctionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A286B821747D23004DACEA /* YZHExtensionFunctionView.xib */; };
@@ -1289,6 +1296,19 @@
 		55A0AF7021BFD2B7004EAEE3 /* YZHAboutCharacteristicVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAboutCharacteristicVC.m; sourceTree = "<group>"; };
 		55A0AF7221BFD2D8004EAEE3 /* YZHAboutFeedBackVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAboutFeedBackVC.h; sourceTree = "<group>"; };
 		55A0AF7321BFD2D8004EAEE3 /* YZHAboutFeedBackVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAboutFeedBackVC.m; sourceTree = "<group>"; };
+		55A0AF7721C0CE3D004EAEE3 /* YZHTeamRecruitSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamRecruitSearch.h; sourceTree = "<group>"; };
+		55A0AF7821C0CE3D004EAEE3 /* YZHTeamRecruitSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamRecruitSearch.m; sourceTree = "<group>"; };
+		55A0AF7B21C0D355004EAEE3 /* YZHCheckVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCheckVersion.h; sourceTree = "<group>"; };
+		55A0AF7C21C0D355004EAEE3 /* YZHCheckVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCheckVersion.m; sourceTree = "<group>"; };
+		55A0AF7F21C0D595004EAEE3 /* YZHStartInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHStartInfo.h; sourceTree = "<group>"; };
+		55A0AF8021C0D595004EAEE3 /* YZHStartInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHStartInfo.m; sourceTree = "<group>"; };
+		55A0AF8221C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamRecruitCardIntroVC.h; sourceTree = "<group>"; };
+		55A0AF8321C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamRecruitCardIntroVC.m; sourceTree = "<group>"; };
+		55A0AF8521C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamRecruitCardIntroModel.h; sourceTree = "<group>"; };
+		55A0AF8621C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamRecruitCardIntroModel.m; sourceTree = "<group>"; };
+		55A0AF8821C0EEE8004EAEE3 /* YZHTeamRecruitCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamRecruitCell.h; sourceTree = "<group>"; };
+		55A0AF8921C0EEE8004EAEE3 /* YZHTeamRecruitCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamRecruitCell.m; sourceTree = "<group>"; };
+		55A0AF8A21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamRecruitCell.xib; sourceTree = "<group>"; };
 		55A286B021746F7F004DACEA /* YZHPrivatelyChatSearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivatelyChatSearchVC.h; sourceTree = "<group>"; };
 		55A286B121746F7F004DACEA /* YZHPrivatelyChatSearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivatelyChatSearchVC.m; sourceTree = "<group>"; };
 		55A286B521747CFC004DACEA /* YZHExtensionFunctionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHExtensionFunctionView.h; sourceTree = "<group>"; };
@@ -1727,6 +1747,8 @@
 		55128A0521463E480099CC55 /* Fundation */ = {
 			isa = PBXGroup;
 			children = (
+				55A0AF7E21C0D57E004EAEE3 /* StartInfo */,
+				55A0AF7A21C0D32D004EAEE3 /* CheckVersion */,
 				55C239EA214A5EA000200798 /* AppNetworkConfig */,
 				556F6CF621476C890048171C /* Theme */,
 			);
@@ -2020,6 +2042,7 @@
 		55128A1F21463E480099CC55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				55A0AF7621C0CE1E004EAEE3 /* TeamRecruit */,
 				559754CC21B42211009AC4D1 /* ChatContent */,
 				5537422521A6D3B800204972 /* AtMember */,
 				5537421621A6791F00204972 /* SetTag */,
@@ -3378,6 +3401,8 @@
 				55BD97B021AF783E00E761F5 /* YZHTeamMemberDetailsVC.m */,
 				55977D2821B0330200309740 /* YZHTeamCardIntroVC.h */,
 				55977D2921B0330200309740 /* YZHTeamCardIntroVC.m */,
+				55A0AF8221C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.h */,
+				55A0AF8321C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.m */,
 				5581915721A1C89800C74E2E /* YZHTeamSharedVC.h */,
 				5581915821A1C89800C74E2E /* YZHTeamSharedVC.m */,
 				5581915A21A1C8C400C74E2E /* YZHTeamSharedCheckVC.h */,
@@ -3403,6 +3428,8 @@
 				558C54F321AD709100CC10D1 /* YZHTeamUpdataModel.m */,
 				55977D2B21B0339800309740 /* YZHTeamCardIntroModel.h */,
 				55977D2C21B0339800309740 /* YZHTeamCardIntroModel.m */,
+				55A0AF8521C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.h */,
+				55A0AF8621C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m */,
 			);
 			path = TeamCard;
 			sourceTree = "<group>";
@@ -3433,6 +3460,9 @@
 				55977D2E21B03E5400309740 /* YZHTeamCardIntro.h */,
 				55977D2F21B03E5400309740 /* YZHTeamCardIntro.m */,
 				55977D3021B03E5400309740 /* YZHTeamCardIntro.xib */,
+				55A0AF8821C0EEE8004EAEE3 /* YZHTeamRecruitCell.h */,
+				55A0AF8921C0EEE8004EAEE3 /* YZHTeamRecruitCell.m */,
+				55A0AF8A21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib */,
 			);
 			path = TeamCard;
 			sourceTree = "<group>";
@@ -3647,6 +3677,33 @@
 				55BA20F421763A3500F90268 /* NTESSessionUtil.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		55A0AF7621C0CE1E004EAEE3 /* TeamRecruit */ = {
+			isa = PBXGroup;
+			children = (
+				55A0AF7721C0CE3D004EAEE3 /* YZHTeamRecruitSearch.h */,
+				55A0AF7821C0CE3D004EAEE3 /* YZHTeamRecruitSearch.m */,
+			);
+			path = TeamRecruit;
+			sourceTree = "<group>";
+		};
+		55A0AF7A21C0D32D004EAEE3 /* CheckVersion */ = {
+			isa = PBXGroup;
+			children = (
+				55A0AF7B21C0D355004EAEE3 /* YZHCheckVersion.h */,
+				55A0AF7C21C0D355004EAEE3 /* YZHCheckVersion.m */,
+			);
+			path = CheckVersion;
+			sourceTree = "<group>";
+		};
+		55A0AF7E21C0D57E004EAEE3 /* StartInfo */ = {
+			isa = PBXGroup;
+			children = (
+				55A0AF7F21C0D595004EAEE3 /* YZHStartInfo.h */,
+				55A0AF8021C0D595004EAEE3 /* YZHStartInfo.m */,
+			);
+			path = StartInfo;
 			sourceTree = "<group>";
 		};
 		55AB6C98219FFA8A005385A0 /* CollectionViewClassifyMenu */ = {
@@ -4565,6 +4622,7 @@
 				552B7903217432C700C1DD99 /* YZHModifyPasswordVC.xib in Resources */,
 				5581916C21A26B8E00C74E2E /* YZHSharedContactCell.xib in Resources */,
 				556D7E4421A2C2AD00533384 /* YZHTeamCardHeaderView.xib in Resources */,
+				55A0AF8C21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib in Resources */,
 				558C54E021ACDF9800CC10D1 /* YZHTeamMemberCell.xib in Resources */,
 				552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */,
 				5531252F21B565A30010B4A6 /* YZHSelectedTeamTypeVC.xib in Resources */,
@@ -4717,6 +4775,7 @@
 				55BD97B121AF783E00E761F5 /* YZHTeamMemberDetailsVC.m in Sources */,
 				55BD8658215DDB2000D23ED1 /* YZHAddressBookHeaderView.m in Sources */,
 				55364222217EAEC3006F77A5 /* UITableView+NIMScrollToBottom.m in Sources */,
+				55A0AF7D21C0D355004EAEE3 /* YZHCheckVersion.m in Sources */,
 				556D7E6021A3F68D00533384 /* YZHTeamDataEditVC.m in Sources */,
 				55E506E121BCD9230052E0F4 /* YZHSearchRecommendSectionView.m in Sources */,
 				55977D2D21B0339800309740 /* YZHTeamCardIntroModel.m in Sources */,
@@ -4849,6 +4908,7 @@
 				553641CB217EAEC2006F77A5 /* NIMInputView.m in Sources */,
 				556D7E5621A2F5B500533384 /* YZHTeamExtManage.m in Sources */,
 				55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */,
+				55A0AF8721C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m in Sources */,
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
 				5551B34921A58B1A00AF3088 /* YZHChatContentHeaderView.m in Sources */,
 				55AB6CDB219FFA8A005385A0 /* NSArray+log.m in Sources */,
@@ -4867,6 +4927,7 @@
 				557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */,
 				55AB6CEA219FFA8A005385A0 /* CYLRightImageButton.m in Sources */,
 				553641EA217EAEC3006F77A5 /* NIMAdvancedTeamMemberCell.m in Sources */,
+				55A0AF8121C0D595004EAEE3 /* YZHStartInfo.m in Sources */,
 				55D0835B2160BE610028D919 /* YZHDetailsSettingCell.m in Sources */,
 				5509F0FB218218A9004E10D3 /* NSDictionary+NTESJson.m in Sources */,
 				55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */,
@@ -4943,6 +5004,7 @@
 				55BA210221763A3700F90268 /* NTESBundleSetting.m in Sources */,
 				55BA210B21763A3700F90268 /* NTESUserUtil.m in Sources */,
 				553641F6217EAEC3006F77A5 /* NIMSessionListViewController.m in Sources */,
+				55A0AF7921C0CE3D004EAEE3 /* YZHTeamRecruitSearch.m in Sources */,
 				552B78E921735F7700C1DD99 /* UIImageView+YZHImage.m in Sources */,
 				559F1B19217EED370028B0E5 /* NTESSessionCustomContentConfig.m in Sources */,
 				55560249217F8275000F46DF /* YZHAddBookDetailsModel.m in Sources */,
@@ -4959,6 +5021,7 @@
 				55977D3921B0D38700309740 /* YZHScanQRCodeModel.m in Sources */,
 				55364206217EAEC3006F77A5 /* NIMSessionMsgDatasource.m in Sources */,
 				55BD97B421AF8FC500E761F5 /* YZHUnreadMessageView.m in Sources */,
+				55A0AF8421C0E46A004EAEE3 /* YZHTeamRecruitCardIntroVC.m in Sources */,
 				556D7E6D21A4197300533384 /* YZHSharedFunctionView.m in Sources */,
 				553641C6217EAEC2006F77A5 /* NIMPinyinConverter.m in Sources */,
 				5581916021A2483A00C74E2E /* YZHLabelShowView.m in Sources */,
@@ -5091,6 +5154,7 @@
 				5520DE21218EE5A90042ED56 /* YZHGroupedContacts.m in Sources */,
 				55D5810C2163952C000A8B55 /* YZHPhoneContactCell.m in Sources */,
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
+				55A0AF8B21C0EEE8004EAEE3 /* YZHTeamRecruitCell.m in Sources */,
 				55364209217EAEC3006F77A5 /* NIMSessionConfigurator.m in Sources */,
 				553641C5217EAEC2006F77A5 /* NIMKitUtil.m in Sources */,
 				5574311C21B816E7006AAED0 /* NTESNavigationAnimator.m in Sources */,

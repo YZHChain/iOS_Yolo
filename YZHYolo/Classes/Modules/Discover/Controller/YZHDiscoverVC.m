@@ -234,14 +234,14 @@
     }
     
     if ([message.name isEqualToString:@"ChangeRecommend"]) { //公开群和招募群都是统一 更换推荐范围
-        
         [self switchTeamRange];
         NSLog(@"点击更换推荐范围");
         return;
     }
     
     if ([message.name isEqualToString:@"SelectRecuire"]) { //社群招募里面的搜索
-        NSLog(@"SelectRecuire");
+        
+        [YZHRouter openURL:kYZHRouterTeamRecruitSearch info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
         return;
     }
     
@@ -255,10 +255,6 @@
     
     if ([message.name isEqualToString:@"SelectActiveGroup"]) { //活跃群里面的查找
         [YZHRouter openURL:kYZHRouterAddressBookSearchTeam info:@{kYZHRouteSegue: kYZHRouteSegueModal ,kYZHRouteSegueNewNavigation : @(YES)}];
-        return;
-    }
-    if ([message.name isEqualToString:@"GetTeamLabel"]) { //
-
         return;
     }
 }
@@ -277,7 +273,7 @@
     } else {
         teamLabel = nil;
     }
-    
+
     NSString *callbackJs = [NSString stringWithFormat:@"iosLabel('%@')", teamLabel];
     [self.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
         NSLog(@"%@----%@",result, error);
@@ -491,25 +487,30 @@
      查询数据库。
      WKWebsiteDataTypeWebSQLDatabases
      */
-    NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage];
-    
-    NSSet *websiteDataTypes= [NSSet setWithArray:types];
-    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-    
-    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+    if (@available(iOS 9.0, *)) {
+        NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage];
         
-    }];
+        NSSet *websiteDataTypes= [NSSet setWithArray:types];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (void)deleteAllWebCache {
     //allWebsiteDataTypes清除所有缓存
-    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-    
-    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-    
-    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+    if (@available(iOS 9.0, *)) {
+        NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
         
-    }];
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+            
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 @end

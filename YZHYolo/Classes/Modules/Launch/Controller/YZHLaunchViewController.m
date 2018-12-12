@@ -15,6 +15,7 @@
 #import "YZHBaseNavigationController.h"
 #import "YZHUserLoginManage.h"
 #import "UIViewController+YZHTool.h"
+#import "YZHCheckVersion.h"
 
 @interface YZHLaunchViewController ()
 
