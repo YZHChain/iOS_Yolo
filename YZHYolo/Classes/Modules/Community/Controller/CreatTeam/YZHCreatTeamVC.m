@@ -208,10 +208,7 @@
     } else if (self.createTeamView.teamType == YZHTeamTypePrivacy) {
         teamOption.joinMode = NIMTeamJoinModeNeedAuth;
     }
-    YZHTeamRecruit* teamRecruit = nil;
-    if (YZHIsString(recruitText)) {
-        teamRecruit = [[YZHTeamRecruit alloc] initWithContent:recruitText];
-    }
+    YZHTeamRecruit* teamRecruit = [[YZHTeamRecruit alloc] initWithContent:recruitText];
     if (YZHIsString(self.createTeamView.teamNameTextFiled.text)) {
         teamOption.name = self.createTeamView.teamNameTextFiled.text;
     } else {
@@ -223,7 +220,10 @@
     if (YZHIsString(self.createTeamView.teamSynopsisTextView.text)) {
         teamOption.intro = self.createTeamView.teamSynopsisTextView.text;
     }
-    YZHTeamInfoExtManage* teamInfo = [[YZHTeamInfoExtManage alloc] initCreatTeamWithTeamLabel:self.selectedLabelArray.count ? self.selectedLabelArray : nil recruit:teamRecruit];
+    if (!self.selectedLabelArray.count) {
+        self.selectedLabelArray = [[NSMutableArray alloc] init];
+    }
+    YZHTeamInfoExtManage* teamInfo = [[YZHTeamInfoExtManage alloc] initCreatTeamWithTeamLabel:self.selectedLabelArray recruit:teamRecruit];
     NSString* teamInfoString = [teamInfo mj_JSONString];
     teamOption.clientCustomInfo = teamInfoString;
     teamOption.type = NIMTeamTypeAdvanced;

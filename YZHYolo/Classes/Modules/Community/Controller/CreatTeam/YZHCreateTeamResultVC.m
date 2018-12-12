@@ -57,7 +57,8 @@
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
-    self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
+    self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
+    self.titleLabel.numberOfLines = 0;
     
     //如果不是互享则隐藏.
     if (self.teamType != YZHTeamTypeShare) {

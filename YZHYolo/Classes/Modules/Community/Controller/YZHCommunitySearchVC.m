@@ -106,7 +106,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
                 @"pageSize": [NSNumber numberWithInt:kYZHRecommendTeamPageSize],
                 };
     }
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
     [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_RECOMMENDEDGROUP params:dic successCompletion:^(id obj) {
         [hud hideWithText:nil];
         self.recommendModel = [YZHSearchListModel YZH_objectWithKeyValues:obj];

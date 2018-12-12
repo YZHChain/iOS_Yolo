@@ -14,7 +14,23 @@
     
     self = [super init];
     if (self) {
-        _content = content;
+        if (YZHIsString(content)) {
+            
+            _content = content;
+            _isValid = YES;
+            
+            NSDate *date = [NSDate date];
+            NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+            fmt.dateFormat = @"yyyy年MM月dd号 HH:mm:ss";
+            NSString *dateString = [fmt stringFromDate:date];
+            
+            _sendTime = dateString;
+        } else {
+            _content = @"";
+            _isValid = NO;
+            _sendTime = @"";
+            
+        }
         //配置时间
     }
     return self;
