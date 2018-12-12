@@ -83,6 +83,7 @@
 
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
         [userContentController addScriptMessageHandler:self name:@"SAVEQR"];
+        [userContentController addScriptMessageHandler:self name:@"GOROOT"];
         configuration.userContentController = userContentController;
         
         WKPreferences *preferences = [WKPreferences new];
@@ -132,6 +133,7 @@
 -(void)removeScriptMessageHandler{
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOBACK"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SAVEQR"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOROOT"];
 }
 
 
@@ -206,7 +208,6 @@
 #pragma mark - WKScriptMessageHandler
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     
-    
     if ([message.name isEqualToString:@"GOBACK"]) { //返回
         [self.navigationController popViewControllerAnimated:true];
         return;
@@ -224,6 +225,12 @@
         } else {
             [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];
         }
+        return;
+    }
+    if ([message.name isEqualToString:@"GOROOT"]) {
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
         return;
     }
 }
@@ -313,6 +320,10 @@
     if ([request.URL.query containsString:@"goback=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
         
         [self.navigationController popViewControllerAnimated:YES];
+        return false;
+    }
+    if ([request.URL.query containsString:@"goRoot=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
         return false;
     }
     YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];

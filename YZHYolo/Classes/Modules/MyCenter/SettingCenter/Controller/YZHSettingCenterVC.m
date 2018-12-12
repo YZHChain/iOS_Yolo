@@ -174,7 +174,7 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
 #pragma mark - 5.Event Response
 
 - (void)executeExitLogin {
-    
+//
     [YZHAlertManage showAlertTitle:@"确定要退出登录么？" message:nil actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [[NIMSDK sharedSDK].loginManager logout:^(NSError * _Nullable error) {
