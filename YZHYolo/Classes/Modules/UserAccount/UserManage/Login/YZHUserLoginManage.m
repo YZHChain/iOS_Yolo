@@ -10,6 +10,7 @@
 
 #import "UIViewController+YZHTool.h"
 #import "NIMKitFileLocationHelper.h"
+#import "NIMLoginClient.h"
 
 static NSString* kYZHIMAccountKey     = @"account";
 static NSString* kYZHIMTokenKey       = @"token";
@@ -79,7 +80,7 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
 
 @end
 
-@interface YZHUserLoginManage()
+@interface YZHUserLoginManage()<NIMLoginManagerDelegate>
 
 @property (nonatomic,copy) NSString *filepath;
 
@@ -104,6 +105,7 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
     
     if (self = [super init]) {
         _filepath = filePath;
+        [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
         [self readData];
     }
     return self;
@@ -181,7 +183,6 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
     loginData.account = self.currentLoginData.account;
     loginData.token = self.currentLoginData.token;
     [[[NIMSDK sharedSDK] loginManager] autoLogin:loginData];
-    
     id LogintSucceedVC = [[NSClassFromString(@"YZHRootTabBarViewController") alloc] init];
     [UIViewController yzh_animationReplaceRootViewController:LogintSucceedVC];
 }
@@ -231,6 +232,7 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
         if (error == nil) {
             successCompletion ? successCompletion() : NULL;
             [self IMServerLoginSuccessWithAccount:account token:token userLoginModel:userLoginModel];
+            
         } else {
             // 错误提示 TODO:
             NSString *appKey        = userLoginModel.appKey;
@@ -260,6 +262,16 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
     [UIViewController yzh_userLoginSuccessToHomePage];
 }
 
+#pragma mark -- LoginDelegate
+
+- (void)onAutoLoginFailed:(NSError *)error {
+    
+    if (error) {
+        //清空缓存数据;
+        [self setCurrentLoginData:nil];
+        [self executeHandInputLogin];
+    }
+}
 #pragma mark -- Set Get
 
 - (NSString *)filepath {
