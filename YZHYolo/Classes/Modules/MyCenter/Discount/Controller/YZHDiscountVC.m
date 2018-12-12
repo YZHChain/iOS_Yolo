@@ -104,9 +104,21 @@
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [self deleteAllWebCache];
+//        static dispatch_once_t onceToken;
+//        dispatch_once(&onceToken, ^{
+//            [self deleteAllWebCache];
+//        });
+//        [self deleteAllWebCache];
+//        [self deleteWebCache];
+        if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {
+            urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
+        }
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
+        NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                                                  cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                              timeoutInterval:20];
+        [self.webView loadRequest:theRequest ];
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
@@ -199,7 +211,6 @@
         [self.navigationController popViewControllerAnimated:true];
         return;
     }
-    
     if ([message.name isEqualToString:@"SAVEQR"]) { //邀请码界面-保存二维码
         NSString* qrString = @"";
         if([message.body isKindOfClass:[NSString class]]){
@@ -257,7 +268,6 @@
         }
         case WKNavigationTypeBackForward: {
             NSLog(@"返回上一个页面类型");
-//            [self.navigationController popViewControllerAnimated:YES];
             break;
         }
         case WKNavigationTypeReload: {
@@ -308,6 +318,7 @@
     YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
     vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];
+    NSLog(@"URL:-----%@-----",request.URL.absoluteString);
     
     return true;
 }
@@ -382,6 +393,46 @@
         _userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     }
     return _userId;
+}
+
+//自定义清除缓存
+- (void)deleteWebCache {
+    /*
+     在磁盘缓存上。
+     WKWebsiteDataTypeDiskCache,
+     
+     html离线Web应用程序缓存。
+     WKWebsiteDataTypeOfflineWebApplicationCache,
+     
+     内存缓存。
+     WKWebsiteDataTypeMemoryCache,
+     
+     本地存储。
+     WKWebsiteDataTypeLocalStorage,
+     
+     Cookies
+     WKWebsiteDataTypeCookies,
+     
+     会话存储
+     WKWebsiteDataTypeSessionStorage,
+     
+     IndexedDB数据库。
+     WKWebsiteDataTypeIndexedDBDatabases,
+     
+     查询数据库。
+     WKWebsiteDataTypeWebSQLDatabases
+     */
+    if (@available(iOS 9.0, *)) {
+//        NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeSessionStorage,WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache];
+        NSArray * types=@[WKWebsiteDataTypeLocalStorage];
+        
+        NSSet *websiteDataTypes= [NSSet setWithArray:types];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (void)deleteAllWebCache {

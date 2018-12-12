@@ -606,8 +606,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             NIMRecentSession *recentSession = weakSelf.recentSessions[indexPath.row];
             [weakSelf onDeleteRecentAtIndexPath:recentSession atIndexPath:indexPath];
         } else {
-            NIMRecentSession *recentSession = weakSelf.recentSessionExtManage.tagsRecentSession[indexPath.section][indexPath.row
-                                                                                                                   ];
+            NIMRecentSession *recentSession = weakSelf.recentSessionExtManage.tagsRecentSession[indexPath.section][indexPath.row];
             [weakSelf onDeleteRecentAtIndexPath:recentSession atIndexPath:indexPath];
         }
         [tableView setEditing:NO animated:YES];

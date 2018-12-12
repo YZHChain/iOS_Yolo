@@ -125,8 +125,15 @@
     for (AVMetadataObject *current in metadataObjects) {
         if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
             NSString *scannedResult = [(AVMetadataMachineReadableCodeObject *) current stringValue];
+            NSString* scannedResultUTF8 = [scannedResult stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
             //执行二维码跳转逻辑
-            YZHScanQRCodeModel* qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:scannedResult];
+            YZHScanQRCodeModel* qrCodeModel;
+            if (YZHIsString(scannedResultUTF8)) {
+                qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:scannedResultUTF8];
+            } else {
+                qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:scannedResult];
+            }
             [self handleQRCodeModel:qrCodeModel];
             
             break;

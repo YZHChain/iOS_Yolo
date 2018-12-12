@@ -110,15 +110,21 @@
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/index.html?useraccout=%@&platform=ios",yolo_no];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL* url = [[NSURL alloc] initWithString: urlStr];
-        [self deleteAllWebCache];
-        [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
-        NSString* teamLabel = [[YZHUserDataManage sharedManager].currentUserData.teamLabel mj_JSONString];
-        if (!YZHIsString(teamLabel)) {
-            teamLabel = nil;
+        if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {
+            urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
         }
-        self.webView.UIDelegate = self;
         
+        NSURL* url = [[NSURL alloc] initWithString: urlStr];
+//        static dispatch_once_t onceToken;
+//        dispatch_once(&onceToken, ^{
+//            [self deleteAllWebCache];
+//        });
+        
+        NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
+                                                                  cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                              timeoutInterval:20];
+        [self.webView loadRequest:theRequest ];
+//        [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
         // KVO 监听属性，除了下面列举的两个，还有其他的一些属性，具体参考 WKWebView 的头文件
         [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:observingOptions context:nil];
@@ -488,7 +494,7 @@
      WKWebsiteDataTypeWebSQLDatabases
      */
     if (@available(iOS 9.0, *)) {
-        NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage];
+        NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeSessionStorage,WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache];
         
         NSSet *websiteDataTypes= [NSSet setWithArray:types];
         NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];

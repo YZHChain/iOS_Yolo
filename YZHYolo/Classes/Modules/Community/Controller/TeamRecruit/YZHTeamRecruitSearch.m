@@ -221,6 +221,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     [self.searchBar endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    return;
     
     YZHSearchModel* model;
     if (self.isSearchStatus) {
