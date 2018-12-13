@@ -19,8 +19,9 @@
 #import "YZHProgressHUD.h"
 #import "UIButton+YZHTool.h"
 #import "YZHTeamExtManage.h"
+#import "CYPhotoPreviewer.h"
 
-@interface YZHAddBookDetailsVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate>
+@interface YZHAddBookDetailsVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate, YZHAddBookUserIDCellProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHAddBookUserAskFooterView* userAskFooterView;
@@ -284,6 +285,7 @@
             cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserIDCell" owner:nil options:nil].lastObject;
         }
         cell.model = cellData;
+        cell.delegate = self;
         
         return cell;
     } else {
@@ -340,6 +342,15 @@
         }
     }
 
+}
+
+#pragma mark - protocol
+
+- (void)onTouchPicImageView:(UIImageView *)imageView {
+    
+    CYPhotoPreviewer *previewer = [[CYPhotoPreviewer alloc] init];
+    
+    [previewer previewFromImageView:imageView inContainer:YZHAppWindow];
 }
 
 #pragma mark - 5.Event Response

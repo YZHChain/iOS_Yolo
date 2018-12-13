@@ -313,6 +313,8 @@
 		556D7E8021A52D3D00533384 /* YZHTeamNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 556D7E7E21A52D3D00533384 /* YZHTeamNoticeView.m */; };
 		556D7E8121A52D3E00533384 /* YZHTeamNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */; };
 		556D7E8821A54E5100533384 /* UILabel+YZHTextAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */; };
+		556E017521C2A99200AF649A /* UIView+CYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E017121C2A99200AF649A /* UIView+CYExtension.m */; };
+		556E017621C2A99200AF649A /* CYPhotoPreviewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E017421C2A99200AF649A /* CYPhotoPreviewer.m */; };
 		556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CD821466A4B0048171C /* YZHBaseViewController.m */; };
 		556F6CDC21466AEF0048171C /* YZHLaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CDB21466AEF0048171C /* YZHLaunchViewController.m */; };
 		556F6CEB214762190048171C /* YZHTabBarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CEA214762190048171C /* YZHTabBarModel.m */; };
@@ -1136,6 +1138,10 @@
 		556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamNoticeView.xib; sourceTree = "<group>"; };
 		556D7E8621A54E5100533384 /* UILabel+YZHTextAlign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+YZHTextAlign.h"; sourceTree = "<group>"; };
 		556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YZHTextAlign.m"; sourceTree = "<group>"; };
+		556E017121C2A99200AF649A /* UIView+CYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CYExtension.m"; sourceTree = "<group>"; };
+		556E017221C2A99200AF649A /* CYPhotoPreviewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYPhotoPreviewer.h; sourceTree = "<group>"; };
+		556E017321C2A99200AF649A /* UIView+CYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CYExtension.h"; sourceTree = "<group>"; };
+		556E017421C2A99200AF649A /* CYPhotoPreviewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYPhotoPreviewer.m; sourceTree = "<group>"; };
 		556F6CD3214665CD0048171C /* YZHYolo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YZHYolo-Prefix.pch"; sourceTree = "<group>"; };
 		556F6CD5214668960048171C /* YZHMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMacro.h; sourceTree = "<group>"; };
 		556F6CD6214668AB0048171C /* YZHPublic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPublic.h; sourceTree = "<group>"; };
@@ -2104,6 +2110,7 @@
 		55128A2221463E480099CC55 /* BaseKit */ = {
 			isa = PBXGroup;
 			children = (
+				556E017021C2A99200AF649A /* CYPhotoPreviewer */,
 				5591D7A4215A2BBA00C2AA93 /* YZHImagePhoto */,
 				5591D7A0215A2B9300C2AA93 /* YZHLocation */,
 				55256F5921590C4300DEEC45 /* YZHAlertMessage */,
@@ -3311,6 +3318,17 @@
 				556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */,
 			);
 			path = UILabel;
+			sourceTree = "<group>";
+		};
+		556E017021C2A99200AF649A /* CYPhotoPreviewer */ = {
+			isa = PBXGroup;
+			children = (
+				556E017221C2A99200AF649A /* CYPhotoPreviewer.h */,
+				556E017421C2A99200AF649A /* CYPhotoPreviewer.m */,
+				556E017321C2A99200AF649A /* UIView+CYExtension.h */,
+				556E017121C2A99200AF649A /* UIView+CYExtension.m */,
+			);
+			path = CYPhotoPreviewer;
 			sourceTree = "<group>";
 		};
 		556F6CD2214664710048171C /* Controller */ = {
@@ -5086,6 +5104,7 @@
 				55364214217EAEC3006F77A5 /* NIMSessionNotificationContentView.m in Sources */,
 				55C239E82149124E00200798 /* YZHNetworkConfig.m in Sources */,
 				55AA826D2186D8EC00ED73B1 /* YZHCommunityChatVC.m in Sources */,
+				556E017621C2A99200AF649A /* CYPhotoPreviewer.m in Sources */,
 				5574311621B81694006AAED0 /* NTESNavigationHandler.m in Sources */,
 				5562DE34215687D70098FA83 /* YZHMyInformationPhotoVC.m in Sources */,
 				5556024C21807CA4000F46DF /* NTESSessionSnapchatContentView.m in Sources */,
@@ -5130,6 +5149,7 @@
 				55AB6CEB219FFA8A005385A0 /* UIImage+Blur.m in Sources */,
 				553641F5217EAEC3006F77A5 /* NIMKitInfo.m in Sources */,
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
+				556E017521C2A99200AF649A /* UIView+CYExtension.m in Sources */,
 				556D7E4D21A2F13D00533384 /* YZHTeamCardTextCell.m in Sources */,
 				55364215217EAEC3006F77A5 /* NIMSessionNetChatNotifyContentView.m in Sources */,
 				553641C0217EAEC2006F77A5 /* NIMKitTimerHolder.m in Sources */,

@@ -11,6 +11,12 @@
 #import "YZHAddBookDetailsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol YZHAddBookUserIDCellProtocol <NSObject>
+
+- (void)onTouchPicImageView:(UIImageView *)imageView;
+
+@end
+
 @interface YZHAddBookUserIDCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userpicImageView;
@@ -18,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userYoloIDLabel;
+@property (nonatomic, weak) id<YZHAddBookUserIDCellProtocol > delegate;
 
 @property (nonatomic, strong) YZHAddBookHeaderModel* model;
 
