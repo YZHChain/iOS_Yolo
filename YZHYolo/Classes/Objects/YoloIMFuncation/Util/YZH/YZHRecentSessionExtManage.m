@@ -85,18 +85,18 @@
 }
 
 - (void)screeningAllPrivateRecebtSessionRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
-    
+    NSLog(@"私聊列表排序");
     if (allRecentSession.count) {
         [self screeningTagSessionAllRecentSession:allRecentSession];
         [self sortTagTeamRecentSession];
     }
+    NSLog(@"私聊列表排序结束");
 }
 
 #pragma mark -- Team
 
 - (void)screeningTagSessionAllTeamRecentSession:(NSMutableArray<NIMRecentSession* > *)allRecentSession {
     
-    NSLog(@"开始排序");
     [self updateTeamDefaultTags];
     
     [self.lockTeamRecentSession removeAllObjects];
@@ -199,7 +199,6 @@
                 i++;
             }
         }
-    NSLog(@"排序结束");
     
 }
 // 社群列表时间排序.
@@ -266,10 +265,12 @@
 - (void)screeningAllTeamRecentSession:(NSMutableArray<NIMRecentSession *> *)allRecentSession {
     
     if (allRecentSession.count) {
+        NSLog(@"群聊排序开始");
         [self screeningTagSessionAllTeamRecentSession:allRecentSession];
         [self sortTagTeamRecentSession];
         [self screeningDefaultSessionAllTeamRecentSession:allRecentSession];
         [self customSortTeamRecents:self.TeamRecentSession];
+        NSLog(@"群聊排序结束");
     }
 }
 //TODO:

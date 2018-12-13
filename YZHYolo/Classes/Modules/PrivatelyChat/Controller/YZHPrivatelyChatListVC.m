@@ -196,8 +196,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 #pragma mark -- Private
 - (void)refresh{
     
+    NSLog(@"刷新");
     [self.tableView reloadData];
     [self.tagsTableView reloadData];
+    NSLog(@"刷新结束");
 }
 
 - (void)customSortRecents:(NSMutableArray *)recentSessions
@@ -702,7 +704,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.recentSessions insertObject:recentSession atIndex:insert];
     //TODO:
     [self customSortRecents:self.recentSessions];
-    [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
+    [self.recentSessionExtManage screeningAllPrivateRecebtSessionRecentSession:self.recentSessions];
     [self refresh];
 }
 
@@ -710,8 +712,12 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
               totalUnreadCount:(NSInteger)totalUnreadCount
 {
     //清理本地数据
-    NSInteger index = [self.recentSessions indexOfObject:recentSession];
-    [self.recentSessions removeObjectAtIndex:index];
+//    NSInteger index = [self.recentSessions indexOfObject:recentSession];
+//    NSLog(@"找到的要清理私聊的下标%ld", index);
+//    if (index >= 0 && index <= self.recentSessions.count) {
+//        [self.recentSessions removeObjectAtIndex:index];
+//    }
+    [self.recentSessions removeObject:recentSession];
     
     //如果删除本地会话后就不允许漫游当前会话，则需要进行一次删除服务器会话的操作
     if (self.autoRemoveRemoteSession)
@@ -719,7 +725,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         [[NIMSDK sharedSDK].conversationManager deleteRemoteSessions:@[recentSession.session]
                                                           completion:nil];
     }
-    //    self.recentSessions = [self customSortRecents:self.recentSessions];
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningTagSessionAllRecentSession:self.recentSessions];
     [self refresh];

@@ -421,7 +421,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     if ([tableView isEqual:self.tableView]) {
-        return 1;
+        return self.recentSessionExtManage.teamDefaultTags.count ? 1 : 0;
     } else {
         return self.recentSessionExtManage.tagsTeamRecentSession.count;
     }
@@ -797,9 +797,14 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
               totalUnreadCount:(NSInteger)totalUnreadCount
 {
     //清理本地数据
-    NSInteger index = [self.recentSessions indexOfObject:recentSession];
-    [self.recentSessions removeObjectAtIndex:index];
-    
+//    NSInteger index = [self.recentSessions indexOfObject:recentSession];
+//    NSLog(@"找到的要清理社群的下标%ld", index);
+//    if (index >= 0 && index <= self.recentSessions.count) {
+//        [self.recentSessions removeObjectAtIndex:index];
+//    } else {
+//
+//    }
+    [self.recentSessions removeObject:recentSession];
     //如果删除本地会话后就不允许漫游当前会话，则需要进行一次删除服务器会话的操作
     if (self.autoRemoveRemoteSession)
     {
