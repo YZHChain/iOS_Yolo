@@ -180,6 +180,26 @@
     }
 }
 
+- (void)gotoTeamDetail:(NSString *)teamId {
+    
+    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:teamId];
+    if (isTeamMerber) {
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:teamId];
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
+        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                          @"isTeamOwner": @(isTeamOwner),
+                                                          @"teamId": teamId ? teamId : @"",
+                                                          }];
+    } else {
+        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                               @"teamId": teamId ? teamId : @"",
+                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                               kYZHRouteSegueNewNavigation: @(YES)
+                                                               }];
+    }
+}
+
 - (void)switchTeamRange {
     
     @weakify(self)
@@ -209,10 +229,16 @@
 
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if ([message.name isEqualToString:@"AddGroup"]) { //公开群-加入
-        NSNumber* value = message.body;
-        NSString* teamId = value.stringValue;
+        
+        NSString* teamId = message.body;
         NSLog(@"%@", teamId);
-        [self addTean:teamId];
+//        if (YZHIsString(teamId)) {
+//            [self gotoTeamDetail:teamId];
+//        } else {
+//            [YZHProgressHUD showText:@"数据异常, 请稍后重试" onView:self.webView];
+//        }
+        [self gotoTeamDetail:teamId];
+        
         return;
     }
     
@@ -253,9 +279,13 @@
     
     if ([message.name isEqualToString:@"AddRecuire"]) { //社群招募-加入
         NSLog(@"AddRecuire");
-        NSNumber* value = message.body;
-        NSString* teamId = value.stringValue;
-        [self addTean:teamId];
+        NSString* teamId = message.body;
+//        if (YZHIsString(teamId)) {
+//            [self gotoTeamDetail:teamId];
+//        } else {
+//            [YZHProgressHUD showText:@"数据异常, 请稍后重试" onView:self.webView];
+//        }
+        [self gotoTeamDetail:teamId];
         return;
     }
     

@@ -216,9 +216,11 @@
         NSString* qrString = @"";
         if([message.body isKindOfClass:[NSString class]]){
             qrString = message.body;
-        }else if([message.body isKindOfClass:[NSNumber class]]){
+        } else if([message.body isKindOfClass:[NSNumber class]]){
             NSNumber* body = message.body;
             qrString = body.stringValue;
+        } else {
+            qrString = message.body;
         }
         if (YZHIsString(qrString)) {
             [self creatQRCodeAndSavaToPotosWithQRString:qrString];
@@ -227,9 +229,6 @@
         }
         return;
     }
-    
-    
-    
 }
 
 //内容返回时调用
