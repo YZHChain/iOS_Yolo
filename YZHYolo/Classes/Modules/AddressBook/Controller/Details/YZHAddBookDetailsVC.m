@@ -202,8 +202,7 @@
         [self.addFriendButton removeFromSuperview];
     }
     if (teamExt.team_p2p_chat) {
-        
-        self.userAskFooterView.sendMessageButton.hidden = NO;
+        self.userAskFooterView.sendMessageButton.hidden = YES; //暂时屏蔽掉, 临时聊天
         //区别临时聊天功能.
     } else {
         self.userAskFooterView.sendMessageButton.hidden = YES;
