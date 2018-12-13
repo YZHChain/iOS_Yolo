@@ -72,6 +72,7 @@
 {
     super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:[self wkWebView]];
 //    if (@available(iOS 11.0, *)) {
 //          UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 //    }
@@ -81,13 +82,13 @@
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
 }
 
--(WKWebView*)wkWebVie{
+-(WKWebView*)wkWebView{
     
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         WKUserContentController *userContentController = [[WKUserContentController alloc] init];
-
+        
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
         [userContentController addScriptMessageHandler:self name:@"SAVEQR"];
         [userContentController addScriptMessageHandler:self name:@"GOROOT"];
@@ -107,7 +108,11 @@
         NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
         NSString* userNick = user.userInfo.nickName;
         NSString* userPic = user.userInfo.avatarUrl;
-        //
+        if (YZHIsString(userPic)) {
+            userPic = [userPic stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
+        } else {
+            userPic = @"";
+        }
         if (self.url == nil) {
             self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
         }
@@ -319,7 +324,7 @@
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) {
         return false;
     }
-    if([[self wkWebVie].URL.absoluteString isEqualToString: request.URL.absoluteString]){
+    if([[self wkWebView].URL.absoluteString isEqualToString: request.URL.absoluteString]){
         return false;
     }
     if (![request.URL.absoluteString containsString:@"https://yolo"]) {

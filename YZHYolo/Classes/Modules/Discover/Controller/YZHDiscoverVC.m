@@ -62,7 +62,7 @@
 
 - (void)setupView
 {
-    super.hideNavigationBar = true ;
+    super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:[self wkWebView]];
     

@@ -62,6 +62,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 #pragma mark - 2.SettingView and Style
 - (void)setupNavBar {
     
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationController.title = @"公开群搜索";
     [self searchBar];
     [self.searchBar becomeFirstResponder];
