@@ -25,8 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL haveTeamData;
 @property (nonatomic, strong) YZHTeamRecruit* recruitModel;
 @property (nonatomic, strong) NSError* error; // 拉取数据时,返回的错误信息
+@property (nonatomic, copy) NSString* recruitInfo;
 
-- (instancetype)initWithTeam:(NIMTeam *)team;
+- (instancetype)initWithTeam:(NIMTeam *)team recruitInfo:(NSString *)recruitInfo;
 
 - (void)updataTeamOwnerData;
 - (void)updataHeaderModel;

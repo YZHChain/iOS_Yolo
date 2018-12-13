@@ -213,7 +213,11 @@
             [self.addTeamButton addTarget:self action:@selector(gotoTeam:) forControlEvents:UIControlEventTouchUpInside];
             
         } else {
-            [hud hideWithText:@"申请入群失败"];
+            if (error.code == 801) {
+                [hud hideWithText:@"群人数达到上限"];
+            } else {
+                [hud hideWithText:@"申请入群失败"];
+            }
         }
         
     }];
@@ -272,7 +276,7 @@
     } else {
         [self.tableView.tableHeaderView removeFromSuperview];
         if (self.viewModel.error.code == 803) {
-            [addTeamButton setTitle:@"该群已解散" forState:UIControlStateNormal];
+            [addTeamButton setTitle:@"未找到该群" forState:UIControlStateNormal];
         } else {
             [addTeamButton setTitle:@"未找到该群" forState:UIControlStateNormal];
         }

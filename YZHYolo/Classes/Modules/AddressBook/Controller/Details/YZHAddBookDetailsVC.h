@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, assign) BOOL isSearch;
 @property (nonatomic, assign) BOOL isTeam;
-@property (nonatomic, strong) NSString* teamId;
+@property (nonatomic, copy) NSString* teamId;
 @property (nonatomic, strong) YZHAddBookDetailsModel* userDetailsModel;
 
 @end

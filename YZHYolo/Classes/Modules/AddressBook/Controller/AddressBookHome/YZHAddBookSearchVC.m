@@ -65,6 +65,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 #pragma mark - 2.SettingView and Style
 - (void)setupNavBar {
     
+    self.navigationController.title = @"好友搜索";
     [self searchBar];
     [self.searchBar becomeFirstResponder];
 }

@@ -10,13 +10,14 @@
 
 @implementation YZHTeamRecruitCardIntroModel
 
-- (instancetype)initWithTeam:(NIMTeam *)team {
+- (instancetype)initWithTeam:(NIMTeam *)team recruitInfo:(nonnull NSString *)recruitInfo {
     
     self = [super init];
     if (self) {
         if (team) {
             _teamId = team.teamId;
             _team = team;
+            _recruitInfo = recruitInfo;
             [self configuration];
             _haveTeamData = YES;
         } else {
@@ -48,6 +49,12 @@
     self.recruitModel = teamInfoExtManage.recruit;
     if (!self.recruitModel) {
         self.recruitModel = [[YZHTeamRecruit alloc] init];
+    }
+    //优先使用后台数据,否则在使用云信。因为云信的可能只是第一次创建时发送的,后续修改都是从 H5走的, 可能没有调云信接口。 会导致数据是老的。
+    if (YZHIsString(_recruitInfo)) {
+        self.recruitModel.content = _recruitInfo;
+    } else {
+        self.recruitModel.content = teamInfoExtManage.recruit.content;
     }
 }
 

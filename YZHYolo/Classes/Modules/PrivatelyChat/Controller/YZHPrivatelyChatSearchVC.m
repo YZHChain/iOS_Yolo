@@ -68,7 +68,7 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 - (void)setupNavBar {
     
     self.navigationController.navigationBar.translucent = NO;
-    
+    self.navigationController.title = @"私聊搜索";
     [self searchBar];
     [self.searchBar becomeFirstResponder];
 }

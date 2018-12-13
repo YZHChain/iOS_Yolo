@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) YZHSharedContactType sharedType;
 @property (nonatomic, assign) YZHForwardContactType forwardType;
 @property (nonatomic, assign) BOOL isForward; //是否为转发, 否则属于分享添加好友
-@property (nonatomic, strong) NSString* teamId;
+@property (nonatomic, copy) NSString* teamId;
 @property (nonatomic, copy) void (^sharedPersonageCardBlock)(YZHUserCardAttachment* );
 @property (nonatomic, copy) void (^sharedTeamCardBlock)(YZHTeamCardAttachment* );
 @property (nonatomic, copy) void (^forwardMessageToUserBlock)(NSString* );

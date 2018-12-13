@@ -61,9 +61,10 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 #pragma mark - 2.SettingView and Style
 - (void)setupNavBar {
     
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.title = @"招募群搜索";
     [self searchBar];
     [self.searchBar becomeFirstResponder];
-    
 }
 
 - (void)setupView {
@@ -142,12 +143,12 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     if (self.isSearchStatus) {
         if (section == 0) {
-            return self.searchModel.searchArray.count;
+            return self.searchModel.searchRecruitArray.count;
         } else {
-            return self.recommendModel.recommendArray.count;
+            return self.recommendModel.recommendRecruitArray.count;
         }
     } else {
-        return self.recommendModel.recommendArray.count ? self.recommendModel.recommendArray.count : 0;
+        return self.recommendModel.recommendRecruitArray.count ? self.recommendModel.recommendRecruitArray.count : 0;
     }
 }
 
@@ -155,17 +156,18 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     YZHSearchTeamCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
-    YZHSearchModel* model;
+    YZHSearchRecruitModel* model;
     if (self.isSearchStatus) {
         if (indexPath.section == 0) {
-            model = self.searchModel.searchArray[indexPath.row];
+            model = self.searchModel.searchRecruitArray[indexPath.row];
         } else {
-            model = self.recommendModel.recommendArray[indexPath.row];
+            model = self.recommendModel.recommendRecruitArray[indexPath.row];
         }
     } else {
-        model = self.recommendModel.recommendArray[indexPath.row];
+        model = self.recommendModel.recommendRecruitArray[indexPath.row];
     }
-    [cell refresh:model];
+    
+    [cell refreshRecruit:model];
     return cell;
 }
 
@@ -221,17 +223,16 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     [self.searchBar endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    return;
     
-    YZHSearchModel* model;
+    YZHSearchRecruitModel* model;
     if (self.isSearchStatus) {
         if (indexPath.section == 0) {
-            model = self.searchModel.searchArray[indexPath.row];
+            model = self.searchModel.searchRecruitArray[indexPath.row];
         } else {
-            model = self.recommendModel.recommendArray[indexPath.row];
+            model = self.recommendModel.recommendRecruitArray[indexPath.row];
         }
     } else {
-        model = self.recommendModel.recommendArray[indexPath.row];
+        model = self.recommendModel.recommendRecruitArray[indexPath.row];
     }
     //进入群详情.
     BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:model.teamId];
@@ -241,11 +242,12 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
         [YZHRouter openURL:kYZHRouterCommunityCard info:@{
                                                           @"isTeamOwner": @(isTeamOwner),
-                                                          @"teamId": model.teamId,
+                                                          @"teamId": model.teamId ? model.teamId : @"",
                                                           }];
     } else {
-        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+        [YZHRouter openURL:kYZHRouterCommunityRecruitCardIntro info:@{
                                                                @"teamId": model.teamId,
+                                                               @"recruitInfo": model.recuitContent ? model.recuitContent : @"",
                                                                kYZHRouteSegue: kYZHRouteSegueModal,
                                                                kYZHRouteSegueNewNavigation: @(YES)
                                                                }];
@@ -285,8 +287,26 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 
 #pragma mark - YZHSearchTeamCellProtocol
 
-- (void)onTouchJoinTeam:(YZHSearchModel *)model {
-    
+//- (void)onTouchJoinTeam:(YZHSearchRecruitModel *)model {
+//
+//    //可以先读取本地,如果没有在拉取.
+//    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+//    @weakify(self)
+//    [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:model.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+//        @strongify(self)
+//        if (!error) {
+//            [self addTeamWith:team hud:hud];
+//        } else {
+//            if (error.code == 803) {
+//                [hud hideWithText:@"该群已解散"];
+//            } else {
+//                [hud hideWithText:@"未找到该群"];
+//            }
+//        }
+//    }];
+//}
+
+- (void)onTouchJoinRecruitTeam:(YZHSearchRecruitModel *)model {
     //可以先读取本地,如果没有在拉取.
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     @weakify(self)
@@ -329,17 +349,14 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         }
         [[[NIMSDK sharedSDK] teamManager] applyToTeam:team.teamId message:@"通过群搜索加入" completion:^(NSError * _Nullable error, NIMTeamApplyStatus applyStatus) {
             if (!error) {
-                //                if (applyStatus == NIMTeamApplyStatusAlreadyInTeam) {
-                //
-                //                } else if (applyStatus == NIMTeamApplyStatusWaitForPass) {
-                //
-                //                } else if (applyStatus == NIMTeamApplyStatusInvalid) {
-                //
-                //                }
                 [hud hideWithText:title];
             } else {
                 //TODO: 提示语
-                [hud hideWithText:@"加入群聊失败, 请稍后重试"];
+                if (error.code == 801) {
+                    [hud hideWithText:@"群人数达到上限"];
+                } else {
+                    [hud hideWithText:@"申请入群失败"];
+                }
             }
         }];
     } else {
@@ -378,7 +395,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         
         [hud hideWithText:nil];
         self.searchModel = [YZHSearchListModel YZH_objectWithKeyValues:obj];
-        if (self.searchModel.searchArray.count) {
+        if (self.searchModel.searchRecruitArray.count) {
             self.havaSearchModel = YES;
         } else {
             self.havaSearchModel = NO;

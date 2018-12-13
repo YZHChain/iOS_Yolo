@@ -162,7 +162,7 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 #pragma mark - 5.Event Response
-
+//暂时不用快速加入方法
 - (void)addTean:(NSString *)teamId {
     
     if (![self isMyTeamWothTeamId:teamId]) {
@@ -172,7 +172,11 @@
             if (!error) {
                 [hud hideWithText:@"成功加入群聊"];
             } else {
-                [hud hideWithText:@"加入社群失败, 请重试"];
+                if (error.code == 801) {
+                    [hud hideWithText:@"群人数达到上限"];
+                } else {
+                    [hud hideWithText:@"申请入群失败"];
+                }
             }
         }];
     } else {
@@ -193,6 +197,26 @@
                                                           }];
     } else {
         [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                               @"teamId": teamId ? teamId : @"",
+                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+                                                               kYZHRouteSegueNewNavigation: @(YES)
+                                                               }];
+    }
+}
+
+- (void)gotoRecuireTeamDetail:(NSString *)teamId {
+    
+    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:teamId];
+    if (isTeamMerber) {
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:teamId];
+        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
+        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+                                                          @"isTeamOwner": @(isTeamOwner),
+                                                          @"teamId": teamId ? teamId : @"",
+                                                          }];
+    } else {
+        [YZHRouter openURL:kYZHRouterCommunityRecruitCardIntro info:@{
                                                                @"teamId": teamId ? teamId : @"",
                                                                kYZHRouteSegue: kYZHRouteSegueModal,
                                                                kYZHRouteSegueNewNavigation: @(YES)
@@ -285,7 +309,7 @@
 //        } else {
 //            [YZHProgressHUD showText:@"数据异常, 请稍后重试" onView:self.webView];
 //        }
-        [self gotoTeamDetail:teamId];
+        [self gotoRecuireTeamDetail:teamId];
         return;
     }
     

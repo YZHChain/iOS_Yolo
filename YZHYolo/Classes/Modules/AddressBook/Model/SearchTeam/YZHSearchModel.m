@@ -25,10 +25,26 @@
 
 @end
 
+@implementation YZHSearchRecruitModel
+
++ (NSDictionary *)YZH_replacedKeyFromPropertyName {
+    
+    return @{
+             @"teamId": @"id",
+             @"teamName": @"name",
+             @"teamIcon": @"url",
+             @"teamOwner": @"owner",
+             @"recuitContent": @"info",
+             };
+}
+
+@end
+
 @interface YZHSearchListModel()
 
 @property (nonatomic, strong) NSMutableArray<NIMRecentSession *>*  allPrivateRecentSession;
 @property (nonatomic, strong) NSMutableArray<NIMRecentSession *>*  allTeamRecentSession;
+@property (nonatomic, strong) NSMutableArray<NIMTeam *> *allTeam;
 @property (nonatomic, strong) YZHGroupedContacts* contacts;
 
 @end
@@ -39,7 +55,8 @@
     
     return @{
              @"recommendArray": [YZHSearchModel class],
-             @"searchArray": [YZHSearchModel class]
+             @"searchArray": [YZHSearchModel class],
+             @"recommendRecruitArray": [YZHSearchRecruitModel class],
              };
 }
 
@@ -47,11 +64,23 @@
     
     return @{
              @"recommendArray": @"beans",
-             @"searchArray": @"beans"
+             @"searchArray": @"beans",
+             @"recommendRecruitArray": @"beans",
              };
 }
 
 - (void)searchTeamKeyText:(NSString *)keyText {
+    
+    [self.searchRecentSession removeAllObjects];
+    for (NIMRecentSession* recentSession in self.allTeamRecentSession) {
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:recentSession.session.sessionId];
+        if ([team.teamName containsString: keyText]) {
+            [self.searchRecentSession addObject:recentSession];
+        }
+    }
+}
+
+- (void)searchTeamRecentSessionKeyText:(NSString *)keyText {
     
     [self.searchRecentSession removeAllObjects];
     for (NIMRecentSession* recentSession in self.allTeamRecentSession) {
@@ -130,6 +159,21 @@
     if (!_allTeamRecentSession) {
         _allTeamRecentSession = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
         [self customSortRecents:_allTeamRecentSession isTeam:YES];
+//        NSArray<NIMTeam*>* myAllTeam = [[[NIMSDK sharedSDK] teamManager] allMyTeams];
+//        for (NIMTeam* team in myAllTeam) {
+//            BOOL containTeam = NO;
+//            for (NIMRecentSession* recentSession in _allTeamRecentSession) {
+//                if ([recentSession.session.sessionId isEqualToString:team.teamId]) {
+//                    containTeam = YES;
+//                    break;
+//                }
+//            }
+//            if (containTeam) {
+//                NIMRecentSession* recentSession = [[NIMRecentSession alloc] init]
+//
+//
+//            }
+//        }
     }
     return _allTeamRecentSession;
     
@@ -194,6 +238,14 @@
         _searchFirends = [[NSMutableArray alloc] init];
     }
     return _searchFirends;
+}
+
+- (NSMutableArray<NIMTeam *> *)allTeam {
+    
+    if (!_allTeam) {
+        _allTeam = [[[NIMSDK sharedSDK] teamManager] allMyTeams].mutableCopy;
+    }
+    return _allTeam;
 }
 
 @end

@@ -56,6 +56,11 @@
     }
 }
 
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+}
+
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar
@@ -67,8 +72,10 @@
 {
     super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[self wkWebVie]];
-    
+//    if (@available(iOS 11.0, *)) {
+//          UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    }
+
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
@@ -89,7 +96,7 @@
         WKPreferences *preferences = [WKPreferences new];
         preferences.javaScriptCanOpenWindowsAutomatically = YES;
         configuration.preferences = preferences;
-        CGRect frame = self.view.frame;
+        CGRect frame = self.view.bounds;
         if(self.navigationController.viewControllers.count==1){
             frame.size.height = frame.size.height - self.tabBarController.tabBar.frame.size.height;
         }

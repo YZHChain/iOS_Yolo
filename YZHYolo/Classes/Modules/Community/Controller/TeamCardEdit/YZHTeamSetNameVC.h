@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamSetNameVC : YZHMyInformationSetNameVC
 
-@property (nonatomic, strong) NSString* teamId;
+@property (nonatomic, copy) NSString* teamId;
 
 @end
 

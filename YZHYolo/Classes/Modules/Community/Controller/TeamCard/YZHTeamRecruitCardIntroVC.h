@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamRecruitCardIntroVC : YZHBaseViewController
 
-@property (nonatomic, strong) NSString* teamId;
+@property (nonatomic, copy) NSString* teamId;
+@property (nonatomic, copy) NSString* recruitInfo; //招募信息
 
 @end
 

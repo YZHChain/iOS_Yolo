@@ -62,6 +62,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 #pragma mark - 2.SettingView and Style
 - (void)setupNavBar {
     
+    self.navigationController.title = @"公开群搜索";
     [self searchBar];
     [self.searchBar becomeFirstResponder];
     
@@ -340,7 +341,11 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
                 [hud hideWithText:title];
             } else {
                 //TODO: 提示语
-                [hud hideWithText:@"加入群聊失败, 请稍后重试"];
+                if (error.code == 801) {
+                    [hud hideWithText:@"群人数达到上限"];
+                } else {
+                    [hud hideWithText:@"申请入群失败"];
+                }
             }
         }];
     } else {

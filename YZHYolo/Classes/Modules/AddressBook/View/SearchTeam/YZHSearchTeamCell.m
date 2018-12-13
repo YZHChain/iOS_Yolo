@@ -55,11 +55,25 @@
     
 }
 
+- (void)refreshRecruit:(YZHSearchRecruitModel *)model {
+    
+    self.recruitModel = model;
+    if (YZHIsString(model.teamIcon)) {
+        [self.avatarImageView yzh_setImageWithString:model.teamIcon placeholder:@"team_cell_photoImage_default"];
+    } else {
+        self.avatarImageView.image = [UIImage imageNamed:@"team_cell_photoImage_default"];
+    }
+    self.titleLabel.text = model.teamName ? model.teamName : @"群聊";
+}
+
 - (void)onTouchJoin:(UIButton *)sender {
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(onTouchJoinTeam:)]) {
         [self.delegate onTouchJoinTeam:self.model];
+    } else if (self.delegate && [self.delegate respondsToSelector:@selector(onTouchJoinRecruitTeam:)]) {
+        [self.delegate onTouchJoinRecruitTeam:self.recruitModel];
     }
 }
+
 
 @end

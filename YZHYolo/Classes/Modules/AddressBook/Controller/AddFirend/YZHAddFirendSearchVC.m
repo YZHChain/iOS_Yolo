@@ -45,7 +45,8 @@
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar {
-    self.navigationItem.title = @"";
+    
+    self.navigationItem.title = @"用户搜索";
  
     [self searchBar];
     [self.searchBar becomeFirstResponder];

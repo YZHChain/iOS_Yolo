@@ -14,13 +14,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YZHSearchTeamCellProtocol <NSObject>
 
 - (void)onTouchJoinTeam:(YZHSearchModel *)model;
+- (void)onTouchJoinRecruitTeam:(YZHSearchRecruitModel *)model;
 
 @end
 
 @interface YZHSearchTeamCell : UITableViewCell
 
 @property (nonatomic, strong) YZHSearchModel* model;
+@property (nonatomic, strong) YZHSearchRecruitModel* recruitModel;
 - (void)refresh:(YZHSearchModel* )model;
+- (void)refreshRecruit:(YZHSearchRecruitModel *)model;
 @property (nonatomic, weak) id<YZHSearchTeamCellProtocol> delegate;
 
 @end
