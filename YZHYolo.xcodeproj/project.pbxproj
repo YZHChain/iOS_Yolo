@@ -554,6 +554,8 @@
 		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
 		55FB0BEB21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0BEA21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m */; };
 		55FB0BED21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */; };
+		55FB0BF221C3E0BC008C95DE /* YZHSearchTeamShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0BF021C3E0BC008C95DE /* YZHSearchTeamShowCell.m */; };
+		55FB0BF321C3E0BC008C95DE /* YZHSearchTeamShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0BF121C3E0BC008C95DE /* YZHSearchTeamShowCell.xib */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -1574,6 +1576,9 @@
 		55FB0BE921C3AB3F008C95DE /* YZHPrivateChatDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatDefaultView.h; sourceTree = "<group>"; };
 		55FB0BEA21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatDefaultView.m; sourceTree = "<group>"; };
 		55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHPrivateChatDefaultView.xib; sourceTree = "<group>"; };
+		55FB0BEF21C3E0BC008C95DE /* YZHSearchTeamShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchTeamShowCell.h; sourceTree = "<group>"; };
+		55FB0BF021C3E0BC008C95DE /* YZHSearchTeamShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchTeamShowCell.m; sourceTree = "<group>"; };
+		55FB0BF121C3E0BC008C95DE /* YZHSearchTeamShowCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSearchTeamShowCell.xib; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -4429,6 +4434,9 @@
 				55E506DA21B91BDE0052E0F4 /* YZHSearchTeamCell.h */,
 				55E506DB21B91BDE0052E0F4 /* YZHSearchTeamCell.m */,
 				55E506DC21B91BDE0052E0F4 /* YZHSearchTeamCell.xib */,
+				55FB0BEF21C3E0BC008C95DE /* YZHSearchTeamShowCell.h */,
+				55FB0BF021C3E0BC008C95DE /* YZHSearchTeamShowCell.m */,
+				55FB0BF121C3E0BC008C95DE /* YZHSearchTeamShowCell.xib */,
 				55E506DF21BCD9230052E0F4 /* YZHSearchRecommendSectionView.h */,
 				55E506E021BCD9230052E0F4 /* YZHSearchRecommendSectionView.m */,
 				55E506E221BCD9320052E0F4 /* YZHSearchRecommendSectionView.xib */,
@@ -4672,6 +4680,7 @@
 				55337DD8214FE0AC00307B75 /* YZHWelcomeView.xib in Resources */,
 				55D5810321636D18000A8B55 /* YZHPhoneContactDefaultView.xib in Resources */,
 				553145722157298200A13F96 /* YZHMyInformationSetNameVC.xib in Resources */,
+				55FB0BF321C3E0BC008C95DE /* YZHSearchTeamShowCell.xib in Resources */,
 				55DF5D5D218982CC00BFA7E6 /* SourceHanSansCN-Normal.ttf in Resources */,
 				553641B3217EAEC2006F77A5 /* NIMKitResource.bundle in Resources */,
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
@@ -5008,6 +5017,7 @@
 				5537422121A6A3F000204972 /* YZHTeamListDefaultView.m in Sources */,
 				55C656D0215F706E005E997B /* YZHAddBookSetTagFooterView.m in Sources */,
 				5551B33A21A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m in Sources */,
+				55FB0BF221C3E0BC008C95DE /* YZHSearchTeamShowCell.m in Sources */,
 				553641E9217EAEC3006F77A5 /* NIMTimePickerView.m in Sources */,
 				5556025321807DFA000F46DF /* NSData+NTES.m in Sources */,
 				55337E002151055500307B75 /* YZHSettingPasswordView.m in Sources */,

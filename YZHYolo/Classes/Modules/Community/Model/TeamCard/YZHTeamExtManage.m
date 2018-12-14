@@ -12,7 +12,16 @@
 
 + (instancetype)targetTeamExtWithTeamId:(NSString *)teamId targetId:(NSString *)targetId {
     
-    NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:targetId inTeam:teamId];
+     NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:targetId inTeam:teamId];
+//    if (!teamMember) {
+//        [[[NIMSDK sharedSDK] teamManager] fetchTeamMembers:teamId completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
+//            for (NIMTeamMember* member in members) {
+//                [member.userId isEqualToString:targetId];
+//                teamMember = member;
+//                break;
+//            }
+//        }];
+//    }
     NSString* teamExtString = teamMember.customInfo;
     
     if (YZHIsString(teamExtString)) {

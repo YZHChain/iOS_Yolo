@@ -20,9 +20,11 @@
 #import "YZHCommunityChatVC.h"
 #import "YZHSearchLabelSelectedView.h"
 #import "YZHUserModelManage.h"
+#import "YZHSearchTeamShowCell.h"
 
 static int kYZHRecommendTeamPageSize = 20; // 默认每页个数
 static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionView";
+static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
 @interface YZHCommunitySearchVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,YZHSearchRecommendViewProtocol, YZHSearchTeamCellProtocol, YZHSearchLabelSelectedProtocol>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -79,6 +81,9 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 }
 
 - (void)reloadView {
@@ -139,7 +144,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
-        return self.searchManage.searchRecentSession.count;
+        return self.searchManage.searchTeams.count;
     } else {
         return self.recommendModel.recommendArray.count;
     }
@@ -165,27 +170,38 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     
     return cell;
 }
+//群聊会话列表展示 暂时注释掉.
+//- (UITableViewCell* )searchTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    static NSString * cellId = @"cellId";
+//    NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+//    if (!cell) {
+//        cell = [[NIMSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+//        //            [cell.avatarImageView addTarget:self action:@selector(onTouchAvatar:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    NIMRecentSession *recent = self.searchManage.searchRecentSession[indexPath.row];
+//    cell.nameLabel.text = [self nameForRecentSession:recent];
+//    [cell.avatarImageView setAvatarBySession:recent.session];
+//    [cell.nameLabel sizeToFit];
+//    cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
+//    [cell.messageLabel sizeToFit];
+//    cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
+//    [cell.timeLabel sizeToFit];
+//
+//    [cell refresh:recent];
+//    return cell;
+//}
 
 - (UITableViewCell* )searchTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString * cellId = @"cellId";
-    NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[NIMSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        //            [cell.avatarImageView addTarget:self action:@selector(onTouchAvatar:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    NIMRecentSession *recent = self.searchManage.searchRecentSession[indexPath.row];
-    cell.nameLabel.text = [self nameForRecentSession:recent];
-    [cell.avatarImageView setAvatarBySession:recent.session];
-    [cell.nameLabel sizeToFit];
-    cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
-    [cell.messageLabel sizeToFit];
-    cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
-    [cell.timeLabel sizeToFit];
+    YZHSearchTeamShowCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHSearchTeamShowCell forIndexPath:indexPath];
+    NIMTeam* model;
+    model = self.searchManage.searchTeams[indexPath.row];
+    [cell refresh:model];
     
-    [cell refresh:recent];
     return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -212,7 +228,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         label.font = [UIFont yzh_commonFontStyleFontSize:13];
         label.textColor = [UIColor yzh_sessionCellGray];
         if (self.havaSearchModel) {
-            label.text = @"搜索到的群";
+            label.text = @"您已加入的群";
         } else {
             label.text = @"未找到相关群";
         }
@@ -261,7 +277,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     }
 }
 
-- (void)searchTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)searchRecentTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NIMRecentSession *recentSession;
     
@@ -305,6 +321,31 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
                                                                kYZHRouteSegueNewNavigation: @(YES)
                                                                }];
     }
+}
+//点击会话, 好像不需要插入回话。即可保存到回话列表
+- (void)searchTableView:(UITableView *)tableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NIMTeam* team = self.searchManage.searchTeams[indexPath.row];
+    NIMSession* session = [NIMSession session:team.teamId type:NIMSessionTypeTeam];
+    //查找最近回话, 如果没有则直接使用, 会话进入聊天窗。 并且插入一条最近会话。
+    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
+    if (recentSession) {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recentSession];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+    } else {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWithSession:session];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+        
+        NIMImportedRecentSession *recentSession = [[NIMImportedRecentSession alloc] init];
+        recentSession.session = session;
+        [[[NIMSDK sharedSDK] conversationManager] allRecentSessions];
+        [[[NIMSDK sharedSDK] conversationManager] importRecentSessions:@[recentSession] completion:^(NSError * _Nullable error, NSArray<NIMImportedRecentSession *> * _Nullable failedImportedRecentSessions) {
+    
+            NSLog(@"插入会话结果%@", error);
+    
+        }];
+    }
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -460,7 +501,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     if (YZHIsString(keyText)) {
         [self.searchManage searchTeamKeyText:keyText];
         self.isSearchStatus = YES;
-        self.havaSearchModel = self.searchManage.searchRecentSession.count;
+        self.havaSearchModel = self.searchManage.searchTeams.count;
         [self.tableView reloadData];
     } else {
         self.isSearchStatus = NO;
@@ -581,6 +622,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
         //        _tableView.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
         [_tableView registerNib:[UINib nibWithNibName:@"YZHSearchTeamCell" bundle:nil] forCellReuseIdentifier: kYZHCommonCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHSearchRecommendSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHSearchRecommendSectionView];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHSearchTeamShowCell" bundle:nil] forCellReuseIdentifier: kYZHSearchTeamShowCell];
         _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -645,7 +687,7 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
             [_teamTagArray addObject:model.tagName];
         }
         if (_teamTagArray.count) {
-            [_teamTagArray addObject:@"无标签群"];
+            [_teamTagArray addObject:@"无分类群"];
         }
     }
     return _teamTagArray;

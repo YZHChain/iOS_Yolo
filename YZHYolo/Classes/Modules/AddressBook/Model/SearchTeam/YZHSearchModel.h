@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<YZHSearchModel *>* recommendArray; // 推荐列表
 @property (nonatomic, strong) NSMutableArray<NIMRecentSession* >* searchRecentSession; //搜索本地回话列表
 @property (nonatomic, strong) NSMutableArray<YZHContactMemberModel *>* searchFirends; //搜索到的好友.
+@property (nonatomic, strong) NSMutableArray<NIMTeam* >* searchTeams; //搜索到的群组
 
 @property (nonatomic, assign) int pageTotal; //总页数
 

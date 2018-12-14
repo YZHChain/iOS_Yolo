@@ -71,11 +71,10 @@
 
 - (void)searchTeamKeyText:(NSString *)keyText {
     
-    [self.searchRecentSession removeAllObjects];
-    for (NIMRecentSession* recentSession in self.allTeamRecentSession) {
-        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:recentSession.session.sessionId];
+    [self.searchTeams removeAllObjects];
+    for (NIMTeam* team in self.allTeam) {
         if ([team.teamName containsString: keyText]) {
-            [self.searchRecentSession addObject:recentSession];
+            [self.searchTeams addObject:team];
         }
     }
 }
@@ -91,24 +90,41 @@
     }
 }
 
+//- (void)searchTeamTag:(NSString *)tagName {
+//
+//    [self.searchRecentSession removeAllObjects];
+//    for (NIMRecentSession* recentSession in self.allTeamRecentSession) {
+//        YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+//        if ([tagName isEqualToString:@"无分类群"]) {
+//            if (!YZHIsString(teamExtManage.team_tagName)) {
+//                [self.searchRecentSession addObject:recentSession];
+//            }
+//        } else {
+//            if ([teamExtManage.team_tagName isEqualToString:tagName]) {
+//                [self.searchRecentSession addObject:recentSession];
+//            }
+//        }
+//
+//    }
+//}
+
 - (void)searchTeamTag:(NSString *)tagName {
-    
-    [self.searchRecentSession removeAllObjects];
-    for (NIMRecentSession* recentSession in self.allTeamRecentSession) {
-        YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
-        if ([tagName isEqualToString:@"无标签群"]) {
+
+    [self.searchTeams removeAllObjects];
+    for (NIMTeam* team in self.allTeam) {
+        YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:team.teamId];
+        if ([tagName isEqualToString:@"无分类群"]) {
             if (!YZHIsString(teamExtManage.team_tagName)) {
-                [self.searchRecentSession addObject:recentSession];
+                [self.searchTeams addObject:team];
             }
         } else {
             if ([teamExtManage.team_tagName isEqualToString:tagName]) {
-                [self.searchRecentSession addObject:recentSession];
+                [self.searchTeams addObject:team];
             }
         }
-
     }
-    
 }
+
 
 - (void)searchPrivateKeyText:(NSString *)keyText {
     
@@ -238,6 +254,14 @@
         _searchFirends = [[NSMutableArray alloc] init];
     }
     return _searchFirends;
+}
+
+- (NSMutableArray<NIMTeam *> *)searchTeams {
+    
+    if (!_searchTeams) {
+        _searchTeams = [[NSMutableArray alloc] init];
+    }
+    return _searchTeams;
 }
 
 - (NSMutableArray<NIMTeam *> *)allTeam {

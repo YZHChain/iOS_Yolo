@@ -401,7 +401,7 @@
     }
     [tagsArray insertObject:@"置顶" atIndex:0];
     [tagsArray insertObject:@"上锁群" atIndex:1];
-    [tagsArray addObject:@"无分类社群"];
+    [tagsArray addObject:@"无分类群"];
     
     self.teamDefaultTags = tagsArray.copy;
 }

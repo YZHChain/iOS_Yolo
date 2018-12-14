@@ -55,6 +55,10 @@
     NSDate * nowDate = [NSDate date];
     NSDate * msgDate = [NSDate dateWithTimeIntervalSince1970:msglastTime];
     NSString *result = nil;
+    //当会话不存在时,显示当前时间
+    if (!msglastTime) {
+        msgDate = nowDate;
+    }
     NSCalendarUnit components = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitHour | NSCalendarUnitMinute);
     NSDateComponents *nowDateComponents = [[NSCalendar currentCalendar] components:components fromDate:nowDate];
     NSDateComponents *msgDateComponents = [[NSCalendar currentCalendar] components:components fromDate:msgDate];
@@ -92,6 +96,7 @@
         NSString *day = [NSString stringWithFormat:@"%zd-%zd-%zd", msgDateComponents.year, msgDateComponents.month, msgDateComponents.day];
         result = showDetail? [day stringByAppendingFormat:@"%@ %zd:%02d",result,hour,(int)msgDateComponents.minute]:day;
     }
+    
     return result;
 }
 
