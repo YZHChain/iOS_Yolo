@@ -60,6 +60,38 @@
     return [UIColor colorWithRed: 249/255.0 green: 249/255.0 blue: 249/255.0 alpha:1];
 }
 
+//绘制渐变色颜色的方法
++ (CAGradientLayer *)yzh_setGradualChangingColor:(UIView *)view fromColor:(NSString *)fromHexColorStr toColor:(NSString *)toHexColorStr{
+    
+    // CAGradientLayer类对其绘制渐变背景颜色、填充层的形状(包括圆角)
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = view.bounds;
+    
+    //  创建渐变色数组，需要转换为CGColor颜色
+    //  https://juejin.im/post/5a30f53e51882554b8378b0b
+    gradientLayer.colors = @[(__bridge id)[UIColor yzh_colorWithHexString:fromHexColorStr].CGColor,(__bridge id)[UIColor yzh_colorWithHexString:toHexColorStr].CGColor];
+    
+    //  设置渐变颜色方向，左上点为(0,0), 右下点为(1,1)
+    
+//    gradientLayer.startPoint = CGPointMake(0, 0);
+//    gradientLayer.endPoint = CGPointMake(1, 1);
+    
+//    gradientLayer.startPoint = CGPointMake(0, 1);
+//    gradientLayer.endPoint = CGPointMake(1, 1);
+//
+//    gradientLayer.startPoint = CGPointMake(0, 1);
+//    gradientLayer.endPoint = CGPointMake(1, 0);
+    
+        gradientLayer.startPoint = CGPointMake(0, 0);
+        gradientLayer.endPoint = CGPointMake(1, 0);
+    
+    //  设置颜色变化点，取值范围 0.0~1.0
+    gradientLayer.locations = @[@0,@1];
+    
+    return gradientLayer;
+}
+
+
 //十六进制颜色转换
 + (UIColor *)yzh_colorWithHexString:(NSString *)color
 {

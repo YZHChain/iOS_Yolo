@@ -195,7 +195,7 @@
         [alertController addAction:[UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:nil]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         
-        UIViewController *vc = self.viewController;
+        UIViewController *vc = self.yzh_findViewController;
         [vc presentViewController:alertController animated:YES completion:nil];
     }
 }

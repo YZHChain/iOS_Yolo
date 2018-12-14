@@ -63,6 +63,9 @@
 {
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
     
+    [self.view layoutIfNeeded];
+    [self.view yzh_addGradientLayerView];
+    
     NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
     if (YZHIsString(user.userInfo.nickName)) {
         self.nickNameLabel.text = user.userInfo.nickName;

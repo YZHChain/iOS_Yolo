@@ -22,4 +22,6 @@
 + (UIColor *)yzh_sessionCellBackgroundGray; // 回话Cell 背景灰
 + (UIColor *)yzh_sessionCellGray;    // 回话Cell 边框
 
++ (CAGradientLayer *)yzh_setGradualChangingColor:(UIView *)view fromColor:(NSString *)fromHexColorStr toColor:(NSString *)toHexColorStr;
+
 @end

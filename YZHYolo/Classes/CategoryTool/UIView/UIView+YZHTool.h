@@ -29,6 +29,8 @@
 - (void)yzh_hideFromWindowAnimations:(void (^)(void))animations;
 - (void)yzh_showOnWindowCallShowBlock:(YZHVoidBlock)callShowBlock;
 
-- (UIViewController *)viewController;
+- (UIViewController *)yzh_findViewController;
+
+- (void)yzh_addGradientLayerView;
 
 @end

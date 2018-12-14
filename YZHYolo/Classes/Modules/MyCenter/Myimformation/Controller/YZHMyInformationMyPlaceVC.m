@@ -93,6 +93,9 @@ typedef enum : NSUInteger {
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     
     YZHLocationManager* manager = [YZHLocationManager shareManager];
     [manager getLocationWithSucceed:^{

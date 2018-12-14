@@ -208,7 +208,7 @@
     }
 }
 
-- (UIViewController *)viewController {
+- (UIViewController *)yzh_findViewController {
     for (UIView *view = self; view; view = view.superview) {
         UIResponder *nextResponder = [view nextResponder];
         if ([nextResponder isKindOfClass:[UIViewController class]]) {
@@ -217,5 +217,19 @@
     }
     return nil;
 }
+
+- (void)yzh_addGradientLayerView {
+    
+    UIView *sysView = [[UIView alloc] init];
+
+    [self insertSubview:sysView atIndex:0];
+    [sysView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.mas_equalTo(0);
+    }];
+    [sysView layoutIfNeeded];
+    [sysView.layer addSublayer:[UIColor yzh_setGradualChangingColor:sysView fromColor:@"#002E60" toColor:@"#204D75"]];
+    
+}
+
 
 @end
