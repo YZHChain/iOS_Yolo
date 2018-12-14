@@ -77,7 +77,7 @@
     
 }
 
--(WKWebView*)wkWebView{
+-(WKWebView*)wkWebView {
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];

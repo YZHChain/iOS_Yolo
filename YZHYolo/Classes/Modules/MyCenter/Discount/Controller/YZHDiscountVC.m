@@ -73,16 +73,16 @@
     super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:[self wkWebView]];
-//    if (@available(iOS 11.0, *)) {
-//          UIScrollView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
-//    }
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
 }
 
--(WKWebView*)wkWebView{
+-(WKWebView*)wkWebView {
     
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
@@ -97,7 +97,7 @@
         WKPreferences *preferences = [WKPreferences new];
         preferences.javaScriptCanOpenWindowsAutomatically = YES;
         configuration.preferences = preferences;
-        CGRect frame = self.view.bounds;
+        CGRect frame = self.view.frame;
         if(self.navigationController.viewControllers.count==1){
             frame.size.height = frame.size.height - self.tabBarController.tabBar.frame.size.height;
         }
@@ -108,21 +108,21 @@
         NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
         NSString* userNick = user.userInfo.nickName;
         NSString* userPic = user.userInfo.avatarUrl;
+        
         if (YZHIsString(userPic)) {
             userPic = [userPic stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
         } else {
-            userPic = @"";
+            userPic = nil;
         }
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
+            if (YZHIsString(userPic)) {
+               self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
+            } else {
+                self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios", yolo_no, userNick];
+            }
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        static dispatch_once_t onceToken;
-//        dispatch_once(&onceToken, ^{
-//            [self deleteAllWebCache];
-//        });
-//        [self deleteAllWebCache];
-//        [self deleteWebCache];
+
         if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {
             urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
         }
@@ -130,8 +130,7 @@
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:20];
-        [self.webView loadRequest:theRequest ];
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
+        [self.webView loadRequest: theRequest];
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;

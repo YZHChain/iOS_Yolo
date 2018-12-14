@@ -38,7 +38,9 @@
         _textLabel.numberOfLines = 0;
         _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _textLabel.backgroundColor = [UIColor clearColor];
+        
         [self addSubview:_textLabel];
+        
         
         YZHSpeedyResponseButtonView* speedyResponseView = [[YZHSpeedyResponseButtonView alloc] init];
         _speedyResponseView = speedyResponseView;
@@ -49,7 +51,7 @@
         
 //        [self addSubview:_speedyResponseView];
         
-        UIButton* receiveButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        UIButton* receiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [receiveButton.titleLabel setFont:[UIFont systemFontOfSize:11]];
         [receiveButton setTitleColor:[UIColor yzh_fontShallowBlack] forState:UIControlStateNormal];
         [receiveButton setTitleColor:[UIColor yzh_sessionCellGray] forState:UIControlStateSelected];
@@ -95,14 +97,46 @@
 {
     [super refresh:data];
     
-    NIMCustomObject *customObject = (NIMCustomObject*)data.message.messageObject;
+    //判断此条消息是否 All 我.
+    BOOL apnsContainMy = NO;
+    NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    NIMMessageApnsMemberOption* apnsMemberOption = self.model.message.apnsMemberOption;
+    if (apnsMemberOption) {
+        if (!apnsMemberOption.userIds) {
+            apnsContainMy = NO;
+        } else {
+ 
+            for (NSString* apnsUserId in apnsMemberOption.userIds) {
+                if ([userId isEqualToString:apnsUserId]) {
+                    apnsContainMy = YES;
+                    break;
+                }
+            }
+        }
+    } else {
+        //清除
+        apnsContainMy = NO;
+    }
+    // 自己发送的不显示
+    if ([userId isEqualToString:data.message.from]) {
+        apnsContainMy = NO;
+    }
+    
+    [self refreshText];
+    if (apnsContainMy) {
+        [self refreshResponseView];
+    } else {
+        [self.handleButton removeFromSuperview];
+        [self.receiveButton removeFromSuperview];
+        [self.responseButton removeFromSuperview];
+    }
+}
+
+- (void)refreshResponseView {
+    
+    NIMCustomObject *customObject = (NIMCustomObject*)self.model.message.messageObject;
     YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
     if ([attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) {
-        
-        NIMKitSetting *setting = [[NIMKit sharedKit].config setting:data.message];
-        self.textLabel.textColor = setting.textColor;;
-        self.textLabel.font      = setting.font;
-        [self.textLabel nim_setText:attachment.content];
         //如果是自己发送的则需要将其删除掉.不需要显示.
         if (attachment.isSender) {
             [self.receiveButton removeFromSuperview];
@@ -110,12 +144,22 @@
             [self.handleButton removeFromSuperview];
         }
         self.receiveButton.selected = attachment.canGet;
-//        self.responseButton.selected = attachment.isResponse;
         self.handleButton.selected = attachment.canFinish;
         self.receiveButton.enabled = !attachment.canGet;
-//        self.responseButton.enabled = !attachment.isResponse;
         self.handleButton.enabled = !attachment.isResponse;
     }
+}
+
+- (void)refreshText {
+    
+    NIMKitSetting *setting = [[NIMKit sharedKit].config setting:self.model.message];
+    self.textLabel.textColor = setting.textColor;
+    self.textLabel.font      = setting.font;
+    //        _textSetting.textColor = _isRight? YZHColorWithRGB(255, 255, 255) :
+    //        _textSetting.font      = [UIFont systemFontOfSize:15];
+    NSLog(@"消息%@", self.model.message.text);
+    [self.textLabel nim_setText:self.model.message.text];
+    NSLog(@"消息:%@",self.textLabel.text);
 }
 
 - (void)layoutSubviews{
@@ -128,10 +172,10 @@
     CGRect labelFrame = CGRectMake(contentInsets.left, contentInsets.top, contentsize.width, contentsize.height);
     self.textLabel.frame = labelFrame;
     
-    self.speedyResponseView.frame = CGRectMake(0, self.bubbleImageView.nim_bottom + 3, 165, 20);
-    self.receiveButton.frame = CGRectMake(0, self.bubbleImageView.nim_bottom + 3, 50, 20);
-    self.responseButton.frame = CGRectMake(50, self.bubbleImageView.nim_bottom + 3, 50, 20);
-    self.handleButton.frame = CGRectMake(100, self.bubbleImageView.nim_bottom + 3, 65, 20);
+    self.speedyResponseView.frame = CGRectMake(7.5, self.bubbleImageView.nim_bottom + 3, 165, 20);
+    self.receiveButton.frame = CGRectMake(7.5, self.bubbleImageView.nim_bottom + 3, 50, 20);
+    self.responseButton.frame = CGRectMake(57.5, self.bubbleImageView.nim_bottom + 3, 50, 20);
+    self.handleButton.frame = CGRectMake(107.5, self.bubbleImageView.nim_bottom + 3, 65, 20);
 }
 
 #pragma mark - M80AttributedLabelDelegate
