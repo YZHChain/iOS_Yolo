@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHStartInfo : NSObject
 
 + (instancetype)shareInstance;
+- (void)checkUserEveryDayTask; //检查当前账号,是否已调用今日任务接口
 
 @end
 

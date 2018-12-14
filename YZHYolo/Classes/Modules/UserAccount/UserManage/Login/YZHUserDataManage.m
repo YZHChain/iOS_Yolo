@@ -12,6 +12,7 @@
 #import "YZHUserLoginManage.h"
 
 static NSString* kYZHUserTeamLabelKey   = @"teamLabel";
+static NSString* kYZHUserTeamtaskCompleDateKey   = @"taskCompleDate";
 
 @interface YZHUserDataModel()
 
@@ -28,6 +29,9 @@ static NSString* kYZHUserTeamLabelKey   = @"teamLabel";
     if (_teamLabel.count) {
         [aCoder encodeObject:_teamLabel.mutableCopy forKey:kYZHUserTeamLabelKey];
     }
+    if ([_taskCompleDate isEqualToDate:[NSDate date]]) {
+        [aCoder encodeObject:_taskCompleDate forKey:kYZHUserTeamtaskCompleDateKey];
+    }
 }
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
@@ -37,6 +41,7 @@ static NSString* kYZHUserTeamLabelKey   = @"teamLabel";
         return nil;
     }
     self.teamLabel = [[aDecoder decodeObjectOfClass:[NSMutableArray class] forKey: kYZHUserTeamLabelKey] mutableCopy];
+    self.taskCompleDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:kYZHUserTeamtaskCompleDateKey];
     return self;
 }
 

@@ -111,7 +111,7 @@ static YZHNetworkConfig* _instance;
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
-    if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS] || [path containsString:PATH_TEAM_ADDUPDATEGROUP] || [path containsString:PATH_TEAM_DELETEGROUP] ) {
+    if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS] || [path containsString:PATH_TEAM_ADDUPDATEGROUP] || [path containsString:PATH_TEAM_DELETEGROUP] || [path containsString:PATH_INTEGRL_COLLARTASK] ) {
         httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpJSONManager;
     }
     [httpSessionManager POST:path parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {

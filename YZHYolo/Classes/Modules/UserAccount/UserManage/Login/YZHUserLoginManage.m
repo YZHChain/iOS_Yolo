@@ -11,6 +11,7 @@
 #import "UIViewController+YZHTool.h"
 #import "NIMKitFileLocationHelper.h"
 #import "NIMLoginClient.h"
+#import "YZHStartInfo.h"
 
 static NSString* kYZHIMAccountKey     = @"account";
 static NSString* kYZHIMTokenKey       = @"token";
@@ -272,6 +273,18 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
         [self executeHandInputLogin];
     }
 }
+
+- (void)onLogin:(NIMLoginStep)step {
+    
+    NSLog(@"登录状态回调%ld", step);
+    //等待数据同步成功之后,调用积分任务接口。
+    if (step == NIMLoginStepSyncOK) {
+        // 登录成功之后, 将数据发送到后台.
+        YZHStartInfo* startInfo = [YZHStartInfo shareInstance];
+        [startInfo checkUserEveryDayTask];
+    }
+}
+
 #pragma mark -- Set Get
 
 - (NSString *)filepath {

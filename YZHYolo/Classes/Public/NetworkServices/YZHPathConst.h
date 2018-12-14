@@ -46,4 +46,7 @@
 #define PATH_TEAM_RECOMMENDEDGROUP               @"https://yolotest.yzhchain.com/yolo-square/ymGroup/recommendedGroup" //推荐群列表
 #define PATH_TEAM_SEARCHGROUP               @"https://yolotest.yzhchain.com/yolo-square/ymGroup/search_group" //搜索群列表
 
+// 积分
+#define PATH_INTEGRL_COLLARTASK              @"https://yolotest.yzhchain.com/yolo-integral/api/collarTaskIntegral" //搜索群列表
+
 #endif /* YZHPathConst_h */

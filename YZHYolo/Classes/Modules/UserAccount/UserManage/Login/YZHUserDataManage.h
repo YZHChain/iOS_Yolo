@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHUserDataModel : NSObject<NSSecureCoding>
 
-@property (nonatomic, strong) NSMutableArray<NSString *>* teamLabel; //用户所推荐群标签
+@property (nonatomic, strong, nullable) NSMutableArray<NSString *>* teamLabel; //用户所推荐群标签
+@property (nonatomic, strong, nullable) NSDate* taskCompleDate; // 积分任务完成时间.
 
 @end
 
