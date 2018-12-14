@@ -33,8 +33,8 @@
     
     [super viewWillAppear:animated];
 
-    if (self.hideNavigationBar) {
-        self.navigationController.navigationBar.hidden = YES;
+    if (self.hideNavigationBar && self.navigationController.navigationBar.hidden == NO) {
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
     if (self.hideNavigationBarLine) {
 //        self.navigationController.navigationBarHidden = YES;
@@ -45,8 +45,8 @@
     
     [super viewWillDisappear:animated];
     
-    if (self.hideNavigationBar) {
-        self.navigationController.navigationBar.hidden = NO;
+    if (self.hideNavigationBar && self.navigationController.navigationBar.hidden == YES) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
     if (self.hideNavigationBarLine) {
 //        self.navigationController.navigationBarHidden = NO;
