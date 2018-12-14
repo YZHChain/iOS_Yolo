@@ -552,6 +552,8 @@
 		55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */; };
 		55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */; };
 		55F912D621661F4300EDF190 /* YZHQRCodeManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F912D521661F4300EDF190 /* YZHQRCodeManage.m */; };
+		55FB0BEB21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0BEA21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m */; };
+		55FB0BED21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -1569,6 +1571,9 @@
 		55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHReadPasswordView.xib; sourceTree = "<group>"; };
 		55F912D421661F4300EDF190 /* YZHQRCodeManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHQRCodeManage.h; sourceTree = "<group>"; };
 		55F912D521661F4300EDF190 /* YZHQRCodeManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHQRCodeManage.m; sourceTree = "<group>"; };
+		55FB0BE921C3AB3F008C95DE /* YZHPrivateChatDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatDefaultView.h; sourceTree = "<group>"; };
+		55FB0BEA21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatDefaultView.m; sourceTree = "<group>"; };
+		55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHPrivateChatDefaultView.xib; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1938,6 +1943,9 @@
 				55A0AF4F21BE9250004EAEE3 /* YZHSearchView.h */,
 				55A0AF5021BE9250004EAEE3 /* YZHSearchView.m */,
 				55A0AF5221BE925C004EAEE3 /* YZHSearchView.xib */,
+				55FB0BE921C3AB3F008C95DE /* YZHPrivateChatDefaultView.h */,
+				55FB0BEA21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m */,
+				55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4660,6 +4668,7 @@
 				553641B3217EAEC2006F77A5 /* NIMKitResource.bundle in Resources */,
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
 				55A0AF6B21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib in Resources */,
+				55FB0BED21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib in Resources */,
 				55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */,
 				55E506DE21B91BDE0052E0F4 /* YZHSearchTeamCell.xib in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
@@ -4910,6 +4919,7 @@
 				55B5DB7C2152236D002A04A9 /* YZHDiscoverVC.m in Sources */,
 				55C656A3215E5907005E997B /* YZHAddBookSettingCell.m in Sources */,
 				553641EF217EAEC3006F77A5 /* NIMAdvancedTeamCardViewController.m in Sources */,
+				55FB0BEB21C3AB3F008C95DE /* YZHPrivateChatDefaultView.m in Sources */,
 				55D580F221635871000A8B55 /* YZHAddBookAddFirendCell.m in Sources */,
 				55977D3C21B1175300309740 /* YZHSessionListLockCell.m in Sources */,
 				553641FB217EAEC3006F77A5 /* NIMVideoContentConfig.m in Sources */,

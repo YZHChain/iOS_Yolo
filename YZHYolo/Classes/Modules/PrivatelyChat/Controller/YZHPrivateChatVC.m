@@ -37,6 +37,7 @@
 #import "YZHUnreadMessageView.h"
 #import "YZHAlertManage.h"
 
+
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
                                NIMSystemNotificationManagerDelegate,

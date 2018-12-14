@@ -21,6 +21,7 @@
 #import "YZHPrivatelyChatSearchVC.h"
 #import "YZHPrivateChatVC.h"
 #import "YZHSearchView.h"
+#import "YZHPrivateChatDefaultView.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -48,6 +49,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 @property (nonatomic, strong) YZHSearchView* searchView;
 @property (nonatomic, strong) YZHSearchView* tagSearchView;
+@property (nonatomic, strong) YZHPrivateChatDefaultView* defaultView;
 
 @end
 
@@ -196,10 +198,13 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 #pragma mark -- Private
 - (void)refresh{
     
-    NSLog(@"刷新");
-    [self.tableView reloadData];
-    [self.tagsTableView reloadData];
-    NSLog(@"刷新结束");
+    if (self.recentSessions.count) {
+        [self.tableView reloadData];
+        [self.tagsTableView reloadData];
+        [self.defaultView removeFromSuperview];
+    } else {
+        [self.view addSubview:self.defaultView];
+    }
 }
 
 - (void)customSortRecents:(NSMutableArray *)recentSessions
@@ -827,6 +832,15 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _tagSearchView;
+}
+
+- (YZHPrivateChatDefaultView *)defaultView {
+    
+    if (!_defaultView) {
+        _defaultView = [YZHPrivateChatDefaultView yzh_viewWithFrame:self.view.bounds];
+        [_defaultView.searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _defaultView;
 }
 
 @end

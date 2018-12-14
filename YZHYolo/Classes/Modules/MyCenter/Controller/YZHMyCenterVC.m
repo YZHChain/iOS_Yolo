@@ -76,6 +76,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     self.headerView.userModel = self.userModel;
+    [self.headerView yzh_addGradientLayerView];
 }
 
 - (void)reloadView
