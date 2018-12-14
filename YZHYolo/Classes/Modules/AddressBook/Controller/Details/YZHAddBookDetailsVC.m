@@ -162,7 +162,7 @@
             [self refresh];
         } else {
 //            if (error.code != 408) {
-            [self refreshErrorUserDeailsRefreshWithError:error];
+            [self refreshError:error];
 //            }
         }
         [hud hideWithText:nil];
@@ -175,6 +175,15 @@
         [self teamMemberDeailsRefresh];
     } else { //刷新从非群聊页面进入的个人详情
         [self userDeailsRefresh];
+    }
+}
+
+- (void)refreshError:(NSError *)error {
+    
+    if (self.isTeam && !self.isMyFriend) { // 刷新从群聊页面进入的个人详情
+        [self teamMemberDeailsRefreshError:error];
+    } else { //刷新从非群聊页面进入的个人详情
+        [self userDeailsRefreshError:error];
     }
 }
 
@@ -255,8 +264,14 @@
     }
 }
 
-- (void)refreshErrorUserDeailsRefreshWithError:(NSError* )error {
+- (void)teamMemberDeailsRefreshError:(NSError* )error {
     
+//    [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
+    [self.userAskFooterView removeFromSuperview];
+}
+
+- (void)userDeailsRefreshError:(NSError* )error {
+   
     [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
     self.userAskFooterView.sendMessageButton.enabled = NO;
 }

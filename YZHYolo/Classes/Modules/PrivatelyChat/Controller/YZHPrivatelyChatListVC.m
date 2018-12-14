@@ -198,7 +198,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 #pragma mark -- Private
 - (void)refresh{
     
-    if (self.recentSessions.count) {
+    if (self.recentSessionExtManage.tagsRecentSession.count) {
         [self.tableView reloadData];
         [self.tagsTableView reloadData];
         [self.defaultView removeFromSuperview];
@@ -517,7 +517,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 60;
+    return 65;
 }
 
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
