@@ -425,6 +425,7 @@
                 <outlet property="codeTipLabel" destination="nMi-JW-AwC" id="zdI-0c-Uag"/>
                 <outlet property="contentView" destination="EWV-nj-Dhw" id="UuN-g9-4Ur"/>
                 <outlet property="phoneTextField" destination="9Hv-Hy-n0z" id="vTo-9Z-Kfk"/>
+                <outlet property="protocolButton" destination="RqG-33-s39" id="DN4-dT-sqA"/>
                 <outlet property="protocolSlectedButton" destination="swg-gS-1AX" id="pyA-Gh-dwS"/>
                 <outlet property="registerButton" destination="EMA-wF-DKz" id="qJx-BJ-cSv"/>
             </connections>

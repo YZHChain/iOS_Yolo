@@ -1,19 +1,17 @@
 //
-//  YZHDiscountVC.m
+//  YZHAboutYoloWebVC.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/12/11.
+//  Created by Jersey on 2018/12/6.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHDiscountVC.h"
-
+#import "YZHWKWebVC.h"
 #import <WebKit/WebKit.h>
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
-#import "ZXingObjC.h"
 
-@interface YZHDiscountVC ()<WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
+@interface YZHWKWebVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView* webView;
 @property (nonatomic, strong) UIProgressView *progressView;
@@ -22,7 +20,7 @@
 @property (nonatomic, strong) NSString* userId;
 @end
 
-@implementation YZHDiscountVC
+@implementation YZHWKWebVC
 
 
 #pragma mark - 1.View Controller Life Cycle
@@ -56,42 +54,34 @@
     }
 }
 
-- (void)viewWillLayoutSubviews {
-    
-    [super viewWillLayoutSubviews];
-}
-
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"异业联盟";
+    if (YZHIsString(_navTitle)) {
+        self.navigationItem.title = self.navTitle;
+    }
+    super.hideNavigationBar = true;
 }
 
 - (void)setupView
 {
-    super.hideNavigationBar = true;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:[self wkWebView]];
-    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-
+    [self.view addSubview:[self wkWebVie]];
+    
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
 }
 
--(WKWebView*)wkWebView {
-    
+-(WKWebView*)wkWebVie {
     if (self.webView==nil) {
         //创建并配置WKWebView的相关参数
         WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
         WKUserContentController *userContentController = [[WKUserContentController alloc] init];
-        
+        [userContentController addScriptMessageHandler:self name:@"InvitePhoneContact"];
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
-        [userContentController addScriptMessageHandler:self name:@"SAVEQR"];
-        [userContentController addScriptMessageHandler:self name:@"GOROOT"];
+        
         configuration.userContentController = userContentController;
         
         WKPreferences *preferences = [WKPreferences new];
@@ -103,34 +93,19 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
-        NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.yoloId;
-        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
-        NSString* userNick = user.userInfo.nickName;
-        NSString* userPic = user.userInfo.avatarUrl;
-        
-        if (YZHIsString(userPic)) {
-            userPic = [userPic stringByReplacingOccurrencesOfString:@"=" withString:@"%3D"];
-        } else {
-            userPic = nil;
-        }
         if (self.url == nil) {
-            if (YZHIsString(userPic)) {
-               self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
-            } else {
-                self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios", yolo_no, userNick];
-            }
+            self.url = @"https://yolotest.yzhchain.com/yolo-web/html/about/registration_agreement.html?platform=ios";
+        } else {
+            //暂时写死
+            self.url = [NSString stringWithFormat:@"%@?platform=ios", self.url];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-        if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {
-            urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
-        }
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:60 * 60 * 3];
-        [self.webView loadRequest: theRequest];
+        [self.webView loadRequest:theRequest ];
+        //        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
@@ -142,9 +117,8 @@
 }
 
 -(void)removeScriptMessageHandler{
+    
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOBACK"];
-    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SAVEQR"];
-    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOROOT"];
 }
 
 
@@ -171,51 +145,6 @@
     
 }
 
-- (void)saveImageToPhotos:(UIImage*)savedImage {
-    // TODO: 先检查设备是否授权访问相册
-    UIImageWriteToSavedPhotosAlbum(savedImage, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
-    if (error == nil) {
-        //        [self.view makeToast:@"图片已经保存到相册"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
-        [YZHProgressHUD showText:@"图片已经保存到相册" onView:self.webView];
-    }else{
-        //        [self.view makeToast:@"图片保存失败,请重试"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
-        [YZHProgressHUD showText:@"图片保存失败,请重试" onView:self.webView];
-    }
-}
-
-- (void)creatQRCodeAndSavaToPotosWithQRString:(NSString *)qrString  {
-    //生成二维码
-    NSError *error = nil;
-    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
-    CGSize imageSize = CGSizeMake(217, 217);
-    ZXBitMatrix* result = [writer encode:qrString
-                                  format:kBarcodeFormatQRCode
-                                   width:imageSize.width
-                                  height:imageSize.height
-                                   error:&error];
-    if (result) {
-        CGImageRef image = CGImageRetain([[ZXImage imageWithMatrix:result] cgimage]);
-        
-        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
-        //保存图片
-        [self saveImageToPhotos:[UIImage imageWithCGImage:image]];
-        
-        CGImageRelease(image);
-    } else {
-        
-        [YZHProgressHUD showText:@"二维码图像处理失败, 请重试" onView:self.webView];
-    }
-}
-
-#pragma mark - 7.GET & SET
-
 #pragma mark - WKScriptMessageHandler
 -(void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     
@@ -223,29 +152,7 @@
         [self.navigationController popViewControllerAnimated:true];
         return;
     }
-    if ([message.name isEqualToString:@"SAVEQR"]) { //邀请码界面-保存二维码
-        NSString* qrString = @"";
-        if([message.body isKindOfClass:[NSString class]]){
-            qrString = message.body;
-        } else if([message.body isKindOfClass:[NSNumber class]]){
-            NSNumber* body = message.body;
-            qrString = body.stringValue;
-        } else {
-            qrString = message.body;
-        }
-        if (YZHIsString(qrString)) {
-            [self creatQRCodeAndSavaToPotosWithQRString:qrString];
-        } else {
-            [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];
-        }
-        return;
-    }
-    if ([message.name isEqualToString:@"GOROOT"]) {
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        
-        return;
-    }
+    return;
 }
 
 //内容返回时调用
@@ -263,6 +170,7 @@
     [self hideHUDError:error];
 }
 
+
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     self.hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
 }
@@ -274,6 +182,7 @@
 -(void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error{
     [self hideHUDError:error];
 }
+
 //服务器开始请求的时候调用
 -(void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
     Boolean flag = false;
@@ -283,10 +192,10 @@
             break;
         }
         case WKNavigationTypeFormSubmitted: {
+            flag = [self pushCurrentSnapshotViewWithRequest:navigationAction.request];
             break;
         }
         case WKNavigationTypeBackForward: {
-            NSLog(@"返回上一个页面类型");
             break;
         }
         case WKNavigationTypeReload: {
@@ -322,28 +231,20 @@
     if ([request.URL.absoluteString isEqualToString:@"about:blank"]) {
         return false;
     }
-    if([[self wkWebView].URL.absoluteString isEqualToString: request.URL.absoluteString]){
-        return false;
-    }
     if (![request.URL.absoluteString containsString:@"https://yolo"]) {
         return false;
     }
     
-    if ([request.URL.query containsString:@"goback=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
-        
-        [self.navigationController popViewControllerAnimated:YES];
+    if([[self wkWebVie].URL.absoluteString isEqualToString: request.URL.absoluteString]){
         return false;
     }
-    if ([request.URL.query containsString:@"goRoot=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        return false;
-    }
-    YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
+    
+    YZHWKWebVC* vc = [[YZHWKWebVC alloc] init];
     vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];
-    NSLog(@"URL:-----%@-----",request.URL.absoluteString);
     
     return true;
+    
 }
 
 //提示框
@@ -388,14 +289,7 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
-        //        [self.progressView setProgress:[self wkWebVie].estimatedProgress animated:YES];
-        //        if ([self wkWebVie].estimatedProgress < 1.0) {
-        //            self.delayTime = 1 - self.webView.estimatedProgress;
-        //            return;
-        //        }
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //            self.progressView.progress = 0;
-        //        });
+        
     }
 }
 
@@ -418,55 +312,5 @@
     return _userId;
 }
 
-//自定义清除缓存
-- (void)deleteWebCache {
-    /*
-     在磁盘缓存上。
-     WKWebsiteDataTypeDiskCache,
-     
-     html离线Web应用程序缓存。
-     WKWebsiteDataTypeOfflineWebApplicationCache,
-     
-     内存缓存。
-     WKWebsiteDataTypeMemoryCache,
-     
-     本地存储。
-     WKWebsiteDataTypeLocalStorage,
-     
-     Cookies
-     WKWebsiteDataTypeCookies,
-     
-     会话存储
-     WKWebsiteDataTypeSessionStorage,
-     
-     IndexedDB数据库。
-     WKWebsiteDataTypeIndexedDBDatabases,
-     
-     查询数据库。
-     WKWebsiteDataTypeWebSQLDatabases
-     */
-    if (@available(iOS 9.0, *)) {
-//        NSArray * types=@[WKWebsiteDataTypeCookies,WKWebsiteDataTypeLocalStorage, WKWebsiteDataTypeSessionStorage,WKWebsiteDataTypeMemoryCache,WKWebsiteDataTypeDiskCache];
-        NSArray * types=@[WKWebsiteDataTypeLocalStorage];
-        
-        NSSet *websiteDataTypes= [NSSet setWithArray:types];
-        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-        }];
-    } else {
-        // Fallback on earlier versions
-    }
-}
-
-- (void)deleteAllWebCache {
-    //allWebsiteDataTypes清除所有缓存
-    NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
-    
-    NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
-    
-    [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
-        
-    }];
-}
-
 @end
+

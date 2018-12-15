@@ -63,6 +63,7 @@ extern NSString *const kYZHRouterSettingCenter;
 extern NSString *const kYZHRouterPrivacySetting;
 extern NSString *const kYZHRouterPrivacyPassword;
 extern NSString *const kYZHRouterMyIntegral;
+extern NSString *const kYZHRouterWKWeb;
 
 #pragma mark -- AddressBook
 

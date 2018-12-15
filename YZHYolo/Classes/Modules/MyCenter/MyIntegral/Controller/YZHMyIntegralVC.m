@@ -99,14 +99,14 @@
         self.webView.navigationDelegate = self;
         NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yoloserver.yzhchain.com/yolo-web/html/integral/index_page.html?userId=%@&platform=ios", yolo_no];
+            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/html/integral/index_page.html?userId=%@&platform=ios", yolo_no];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                              timeoutInterval:20];
+                                                              timeoutInterval:60 * 60 * 3];
         [self.webView loadRequest:theRequest ];
         
 //        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];

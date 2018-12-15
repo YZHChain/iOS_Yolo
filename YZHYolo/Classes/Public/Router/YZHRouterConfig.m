@@ -57,6 +57,8 @@ NSString* const kYZHRouterPrivacySetting          = @"/myCenter/privacySetting";
 NSString *const kYZHRouterPrivacyPassword          = @"/myCenter/privacySetting/password";
 NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
 NSString* const kYZHRouterMyIntegral              = @"/myCenter/myIntegral";
+NSString* const kYZHRouterWKWeb                   = @"/myCenter/wkWeb";
+
 
 #pragma mark -- AddressBook
 
@@ -73,8 +75,6 @@ NSString* const kYZHRouterAddressBookScanQRCode  = @"/addressBook/scanQRCode";
 NSString* const kYZHRouterAddressBookAddFirendRecord = @"/addressBook/addFirendRecord";
 NSString *const kYZHRouterAddressBookSearchTeam = @"/addressBook/searchTeam";
 NSString *const kYZHRouterAddressBookSearchFirend  = @"/teamChat/searchFriend";
-
-
 
 #pragma mark -- Session
 
@@ -221,6 +221,12 @@ NSString *const kYZHRouterTeamRecruitSearch = @"/teamRecruit/search";
                      },
              kYZHRouterPrivacyPassword: @{
                      kYZHRouteViewControllerClassKey: @"YZHPrivacyReadPasswordVC",
+                     kYZHRouteViewControllerNameKey: @"阅读密码",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterWKWeb: @{
+                     kYZHRouteViewControllerClassKey: @"YZHWKWebVC",
                      kYZHRouteViewControllerNameKey: @"阅读密码",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",

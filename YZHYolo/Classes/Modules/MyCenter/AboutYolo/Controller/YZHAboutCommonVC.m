@@ -91,13 +91,13 @@
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
         if (self.url == nil) {
-            self.url = @"https://yoloserver.yzhchain.com/yolo-web/html/about/common_problem.html?platform=ios";
+            self.url = @"https://yolotest.yzhchain.com/yolo-web/html/about/common_problem.html?platform=ios";
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                              timeoutInterval:20];
+                                                              timeoutInterval:60 * 60 * 3];
         [self.webView loadRequest:theRequest ];
         //        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;

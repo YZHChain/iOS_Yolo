@@ -212,11 +212,12 @@
     }];
 }
 
-
 // 阅读协议.
 - (void)clickReadProtocol:(UIButton *)sender {
     
-    
+    [YZHRouter openURL:kYZHRouterWKWeb info:@{
+                                              @"navTitle": @"注册协议"
+                                              }];
 }
 #pragma mark - 6.Private Methods
 

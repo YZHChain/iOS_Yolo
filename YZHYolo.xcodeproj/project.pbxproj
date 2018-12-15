@@ -555,6 +555,7 @@
 		55FB0BED21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0BEC21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib */; };
 		55FB0BF221C3E0BC008C95DE /* YZHSearchTeamShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0BF021C3E0BC008C95DE /* YZHSearchTeamShowCell.m */; };
 		55FB0BF321C3E0BC008C95DE /* YZHSearchTeamShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0BF121C3E0BC008C95DE /* YZHSearchTeamShowCell.xib */; };
+		55FB0BF921C4DA71008C95DE /* YZHWKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0BF821C4DA71008C95DE /* YZHWKWebVC.m */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -1577,6 +1578,8 @@
 		55FB0BEF21C3E0BC008C95DE /* YZHSearchTeamShowCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchTeamShowCell.h; sourceTree = "<group>"; };
 		55FB0BF021C3E0BC008C95DE /* YZHSearchTeamShowCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchTeamShowCell.m; sourceTree = "<group>"; };
 		55FB0BF121C3E0BC008C95DE /* YZHSearchTeamShowCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHSearchTeamShowCell.xib; sourceTree = "<group>"; };
+		55FB0BF721C4DA71008C95DE /* YZHWKWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHWKWebVC.h; sourceTree = "<group>"; };
+		55FB0BF821C4DA71008C95DE /* YZHWKWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHWKWebVC.m; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2307,6 +2310,8 @@
 				55A0AF7021BFD2B7004EAEE3 /* YZHAboutCharacteristicVC.m */,
 				55A0AF7221BFD2D8004EAEE3 /* YZHAboutFeedBackVC.h */,
 				55A0AF7321BFD2D8004EAEE3 /* YZHAboutFeedBackVC.m */,
+				55FB0BF721C4DA71008C95DE /* YZHWKWebVC.h */,
+				55FB0BF821C4DA71008C95DE /* YZHWKWebVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4875,6 +4880,7 @@
 				55BDA36D2189BF27006400B0 /* FSTextView.m in Sources */,
 				5536420A217EAEC3006F77A5 /* NIMSessionInteractorImpl.m in Sources */,
 				55C656CB215F5FAE005E997B /* YZHAddBookSetTagCell.m in Sources */,
+				55FB0BF921C4DA71008C95DE /* YZHWKWebVC.m in Sources */,
 				5581916521A2681200C74E2E /* YZHSharedContactVC.m in Sources */,
 				55B5DB9621528566002A04A9 /* YZHMyCenterCell.m in Sources */,
 				553641E1217EAEC2006F77A5 /* NIMTeamMemberListViewController.m in Sources */,
