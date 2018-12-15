@@ -49,6 +49,17 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+//    NSLog(@"%f", self.view.height);
+//    [self.view layoutIfNeeded];
+//    [self.view yzh_addGradientLayerView];
+//    NSLog(@"%f", self.view.height);
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    [self.view yzh_addGradientLayerView];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -62,9 +73,6 @@
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
-    
-    [self.view layoutIfNeeded];
-    [self.view yzh_addGradientLayerView];
     
     NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
     if (YZHIsString(user.userInfo.nickName)) {

@@ -50,12 +50,15 @@ static id instance;
 //TODO: 字典异常捕获,
 - (NSString *)confignInfoJson{
     
-    NSDictionary *info = @{@"uuid": self.UUID,
-                           @"name": self.name,
-                           @"machine": self.machine,
-                           @"systemName": self.systemName,
-                           @"systemVersion": self.systemVersion,
-                           @"resolution": self.resolution,
+//    NSDictionary *info = @{@"uuid": self.UUID,
+//                           @"name": self.name,
+//                           @"machine": self.machine,
+//                           @"systemName": self.systemName,
+//                           @"systemVersion": self.systemVersion,
+//                           @"resolution": self.resolution,
+//                           };
+    NSDictionary* info = @{
+                           @"uuid": self.UUID,
                            };
     NSData *data = [NSJSONSerialization dataWithJSONObject:info options:0 error:nil];
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -63,5 +66,24 @@ static id instance;
 }
 
 #pragma GET & SET
+
+- (NSString *)UUID
+{
+    //初始化keychain
+    //TODO:搞清楚accessGroup为什么传nil
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"UUID" accessGroup:nil];
+    //从keychain中取uuid
+    NSString *uuidString = (NSString *)[wrapper objectForKey:(id)kSecValueData];
+    //uuid为空，生成一个并存到keychain
+    if (uuidString.length == 0) {
+        //生成一个uuid的方法
+        uuidString = [[NSUUID UUID] UUIDString];
+        //去掉横杠
+        //uuidString = [uuidString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        //将该uuid保存到keychain
+        [wrapper setObject:uuidString forKey:(id)kSecValueData];
+    }
+    return uuidString;
+}
 
 @end

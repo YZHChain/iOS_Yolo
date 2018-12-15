@@ -53,6 +53,14 @@ static NSArray* buttonArray;
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    [self.view yzh_addGradientLayerView];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -66,6 +74,7 @@ static NSArray* buttonArray;
 - (void)setupView
 {
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
+    [self.view yzh_addGradientLayerView];
     
     [self.callCameraButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];
     [self.callPhotoButton yzh_setBackgroundColor:[UIColor yzh_backgroundThemeGray] forState:UIControlStateHighlighted];

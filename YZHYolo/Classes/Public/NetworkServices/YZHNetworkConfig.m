@@ -228,9 +228,9 @@ static YZHNetworkConfig* _instance;
         // TODO设置请求超时时间
         httpSessionManager.requestSerializer.timeoutInterval = YZHAPIDefaultTimeoutInterval;
         // HTTPHeader添加设备信息
-//        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
+        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
         // TODO 需和后台协商
-//        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
+        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
         // 数据序列化处理
         httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
 //        httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -253,10 +253,10 @@ static YZHNetworkConfig* _instance;
         httpSessionManager.securityPolicy = [self securityPolicy];
         // TODO设置请求超时时间
         httpSessionManager.requestSerializer.timeoutInterval = YZHAPIDefaultTimeoutInterval;
-        // HTTPHeader添加设备信息
-        //        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
-        // TODO 需和后台协商
-        //        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
+//         HTTPHeader添加设备信息
+        NSString *deviceInfoString = [[YZHDevice shareDevice] deviceInfoJsonString];
+//         TODO 需和后台协商
+        [httpSessionManager.requestSerializer setValue:deviceInfoString forHTTPHeaderField:@"DeviceInfo"];
         // 数据序列化处理
         httpSessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
         httpSessionManager.responseSerializer = [AFJSONResponseSerializer serializer];

@@ -220,8 +220,13 @@
 
 - (void)yzh_addGradientLayerView {
     
+    for (UIView* subView in self.subviews) {
+        if (subView.tag == 100) {
+            return;
+        }
+    }
     UIView *sysView = [[UIView alloc] init];
-
+    sysView.tag = 100;//防止重复添加
     [self insertSubview:sysView atIndex:0];
     [sysView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.mas_equalTo(0);
