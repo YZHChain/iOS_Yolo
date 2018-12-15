@@ -116,9 +116,9 @@
         }
         if (self.url == nil) {
             if (YZHIsString(userPic)) {
-               self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
+               self.url = [NSString stringWithFormat:@"https://yoloserver.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
             } else {
-                self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios", yolo_no, userNick];
+                self.url = [NSString stringWithFormat:@"https://yoloserver.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios", yolo_no, userNick];
             }
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

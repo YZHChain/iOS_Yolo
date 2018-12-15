@@ -61,6 +61,8 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     
     [self.view addSubview:self.tableView];
     
+    [self.tableView setTableHeaderView:self.searchView];
+    
 }
 
 #pragma mark - 3.Request Data
@@ -115,7 +117,6 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     return view;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -169,7 +170,6 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
         [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookAddFirendCell" bundle:nil] forCellReuseIdentifier:kaddFirendCellIdentifier];
         _tableView.tableFooterView = [[UIView alloc] init];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tableView.tableHeaderView = self.searchView;
         _tableView.rowHeight = kYZHCellHeight;
     }
     return _tableView;
@@ -181,6 +181,7 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
         _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         _searchView.searchLabel.text = @"搜索";
+        [self.tableView addSubview:_searchView];
     }
     return _searchView;
 }

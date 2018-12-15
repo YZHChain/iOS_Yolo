@@ -514,7 +514,6 @@
 		55D580E32163240B000A8B55 /* YZHAddBookDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580DB2163240B000A8B55 /* YZHAddBookDetailsVC.m */; };
 		55D580E721632479000A8B55 /* YZHAddressBookVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580E621632478000A8B55 /* YZHAddressBookVC.m */; };
 		55D580EC21632541000A8B55 /* YZHAddBookAddFirendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580EA21632541000A8B55 /* YZHAddBookAddFirendVC.m */; };
-		55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D580EB21632541000A8B55 /* YZHAddBookAddFirendVC.xib */; };
 		55D580F221635871000A8B55 /* YZHAddBookAddFirendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580F021635871000A8B55 /* YZHAddBookAddFirendCell.m */; };
 		55D580F321635871000A8B55 /* YZHAddBookAddFirendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D580F121635871000A8B55 /* YZHAddBookAddFirendCell.xib */; };
 		55D580F721635976000A8B55 /* YZHAddBookFirendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55D580F621635976000A8B55 /* YZHAddBookFirendModel.m */; };
@@ -1506,7 +1505,6 @@
 		55D580E621632478000A8B55 /* YZHAddressBookVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZHAddressBookVC.m; sourceTree = "<group>"; };
 		55D580E921632541000A8B55 /* YZHAddBookAddFirendVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendVC.h; sourceTree = "<group>"; };
 		55D580EA21632541000A8B55 /* YZHAddBookAddFirendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendVC.m; sourceTree = "<group>"; };
-		55D580EB21632541000A8B55 /* YZHAddBookAddFirendVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookAddFirendVC.xib; sourceTree = "<group>"; };
 		55D580EF21635871000A8B55 /* YZHAddBookAddFirendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendCell.h; sourceTree = "<group>"; };
 		55D580F021635871000A8B55 /* YZHAddBookAddFirendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendCell.m; sourceTree = "<group>"; };
 		55D580F121635871000A8B55 /* YZHAddBookAddFirendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHAddBookAddFirendCell.xib; sourceTree = "<group>"; };
@@ -4313,7 +4311,6 @@
 			children = (
 				55D580E921632541000A8B55 /* YZHAddBookAddFirendVC.h */,
 				55D580EA21632541000A8B55 /* YZHAddBookAddFirendVC.m */,
-				55D580EB21632541000A8B55 /* YZHAddBookAddFirendVC.xib */,
 				5520584121995DEE00591A4A /* YZHAddFirendSearchVC.h */,
 				5520584221995DEE00591A4A /* YZHAddFirendSearchVC.m */,
 				555B8080219BC25300168C3C /* YZHAddFirendSendVerifyVC.h */,
@@ -4686,7 +4683,6 @@
 				55BD866B215E0CA700D23ED1 /* YZHAddBookAdditionalCell.xib in Resources */,
 				55A0AF6B21BFB1BF004EAEE3 /* YZHCommandTipLabelView.xib in Resources */,
 				55FB0BED21C3AB48008C95DE /* YZHPrivateChatDefaultView.xib in Resources */,
-				55D580ED21632541000A8B55 /* YZHAddBookAddFirendVC.xib in Resources */,
 				55E506DE21B91BDE0052E0F4 /* YZHSearchTeamCell.xib in Resources */,
 				55C239DF2148F07800200798 /* YZHAppConfig.plist in Resources */,
 				5537422A21A6D3D800204972 /* YZHCommunityAtMemberVC.xib in Resources */,

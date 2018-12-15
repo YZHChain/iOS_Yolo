@@ -28,7 +28,10 @@
 
 - (void)checkUserEveryDayTask {
     
-    NSDate* taskCompleDate = [[[YZHUserDataManage sharedManager] currentUserData] taskCompleDate];
+    YZHUserDataManage* dateManage = [YZHUserDataManage sharedManager];
+    YZHUserDataModel* currentUserData =  dateManage.currentUserData;
+    
+    NSDate* taskCompleDate = currentUserData.taskCompleDate;
     if (taskCompleDate) {
         NSDate* currentTime = [NSDate date];
         NSTimeInterval currentTimeinter = [currentTime timeIntervalSince1970] * 1;

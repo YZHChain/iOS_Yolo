@@ -86,4 +86,34 @@ static id instance;
     return uuidString;
 }
 
+- (NSString *)name
+{
+    return [UIDevice currentDevice].name;
+}
+
+//- (NSString *)machine
+//{
+//    struct utsname systemInfo;
+//    uname(&systemInfo);
+//    NSString *machineStr = [NSString stringWithCString:systemInfo.machine  encoding:NSUTF8StringEncoding];
+//    return machineStr;
+//}
+
+- (NSString *)systemName
+{
+    return [UIDevice currentDevice].systemName;
+}
+
+- (NSString *)systemVersion
+{
+    return [UIDevice currentDevice].systemVersion;
+}
+
+- (NSString *)resolution
+{
+    CGFloat width = [UIScreen mainScreen].bounds.size.width * [UIScreen mainScreen].scale;
+    CGFloat height = [UIScreen mainScreen].bounds.size.height * [UIScreen mainScreen].scale;
+    return [NSString stringWithFormat:@"%@*%@",@(width) ,@(height)];
+}
+
 @end
