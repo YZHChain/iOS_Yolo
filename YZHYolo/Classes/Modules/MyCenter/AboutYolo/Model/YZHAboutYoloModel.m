@@ -34,7 +34,9 @@
 - (NSArray<YZHAboutYoloContentModel *> *)list {
     
     if (!_list) {
-        NSString* version = @"v1.0.0";
+        NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        
+        NSString* version = [NSString stringWithFormat:@"v%@", currentVersion];
         NSArray* contenArray = @[
                                  @{@"content": @[@{@"title": @"关于YOLO",
                                                    @"subtitle":@"",
@@ -65,6 +67,20 @@
         
     }
     return _list;
+}
+
+- (NSString *)encodeVersion {
+//    if (encodeVersion == nil) {
+        NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        NSMutableArray<NSString *> *versionArray = [[appVersion componentsSeparatedByString:@"."] mutableCopy];
+        for (int i=0; i<3; i++) {
+            if (i > versionArray.count-1) {
+                [versionArray addObject:@"0"];
+            }
+        }
+       NSString* encodeVersion = [NSString stringWithFormat:@"%02d%02d%02d",versionArray[0].intValue ,versionArray[1].intValue ,versionArray[2].intValue];
+//    }
+    return encodeVersion;
 }
 
 @end
