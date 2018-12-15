@@ -95,7 +95,7 @@
         NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
         NSString* userNick = user.userInfo.nickName;
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios", yolo_no, userNick];
+            self.url = [NSString stringWithFormat:@"https://yoloserver.yzhchain.com/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios", yolo_no, userNick];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];

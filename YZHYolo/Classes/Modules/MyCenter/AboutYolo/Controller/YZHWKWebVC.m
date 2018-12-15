@@ -94,7 +94,7 @@
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
         if (self.url == nil) {
-            self.url = @"https://yolotest.yzhchain.com/yolo-web/html/about/registration_agreement.html?platform=ios";
+            self.url = @"https://yoloserver.yzhchain.com/yolo-web/html/about/registration_agreement.html?platform=ios";
         } else {
             //暂时写死
             self.url = [NSString stringWithFormat:@"%@?platform=ios", self.url];
