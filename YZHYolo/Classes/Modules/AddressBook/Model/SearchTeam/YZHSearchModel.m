@@ -57,6 +57,7 @@
              @"recommendArray": [YZHSearchModel class],
              @"searchArray": [YZHSearchModel class],
              @"recommendRecruitArray": [YZHSearchRecruitModel class],
+             @"searchRecruitArray": [YZHSearchRecruitModel class],
              };
 }
 
@@ -66,6 +67,7 @@
              @"recommendArray": @"beans",
              @"searchArray": @"beans",
              @"recommendRecruitArray": @"beans",
+             @"searchRecruitArray": @"beans",
              };
 }
 

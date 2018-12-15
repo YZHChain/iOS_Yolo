@@ -263,7 +263,6 @@
     [self hideHUDError:error];
 }
 
-
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
     self.hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
 }

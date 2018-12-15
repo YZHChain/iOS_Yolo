@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSearchListModel : NSObject
 
-@property (nonatomic, strong) NSMutableArray<YZHSearchRecruitModel *>* searchRecruitArray;
+@property (nonatomic, strong) NSMutableArray<YZHSearchRecruitModel *>* searchRecruitArray; //搜索招募列表
 @property (nonatomic, strong) NSMutableArray<YZHSearchRecruitModel *>* recommendRecruitArray; // 推荐列表
 @property (nonatomic, strong) NSMutableArray<YZHSearchModel *>* searchArray; // 后台接口搜索结果
 @property (nonatomic, strong) NSMutableArray<YZHSearchModel *>* recommendArray; // 推荐列表

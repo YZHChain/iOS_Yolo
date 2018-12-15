@@ -75,7 +75,6 @@
     return size;
 }
 
-
 - (UIEdgeInsets)contentViewInsets{
     if (UIEdgeInsetsEqualToEdgeInsets(_contentViewInsets, UIEdgeInsetsZero))
     {

@@ -100,6 +100,8 @@
     {
         self.navigationItem.title = _currentItem.name;
     }
+    //统一浏览图片时导航栏标题
+    self.navigationItem.title = @"图片浏览";
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPressImageView:)];
     [self.scrollView addGestureRecognizer:recognizer];
