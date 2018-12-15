@@ -137,14 +137,14 @@ static YZHNetworkConfig* _instance;
     
     NSString* urlServerString;
 
-#if DEBUG
-    // 配置测试服
-    urlServerString = [YZHServicesConfig debugTestServerConfig];
-    
-#else
-    
-    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
-#endif
+//#if DEBUG
+//    // 配置测试服
+//    urlServerString = [YZHServicesConfig debugTestServerConfig];
+//    
+//#else
+//    
+//    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+//#endif
     
     return urlServerString;
     
