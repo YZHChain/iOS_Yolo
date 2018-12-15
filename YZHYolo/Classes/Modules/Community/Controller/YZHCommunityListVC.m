@@ -177,11 +177,13 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         }
     } else {
         [self.view addSubview:self.defaultView];
-        self.defaultView.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"您还没有最近回话, 广场有很多优质的群 快去看一下吧"];
+        self.defaultView.titleLabel.text = @"您的群列表已被清空，请使用上方的【搜索我的群】\n功能查找您的群 \n\n(群内有新信息时也会自动展示出来）";
+        self.defaultView.findTeamButton.hidden = YES;
         BOOL teamAcount = [[[NIMSDK sharedSDK] teamManager] allMyTeams].count;
         if (!teamAcount) {
             [self.view addSubview:self.defaultView];
-            self.defaultView.titleLabel.attributedText = [[NSAttributedString alloc] initWithString:@"您还没有群, 广场有很多优质的群 快去看一下吧"];
+            self.defaultView.titleLabel.text = @"您还没有群, 广场有很多优质的群 \n快去看一下吧";
+            self.defaultView.findTeamButton.hidden = NO;
         }
     }
 }

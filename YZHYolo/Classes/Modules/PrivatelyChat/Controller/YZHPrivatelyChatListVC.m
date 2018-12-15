@@ -165,6 +165,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }
     self.tableView.hidden = YES;
     self.tagsTableView.hidden = NO;
+    [self refresh];
     
 }
 

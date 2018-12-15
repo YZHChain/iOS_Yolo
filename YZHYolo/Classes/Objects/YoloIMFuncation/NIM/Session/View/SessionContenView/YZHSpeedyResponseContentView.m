@@ -56,6 +56,7 @@
         [receiveButton setTitleColor:[UIColor yzh_fontShallowBlack] forState:UIControlStateNormal];
         [receiveButton setTitleColor:[UIColor yzh_sessionCellGray] forState:UIControlStateSelected];
         [receiveButton setTitle:@"收到" forState:UIControlStateNormal];
+        [receiveButton setTitle:@"收到" forState:UIControlStateSelected];
         [receiveButton yzh_setBackgroundColor:YZHColorWithRGB(245, 245, 245) forState:UIControlStateNormal];
         [receiveButton yzh_setBackgroundColor:YZHColorWithRGB(245, 245, 245) forState:UIControlStateSelected];
         _receiveButton = receiveButton;
@@ -72,6 +73,7 @@
         responseButton.layer.borderColor = [UIColor yzh_separatorLightGray].CGColor;
         responseButton.layer.masksToBounds = YES;
         [responseButton setTitle:@"回复" forState:UIControlStateNormal];
+        [responseButton setTitle:@"回复" forState:UIControlStateSelected];
         _responseButton = responseButton;
         [_responseButton addTarget:self action:@selector(onTouchResponseUpInside:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -80,6 +82,7 @@
         [handleButton setTitleColor:[UIColor yzh_fontShallowBlack] forState:UIControlStateNormal];
         [handleButton setTitleColor:[UIColor yzh_fontShallowBlack] forState:UIControlStateSelected];
         [handleButton setTitle:@"已处理完" forState:UIControlStateNormal];
+        [handleButton setTitle:@"已处理完" forState:UIControlStateSelected];
         [handleButton yzh_setBackgroundColor:YZHColorWithRGB(238, 238, 238) forState:UIControlStateNormal];
         [handleButton yzh_setBackgroundColor:[UIColor yzh_separatorLightGray] forState:UIControlStateSelected];
         _handleButton = handleButton;
@@ -138,15 +141,10 @@
     YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
     if ([attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) {
         //如果是自己发送的则需要将其删除掉.不需要显示.
-        if (attachment.isSender) {
-            [self.receiveButton removeFromSuperview];
-            [self.responseButton removeFromSuperview];
-            [self.handleButton removeFromSuperview];
-        }
-        self.receiveButton.selected = attachment.canGet;
-        self.handleButton.selected = attachment.canFinish;
-        self.receiveButton.enabled = !attachment.canGet;
-        self.handleButton.enabled = !attachment.isResponse;
+//        self.receiveButton.selected = attachment.canGet;
+//        self.handleButton.selected = attachment.canFinish;
+//        self.receiveButton.enabled = !attachment.canGet;
+//        self.handleButton.enabled = !attachment.isResponse;
     }
 }
 
@@ -191,38 +189,38 @@
 
 - (void)onTouchReceiveUpInside:(UIButton *)sender {
     
-    if (sender.isSelected == YES) {
-        sender.selected = YES;
-        sender.enabled = NO;
+//    if (sender.isSelected == YES) {
+//        sender.selected = YES;
+//        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameReceive;
         event.messageModel = self.model;
         [self.delegate onCatchEvent:event];
-    }
+//    }
 }
 
 - (void)onTouchResponseUpInside:(UIButton *)sender {
     
-    if (sender.isSelected == NO) {
-        sender.selected = YES;
+//    if (sender.isSelected == NO) {
+//        sender.selected = YES;
 //        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameResponse;
         event.messageModel = self.model;
         [self.delegate onCatchEvent:event];
-    }
+//    }
 }
 
 - (void)onTouchHandleUpInside:(UIButton *)sender {
     
-    if (sender.isSelected == YES) {
-        sender.selected = YES;
-        sender.enabled = NO;
+//    if (sender.isSelected == YES) {
+//        sender.selected = YES;
+//        sender.enabled = NO;
         NIMKitEvent *event = [[NIMKitEvent alloc] init];
         event.eventName = NIMKitEventNameHandle;
         event.messageModel = self.model;
         [self.delegate onCatchEvent:event];
-    }
+//    }
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

@@ -320,23 +320,6 @@
 - (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers needResponed:(BOOL)needResponed {
     
     NIMMessage* message = [NIMMessageMaker msgWithText:text];
-    
-    if (atUsers.count)
-    {
-        NIMMessageApnsMemberOption *apnsOption = [[NIMMessageApnsMemberOption alloc] init];
-        apnsOption.forcePush = YES;
-        if ([atUsers.firstObject isEqualToString:kYZHTeamAtMemberAtAllKey]) {
-            apnsOption.userIds = nil;
-        } else {
-            apnsOption.userIds = atUsers;
-        }
-        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
-        option.session = self.session;
-        
-        NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
-        apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
-        message.apnsMemberOption = apnsOption;
-    }
     if (needResponed) {
         //如果需要快捷回应时,则需要对消息进行封装成自定义消息
         NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
@@ -360,6 +343,22 @@
         }
         YZHSpeedyResponseAttachment* attachment = [[YZHSpeedyResponseAttachment alloc] initWithTitleText:text senderUserId:userId teamNickName:team.teamName senderUserName:senderUserName];
         message = [YZHSessionMsgConverter msgWithSeepdyReponse:attachment text:text];
+    }
+    if (atUsers.count)
+    {
+        NIMMessageApnsMemberOption *apnsOption = [[NIMMessageApnsMemberOption alloc] init];
+        apnsOption.forcePush = YES;
+        if ([atUsers.firstObject isEqualToString:kYZHTeamAtMemberAtAllKey]) {
+            apnsOption.userIds = nil;
+        } else {
+            apnsOption.userIds = atUsers;
+        }
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = self.session;
+        
+        NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
+        apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
+        message.apnsMemberOption = apnsOption;
     }
     [self sendMessage:message];
     
@@ -687,9 +686,13 @@
     YZHSpeedyResponseAttachment *attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
     NSString* userId = attachment.account;
     if (type == 0) {
-        
 //        NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.session.sessionId];
-        [self onSendText:[NSString stringWithFormat:@"@\%@ 收到", attachment.teamNickName] atUsers:@[userId]];
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = self.session;
+        option.forbidaAlias = YES;
+        
+        NSString *nick = [[NIMKit sharedKit].provider infoByUser:userId option:option].showName;
+        [self onSendText:[NSString stringWithFormat:@"@\%@ 收到", nick] atUsers:@[messageModel.message.from]];
 //        messageModel.message.isReceivedMsg
 //        [[[NIMSDK sharedSDK] conversationManager] updateMessage:messageModel.message forSession:self.session completion:^(NSError * _Nullable error) {
 //            if (!error) {
@@ -711,7 +714,12 @@
                 [contentMutable appendString:text];
             }
         }
-        [self onSendText:[NSString stringWithFormat:@"@\%@ 你说的 \"\%@\" 已处理完成 ", attachment.teamNickName, attachment.content] atUsers:@[userId]];
+        NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+        option.session = self.session;
+        option.forbidaAlias = YES;
+        
+        NSString *nick = [[NIMKit sharedKit].provider infoByUser:userId option:option].showName;
+        [self onSendText:[NSString stringWithFormat:@"%@ 你说的 \"\%@\" 已处理完成 ", nick, attachment.content] atUsers:@[messageModel.message.from]];
     }
 }
 

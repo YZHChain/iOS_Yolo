@@ -198,7 +198,7 @@
                     if (!self.isSkip) {
                         self.isSkip = YES;
                         YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
-                        NSString *url = [NSString stringWithFormat:@"https://yoloserver.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
+                        NSString *url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
                         discountVC.url = url;
                         [self.navigationController pushViewController:discountVC animated:YES];
                     }
