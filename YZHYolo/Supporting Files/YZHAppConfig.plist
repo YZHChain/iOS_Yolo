@@ -11,8 +11,8 @@
 	<key>severTest</key>
 	<false/>
 	<key>severAddrTest</key>
-	<string>http://192.168.1.190:8084/</string>
+	<string>https://yolotest.yzhchain.com/</string>
 	<key>severAddrRelease</key>
-	<string>http://192.168.1.190:8084/</string>
+	<string>https://yoloserver.yzhchain.com/</string>
 </dict>
 </plist>

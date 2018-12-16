@@ -226,7 +226,7 @@
                               };
         YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
         @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_SEARCHUSER params:dic successCompletion:^(NSObject* obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_FRIENDS_SEARCHUSER) params:dic successCompletion:^(NSObject* obj) {
             @strongify(self)
             [hud hideWithText:nil];
             //后台能不能别瞎返回状态码???????

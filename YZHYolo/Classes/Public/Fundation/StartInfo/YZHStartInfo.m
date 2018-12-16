@@ -77,7 +77,7 @@
                         @"yoloNo": yoloNo
                         };
     YZHUserDataManage* dateManage = [YZHUserDataManage sharedManager];
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_INTEGRL_COLLARTASK params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_INTEGRAL(PATH_INTEGRL_COLLARTASK) params:dic successCompletion:^(id obj) {
         
         NSDate *compleDate = [NSDate date];
         dateManage.currentUserData.taskCompleDate = compleDate;

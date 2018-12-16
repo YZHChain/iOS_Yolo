@@ -15,8 +15,8 @@ NSString *const kYZHAppConfigLogToFile              = @"logToFile";
 NSString *const kYZHAppConfigApiLog                 = @"apiLog";
 NSString *const kYZHAppConfigApiDebug               = @"apiDebug";
 NSString *const kYZHAppConfigSeverTest              = @"severTest";
-NSString *const kYZHAppConfigSeverAddrRelease       = @"severAddrRelease";
 NSString *const kYZHAppConfigSeverAddrTest          = @"severAddrTest";
+NSString *const kYZHAppConfigSeverAddrRelease       = @"severAddrRelease";
 
 static id instance;
 @implementation YZHServicesConfig
@@ -90,6 +90,7 @@ static id instance;
 + (NSString *)debugTestServerConfig{
     
     NSString* appConfigSeverKey;
+    // 关闭则是正式,开启则是测试.
     if ([[self stringForKey:kYZHAppConfigSeverTest] boolValue]) {
         appConfigSeverKey = kYZHAppConfigSeverAddrTest;
     } else {

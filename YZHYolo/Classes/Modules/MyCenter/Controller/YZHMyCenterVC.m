@@ -64,6 +64,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 {
     self.navigationItem.title = @"我";
     self.hideNavigationBar = YES;
+
 }
 
 - (void)setupView

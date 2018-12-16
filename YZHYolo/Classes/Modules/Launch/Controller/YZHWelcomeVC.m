@@ -160,7 +160,7 @@
                          @"phone":self.welcomeView.phoneTextField.text
                          };
     YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.welcomeView text:nil];
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUPHONE params:params successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUPHONE) params:params successCompletion:^(id obj) {
         [hud hideWithText:nil];
         if ([obj isEqualToString:@"621"]) {
             // 请求后台对手机号做校验 弹出相应框 通过则引导其去登录

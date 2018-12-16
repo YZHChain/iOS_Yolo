@@ -113,7 +113,7 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
                 };
     }
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
-    [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_RECOMMENDEDGROUP params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTGDLNetworkingResource:SERVER_SQUARE(PATH_TEAM_RECOMMENDEDGROUP) params:dic successCompletion:^(id obj) {
         [hud hideWithText:nil];
         self.recommendModel = [YZHSearchListModel YZH_objectWithKeyValues:obj];
         [self.tableView reloadData];

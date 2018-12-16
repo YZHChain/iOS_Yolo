@@ -145,7 +145,7 @@
                                   };
         }
         @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_UPDATELOGIN params:dic successCompletion:^(NSObject* obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_UPDATELOGIN) params:dic successCompletion:^(NSObject* obj) {
             @strongify(self)
             if (obj.yzh_apiEmptyValue) {
               //使用后台返回数据去通知云信修改.
@@ -215,7 +215,7 @@
                               @"yoloNo":self.yoloIDTextField.text.length ? self.yoloIDTextField.text : @""
                               };
         @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUTYOLOID) params:dic successCompletion:^(id obj) {
             self.checkResultView.hidden = NO;
             @strongify(self)
             self.checkResultImageView.image = [UIImage imageNamed:@"my_information_setYoloID_correct"];

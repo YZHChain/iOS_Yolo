@@ -96,13 +96,13 @@
     NSString* requestURL;
     switch (_settingPasswordType) {
         case YZHSettingPasswordTypeRegister:
-            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            requestURL = SERVER_LOGIN(PATH_USER_REGISTERED_REGISTEREDNVERIFY);
             break;
         case YZHSettingPasswordTypeFind:
-            requestURL = PATH_USER_SECRETKEYUPDATEPWD;
+            requestURL = SERVER_LOGIN(PATH_USER_SECRETKEYUPDATEPWD);
             break;
         default:
-            requestURL = PATH_USER_REGISTERED_REGISTEREDNVERIFY;
+            requestURL = SERVER_LOGIN(PATH_USER_REGISTERED_REGISTEREDNVERIFY);
             break;
     }
     NSDictionary* parameters;

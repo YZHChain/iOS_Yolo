@@ -96,7 +96,7 @@
 //                                  @"inviteCode":self.codeTextField.text
 //                                  };
 //            @weakify(self)
-//             [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_CHECKINVITECODE params:dic successCompletion:^(id obj) {
+//             [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_CHECKINVITECODE) params:dic successCompletion:^(id obj) {
 //                 @strongify(self)
 //                 self.codeTipLabel.hidden = YES;
 //                 self.codeTipLabel.text = nil;

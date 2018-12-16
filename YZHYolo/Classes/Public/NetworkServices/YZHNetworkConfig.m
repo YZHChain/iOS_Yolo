@@ -111,7 +111,7 @@ static YZHNetworkConfig* _instance;
     NSString* encodeURL =  [self ConsoleOutputLogWithPath:path params:params];
     
     AFHTTPSessionManager* httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpManager;
-    if ([path containsString:PATH_FRIENDS_MOBILEFRIENDS] || [path containsString:PATH_TEAM_ADDUPDATEGROUP] || [path containsString:PATH_TEAM_DELETEGROUP] || [path containsString:PATH_INTEGRL_COLLARTASK] ) {
+    if ([path containsString:PATH_PERSON_MOBILEFRIENDS] || [path containsString:PATH_TEAM_ADDUPDATEGROUP] || [path containsString:PATH_TEAM_DELETEGROUP] || [path containsString:PATH_INTEGRL_COLLARTASK] ) {
         httpSessionManager = [YZHNetworkConfig shareNetworkConfig].httpJSONManager;
     }
     [httpSessionManager POST:path parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
@@ -136,15 +136,13 @@ static YZHNetworkConfig* _instance;
 + (NSString* )confignServerHead{
     
     NSString* urlServerString;
-
-//#if DEBUG
-//    // 配置测试服
-//    urlServerString = [YZHServicesConfig debugTestServerConfig];
-//    
-//#else
-//    
-//    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
-//#endif
+//只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+#if DEBUG
+//  配置测试服,会检测是否开启、
+    urlServerString = [YZHServicesConfig debugTestServerConfig];
+#else
+    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+#endif
     
     return urlServerString;
     
@@ -269,13 +267,13 @@ static YZHNetworkConfig* _instance;
     return _httpJSONManager;
 }
 // 防止 baseURL 读取失败,直接从这里设置.
-//- (NSURL *)baseURL{
-//
-//    if (_baseURL == nil) {
-//        //TODO: 正式服 BaseURL  异常捕获,
-//        _baseURL = [NSURL URLWithString:@"www"];
-//    }
-//    NSAssert(_baseURL, @"_baseURL Can't be empty");
-//    return _baseURL;
-//}
+- (NSURL *)baseURL{
+
+    if (_baseURL == nil) {
+        //TODO: 正式服 BaseURL  异常捕获,
+        _baseURL = [NSURL URLWithString:@"https://yoloserver.yzhchain.com"];
+    }
+    NSAssert(_baseURL, @"_baseURL Can't be empty");
+    return _baseURL;
+}
 @end

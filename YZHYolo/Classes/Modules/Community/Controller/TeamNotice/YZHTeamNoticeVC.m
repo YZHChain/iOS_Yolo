@@ -85,7 +85,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
                               @"pageSize": [NSNumber numberWithInteger:100],
                               @"pn": [NSNumber numberWithInteger:0]
                            };
-    [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_NOTICE_LIST params:params successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTGDLNetworkingResource:SERVER_CHAT(PATH_TEAM_NOTICE_LIST) params:params successCompletion:^(id obj) {
         [hud hideWithText:nil];
         self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
         [self.dataSource.noticeArray mutableCopy];
@@ -166,7 +166,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
                                      @"noticeId": modle.noticeId.length ? modle.noticeId : @""
                                      };
             YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-            [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_DELETEGROUP params:params successCompletion:^(id obj) {
+            [[YZHNetworkService shareService] POSTGDLNetworkingResource:SERVER_CHAT(PATH_TEAM_NOTICE_DELETE) params:params successCompletion:^(id obj) {
                 @strongify(self)
                 [hud hideWithText:nil];
                 self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];

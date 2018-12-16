@@ -101,7 +101,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_FRIENDS_MOBILEFRIENDS params:self.contactModel.params successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_PERSON(PATH_PERSON_MOBILEFRIENDS) params:self.contactModel.params successCompletion:^(id obj) {
         [hud hideWithText:nil];
         if (obj) {
             NSArray* contactArray = [obj mj_JSONObject];
@@ -232,7 +232,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
                               @"userId": userId
                               };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_INVITE_SENDSMS params:dic successCompletion:^(NSObject* obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_PERSON_INVITE_SENDSMS) params:dic successCompletion:^(NSObject* obj) {
             //TODO: 邀请成功
             [hud hideWithText: obj.yzh_apiDetail];
         } failureCompletion:^(NSError *error) {

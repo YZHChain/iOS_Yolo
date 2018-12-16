@@ -226,7 +226,7 @@
                           @"allowPhoneAdd": allowPhoneAdd,
                           @"userId":userId,
                           };
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_SETTINGSPRIVACY params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_SETTINGSPRIVACY) params:dic successCompletion:^(id obj) {
         
         [self updateUserPrivacySettingIM];
     } failureCompletion:^(NSError *error) {

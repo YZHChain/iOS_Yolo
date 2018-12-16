@@ -173,7 +173,7 @@
         }
         @weakify(self)
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-        [[YZHNetworkService shareService] POSTGDLNetworkingResource:PATH_TEAM_NOTICE_ADD params:params successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTGDLNetworkingResource:SERVER_CHAT(PATH_TEAM_NOTICE_ADD) params:params successCompletion:^(id obj) {
             @strongify(self)
             if ([obj objectForKey:@"code"] && [obj[@"code"] isEqualToString:@"200"]) {
                 [hud hideWithText:@"公告发布成功"];

@@ -239,6 +239,8 @@ static id instance;
 //        }
 //        _encodeVersion = [NSString stringWithFormat:@"%02d%02d%02d",versionArray[0].intValue ,versionArray[1].intValue ,versionArray[2].intValue];
         _encodeVersion = appVersion;
+        NSString* str;
+        [str stringByAppendingString:@""];
     }
     return _encodeVersion;
 }

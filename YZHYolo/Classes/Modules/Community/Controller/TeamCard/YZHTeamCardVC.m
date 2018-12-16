@@ -329,7 +329,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
                     NSDictionary* dic = @{
                                           @"groupId": self.teamId
                                           };
-                    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_DELETEGROUP params:dic successCompletion:^(id obj) {
+                    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_DELETEGROUP) params:dic successCompletion:^(id obj) {
                         
                         
                     } failureCompletion:^(NSError *error) {

@@ -207,7 +207,7 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
                                 };
 
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:parameter successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_LOGIN_LOGINVERIFY) params:parameter successCompletion:^(id obj) {
         @strongify(self)
         [self serverloginSuccessWithResponData:obj userAccount:account successCompletion:successCompletion failureCompletion:failureCompletion];
     } failureCompletion:^(NSError *error) {

@@ -146,7 +146,7 @@
     }
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
 //    @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_MODIFI_PASSWORD params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_MODIFI_PASSWORD) params:dic successCompletion:^(id obj) {
 //        @strongify(self)
         [[YZHUserLoginManage sharedManager] setCurrentLoginData:nil];
         //TODO:开启子线程异步执行保存登录数据. //
@@ -179,7 +179,7 @@
                 };
     }
     YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SENDSMSCODE) params:dic successCompletion:^(id obj) {
         [hud hideWithText:nil];
         [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
     } failureCompletion:^(NSError *error) {

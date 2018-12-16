@@ -122,7 +122,7 @@
                                  @"phoneNum": self.registerView.phoneTextField.text };
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(NSObject* obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PAWTH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(NSObject* obj) {
         if ([obj.yzh_apiCode isEqualToString:@"200"]) {
             [hud hideWithText:nil];
             @strongify(self)
@@ -143,7 +143,7 @@
                                      @"phoneNum":  phoneNumText,
                                      @"type":@(0),};
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameters successCompletion:^(NSObject* obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SENDSMSCODE) params:parameters successCompletion:^(NSObject* obj) {
             if ([obj.yzh_apiCode isEqualToString:@"200"]) {
                 [hud hideWithText:obj.yzh_apiDetail];
                 // 处理验证码按钮 倒计时
@@ -175,7 +175,7 @@
                           };
     @weakify(self)
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-    [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_REGISTERED_CHECKINVITECODE params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_CHECKINVITECODE) params:dic successCompletion:^(id obj) {
         @strongify(self)
         [hud hideWithText:nil];
         self.registerView.codeTipLabel.hidden = YES;
@@ -200,7 +200,7 @@
     //检测 Yolo 号是否可用
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKOUTYOLOID params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUTYOLOID) params:dic successCompletion:^(id obj) {
         @strongify(self)
         [hud hideWithText:nil];
         // 跳转至设置密码,并且带 YoloID,和邀请码.

@@ -108,7 +108,7 @@
                               };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
         @weakify(self)
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_LOGIN_LOGINVERIFY params:dic successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_LOGIN_LOGINVERIFY) params:dic successCompletion:^(id obj) {
             @strongify(self)
             self.userManage.privateSetting.groupPassword = self.passwrodView.passwordTextField.text;
             NSString* userInfoExt = [self.userManage userInfoExtString];

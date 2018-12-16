@@ -246,7 +246,7 @@
                                                                           }];
             YZHTeamUpdataModel* model = [[YZHTeamUpdataModel alloc] initWithTeamId:teamId isCreatTeam:YES];
             //通知后台
-            [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_ADDUPDATEGROUP params:model.params successCompletion:^(id obj) {
+            [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_ADDUPDATEGROUP) params:model.params successCompletion:^(id obj) {
             } failureCompletion:^(NSError *error) {
             }];
             //发布招募
@@ -266,7 +266,7 @@
                               @"accid": accid ? accid : @"",
                               @"info": info ? info : @"",
                               };
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_TEAM_PUBLISHMYRECRUITS params:dic successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_PUBLISHMYRECRUITS) params:dic successCompletion:^(id obj) {
             
         } failureCompletion:^(NSError *error) {
             

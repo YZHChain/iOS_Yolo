@@ -104,7 +104,7 @@
                                 @"verifyCode":self.findPasswordView.SMSCodeTextField.text
                                 };
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SMSVERIFYCODE params:parameter successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PAWTH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
         @strongify(self)
         // 请求后台 成功则跳转至设置新密码 枚举
         [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordType": @(1),
@@ -128,7 +128,7 @@
                                     };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.findPasswordView text:@""];
         // 处理验证码按钮 倒计时
-        [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_REGISTERED_SENDSMSCODE params:parameter successCompletion:^(id obj) {
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SENDSMSCODE) params:parameter successCompletion:^(id obj) {
             [hud hideWithText:@"验证码已发送至手机"];
             [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
         } failureCompletion:^(NSError *error) {
@@ -144,7 +144,7 @@
     NSDictionary *dic = @{
                           @"secretKey": self.findPasswordView.passwordTextView.text
                           };
-    [[YZHNetworkService shareService] POSTNetworkingResource:PATH_USER_CHECKSECRETKEY params:dic successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKSECRETKEY) params:dic successCompletion:^(id obj) {
         [hud hideWithText:nil];
         //跳转至重新设置密码
         // 请求后台 成功则跳转至设置新密码 枚举
