@@ -80,6 +80,7 @@ extern NSString *const kYZHRouterAddressBookAddFirendRecord;
 extern NSString *const kYZHRouterAddressBookScanQRCode;
 extern NSString *const kYZHRouterAddressBookSearchTeam;
 extern NSString *const kYZHRouterAddressBookSearchFirend;
+
 #pragma mark -- Session
 
 extern NSString *const kYZHRouterSessionSharedCard;
@@ -104,6 +105,10 @@ extern NSString *const kYZHRouterCommunityAtTeamMember;
 extern NSString *const kYZHRouterPrivateChatSearch;
 extern NSString *const kYZHRouterTeamChatSearch;
 extern NSString *const kYZHRouterTeamRecruitSearch;
+
+#pragma mark -- DeBug
+
+extern NSString *const kYZHRouterAppConfig;
 
 + (NSDictionary* )configInfo;
 

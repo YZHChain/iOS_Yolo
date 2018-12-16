@@ -122,7 +122,7 @@
                                  @"phoneNum": self.registerView.phoneTextField.text };
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PAWTH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(NSObject* obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(NSObject* obj) {
         if ([obj.yzh_apiCode isEqualToString:@"200"]) {
             [hud hideWithText:nil];
             @strongify(self)

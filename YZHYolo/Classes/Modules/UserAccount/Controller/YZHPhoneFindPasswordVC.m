@@ -96,7 +96,7 @@
                                 };
     @weakify(self)
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PAWTH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
         @strongify(self)
         [hud hideWithText:nil];
         YZHGetSecreKeyVC* secreKeyVC = [[YZHGetSecreKeyVC alloc] init];

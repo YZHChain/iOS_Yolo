@@ -135,7 +135,6 @@ static id instance;
                 NSDictionary *serializedData = [NSJSONSerialization JSONObjectWithData:errorData options:kNilOptions error:nil];
                 NSLog(@"请求后台报错日志:error--%@",serializedData);
             }
-
 #endif
         }
     }

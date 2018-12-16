@@ -101,6 +101,9 @@ NSString *const kYZHRouterPrivateChatSearch = @"/privateChat/search";
 NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
 NSString *const kYZHRouterTeamRecruitSearch = @"/teamRecruit/search";
 
+NSString *const kYZHRouterAppConfig = @"debug/appConfig";
+
+
 @implementation YZHRouterConfig
 
 + (NSDictionary *)configInfo{
@@ -443,6 +446,12 @@ NSString *const kYZHRouterTeamRecruitSearch = @"/teamRecruit/search";
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
+             kYZHRouterAppConfig: @{
+                 kYZHRouteViewControllerClassKey: @"YMAppConfigVC",
+                 kYZHRouteViewControllerNameKey: @"调试台",
+                 kYZHRouteViewControllerNotesKey: @"",
+                 kYZHRouteViewControllerNeedLoginKey:@"1",
+                 },
         };
     
 }

@@ -8,25 +8,29 @@
 
 #import "YZHServicesConfig.h"
 #import "YZHConfigKey.h"
+#import "YZHCacheManager.h"
 
-NSString *const kYZHAppConfig    = @"YMAppConfig.plist";
+NSString *const kYZHAppConfig    = @"YZHAppConfig.plist";
 
-NSString *const kYZHAppConfigLogToFile              = @"logToFile";
-NSString *const kYZHAppConfigApiLog                 = @"apiLog";
-NSString *const kYZHAppConfigApiDebug               = @"apiDebug";
-NSString *const kYZHAppConfigSeverTest              = @"severTest";
-NSString *const kYZHAppConfigSeverAddrTest          = @"severAddrTest";
-NSString *const kYZHAppConfigSeverAddrRelease       = @"severAddrRelease";
+NSString *const kYZHAppConfigLogToFile               = @"logToFile";
+NSString *const kYZHAppConfigApiLog                  = @"apiLog";
+NSString *const kYZHAppConfigApiDebug                = @"apiDebug";
+NSString *const kYZHAppConfigServerTest              = @"serverTest";
+NSString *const kYZHAppConfigServerAddrTest          = @"serverAddrTest";
+NSString *const kYZHAppConfigServerAddr              = @"serverAddr";
+NSString *const kYZHAppConfigNIMAppKeyTest           = @"NIMAppKeyTest";
+NSString *const kYZHAppConfigNIMAppKey               = @"NIMAppKey";
+NSString *const kYZHAppConfigNIMTest                 = @"NIMSeverTest";
 
 static id instance;
 @implementation YZHServicesConfig
 
 + (void)initialize{
     
-    [self performSelectorOnMainThread:@selector(shareServicesConfi) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(shareServicesConfig) withObject:nil waitUntilDone:NO];
 }
 
-+ (instancetype)shareServicesConfi{
++ (instancetype)shareServicesConfig{
 
     return [[self alloc] init];
 }
@@ -49,6 +53,7 @@ static id instance;
     if (self) {
         NSString *path = [[NSBundle mainBundle] pathForResource:YZHAppConfigFileName ofType:@"plist"];
         _defaultInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+        _info = (NSDictionary *)[[YZHCacheManager shareManager] objectForName:[self configFileName]];
         // 缓存配置 读取缓存
         if (_info == nil) {
             _info = [_defaultInfo copy];
@@ -64,7 +69,7 @@ static id instance;
     
     NSAssert(key, @"key Can't be empty");
     
-    NSString* value = [YZHServicesConfig shareServicesConfi].info[key];
+    NSString* value = [YZHServicesConfig shareServicesConfig].info[key];
     
     return value;
 }
@@ -87,18 +92,44 @@ static id instance;
     }
 }
 
-+ (NSString *)debugTestServerConfig{
++ (NSString *)debugTestServerConfig {
     
     NSString* appConfigSeverKey;
     // 关闭则是正式,开启则是测试.
-    if ([[self stringForKey:kYZHAppConfigSeverTest] boolValue]) {
-        appConfigSeverKey = kYZHAppConfigSeverAddrTest;
+    if ([[self stringForKey:kYZHAppConfigServerTest] boolValue]) {
+        appConfigSeverKey = kYZHAppConfigServerAddrTest;
     } else {
-        appConfigSeverKey = kYZHAppConfigSeverAddrRelease;
+        appConfigSeverKey = kYZHAppConfigServerAddr;
     }
     return [self stringForKey:appConfigSeverKey];
 }
 
++ (NSString *)debugTestNIMAppKeyConfig {
+    
+    NSString* appConfigNIMAppKey;
+    // 关闭则是正式,开启则是测试.
+    if ([[self stringForKey:kYZHAppConfigNIMTest] boolValue]) {
+        appConfigNIMAppKey = kYZHAppConfigNIMAppKeyTest;
+    } else {
+        appConfigNIMAppKey = kYZHAppConfigNIMAppKey;
+    }
+
+    return [self stringForKey:appConfigNIMAppKey];
+}
+
 #pragma mark -- ConfigCache
+
+//保存配置信息，重启后生效
+- (void)saveConfigInfo:(NSDictionary *)info
+{
+    [[YZHCacheManager shareManager] saveObject:info forName:[self configFileName]];
+}
+
+- (NSString *)configFileName
+{
+    NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *name = [NSString stringWithFormat:@"%@-%@",kYZHAppConfig ,appVersion];
+    return name;
+}
 
 @end

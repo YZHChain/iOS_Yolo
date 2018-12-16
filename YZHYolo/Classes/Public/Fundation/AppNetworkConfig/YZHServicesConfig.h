@@ -11,22 +11,27 @@
 extern NSString *const kYZHAppConfigLogToFile;
 extern NSString *const kYZHAppConfigApiLog;
 extern NSString *const kYZHAppConfigApiDebug;
-extern NSString *const kYZHAppConfigSeverTest;
-extern NSString *const kYZHAppConfigSeverAddr;
-extern NSString *const kYZHAppConfigSeverAddrTest;
+extern NSString *const kYZHAppConfigServerTest;
+extern NSString *const kYZHAppConfigServerAddrTest;
+extern NSString *const kYZHAppConfigServerAddr;
+extern NSString *const kYZHAppConfigNIMAppKeyTest;
+extern NSString *const kYZHAppConfigNIMAppKey;
+extern NSString *const kYZHAppConfigNIMTest;
 
 @interface YZHServicesConfig : NSObject
 
 @property (nonatomic, strong) NSDictionary *info;
 @property (nonatomic, strong) NSDictionary *defaultInfo;
+@property (nonatomic, assign) BOOL showDebugView;
 
-+ (instancetype)shareServicesConfi;
++ (instancetype)shareServicesConfig;
 
 + (id)configValueFromKey:(NSString *)key;
 + (BOOL)boolForKey:(NSString *)key;
 + (NSString *)stringForKey:(NSString *)key;
 + (NSString *)debugTestServerConfig;
++ (NSString *)debugTestNIMAppKeyConfig;
 
-//- (void)saveConfigInfo:(NSDictionary *)info;
+- (void)saveConfigInfo:(NSDictionary *)info;
 
 @end

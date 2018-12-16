@@ -25,6 +25,8 @@ target 'YZHYolo' do
   pod 'BlocksKit'
   pod 'Aspects'
   pod 'JLRoutes', '1.6'
+  pod 'FLEX', '~> 2.1.1', :configurations => ['Debug']
+  pod 'EGOCache', '2.1.3'
   #pod 'WebViewJavascriptBridge'
   pod 'UIViewController+KeyboardAnimation', '~> 1.3'
   pod 'SCIndexView' 

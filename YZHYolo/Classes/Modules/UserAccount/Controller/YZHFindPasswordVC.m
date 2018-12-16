@@ -104,7 +104,7 @@
                                 @"verifyCode":self.findPasswordView.SMSCodeTextField.text
                                 };
     @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PAWTH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
         @strongify(self)
         // 请求后台 成功则跳转至设置新密码 枚举
         [YZHRouter openURL:kYZHRouterSettingPassword info:@{@"settingPasswordType": @(1),

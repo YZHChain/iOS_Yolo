@@ -35,7 +35,9 @@ PODS:
     - BlocksKit/DynamicDelegate
   - BRPickerView (2.2.1)
   - DDPageControl (0.3.2)
+  - EGOCache (2.1.3)
   - FDFullscreenPopGesture (1.1)
+  - FLEX (2.1.1)
   - JLRoutes (1.6)
   - M80AttributedLabel (1.6.3)
   - Masonry (1.1.0)
@@ -78,7 +80,9 @@ DEPENDENCIES:
   - BlocksKit
   - BRPickerView (~> 2.2.1)
   - DDPageControl
+  - EGOCache (= 2.1.3)
   - FDFullscreenPopGesture (= 1.1)
+  - FLEX (~> 2.1.1)
   - JLRoutes (= 1.6)
   - M80AttributedLabel (~> 1.6.3)
   - Masonry
@@ -111,7 +115,9 @@ SPEC REPOS:
     - BlocksKit
     - BRPickerView
     - DDPageControl
+    - EGOCache
     - FDFullscreenPopGesture
+    - FLEX
     - JLRoutes
     - M80AttributedLabel
     - Masonry
@@ -152,7 +158,9 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   BRPickerView: 0590a8c5de9bd98c6b4e4f117a3dff6de287d5b2
   DDPageControl: 0649cdb188fb9045e7b80ba63c15e0a277fbdf5f
+  EGOCache: f0295dbe041156acabd39021354ad1045ee49e72
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  FLEX: 27b768fcae23a313a1eb115076d429180ca9b472
   JLRoutes: 435d791422e96c9b9b5e1c4db1aedb3ae1b1a08f
   M80AttributedLabel: d06543195d3e451d2ea62ad76d04aa9cea7661d4
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -178,6 +186,6 @@ SPEC CHECKSUMS:
   ZXingObjC: 4ed7bbb878b2cff73b3c02f6f87be9baf65097ef
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: a12dd5db8dd6a089ff2339a304c86d928110d776
+PODFILE CHECKSUM: 22f4f5d71ae34b15825abe5fd60e4d709516a2ea
 
 COCOAPODS: 1.5.3
