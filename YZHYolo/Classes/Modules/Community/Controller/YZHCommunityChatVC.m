@@ -686,18 +686,23 @@
     YZHSpeedyResponseAttachment *attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
     NSString* userId = attachment.account;
     if (type == 0) {
-//        NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:userId inTeam:self.session.sessionId];
         NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
         option.session = self.session;
         option.forbidaAlias = YES;
         
         NSString *nick = [[NIMKit sharedKit].provider infoByUser:userId option:option].showName;
         [self onSendText:[NSString stringWithFormat:@"@\%@ 收到", nick] atUsers:@[messageModel.message.from]];
-//        messageModel.message.isReceivedMsg
+        
+//        NIMCustomObject *customObject = (NIMCustomObject*)messageModel.message.messageObject;
+//        YZHSpeedyResponseAttachment *attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
+//        
+//        attachment.canGet = YES;
+//        attachment.content = @"哈哈哈哈哈,你完蛋了";
 //        [[[NIMSDK sharedSDK] conversationManager] updateMessage:messageModel.message forSession:self.session completion:^(NSError * _Nullable error) {
 //            if (!error) {
 //                [self.tableView reloadData];
 //            } else {
+//                
 //            }
 //        }];
     } else if (type == 1) {

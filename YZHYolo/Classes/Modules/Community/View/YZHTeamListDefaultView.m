@@ -24,6 +24,7 @@
     self.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     self.titleLabel.textColor = [UIColor yzh_sessionCellGray];
+    self.titleLabel.numberOfLines = 0;
     
     self.findTeamButton.layer.cornerRadius = 4;
     self.findTeamButton.layer.masksToBounds = YES;

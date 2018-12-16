@@ -24,6 +24,7 @@
     
     self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:14];
     self.titleLabel.textColor = [UIColor yzh_sessionCellGray];
+    self.titleLabel.numberOfLines = 0;
     
     _searchView = [YZHSearchView yzh_viewWithFrame:CGRectMake(0, 0, YZHScreen_Width, 50)];
     [self addSubview:_searchView];

@@ -23,10 +23,10 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="private_sessionList_defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="sHq-uC-l2z">
-                    <rect key="frame" x="112" y="185" width="151" height="138"/>
+                    <rect key="frame" x="112" y="175" width="151" height="138"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您没有私聊内容" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8JS-Xn-gfl">
-                    <rect key="frame" x="77.5" y="363" width="220" height="14"/>
+                    <rect key="frame" x="77.5" y="353" width="220" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="220" id="hMw-MG-OTI"/>
                     </constraints>
@@ -42,7 +42,7 @@
                 <constraint firstItem="8JS-Xn-gfl" firstAttribute="centerX" secondItem="Rpj-iL-y6T" secondAttribute="centerX" id="Gqn-HU-VLi"/>
                 <constraint firstItem="sHq-uC-l2z" firstAttribute="centerX" secondItem="Rpj-iL-y6T" secondAttribute="centerX" id="UpR-dc-nzE"/>
                 <constraint firstAttribute="trailing" secondItem="LUB-OC-0SB" secondAttribute="trailing" id="gcd-mQ-9Zr"/>
-                <constraint firstItem="sHq-uC-l2z" firstAttribute="top" secondItem="LUB-OC-0SB" secondAttribute="bottom" constant="135" id="iSh-Bb-Y4U"/>
+                <constraint firstItem="sHq-uC-l2z" firstAttribute="top" secondItem="LUB-OC-0SB" secondAttribute="bottom" constant="125" id="iSh-Bb-Y4U"/>
                 <constraint firstItem="LUB-OC-0SB" firstAttribute="top" secondItem="Rpj-iL-y6T" secondAttribute="top" id="vnG-kQ-TcZ"/>
             </constraints>
             <connections>

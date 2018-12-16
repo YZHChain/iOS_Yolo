@@ -33,14 +33,14 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_sessionList_defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Ya-PId">
-                    <rect key="frame" x="76.5" y="211" width="222" height="201"/>
+                    <rect key="frame" x="76.5" y="150" width="222" height="201"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="222" id="XFL-sB-ECG"/>
                         <constraint firstAttribute="height" constant="201" id="znS-W7-WtV"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ui-br-jSb">
-                    <rect key="frame" x="187.5" y="447" width="0.0" height="0.0"/>
+                    <rect key="frame" x="187.5" y="386" width="0.0" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="tZh-RF-o4f"/>
                     </constraints>
@@ -51,7 +51,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="MGD-BE-RAp" firstAttribute="top" secondItem="1ui-br-jSb" secondAttribute="bottom" constant="114" id="7CQ-TU-VCa"/>
+                <constraint firstItem="9da-Ya-PId" firstAttribute="top" secondItem="n6x-nU-LNH" secondAttribute="bottom" constant="100" id="0jk-Is-ocH"/>
                 <constraint firstAttribute="trailing" secondItem="MGD-BE-RAp" secondAttribute="trailing" constant="68" id="Bxv-Is-YVl"/>
                 <constraint firstItem="9da-Ya-PId" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ORH-kv-Tov"/>
                 <constraint firstItem="n6x-nU-LNH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rdo-fT-LPB"/>
