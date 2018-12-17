@@ -11,6 +11,8 @@
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
 #import "ZXingObjC.h"
+#import "YZHServicesConfig.h"
+
 
 @interface YZHAboutFeedBackVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 @property (nonatomic, strong) WKWebView* webView;
@@ -95,7 +97,15 @@
         NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:userId];
         NSString* userNick = user.userInfo.nickName;
         if (self.url == nil) {
-            self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios", yolo_no, userNick];
+            NSString* urlServerString;
+            //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+#if DEBUG
+            //  配置测试服,会检测是否开启、
+            urlServerString = [YZHServicesConfig debugTestServerConfig];
+#else
+            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+#endif
+            self.url = [NSString stringWithFormat:@"%@/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios",urlServerString , yolo_no, userNick];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];

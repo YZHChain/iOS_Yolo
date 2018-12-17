@@ -10,6 +10,8 @@
 #import <WebKit/WebKit.h>
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
+#import "YZHServicesConfig.h"
+
 
 @interface YZHWKWebVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
@@ -93,11 +95,19 @@
         }
         self.webView = [[WKWebView alloc] initWithFrame:frame configuration:configuration];
         self.webView.navigationDelegate = self;
+        NSString* urlServerString;
+        //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+#if DEBUG
+        //  配置测试服,会检测是否开启、
+        urlServerString = [YZHServicesConfig debugTestServerConfig];
+#else
+        urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+#endif
         if (self.url == nil) {
-            self.url = @"https://yolotest.yzhchain.com/yolo-web/html/about/registration_agreement.html?platform=ios";
+            self.url = [NSString stringWithFormat:@"%@/yolo-web/html/about/registration_agreement.html?platform=ios",urlServerString];
+            
         } else {
-            //暂时写死
-            self.url = [NSString stringWithFormat:@"%@?platform=ios", self.url];
+            self.url = [NSString stringWithFormat:@"%@%@?platform=ios",urlServerString, self.url];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];

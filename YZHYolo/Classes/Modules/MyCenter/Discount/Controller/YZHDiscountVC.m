@@ -12,6 +12,7 @@
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
 #import "ZXingObjC.h"
+#import "YZHServicesConfig.h"
 
 @interface YZHDiscountVC ()<WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
@@ -115,10 +116,18 @@
             userPic = nil;
         }
         if (self.url == nil) {
+            NSString* urlServerString;
+            //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+#if DEBUG
+            //  配置测试服,会检测是否开启、
+            urlServerString = [YZHServicesConfig debugTestServerConfig];
+#else
+            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+#endif
             if (YZHIsString(userPic)) {
-               self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios", yolo_no, userNick, userPic];
+               self.url = [NSString stringWithFormat:@"%@/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios",urlServerString , yolo_no, userNick, userPic];
             } else {
-                self.url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios", yolo_no, userNick];
+                self.url = [NSString stringWithFormat:@"%@/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios",urlServerString , yolo_no, userNick];
             }
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

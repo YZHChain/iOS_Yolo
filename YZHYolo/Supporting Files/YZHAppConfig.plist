@@ -2,17 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>severAddrTest</key>
+	<key>serverAddrTest</key>
 	<string>https://yolotest.yzhchain.com/</string>
-	<key>severAddr</key>
+	<key>serverAddr</key>
 	<string>https://yoloserver.yzhchain.com/</string>
-	<key>severTest</key>
+	<key>serverTest</key>
 	<true/>
 	<key>NIMKeyTest</key>
 	<string>14f11c236ed7c56d576d251bbbad67cb</string>
 	<key>NIMKey</key>
 	<string>d62461f3a67a1f9eb1d8604b9ebea576</string>
-	<key>NIMSeverTest</key>
+	<key>NIMServerTest</key>
 	<true/>
 	<key>logToFile</key>
 	<false/>

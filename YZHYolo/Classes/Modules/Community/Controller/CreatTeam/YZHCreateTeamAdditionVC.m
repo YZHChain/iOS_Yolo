@@ -283,12 +283,12 @@
     
     if (self.recruitSelectedButton.selected) {
         if (YZHIsString(self.recruitImportView.importTextView.text)) {
-            self.clickCreatTeamBlock ? self.clickCreatTeamBlock(self.recruitImportView.importTextView.text) : UUID_NULL;
+            self.clickCreatTeamBlock ? self.clickCreatTeamBlock(self.recruitImportView.importTextView.text) : NULL;
         } else {
             [YZHAlertManage showAlertMessage:@"请填写广播招募信息"];
         }
     } else {
-        self.clickCreatTeamBlock ? self.clickCreatTeamBlock(nil) : UUID_NULL;
+        self.clickCreatTeamBlock ? self.clickCreatTeamBlock(nil) : NULL;
     }
 }
 

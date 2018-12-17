@@ -20,7 +20,7 @@ NSString *const kYZHAppConfigServerAddrTest          = @"serverAddrTest";
 NSString *const kYZHAppConfigServerAddr              = @"serverAddr";
 NSString *const kYZHAppConfigNIMAppKeyTest           = @"NIMKeyTest";
 NSString *const kYZHAppConfigNIMAppKey               = @"NIMKey";
-NSString *const kYZHAppConfigNIMTest                 = @"NIMSeverTest";
+NSString *const kYZHAppConfigNIMTest                 = @"NIMServerTest";
 
 static id instance;
 @implementation YZHServicesConfig
@@ -31,19 +31,13 @@ static id instance;
 }
 
 + (instancetype)shareServicesConfig{
-
-    return [[self alloc] init];
-}
-
-+ (instancetype)allocWithZone:(struct _NSZone *)zone{
     
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if (instance == nil) {
-            instance = [super allocWithZone:zone];
-        }
-    });
-    return instance;
+        static id instance;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            instance = [[[self class] alloc] init];
+        });
+        return instance;
 }
 
 - (instancetype)init{
@@ -128,7 +122,7 @@ static id instance;
 - (NSString *)configFileName
 {
     NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    NSString *name = [NSString stringWithFormat:@"%@-%@",kYZHAppConfig ,appVersion];
+    NSString *name = [NSString stringWithFormat:@"%@---%@",kYZHAppConfig ,appVersion];
     return name;
 }
 

@@ -14,6 +14,7 @@
 #import "UIViewController+YZHTool.h"
 #import "YZHUserLoginManage.h"
 #import "YZHRegisterBackupsVC.h"
+#import "YZHDevice.h"
 
 @interface YZHSettingPasswordVC ()<UIGestureRecognizerDelegate>
 
@@ -107,13 +108,15 @@
     }
     NSDictionary* parameters;
     if (YZHIsString(_inviteCode)) {
+        NSString* uuid = [YZHDevice shareDevice].UUID;
         parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
-                                     @"yoloNo":self.phoneNum,
-                                     @"inviteCode": _inviteCode
+                       @"yoloNo":self.phoneNum,
+                       @"inviteCode": _inviteCode,
+                       @"mac": uuid.length ? uuid : @"",
                                          };
     } else {
         parameters = @{@"password":self.settingPasswordView.passwordTextField.text,
-                           @"yoloNo":self.phoneNum,
+                       @"yoloNo":self.phoneNum,
                        };
     }
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.settingPasswordView text:nil];

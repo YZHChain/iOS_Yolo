@@ -190,7 +190,7 @@ static YZHNetworkConfig* _instance;
     //APILog模式，打印API信息
     NSString *encodeURL = [self urlWithPath:path];
     if ([YZHServicesConfig boolForKey:kYZHAppConfigApiLog]) {
-        NSLog(@"\n GET encodeURL: %@ \n params: %@", encodeURL, params);
+        NSLog(@"\n 返回结果: encodeURL: %@ \n params: %@", encodeURL, params);
     }
     NSAssert(encodeURL, @"URL Can't be empty");
     return encodeURL;
