@@ -12,7 +12,7 @@
 
 @interface NIMBadgeView ()
 
-@property (strong) UIColor *badgeBackgroundColor;
+
 
 @property (strong) UIColor *badgeTextColor;
 
@@ -98,8 +98,6 @@
     return badgeFrame;
 }
 
-
-
 #pragma mark - Private
 - (void)drawWithContent:(CGRect)rect context:(CGContextRef)context{
     CGRect bodyFrame = self.bounds;
@@ -160,7 +158,7 @@
 
 - (void)drawWithOutContent:(CGRect)rect context:(CGContextRef)context{
     CGRect bodyFrame = self.bounds;
-    CGContextSetFillColorWithColor(context, [YZHColorWithRGB(110, 193, 201) CGColor]);
+    CGContextSetFillColorWithColor(context, [_badgeBackgroundColor CGColor]);
     CGContextFillEllipseInRect(context, bodyFrame);
 }
 

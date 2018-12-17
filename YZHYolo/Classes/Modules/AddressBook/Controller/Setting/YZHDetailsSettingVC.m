@@ -101,12 +101,13 @@
 
 - (IBAction)trashliChatLog:(UIButton *)sender {
     
-    [YZHAlertManage showAlertTitle:@"确定要清空所有社群的聊天记录么？" message:@"此操作不可逆，请谨慎操作" actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+    [YZHAlertManage showAlertTitle:@"确定要清空此好友的聊天记录么？" message:@"此操作不可逆，请谨慎操作" actionButtons:@[@"取消",@"确认"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             NIMDeleteMessagesOption *option = [[NIMDeleteMessagesOption alloc] init];
             option.removeSession = NO;
             option.removeTable = NO;
-            [[NIMSDK sharedSDK].conversationManager deleteAllMessages:option];
+            NIMSession* session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
+            [[NIMSDK sharedSDK].conversationManager deleteAllmessagesInSession:session option:option];
             
         }
     }];

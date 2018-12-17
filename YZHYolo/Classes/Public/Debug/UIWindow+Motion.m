@@ -42,8 +42,7 @@
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (![[YZHServicesConfig shareServicesConfig] showDebugView]) {
-        // 震动
-        [YZHServicesConfig shareServicesConfig].showDebugView = YES;
+
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         // 弹出开发者选项
         [UIAlertView bk_showAlertViewWithTitle:@"Developer Options"
@@ -52,7 +51,10 @@
                              otherButtonTitles:@[@"App Config", @"Show Explorer", @"Route List"]
                                        handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                            if (buttonIndex == 1) {
-                                               [YZHRouter openURL:kYZHRouterAppConfig];
+                                               [YZHRouter openURL:kYZHRouterAppConfig info:@{
+                                                                                             kYZHRouteSegueNewNavigation : @(YES),
+                                                                                             kYZHRouteSegue: kYZHRouteSegueModal
+                                                                                          }];
                                            } else if (buttonIndex == 2) {
                                                [YZHRouter openURL:@"yeamoney://showExplorer"];
                                                [[FLEXManager sharedManager] showExplorer];
@@ -61,8 +63,13 @@
                                            }
                                            [YZHServicesConfig shareServicesConfig].showDebugView = NO;
                                        }];
+        // 震动
+        [YZHServicesConfig shareServicesConfig].showDebugView = YES;
     } else {
         
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [YZHServicesConfig shareServicesConfig].showDebugView = NO;
+        });
     }
 
 }

@@ -76,6 +76,8 @@
 //按钮响应接口
 - (void)mediaAudioPressed:(NIMMessageModel *)messageModel;
 
+- (void)mediaAudioTelephonePressed:(NIMMessageModel *)messageModel;
+
 - (void)mediaPicturePressed;
 
 - (void)mediaShootPressed;

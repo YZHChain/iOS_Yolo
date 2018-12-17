@@ -48,26 +48,22 @@
 }
 
 - (void)addVoiceView{
-    UIImage * image = [UIImage nim_imageInKit:@"icon_receiver_voice_playing.png"];
+    
+    UIImage * image = [UIImage nim_imageInKit:@"session_sender_audio"];
     _voiceImageView = [[UIImageView alloc] initWithImage:image];
-//    Jersey, 语音动画
-    NSArray * animateNames = @[@"icon_receiver_voice_playing_001.png",@"icon_receiver_voice_playing_002.png",@"icon_receiver_voice_playing_003.png"];
-    NSMutableArray * animationImages = [[NSMutableArray alloc] initWithCapacity:animateNames.count];
-    for (NSString * animateName in animateNames) {
-        UIImage * animateImage = [UIImage nim_imageInKit:animateName];
-        [animationImages addObject:animateImage];
-    }
-    _voiceImageView.animationImages = animationImages;
-    _voiceImageView.animationDuration = 1.0;
     [self addSubview:_voiceImageView];
     
     _durationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _durationLabel.backgroundColor = [UIColor clearColor];
     [self addSubview:_durationLabel];
+    
 }
 //Jersey IM:刷新,
 - (void)refresh:(NIMMessageModel *)data{
     [super refresh:data];
+    
+    [self refreshVoiceView];
+    
     NIMAudioObject *object = (NIMAudioObject *)self.model.message.messageObject;
     self.durationLabel.text = [NSString stringWithFormat:@"%zd\"",(object.duration+500)/1000];//四舍五入
     //Jersey IM: 取出 setting作相应配置.
@@ -82,15 +78,26 @@
     [self setPlaying:self.isPlaying];
 }
 
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
+- (void)refreshVoiceView {
     
-    //Jersey IM:使用消息排列的方式来判断左右.
-    //IMTODO: 动画效果有问题,重新切图.
-    if (self.model.message.isOutgoingMsg) {
-        _voiceImageView.image = [UIImage imageNamed:@"session_sender_audio"];
+    [_voiceImageView removeFromSuperview];
+    NSString* userID = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+    BOOL isMySender = [self.model.message.from isEqualToString:userID];
+    if (isMySender) {
+        UIImage * image = [UIImage nim_imageInKit:@"session_sender_audio"];
+        _voiceImageView = [[UIImageView alloc] initWithImage:image];
         NSArray* imageNames = @[@"session_sender_audio_animationA",@"session_sender_audio_animationB",@"session_sender_audio_animationC"];
+        NSMutableArray* animationImages = [[NSMutableArray alloc] init];
+        for (NSString* imageName in imageNames) {
+            [animationImages addObject:[UIImage imageNamed:imageName]];
+        }
+        _voiceImageView.animationImages = animationImages;
+        _voiceImageView.animationDuration = 1.0;
+    } else {
+        UIImage * image = [UIImage nim_imageInKit:@"session_receiver_audio"];
+        _voiceImageView = [[UIImageView alloc] initWithImage:image];
+        
+        NSArray* imageNames = @[@"session_receiver_audio_animationA",@"session_receiver_audio_animationB",@"session_receiver_audio_animationC"];
         NSMutableArray* animationImages = [[NSMutableArray alloc] init];
         for (NSString* imageName in imageNames) {
             UIImage* image = [UIImage imageNamed:imageName];
@@ -98,18 +105,16 @@
         }
         _voiceImageView.animationImages = animationImages;
         _voiceImageView.animationDuration = 1.0;
-        
-    } else {
-        _voiceImageView.image = [UIImage imageNamed:@"session_receiver_audio"];
-        NSArray* imageNames = @[@"session_receiver_audio_animationA",@"session_receiver_audio_animationB",@"session_receiver_audio_animationC"];
-        NSMutableArray* animationImages = [[NSMutableArray alloc] init];
-        for (NSString* imageName in imageNames) {
-            [animationImages addObject:[UIImage imageNamed:imageName]];
-        }
-        _voiceImageView.animationImages = animationImages;
-        _voiceImageView.animationDuration = 1.0;
     }
+    [self addSubview:_voiceImageView];
+}
 
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    //Jersey IM:使用消息排列的方式来判断左右.
+    //IMTODO: 动画效果有问题,重新切图.
     UIEdgeInsets contentInsets = self.model.contentViewInsets;
     if (self.model.message.isOutgoingMsg) {
         self.voiceImageView.nim_right = self.nim_width - contentInsets.right;

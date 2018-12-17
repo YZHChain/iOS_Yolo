@@ -8,7 +8,6 @@
 
 #if DEBUG
 
-
 #import <UIKit/UIKit.h>
 
 @interface UIWindow (Motion)

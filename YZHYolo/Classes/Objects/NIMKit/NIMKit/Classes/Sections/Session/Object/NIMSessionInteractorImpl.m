@@ -377,10 +377,24 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
 
 
 #pragma mark - NIMMeidaButton
+// 扬声器
 - (void)mediaAudioPressed:(NIMMessageModel *)messageModel
 {
     if (![[NIMSDK sharedSDK].mediaManager isPlaying]) {
         [[NIMSDK sharedSDK].mediaManager switchAudioOutputDevice:NIMAudioOutputDeviceSpeaker];
+        self.pendingAudioMessages = [self findRemainAudioMessages:messageModel.message];
+        [[NIMKitAudioCenter instance] play:messageModel.message];
+        
+    } else {
+        self.pendingAudioMessages = nil;
+        [[NIMSDK sharedSDK].mediaManager stopPlay];
+    }
+}
+// 听筒
+- (void)mediaAudioTelephonePressed:(NIMMessageModel *)messageModel
+{
+    if (![[NIMSDK sharedSDK].mediaManager isPlaying]) {
+        [[NIMSDK sharedSDK].mediaManager switchAudioOutputDevice:NIMAudioOutputDeviceReceiver];
         self.pendingAudioMessages = [self findRemainAudioMessages:messageModel.message];
         [[NIMKitAudioCenter instance] play:messageModel.message];
         

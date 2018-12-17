@@ -67,6 +67,9 @@
     
     //audioPlayedIcon
     _audioPlayedIcon = [NIMBadgeView viewWithBadgeTip:@""];
+    _audioPlayedIcon.size = CGSizeMake(10, 10);
+    _audioPlayedIcon.badgeBackgroundColor = [UIColor yzh_colorWithHexString:@"#FF5E86"];
+//    [_audioPlayedIcon setNeedsLayout];
     [self.contentView addSubview:_audioPlayedIcon];
     
     //traningActivityIndicator

@@ -14,5 +14,6 @@
 
 + (instancetype)viewWithBadgeTip:(NSString *)badgeValue;
 
+@property (strong) UIColor *badgeBackgroundColor;
 
 @end

@@ -45,6 +45,7 @@
 
 @property (nonatomic, copy) void (^forwardPersonageCardHandle)(NSString*);
 @property (nonatomic, copy) void (^forwardTeamCardHandle)(NSString*);
+@property (nonatomic, strong) NIMMessage* audioMessage;
 
 @end
 
@@ -628,8 +629,10 @@
         copyText = !robotObject.isFromRobot;
     }
     if (message.messageType == NIMMessageTypeAudio) {
-        [items addObject:[[UIMenuItem alloc] initWithTitle:@"静音播放"
+        [items addObject:[[UIMenuItem alloc] initWithTitle:@"听筒播放"
                                                     action:@selector(mutePlayAudio:)]];
+        self.audioMessage = message;
+        
     }
     if (copyText) {
         [items addObject:[[UIMenuItem alloc] initWithTitle:@"复制"
@@ -668,10 +671,12 @@
     }
     return NO;
 }
-//JerseyYolo: 静音播放
+//JerseyYolo: 听筒播放
 - (void)mutePlayAudio:(id)sender {
     
-    
+    NIMMessageModel* audioModel = [[NIMMessageModel alloc] init];
+    audioModel.message = self.audioMessage;
+    [self.interactor mediaAudioTelephonePressed:audioModel];
 }
 
 - (void)copyText:(id)sender
