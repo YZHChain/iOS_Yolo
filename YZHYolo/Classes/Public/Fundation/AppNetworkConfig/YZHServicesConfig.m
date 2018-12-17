@@ -18,8 +18,8 @@ NSString *const kYZHAppConfigApiDebug                = @"apiDebug";
 NSString *const kYZHAppConfigServerTest              = @"serverTest";
 NSString *const kYZHAppConfigServerAddrTest          = @"serverAddrTest";
 NSString *const kYZHAppConfigServerAddr              = @"serverAddr";
-NSString *const kYZHAppConfigNIMAppKeyTest           = @"NIMAppKeyTest";
-NSString *const kYZHAppConfigNIMAppKey               = @"NIMAppKey";
+NSString *const kYZHAppConfigNIMAppKeyTest           = @"NIMKeyTest";
+NSString *const kYZHAppConfigNIMAppKey               = @"NIMKey";
 NSString *const kYZHAppConfigNIMTest                 = @"NIMSeverTest";
 
 static id instance;

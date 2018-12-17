@@ -7,13 +7,13 @@
 	<key>severAddr</key>
 	<string>https://yoloserver.yzhchain.com/</string>
 	<key>severTest</key>
-	<false/>
-	<key>NIMAppKeyTest</key>
+	<true/>
+	<key>NIMKeyTest</key>
 	<string>14f11c236ed7c56d576d251bbbad67cb</string>
-	<key>NIMAppKey</key>
+	<key>NIMKey</key>
 	<string>d62461f3a67a1f9eb1d8604b9ebea576</string>
 	<key>NIMSeverTest</key>
-	<false/>
+	<true/>
 	<key>logToFile</key>
 	<false/>
 	<key>apiDebug</key>

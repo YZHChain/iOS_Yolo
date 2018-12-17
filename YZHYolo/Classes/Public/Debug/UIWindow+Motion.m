@@ -19,8 +19,6 @@
 
 @interface UIWindow()
 
-@property (nonatomic, copy) NSString* debugViewShow;
-
 @end
 
 @implementation UIWindow (Motion)
@@ -75,16 +73,6 @@
 }
 
 #pragma mark -- SET -- GET
-
-- (BOOL)debugViewShow {
-    
-    return objc_getAssociatedObject(self, _cmd);
-}
-
-- (void)setDebugViewShow:(NSString *)debugViewShow {
-    
-    objc_setAssociatedObject(self, @selector(debugViewShow), debugViewShow, OBJC_ASSOCIATION_COPY);
-}
 
 @end
 
