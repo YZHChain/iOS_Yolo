@@ -22,6 +22,8 @@
 #import "YZHPrivateChatVC.h"
 #import "YZHSearchView.h"
 #import "YZHPrivateChatDefaultView.h"
+#import "YZHNetworkStatusView.h"
+#import "AFNetworkReachabilityManager.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -50,6 +52,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 @property (nonatomic, strong) YZHSearchView* searchView;
 @property (nonatomic, strong) YZHSearchView* tagSearchView;
 @property (nonatomic, strong) YZHPrivateChatDefaultView* defaultView;
+@property (nonatomic, strong) YZHNetworkStatusView* networkView;
 
 @end
 
@@ -86,6 +89,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     //4.设置通知
     [self setupNotification];
     
+    [self setupListeningNetworkStatus];
 //    // 设置 3D Touch.
 //    if (@available(iOS 9.0, *)) {
 //        self.supportsForceTouch = [self.traitCollection respondsToSelector:@selector(forceTouchCapability)] && self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
@@ -181,8 +185,61 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     extern NSString *const NIMKitUserInfoHasUpdatedNotification;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserInfoHasUpdatedNotification:) name:NIMKitUserInfoHasUpdatedNotification object:nil];
-    
 }
+
+- (void)setupListeningNetworkStatus {
+    
+    //1.创建网络状态监测管理者
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    //2.监听改变
+    [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"没有网络");
+                [self refreshNetworkViewWithStatus:NO];
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                [self refreshNetworkViewWithStatus:YES];
+                NSLog(@"3G|4G");
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                [self refreshNetworkViewWithStatus:YES];
+                NSLog(@"WiFi");
+                break;
+            default:
+                [self refreshNetworkViewWithStatus:YES];
+                break;
+        }
+    }];
+    [manager startMonitoring];//开始监听
+}
+
+// 网络正常
+- (void)refreshNetworkViewWithStatus:(BOOL )status {
+    
+    if (status) {
+        if (self.networkView.superview) {
+            [self.networkView removeFromSuperview];
+            self.tableView.y = 0;
+            self.tagsTableView.y = 0;
+            self.defaultView.y = 0;
+        } else {
+            
+        }
+    } else {
+        if (self.networkView.superview) {
+            
+        } else {
+            [self.view addSubview:self.networkView];
+            self.tableView.y = self.networkView.height;
+            self.tagsTableView.y = self.networkView.height;
+            self.defaultView.y = self.networkView.height;
+        }
+    }
+}
+
+// 网络异常
+
 //TODO:
 - (void)onUserInfoHasUpdatedNotification:(NSNotification *)notification{
     [self refresh];
@@ -844,4 +901,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     return _defaultView;
 }
 
+- (YZHNetworkStatusView *)networkView {
+    
+    if (!_networkView) {
+        _networkView = [YZHNetworkStatusView yzh_viewWithFrame:CGRectMake(0, 0, self.tableView.width, 35)];
+    }
+    return _networkView;
+}
 @end

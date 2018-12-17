@@ -562,6 +562,8 @@
 		55FB0C0921C67F8A008C95DE /* YMAppConfigVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C0321C67F8A008C95DE /* YMAppConfigVC.m */; };
 		55FB0C0A21C67F8A008C95DE /* YMAppConfigVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0C0421C67F8A008C95DE /* YMAppConfigVC.xib */; };
 		55FB0C0D21C6803F008C95DE /* YZHCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C0C21C6803F008C95DE /* YZHCacheManager.m */; };
+		55FB0C1021C797CD008C95DE /* YZHNetworkStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C0F21C797CD008C95DE /* YZHNetworkStatusView.m */; };
+		55FB0C1221C797EC008C95DE /* YZHNetworkStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0C1121C797EC008C95DE /* YZHNetworkStatusView.xib */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -1596,6 +1598,9 @@
 		55FB0C0421C67F8A008C95DE /* YMAppConfigVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YMAppConfigVC.xib; sourceTree = "<group>"; };
 		55FB0C0B21C6803F008C95DE /* YZHCacheManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHCacheManager.h; sourceTree = "<group>"; };
 		55FB0C0C21C6803F008C95DE /* YZHCacheManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHCacheManager.m; sourceTree = "<group>"; };
+		55FB0C0E21C797CD008C95DE /* YZHNetworkStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHNetworkStatusView.h; sourceTree = "<group>"; };
+		55FB0C0F21C797CD008C95DE /* YZHNetworkStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHNetworkStatusView.m; sourceTree = "<group>"; };
+		55FB0C1121C797EC008C95DE /* YZHNetworkStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHNetworkStatusView.xib; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -4068,6 +4073,9 @@
 				55BDA36F218AA267006400B0 /* YZHImportBoxView.m */,
 				55BDA36B2189BF27006400B0 /* FSTextView.h */,
 				55BDA36C2189BF27006400B0 /* FSTextView.m */,
+				55FB0C0E21C797CD008C95DE /* YZHNetworkStatusView.h */,
+				55FB0C0F21C797CD008C95DE /* YZHNetworkStatusView.m */,
+				55FB0C1121C797EC008C95DE /* YZHNetworkStatusView.xib */,
 			);
 			path = Function;
 			sourceTree = "<group>";
@@ -4693,6 +4701,7 @@
 				5537421E21A6796A00204972 /* YZHSetTeamTagVC.xib in Resources */,
 				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
 				55AB6CEE219FFA8A005385A0 /* FilterBaseController.xib in Resources */,
+				55FB0C1221C797EC008C95DE /* YZHNetworkStatusView.xib in Resources */,
 				55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */,
 				552CC89C215A746D00135FDC /* YZHSettingCenterVC.xib in Resources */,
 				5531252A21B55FE40010B4A6 /* YZHGetSecreKeyVC.xib in Resources */,
@@ -5119,6 +5128,7 @@
 				55FB0C0D21C6803F008C95DE /* YZHCacheManager.m in Sources */,
 				558C54EA21AD1F7700CC10D1 /* YZHTeamMemberManageCell.m in Sources */,
 				553641F9217EAEC3006F77A5 /* NIMFileContentConfig.m in Sources */,
+				55FB0C1021C797CD008C95DE /* YZHNetworkStatusView.m in Sources */,
 				5520DE27218EE6380042ED56 /* YZHGroupedDataCollection.m in Sources */,
 				553641F7217EAEC3006F77A5 /* NIMSessionListCell.m in Sources */,
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
