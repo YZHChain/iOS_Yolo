@@ -100,6 +100,7 @@ extern NSString *const kYZHRouterCommunityCardTeamNotice;
 extern NSString *const kYZHRouterCommunityCardSendTeamNotice;
 extern NSString *const kYZHRouterCommunityCardSelectedTeam;
 extern NSString *const kYZHRouterSessionChatContent;
+extern NSString *const kYZHRouterSessionSearchChatContent;
 extern NSString *const kYZHRouterCommunitySetTeamTag;
 extern NSString *const kYZHRouterCommunityAtTeamMember;
 extern NSString *const kYZHRouterPrivateChatSearch;

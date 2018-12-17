@@ -345,6 +345,7 @@
     if ([model.title isEqualToString:@"聊天内容"]) {
         [YZHRouter openURL:model.router info:@{
                                                 @"targetId": self.userId,
+                                                @"isTeam": @(NO)
                                                }];
         
     } else {

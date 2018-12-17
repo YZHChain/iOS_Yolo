@@ -226,7 +226,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
 }
 
-
 #pragma mark - 5.Event Response
 
 

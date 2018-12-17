@@ -76,6 +76,7 @@
     //TODO: 空白展示页.
     chatContentModel.routetInfo = @{
                                     @"targetId": self.teamId,
+                                    @"isTeam": @(YES)
                                     };
     // 群主设置
     YZHTeamDetailModel* publicModel = [[YZHTeamDetailModel alloc] init];

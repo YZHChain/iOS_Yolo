@@ -39,6 +39,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 @property (nonatomic, strong) NSArray<NIMMessage*>* urlMessages;
 @property (nonatomic, strong) NSArray<NIMMessage*>* cardMessages;
 @property (nonatomic, strong) NSArray<NIMMessage*>* imageViewMessages;
+@property (nonatomic, strong) NSArray<NIMMessage*>* allTextMessage;
 @property (nonatomic, strong) NIMMessage* messageForMenu;
 
 @end
@@ -71,6 +72,14 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 
 - (void)setupNavBar {
     self.navigationItem.title = @"聊天内容";
+    
+    UIButton* searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setImage:[UIImage imageNamed:@"addBook_cover_search_default"] forState:UIControlStateNormal];
+    [searchButton setImage:[UIImage imageNamed:@"addBook_cover_search_default"] forState:UIControlStateSelected];
+    self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    [searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    [searchButton sizeToFit];
+    
 }
 
 - (void)setupView {
@@ -170,6 +179,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
                 [mutableHTTPMessages addObject:mutableMessages[i]];
             }
         }
+        self.allTextMessage = messages;
         self.urlMessages = mutableHTTPMessages.copy;
         [self.urlTableView reloadData];
     }];
@@ -467,6 +477,27 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
                                                     action:@selector(copyText:)]];
     }
     return items;
+    
+}
+
+- (void)onTouchSearch:(UIButton *)sender {
+    
+    NIMSession* session;
+    if (self.isTeam) {
+        session = [NIMSession session:self.targetId type:NIMSessionTypeTeam];
+    } else {
+        session = [NIMSession session:self.targetId type:NIMSessionTypeP2P];
+    }
+    if (session) {
+        [YZHRouter openURL:kYZHRouterSessionSearchChatContent info:@{
+                                                                     @"session": session,
+                                                                     @"allTextMessages": self.allTextMessage.count ? self.allTextMessage : @"",
+                                                                     kYZHRouteSegueNewNavigation: @(YES),
+                                                                     kYZHRouteSegue: kYZHRouteSegueModal
+                                                                     }];
+    } else {
+        [YZHRouter openURL:kYZHRouterSessionSearchChatContent];
+    }
     
 }
 

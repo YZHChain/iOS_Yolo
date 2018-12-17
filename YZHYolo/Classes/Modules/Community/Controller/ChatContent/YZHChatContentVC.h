@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHChatContentVC : YZHBaseViewController
 
+@property (nonatomic, assign) BOOL isTeam;
 @property (nonatomic, copy) NSString* targetId;
 
 @end

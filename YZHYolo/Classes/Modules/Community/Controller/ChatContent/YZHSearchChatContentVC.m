@@ -1,44 +1,36 @@
 //
-//  YZHPrivatelyChatSearchVC.m
+//  YZHSearchChatContentVC.m
 //  YZHYolo
 //
-//  Created by Jersey on 2018/10/15.
+//  Created by Jersey on 2018/12/17.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
-#import "YZHPrivatelyChatSearchVC.h"
+#import "YZHSearchChatContentVC.h"
 
-#import "YZHUserLoginManage.h"
-#import "YZHSearchModel.h"
-#import "YZHSearchTeamCell.h"
-#import "YZHSearchRecommendSectionView.h"
-#import "UINavigationController+FDFullscreenPopGesture.h"
-#import "YZHUserDataManage.h"
 #import "NIMSessionListCell.h"
-#import "NIMAvatarImageView.h"
+#import "YZHSearchModel.h"
 #import "NIMKitUtil.h"
+#import "NIMAvatarImageView.h"
 #import "YZHPrivateChatVC.h"
-#import "YZHAddBookFriendsCell.h"
-#import "YZHCommandSectionView.h"
 #import "YZHCommandTipView.h"
+#import "YZHSearchChatContentModel.h"
+#import "YZHCommandSectionView.h"
 
-static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
-@interface YZHPrivatelyChatSearchVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface YZHSearchChatContentVC ()<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
-@property (nonatomic, strong) YZHSearchListModel* searchManage;
-@property (nonatomic, assign) int recommendPageNumber;
-@property (nonatomic, assign) BOOL havaSearchModel;
+@property (nonatomic, strong) UITextField* textField;
+@property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, assign) BOOL isSearchStatus;
-@property (nonatomic, strong) NSString* lastKeyText;
-@property (nonatomic, assign) int searchPageNumber;
-@property (nonatomic, strong) YZHUserDataModel* userDataModel;
+@property (nonatomic, assign) BOOL havaSearchModel;
 @property (nonatomic, strong) YZHCommandTipView* tipView;
+@property (nonatomic, strong) YZHSearchChatContentModel* searchManage;
 
 @end
 
-@implementation YZHPrivatelyChatSearchVC
+@implementation YZHSearchChatContentVC
+
 
 #pragma mark - 1.View Controller Life Cycle
 
@@ -67,17 +59,18 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 - (void)setupNavBar {
     
     self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.title = @"私聊搜索";
+    self.navigationController.title = @"聊天内容搜索";
+    self.navigationItem.leftBarButtonItem = nil;
     [self searchBar];
     [self.searchBar becomeFirstResponder];
 }
 
 - (void)setupView {
+    
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.tipView];
-    
 }
 
 - (void)reloadView {
@@ -88,105 +81,49 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 
 - (void)setupData {
     
-    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     if (self.isSearchStatus) {
-        NSInteger section = 0;
-        section = self.searchManage.searchRecentSession.count ? ++section : section;
-        section = self.searchManage.searchFirends.count ? ++section : section;
-        return section;
-    } else {
-        return 0;
-    }
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (self.isSearchStatus) {
-        switch (section) {
-            case 0:
-                return self.searchManage.searchRecentSession.count ? self.searchManage.searchRecentSession.count : self.searchManage.searchFirends.count;
-                break;
-            case 1:
-                return self.searchManage.searchFirends.count;
-                break;
-            default:
-                return 0;
-                break;
-        }
-    } else {
-        return 0;
-    }
-}
-
-- (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (self.isSearchStatus) {
-        if (indexPath.section == 0) {
-            if (self.searchManage.searchRecentSession.count) {
-               return [self searchTableView:tableView cellForRowAtIndexPath:indexPath];
-            } else {
-               return [self firendTableView:tableView cellForRowAtIndexPath:indexPath];
-            }
+        if (self.havaSearchModel) {
+            
+            return 1;
         } else {
-           return [self firendTableView:tableView cellForRowAtIndexPath:indexPath];
+            return 0;
         }
     } else {
-        return nil;
+        return 0;
     }
 }
 
-- (UITableViewCell* )firendTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    YZHContactMemberModel* memberModel =  [self.searchManage.searchFirends objectAtIndex:indexPath.row];
-    YZHAddBookFriendsCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHFriendsCellIdentifier forIndexPath:indexPath];
-    [cell refreshUser:memberModel];
-    
-    return cell;
-}
-
-- (UITableViewCell* )searchTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-        static NSString * cellId = @"cellId";
-        NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (!cell) {
-            cell = [[NIMSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    if (self.isSearchStatus) {
+        if (self.havaSearchModel) {
+            
+            return self.searchManage.searchTextMessages.count;
+        } else {
+            return 0;
         }
-        NIMRecentSession *recent = self.searchManage.searchRecentSession[indexPath.row];
-        cell.nameLabel.text = [self nameForRecentSession:recent];
-        [cell.avatarImageView setAvatarBySession:recent.session];
-        [cell.nameLabel sizeToFit];
-        cell.messageLabel.attributedText  = [self contentForRecentSession:recent];
-        [cell.messageLabel sizeToFit];
-        cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
-        [cell.timeLabel sizeToFit];
-    
-        [cell refresh:recent];
-        return cell;
+    } else {
+        return 0;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.isSearchStatus) {
-        switch (indexPath.section) {
-            case 0:
-                return self.searchManage.searchRecentSession.count ? 65 : 55;
-                break;
-            case 1:
-                return 55;
-                break;
-            default:
-                return 65;
-                break;
-        }
-    } else {
-        return 0;
-    }
+    return 60;
+}
+
+- (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier];
+    
+
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -194,36 +131,13 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
     return 40;
 }
 
-- (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    YZHCommandSectionView* sectionView = [YZHCommandSectionView yzh_viewWithFrame:CGRectMake(0, 0, tableView.width, 40)];
-    NSString* titleText;
-    if (self.isSearchStatus) {
-        if (section == 0) {
-            if (self.searchManage.searchRecentSession.count) {
-                titleText = @"查找到的聊天";
-            } else {
-                titleText = @"查找到的好友";
-            }
-        } else {
-            titleText = @"查找到的好友";
-        }
-        sectionView.titleLabel.text = titleText;
-        return sectionView;
-    } else {
-        return nil;
+    YZHCommandSectionView* view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kYZHCommonHeaderIdentifier];
+    if (!view) {
+        view = [YZHCommandSectionView yzh_viewWithFrame:CGRectZero];
     }
-    return nil;
-}
-// 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    
-    return 0.1f;
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    
-    UIView* view = [[UIView alloc] init];
+    view.titleLabel.text = @"搜索到的聊天内容";
     
     return view;
 }
@@ -232,27 +146,10 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
     
     [self.searchBar endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    if (self.isSearchStatus) {
-        if (indexPath.section == 0) {
-            if (self.searchManage.searchRecentSession.count) {
-                 [self searchTableView:tableView didSelectRowAtIndexPath:indexPath];
-            } else {
-                 [self friendTableView:tableView didSelectRowAtIndexPath:indexPath];
-            }
-        } else {
-            [self friendTableView:tableView didSelectRowAtIndexPath:indexPath];
-        }
-    } else {
-        
-    }
-}
-
-- (void)searchTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NIMRecentSession *recentSession;
-
-    recentSession = self.searchManage.searchRecentSession[indexPath.row];
+    
+    recentSession = self.searchManage.searchTextMessages[indexPath.row];
     [self onSelectedRecent:recentSession atIndexPath:indexPath];
 }
 
@@ -264,20 +161,10 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 
 - (void)onSelectedAvatar:(NIMRecentSession *)recent
              atIndexPath:(NSIndexPath *)indexPath{
+    
     if (recent.session.sessionType == NIMSessionTypeP2P) {
         [self onSelectedRecent:recent atIndexPath:indexPath];
     }
-}
-
-- (void)friendTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    YZHContactMemberModel* memberModel =  [self.searchManage.searchFirends objectAtIndex:indexPath.row];
-    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{@"userId": memberModel.info.infoId}];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    [self.searchBar endEditing:YES];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -305,42 +192,36 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (!YZHIsString(searchBar.text)) {
         self.isSearchStatus = NO;
-        [self.searchManage.searchRecentSession removeAllObjects];
-        [self.searchManage.searchFirends removeAllObjects];
+        [self.searchManage.searchTextMessages removeAllObjects];
         [self.tableView reloadData];
         self.tableView.hidden = YES;
         self.tipView.hidden = NO;
-        self.tipView.titleLabel.text = @"输入昵称关键字搜索聊天或好友";
+        self.tipView.titleLabel.text = @"输入您要查找的聊天记录";
     }
 }
 
 #pragma mark - 5.Event Response
 
-#pragma mark - 6.Private Methods
-
 - (void)searchTeamListWithKeyText:(NSString *)keyText {
     
     if (YZHIsString(keyText)) {
-        [self.searchManage searchPrivateKeyText:keyText];
-        [self.searchManage searchFirendKeyText:keyText];
+        [self.searchManage searchPrivateContentKeyText:keyText];
         self.isSearchStatus = YES;
         [self.tableView reloadData];
-        if (self.searchManage.searchRecentSession.count || self.searchManage.searchFirends.count) {
+        if (self.searchManage.searchTextMessages.count) {
             self.tipView.hidden = YES;
             self.tableView.hidden = NO;
         } else {
+            self.tipView.titleLabel.text = @"未找到相关聊天记录";
             self.tipView.hidden = NO;
-            self.tipView.titleLabel.text = @"未找到相关聊天或好友";
             self.tableView.hidden = YES;
         }
     } else {
         self.isSearchStatus = NO;
         [self.tableView reloadData];
+        self.tipView.hidden = NO;
+        self.tipView.titleLabel.text = @"输入您要查找的聊天记录";
     }
-}
-
-- (void)setupNotification {
-    
 }
 
 #pragma mark NIMCell
@@ -387,7 +268,7 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
             text = lastMessage.text;
             break;
         case NIMMessageTypeRobot:
-//            text = [self robotMessageContent:lastMessage];
+            //            text = [self robotMessageContent:lastMessage];
             break;
         case NIMMessageTypeCustom:
             //TODO:增加自定义消息解析.识别不同自定义消息格式
@@ -442,36 +323,45 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
     return [NIMKitUtil showTime:recent.lastMessage.timestamp showDetail:NO];
 }
 
+
+#pragma mark - 6.Private Methods
+
+- (void)setupNotification {
+    
+}
+
 #pragma mark - 7.GET & SET
 
 - (UITableView *)tableView{
     
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
-//        _tableView.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHAddBookFriendsCell" bundle:nil] forCellReuseIdentifier:kYZHFriendsCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"YZHCommandSectionView" bundle:nil] forCellReuseIdentifier:kYZHCommonHeaderIdentifier];
+        
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        [_tableView registerClass:[NIMSessionListCell class] forCellReuseIdentifier:kYZHCommonCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHCommandSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHCommonHeaderIdentifier];
         _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
-        _tableView.tableFooterView = [[UITableViewHeaderFooterView alloc] init];
+        _tableView.tableFooterView = [[UIView alloc] init];
     }
     return _tableView;
 }
+
 - (UISearchBar *)searchBar {
     
     if (!_searchBar) {
         
         UISearchBar * searchbar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-80,33)];
-        searchbar.placeholder = @"模糊搜索";
+        searchbar.placeholder = @"搜索";
         searchbar.searchBarStyle = UISearchBarStyleDefault;
         searchbar.showsCancelButton = YES;
         //通过KVC拿到textField
         UITextField  *seachTextFild = [searchbar valueForKey:@"searchField"];
         seachTextFild.textColor = [UIColor yzh_fontShallowBlack];
         seachTextFild.font = [UIFont yzh_commonFontStyleFontSize:14];
+        self.textField = seachTextFild;
         //修改光标颜色
         [seachTextFild setTintColor:[UIColor blueColor]];
         
@@ -485,24 +375,16 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
             }
         }
         searchbar.delegate = self;
-        self.navigationItem.titleView = searchbar;
         if (@available(iOS 9.0, *)) {
             [[searchbar.heightAnchor constraintEqualToConstant:44.0] setActive:YES];
         } else {
             // Fallback on earlier versions
         }
+        self.navigationItem.titleView = searchbar;
         
         _searchBar = searchbar;
     }
     return _searchBar;
-}
-
-- (YZHSearchListModel *)searchManage {
-    
-    if (!_searchManage) {
-        _searchManage = [[YZHSearchListModel alloc] init];
-    }
-    return _searchManage;
 }
 
 - (YZHCommandTipView *)tipView {
@@ -510,7 +392,7 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
     if (!_tipView) {
         _tipView = [YZHCommandTipView yzh_viewWithFrame:self.view.bounds];
         _tipView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        _tipView.titleLabel.text = @"输入昵称关键字搜索聊天或好友";
+        _tipView.titleLabel.text = @"输入您要查找的聊天记录";
         UITapGestureRecognizer* tipViewGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchTipView:)];
         [_tipView addGestureRecognizer:tipViewGesture];
     }
@@ -520,6 +402,14 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 - (void)onTouchTipView:(UIGestureRecognizer *)sender {
     
     [self.searchBar endEditing:YES];
+}
+
+- (YZHSearchChatContentModel *)searchManage {
+    
+    if (!_searchManage) {
+        _searchManage = [[YZHSearchChatContentModel alloc] initWithSession:_session allTextMessages: _allTextMessages];
+    }
+    return _searchManage;
 }
 
 @end

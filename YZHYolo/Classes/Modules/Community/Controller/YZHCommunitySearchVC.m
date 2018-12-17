@@ -31,7 +31,6 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) YZHSearchListModel* searchManage;
 @property (nonatomic, strong) YZHSearchListModel* recommendModel;
-@property (nonatomic, strong) UIView *customNavBar;
 @property (nonatomic, assign) int recommendPageNumber;
 @property (nonatomic, assign) BOOL havaSearchModel;
 @property (nonatomic, assign) BOOL isSearchStatus;

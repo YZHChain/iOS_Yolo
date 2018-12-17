@@ -564,6 +564,10 @@
 		55FB0C0D21C6803F008C95DE /* YZHCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C0C21C6803F008C95DE /* YZHCacheManager.m */; };
 		55FB0C1021C797CD008C95DE /* YZHNetworkStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C0F21C797CD008C95DE /* YZHNetworkStatusView.m */; };
 		55FB0C1221C797EC008C95DE /* YZHNetworkStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0C1121C797EC008C95DE /* YZHNetworkStatusView.xib */; };
+		55FB0C1521C7A85D008C95DE /* YZHSearchChatContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C1421C7A85D008C95DE /* YZHSearchChatContentVC.m */; };
+		55FB0C1821C7CD75008C95DE /* YZHSearchChatContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C1721C7CD75008C95DE /* YZHSearchChatContentModel.m */; };
+		55FB0C1C21C7E0D8008C95DE /* YZHTextChatContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FB0C1A21C7E0D8008C95DE /* YZHTextChatContentCell.m */; };
+		55FB0C1D21C7E0D8008C95DE /* YZHTextChatContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55FB0C1B21C7E0D8008C95DE /* YZHTextChatContentCell.xib */; };
 		813DF7177259701854776310 /* libPods-YZHYolo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB35EA91B092229538FDAAC /* libPods-YZHYolo.a */; };
 /* End PBXBuildFile section */
 
@@ -1601,6 +1605,13 @@
 		55FB0C0E21C797CD008C95DE /* YZHNetworkStatusView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHNetworkStatusView.h; sourceTree = "<group>"; };
 		55FB0C0F21C797CD008C95DE /* YZHNetworkStatusView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHNetworkStatusView.m; sourceTree = "<group>"; };
 		55FB0C1121C797EC008C95DE /* YZHNetworkStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHNetworkStatusView.xib; sourceTree = "<group>"; };
+		55FB0C1321C7A85D008C95DE /* YZHSearchChatContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchChatContentVC.h; sourceTree = "<group>"; };
+		55FB0C1421C7A85D008C95DE /* YZHSearchChatContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchChatContentVC.m; sourceTree = "<group>"; };
+		55FB0C1621C7CD75008C95DE /* YZHSearchChatContentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSearchChatContentModel.h; sourceTree = "<group>"; };
+		55FB0C1721C7CD75008C95DE /* YZHSearchChatContentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHSearchChatContentModel.m; sourceTree = "<group>"; };
+		55FB0C1921C7E0D8008C95DE /* YZHTextChatContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTextChatContentCell.h; sourceTree = "<group>"; };
+		55FB0C1A21C7E0D8008C95DE /* YZHTextChatContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTextChatContentCell.m; sourceTree = "<group>"; };
+		55FB0C1B21C7E0D8008C95DE /* YZHTextChatContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTextChatContentCell.xib; sourceTree = "<group>"; };
 		AB62DE78412941CF3F994649 /* Pods-YZHYolo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.debug.xcconfig"; sourceTree = "<group>"; };
 		BFAAA0EF6F83022BCDCE8675 /* Pods-YZHYolo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YZHYolo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3644,6 +3655,8 @@
 			children = (
 				5551B34421A58AA600AF3088 /* YZHChatContentVC.h */,
 				5551B34521A58AA600AF3088 /* YZHChatContentVC.m */,
+				55FB0C1321C7A85D008C95DE /* YZHSearchChatContentVC.h */,
+				55FB0C1421C7A85D008C95DE /* YZHSearchChatContentVC.m */,
 			);
 			path = ChatContent;
 			sourceTree = "<group>";
@@ -3662,6 +3675,9 @@
 				5551B34721A58B1A00AF3088 /* YZHChatContentHeaderView.h */,
 				5551B34821A58B1A00AF3088 /* YZHChatContentHeaderView.m */,
 				5551B34A21A58B2300AF3088 /* YZHChatContentHeaderView.xib */,
+				55FB0C1921C7E0D8008C95DE /* YZHTextChatContentCell.h */,
+				55FB0C1A21C7E0D8008C95DE /* YZHTextChatContentCell.m */,
+				55FB0C1B21C7E0D8008C95DE /* YZHTextChatContentCell.xib */,
 			);
 			path = ChatContent;
 			sourceTree = "<group>";
@@ -3669,6 +3685,8 @@
 		559754CE21B42234009AC4D1 /* ChatContent */ = {
 			isa = PBXGroup;
 			children = (
+				55FB0C1621C7CD75008C95DE /* YZHSearchChatContentModel.h */,
+				55FB0C1721C7CD75008C95DE /* YZHSearchChatContentModel.m */,
 			);
 			path = ChatContent;
 			sourceTree = "<group>";
@@ -4710,6 +4728,7 @@
 				5581916C21A26B8E00C74E2E /* YZHSharedContactCell.xib in Resources */,
 				556D7E4421A2C2AD00533384 /* YZHTeamCardHeaderView.xib in Resources */,
 				55FB0C0A21C67F8A008C95DE /* YMAppConfigVC.xib in Resources */,
+				55FB0C1D21C7E0D8008C95DE /* YZHTextChatContentCell.xib in Resources */,
 				55A0AF8C21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib in Resources */,
 				558C54E021ACDF9800CC10D1 /* YZHTeamMemberCell.xib in Resources */,
 				552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */,
@@ -5000,6 +5019,7 @@
 				553641CB217EAEC2006F77A5 /* NIMInputView.m in Sources */,
 				556D7E5621A2F5B500533384 /* YZHTeamExtManage.m in Sources */,
 				55C21082215A3948006AA568 /* YZHMyCenterModel.m in Sources */,
+				55FB0C1C21C7E0D8008C95DE /* YZHTextChatContentCell.m in Sources */,
 				55A0AF8721C0EB95004EAEE3 /* YZHTeamRecruitCardIntroModel.m in Sources */,
 				5591D7A3215A2B9300C2AA93 /* YZHLocationManager.m in Sources */,
 				5551B34921A58B1A00AF3088 /* YZHChatContentHeaderView.m in Sources */,
@@ -5230,6 +5250,7 @@
 				553641F5217EAEC3006F77A5 /* NIMKitInfo.m in Sources */,
 				55256F58215901EA00DEEC45 /* YZHProgressHUD.m in Sources */,
 				556E017521C2A99200AF649A /* UIView+CYExtension.m in Sources */,
+				55FB0C1821C7CD75008C95DE /* YZHSearchChatContentModel.m in Sources */,
 				556D7E4D21A2F13D00533384 /* YZHTeamCardTextCell.m in Sources */,
 				55364215217EAEC3006F77A5 /* NIMSessionNetChatNotifyContentView.m in Sources */,
 				553641C0217EAEC2006F77A5 /* NIMKitTimerHolder.m in Sources */,
@@ -5256,6 +5277,7 @@
 				55B5DB7F21522383002A04A9 /* YZHMyCenterVC.m in Sources */,
 				55A0AF8B21C0EEE8004EAEE3 /* YZHTeamRecruitCell.m in Sources */,
 				55364209217EAEC3006F77A5 /* NIMSessionConfigurator.m in Sources */,
+				55FB0C1521C7A85D008C95DE /* YZHSearchChatContentVC.m in Sources */,
 				553641C5217EAEC2006F77A5 /* NIMKitUtil.m in Sources */,
 				5574311C21B816E7006AAED0 /* NTESNavigationAnimator.m in Sources */,
 				55977D3121B03E5400309740 /* YZHTeamCardIntro.m in Sources */,

@@ -139,6 +139,12 @@
     }
 }
 
+- (void)searchPrivateContentKeyText:(NSString *)keyText {
+    
+    [self.searchRecentContentSession removeAllObjects];
+    
+}
+
 - (void)searchFirendTag:(NSString *)tagName {
     
     [self.searchFirends removeAllObjects];
@@ -272,6 +278,15 @@
         _allTeam = [[[NIMSDK sharedSDK] teamManager] allMyTeams].mutableCopy;
     }
     return _allTeam;
+}
+
+- (NSMutableArray<NIMRecentSession *> *)searchRecentContentSession {
+    
+    if (!_searchRecentContentSession) {
+        _searchRecentContentSession = [[NSMutableArray alloc] init];
+        
+    }
+    return _searchRecentContentSession;
 }
 
 @end
