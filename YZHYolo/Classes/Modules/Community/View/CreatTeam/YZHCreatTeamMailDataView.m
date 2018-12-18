@@ -11,6 +11,10 @@
 #import "UIImageView+YZHImage.h"
 #import "NSString+YZHTool.h"
 
+@interface YZHCreatTeamMailDataView()<UITextFieldDelegate>
+
+@end
+
 @implementation YZHCreatTeamMailDataView
 
 - (void)awakeFromNib {
@@ -34,7 +38,7 @@
         NSString* currentStringLength = [NSString stringWithFormat:@"%ld", (long)[textView.text yzh_calculateStringLeng]];
         self.currentTextLengthLabel.text = currentStringLength;
     }];
-    
+    self.teamSynopsisTextView = textView;
     [self.teamSynopsisView insertSubview:textView atIndex:0];
     
     //默认是私密群
@@ -49,6 +53,7 @@
                                       NSForegroundColorAttributeName: [UIColor colorWithRed:125 / 255.0 green:125 / 255.0 blue:125 / 255.0 alpha:1],
                                       NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:12]
                                       } range:NSMakeRange(2, nameAttributedString.length - 2)];
+    
     self.teamNameTextFiled.attributedPlaceholder = nameAttributedString;
     
     NSMutableAttributedString* synopsisAttributedString =  [[NSMutableAttributedString alloc] initWithString:@"无 (默认)"];
@@ -68,6 +73,8 @@
     [self.avatarImageView yzh_cornerRadiusAdvance:3 rectCornerType:UIRectCornerAllCorners];
     self.teamType = YZHTeamTypePublic;
     
+    self.teamNameTextFiled.delegate = self;
+    
 }
 
 - (IBAction)updateAvatar:(UIButton *)sender {
@@ -83,6 +90,17 @@
     } else {
         self.teamTypeLabel.text = @"私密";
         self.teamType = YZHTeamTypePrivacy;
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([textField isEqual:self.teamNameTextFiled]) {
+        
+        BOOL checkout =  [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:30];
+        return checkout;
+    } else {
+        return YES;
     }
 }
 

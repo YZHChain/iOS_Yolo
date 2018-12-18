@@ -50,7 +50,7 @@
         [mutableDic setValue:team.owner forKey:@"teamOwner"];
     }
     // 是否为招募群
-    [mutableDic setValue:[NSNumber numberWithBool:teamInfoExt.recruit ? YES : NO] forKey:@"teamRecruit"];
+    [mutableDic setValue:[NSNumber numberWithBool:teamInfoExt.recruit.isValid ? YES : NO] forKey:@"teamRecruit"];
     //TODO 招募群信息.
     if (YZHIsString(teamInfoExt.recruit.content)) {
         [mutableDic setValue:teamInfoExt.recruit.content forKey:@"teamRecruitMsg"];

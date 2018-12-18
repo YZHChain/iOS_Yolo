@@ -20,7 +20,7 @@
 #import "NIMInputEmoticonDefine.h"
 #import "UIImage+NIMKit.h"
 
-@interface YZHTeamDataEditVC ()<UIScrollViewDelegate>
+@interface YZHTeamDataEditVC ()<UIScrollViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *teamNameTextFiled;
@@ -85,6 +85,7 @@
                                           NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:12]
                                           } range:NSMakeRange(2, nameAttributedString.length - 2)];
     self.teamNameTextFiled.attributedPlaceholder = nameAttributedString;
+    self.teamNameTextFiled.delegate = self;
     
     [self.updateAvatarButton addTarget:self action:@selector(selectedAvatar:) forControlEvents:UIControlEventTouchUpInside];
     @weakify(self)
@@ -135,6 +136,17 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
     [self.scrollView endEditing:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([textField isEqual:self.teamNameTextFiled]) {
+        
+        BOOL checkout = [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:30];
+        return checkout;
+    } else {
+        return YES;
+    }
 }
 
 #pragma mark - 5.Event Response
