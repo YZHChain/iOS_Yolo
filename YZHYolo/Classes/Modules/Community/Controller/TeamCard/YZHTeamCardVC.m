@@ -20,6 +20,7 @@
 #import "NIMContactSelectConfig.h"
 #import "YZHTeamMemberVC.h"
 #import "YZHAlertManage.h"
+#import "YZHTeamUpdataModel.h"
 
 static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 @interface YZHTeamCardVC ()<UITableViewDataSource, UITableViewDelegate, YZHSwitchProtocol, NIMTeamManagerDelegate>
@@ -113,17 +114,15 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)refresh {
     
-    if (self.viewModel.updateSucceed) {
-        
-    } else {
-        self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.headerView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(self.headerView.height);
-            }];
-            [self.tableView reloadData];
-        });
-    }
+    self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [self.headerView refreshWithModel:self.viewModel.headerModel];
+        [self.headerView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.headerView.height);
+        }];
+    });
+    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -392,8 +391,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 }
 
 - (void)updateTeamSwitchSetting {
-    
-    self.viewModel.updateSucceed = NO;
+    self.viewModel.updateSucceed = NO; // 更新成功标志, 暂未使用
     //TODO: 需修改
     [self.viewModel updata];
 }
@@ -402,6 +400,16 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)setupNotification {
     
+}
+
+- (void)updataTeamData {
+    
+    YZHTeamUpdataModel* teamModel = [[YZHTeamUpdataModel alloc] initWithTeamId:self.teamId isCreatTeam:NO];
+    //通知后台
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_ADDUPDATEGROUP) params:teamModel.params successCompletion:^(id obj) {
+        
+    } failureCompletion:^(NSError *error) {
+    }];
 }
 
 #pragma mark - 7.GET & SET
@@ -439,7 +447,9 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
         @weakify(self)
         _headerTeamDataUpdataHandle = ^(){
             @strongify(self)
-            [self reloadView];
+            [self refresh];
+            //更新数据并通知后台
+            [self.viewModel updata];
         };
     }
     return _headerTeamDataUpdataHandle;

@@ -48,8 +48,8 @@
 
 - (void)setupNavBar {
     self.navigationItem.title = @"群创建成功";
-    
-    self.navigationItem.leftBarButtonItem = nil;
+
+    self.navigationItem.hidesBackButton = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"继续建群" style:UIBarButtonItemStylePlain target:self action:@selector(onCreatTeam:)];
 }
 

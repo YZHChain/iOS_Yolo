@@ -164,6 +164,7 @@
         // 赋值, 并且保存.
         [[YZHUserLoginManage sharedManager] setCurrentLoginData:currentLoginData];
         [hud hideWithText:@"密码修改成功"];
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];

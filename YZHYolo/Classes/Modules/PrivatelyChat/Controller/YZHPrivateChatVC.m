@@ -37,7 +37,6 @@
 #import "YZHUnreadMessageView.h"
 #import "YZHAlertManage.h"
 
-
 @interface YZHPrivateChatVC ()<UIImagePickerControllerDelegate,
                                UINavigationControllerDelegate,
                                NIMSystemNotificationManagerDelegate,
@@ -364,27 +363,6 @@
             }
         }];
     }
-}
-
-#pragma mark - 录音事件
-
-- (BOOL)recordFileCanBeSend:(NSString *)filepath
-{
-    NSURL    *URL = [NSURL fileURLWithPath:filepath];
-    AVURLAsset *urlAsset = [[AVURLAsset alloc]initWithURL:URL options:nil];
-    CMTime time = urlAsset.duration;
-    CGFloat mediaLength = CMTimeGetSeconds(time);
-    return mediaLength > 1;
-}
-
-- (void)onRecordFailed:(NSError *)error
-{
-    [self.view makeToast:@"录音失败" duration:2 position:CSToastPositionCenter];
-}
-
-- (void)showRecordFileNotSendReason
-{
-    [self.view makeToast:@"录音时间太短" duration:0.2f position:CSToastPositionCenter];
 }
 
 #pragma mark -- Cell

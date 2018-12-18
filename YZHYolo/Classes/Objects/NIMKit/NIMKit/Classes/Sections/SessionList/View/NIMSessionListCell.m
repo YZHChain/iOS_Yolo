@@ -56,8 +56,8 @@
 }
 
 
-#define NameLabelMaxWidth    160.f
-#define MessageLabelMaxWidth 200.f
+#define NameLabelMaxWidth    230.f
+#define MessageLabelMaxWidth 250.f
 - (void)refresh:(NIMRecentSession*)recent{
     self.nameLabel.nim_width = self.nameLabel.nim_width > NameLabelMaxWidth ? NameLabelMaxWidth : self.nameLabel.nim_width;
     self.messageLabel.nim_width = self.messageLabel.nim_width > MessageLabelMaxWidth ? MessageLabelMaxWidth : self.messageLabel.nim_width;
@@ -68,7 +68,6 @@
         self.badgeView.hidden = YES;
     }
 }
-
 
 - (void)layoutSubviews{
     [super layoutSubviews];

@@ -25,6 +25,7 @@
 #import "YZHUserCardAttachment.h"
 #import "YZHTeamCardAttachment.h"
 #import "YZHSessionMsgConverter.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface NIMSessionViewController ()<NIMMediaManagerDelegate,NIMInputDelegate>
 
@@ -391,14 +392,26 @@
 }
 
 #pragma mark - 录音相关接口
-- (void)onRecordFailed:(NSError *)error{}
+#pragma mark - 录音事件
 
 - (BOOL)recordFileCanBeSend:(NSString *)filepath
 {
-    return YES;
+    NSURL    *URL = [NSURL fileURLWithPath:filepath];
+    AVURLAsset *urlAsset = [[AVURLAsset alloc]initWithURL:URL options:nil];
+    CMTime time = urlAsset.duration;
+    CGFloat mediaLength = CMTimeGetSeconds(time);
+    return mediaLength > 1;
 }
 
-- (void)showRecordFileNotSendReason{}
+- (void)onRecordFailed:(NSError *)error
+{
+    [self.view makeToast:@"录音失败" duration:2 position:CSToastPositionCenter];
+}
+
+- (void)showRecordFileNotSendReason
+{
+    [self.view makeToast:@"录音时间太短" duration:0.2f position:CSToastPositionCenter];
+}
 
 #pragma mark - NIMInputDelegate
 

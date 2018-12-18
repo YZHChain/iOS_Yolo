@@ -11,6 +11,7 @@
 #import "YZHTeamInfoExtManage.h"
 #import "YZHTeamExtManage.h"
 #import "NTESSessionUtil.h"
+#import "YZHTeamUpdataModel.h"
 
 @implementation YZHTeamHeaderModel
 
@@ -252,10 +253,13 @@
 - (void)updata {
     
     [self configuraTeamInfos];
-    // 更新群信息
+    // 更新群信息 当群信息更新成功之后, 需要通知后台服务, 使群数据保持同步.
+    @weakify(self)
     [[[NIMSDK sharedSDK] teamManager] updateTeamInfos:self.teamInfos teamId:self.teamId completion:^(NSError * _Nullable error) {
         if (!error) {
             self.updateSucceed = YES;
+            @strongify(self)
+            [self updataTeamData];
         } else {
             
         }
@@ -288,6 +292,7 @@
     } else {
         [NTESSessionUtil removeRecentSessionMark:session type:NTESRecentSessionMarkTypeTop];
     }
+    
 }
 
 - (void)configuraTeamInfos {
@@ -312,18 +317,29 @@
     NSDictionary *teamInfos;
     if (self.isManage) {
         teamInfos = @{
-                      @(NIMTeamUpdateTagJoinMode) : @(self.publicModel.isOpenStatus),
+                      @(NIMTeamUpdateTagJoinMode) : @(!self.publicModel.isOpenStatus),
                       @(NIMTeamUpdateTagInviteMode): @(self.memberInviteFriendModel.isOpenStatus),
                       @(NIMTeamUpdateTagClientCustom) : teamClientExtInfo ? teamClientExtInfo : nil,
-                      
                      };
     } else {
         teamInfos = @{
-                      @(NIMTeamUpdateTagJoinMode) : @(self.publicModel.isOpenStatus),
+                      @(NIMTeamUpdateTagJoinMode) : @(!self.publicModel.isOpenStatus),
                       @(NIMTeamUpdateTagInviteMode): @(self.memberInviteFriendModel.isOpenStatus),
                       };
     }
     self.teamInfos = teamInfos;
+}
+// 数据同步到后台
+- (void)updataTeamData {
+    
+    YZHTeamUpdataModel* teamModel = [[YZHTeamUpdataModel alloc] initWithTeamId:self.teamId isCreatTeam:NO];
+    
+    //通知后台
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_ADDUPDATEGROUP) params:teamModel.params successCompletion:^(id obj) {
+        
+        
+    } failureCompletion:^(NSError *error) {
+    }];
 }
 
 @end
