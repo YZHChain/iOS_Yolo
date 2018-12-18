@@ -139,7 +139,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     NSArray* contactContents = self.contactModel.phoneContactList[indexPath.section];
     YZHAddBookPhoneContactModel* model = contactContents[indexPath.row];
     //根据 Model 状态还选择 Cell 类型,分两种一种是 Label,一种是 Button
@@ -238,7 +237,6 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         } failureCompletion:^(NSError *error) {
             [hud hideWithText:error.domain];
         }];
-       
     }
     
 }

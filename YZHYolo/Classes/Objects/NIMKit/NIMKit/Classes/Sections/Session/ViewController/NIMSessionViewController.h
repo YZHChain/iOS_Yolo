@@ -15,6 +15,8 @@
 
 @interface NIMSessionViewController : UIViewController<NIMSessionInteractorDelegate,NIMInputActionDelegate,NIMMessageCellDelegate,NIMChatManagerDelegate,NIMConversationManagerDelegate>
 
+@property (nonatomic,weak)    id<NIMSessionInteractor> interactor;
+
 @property (nonatomic, strong)  UITableView *tableView;
 
 @property (nonatomic, strong)  NIMInputView *sessionInputView;
@@ -22,6 +24,8 @@
 @property (nonatomic, strong)  NIMSession *session;
 
 @property (nonatomic, strong) NIMRecentSession* recentSession;
+
+@property (nonatomic, strong) NIMMessage* assignMessage;
 
 /**
  *  当前当初的菜单所关联的消息

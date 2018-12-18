@@ -99,6 +99,13 @@
     
     [[[NIMSDK sharedSDK] teamManager] addDelegate:self];
     
+    if (self.assignMessage) {
+        NSInteger number = [self.interactor findMessageIndex:self.assignMessage];
+        
+        if (number) {
+            
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -422,7 +429,7 @@
     //滚动到指定消息条数.
     if (self.unreadNumber <= 20) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:20 - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-    }  else {
+    } else {
         NSInteger messageCount = [self uiReadUnreadMessage: self.unreadNumber];
         NSLog(@"%ld 滚到到行数 %ld", messageCount, messageCount - self.unreadNumber);
 //        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:messageCount - self.unreadNumber inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -433,6 +440,15 @@
     self.unreadNumber = 0;
     [self.unreadMessageView removeFromSuperview];
     self.unreadMessageView = nil;
+}
+
+- (void)rollToAssignMessageRow:(NSInteger)messageRow {
+    
+    if (messageRow <= 20) {
+       [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:20 - messageRow inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    } else {
+       [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (void)gotoUserDetails:(UIBarButtonItem *)sender {

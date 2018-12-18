@@ -16,6 +16,11 @@
 #import "YZHCommandTipView.h"
 #import "YZHSearchChatContentModel.h"
 #import "YZHCommandSectionView.h"
+#import "YZHTextChatContentCell.h"
+#import "UIImageView+YZHImage.h"
+#import "NIMKitInfoFetchOption.h"
+#import "NIMKitInfo.h"
+#import "YZHCommunityChatVC.h"
 
 @interface YZHSearchChatContentVC ()<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -26,6 +31,7 @@
 @property (nonatomic, assign) BOOL havaSearchModel;
 @property (nonatomic, strong) YZHCommandTipView* tipView;
 @property (nonatomic, strong) YZHSearchChatContentModel* searchManage;
+@property (nonatomic, assign) NIMSessionType* sessionType;
 
 @end
 
@@ -71,6 +77,10 @@
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.tipView];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 }
 
 - (void)reloadView {
@@ -81,6 +91,8 @@
 
 - (void)setupData {
     
+    
+    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -89,7 +101,6 @@
     
     if (self.isSearchStatus) {
         if (self.havaSearchModel) {
-            
             return 1;
         } else {
             return 0;
@@ -103,7 +114,6 @@
     
     if (self.isSearchStatus) {
         if (self.havaSearchModel) {
-            
             return self.searchManage.searchTextMessages.count;
         } else {
             return 0;
@@ -115,20 +125,54 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 60;
+    NIMMessage* message = self.searchManage.searchTextMessages[indexPath.row];
+    CGFloat width = tableView.width - 65 - 15;
+    CGFloat height = [self getLabelHeightWithText:message.text width:width uiFont:[UIFont yzh_commonFontStyleFontSize:13]];
+    if (height <= 24) {
+        return 65;
+    } else {
+        return 65 + height - 24 + 10;
+    }
 }
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier];
+    YZHTextChatContentCell * cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier];
+    NIMMessage* message = self.searchManage.searchTextMessages[indexPath.row];
+    cell.contentLabel.text = message.text;
     
-
+    NIMKitInfoFetchOption *option = [[NIMKitInfoFetchOption alloc] init];
+    option.session = self.session;
+    NIMKitInfo* userInfo;
+    if (self.session.sessionType == NIMSessionTypeTeam) {
+        userInfo = [[NIMKit sharedKit].provider infoByUser:message.from option:option];
+        if (userInfo.avatarUrlString) {
+            [cell.avatarImageView yzh_setImageWithString:userInfo.avatarUrlString placeholder:@"team_cell_photoImage_default"];
+        } else {
+            [cell.avatarImageView setImage:[UIImage imageNamed:@"team_cell_photoImage_default"]];
+        }
+    } else {
+        userInfo = [[NIMKit sharedKit].provider infoByUser:message.from option:option];
+        if (userInfo.avatarUrlString) {
+            [cell.avatarImageView yzh_setImageWithString:userInfo.avatarUrlString placeholder:@"addBook_cover_cell_photo_default"];
+        } else {
+            [cell.avatarImageView setImage:[UIImage imageNamed:@"addBook_cover_cell_photo_default"]];
+        }
+    }
+    cell.contentLabel.text = message.text;
+    cell.dateLabel.text = [NIMKitUtil showTime:message.timestamp showDetail:NO];
+    if (YZHIsString(userInfo.nickName)) {
+        cell.nickNameLabel.text = userInfo.nickName;
+    } else {
+        cell.nickNameLabel.text = userInfo.showName;
+    }
+    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 35;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -147,23 +191,19 @@
     [self.searchBar endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NIMRecentSession *recentSession;
+    NIMMessage *message;
     
-    recentSession = self.searchManage.searchTextMessages[indexPath.row];
-    [self onSelectedRecent:recentSession atIndexPath:indexPath];
-}
-
-- (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
-    
-    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
-    [self.navigationController pushViewController:privateChatVC animated:YES];
-}
-
-- (void)onSelectedAvatar:(NIMRecentSession *)recent
-             atIndexPath:(NSIndexPath *)indexPath{
-    
-    if (recent.session.sessionType == NIMSessionTypeP2P) {
-        [self onSelectedRecent:recent atIndexPath:indexPath];
+    message = self.searchManage.searchTextMessages[indexPath.row];
+    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:_session];
+    if (self.session.sessionType == NIMSessionTypeTeam) {
+        
+        YZHCommunityChatVC* teamChatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recentSession];
+        teamChatVC.assignMessage = message;
+        [self.navigationController pushViewController:teamChatVC animated:YES];
+    } else {
+        YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWitRecentSession:recentSession];
+        privateChatVC.assignMessage = message;
+        [self.navigationController pushViewController:privateChatVC animated:YES];
     }
 }
 
@@ -193,6 +233,7 @@
     if (!YZHIsString(searchBar.text)) {
         self.isSearchStatus = NO;
         [self.searchManage.searchTextMessages removeAllObjects];
+        self.havaSearchModel = NO;
         [self.tableView reloadData];
         self.tableView.hidden = YES;
         self.tipView.hidden = NO;
@@ -207,20 +248,23 @@
     if (YZHIsString(keyText)) {
         [self.searchManage searchPrivateContentKeyText:keyText];
         self.isSearchStatus = YES;
-        [self.tableView reloadData];
         if (self.searchManage.searchTextMessages.count) {
+            self.havaSearchModel = YES;
             self.tipView.hidden = YES;
             self.tableView.hidden = NO;
         } else {
+            self.havaSearchModel = NO;
             self.tipView.titleLabel.text = @"未找到相关聊天记录";
             self.tipView.hidden = NO;
             self.tableView.hidden = YES;
         }
-    } else {
-        self.isSearchStatus = NO;
         [self.tableView reloadData];
+    } else {
+        self.havaSearchModel = NO;
+        self.isSearchStatus = NO;
         self.tipView.hidden = NO;
         self.tipView.titleLabel.text = @"输入您要查找的聊天记录";
+        [self.tableView reloadData];
     }
 }
 
@@ -323,6 +367,12 @@
     return [NIMKitUtil showTime:recent.lastMessage.timestamp showDetail:NO];
 }
 
+- (CGFloat)getLabelHeightWithText:(NSString *)text width:(CGFloat)width uiFont: (UIFont*)font
+{
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil];
+    
+    return rect.size.height;
+}
 
 #pragma mark - 6.Private Methods
 
@@ -336,8 +386,8 @@
     
     if (_tableView == nil) {
         
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        [_tableView registerClass:[NIMSessionListCell class] forCellReuseIdentifier:kYZHCommonCellIdentifier];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+        [_tableView registerNib:[UINib nibWithNibName:@"YZHTextChatContentCell" bundle:nil] forCellReuseIdentifier:kYZHCommonCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"YZHCommandSectionView" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHCommonHeaderIdentifier];
         _tableView.frame = self.view.bounds;
         _tableView.delegate = self;
@@ -345,6 +395,7 @@
         _tableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         _tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
         _tableView.tableFooterView = [[UIView alloc] init];
+        _tableView.estimatedRowHeight = 65;
     }
     return _tableView;
 }

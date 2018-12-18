@@ -86,6 +86,7 @@
         [userContentController addScriptMessageHandler:self name:@"InvitePhoneContact"];
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
         [userContentController addScriptMessageHandler:self name:@"SaveQR"];
+        [userContentController addScriptMessageHandler:self name:@"COPYTEXT"];
         
         configuration.userContentController = userContentController;
         
@@ -132,7 +133,8 @@
 -(void)removeScriptMessageHandler{
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"InvitePhoneContact"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOBACK"];
-      [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SaveQR"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SaveQR"];
+    [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"COPYTEXT"];
 }
 
 
@@ -218,6 +220,14 @@
     if ([message.name isEqualToString:@"InvitePhoneContact"]) { //邀请手机联系人
         NSLog(@"InvitePhoneContact");
         [YZHRouter openURL:kYZHRouterAddressBookPhoneContact];
+        return;
+    }
+    if ([message.name isEqualToString:@"COPYTEXT"]) {// 复制文本
+        
+        NSString* text = message.body;
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = text;
+        [YZHProgressHUD showText:@"已复制到剪切板" onView:self.webView];
         return;
     }
     
@@ -405,6 +415,20 @@
         _userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
     }
     return _userId;
+}
+
+- (void)deleteAllWebCache {
+    //allWebsiteDataTypes清除所有缓存
+    if (@available(iOS 9.0, *)) {
+        NSSet *websiteDataTypes = [WKWebsiteDataStore allWebsiteDataTypes];
+        NSDate *dateFrom = [NSDate dateWithTimeIntervalSince1970:0];
+        
+        [[WKWebsiteDataStore defaultDataStore] removeDataOfTypes:websiteDataTypes modifiedSince:dateFrom completionHandler:^{
+            
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 @end

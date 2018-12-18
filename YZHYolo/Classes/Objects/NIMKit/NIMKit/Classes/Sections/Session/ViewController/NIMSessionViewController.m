@@ -38,8 +38,6 @@
 
 @property (nonatomic,strong)  NIMSessionConfigurator *configurator;
 
-@property (nonatomic,weak)    id<NIMSessionInteractor> interactor;
-
 @property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
 @property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
 

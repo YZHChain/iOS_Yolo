@@ -89,7 +89,7 @@
             
             NIMCustomObject *object = (NIMCustomObject* )model.message.messageObject;
             if ([object.attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) {
-                YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)object.attachment;
+//                YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)object.attachment;
                 cellHeight += 23;
             }
         }
