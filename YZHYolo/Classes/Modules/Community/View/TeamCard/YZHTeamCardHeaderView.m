@@ -58,7 +58,9 @@
     
     NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
     
-    self.height = 115 + labelAddHeight;
+    self.updateHeight = 115 + labelAddHeight;
+    self.y = self.updateHeight;
+    [self layoutIfNeeded];
 }
 
 @end

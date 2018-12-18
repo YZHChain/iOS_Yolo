@@ -219,7 +219,9 @@
         // 拼装其他功能
         [teamMoreArray addObject:chatDataModel];
     } else {
-        [teamShowArray addObject:sharedQRCodeModel];
+        if (self.publicModel.isOpenStatus) {
+           [teamShowArray addObject:sharedQRCodeModel];
+        }
         [teamShowArray addObject:memberModel];
         [teamShowArray addObject:chatContentModel];
         

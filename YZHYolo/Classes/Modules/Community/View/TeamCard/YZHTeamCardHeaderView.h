@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)refreshWithModel:(YZHTeamHeaderModel* )model;
 @property (nonatomic, copy) YZHButtonExecuteBlock headerHandle;
-@property (nonatomic, assign) NSInteger height;
+@property (nonatomic, assign) CGFloat updateHeight;
 
 @end
 

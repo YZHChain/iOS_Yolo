@@ -56,39 +56,34 @@
                         <constraint firstItem="IdM-MZ-rNR" firstAttribute="bottom" secondItem="7X1-oq-hkd" secondAttribute="bottom" id="FBR-xv-ppo"/>
                         <constraint firstItem="7X1-oq-hkd" firstAttribute="leading" secondItem="Fbz-dR-YPl" secondAttribute="leading" constant="18" id="FRj-MO-aKT"/>
                         <constraint firstItem="v2j-9O-c1O" firstAttribute="centerY" secondItem="Fbz-dR-YPl" secondAttribute="centerY" id="FvS-xm-2en"/>
-                        <constraint firstAttribute="height" constant="80" id="Mye-8c-fVJ"/>
                         <constraint firstItem="IdM-MZ-rNR" firstAttribute="leading" secondItem="n09-0f-szS" secondAttribute="leading" id="U3X-IK-lOk"/>
                         <constraint firstAttribute="trailing" secondItem="n09-0f-szS" secondAttribute="trailing" constant="30" id="ZT2-ke-ziF"/>
                         <constraint firstItem="7X1-oq-hkd" firstAttribute="centerY" secondItem="Fbz-dR-YPl" secondAttribute="centerY" id="bTq-it-qAn"/>
+                        <constraint firstAttribute="height" constant="80" id="gUq-ZE-CH3"/>
                         <constraint firstItem="n09-0f-szS" firstAttribute="leading" secondItem="7X1-oq-hkd" secondAttribute="trailing" constant="14" id="oW7-aT-nlB"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eL-OI-XY8" customClass="YZHLabelShowView">
                     <rect key="frame" x="0.0" y="80" width="375" height="35"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="9QW-h3-9gI"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Fbz-dR-YPl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="55A-Ev-8CQ"/>
-                <constraint firstItem="4eL-OI-XY8" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="bottom" id="MeI-ih-fJw"/>
                 <constraint firstAttribute="trailing" secondItem="Fbz-dR-YPl" secondAttribute="trailing" id="Rhc-yX-oFX"/>
-                <constraint firstItem="4eL-OI-XY8" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="bottom" id="aUw-WP-lIO"/>
+                <constraint firstItem="4eL-OI-XY8" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="bottom" id="TzJ-kf-e2h"/>
+                <constraint firstAttribute="bottom" secondItem="4eL-OI-XY8" secondAttribute="bottom" id="aPo-Vz-SUH"/>
                 <constraint firstItem="Fbz-dR-YPl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="d1T-tM-w6e"/>
                 <constraint firstAttribute="trailing" secondItem="4eL-OI-XY8" secondAttribute="trailing" id="iqz-Vn-2yL"/>
                 <constraint firstItem="4eL-OI-XY8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="m3E-HH-WdA"/>
-                <constraint firstAttribute="bottom" secondItem="4eL-OI-XY8" secondAttribute="bottom" id="ysh-X5-AzT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="avatarImageView" destination="7X1-oq-hkd" id="ILc-QY-flF"/>
                 <outlet property="guideImageView" destination="v2j-9O-c1O" id="HE8-V6-kEv"/>
                 <outlet property="labelShowView" destination="4eL-OI-XY8" id="Cz7-LG-SRt"/>
-                <outlet property="labelViewLayoutConstraint" destination="9QW-h3-9gI" id="QK4-i3-8Ob"/>
                 <outlet property="nameLabel" destination="n09-0f-szS" id="O6z-II-hNx"/>
                 <outlet property="synopisisLabel" destination="IdM-MZ-rNR" id="wWs-uA-dSf"/>
             </connections>

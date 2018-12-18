@@ -121,10 +121,17 @@
             if (buttonIndex == 1) {
                 @strongify(self)
                 YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+                
                 [[NIMSDK sharedSDK].userManager deleteFriend:self.userId completion:^(NSError *error) {
                     [SVProgressHUD dismiss];
                     if (!error) {
                         [hud hideWithText:@"已删除"];
+                        NIMDeleteMessagesOption *option = [[NIMDeleteMessagesOption alloc] init];
+                        option.removeSession = YES;
+                        option.removeTable = NO;
+                        NIMSession* session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
+                        [[NIMSDK sharedSDK].conversationManager deleteAllmessagesInSession:session option:option];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
                     }else{
                         [hud hideWithText:@"删除失败,请重试"];
                     }

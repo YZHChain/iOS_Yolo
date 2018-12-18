@@ -45,7 +45,6 @@
     [self setupData];
     //4.设置通知
     [self setupNotification];
-    
 }
 
 - (void)didReceiveMemoryWarning {

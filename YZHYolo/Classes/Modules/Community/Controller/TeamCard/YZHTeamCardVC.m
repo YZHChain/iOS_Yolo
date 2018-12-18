@@ -76,8 +76,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [self.view addSubview:self.tableView];
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.mas_equalTo(0);
-        make.width.height.equalTo(self.view);
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -91,15 +90,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     [self.headerView refreshWithModel:self.viewModel.headerModel];
+    self.headerView.height = self.headerView.updateHeight;
     [self.tableView setTableHeaderView:self.headerView];
-    //TODO:
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.top.bottom.mas_equalTo(0);
-        make.width.equalTo(self.view);
-        make.height.mas_equalTo(self.headerView.height);
-    }];
-    [self.tableView layoutIfNeeded];
-    
     [self configurationFooterView];
     if (self.viewModel.isManage) {
         UIButton* headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -116,11 +108,10 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
         [self.headerView refreshWithModel:self.viewModel.headerModel];
-        [self.headerView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(self.headerView.height);
-        }];
+        self.headerView.height = self.headerView.updateHeight;
+        [self.tableView setTableHeaderView:self.headerView];
+        [self.tableView reloadData];
     });
     
 }
@@ -436,7 +427,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 - (YZHTeamCardHeaderView *)headerView {
     
     if (!_headerView) {
-        _headerView = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardHeaderView" owner:nil options:nil].lastObject;
+        _headerView = [YZHTeamCardHeaderView yzh_viewWithFrame:CGRectMake(0, 0, YZHScreen_Width, 115)];
+        _headerView.autoresizingMask = NO;
     }
     return _headerView;
 }
@@ -458,7 +450,6 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 - (void)configurationFooterView {
     
     _footerView = [[UITableViewHeaderFooterView alloc] init];
-    self.tableView.tableFooterView = _footerView;
     _footerView.frame = CGRectMake(0, 0, self.tableView.width, 110);
     UIButton* removeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     if (self.viewModel.isManage) {
@@ -477,6 +468,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
         [removeButton addTarget:self action:@selector(exitTeam:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    [self.tableView setTableFooterView:_footerView];
     [self.footerView addSubview:removeButton];
     
     [removeButton mas_makeConstraints:^(MASConstraintMaker *make) {

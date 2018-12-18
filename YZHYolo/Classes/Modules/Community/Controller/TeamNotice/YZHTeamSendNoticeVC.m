@@ -180,6 +180,7 @@
                 self.sendNoticeButton.userInteractionEnabled = NO;
                 self.sendNoticeButton.alpha = 0.4;
                 [self IMSendNotice];
+                [self dismissViewControllerAnimated:YES completion:nil];
             } else {
                 if (obj[@"message"]) {
                     [hud hideWithText:obj[@"message"]];
