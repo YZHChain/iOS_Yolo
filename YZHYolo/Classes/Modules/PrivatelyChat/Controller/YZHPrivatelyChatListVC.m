@@ -337,7 +337,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
     
-    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:recent.session];
+    YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWitRecentSession:recent];
     [self.navigationController pushViewController:privateChatVC animated:YES];
 }
 
