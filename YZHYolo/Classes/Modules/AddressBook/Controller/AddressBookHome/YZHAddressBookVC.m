@@ -215,7 +215,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
     if (section == 0) {
-        return 10;
+        return 1;
     }
     return 20;
 }

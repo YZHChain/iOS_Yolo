@@ -175,10 +175,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (void)configurationDefaultCell:(YZHSessionListCell *)cell recent:(NIMRecentSession *)recent{
     
     cell.delegate = self;
-    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
-    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:[UIColor yzh_fontThemeBlue]];
     cell.leftButtons = @[tipButton, lockButton];
-    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
+    cell.leftSwipeSettings.transition = MGSwipeStateSwipingLeftToRight;
     
     [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //

@@ -306,11 +306,10 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)configurationDefaultCell:(YZHSessionListCell *)cell recent:(NIMRecentSession *)recent{
     
     cell.delegate = self;
-    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
-    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:[UIColor yzh_fontThemeBlue]];
     cell.leftButtons = @[tipButton, lockButton];
-    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
-    
+    cell.leftSwipeSettings.transition = MGSwipeStateSwipingLeftToRight;
     [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //
         return YES;
@@ -356,12 +355,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)configurationLockCell:(YZHSessionListLockCell *)cell recent:(NIMRecentSession *)recent {
     
     cell.delegate = self;
-    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:[UIColor yzh_fontThemeBlue]];
+    MGSwipeButton* tipButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"team_sessionList_cellEdit_tip"] backgroundColor:YZHColorWithRGB(207, 211, 217)];
     NSString* title = self.teamLock ? @"解锁": @"上锁";
-    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:title backgroundColor:YZHColorWithRGB(207, 211, 217)];
+    MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:title backgroundColor:[UIColor yzh_fontThemeBlue]];
     cell.leftButtons = @[tipButton, lockButton];
-    cell.leftSwipeSettings.transition = MGSwipeTransitionRotate3D;
-    
+    cell.leftSwipeSettings.transition = MGSwipeStateSwipingLeftToRight;
     [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //
         return YES;
@@ -523,19 +521,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         } else {
             return self.recentSessionExtManage.TeamRecentSession.count;
         }
-//        if (self.recentSessionExtManage.TeamRecentSession.count) {
-//            if (self.recentSessionExtManage.lockTeamRecentSession.count) {
-//                return self.recentSessionExtManage.TeamRecentSession.count + 1;
-//            } else {
-//                return self.recentSessionExtManage.TeamRecentSession.count;
-//            }
-//        } else {
-//            if (self.recentSessionExtManage.lockTeamRecentSession.count) {
-//                return self.recentSessionExtManage.TeamRecentSession.count + 1;
-//            } else {
-//                return self.recentSessionExtManage.TeamRecentSession.count;
-//            }
-//        }
     }
 }
 
@@ -680,8 +665,12 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
     if ([tableView isEqual:self.tableView]) {
+        if (section == 0) {
+            return 1;
+        }
         return 0;
     } else {
+        
         return 40;
     }
 }

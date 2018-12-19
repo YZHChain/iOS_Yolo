@@ -243,8 +243,10 @@
     
     [listArray addObject:teamShowArray];
     [listArray addObject:managePublickArray];
-    [listArray addObject:manageSharedArray];
-    [listArray addObject:manageSharedQRCodeArray];
+    if (self.isManage) {
+        [listArray addObject:manageSharedArray];
+        [listArray addObject:manageSharedQRCodeArray];
+    }
     [listArray addObject:teamFunctionArray];
     [listArray addObject:teamMoreArray];
     
