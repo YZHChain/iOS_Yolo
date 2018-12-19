@@ -236,24 +236,28 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     } else {
         model = self.recommendModel.recommendArray[indexPath.row];
     }
-    //进入群详情.
-    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:model.teamId];
-    if (isTeamMerber) {
-        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:model.teamId];
-        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
-        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
-                                                          @"isTeamOwner": @(isTeamOwner),
-                                                          @"teamId": model.teamId,
-                                                          }];
-    } else {
-        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
-                                                               @"teamId": model.teamId,
-                                                               kYZHRouteSegue: kYZHRouteSegueModal,
-                                                               kYZHRouteSegueNewNavigation: @(YES)
-                                                               }];
-    }
-    
+//    //进入群详情.
+//    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:model.teamId];
+//    if (isTeamMerber) {
+//        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:model.teamId];
+//        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+//        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
+//        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
+//                                                          @"isTeamOwner": @(isTeamOwner),
+//                                                          @"teamId": model.teamId,
+//                                                          }];
+//    } else {
+//        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+//                                                               @"teamId": model.teamId,
+//                                                               kYZHRouteSegue: kYZHRouteSegueModal,
+//                                                               kYZHRouteSegueNewNavigation: @(YES)
+//                                                               }];
+//    }
+    [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                           @"teamId": model.teamId ? model.teamId : @"",
+                                                           kYZHRouteSegue: kYZHRouteSegueModal,
+                                                           kYZHRouteSegueNewNavigation: @(YES)
+                                                           }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

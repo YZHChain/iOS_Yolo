@@ -213,6 +213,17 @@
     }
 }
 
+// 新跳转逻辑.
+- (void)gotoTeamDetailInfos:(NSString *)teamId {
+    
+    [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                           @"teamId": teamId ? teamId : @"",
+                                                           kYZHRouteSegue: kYZHRouteSegueModal,
+                                                           kYZHRouteSegueNewNavigation: @(YES)
+                                                           }];
+    
+}
+
 - (void)gotoRecuireTeamDetail:(NSString *)teamId {
     
     BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:teamId];
@@ -231,6 +242,17 @@
                                                                kYZHRouteSegueNewNavigation: @(YES)
                                                                }];
     }
+}
+
+// 新跳转逻辑.
+- (void)gotoRecuireTeamInfosDetail:(NSString *)teamId {
+    
+    [YZHRouter openURL:kYZHRouterCommunityRecruitCardIntro info:@{
+                                                           @"teamId": teamId ? teamId : @"",
+                                                           kYZHRouteSegue: kYZHRouteSegueModal,
+                                                           kYZHRouteSegueNewNavigation: @(YES)
+                                                           }];
+    
 }
 
 - (void)switchTeamRange {
@@ -270,7 +292,8 @@
 //        } else {
 //            [YZHProgressHUD showText:@"数据异常, 请稍后重试" onView:self.webView];
 //        }
-        [self gotoTeamDetail:teamId];
+//        [self gotoTeamDetail:teamId];
+        [self gotoTeamDetailInfos:teamId];
         
         return;
     }
@@ -318,7 +341,8 @@
 //        } else {
 //            [YZHProgressHUD showText:@"数据异常, 请稍后重试" onView:self.webView];
 //        }
-        [self gotoRecuireTeamDetail:teamId];
+//        [self gotoRecuireTeamDetail:teamId];
+        [self gotoRecuireTeamInfosDetail:teamId];
         return;
     }
     

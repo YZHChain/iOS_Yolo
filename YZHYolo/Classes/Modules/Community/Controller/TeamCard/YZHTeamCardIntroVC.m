@@ -123,6 +123,10 @@
              }
              [self reloadView];
         }];
+    }else {
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
+        self.viewModel = [[YZHTeamCardIntroModel alloc] initWithTeam:team];
+        [self reloadView];
     }
 }
 
@@ -272,7 +276,12 @@
     
     self.addTeamButton = addTeamButton;
     if (self.viewModel.haveTeamData) {
-        [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.viewModel.team.joinMode == NIMTeamJoinModeNoAuth) {
+            [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            [addTeamButton setTitle:@"该群非公开" forState:UIControlStateNormal];
+            addTeamButton.enabled = NO;
+        }
     } else {
         [self.tableView.tableHeaderView removeFromSuperview];
         if (self.viewModel.error.code == 803) {
@@ -282,6 +291,14 @@
         }
         addTeamButton.enabled = NO;
     }
+    // 判断如果处于本群群成员则,
+    if ([[[NIMSDK sharedSDK] teamManager] isMyTeam:self.teamId]) {
+        [self.addTeamButton setTitle:@"进入群聊" forState:UIControlStateNormal];
+        [self.addTeamButton removeTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+        [self.addTeamButton addTarget:self action:@selector(gotoTeam:) forControlEvents:UIControlEventTouchUpInside];
+        self.addTeamButton.enabled = YES;
+    }
+    
     [self.footerView addSubview:addTeamButton];
     
     [addTeamButton mas_makeConstraints:^(MASConstraintMaker *make) {

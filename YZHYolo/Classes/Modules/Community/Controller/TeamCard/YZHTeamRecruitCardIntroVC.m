@@ -114,15 +114,21 @@
     
     if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.teamId]) {
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+        @weakify(self)
         [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+            @strongify(self)
             [hud hideWithText:nil];
             //如果请求失败,或者找不到此群,或者此群解散,按这个逻辑处理,默认都是展示此群已解散。
-            self.viewModel = [[YZHTeamRecruitCardIntroModel alloc] initWithTeam:team recruitInfo:_recruitInfo];
+            self.viewModel = [[YZHTeamRecruitCardIntroModel alloc] initWithTeam:team recruitInfo:self.recruitInfo];
             if (error) {
                 self.viewModel.error = error;
             }
             [self reloadView];
         }];
+    } else {
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
+        self.viewModel = [[YZHTeamRecruitCardIntroModel alloc] initWithTeam:team recruitInfo:self.recruitInfo];
+        [self reloadView];
     }
 }
 
@@ -320,6 +326,15 @@
         }
         addTeamButton.enabled = NO;
     }
+    
+    // 判断如果处于本群群成员则,
+    if ([[[NIMSDK sharedSDK] teamManager] isMyTeam:self.teamId]) {
+        [self.addTeamButton setTitle:@"进入群聊" forState:UIControlStateNormal];
+        [self.addTeamButton removeTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
+        [self.addTeamButton addTarget:self action:@selector(gotoTeam:) forControlEvents:UIControlEventTouchUpInside];
+        addTeamButton.enabled = YES;
+    }
+    
     [self.footerView addSubview:addTeamButton];
     
     [addTeamButton mas_makeConstraints:^(MASConstraintMaker *make) {
