@@ -305,15 +305,12 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [YZHAlertManage showAlertTitle:@"确定要解散并删除本群么？" message:@"(您将失去所有群成员)\n\n 此操作不可逆,请谨慎操作" actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             @strongify(self)
-            NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
-            option.removeTable = YES;
-            option.removeSession = YES;
-            NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
-            [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
             [[[NIMSDK sharedSDK] teamManager] dismissTeam:self.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
                     @strongify(self)
+                    
+                    [self dismissTeamSuccessful];
                     [hud hideWithText:nil];
                     //通知后台
                     NSDictionary* dic = @{
@@ -325,7 +322,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
                     } failureCompletion:^(NSError *error) {
                         
                     }];
-                    [self.navigationController popViewControllerAnimated:YES];
+
                 } else {
                     [hud hideWithText:@"网络异常,请重试"];
                 }
@@ -334,21 +331,31 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     }];
 }
 
+- (void)dismissTeamSuccessful {
+    
+    NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
+    option.removeTable = YES;
+    option.removeSession = YES;
+    NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
+    //删除回话消息
+    [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
+    //删除最近回话
+    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
+    [[[NIMSDK sharedSDK] conversationManager] deleteRecentSession: recentSession];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)exitTeam:(UIButton* )sender {
     //删除并退出社群
     @weakify(self)
     [YZHAlertManage showAlertTitle:@"确定要退出群以及删除聊天记录么？" message:nil actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             @strongify(self)
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-            NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
-            option.removeTable = YES;
-            option.removeSession = YES;
-            NIMSession *session = [NIMSession session:self.viewModel.teamId type:NIMSessionTypeTeam];
-            [[[NIMSDK sharedSDK] conversationManager] deleteAllmessagesInSession:session option:option];
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
             [[[NIMSDK sharedSDK] teamManager] quitTeam:self.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [self dismissTeamSuccessful];
                 } else {
                     [hud hideWithText:@"网络异常,请重试"];
                 }

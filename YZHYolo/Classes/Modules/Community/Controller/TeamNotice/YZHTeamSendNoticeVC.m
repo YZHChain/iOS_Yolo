@@ -13,6 +13,7 @@
 #import "YZHUserLoginManage.h"
 #import "BRPickerView.h"
 #import "NSDate+BRPickerView.h"
+#import "NIMMessageMaker.h"
 
 @interface YZHTeamSendNoticeVC ()<UIScrollViewDelegate>
 
@@ -153,12 +154,12 @@
             }
         }];
         NSDictionary* params;
-        NSString* noticeContent;
-        if (self.informAllSwitch.isOn) {
-            noticeContent = [NSString stringWithFormat:@"@All %@", self.noticeImportBoxView.importTextView.text];
-        } else {
-            noticeContent = self.noticeImportBoxView.importTextView.text;
-        }
+        NSString* noticeContent = self.noticeImportBoxView.importTextView.text;
+//        if (self.informAllSwitch.isOn) {
+//            noticeContent = [NSString stringWithFormat:@"@All %@", self.noticeImportBoxView.importTextView.text];
+//        } else {
+//            noticeContent = self.noticeImportBoxView.importTextView.text;
+//        }
         if (YZHIsString(self.endTime)) {
             params = @{
                        @"endTime": self.endTime,
@@ -182,6 +183,9 @@
                 self.sendNoticeButton.userInteractionEnabled = NO;
                 self.sendNoticeButton.alpha = 0.4;
                 [self IMSendNotice];
+                if (self.informAllSwitch.isOn) {
+                    [self IMSendMessage];
+                }
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
                 if (obj[@"message"]) {
@@ -220,8 +224,29 @@
             
         }];
     }
+}
 
+- (void)IMSendMessage {
     
+    NSString* messageText = [NSString stringWithFormat:@"@All %@",self.noticeImportBoxView.importTextView.text];
+    NIMMessage* message = [NIMMessageMaker msgWithText: messageText];
+    NIMMessageApnsMemberOption *apnsOption = [[NIMMessageApnsMemberOption alloc] init];
+    apnsOption.forcePush = YES;
+    apnsOption.userIds = nil;
+    NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
+    NSString *userName = user.userInfo.nickName;
+    apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",userName];
+    message.apnsMemberOption = apnsOption;
+    //发布到多个群组.
+//    for (NSString* teamId in self.selectedTeamArray) {
+//        NIMSession* session = [NIMSession session:teamId type:NIMSessionTypeTeam];
+//
+//        [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:session error: nil];
+//        NSLog(@"发送了一个");
+//    }
+        //暂时消息只发送到一个群
+    NIMSession* session = [NIMSession session:_teamId type:NIMSessionTypeTeam];
+    [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:session error: nil];
 }
 
 - (void)clickInformAllSwitch:(UISwitch *)sender {

@@ -126,11 +126,15 @@
                     [SVProgressHUD dismiss];
                     if (!error) {
                         [hud hideWithText:@"已删除"];
-                        NIMDeleteMessagesOption *option = [[NIMDeleteMessagesOption alloc] init];
+                        NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
                         option.removeSession = YES;
-                        option.removeTable = NO;
+                        option.removeTable = YES;
                         NIMSession* session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
                         [[NIMSDK sharedSDK].conversationManager deleteAllmessagesInSession:session option:option];
+                        NIMRecentSession* recentSesession = [[NIMSDK sharedSDK].conversationManager recentSessionBySession:session];
+                        if (recentSesession) {
+                            [[NIMSDK sharedSDK].conversationManager deleteRecentSession:recentSesession];
+                        }
                         [self.navigationController popToRootViewControllerAnimated:YES];
                     }else{
                         [hud hideWithText:@"删除失败,请重试"];
