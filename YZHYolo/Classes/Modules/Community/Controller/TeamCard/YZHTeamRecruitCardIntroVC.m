@@ -301,9 +301,9 @@
     addTeamButton.layer.cornerRadius = 4;
     addTeamButton.layer.masksToBounds = YES;
     [addTeamButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:20]];
-    [addTeamButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundGreen] forState:UIControlStateNormal];
+    [addTeamButton yzh_setBackgroundColor:[UIColor yzh_fontThemeBlue] forState:UIControlStateNormal];
     [addTeamButton yzh_setBackgroundColor:[UIColor yzh_separatorLightGray] forState:UIControlStateDisabled];
-    [addTeamButton setTitle:@"加入" forState:UIControlStateNormal];
+    [addTeamButton setTitle:@"加入群聊" forState:UIControlStateNormal];
     //TODO: 有空看下云信,查找社群时,是否会返回相应错误参数,包含找不到此群还是此群已解散等信息。
     [addTeamButton setTitle:@"未找到该群" forState:UIControlStateDisabled];
     [addTeamButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

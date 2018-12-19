@@ -179,7 +179,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     MGSwipeButton* lockButton = [MGSwipeButton buttonWithTitle:@"群信息" backgroundColor:[UIColor yzh_fontThemeBlue]];
     cell.leftButtons = @[tipButton, lockButton];
     cell.leftSwipeSettings.transition = MGSwipeStateSwipingLeftToRight;
-    
+    cell.leftSwipeSettings.enableSwipeBounces = NO;
     [tipButton setCallback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
         //
         return YES;
@@ -224,6 +224,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     }];
     cell.rightButtons = @[deleteButton, classButton];
     cell.rightSwipeSettings.transition = MGSwipeStateSwipingRightToLeft;
+    cell.rightSwipeSettings.enableSwipeBounces = NO;
 }
 
 #pragma mark - 5.Event Response

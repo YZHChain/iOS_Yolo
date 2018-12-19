@@ -328,7 +328,7 @@
     if (self.session.sessionType != NIMSessionTypeP2P) {
         return;
     }
-    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerift;
+    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerify;
     NIMUserRequest *request = [[NIMUserRequest alloc] init];
     request.userId = self.session.sessionId;
     if (needAddVerify) {

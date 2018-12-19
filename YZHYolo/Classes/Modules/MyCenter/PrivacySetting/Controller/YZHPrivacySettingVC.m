@@ -243,7 +243,7 @@
     YZHPrivacySettingModel* phoneAddModel = self.viewModel.content[2];
     userSetting.allowAdd = addFirendModel.isSelected;
     userSetting.allowPhoneAdd = phoneAddModel.isSelected;
-    userSetting.addVerift = addVerifyModel.isSelected;
+    userSetting.addVerify = addVerifyModel.isSelected;
     
     NSString* userInfoExtString = [userInfoExt userInfoExtString];
     [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{

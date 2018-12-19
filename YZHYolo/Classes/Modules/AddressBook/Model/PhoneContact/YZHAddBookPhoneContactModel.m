@@ -84,7 +84,7 @@ static NSString* subTitleAlreadyInviteText = @"已邀请";
 - (BOOL)needVerfy {
     
     YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.accid];
-    return userInfoExt.privateSetting.addVerift;
+    return userInfoExt.privateSetting.addVerify;
 }
 
 @end

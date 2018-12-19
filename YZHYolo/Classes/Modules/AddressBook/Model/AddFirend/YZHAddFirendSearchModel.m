@@ -49,7 +49,7 @@
         YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage targetUserInfoExtWithUserId:self.userId];
         _userInfoExt = userInfoExt;
         self.allowAdd = userInfoExt.privateSetting.allowAdd;
-        self.needVerfy = userInfoExt.privateSetting.addVerift;
+        self.needVerfy = userInfoExt.privateSetting.addVerify;
     }
 }
 

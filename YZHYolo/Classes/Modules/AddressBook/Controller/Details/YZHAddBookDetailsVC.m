@@ -394,7 +394,7 @@
 
 - (void)addFriendRequst:(UIButton *)sender {
     
-    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerift;
+    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerify;
     NIMUserRequest *request = [[NIMUserRequest alloc] init];
     request.userId = self.userId;
     if (needAddVerify) {

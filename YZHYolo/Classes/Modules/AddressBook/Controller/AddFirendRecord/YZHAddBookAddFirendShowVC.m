@@ -313,7 +313,7 @@
 //TODO: 封装
 - (void)addFriendRequst {
     
-    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerift;
+    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerify;
     NIMUserRequest *request = [[NIMUserRequest alloc] init];
     request.userId = self.userId;
     if (needAddVerify) {

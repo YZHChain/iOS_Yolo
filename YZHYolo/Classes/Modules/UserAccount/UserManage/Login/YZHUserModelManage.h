@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHUserPrivateSettingModel : NSObject
 
 @property (nonatomic, assign) BOOL allowAdd;
-@property (nonatomic, assign) BOOL addVerift;
+@property (nonatomic, assign) BOOL addVerify;
 @property (nonatomic, assign) BOOL allowPhoneAdd;
 @property (nonatomic, copy) NSString* groupPassword;
 

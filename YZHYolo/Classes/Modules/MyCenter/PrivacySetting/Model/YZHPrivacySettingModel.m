@@ -47,7 +47,7 @@ static id instance;
         }
         YZHPrivacySettingModel* addVerifyModel = [[YZHPrivacySettingModel alloc] init];
         addVerifyModel.title = @"加好友时是否需要验证";
-        if (userSetting.addVerift) {
+        if (userSetting.addVerify) {
             addVerifyModel.subTitle = @"需验证";
             addVerifyModel.isSelected = YES;
         } else {
