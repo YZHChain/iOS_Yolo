@@ -636,7 +636,7 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
     if (!_searchBar) {
         
         UISearchBar * searchbar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width-80,33)];
-        searchbar.placeholder = @"搜索";
+        searchbar.placeholder = @"模糊搜索";
         searchbar.searchBarStyle = UISearchBarStyleDefault;
         searchbar.showsCancelButton = YES;
         //通过KVC拿到textField

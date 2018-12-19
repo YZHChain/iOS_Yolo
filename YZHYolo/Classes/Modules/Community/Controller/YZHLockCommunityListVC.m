@@ -114,7 +114,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-     NIMRecentSession *recent = self.recentSessionExtManage.TeamRecentSession[indexPath.row];
+    NIMRecentSession *recent = self.recentSessionExtManage.lockTeamRecentSession[indexPath.row];
     YZHSessionListCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHDefaultCellIdentifie forIndexPath:indexPath];
     if (!cell) {
         cell = [[YZHSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHDefaultCellIdentifie];
@@ -144,7 +144,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NIMRecentSession *recentSession = self.recentSessions[indexPath.row];
+    NIMRecentSession *recentSession = self.recentSessionExtManage.lockTeamRecentSession[indexPath.row];
     [self onSelectedRecent:recentSession atIndexPath:indexPath];
 }
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
