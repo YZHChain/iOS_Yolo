@@ -20,6 +20,8 @@ target 'YZHYolo' do
   pod 'Masonry'
   pod 'SDCycleScrollView'
   pod 'BRPickerView', '~> 2.2.1'
+  pod 'VBFPopFlatButton'
+  pod 'DLRadioButton', '~> 1.4'
 
   #功能
   pod 'BlocksKit'

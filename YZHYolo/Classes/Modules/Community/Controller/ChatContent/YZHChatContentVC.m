@@ -16,6 +16,8 @@
 #import "YZHImageReusableView.h"
 #import "NTESGalleryViewController.h"
 #import "NSString+YZHTool.h"
+#import "VBFPopFlatButton.h"
+#import "DLRadioButton.h"
 
 typedef enum : NSUInteger {
     YZHChatContentTypeImage = 1,
@@ -73,13 +75,16 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 - (void)setupNavBar {
     self.navigationItem.title = @"聊天内容";
     
-    UIButton* searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [searchButton setImage:[UIImage imageNamed:@"addBook_cover_search_default"] forState:UIControlStateNormal];
-    [searchButton setImage:[UIImage imageNamed:@"addBook_cover_search_default"] forState:UIControlStateSelected];
-    self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc] initWithCustomView:searchButton];
-    [searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    DLRadioButton* searchButton = [DLRadioButton buttonWithType:UIButtonTypeCustom];
+    searchButton.marginWidth = 0;
+    [searchButton setIcon:[UIImage imageNamed:@"addBook_cover_search_default"]];
+    [searchButton setIconSelected:[UIImage imageNamed:@"addBook_cover_search_default"]];
+    [searchButton setTitle:@"查找" forState:UIControlStateNormal];
+    [searchButton setTitle:@"查找" forState:UIControlStateSelected];
+
     [searchButton sizeToFit];
-    
+    [searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem =  [[UIBarButtonItem alloc] initWithCustomView:searchButton];
 }
 
 - (void)setupView {
