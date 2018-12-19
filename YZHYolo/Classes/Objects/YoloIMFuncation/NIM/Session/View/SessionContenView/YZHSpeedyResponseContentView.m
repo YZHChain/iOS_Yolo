@@ -98,6 +98,16 @@
 
 - (void)refresh:(NIMMessageModel *)data
 {
+    if (!YZHIsString(data.message.text)) {
+//        NIMCustomObject *customObject = (NIMCustomObject*)data.message.messageObject;
+//        YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
+//        data.message.text = attachment.content;
+//        NIMMessage* message = data.message;
+//        if (!YZHIsString(data.message)) {
+//
+//        }
+        NSLog(@"文本消息为空");
+    }
     [super refresh:data];
     
     //判断此条消息是否 All 我.
@@ -145,6 +155,9 @@
 //        self.handleButton.selected = attachment.canFinish;
 //        self.receiveButton.enabled = !attachment.canGet;
 //        self.handleButton.enabled = !attachment.isResponse;
+        [self addSubview:self.handleButton];
+        [self addSubview:self.receiveButton];
+        [self addSubview:self.responseButton];
     }
 }
 
@@ -153,11 +166,10 @@
     NIMKitSetting *setting = [[NIMKit sharedKit].config setting:self.model.message];
     self.textLabel.textColor = setting.textColor;
     self.textLabel.font      = setting.font;
-    //        _textSetting.textColor = _isRight? YZHColorWithRGB(255, 255, 255) :
-    //        _textSetting.font      = [UIFont systemFontOfSize:15];
-    NSLog(@"消息%@", self.model.message.text);
-    [self.textLabel nim_setText:self.model.message.text];
-    NSLog(@"消息:%@",self.textLabel.text);
+    NIMCustomObject *customObject = (NIMCustomObject*)self.model.message.messageObject;
+    YZHSpeedyResponseAttachment* attachment = (YZHSpeedyResponseAttachment *)customObject.attachment;
+    NSLog(@"云信消息---%@-----自定义消息%@", self.model.message.text, attachment.content);
+    [self.textLabel nim_setText:attachment.content];
 }
 
 - (void)layoutSubviews{
@@ -169,6 +181,9 @@
     CGSize contentsize = [self.model contentSize:tableViewWidth];
     CGRect labelFrame = CGRectMake(contentInsets.left, contentInsets.top, contentsize.width, contentsize.height);
     self.textLabel.frame = labelFrame;
+//    if (self.textLabel.height < 26) {
+//        self.textLabel.height = 26;
+//    }
     
     self.speedyResponseView.frame = CGRectMake(7.5, self.bubbleImageView.nim_bottom + 3, 165, 20);
     self.receiveButton.frame = CGRectMake(7.5, self.bubbleImageView.nim_bottom + 3, 50, 20);
