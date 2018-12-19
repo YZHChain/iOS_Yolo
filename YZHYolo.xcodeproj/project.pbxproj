@@ -547,6 +547,7 @@
 		55ED310B2171C6FD005BFD3E /* YZHUserDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ED310A2171C6FD005BFD3E /* YZHUserDetailsModel.m */; };
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
+		55F3FA0121C9D224003E05B4 /* UIScrollView+YZHScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */; };
 		55F7F8DA21B633AC00402189 /* YZHPrivacyReadPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */; };
 		55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */; };
 		55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */; };
@@ -1577,6 +1578,8 @@
 		55EE6D3C215B7683004E092F /* YZHLocation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = YZHLocation.json; sourceTree = "<group>"; };
 		55EE6D3E215B76FD004E092F /* YZHMyinformationMyplaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMyinformationMyplaceModel.h; sourceTree = "<group>"; };
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
+		55F3F9FF21C9D224003E05B4 /* UIScrollView+YZHScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+YZHScrollView.h"; sourceTree = "<group>"; };
+		55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+YZHScrollView.m"; sourceTree = "<group>"; };
 		55F7F8D821B633AC00402189 /* YZHPrivacyReadPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivacyReadPasswordVC.h; sourceTree = "<group>"; };
 		55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivacyReadPasswordVC.m; sourceTree = "<group>"; };
 		55F7F8DB21B633EE00402189 /* YZHReadPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHReadPasswordView.h; sourceTree = "<group>"; };
@@ -1764,6 +1767,7 @@
 		55128A0221463E480099CC55 /* Objects */ = {
 			isa = PBXGroup;
 			children = (
+				55F3F9FE21C9D203003E05B4 /* ScrollView */,
 				5536408B217EAEC2006F77A5 /* NIMKit */,
 				55ED3106217094EE005BFD3E /* YoloIMFuncation */,
 			);
@@ -4545,6 +4549,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		55F3F9FE21C9D203003E05B4 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				55F3F9FF21C9D224003E05B4 /* UIScrollView+YZHScrollView.h */,
+				55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */,
+			);
+			path = ScrollView;
+			sourceTree = "<group>";
+		};
 		55F91A762160A2010037EC3B /* SearchFirend */ = {
 			isa = PBXGroup;
 			children = (
@@ -4929,6 +4942,7 @@
 				555DA4B4216C35160057D434 /* UIView+JKR_Frame.m in Sources */,
 				55DF5D612189AB9D00BFA7E6 /* YZHCreateTeamAdditionVC.m in Sources */,
 				55DC36B72167B23D00871C2B /* YZHAddBookAddFirendRecordVC.m in Sources */,
+				55F3FA0121C9D224003E05B4 /* UIScrollView+YZHScrollView.m in Sources */,
 				553641CC217EAEC2006F77A5 /* NIMInputEmoticonTabView.m in Sources */,
 				55DC01BB2175B8FC009CE59B /* YZHSessionUtil.m in Sources */,
 				55364204217EAEC3006F77A5 /* NIMSessionDataSourceImpl.m in Sources */,

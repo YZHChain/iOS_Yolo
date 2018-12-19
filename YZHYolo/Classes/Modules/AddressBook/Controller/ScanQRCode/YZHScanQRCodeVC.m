@@ -179,28 +179,41 @@
             case 0: // 用户
                 if (!self.isSkip) {
                     self.isSkip = YES;
-                    [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
-                                                                           @"userId": codeModel.accid
-                                                                           }];
+                    
+                    YZHVoidBlock complection = ^ {
+                        [YZHRouter openURL:kYZHRouterAddressBookDetails info:@{
+                                                                               @"userId": codeModel.accid
+                                                                               }];
+                    };
+                    [self closeQRCodeCompletion:complection];
                 }
                     break;
                 case 1: // 群聊
                     if (!self.isSkip) {
                         self.isSkip = YES;
-                        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
-                                                                               @"teamId": codeModel.accid,
-                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
-                                                                               kYZHRouteSegueNewNavigation: @(YES)
-                                                                               }];
+                        
+                        YZHVoidBlock complection = ^ {
+                            [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                                                   @"teamId": codeModel.accid,
+                                                                                   kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                                   kYZHRouteSegueNewNavigation: @(YES)
+                                                                                   }];
+                        };
+
+                        [self closeQRCodeCompletion:complection];
                     }
                         break;
                     case 2:  // 支付
                     if (!self.isSkip) {
                         self.isSkip = YES;
-                        YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
-                        NSString *url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
-                        discountVC.url = url;
-                        [self.navigationController pushViewController:discountVC animated:YES];
+                        YZHVoidBlock complection = ^ {
+                            YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
+                            NSString *url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
+                            discountVC.url = url;
+                            [self.navigationController pushViewController:discountVC animated:YES];
+                        };
+
+                        [self closeQRCodeCompletion:complection];
                     }
                         break;
                     default:
@@ -273,6 +286,14 @@
 - (void)stopScanWithLineAnimation {
     
     [self.scanLineImageView.layer removeAnimationForKey:@"frameAnimation"];
+}
+
+- (void)closeQRCodeCompletion:(YZHVoidBlock)completion {
+    
+    [self stopScanWithLineAnimation];
+    [self dismissViewControllerAnimated:NO completion:^{
+        completion ? completion () : NULL;
+    }];
 }
 
 @end

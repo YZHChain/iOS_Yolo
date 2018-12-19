@@ -65,7 +65,9 @@
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
-    self.scrollView.delegate = self; self.noticeImportBoxView.maximumLengthLabel.text = @"/500";
+    self.scrollView.delegate = self;
+    self.scrollView.contentSize = CGSizeMake(YZHScreen_Width, YZHView_Height + 15);
+    self.noticeImportBoxView.maximumLengthLabel.text = @"/500";
     self.noticeImportBoxView.importTextView.maxLength = 500;
     
     self.endTimeLabel.textColor = [UIColor yzh_sessionCellGray];
