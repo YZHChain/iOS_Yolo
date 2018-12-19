@@ -1006,6 +1006,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     if (!_searchView) {
         _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
+        [_searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
     }
     return _searchView;
 }
@@ -1015,6 +1017,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     if (!_tagSearchView) {
         _tagSearchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
+        [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
     }
     return _tagSearchView;
 }

@@ -180,7 +180,8 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
     if (!_searchView) {
         _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
-        _searchView.searchLabel.text = @"搜索";
+        [_searchView.searchButton setTitle:@"搜索 YOLO ID 号" forState:UIControlStateNormal];
+        [_searchView.searchButton setTitle:@"搜索 YOLO ID 号" forState:UIControlStateSelected];
         [self.tableView addSubview:_searchView];
     }
     return _searchView;

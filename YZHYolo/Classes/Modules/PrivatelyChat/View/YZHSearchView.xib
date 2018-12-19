@@ -66,11 +66,47 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="searchButton" destination="n9q-n5-Hqi" id="b0N-gA-UrP"/>
+                <outlet property="searchButton" destination="Gdf-Zu-V9A" id="hSy-Ia-clL"/>
                 <outlet property="searchContentView" destination="aJd-6D-CYV" id="R3m-bU-HRc"/>
                 <outlet property="searchLabel" destination="c4J-6W-E2D" id="QXh-tn-VB0"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="154.72263868065968"/>
+        </view>
+        <view contentMode="scaleToFill" id="0v7-W2-68L" customClass="YZHSearchView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lD2-h5-jZ2">
+                    <rect key="frame" x="13" y="10" width="349" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gdf-Zu-V9A" customClass="DLRadioButton">
+                            <rect key="frame" x="0.0" y="0.0" width="349" height="30"/>
+                            <state key="normal" title="搜索"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Gdf-Zu-V9A" secondAttribute="trailing" id="7vK-YX-tvp"/>
+                        <constraint firstAttribute="height" constant="30" id="JAD-9D-gcQ"/>
+                        <constraint firstItem="Gdf-Zu-V9A" firstAttribute="top" secondItem="lD2-h5-jZ2" secondAttribute="top" id="Ksm-7H-6Bt"/>
+                        <constraint firstItem="Gdf-Zu-V9A" firstAttribute="leading" secondItem="lD2-h5-jZ2" secondAttribute="leading" id="Usb-n8-N3y"/>
+                        <constraint firstAttribute="bottom" secondItem="Gdf-Zu-V9A" secondAttribute="bottom" id="nlq-eq-rpP"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="lD2-h5-jZ2" firstAttribute="top" secondItem="0v7-W2-68L" secondAttribute="top" constant="10" id="Q7N-Um-pRj"/>
+                <constraint firstItem="lD2-h5-jZ2" firstAttribute="leading" secondItem="0v7-W2-68L" secondAttribute="leading" constant="13" id="WaP-xM-y7W"/>
+                <constraint firstAttribute="bottom" secondItem="lD2-h5-jZ2" secondAttribute="bottom" constant="10" id="c7N-Vh-ZFH"/>
+                <constraint firstAttribute="trailing" secondItem="lD2-h5-jZ2" secondAttribute="trailing" constant="13" id="voz-N4-QC9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="searchButton" destination="Gdf-Zu-V9A" id="AdT-5Z-Wz0"/>
+                <outlet property="searchContentView" destination="lD2-h5-jZ2" id="I5q-6I-5iN"/>
+            </connections>
+            <point key="canvasLocation" x="138" y="276"/>
         </view>
     </objects>
     <resources>

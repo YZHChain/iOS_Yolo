@@ -33,6 +33,12 @@
     _searchContentView.layer.masksToBounds = YES;
     _searchContentView.backgroundColor = YZHColorWithRGB(247, 247, 247);
     
+    [_searchButton setTitleColor:[UIColor yzh_separatorLightGray] forState:UIControlStateNormal];
+    [_searchButton setTitleColor:[UIColor yzh_separatorLightGray] forState:UIControlStateSelected];
+    _searchButton.titleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:11];
+    [_searchButton setIcon:[UIImage imageNamed:@"addBook_cover_search_default"]];
+    [_searchButton setIconSelected:[UIImage imageNamed:@"addBook_cover_search_default"]];
+    
     self.backgroundColor = [UIColor whiteColor];
 }
 

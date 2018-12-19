@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DLRadioButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHSearchView : UIView
 
-@property (weak, nonatomic) IBOutlet UIButton *searchButton;
+@property (weak, nonatomic) IBOutlet DLRadioButton *searchButton;
+
 @property (weak, nonatomic) IBOutlet UILabel *searchLabel;
 
 @end

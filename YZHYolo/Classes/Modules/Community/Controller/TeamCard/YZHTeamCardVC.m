@@ -312,16 +312,6 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
                     
                     [self dismissTeamSuccessful];
                     [hud hideWithText:nil];
-                    //通知后台
-                    NSDictionary* dic = @{
-                                          @"groupId": self.teamId
-                                          };
-                    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_DELETEGROUP) params:dic successCompletion:^(id obj) {
-                        
-                        
-                    } failureCompletion:^(NSError *error) {
-                        
-                    }];
 
                 } else {
                     [hud hideWithText:@"网络异常,请重试"];
@@ -342,6 +332,16 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     //删除最近回话
     NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
     [[[NIMSDK sharedSDK] conversationManager] deleteRecentSession: recentSession];
+    
+    //通知后台
+    NSDictionary* dic = @{
+                          @"groupId": self.teamId
+                          };
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_DELETEGROUP) params:dic successCompletion:^(id obj) {
+        
+    } failureCompletion:^(NSError *error) {
+        
+    }];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

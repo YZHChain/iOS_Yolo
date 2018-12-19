@@ -879,6 +879,9 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     if (!_searchView) {
         _searchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateNormal];
+        [_searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateSelected];
+        
     }
     return _searchView;
 }
@@ -888,6 +891,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     if (!_tagSearchView) {
         _tagSearchView = [[NSBundle mainBundle] loadNibNamed:@"YZHSearchView" owner:nil options:nil].lastObject;
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_tagSearchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateNormal];
+        [_tagSearchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateSelected];
     }
     return _tagSearchView;
 }
