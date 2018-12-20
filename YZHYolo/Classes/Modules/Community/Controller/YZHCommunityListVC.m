@@ -175,7 +175,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     if (self.recentSessions.count) {
         [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
-        if (self.recentSessionExtManage.teamCurrentSessionTags.firstObject.count) {
+        if (self.recentSessionExtManage.teamCurrentSessionTags.firstObject.count || self.recentSessionExtManage.TeamRecentSession.count) {
             [self.tagsTableView reloadData];
             [self.tableView reloadData];
             [self.defaultView removeFromSuperview];
@@ -189,6 +189,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             [self.view addSubview:self.defaultView];
             self.defaultView.titleLabel.text = @"您还没有群, 广场有很多优质的群 \n快去看一下吧";
             self.defaultView.findTeamButton.hidden = NO;
+        } else {
+            [self.defaultView removeFromSuperview];
         }
     }
 }
