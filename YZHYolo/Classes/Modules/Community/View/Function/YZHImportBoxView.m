@@ -87,7 +87,7 @@
         make.left.mas_equalTo(17);
         make.right.mas_equalTo(-17);
         make.top.mas_equalTo(5);
-        make.bottom.mas_equalTo(0);
+        make.bottom.mas_equalTo(-20);
     }];
     
     [self.maximumLengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {

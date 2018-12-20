@@ -147,18 +147,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     [self.tableView setTableHeaderView:self.searchView];
-    [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(50);
-        make.width.mas_offset(YZHScreen_Width);
-    }];
     [self.tableView layoutIfNeeded];
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
     [self.tagsTableView setTableHeaderView:self.tagSearchView];
-//    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_offset(50);
-//        make.width.mas_offset(YZHScreen_Width);
-//    }];
     [self.tagsTableView layoutIfNeeded];
     
     if (self.recentSessions.count) {
