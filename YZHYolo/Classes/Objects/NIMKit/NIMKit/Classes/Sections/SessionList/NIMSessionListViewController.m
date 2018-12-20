@@ -151,8 +151,9 @@
               totalUnreadCount:(NSInteger)totalUnreadCount
 {
     //清理本地数据
-    NSInteger index = [self.recentSessions indexOfObject:recentSession];
-    [self.recentSessions removeObjectAtIndex:index];
+//    NSInteger index = [self.recentSessions indexOfObject:recentSession];
+//    [self.recentSessions removeObjectAtIndex:index];
+    [self.recentSessions removeObject:recentSession];
     
     //如果删除本地会话后就不允许漫游当前会话，则需要进行一次删除服务器会话的操作
     if (self.autoRemoveRemoteSession)
@@ -181,11 +182,6 @@
     _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
     [self customSortRecents:_recentSessions];
     [self refresh];
-}
-
-- (void)customSortRecents:(NSMutableArray *)recentSessions {
-    
-    self.recentSessions = recentSessions;
 }
 
 #pragma mark - NIMLoginManagerDelegate

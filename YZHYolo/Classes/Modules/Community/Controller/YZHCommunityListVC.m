@@ -410,6 +410,14 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)customSortRecents:(NSMutableArray *)recentSessions
 {
+    for (NSInteger i = 0; i < recentSessions.count; i++) {
+        NIMRecentSession* recentSession = recentSessions[i];
+        if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:recentSession.session.sessionId]) {
+            NSLog(@"删除");
+            [recentSessions removeObject:recentSession];
+            i--;
+        }
+    }
     // 这里只需要遍历一次即可.然后等收到群通知时,在进行编译.
     for (NSInteger i = 0 ; i < recentSessions.count; i++) {
         NIMRecentSession* recentSession = recentSessions[i];
@@ -820,7 +828,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)didAddRecentSession:(NIMRecentSession *)recentSession
            totalUnreadCount:(NSInteger)totalUnreadCount{
-    
     [self.recentSessions addObject:recentSession];
     //TODO:
     [self customSortRecents:self.recentSessions];

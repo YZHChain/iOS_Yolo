@@ -35,7 +35,7 @@
 
 - (void)searchPrivateContentKeyText:(NSString *)keyText {
     
-    if (self.allTextMessages) {
+    if (self.allTextMessages.count) {
         [self.searchTextMessages removeAllObjects];
         for (NIMMessage* message in self.allTextMessages) {
             if ([message.text containsString:keyText]) {

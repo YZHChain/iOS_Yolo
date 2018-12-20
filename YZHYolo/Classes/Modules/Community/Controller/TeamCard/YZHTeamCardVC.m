@@ -309,10 +309,8 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
             [[[NIMSDK sharedSDK] teamManager] dismissTeam:self.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
                     @strongify(self)
-                    
                     [self dismissTeamSuccessful];
                     [hud hideWithText:nil];
-
                 } else {
                     [hud hideWithText:@"网络异常,请重试"];
                 }
@@ -357,6 +355,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     //删除最近回话
     NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
     [[[NIMSDK sharedSDK] conversationManager] deleteRecentSession: recentSession];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)exitTeam:(UIButton* )sender {
@@ -369,6 +368,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
             [[[NIMSDK sharedSDK] teamManager] quitTeam:self.teamId completion:^(NSError * _Nullable error) {
                 if (!error) {
                     [self exitTeamSuccessful];
+                    [hud hideWithText:nil];
                 } else {
                     [hud hideWithText:@"网络异常,请重试"];
                 }
