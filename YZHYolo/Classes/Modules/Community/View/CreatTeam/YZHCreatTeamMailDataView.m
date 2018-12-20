@@ -44,17 +44,17 @@
     //默认是私密群
     self.teamType = YZHTeamTypePrivacy;
     
-    NSMutableAttributedString* nameAttributedString = [[NSMutableAttributedString alloc] initWithString:@"群聊 (默认)"];
-    [nameAttributedString addAttributes:@{
-                                      NSForegroundColorAttributeName: [UIColor yzh_fontShallowBlack],
-                                      NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:15]
-                                      } range:NSMakeRange(0, 2)];
-    [nameAttributedString addAttributes:@{
-                                      NSForegroundColorAttributeName: [UIColor colorWithRed:125 / 255.0 green:125 / 255.0 blue:125 / 255.0 alpha:1],
-                                      NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:12]
-                                      } range:NSMakeRange(2, nameAttributedString.length - 2)];
+//    NSMutableAttributedString* nameAttributedString = [[NSMutableAttributedString alloc] initWithString:@"群聊 (默认)"];
+//    [nameAttributedString addAttributes:@{
+//                                      NSForegroundColorAttributeName: [UIColor yzh_fontShallowBlack],
+//                                      NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:15]
+//                                      } range:NSMakeRange(0, 2)];
+//    [nameAttributedString addAttributes:@{
+//                                      NSForegroundColorAttributeName: [UIColor colorWithRed:125 / 255.0 green:125 / 255.0 blue:125 / 255.0 alpha:1],
+//                                      NSFontAttributeName: [UIFont yzh_commonStyleWithFontSize:12]
+//                                      } range:NSMakeRange(2, nameAttributedString.length - 2)];
     
-    self.teamNameTextFiled.attributedPlaceholder = nameAttributedString;
+    self.teamNameTextFiled.placeholder = @"群聊 (默认)";
     
     NSMutableAttributedString* synopsisAttributedString =  [[NSMutableAttributedString alloc] initWithString:@"无 (默认)"];
     

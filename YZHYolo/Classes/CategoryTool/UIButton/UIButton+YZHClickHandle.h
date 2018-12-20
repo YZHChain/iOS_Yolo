@@ -10,8 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIButton (YZHClickHandlew)
-
+@interface UIButton (YZHClickHandle)
+/*
+- (void)yzh_setEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left;
+*/
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,6 +16,7 @@
 #import "YZHAlertManage.h"
 #import "YZHScanQRCodeModel.h"
 #import "YZHDiscountVC.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -210,10 +211,10 @@
                             YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
                             NSString *url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
                             discountVC.url = url;
-                            [self.navigationController pushViewController:discountVC animated:YES];
+                            [[UIViewController yzh_findTopViewController].navigationController pushViewController:discountVC animated:YES];
                         };
-
                         [self closeQRCodeCompletion:complection];
+                        
                     }
                         break;
                     default:

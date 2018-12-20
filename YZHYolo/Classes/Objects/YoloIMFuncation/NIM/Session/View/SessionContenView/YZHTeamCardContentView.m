@@ -59,6 +59,8 @@
         _teamNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _teamNameLabel.font = [UIFont systemFontOfSize:14];
         _teamNameLabel.textColor = [UIColor yzh_fontShallowBlack];
+        _teamNameLabel.numberOfLines = 2;
+        _teamNameLabel.width = 145;
 //        _teamNameLabel.preferredMaxLayoutWidth = 250 - 65;
     
         _teamUrlLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -153,7 +155,7 @@
     
     _teamNameLabel.x = _avatarImageView.right + 8;
     _teamNameLabel.y = 13;
-    _teamNameLabel.width = 250 - 65;
+    _teamNameLabel.width = 165;
     
     _teamUrlLabel.x = _teamNameLabel.x;
     _teamUrlLabel.y = 47;
