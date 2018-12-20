@@ -23,6 +23,7 @@ static NSString* const kCategoryTagCellIdentifier =  @"categoryTagCellIdentifier
     [super awakeFromNib];
     
     // Initialization code
+    self.subtitleTextField.delegate = self;
     
 }
 
@@ -85,6 +86,12 @@ static NSString* const kCategoryTagCellIdentifier =  @"categoryTagCellIdentifier
         }
         
     } else {
+        if (string.length == 0) {
+            return YES;
+        } else {
+            BOOL lengthQualified = [NSString  yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength: 20];
+            return lengthQualified;
+        }
         return YES;
     }
 }

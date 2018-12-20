@@ -97,12 +97,21 @@
     self.tagContacts = [[NSMutableArray alloc] initWithCapacity:self.tagNameArray.count];
     self.showTagNameArray = [[NSMutableArray alloc] init];
     for (NSString* tagName in self.tagNameArray) {
+        NSLog(@"循环%@", tagName);
         NSMutableArray* contentContacts = [_groupMutableDictionary objectForKey:tagName];
         if (contentContacts) {
+
             [self.tagContacts addObject:contentContacts];
             [self.showTagNameArray addObject:tagName];
         }
-        
+    }
+    for (NSString* tagName in _groupMutableDictionary.allKeys) {
+        if (![self.tagNameArray containsObject:tagName]) {
+            NSMutableArray* contentContacts = [_groupMutableDictionary objectForKey:tagName];
+            for (id obj in contentContacts) {
+                [self.tagContacts.lastObject addObject:obj];
+            }
+        }
     }
 }
 
