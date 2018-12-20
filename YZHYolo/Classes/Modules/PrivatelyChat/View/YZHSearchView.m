@@ -20,7 +20,8 @@
     
     self = [super initWithCoder:aDecoder];
     if (self) {
-        
+        self.height = 50;
+        self.width = YZHScreen_Width;
     }
     return self;
 }

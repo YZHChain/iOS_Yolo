@@ -10,8 +10,9 @@
 #import "YZHChekoutVersionModel.h"
 #import "YZHAlertManage.h"
 #import "AppDelegate.h"
+#import "YZHProgressHUD.h"
 
-NSString* const kYZHAppID = @"";
+NSString* const kYZHAppID = @"1446610007";
 
 @implementation YZHCheckVersion
 
@@ -34,7 +35,6 @@ NSString* const kYZHAppID = @"";
 
 - (void)checkoutCurrentVersionUpdataCompletion:(YZHVoidBlock)completion {
     
-    
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSLog(@"当前版本%@", currentVersion);
     NSDictionary* dic = @{
@@ -47,13 +47,14 @@ NSString* const kYZHAppID = @"";
         YZHChekoutVersionModel* model = [YZHChekoutVersionModel YZH_objectWithKeyValues:obj];
         @strongify(self)
         // 先判断是否需要强更
-        if (!model.updateForced) {
+        if (model.updateForced) {
             [YZHAlertManage showAlertTitle:model.title message:model.updateContent actionButtons:@[@"退出",@"马上更新"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
                 if (buttonIndex == 0) {
                     [self exitApplication];
                 } else {
                     //跳转至 App Store
-                    completion ? completion() : NULL;
+                    [self gotoAppStore];
+                    [self exitApplication];
                 }
             }];
         } else {
@@ -63,9 +64,8 @@ NSString* const kYZHAppID = @"";
                         completion ? completion() : NULL;
                     } else {
                         //跳转至 App Store
+                        [self gotoAppStore];
                         completion ? completion() : NULL;
-                        NSString *urlStr = [NSString stringWithFormat:@"https://itunes.apple.com/cn/app/id%@", kYZHAppID];
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
                     }
                 }];
             } else {
@@ -90,5 +90,55 @@ NSString* const kYZHAppID = @"";
     
 }
 
+- (void)checkoutCurrentVersion {
+    
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSLog(@"当前版本%@", currentVersion);
+    NSDictionary* dic = @{
+                          @"appSource": @"1", // iOS
+                          @"appVersion": currentVersion
+                          };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+    @weakify(self)
+    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUAPPUPDATE) params:dic successCompletion:^(id obj) {
+        [hud hideWithText:nil];
+        YZHChekoutVersionModel* model = [YZHChekoutVersionModel YZH_objectWithKeyValues:obj];
+        @strongify(self)
+        // 先判断是否需要强更
+        if (model.updateForced) {
+            [YZHAlertManage showAlertTitle:model.title message:model.updateContent actionButtons:@[@"退出",@"马上更新"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+                if (buttonIndex == 0) {
+                    [self exitApplication];
+                } else {
+                    //跳转至 App Store
+                    [self gotoAppStore];
+                    [self exitApplication];
+                }
+            }];
+        } else {
+            if (model.updateState == 0) {
+                [YZHAlertManage showAlertTitle:model.title message:model.updateContent actionButtons:@[@"取消",@"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                       
+                    } else {
+                        [self gotoAppStore];
+                    }
+                }];
+            } else {
+                [YZHProgressHUD showLoadingOnView:YZHAppWindow text:@"当前已经是最新版本"];
+            }
+        }
+        
+    } failureCompletion:^(NSError *error) {
+        
+        [hud hideWithText:error.domain];
+    }];
+}
+
+- (void)gotoAppStore {
+    
+    NSURL* appStoreUrl = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/cn/app/id%@", kYZHAppID]];
+    [[UIApplication sharedApplication] openURL:appStoreUrl];
+}
 
 @end

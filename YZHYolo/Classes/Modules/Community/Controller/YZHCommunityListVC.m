@@ -1023,6 +1023,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
         [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
+//        [_tagSearchView layoutSubviews];
+        [_tagSearchView layoutIfNeeded];
     }
     return _tagSearchView;
 }

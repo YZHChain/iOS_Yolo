@@ -10,6 +10,8 @@
 
 #import "YZHAboutYoloCell.h"
 #import "YZHAboutYoloModel.h"
+#import "YZHCheckVersion.h"
+
 @interface YZHAboutYoloVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHAboutYoloListModel* viewModel;
@@ -132,6 +134,11 @@
     if (YZHIsString(model.route)) {
         id viewController = [[[NSClassFromString(model.route) class] alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
+    } else {
+        if ([model.title isEqualToString:@"当前版本"]) {
+            //检测版本
+            [[YZHCheckVersion shareInstance] checkoutCurrentVersion];
+        }
     }
     
 }

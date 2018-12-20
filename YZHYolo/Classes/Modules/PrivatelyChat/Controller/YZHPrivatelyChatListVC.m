@@ -154,11 +154,11 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.tableView layoutIfNeeded];
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
-    self.tagsTableView.tableHeaderView = self.tagSearchView;
-    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(50);
-        make.width.mas_offset(YZHScreen_Width);
-    }];
+    [self.tagsTableView setTableHeaderView:self.tagSearchView];
+//    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_offset(50);
+//        make.width.mas_offset(YZHScreen_Width);
+//    }];
     [self.tagsTableView layoutIfNeeded];
     
     if (self.recentSessions.count) {
@@ -893,6 +893,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_tagSearchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateNormal];
         [_tagSearchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateSelected];
+        _tagSearchView.autoresizingMask = NO;
     }
     return _tagSearchView;
 }

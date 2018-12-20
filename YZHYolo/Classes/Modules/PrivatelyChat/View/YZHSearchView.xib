@@ -26,7 +26,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Gdf-Zu-V9A" secondAttribute="trailing" id="7vK-YX-tvp"/>
-                        <constraint firstAttribute="height" constant="30" id="JAD-9D-gcQ"/>
                         <constraint firstItem="Gdf-Zu-V9A" firstAttribute="top" secondItem="lD2-h5-jZ2" secondAttribute="top" id="Ksm-7H-6Bt"/>
                         <constraint firstItem="Gdf-Zu-V9A" firstAttribute="leading" secondItem="lD2-h5-jZ2" secondAttribute="leading" id="Usb-n8-N3y"/>
                         <constraint firstAttribute="bottom" secondItem="Gdf-Zu-V9A" secondAttribute="bottom" id="nlq-eq-rpP"/>

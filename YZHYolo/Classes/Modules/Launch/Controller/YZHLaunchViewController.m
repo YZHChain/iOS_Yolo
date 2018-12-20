@@ -48,7 +48,14 @@
 
 - (void)setupSplashScreen{
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"screent_default" ofType:@"png"];
+    UIImageView* screentImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
+    [self.view addSubview:screentImageView];
+    [screentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
 }
 
 #pragma mark -- Start
@@ -69,8 +76,6 @@
             [self startAutoLogin];
         }
 //    }];
-    
-
 }
 
 - (BOOL)detectionApplicationStatus{
