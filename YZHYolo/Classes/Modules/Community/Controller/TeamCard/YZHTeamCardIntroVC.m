@@ -279,7 +279,7 @@
         if (self.viewModel.team.joinMode == NIMTeamJoinModeNoAuth) {
             [addTeamButton addTarget:self action:@selector(addTeam:) forControlEvents:UIControlEventTouchUpInside];
         } else {
-            [addTeamButton setTitle:@"该群非公开" forState:UIControlStateNormal];
+            [addTeamButton setTitle:@"该群非公开" forState:UIControlStateDisabled];
             addTeamButton.enabled = NO;
         }
     } else {

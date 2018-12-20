@@ -52,9 +52,9 @@
         _account = senderUserId;
         _teamNickName = teamNickName;
         _userName = teamNickName;
-        _canGet = NO;
+        _canGet = YES;
         _isResponse = NO;
-        _canFinish = NO;
+        _canFinish = YES;
         _isSender = YES;
     }
     return self;

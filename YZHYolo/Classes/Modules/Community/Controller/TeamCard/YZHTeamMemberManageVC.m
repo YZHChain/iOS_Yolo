@@ -141,7 +141,7 @@
     YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
     YZHTeamMemberManageCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
     [cell refresh:member];
-    BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:self.viewModel.teamId inTeam:member.info.infoId].isMuted;
+    BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:member.info.infoId inTeam:self.viewModel.teamId].isMuted;
     NSLog(@"成员名%@ iD:%@禁言状态%d", member.info.showName, member.info.infoId, isBanned);
     cell.bannedButton.selected = isBanned;
 //    if (isBanned) {
@@ -183,7 +183,7 @@
 // 禁言和移出群按钮回调;
 - (void)onTouchBannedWithMember:(nonnull YZHContactMemberModel *)member {
     
-    BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:self.viewModel.teamId inTeam:member.info.infoId].isMuted;
+    BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:member.info.infoId inTeam:self.viewModel.teamId].isMuted;
     
     NSString* title;
     NSString* succeedTitle;
