@@ -219,9 +219,9 @@
     YZHPrivacySettingModel* phoneAddModel = self.viewModel.content[2];
     NSString* allowAdd = @(addFirendModel.isSelected).stringValue;
     NSString* allowPhoneAdd = @(phoneAddModel.isSelected).stringValue;
-    NSString* addVerift = @(addVerifyModel.isSelected).stringValue;
+    NSString* addVerify = @(addVerifyModel.isSelected).stringValue;
     NSDictionary* dic = @{
-                          @"addVerify": addVerift,
+                          @"addVerify": addVerify,
                           @"allowAdd": allowAdd,
                           @"allowPhoneAdd": allowPhoneAdd,
                           @"userId":userId,

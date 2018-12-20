@@ -269,11 +269,13 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
 
 - (void)onTouchSwitchRange:(UIButton *)sender {
     
+    YZHUserDataManage* dataManage = [YZHUserDataManage sharedManager];
     @weakify(self)
     void(^selectedLabelSaveHandle)(NSMutableArray *) = ^(NSMutableArray *selectedTeamLabel) {
         @strongify(self)
         self.userDataModel.teamLabel = selectedTeamLabel;
-        [[YZHUserDataManage sharedManager] setCurrentUserData:self.userDataModel];
+        dataManage.currentUserData.teamLabel = self.userDataModel.teamLabel;
+        [[YZHUserDataManage sharedManager] setCurrentUserData:dataManage.currentUserData];
         [self setupData];
     };
     NSMutableArray* selectedArray = self.userDataModel.teamLabel.count ? self.userDataModel.teamLabel : [[NSMutableArray alloc] init];

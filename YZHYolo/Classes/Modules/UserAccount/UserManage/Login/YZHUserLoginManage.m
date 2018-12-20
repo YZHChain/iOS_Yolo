@@ -120,9 +120,9 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
     if ([[NSFileManager defaultManager] fileExistsAtPath:filepath])
     {
         id object = [NSKeyedUnarchiver unarchiveObjectWithFile:filepath];
-        _currentLoginData = [object isKindOfClass:[YZHIMLoginData class]] ? object : nil;
+        _currentLoginData = [object isKindOfClass:[YZHIMLoginData class]] ? object : [[YZHIMLoginData alloc] init];
     } else {
-        
+        _currentLoginData = [[YZHIMLoginData alloc] init];
     }
 }
 
@@ -290,7 +290,7 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
 - (NSString *)filepath {
     
     if (!_filepath) {
-        _filepath = kYZHIMloginFilePath;
+        _filepath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:kYZHIMloginFilePath];
     }
     return _filepath;
 }

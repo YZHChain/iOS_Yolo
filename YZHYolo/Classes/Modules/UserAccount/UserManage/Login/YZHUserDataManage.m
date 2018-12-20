@@ -20,30 +20,52 @@ static NSString* kYZHUserTeamtaskCompleDateKey   = @"taskCompleDate";
 
 @implementation YZHUserDataModel
 
-+ (BOOL)supportsSecureCoding {
-    
-    return YES;
-}
-- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
+//+ (BOOL)supportsSecureCoding {
+//    
+//    return YES;
+//}
+//- (void)encodeWithCoder:(nonnull NSCoder *)aCoder {
+//
+//    if (_teamLabel.count) {
+//        [aCoder encodeObject:_teamLabel.mutableCopy forKey:kYZHUserTeamLabelKey];
+//    }
+//    if ([_taskCompleDate isEqualToDate:[NSDate date]]) {
+//        [aCoder encodeObject:_taskCompleDate forKey:kYZHUserTeamtaskCompleDateKey];
+//    }
+//}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
     
     if (_teamLabel.count) {
-        [aCoder encodeObject:_teamLabel.mutableCopy forKey:kYZHUserTeamLabelKey];
+        [encoder encodeObject:_teamLabel.mutableCopy forKey:kYZHUserTeamLabelKey];
     }
-    if ([_taskCompleDate isEqualToDate:[NSDate date]]) {
-        [aCoder encodeObject:_taskCompleDate forKey:kYZHUserTeamtaskCompleDateKey];
+    if (_taskCompleDate) {
+        [encoder encodeObject:_taskCompleDate forKey:kYZHUserTeamtaskCompleDateKey];
     }
 }
 
-- (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
-
-    self = [super init];
-    if (!self) {
-        return nil;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    
+    if (self = [super init]) {
+        self.teamLabel = [[aDecoder decodeObjectOfClass:[NSMutableArray class] forKey: kYZHUserTeamLabelKey] mutableCopy];
+//        self.taskCompleDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:kYZHUserTeamtaskCompleDateKey];
+        //不能使用上面的方法来解档
+        self.taskCompleDate = [aDecoder decodeObjectForKey:kYZHUserTeamtaskCompleDateKey];
     }
-    self.teamLabel = [[aDecoder decodeObjectOfClass:[NSMutableArray class] forKey: kYZHUserTeamLabelKey] mutableCopy];
-    self.taskCompleDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:kYZHUserTeamtaskCompleDateKey];
+
     return self;
 }
+
+//- (nullable instancetype)initWithCoder:(nonnull NSCoder *)aDecoder {
+//
+//    self = [super init];
+//    if (!self) {
+//        return nil;
+//    }
+//    self.teamLabel = [[aDecoder decodeObjectOfClass:[NSMutableArray class] forKey: kYZHUserTeamLabelKey] mutableCopy];
+//    self.taskCompleDate = [aDecoder decodeObjectOfClass:[NSDate class] forKey:kYZHUserTeamtaskCompleDateKey];
+//    return self;
+//}
 
 @end
 
@@ -73,12 +95,12 @@ static NSString* kYZHUserTeamtaskCompleDateKey   = @"taskCompleDate";
 
 - (instancetype)initWithPath:(NSString* )filePath {
     
-    self = [super init];
-    if (!self) {
-        return nil;
+    
+    if (self = [super init]) {
+        _filepath = filePath;
+        [self readData];
     }
-    _filepath = filePath;
-    [self readData];
+
     return self;
 }
 
@@ -89,7 +111,7 @@ static NSString* kYZHUserTeamtaskCompleDateKey   = @"taskCompleDate";
     if ([[NSFileManager defaultManager] fileExistsAtPath:filepath])
     {
         id object = [NSKeyedUnarchiver unarchiveObjectWithFile:filepath];
-        _currentUserData = [object isKindOfClass:[YZHUserDataModel class]] ? object : nil;
+        _currentUserData = [object isKindOfClass:[YZHUserDataModel class]] ? object : [[YZHUserDataModel alloc] init];
     } else {
         _currentUserData = [[YZHUserDataModel alloc] init];
     }
@@ -105,20 +127,19 @@ static NSString* kYZHUserTeamtaskCompleDateKey   = @"taskCompleDate";
     [data writeToFile:[self filepath] atomically:YES];
 }
 
-
 #pragma mark - GET & SET
 
 - (NSString *)filepath {
     
     if (!_filepath) {
-        _filepath = [[[YZHUserLoginManage sharedManager] currentLoginData] account];
+        _filepath = [[NIMKitFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent: [[[YZHUserLoginManage sharedManager] currentLoginData] account]];
     }
     return _filepath;
 }
 
 - (void)setCurrentUserData:(YZHUserDataModel *)currentUserData {
     
-    [self readData];
+//    [self readData];
     _currentUserData = currentUserData;
     [self saveData];
 }

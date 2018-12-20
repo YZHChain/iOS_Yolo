@@ -361,11 +361,13 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
 
 - (void)onTouchSwitchRange:(UIButton *)sender {
     
+    YZHUserDataManage* dataManage = [YZHUserDataManage sharedManager];
     @weakify(self)
     void(^selectedLabelSaveHandle)(NSMutableArray *) = ^(NSMutableArray *selectedTeamLabel) {
         @strongify(self)
         self.userDataModel.teamLabel = selectedTeamLabel;
-        [[YZHUserDataManage sharedManager] setCurrentUserData:self.userDataModel];
+        dataManage.currentUserData.teamLabel = self.userDataModel.teamLabel;
+        [[YZHUserDataManage sharedManager] setCurrentUserData:dataManage.currentUserData];
         [self setupData];
     };
     NSMutableArray* selectedArray = self.userDataModel.teamLabel.count ? self.userDataModel.teamLabel : [[NSMutableArray alloc] init];
@@ -690,6 +692,14 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
         }
     }
     return _teamTagArray;
+}
+
+- (YZHUserDataModel *)userDataModel {
+    
+    if (!_userDataModel) {
+        _userDataModel = [[YZHUserDataManage sharedManager] currentUserData];
+    }
+    return _userDataModel;
 }
 
 @end

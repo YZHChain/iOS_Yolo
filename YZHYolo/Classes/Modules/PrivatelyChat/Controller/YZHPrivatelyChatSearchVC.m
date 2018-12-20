@@ -522,4 +522,12 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
     [self.searchBar endEditing:YES];
 }
 
+- (YZHUserDataModel *)userDataModel {
+    
+    if (!_userDataModel) {
+        _userDataModel = [[YZHUserDataManage sharedManager] currentUserData];
+    }
+    return _userDataModel;
+}
+
 @end
