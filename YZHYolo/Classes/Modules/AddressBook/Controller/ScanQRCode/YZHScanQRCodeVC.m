@@ -106,6 +106,7 @@
         YZHQRCodeManage* QRCodeManage = [[YZHQRCodeManage alloc] init];
         self.manage = QRCodeManage;
         self.manage.metadatadelegate = self;
+        self.photoImageView.bounds = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
         [QRCodeManage configurationVideoPreviewLayerWithScanImageView:self.photoImageView];
         [QRCodeManage startScanVideo];
         self.scanContentView.backgroundColor = [UIColor clearColor];

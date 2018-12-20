@@ -10,14 +10,14 @@
 
 #import <objc/runtime.h>
 
-//static char topNameKey;
-//static char rightNameKey;
-//static char bottomNameKey;
-//static char leftNameKey;
+static char topNameKey;
+static char rightNameKey;
+static char bottomNameKey;
+static char leftNameKey;
 
 @implementation UIButton (YZHClickHandle)
-/*
-- (void)setEnlargeEdge:(CGFloat) size
+
+- (void)yzh_setEnlargeEdge:(CGFloat) size
 {
     objc_setAssociatedObject(self, &topNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);
     objc_setAssociatedObject(self, &rightNameKey, [NSNumber numberWithFloat:size], OBJC_ASSOCIATION_COPY_NONATOMIC);

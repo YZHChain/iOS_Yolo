@@ -148,21 +148,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     [self.tableView registerClass:[YZHSessionListCell class] forCellReuseIdentifier:kYZHDefaultCellIdentifie];
     [self.tableView registerClass:[YZHSessionListLockCell class] forCellReuseIdentifier:kYZHLockCellIdentifie];
     
-    
     // 添加分类标签列表
     [self.view addSubview:self.tagsTableView];
     [self.tagsTableView setTableHeaderView:self.tagSearchView];
-    
-    [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(50);
-        make.width.mas_offset(YZHScreen_Width);
-    }];
+
     [self.tableView layoutIfNeeded];
-    
-    [self.tagSearchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_offset(50);
-        make.width.mas_offset(YZHScreen_Width);
-    }];
     [self.tagsTableView layoutIfNeeded];
     //默认上锁
     self.teamLock = YES;
@@ -1019,6 +1009,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
         [_searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
+        _searchView.autoresizingMask = NO;
     }
     return _searchView;
 }
@@ -1030,8 +1021,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         [_tagSearchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
         [_tagSearchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
-//        [_tagSearchView layoutSubviews];
-        [_tagSearchView layoutIfNeeded];
+        _tagSearchView.autoresizingMask = NO;
     }
     return _tagSearchView;
 }

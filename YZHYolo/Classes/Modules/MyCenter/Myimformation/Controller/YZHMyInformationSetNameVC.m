@@ -75,6 +75,8 @@
     [self.nickNameTextField becomeFirstResponder];
     
     self.nickNameTextField.text = self.userInfo.nickName;
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 - (void)reloadView

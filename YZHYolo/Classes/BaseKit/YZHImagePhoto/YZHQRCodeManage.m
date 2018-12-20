@@ -122,6 +122,7 @@
 - (void)configurationVideoPreviewLayerWithScanImageView:(UIView *)scanImageView {
     
     AVCaptureVideoPreviewLayer* captureVideoLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.caputreSession];
+    
     captureVideoLayer.frame = scanImageView.layer.bounds;
     captureVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     //    captureVideoLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;

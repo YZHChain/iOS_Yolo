@@ -881,7 +881,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         [_searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
         [_searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateNormal];
         [_searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateSelected];
-        
+        _searchView.autoresizingMask = NO;
     }
     return _searchView;
 }
