@@ -902,6 +902,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     if (!_defaultView) {
         _defaultView = [YZHPrivateChatDefaultView yzh_viewWithFrame:self.view.bounds];
         [_defaultView.searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_defaultView.searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateNormal];
+        [_defaultView.searchView.searchButton setTitle:@"搜索聊天或好友" forState:UIControlStateSelected];
     }
     return _defaultView;
 }

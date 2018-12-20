@@ -55,17 +55,22 @@
 
 - (void)startConfign{
     
-    UIViewController* rootViewController;
-    if ([self detectionApplicationStatus]) {
-        // 引导页
-        YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
-        YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];
-        rootViewController = navigationController;
-        [self yzh_animationReplaceRootViewController:rootViewController];
-    } else {
-        // 判断用户是否已登录, 设置用户自动登录.
-        [self startAutoLogin];
-    }
+    __block UIViewController* rootViewController;
+    
+//    [[YZHCheckVersion shareInstance] checkoutCurrentVersionUpdataCompletion:^{
+        if ([self detectionApplicationStatus]) {
+            // 引导页
+            YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
+            YZHBaseNavigationController* navigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:welcomeVC];
+            rootViewController = navigationController;
+            [self yzh_animationReplaceRootViewController:rootViewController];
+        } else {
+            // 判断用户是否已登录, 设置用户自动登录.
+            [self startAutoLogin];
+        }
+//    }];
+    
+
 }
 
 - (BOOL)detectionApplicationStatus{

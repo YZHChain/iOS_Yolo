@@ -548,6 +548,7 @@
 		55EE6D3D215B7683004E092F /* YZHLocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 55EE6D3C215B7683004E092F /* YZHLocation.json */; };
 		55EE6D40215B76FD004E092F /* YZHMyinformationMyplaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */; };
 		55F3FA0121C9D224003E05B4 /* UIScrollView+YZHScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */; };
+		55F3FA0421CA8052003E05B4 /* YZHChekoutVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F3FA0321CA8052003E05B4 /* YZHChekoutVersionModel.m */; };
 		55F7F8DA21B633AC00402189 /* YZHPrivacyReadPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */; };
 		55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */; };
 		55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */; };
@@ -1580,6 +1581,8 @@
 		55EE6D3F215B76FD004E092F /* YZHMyinformationMyplaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMyinformationMyplaceModel.m; sourceTree = "<group>"; };
 		55F3F9FF21C9D224003E05B4 /* UIScrollView+YZHScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+YZHScrollView.h"; sourceTree = "<group>"; };
 		55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+YZHScrollView.m"; sourceTree = "<group>"; };
+		55F3FA0221CA8052003E05B4 /* YZHChekoutVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHChekoutVersionModel.h; sourceTree = "<group>"; };
+		55F3FA0321CA8052003E05B4 /* YZHChekoutVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHChekoutVersionModel.m; sourceTree = "<group>"; };
 		55F7F8D821B633AC00402189 /* YZHPrivacyReadPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivacyReadPasswordVC.h; sourceTree = "<group>"; };
 		55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivacyReadPasswordVC.m; sourceTree = "<group>"; };
 		55F7F8DB21B633EE00402189 /* YZHReadPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHReadPasswordView.h; sourceTree = "<group>"; };
@@ -3776,6 +3779,8 @@
 			children = (
 				55A0AF7B21C0D355004EAEE3 /* YZHCheckVersion.h */,
 				55A0AF7C21C0D355004EAEE3 /* YZHCheckVersion.m */,
+				55F3FA0221CA8052003E05B4 /* YZHChekoutVersionModel.h */,
+				55F3FA0321CA8052003E05B4 /* YZHChekoutVersionModel.m */,
 			);
 			path = CheckVersion;
 			sourceTree = "<group>";
@@ -5116,6 +5121,7 @@
 				5536422F217EAEC3006F77A5 /* NIMKit.m in Sources */,
 				55337DFA2150FFCD00307B75 /* UIButton+YZHTool.m in Sources */,
 				555DA4B0216C35160057D434 /* UIGestureRecognizer+JKRTouch.m in Sources */,
+				55F3FA0421CA8052003E05B4 /* YZHChekoutVersionModel.m in Sources */,
 				55364212217EAEC3006F77A5 /* NIMSessionVideoContentView.m in Sources */,
 				5528C5DC2190A8E600F255EE /* YZHMyinformationQRCodeModel.m in Sources */,
 				559F1B18217EED370028B0E5 /* NTESCellLayoutConfig.m in Sources */,

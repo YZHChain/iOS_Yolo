@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "YZHChekoutVersionModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHCheckVersion : NSObject
 
 + (instancetype)shareInstance;
+- (void)checkoutCurrentVersionUpdataCompletion:(YZHVoidBlock)completion;
+@property (nonatomic, strong) YZHChekoutVersionModel* model;
 
 @end
 

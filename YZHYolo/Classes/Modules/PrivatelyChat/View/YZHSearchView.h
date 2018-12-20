@@ -15,8 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet DLRadioButton *searchButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *searchLabel;
-
 @end
 
 NS_ASSUME_NONNULL_END

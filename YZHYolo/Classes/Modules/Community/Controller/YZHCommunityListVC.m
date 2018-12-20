@@ -989,6 +989,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         _defaultView = [YZHTeamListDefaultView yzh_viewWithFrame:self.view.bounds];
         [_defaultView.findTeamButton addTarget:self action:@selector(onTouchfindTeam:) forControlEvents:UIControlEventTouchUpInside];
         [_defaultView.searchView.searchButton addTarget:self action:@selector(onTouchSearch:) forControlEvents:UIControlEventTouchUpInside];
+        [_defaultView.searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateNormal];
+        [_defaultView.searchView.searchButton setTitle:@"搜索我的群" forState:UIControlStateSelected];
     }
     return _defaultView;
 }
