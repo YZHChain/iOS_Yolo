@@ -67,7 +67,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="me0-go-5Yl">
                             <rect key="frame" x="0.0" y="109" width="375" height="56"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_createTeam_avatar_icon_normal" translatesAutoresizingMaskIntoConstraints="NO" id="B3I-zj-qEM">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_cell_photoImage_default" translatesAutoresizingMaskIntoConstraints="NO" id="B3I-zj-qEM">
                                     <rect key="frame" x="17" y="10.5" width="35" height="35"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="VVX-SJ-MR5"/>
@@ -201,7 +201,7 @@
     </objects>
     <resources>
         <image name="my_cover_cell_back" width="9" height="16"/>
-        <image name="team_createTeam_avatar_icon_normal" width="35" height="35"/>
+        <image name="team_cell_photoImage_default" width="40" height="40"/>
         <image name="team_createTeam_updataPhoto_normal" width="35" height="35"/>
     </resources>
 </document>

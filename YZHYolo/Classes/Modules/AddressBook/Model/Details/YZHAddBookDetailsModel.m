@@ -36,19 +36,19 @@
 //    YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:_userId];
     self.photoImageName = userInfo.avatarUrl;
     self.remarkName = user.alias;
-    if (YZHIsString(self.remarkName)) {
-        //TODO:暂时不设置
-        self.nickName = self.remarkName;
-        
-    } else {
-        self.remarkName = userInfo.nickName;
-        self.nickName = @"";
-    }
+    self.nickName = userInfo.nickName;
+//    if (YZHIsString(self.remarkName)) {
+//        //TODO:暂时不设置
+//        self.nickName = self.remarkName;
+//    } else {
+//        self.remarkName = userInfo.nickName;
+//        self.nickName = @"";
+//    }
     self.genderImageName = [YZHUserUtil genderImageNameString:userInfo.gender];
     self.yoloId = userInfoExtManage.userYolo.yoloID;
     self.cellClass = @"YZHAddBookUserIDCell";
     self.canSkip = NO;
-    self.cellHeight = 55;
+    self.cellHeight = 65;
 }
 
 @end

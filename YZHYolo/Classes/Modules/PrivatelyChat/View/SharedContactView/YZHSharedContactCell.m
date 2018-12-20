@@ -48,9 +48,9 @@
     NSString *imageUrl = team.avatarUrl ? team.avatarUrl : nil;
     //TODO: 加载图片方法需优化.
     if (imageUrl) {
-        [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"team_createTeam_avatar_icon_normal"];
+        [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"team_cell_photoImage_default"];
     } else {
-        [_photoImageView setImage:[UIImage imageNamed:@"team_createTeam_avatar_icon_normal"]];
+        [_photoImageView setImage:[UIImage imageNamed:@"team_cell_photoImage_default"]];
     }
 //    NSString* showNickName = member.info.nickName ? [NSString stringWithFormat:@"(%@)", member.info.nickName] : nil;
     self.subtitleLabel.text = nil;

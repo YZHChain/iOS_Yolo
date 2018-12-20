@@ -66,7 +66,7 @@
 
 - (void)setupNavBar {
     
-    self.navigationItem.title = @"详情资料";
+    self.navigationItem.title = @"详细资料";
     
     // 不是自己,并且是我的好友时,才会有更多选项
     if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {

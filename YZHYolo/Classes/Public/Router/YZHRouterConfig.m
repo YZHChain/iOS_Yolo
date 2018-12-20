@@ -237,13 +237,13 @@ NSString *const kYZHRouterAppConfig = @"debug/appConfig";
                      },
              kYZHRouterAddressBookDetails: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
-                     kYZHRouteViewControllerNameKey: @"详情资料",
+                     kYZHRouteViewControllerNameKey: @"详细资料",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },
              kYZHRouterAddressBookAddFriendShow: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookAddFirendShowVC",
-                     kYZHRouteViewControllerNameKey: @"详情资料",
+                     kYZHRouteViewControllerNameKey: @"详细资料",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

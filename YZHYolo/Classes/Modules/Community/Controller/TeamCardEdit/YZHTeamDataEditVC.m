@@ -112,9 +112,9 @@
     self.teamNameTextFiled.text = self.viewModel.teamName;
     self.synopsisView.importTextView.text = self.viewModel.teamSynopsis;
     if (self.viewModel.teamName) {
-        [self.avatarImageView yzh_setImageWithString:self.viewModel.teamName placeholder:@"team_createTeam_avatar_icon_normal"];
+        [self.avatarImageView yzh_setImageWithString:self.viewModel.teamName placeholder:@"team_cell_photoImage_default"];
     } else {
-        [self.avatarImageView setImage:[UIImage imageNamed:@"team_createTeam_avatar_icon_normal"]];
+        [self.avatarImageView setImage:[UIImage imageNamed:@"team_cell_photoImage_default"]];
     }
 }
 

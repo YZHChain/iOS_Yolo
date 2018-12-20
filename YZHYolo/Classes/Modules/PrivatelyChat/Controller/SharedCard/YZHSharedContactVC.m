@@ -285,7 +285,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
         NSString* yoloId = memberModel.info.infoId;
         YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
-        userCardAttachment.userName = memberModel.info.showName;
+        userCardAttachment.userName = memberModel.info.nickName;
         userCardAttachment.yoloID = yoloId;
         userCardAttachment.account = memberModel.info.infoId;
         [userCardAttachment encodeAttachment];
@@ -305,7 +305,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             teamCardAttachment.groupID = teamCard.teamId;
             teamCardAttachment.groupSynopsis = teamCard.intro;
             teamCardAttachment.groupUrl = teamCard.intro;
-            teamCardAttachment.avatarUrl = teamCard.avatarUrl ? teamCard.avatarUrl : @"team_createTeam_avatar_icon_normal";
+            teamCardAttachment.avatarUrl = teamCard.avatarUrl ? teamCard.avatarUrl : @"team_cell_photoImage_default";
             self.sharedTeamCardBlock ? self.sharedTeamCardBlock(teamCardAttachment) : NULL;
 
             [self dismissViewControllerAnimated:YES completion:^{

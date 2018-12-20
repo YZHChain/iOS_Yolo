@@ -16,7 +16,9 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.userpicImageView yzh_cornerRadiusAdvance:self.userpicImageView.height / 2 rectCornerType:UIRectCornerAllCorners];
+//    [self.userpicImageView yzh_cornerRadiusAdvance:self.userpicImageView.height / 2 rectCornerType:UIRectCornerAllCorners];
+    self.userpicImageView.layer.cornerRadius = 4;
+    self.userpicImageView.layer.masksToBounds = YES;
     
     self.userpicImageView.userInteractionEnabled = YES;
     [self.userpicImageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayLargePhoto)]];
@@ -31,15 +33,30 @@
 - (void)setModel:(YZHAddBookHeaderModel *)model {
     
     if (model.photoImageName) {
-        [self.userpicImageView yzh_setImageWithString:model.photoImageName placeholder:@"my_cover_headPhoto_default"];
-    } 
+        [self.userpicImageView yzh_setImageWithString:model.photoImageName placeholder:@"addBook_cover_cell_photo_default"];
+    } else {
+        [self.userpicImageView setImage:[UIImage imageNamed:@"addBook_cover_cell_photo_default"]];
+    }
     self.notoNameLabel.text = model.remarkName;
     self.nickNameLabel.text = @"";
     if (YZHIsString(model.yoloId)) {
-        self.userYoloIDLabel.text = [NSString stringWithFormat:@"YOLO号：%@",model.yoloId];
+        self.userYoloIDLabel.text = [NSString stringWithFormat:@"YOLO号: %@",model.yoloId];
     } else {
-        self.userYoloIDLabel.text = @"YOLO号";
+        self.userYoloIDLabel.text = @"YOLO号:";
     }
+    if (YZHIsString(model.remarkName)) {
+        self.notoNameLabel.text = model.remarkName;
+        if (YZHIsString(model.nickName)) {
+            self.nickNameLabel.text = [NSString stringWithFormat:@"昵称: %@", model.nickName];
+        } else {
+            self.nickNameLabel.text = nil;
+        }
+    } else {
+        self.notoNameLabel.text = model.nickName;
+        self.nickNameLabel.text = self.userYoloIDLabel.text;
+        self.userYoloIDLabel.text = nil;
+    }
+    
 }
 
 - (void) displayLargePhoto {

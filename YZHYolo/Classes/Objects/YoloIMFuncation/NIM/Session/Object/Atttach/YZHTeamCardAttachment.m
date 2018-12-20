@@ -69,7 +69,7 @@
         //            }
         //        }];
 //        NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_groupID];
-        _avatarUrl = @"team_createTeam_avatar_icon_normal";
+        _avatarUrl = @"team_cell_photoImage_default";
     }
     return _avatarUrl;
 }
