@@ -64,7 +64,7 @@
     
     __block UIViewController* rootViewController;
     
-    [[YZHCheckVersion shareInstance] checkoutCurrentVersionUpdataCompletion:^{
+//    [[YZHCheckVersion shareInstance] checkoutCurrentVersionUpdataCompletion:^{
         if ([self detectionApplicationStatus]) {
             // 引导页
             YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
@@ -75,10 +75,10 @@
             // 判断用户是否已登录, 设置用户自动登录.
             [self startAutoLogin];
         }
-    }];
+//    }];
 }
 
-- (BOOL)detectionApplicationStatus{
+- (BOOL)detectionApplicationStatus {
     
     BOOL firstLaunching = false;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -88,8 +88,9 @@
     
     if ([lastAppVersion floatValue] < [currentAppVersion floatValue])
     {
-        [userDefaults setValue:currentAppVersion forKey:@"LastAppVersion"];
-        [userDefaults synchronize];
+//        [userDefaults setValue:currentAppVersion forKey:@"LastAppVersion"];
+//        [userDefaults synchronize];
+        //到新手引导之后在更换.
         
         firstLaunching = true;
     }

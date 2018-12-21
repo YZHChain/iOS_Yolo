@@ -32,6 +32,7 @@
 #import "YZHSearchView.h"
 #import "AFNetworkReachabilityManager.h"
 #import "YZHNetworkStatusView.h"
+#import "YZHGuideViewManage.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -84,6 +85,10 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     [self setupListeningNetworkStatus];
     
     [[NIMSDK sharedSDK].teamManager addDelegate:self];
+    
+    YZHGuideViewManage* manage = [[YZHGuideViewManage alloc] init];
+    [manage startGuideView];
+    
 }
 
 - (void)didReceiveMemoryWarning {

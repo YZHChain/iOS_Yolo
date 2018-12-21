@@ -114,12 +114,12 @@
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
+        NSLog(@"----URL %@--", url);
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:60 * 60 * 3];
         [self.webView loadRequest:theRequest ];
         
-//        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;
         
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;

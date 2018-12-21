@@ -136,6 +136,7 @@
             urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
         }
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
+        NSLog(@"-----加载 URL::::URL:%@------", url);
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:60 * 60 * 3];
@@ -334,9 +335,12 @@
     if([[self wkWebView].URL.absoluteString isEqualToString: request.URL.absoluteString]){
         return false;
     }
-    if (![request.URL.absoluteString containsString:@"https://yolo"]) {
+    if (![request.URL.absoluteString containsString:@"https://yolo"] ) {
         return false;
     }
+//    if ([request.URL.absoluteString containsString:@"https://api"]) {
+//        return false;
+//    }
     
     if ([request.URL.query containsString:@"goback=1"] && ![self.webView.URL.absoluteString isEqualToString:request.URL.absoluteString]) {
         
@@ -350,7 +354,7 @@
     YZHDiscountVC* vc = [[YZHDiscountVC alloc] init];
     vc.url = [[NSString alloc] initWithFormat:@"%@",request.URL.absoluteString];
     [self.navigationController pushViewController:vc animated:true];
-    NSLog(@"URL:-----%@-----",request.URL.absoluteString);
+    NSLog(@"页面跳转:URL:-----%@-----",request.URL.absoluteString);
     
     return true;
 }
