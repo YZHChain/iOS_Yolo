@@ -75,6 +75,9 @@
     }
     _badgeTopPadding      = 2.f;
 
+    if (badgeValue.integerValue >= 999) {
+        badgeValue = @"999";
+    }
     self.frame = [self frameWithStr:badgeValue];
     
     

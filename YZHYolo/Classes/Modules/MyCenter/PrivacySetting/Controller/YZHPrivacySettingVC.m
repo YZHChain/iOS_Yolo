@@ -158,9 +158,31 @@
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
-        model.isSelected = !model.isSelected;
-        [self.tableView reloadData];
+        if (indexPath.row == 0) {
+            if (!uiSwitch.isOn) {
+                [YZHAlertManage showAlertTitle:@"确定不允许其他人添加您为好友么？" message:@"(您可正常添加其他人)" actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+                        model.isSelected = NO;
+                        [self.tableView reloadData];
+                    } else {
+                        uiSwitch.on = YES;
+                        YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+                        model.isSelected = YES;
+                        model.subTitle = @"允许";
+                        [self.tableView reloadData];
+                    }
+                }];
+            } else {
+                YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+                model.isSelected = !model.isSelected;
+                [self.tableView reloadData];
+            }
+        } else {
+            YZHPrivacySettingModel* model = self.viewModel.content[indexPath.row];
+            model.isSelected = !model.isSelected;
+            [self.tableView reloadData];
+        }
     }
     if (!self.lastDate) {
         self.lastDate = [NSDate date];
