@@ -145,7 +145,10 @@
                                         <constraint firstAttribute="height" constant="16" id="8Qu-AX-Cbr"/>
                                         <constraint firstAttribute="width" constant="16" id="PSQ-CC-3Cu"/>
                                     </constraints>
-                                    <state key="normal" image="session_inputView_ extend_default"/>
+                                    <state key="normal" image="textfield_common_clearButton"/>
+                                    <connections>
+                                        <action selector="onTouchSynopsisClear:" destination="iN0-l3-epB" eventType="touchUpInside" id="Tib-6q-X0Q"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -336,8 +339,8 @@
     </objects>
     <resources>
         <image name="my_cover_cell_back" width="9" height="16"/>
-        <image name="session_inputView_ extend_default" width="35" height="35"/>
         <image name="team_cell_photoImage_default" width="40" height="40"/>
         <image name="team_createTeam_updataPhoto_normal" width="35" height="35"/>
+        <image name="textfield_common_clearButton" width="15" height="15"/>
     </resources>
 </document>

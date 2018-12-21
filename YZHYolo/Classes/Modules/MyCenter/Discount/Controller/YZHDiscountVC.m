@@ -122,7 +122,7 @@
             //  配置测试服,会检测是否开启、
             urlServerString = [YZHServicesConfig debugTestServerConfig];
 #else
-            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
             if (YZHIsString(userPic)) {
                self.url = [NSString stringWithFormat:@"%@/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios",urlServerString , yolo_no, userNick, userPic];

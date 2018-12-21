@@ -141,7 +141,7 @@ static YZHNetworkConfig* _instance;
 //  配置测试服,会检测是否开启、
     urlServerString = [YZHServicesConfig debugTestServerConfig];
 #else
-    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
     
     return urlServerString;

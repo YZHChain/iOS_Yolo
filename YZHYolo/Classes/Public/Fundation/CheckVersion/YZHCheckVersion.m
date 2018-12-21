@@ -33,7 +33,7 @@ NSString* const kYZHAppID = @"1446610007";
     return self;
 }
 
-- (void)checkoutCurrentVersionUpdataCompletion:(YZHVoidBlock)completion {
+- (void) checkoutCurrentVersionUpdataCompletion:(YZHVoidBlock)completion {
     
     NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     NSLog(@"当前版本%@", currentVersion);

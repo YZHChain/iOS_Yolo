@@ -101,7 +101,7 @@
         //  配置测试服,会检测是否开启、
         urlServerString = [YZHServicesConfig debugTestServerConfig];
 #else
-        urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+        urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
         if (self.url == nil) {
             self.url = [NSString stringWithFormat:@"%@/yolo-web/html/about/registration_agreement.html?platform=ios",urlServerString];

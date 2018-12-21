@@ -76,6 +76,10 @@
     self.teamNameTextFiled.delegate = self;
     
 }
+- (IBAction)onTouchSynopsisClear:(UIButton *)sender {
+    
+    self.teamSynopsisTextView.text = nil;
+}
 
 - (IBAction)updateAvatar:(UIButton *)sender {
     

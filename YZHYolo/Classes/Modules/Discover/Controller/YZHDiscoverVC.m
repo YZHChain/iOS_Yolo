@@ -114,7 +114,7 @@
             //  配置测试服,会检测是否开启、
             urlServerString = [YZHServicesConfig debugTestServerConfig];
 #else
-            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigSeverAddr];
+            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
             self.url = [NSString stringWithFormat:@"%@/yolo-web/index.html?useraccout=%@&platform=ios",urlServerString ,yolo_no];
         }
@@ -124,10 +124,6 @@
         }
         
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
-//        static dispatch_once_t onceToken;
-//        dispatch_once(&onceToken, ^{
-//            [self deleteAllWebCache];
-//        });
         
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
