@@ -142,6 +142,10 @@
     UIBarButtonItem *buttonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = buttonItem;
 }
+
+- (void)onMore:(id)sender {
+    
+}
 /*
 - (void)onMore:(id)sender
 {
@@ -272,6 +276,16 @@
 
 
 @implementation  NTESGalleryViewController(SingleView)
+
+- (void)setProgress:(CGFloat)progress {
+    
+}
+
++ (UIView *)alertSingleSnapViewWithMessage:(NIMMessage *)message baseView:(UIView *)view {
+    
+    return nil;
+    
+}
 /*
 + (UIView *)alertSingleSnapViewWithMessage:(NIMMessage *)message baseView:(UIView *)view{
     NIMCustomObject *messageObject = (NIMCustomObject *)message.messageObject;

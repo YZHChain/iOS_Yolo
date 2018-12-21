@@ -47,7 +47,8 @@
     NSArray<CIFeature *> *features = [detector featuresInImage:ciImage];
     // 识别后的结果集,默认读取第一个
     if ([features.firstObject isKindOfClass:[CIQRCodeFeature class]]) {
-        successfulBlock ? successfulBlock(features.firstObject) : NULL;
+        NSArray<CIQRCodeFeature* > *qrFeatures = (NSArray <CIQRCodeFeature *> *)features;
+        successfulBlock ? successfulBlock(qrFeatures.firstObject) : NULL;
     } else {
         [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
     }

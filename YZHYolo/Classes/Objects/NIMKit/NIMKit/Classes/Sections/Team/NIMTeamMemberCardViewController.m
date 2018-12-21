@@ -180,8 +180,8 @@
             wself.member.type = NIMTeamMemberTypeNormal;
             [wself.view makeToast:@"修改成功"];
             [wself refreshData];
-            if([_delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
-                [_delegate onTeamMemberInfoChaneged:wself.member];
+            if([self.delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
+                [self.delegate onTeamMemberInfoChaneged:wself.member];
             }
         }else{
             [wself.view makeToast:@"修改失败"];
@@ -197,8 +197,8 @@
             wself.member.type = NIMTeamMemberTypeManager;
             [wself.view makeToast:@"修改成功"];
             [wself refreshData];
-            if([_delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
-                [_delegate onTeamMemberInfoChaneged:wself.member];
+            if([self.delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
+                [self.delegate onTeamMemberInfoChaneged:wself.member];
             }
         }else{
             [wself.view makeToast:@"修改失败"];
@@ -215,8 +215,8 @@
                 if(!error) {
                     [self.view makeToast:@"踢人成功"];
                     [self.navigationController popViewControllerAnimated:YES];
-                    if([_delegate respondsToSelector:@selector(onTeamMemberKicked:)]) {
-                        [_delegate onTeamMemberKicked:self.member];
+                    if([self.delegate respondsToSelector:@selector(onTeamMemberKicked:)]) {
+                        [self.delegate onTeamMemberKicked:self.member];
                     }
                 } else {
                     [self.view makeToast:@"踢人失败"];
@@ -230,12 +230,14 @@
                 break;
             case 1:{
                 NSString *name = [alertView textFieldAtIndex:0].text;
+                @weakify(self)
                 [[NIMSDK sharedSDK].teamManager updateUserNick:self.member.memberId newNick:name inTeam:self.member.team.teamId completion:^(NSError *error) {
+                    @strongify(self)
                     if (!error) {
                         [self.view makeToast:@"修改成功"];
                         [self refreshData];
-                        if([_delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
-                            [_delegate onTeamMemberInfoChaneged:self.member];
+                        if([self.delegate respondsToSelector:@selector(onTeamMemberInfoChaneged:)]) {
+                            [self.delegate onTeamMemberInfoChaneged:self.member];
                         }
                     }else{
                         [self.view makeToast:@"修改失败"];

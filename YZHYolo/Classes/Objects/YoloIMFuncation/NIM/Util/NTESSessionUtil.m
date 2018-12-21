@@ -416,52 +416,57 @@ static NSString *const NTESRecentSessionTopMark = @"NTESRecentSessionTopMark";
     });
     return [keys objectForKey:@(type)];
 }
+/*
++ (NSString *)onlineState:(NSString *)userId detail:(BOOL)detail
+{
+    NSString *state = @"";
+    if (![NTESSubscribeManager sharedManager] || [[NIMSDK sharedSDK].loginManager.currentAccount isEqualToString:userId])
+    {
+        //没有开启订阅服务或是自己  不显示在线状态
+        return state;
+    }
+    if ([[NIMSDK sharedSDK].robotManager isValidRobot:userId]) {
+        return @"在线";
+    }
 
-//+ (NSString *)onlineState:(NSString *)userId detail:(BOOL)detail
-//{
-//    NSString *state = @"";
-//    if (![NTESSubscribeManager sharedManager] || [[NIMSDK sharedSDK].loginManager.currentAccount isEqualToString:userId])
-//    {
-//        //没有开启订阅服务或是自己  不显示在线状态
-//        return state;
-//    }
-//    if ([[NIMSDK sharedSDK].robotManager isValidRobot:userId]) {
-//        return @"在线";
-//    }
-//
-//    NSDictionary *dict = [[NTESSubscribeManager sharedManager] eventsForType:NIMSubscribeSystemEventTypeOnline];
-//    NIMSubscribeEvent *event = [dict objectForKey:userId];
-//    NIMSubscribeOnlineInfo *info = event.subscribeInfo;
-//    if ([info isKindOfClass:[NIMSubscribeOnlineInfo class]] && info.senderClientTypes.count)
-//    {
-//        NIMLoginClientType client = [self resolveShowClientType:info.senderClientTypes];
-//
-//        switch (event.value) {
-//            case NTESCustomStateValueOnlineExt:
-//            case NIMSubscribeEventOnlineValueLogin:
-//            case NIMSubscribeEventOnlineValueLogout:
-//            case NIMSubscribeEventOnlineValueDisconnected:
-//            {
-//                NSString *ext = [event ext:client];
-//                state = [self resolveOnlineState:ext client:client detail:detail];
-//            }
-//                break;
-//
-//            default:
-//            {
-//                NSString *clientName = [self resolveOnlineClientName:client];
-//                state = [NSString stringWithFormat:@"%@在线",clientName];
-//                break;
-//            }
-//        }
-//    }
-//    else
-//    {
-//        state = @"离线";
-//    }
-//    return state;
-//}
+    NSDictionary *dict = [[NTESSubscribeManager sharedManager] eventsForType:NIMSubscribeSystemEventTypeOnline];
+    NIMSubscribeEvent *event = [dict objectForKey:userId];
+    NIMSubscribeOnlineInfo *info = event.subscribeInfo;
+    if ([info isKindOfClass:[NIMSubscribeOnlineInfo class]] && info.senderClientTypes.count)
+    {
+        NIMLoginClientType client = [self resolveShowClientType:info.senderClientTypes];
 
+        switch (event.value) {
+            case NTESCustomStateValueOnlineExt:
+            case NIMSubscribeEventOnlineValueLogin:
+            case NIMSubscribeEventOnlineValueLogout:
+            case NIMSubscribeEventOnlineValueDisconnected:
+            {
+                NSString *ext = [event ext:client];
+                state = [self resolveOnlineState:ext client:client detail:detail];
+            }
+                break;
+
+            default:
+            {
+                NSString *clientName = [self resolveOnlineClientName:client];
+                state = [NSString stringWithFormat:@"%@在线",clientName];
+                break;
+            }
+        }
+    }
+    else
+    {
+        state = @"离线";
+    }
+    return state;
+}
+ */
+
++ (NSString *)onlineState:(NSString *)userId detail:(BOOL)detail {
+    
+    return nil;
+}
 
 + (NIMLoginClientType)resolveShowClientType:(NSArray *)senderClientTypes
 {

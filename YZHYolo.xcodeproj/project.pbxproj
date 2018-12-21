@@ -315,7 +315,6 @@
 		556D7E7C21A52B5300533384 /* YZHTeamNoticeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 556D7E7B21A52B5300533384 /* YZHTeamNoticeModel.m */; };
 		556D7E8021A52D3D00533384 /* YZHTeamNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 556D7E7E21A52D3D00533384 /* YZHTeamNoticeView.m */; };
 		556D7E8121A52D3E00533384 /* YZHTeamNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */; };
-		556D7E8821A54E5100533384 /* UILabel+YZHTextAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = 556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */; };
 		556E017521C2A99200AF649A /* UIView+CYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E017121C2A99200AF649A /* UIView+CYExtension.m */; };
 		556E017621C2A99200AF649A /* CYPhotoPreviewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 556E017421C2A99200AF649A /* CYPhotoPreviewer.m */; };
 		556F6CD921466A4B0048171C /* YZHBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F6CD821466A4B0048171C /* YZHBaseViewController.m */; };
@@ -1163,8 +1162,6 @@
 		556D7E7D21A52D3D00533384 /* YZHTeamNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamNoticeView.h; sourceTree = "<group>"; };
 		556D7E7E21A52D3D00533384 /* YZHTeamNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamNoticeView.m; sourceTree = "<group>"; };
 		556D7E7F21A52D3D00533384 /* YZHTeamNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamNoticeView.xib; sourceTree = "<group>"; };
-		556D7E8621A54E5100533384 /* UILabel+YZHTextAlign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+YZHTextAlign.h"; sourceTree = "<group>"; };
-		556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YZHTextAlign.m"; sourceTree = "<group>"; };
 		556E017121C2A99200AF649A /* UIView+CYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CYExtension.m"; sourceTree = "<group>"; };
 		556E017221C2A99200AF649A /* CYPhotoPreviewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYPhotoPreviewer.h; sourceTree = "<group>"; };
 		556E017321C2A99200AF649A /* UIView+CYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CYExtension.h"; sourceTree = "<group>"; };
@@ -3399,8 +3396,6 @@
 		556D7E8221A54E1700533384 /* UILabel */ = {
 			isa = PBXGroup;
 			children = (
-				556D7E8621A54E5100533384 /* UILabel+YZHTextAlign.h */,
-				556D7E8721A54E5100533384 /* UILabel+YZHTextAlign.m */,
 			);
 			path = UILabel;
 			sourceTree = "<group>";
@@ -5201,7 +5196,6 @@
 				55B5DB8B215229BD002A04A9 /* YZHMyInformationVC.m in Sources */,
 				55AB6CE8219FFA8A005385A0 /* CYLIndexPathButton.m in Sources */,
 				5536420E217EAEC3006F77A5 /* NIMMessageCellFactory.m in Sources */,
-				556D7E8821A54E5100533384 /* UILabel+YZHTextAlign.m in Sources */,
 				55DC36BE216899C000871C2B /* UIControl+YZHClickHandle.m in Sources */,
 				55C239F9214B54B500200798 /* KeychainItemWrapper.m in Sources */,
 				5520584621997D1E00591A4A /* YZHAddFirendSearchModel.m in Sources */,

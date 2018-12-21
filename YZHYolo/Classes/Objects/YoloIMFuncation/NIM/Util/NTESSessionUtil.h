@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, NTESRecentSessionMarkType){
 
 + (NSDictionary *)dictByJsonString:(NSString *)jsonString;
 
-+ (BOOL)canMessageBeForwarded:(NIMMessage *)message;
+//+ (BOOL)canMessageBeForwarded:(NIMMessage *)message;
 
 + (BOOL)canMessageBeRevoked:(NIMMessage *)message;
 

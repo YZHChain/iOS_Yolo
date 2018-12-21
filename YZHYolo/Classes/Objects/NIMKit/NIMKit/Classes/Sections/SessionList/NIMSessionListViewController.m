@@ -76,6 +76,10 @@
     [self.tableView reloadData];
 }
 
+- (void)customSortRecents:(NSMutableArray *)recentSessions {
+    
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -264,8 +268,6 @@
     NIMRecentSession *recent = self.recentSessions[indexPath.row];
     [self onSelectedAvatar:recent atIndexPath:indexPath];
 }
-
-
 
 #pragma mark - Private
 - (NSString *)messageContent:(NIMMessage*)lastMessage{

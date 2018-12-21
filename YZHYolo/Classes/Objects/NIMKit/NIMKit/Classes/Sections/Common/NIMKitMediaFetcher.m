@@ -92,7 +92,7 @@
                 vc.naviTitleColor = [UIColor whiteColor];
                 vc.barItemTextColor = [UIColor whiteColor];
                 vc.navigationBar.barStyle = UIBarStyleDefault;
-                vc.allowPickingVideo = [_mediaTypes containsObject:(NSString *)kUTTypeMovie];
+                vc.allowPickingVideo = [self.mediaTypes containsObject:(NSString *)kUTTypeMovie];
                 if(handler) handler(vc);
             }
         });

@@ -19,17 +19,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NIMMessage *)msgWithText:(NSString *)text;
 
-+ (NIMMessage *)msgWithImage:(UIImage *)image;
+//+ (NIMMessage *)msgWithImage:(UIImage *)image;
 
-+ (NIMMessage *)msgWithImagePath:(NSString *)path;
+//+ (NIMMessage *)msgWithImagePath:(NSString *)path;
 
 + (NIMMessage *)msgWithAudio:(NSString *)filePath;
 
 + (NIMMessage *)msgWithVideo:(NSString *)filePath;
 
-+ (NIMMessage *)msgWithFilePath:(NSString *)path;
+//+ (NIMMessage *)msgWithFilePath:(NSString *)path;
 
-+ (NIMMessage *)msgWithFileData:(NSData *)data extension:(NSString *)extension;
+//+ (NIMMessage *)msgWithFileData:(NSData *)data extension:(NSString *)extension;
 
 + (NIMMessage *)msgWithTip:(NSString *)tip;
 

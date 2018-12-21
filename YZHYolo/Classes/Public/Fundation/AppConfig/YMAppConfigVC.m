@@ -10,6 +10,7 @@
 
 #import "YMAppConfigCell.h"
 #import "YZHServicesConfig.h"
+#import "UIViewController+KeyboardAnimation.h"
 
 @interface YMAppConfigVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) NSMutableDictionary *configInfo;
 @property (nonatomic, strong) NSArray *configKeys;
 @property (nonatomic, assign) UIWindowLevel originalWindowLevel;
+@property (nonatomic, assign) BOOL play;
 
 @end
 
@@ -47,6 +49,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+//    [self keyboardNotification];
     //改变windowLevel，防止被UIAlertView等window遮挡
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     self.originalWindowLevel = window.windowLevel;
@@ -64,6 +67,9 @@
     //还原windowLevel
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     window.windowLevel = self.originalWindowLevel;
+    
+    // 移除通知.
+    [self an_unsubscribeKeyboard];
 }
 
 /*
@@ -89,7 +95,7 @@
 
 - (void)setupView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height * 2) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     //self.tableView.allowsSelection = NO;
@@ -287,6 +293,22 @@
     return self.navigationController.viewControllers.count <= 1;
 }
 
+- (void)keyboardNotification {
+    
+    @weakify(self)
+    [self an_subscribeKeyboardWithAnimations:^(CGRect keyboardRect, NSTimeInterval duration, BOOL isShowing) {
+        @strongify(self)
+        if (isShowing) {
+            // TODO: 小屏时最好修改一下.
+            self.tableView.y = -(keyboardRect.size.height);
+        } else {
+            self.tableView.y = 0;
+        }
+        [self.tableView layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
+}
+
 #pragma mark - 6.GET & SET
 
 - (void)setConfigInfo:(NSMutableDictionary *)configInfo {
@@ -294,6 +316,7 @@
     //key排序
     NSArray *array = [configInfo.allKeys copy];
     self.configKeys = [array sortedArrayUsingSelector:@selector(compare:)];
+    self.configKeys = @[@"serverAddr",@"serverAddrTest",@"serverTest",@"NIMKey",@"NIMKeyTest",@"NIMServerTest",@"logToFile",@"apiDebug",@"apiLog"];
 }
 
 @end

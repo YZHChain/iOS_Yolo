@@ -20,6 +20,8 @@
 }
 
 - (void)awakeFromNib {
+    
+    [super awakeFromNib];
     //仅修改_titleLabel的宽度,xyh值不变
     float width = [UIScreen mainScreen].bounds.size.width - 50 - 50;
     _titleLabel.frame = CGRectMake(_titleLabel.frame.origin.x, _titleLabel.frame.origin.y, width, _titleLabel.frame.size.height);

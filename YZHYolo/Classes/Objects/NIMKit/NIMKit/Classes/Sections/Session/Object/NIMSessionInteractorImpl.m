@@ -508,6 +508,10 @@ dispatch_queue_t NTESMessageDataPrepareQueue()
     }];
 }
 
+- (void)onRefreshNumber:(NSInteger)number {
+    
+}
+
 //新增 Jersey
 - (void)resetLayoutNumber:(NSInteger)number {
     

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamMemberManageModel* manageModel;
 @property (nonatomic, strong) YZHTeamMemberModel* viewModel;
 
-- (instancetype)initWithmemberModel:(YZHTeamMemberModel* )memberModel;
+//- (instancetype)initWithmemberModel:(YZHTeamMemberModel* )memberModel;
 
 @end
 

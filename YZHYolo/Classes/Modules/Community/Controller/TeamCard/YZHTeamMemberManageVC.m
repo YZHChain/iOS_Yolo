@@ -11,6 +11,7 @@
 #import "YZHTeamMemberManageCell.h"
 #import "YZHAlertManage.h"
 #import "YZHProgressHUD.h"
+
 @interface YZHTeamMemberManageVC()<UITableViewDelegate, UITableViewDataSource, YZHTeamMemberManageProtocol, NIMTeamManagerDelegate>
 
 @property (nonatomic, strong) UITableView* tableView;

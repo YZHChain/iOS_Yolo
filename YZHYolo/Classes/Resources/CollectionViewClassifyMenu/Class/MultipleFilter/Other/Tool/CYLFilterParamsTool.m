@@ -62,7 +62,7 @@ NSString *const kMultipleFilterSettingModified = @"kMultipleFilterSettingModifie
         NSMutableArray *boolDataSource = [NSMutableArray arrayWithArray:self.dataSources];
         [boolDataSource enumerateObjectsUsingBlock:^(NSMutableArray *obj, NSUInteger idx, BOOL *stop) {
             NSMutableArray *array = [self filterParamsArrayCount:[obj count] defaultSelected:YES defaultSelectedIndex:0];
-            [_filterParamsArray addObject:array];
+            [self.filterParamsArray addObject:array];
         }];
     }
     return _filterParamsArray;

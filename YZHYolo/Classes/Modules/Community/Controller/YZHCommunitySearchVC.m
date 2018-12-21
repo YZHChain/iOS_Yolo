@@ -402,15 +402,15 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
 
 - (void)selectedTagLabel:(UIButton *)tagLabel {
     
-//    NSMutableString* mutableKeyText = [[NSMutableString alloc] init];
-//    if (YZHIsString(self.textField.text)) {
-//        [mutableKeyText appendString:self.textField.text];
-//        [mutableKeyText appendString:tagLabel.titleLabel.text];
-//    } else {
-//        mutableKeyText = tagLabel.titleLabel.text.mutableCopy;
-//    }
-//    self.textField.text = mutableKeyText;
-//    [self searchTeamListWithKeyText:mutableKeyText];
+    //    NSMutableString* mutableKeyText = [[NSMutableString alloc] init];
+    //    if (YZHIsString(self.textField.text)) {
+    //        [mutableKeyText appendString:self.textField.text];
+    //        [mutableKeyText appendString:tagLabel.titleLabel.text];
+    //    } else {
+    //        mutableKeyText = tagLabel.titleLabel.text.mutableCopy;
+    //    }
+    //    self.textField.text = mutableKeyText;
+    //    [self searchTeamListWithKeyText:mutableKeyText];
     self.textField.text = tagLabel.titleLabel.text;
     [self.searchBar endEditing:YES];
     [self.searchManage searchTeamTag:self.textField.text];

@@ -210,7 +210,7 @@ static YZHNetworkConfig* _instance;
 /**
  *  初始化HTTP请求管理器，加上请求头等参数
  *
- *  @param AFHTTPSessionManager HTTP请求管理器
+ *  param AFHTTPSessionManager HTTP请求管理器
  *
  *  @return HTTP请求管理器
  */

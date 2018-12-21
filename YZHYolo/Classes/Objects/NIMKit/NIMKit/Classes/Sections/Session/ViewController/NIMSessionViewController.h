@@ -176,7 +176,7 @@
 /**
  *  拉取未读消息数.
  *
- *  @param message 消息
+ *  @param number 消息
  *
  *  @discussion 直接把未读消息数量传入即可.
  */

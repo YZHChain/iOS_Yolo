@@ -52,7 +52,7 @@
 /**
  *  加工字符串，把字符串里数字的颜色和字体替换成给定的颜色和字体
  *
- *  @param str     原始字符串
+ *  param  String   原始字符串
  *  @param pattern 正则规则
  *  @param font    字体
  *  @param color   颜色

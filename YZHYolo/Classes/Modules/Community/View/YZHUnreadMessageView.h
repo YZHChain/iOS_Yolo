@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger unreadNumber;
 
 - (instancetype)initWithUnreadNumber:(NSInteger)number;
-- (instancetype)initWithAtMessageNumber:(NSInteger)number;
+//- (instancetype)initWithAtMessageNumber:(NSInteger)number;
 
 @end
 

@@ -82,10 +82,7 @@
         NSDate *compleDate = [NSDate date];
         dateManage.currentUserData.taskCompleDate = compleDate;
         [dateManage setCurrentUserData:dateManage.currentUserData];
-        
-        YZHUserDataManage* newdateManage = [YZHUserDataManage sharedManager];
-        YZHUserDataModel* newData = newdateManage.currentUserData;
-        
+
         NSLog(@"保存的内容");
     } failureCompletion:^(NSError *error) {
         

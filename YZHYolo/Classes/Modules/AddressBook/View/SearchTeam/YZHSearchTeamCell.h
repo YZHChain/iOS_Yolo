@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol YZHSearchTeamCellProtocol <NSObject>
 
+@optional
 - (void)onTouchJoinTeam:(YZHSearchModel *)model;
 - (void)onTouchJoinRecruitTeam:(YZHSearchRecruitModel *)model;
 
