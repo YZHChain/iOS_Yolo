@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)yzh_setEnlargeEdgeWithTop:(CGFloat) top right:(CGFloat) right bottom:(CGFloat) bottom left:(CGFloat) left;
 
+- (void)yzh_setEnlargeEdge:(CGFloat) size;
 @end
 
 NS_ASSUME_NONNULL_END

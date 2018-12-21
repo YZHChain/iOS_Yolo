@@ -48,8 +48,7 @@
     self.registerButton.enabled = NO;
     
     self.protocolSlectedButton.selected = NO;
-    [self.protocolSlectedButton yzh_setEnlargeEdgeWithTop:50 right:30 bottom:50 left:50];
-    //
+    [self.protocolSlectedButton yzh_setEnlargeEdgeWithTop:15 right:35 bottom:30 left:50];
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
     CAGradientLayer *layer = [CAGradientLayer new];

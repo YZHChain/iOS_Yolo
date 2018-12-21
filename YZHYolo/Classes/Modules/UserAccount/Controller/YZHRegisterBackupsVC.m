@@ -94,6 +94,7 @@
     self.passwordLabel.textColor = [UIColor whiteColor];
     
     self.backupsButton.selected = NO;
+    [self.backupsButton yzh_setEnlargeEdge:40];
     //展示助记词
     self.passwordLabel.text = self.logModel.mnemonicWord;
 }
