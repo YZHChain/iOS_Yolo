@@ -33,6 +33,7 @@
 #import "AFNetworkReachabilityManager.h"
 #import "YZHNetworkStatusView.h"
 #import "YZHGuideViewManage.h"
+#import "YZHCheckVersion.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -72,6 +73,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 #pragma mark - 1.View Controller Life Cycle
 
 - (void)viewDidLoad {
+    
+    [[YZHCheckVersion shareInstance] checkoutTeamCurrentVersion];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -88,7 +91,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     YZHGuideViewManage* manage = [[YZHGuideViewManage alloc] init];
     [manage startGuideView];
-    
 }
 
 - (void)didReceiveMemoryWarning {

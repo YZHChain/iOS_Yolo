@@ -136,7 +136,7 @@
             urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
         }
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
-        NSLog(@"-----加载 URL::::URL:%@------", url);
+        NSLog(@"-----加载 URL:%@------", url);
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:60 * 60 * 3];

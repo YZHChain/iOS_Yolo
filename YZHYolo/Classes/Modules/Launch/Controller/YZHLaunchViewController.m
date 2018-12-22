@@ -49,22 +49,13 @@
 - (void)setupSplashScreen{
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"screent_default" ofType:@"png"];
-    UIImageView* screentImageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:path]];
-    [self.view addSubview:screentImageView];
-    [screentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
 }
 
 #pragma mark -- Start
 
 - (void)startConfign{
     
-    __block UIViewController* rootViewController;
-    
-//    [[YZHCheckVersion shareInstance] checkoutCurrentVersionUpdataCompletion:^{
+     UIViewController* rootViewController;
         if ([self detectionApplicationStatus]) {
             // 引导页
             YZHWelcomeVC* welcomeVC = [[YZHWelcomeVC alloc] init];
@@ -75,7 +66,6 @@
             // 判断用户是否已登录, 设置用户自动登录.
             [self startAutoLogin];
         }
-//    }];
 }
 
 - (BOOL)detectionApplicationStatus {

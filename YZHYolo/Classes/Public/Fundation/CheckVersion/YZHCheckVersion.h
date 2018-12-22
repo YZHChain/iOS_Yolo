@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shareInstance;
 - (void)checkoutCurrentVersionUpdataCompletion:(YZHVoidBlock)completion;
 - (void)checkoutCurrentVersion;
+- (void)checkoutTeamCurrentVersion;
 
 @property (nonatomic, strong) YZHChekoutVersionModel* model;
 
