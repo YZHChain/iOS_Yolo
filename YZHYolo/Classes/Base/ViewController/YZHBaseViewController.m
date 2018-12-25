@@ -44,9 +44,9 @@
         }
     }
 
-    if (self.hideNavigationBarLine) {
+//    if (self.hideNavigationBarLine) {
 //        self.navigationController.navigationBarHidden = YES;
-    }
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -63,9 +63,9 @@
             self.navigationController.navigationBar.hidden = NO;
         }
     }
-    if (self.hideNavigationBarLine) {
+//    if (self.hideNavigationBarLine) {
 //        self.navigationController.navigationBarHidden = NO;
-    }
+//    }
     
     //关闭键盘
     [self.view endEditing:YES];

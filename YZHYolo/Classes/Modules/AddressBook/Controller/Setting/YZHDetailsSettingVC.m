@@ -15,7 +15,7 @@
 #import "YZHProgressHUD.h"
 #import "YZHBlackSettingCell.h"
 
-@interface YZHDetailsSettingVC ()<UITableViewDelegate, UITableViewDataSource>
+@interface YZHDetailsSettingVC ()
 
 
 @property (weak, nonatomic) IBOutlet UIButton *removeButton;
@@ -70,6 +70,10 @@
     }
     
     [self.blackSwitch addTarget:self action:@selector(onTouchBlack:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (![[NIMSDK sharedSDK].userManager isMyFriend:self.userId]) {
+        self.removeButton.hidden = YES;
+    }
 }
 
 #pragma mark - 3.Request Data

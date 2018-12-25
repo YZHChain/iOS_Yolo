@@ -72,6 +72,7 @@
         _showButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _showButton.backgroundColor = [UIColor clearColor];
         [_showButton addTarget:self action:@selector(onTouchCardUpInside:) forControlEvents:UIControlEventTouchUpInside];
+        _showButton.frame = _contentView.frame;
         [self addSubview:_showButton];
         
         [self.bubbleImageView removeFromSuperview];

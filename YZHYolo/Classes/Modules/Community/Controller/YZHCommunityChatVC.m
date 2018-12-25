@@ -56,6 +56,7 @@
 #import "YZHTeamNoticeShowView.h"
 #import "YZHTeamNoticeModel.h"
 #import "YZHAlertManage.h"
+#import "YZHChatContentUtil.h"
 
 @interface YZHCommunityChatVC ()<NIMInputActionDelegate, NIMTeamManagerDelegate, NIMInputDelegate>
 
@@ -302,7 +303,7 @@
 
 - (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers
 {
-    NIMMessage* message = [NIMMessageMaker msgWithText:text];
+    __block NIMMessage* message = [NIMMessageMaker msgWithText:text];
     
     if (atUsers.count)
     {
@@ -319,8 +320,23 @@
         NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
         apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
         message.apnsMemberOption = apnsOption;
+    } else {
+        [YZHChatContentUtil checkoutContentContentTeamId:text completion:^(NIMTeam * _Nonnull team) {
+            if (team) {
+                YZHTeamCardAttachment* teamCardAttachment = [[YZHTeamCardAttachment alloc] init];
+                teamCardAttachment.groupName = team.teamName;
+                teamCardAttachment.groupID = team.teamId;
+                teamCardAttachment.groupSynopsis = team.intro;
+                teamCardAttachment.groupUrl = [YZHChatContentUtil createTeamURLWithTeamId:team.teamId];
+                teamCardAttachment.avatarUrl = team.avatarUrl ? team.avatarUrl : @"team_cell_photoImage_default";
+                message = [YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment];
+                [self sendMessage:message];
+            } else {
+                [self sendMessage:message];
+            }
+        }];
     }
-    [self sendMessage:message];
+    
 }
 
 - (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers needResponed:(BOOL)needResponed {

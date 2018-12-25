@@ -11,6 +11,7 @@
 @interface YZHTeamCardImageCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *functionImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 
@@ -38,6 +39,7 @@
     
     self.titleLabel.text = model.title;
     self.functionImageView.image = [UIImage imageNamed:model.imageName];
+    self.subTitleLabel.text = model.subtitle;
     
 }
 

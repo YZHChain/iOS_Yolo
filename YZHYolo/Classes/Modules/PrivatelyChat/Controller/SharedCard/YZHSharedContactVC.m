@@ -17,6 +17,7 @@
 #import "YZHUserModelManage.h"
 #import "YZHTeamModel.h"
 #import "YZHProgressHUD.h"
+#import "YZHChatContentUtil.h"
 
 static NSString* kYZHSharedCellIdentifier = @"YZHSharedContactCell";
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
@@ -304,7 +305,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             teamCardAttachment.groupName = teamCard.teamName;
             teamCardAttachment.groupID = teamCard.teamId;
             teamCardAttachment.groupSynopsis = teamCard.intro;
-            teamCardAttachment.groupUrl = teamCard.intro;
+            teamCardAttachment.groupUrl = [YZHChatContentUtil createTeamURLWithTeamId:teamCard.teamId];
             teamCardAttachment.avatarUrl = teamCard.avatarUrl ? teamCard.avatarUrl : @"team_cell_photoImage_default";
             self.sharedTeamCardBlock ? self.sharedTeamCardBlock(teamCardAttachment) : NULL;
 

@@ -62,6 +62,8 @@ extern NSString * const kYZHResponeMessageKey;
 
 extern NSString * const kYZHResponeDataKey;
 
+extern NSString * const kYZHTeamURLHostKey;
+
 #pragma mark - TableView SubView Identifier Size
 
 /**

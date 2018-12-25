@@ -22,6 +22,7 @@
                 <outlet property="photoView" destination="cib-Ce-xTk" id="UQW-BV-L3k"/>
                 <outlet property="saveSharedView" destination="h6a-00-Ea1" id="yz7-oM-FSn"/>
                 <outlet property="subTitleLabel" destination="n7K-Ql-Sht" id="482-Ny-0SJ"/>
+                <outlet property="teamUrlLabel" destination="ep1-f2-2kh" id="xSY-ao-7xF"/>
                 <outlet property="view" destination="BSA-lw-Aar" id="vog-nF-Eq9"/>
             </connections>
         </placeholder>
@@ -31,17 +32,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cib-Ce-xTk">
-                    <rect key="frame" x="30" y="91" width="315" height="376"/>
+                    <rect key="frame" x="30" y="87" width="315" height="320"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_headPhoto_default" translatesAutoresizingMaskIntoConstraints="NO" id="A94-aC-Cey">
-                            <rect key="frame" x="129" y="17" width="57" height="57"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_cell_photoImage_default" translatesAutoresizingMaskIntoConstraints="NO" id="A94-aC-Cey">
+                            <rect key="frame" x="132" y="17" width="51" height="51"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="57" id="176-j2-Lyb"/>
-                                <constraint firstAttribute="width" constant="57" id="ewy-jS-oI6"/>
+                                <constraint firstAttribute="height" constant="51" id="176-j2-Lyb"/>
+                                <constraint firstAttribute="width" constant="51" id="ewy-jS-oI6"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="贺任贾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-bN-2GZ">
-                            <rect key="frame" x="138" y="84" width="39.5" height="16"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群聊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTg-bN-2GZ">
+                            <rect key="frame" x="144.5" y="78" width="26.5" height="16"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="16" id="Le6-Rj-bhW"/>
                             </constraints>
@@ -50,37 +51,37 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_information_myQRCode_imageView" translatesAutoresizingMaskIntoConstraints="NO" id="AbM-za-KgB">
-                            <rect key="frame" x="49" y="120" width="217" height="216"/>
+                            <rect key="frame" x="75" y="110" width="165" height="165"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="217" id="d4Z-9e-NUM"/>
-                                <constraint firstAttribute="height" constant="216" id="ntk-xl-iVc"/>
+                                <constraint firstAttribute="width" constant="165" id="d4Z-9e-NUM"/>
+                                <constraint firstAttribute="height" constant="165" id="ntk-xl-iVc"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码，添加我为好友吧" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7K-Ql-Sht">
-                            <rect key="frame" x="99" y="347" width="117" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码，加入群聊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7K-Ql-Sht">
+                            <rect key="frame" x="92.5" y="286" width="130.5" height="14"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="10" id="ABI-IN-vVi"/>
+                                <constraint firstAttribute="height" constant="14" id="ABI-IN-vVi"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="9"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="13"/>
                             <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="AbM-za-KgB" firstAttribute="top" secondItem="YTg-bN-2GZ" secondAttribute="bottom" constant="20" id="5rA-h4-y6T"/>
+                        <constraint firstItem="AbM-za-KgB" firstAttribute="top" secondItem="YTg-bN-2GZ" secondAttribute="bottom" constant="16" id="5rA-h4-y6T"/>
                         <constraint firstItem="YTg-bN-2GZ" firstAttribute="centerX" secondItem="cib-Ce-xTk" secondAttribute="centerX" id="DyO-Yu-t9x"/>
                         <constraint firstItem="n7K-Ql-Sht" firstAttribute="top" secondItem="AbM-za-KgB" secondAttribute="bottom" constant="11" id="Jej-Cx-EFK"/>
                         <constraint firstItem="A94-aC-Cey" firstAttribute="top" secondItem="cib-Ce-xTk" secondAttribute="top" constant="17" id="TM7-bo-RD1"/>
                         <constraint firstItem="YTg-bN-2GZ" firstAttribute="top" secondItem="A94-aC-Cey" secondAttribute="bottom" constant="10" id="dLe-CD-tJV"/>
                         <constraint firstItem="A94-aC-Cey" firstAttribute="centerX" secondItem="cib-Ce-xTk" secondAttribute="centerX" id="iyI-4v-aZ9"/>
-                        <constraint firstAttribute="bottom" secondItem="n7K-Ql-Sht" secondAttribute="bottom" constant="19" id="o6r-PR-1o5"/>
+                        <constraint firstAttribute="bottom" secondItem="n7K-Ql-Sht" secondAttribute="bottom" constant="20" id="o6r-PR-1o5"/>
                         <constraint firstItem="n7K-Ql-Sht" firstAttribute="centerX" secondItem="cib-Ce-xTk" secondAttribute="centerX" id="sPB-B9-DnC"/>
                         <constraint firstItem="AbM-za-KgB" firstAttribute="centerX" secondItem="cib-Ce-xTk" secondAttribute="centerX" id="soe-0u-Dic"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="8"/>
+                            <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                     </userDefinedRuntimeAttributes>
@@ -93,11 +94,12 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ap2-RI-NJZ">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
-                                    <state key="normal" title="保存二维码照片">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                                    <state key="normal" title="复制链接">
+                                        <color key="titleColor" red="0.22352941176470587" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="saveQRCodeImageView:" destination="-1" eventType="touchUpInside" id="USf-4X-0Ra"/>
+                                        <action selector="copyTeamUrl:" destination="-1" eventType="touchUpInside" id="4HJ-rD-5M8"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -121,11 +123,12 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klK-rN-axh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="54.5"/>
-                                    <state key="normal" title="分享群地址">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="15"/>
+                                    <state key="normal" title="保存图片">
+                                        <color key="titleColor" red="0.22352941176470587" green="0.23137254901960785" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="sharedTeam:" destination="-1" eventType="touchUpInside" id="nSf-ZW-3D3"/>
+                                        <action selector="saveQRCodeImageView:" destination="-1" eventType="touchUpInside" id="coq-0c-WKx"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -155,22 +158,43 @@
                         <constraint firstAttribute="trailing" secondItem="TLy-0O-Ojf" secondAttribute="trailing" constant="13" id="rGo-3q-phv"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mv-X8-meM">
+                    <rect key="frame" x="168" y="424" width="39.5" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="hlE-rg-sfV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.yolo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ep1-f2-2kh">
+                    <rect key="frame" x="58" y="449" width="259" height="17"/>
+                    <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="12"/>
+                    <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.074509803920000006" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="5mv-X8-meM" firstAttribute="centerX" secondItem="BSA-lw-Aar" secondAttribute="centerX" id="DmB-pY-mdy"/>
+                <constraint firstAttribute="trailing" secondItem="ep1-f2-2kh" secondAttribute="trailing" constant="58" id="ELc-e6-JLA"/>
                 <constraint firstItem="cib-Ce-xTk" firstAttribute="leading" secondItem="BSA-lw-Aar" secondAttribute="leading" constant="30" id="HLk-pR-saT"/>
+                <constraint firstItem="ep1-f2-2kh" firstAttribute="centerX" secondItem="BSA-lw-Aar" secondAttribute="centerX" id="OC6-nq-CyK"/>
+                <constraint firstItem="5mv-X8-meM" firstAttribute="top" secondItem="cib-Ce-xTk" secondAttribute="bottom" constant="17" id="Re0-U3-qdy"/>
+                <constraint firstItem="ep1-f2-2kh" firstAttribute="leading" secondItem="BSA-lw-Aar" secondAttribute="leading" constant="58" id="S6H-Ya-Mao"/>
                 <constraint firstAttribute="bottom" secondItem="h6a-00-Ea1" secondAttribute="bottom" id="WtF-NI-GDI"/>
                 <constraint firstItem="h6a-00-Ea1" firstAttribute="leading" secondItem="BSA-lw-Aar" secondAttribute="leading" id="ci4-Ob-NU3"/>
-                <constraint firstAttribute="bottom" secondItem="cib-Ce-xTk" secondAttribute="bottom" constant="200" id="g3S-EE-mpb"/>
+                <constraint firstAttribute="bottom" secondItem="cib-Ce-xTk" secondAttribute="bottom" constant="260" id="g3S-EE-mpb"/>
                 <constraint firstAttribute="trailing" secondItem="cib-Ce-xTk" secondAttribute="trailing" constant="30" id="gRm-vc-dz0"/>
                 <constraint firstItem="cib-Ce-xTk" firstAttribute="top" relation="lessThanOrEqual" secondItem="BSA-lw-Aar" secondAttribute="top" constant="100" id="gta-mP-vLR"/>
+                <constraint firstItem="ep1-f2-2kh" firstAttribute="top" secondItem="5mv-X8-meM" secondAttribute="bottom" constant="11" id="kuy-Zd-sdZ"/>
                 <constraint firstAttribute="trailing" secondItem="h6a-00-Ea1" secondAttribute="trailing" id="sPz-xf-vBh"/>
             </constraints>
             <point key="canvasLocation" x="111.2" y="4.9475262368815596"/>
         </view>
     </objects>
     <resources>
-        <image name="my_cover_headPhoto_default" width="63" height="63"/>
         <image name="my_information_myQRCode_imageView" width="216" height="215"/>
+        <image name="team_cell_photoImage_default" width="40" height="40"/>
     </resources>
 </document>

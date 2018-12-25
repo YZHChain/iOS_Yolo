@@ -158,7 +158,9 @@
     _teamNameLabel.width = 165;
     
     _teamUrlLabel.x = _teamNameLabel.x;
-    _teamUrlLabel.y = 47;
+    _teamUrlLabel.y = 35;
+    _teamUrlLabel.width = contentSize.width - 75;
+    _teamUrlLabel.numberOfLines = 2;
     
     _teamSynopsisLabel.x = 12;
     _teamSynopsisLabel.y = 65;

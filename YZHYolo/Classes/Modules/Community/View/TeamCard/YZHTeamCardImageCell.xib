@@ -8,6 +8,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Light.ttf">
+            <string>SourceHanSansCN-Light</string>
+        </array>
+        <array key="SourceHanSansCN-Normal.ttf">
+            <string>SourceHanSansCN-Normal</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,8 +27,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群分享" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLX-Xt-6GR">
-                        <rect key="frame" x="12" y="13" width="46" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <rect key="frame" x="12" y="0.5" width="45" height="43"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -38,19 +46,29 @@
                             <constraint firstAttribute="height" constant="23" id="vEr-Yb-yCW"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtS-AN-gwc">
+                        <rect key="frame" x="221" y="3" width="33" height="37.5"/>
+                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="13"/>
+                        <color key="textColor" red="0.75686274509803919" green="0.75686274509803919" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="zQC-SQ-GZ9" secondAttribute="trailing" constant="17" id="5F4-LJ-XxS"/>
+                    <constraint firstItem="gtS-AN-gwc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mLX-Xt-6GR" secondAttribute="trailing" constant="15" id="AZ4-dt-zRb"/>
                     <constraint firstAttribute="trailing" secondItem="jEI-TE-Og6" secondAttribute="trailing" constant="38" id="GEk-86-WaX"/>
+                    <constraint firstItem="jEI-TE-Og6" firstAttribute="leading" secondItem="gtS-AN-gwc" secondAttribute="trailing" constant="5" id="JFM-a1-JI9"/>
                     <constraint firstItem="mLX-Xt-6GR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="aUZ-n3-xDl"/>
                     <constraint firstItem="zQC-SQ-GZ9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bvq-wb-Mho"/>
                     <constraint firstItem="jEI-TE-Og6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hsp-Fd-dbf"/>
+                    <constraint firstItem="gtS-AN-gwc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jFC-If-260"/>
                     <constraint firstItem="mLX-Xt-6GR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="uUs-bR-tUY"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="functionImageView" destination="jEI-TE-Og6" id="Sxo-nF-hDB"/>
                 <outlet property="guideImageView" destination="zQC-SQ-GZ9" id="RtO-yq-dzD"/>
+                <outlet property="subTitleLabel" destination="gtS-AN-gwc" id="zkm-OR-Xyc"/>
                 <outlet property="titleLabel" destination="mLX-Xt-6GR" id="pHO-PD-0LW"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>

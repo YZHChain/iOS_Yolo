@@ -12,6 +12,7 @@
 #import "YZHSelectedTeamTypeVC.h"
 #import "YZHUserLoginManage.h"
 #import "YZHProgressHUD.h"
+#import "YZHPasteSkipManage.h"
 
 @interface YZHRegisterBackupsVC ()
 
@@ -138,9 +139,11 @@
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     [manage IMServerLoginWithAccount:_logModel.acctId token:_logModel.token userLoginModel:_logModel successCompletion:^{
         [hud hideWithText:@"nil"];
+        YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
+        [pasteManage checkoutTeamPasteboard];
     } failureCompletion:^(NSError *error) {
         // TODO云信登录错误
-        [hud hideWithText:error.domain];
+        [hud hideWithText:@"登录失败,请重试"];
     }];
 }
 

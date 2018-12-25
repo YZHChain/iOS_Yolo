@@ -12,6 +12,8 @@
 #import "YZHTeamExtManage.h"
 #import "NTESSessionUtil.h"
 #import "YZHTeamUpdataModel.h"
+#import "YZHServicesConfig.h"
+#import "YZHChatContentUtil.h"
 
 @implementation YZHTeamHeaderModel
 
@@ -56,7 +58,17 @@
     headerModel.teamId = _teamId;
     
     YZHTeamDetailModel* sharedQRCodeModel = [[YZHTeamDetailModel alloc] init];
-    sharedQRCodeModel.title = @"群分享";
+    sharedQRCodeModel.title = @"群地址分享";
+//    NSString* urlServerString;
+//    //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+//#if DEBUG
+//    //  配置测试服,会检测是否开启、
+//    urlServerString = [YZHServicesConfig debugTestServerConfig];
+//#else
+//    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
+//#endif
+    
+    sharedQRCodeModel.subtitle = [YZHChatContentUtil createTeamURLWithTeamId:self.teamId];
     sharedQRCodeModel.imageName = @"my_informationCell_QRCode";
     sharedQRCodeModel.cellClass = @"YZHTeamCardImageCell";
     sharedQRCodeModel.router = kYZHRouterCommunityCardQRCodeShared;
@@ -90,6 +102,7 @@
         publicModel.cellClass = @"YZHTeamCardSwitchCell";
     } else {
         publicModel.title = !team.joinMode ? @"本群已公开" : @"本群未公开";
+        publicModel.isOpenStatus = !team.joinMode;
         publicModel.subtitle = !team.joinMode ? @"可加好友进群" : nil;
         publicModel.cellClass = @"YZHTeamCardTextCell";
     }

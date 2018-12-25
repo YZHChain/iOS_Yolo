@@ -15,6 +15,8 @@
 #import "YZHAlertManage.h"
 #import "YZHTeamCardAttachment.h"
 #import "YZHSessionMsgConverter.h"
+#import "YZHPasteSkipManage.h"
+#import "YZHChatContentUtil.h"
 
 @interface YZHTeamQRCodeSharedVC()
 
@@ -25,7 +27,10 @@
 @property (weak, nonatomic) IBOutlet UIView *photoView;
 @property (nonatomic, copy) NSString* QRCodeResult;
 @property (strong, nonatomic) IBOutlet UIView *saveSharedView;
-@property (nonatomic, strong) YZHSharedFunctionView* sharedFunctionView;
+@property (weak, nonatomic) IBOutlet UILabel *teamUrlLabel;
+@property (nonatomic, copy) NSString* teamUrl;
+
+//@property (nonatomic, strong) YZHSharedFunctionView* sharedFunctionView;
 //@property (nonatomic, copy) void (^sharedPersonageCardHandle)(YZHUserCardAttachment*);
 //@property (nonatomic, copy) void (^sharedTeamCardHandle)(YZHTeamCardAttachment*);
 
@@ -59,20 +64,23 @@
 
 - (void)setupNavBar {
     
-    self.navigationItem.title = @"分享群地址";
-    
+    self.navigationItem.title = @"群地址";
+    self.hideNavigationBarLine = YES;
 }
 
 - (void)setupView {
     
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
     
-    @weakify(self);
-    self.sharedFunctionView.cancelBlock = ^(UIButton *sender) {
-        @strongify(self);
-        [self hideSharedTeam];
-    };
-    
+    self.view.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height);
+    [self.view yzh_addGradientLayerView];
+//    @weakify(self);
+//    self.sharedFunctionView.cancelBlock = ^(UIButton *sender) {
+//        @strongify(self);
+//        [self hideSharedTeam];
+//    };
+
+    self.teamUrlLabel.text = self.teamUrl;
     NIMTeam *team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
     if (YZHIsString(team.teamName)) {
         self.nickNameLabel.text = team.teamName;
@@ -105,12 +113,12 @@
         
     }
     
-    self.sharedFunctionView.firendSharedBlock = ^(UIButton *sender) {
-        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
-    };
-    self.sharedFunctionView.teamSharedBlock = ^(UIButton *sender) {
-        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
-    };
+//    self.sharedFunctionView.firendSharedBlock = ^(UIButton *sender) {
+//        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
+//    };
+//    self.sharedFunctionView.teamSharedBlock = ^(UIButton *sender) {
+//        [YZHAlertManage showAlertMessage:@"暂不支持分享功能"];
+//    };
 }
 
 - (void)reloadView {
@@ -133,31 +141,43 @@
     [self saveImageToPhotos:image];
 }
 
-- (IBAction)sharedTeam:(UIButton *)sender {
+- (IBAction)copyTeamUrl:(UIButton *)sender {
     
-    [self.saveSharedView removeFromSuperview];
-    [self.view addSubview:self.sharedFunctionView];
+    UIPasteboard* pasterboard = [UIPasteboard generalPasteboard];
+    //群链接
+    [pasterboard setString:self.teamUrl];
+    [YZHProgressHUD showText:@"群链接已复制到剪切板" onView:self.view];
     
-    [self.sharedFunctionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        [UIView animateWithDuration:2 animations:^{
-            make.left.right.bottom.mas_equalTo(0);
-            make.height.mas_equalTo(151);
-            
-//        }];
-    }];
+    YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
+    [pasteManage checkoutTeamPasteboard];
 }
 
-- (void)hideSharedTeam {
-    
-    [self.sharedFunctionView removeFromSuperview];
-    [self.view addSubview:self.saveSharedView];
-    [self.saveSharedView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        [UIView animateWithDuration:2 animations:^{
-            make.left.right.bottom.mas_equalTo(0);
-            make.height.mas_equalTo(110);
-//        }];
-    }];
-}
+//原分享,暂时去掉
+//- (IBAction)sharedTeam:(UIButton *)sender {
+//
+//    [self.saveSharedView removeFromSuperview];
+//    [self.view addSubview:self.sharedFunctionView];
+//
+//    [self.sharedFunctionView mas_makeConstraints:^(MASConstraintMaker *make) {
+////        [UIView animateWithDuration:2 animations:^{
+//            make.left.right.bottom.mas_equalTo(0);
+//            make.height.mas_equalTo(151);
+//
+////        }];
+//    }];
+//}
+//
+//- (void)hideSharedTeam {
+//
+//    [self.sharedFunctionView removeFromSuperview];
+//    [self.view addSubview:self.saveSharedView];
+//    [self.saveSharedView mas_makeConstraints:^(MASConstraintMaker *make) {
+////        [UIView animateWithDuration:2 animations:^{
+//            make.left.right.bottom.mas_equalTo(0);
+//            make.height.mas_equalTo(110);
+////        }];
+//    }];
+//}
 
 #pragma mark - 6.Private Methods
 
@@ -193,14 +213,14 @@
 
 #pragma mark - 7.GET & SET
 
-- (YZHSharedFunctionView *)sharedFunctionView {
-    
-    if (!_sharedFunctionView) {
-        _sharedFunctionView = [[NSBundle mainBundle] loadNibNamed:@"YZHSharedFunctionView" owner:nil options:nil].lastObject;
-        
-    }
-    return _sharedFunctionView;
-}
+//- (YZHSharedFunctionView *)sharedFunctionView {
+//
+//    if (!_sharedFunctionView) {
+//        _sharedFunctionView = [[NSBundle mainBundle] loadNibNamed:@"YZHSharedFunctionView" owner:nil options:nil].lastObject;
+//
+//    }
+//    return _sharedFunctionView;
+//}
 
 - (NSString *)QRCodeResult {
     
@@ -226,5 +246,13 @@
 //    }
 //    return _sharedTeamCardHandle;
 //}
+
+- (NSString *)teamUrl {
+    
+    if (!_teamUrl) {
+        _teamUrl = [YZHChatContentUtil createTeamURLWithTeamId:self.teamId];
+    }
+    return _teamUrl;
+}
 
 @end

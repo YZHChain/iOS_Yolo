@@ -44,6 +44,9 @@
     UIView* view = [[UIView alloc] initWithFrame:rect];
     [view.layer addSublayer:layer];
     
+    self.confirmButton.layer.cornerRadius = 4;
+    self.confirmButton.layer.masksToBounds = YES;
+    
     [_topContentView insertSubview:view atIndex:0];
     
 }

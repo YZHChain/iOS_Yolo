@@ -129,7 +129,6 @@
             YZHRegisterBackupsVC* backupsVC = [[YZHRegisterBackupsVC alloc] init];
             backupsVC.logModel = logModel;
             [self.navigationController pushViewController:backupsVC animated:YES];
-            
         } else {//找回密码直接找登录,
            [self autoLoginWithResponse:obj progressHUD:hud];
         }

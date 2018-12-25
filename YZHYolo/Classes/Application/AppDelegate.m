@@ -18,6 +18,7 @@
 #import <PushKit/PushKit.h>
 #import "YZHServicesConfig.h"
 #import "YZHCheckVersion.h"
+#import "YZHPasteSkipManage.h"
 
 NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 @interface AppDelegate ()<NIMLoginManagerDelegate>
@@ -57,6 +58,8 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
+    [pasteManage checkoutTeamPasteboard];
 }
 
 
@@ -67,6 +70,20 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
+    [pasteManage checkoutTeamPasteboard];
+    return YES;
+}
+// 如果iOS版本是9.0及以上的，会在下面方法接受到在地址栏输入的字符串
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
+    [pasteManage checkoutTeamPasteboard];
+    return YES;
 }
 
 #pragma mark PKPushRegistryDelegate
