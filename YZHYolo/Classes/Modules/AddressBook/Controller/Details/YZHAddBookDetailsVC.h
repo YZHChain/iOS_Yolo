@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHAddBookDetailsVC : YZHBaseViewController
 
-@property (nonatomic, strong) NSString* userId;
+@property (nonatomic, copy) NSString* userId;
 @property (nonatomic, assign) BOOL isSearch;
 @property (nonatomic, assign) BOOL isTeam;
 @property (nonatomic, copy) NSString* teamId;

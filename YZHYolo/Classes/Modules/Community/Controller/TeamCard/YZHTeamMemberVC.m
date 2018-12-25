@@ -150,10 +150,9 @@
     //跳转用户资料.
     NSDictionary* info = @{
                            @"userId": member.info.infoId,
-                           @"isTeam": @(YES),
                            @"teamId": _teamId,
                            };
-    [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
+    [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
 }
 
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线

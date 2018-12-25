@@ -38,7 +38,7 @@
 
 - (void)changeStatus:(UISwitch *)sender {
     //TODO修改成使用 Switch
-
+    NSLog(@"点击");
     if ([self.model.title isEqualToString:@"是否公开本群"]) {
         self.model.subtitle = sender.isOn ? @"公开" : @"私密";
     } else if ([self.model.title isEqualToString:@"允许群成员添加好友进群"]) {
@@ -50,13 +50,13 @@
         }
     } else if ([self.model.title isEqualToString:@"允许向群里分享其他群名片"]) {
         self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
+    } else if ([self.model.title isEqualToString:@"允许群成员互相私聊和加好友"]) {
+        self.model.subtitle = sender.isOn ? @"允许" : @"不允许";
     } else if ([self.model.title isEqualToString:@"群消息免打扰"]) {
         
     } else if ([self.model.title isEqualToString:@"群聊置顶"]) {
         
-    } else if ([self.model.title isEqualToString:@"允许群成员加好友"]) {
-        
-    } else if ([self.model.title isEqualToString:@"允许群成员和我私聊"]) {
+    } else if ([self.model.title isEqualToString:@"对其他成员隐藏我的个人信息"]) {
         
     } else if ([self.model.title isEqualToString:@"群上锁"]) {
         self.model.subtitle = sender.isOn ? @"上锁" : @"不上锁";

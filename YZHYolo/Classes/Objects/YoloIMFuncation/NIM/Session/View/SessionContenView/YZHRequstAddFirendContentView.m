@@ -12,8 +12,7 @@
 @interface YZHRequstAddFirendContentView()
 
 @property (nonatomic, strong) UILabel* titleLabel;
-@property (nonatomic, strong) UIView* topLineView;
-@property (nonatomic, strong) UIView* bottomLineView;
+@property (nonatomic, strong) UIView* titleBackgroundView;
 
 @end
 
@@ -28,15 +27,12 @@
         _titleLabel.font = [UIFont systemFontOfSize:12];
         _titleLabel.textColor = [UIColor yzh_sessionCellGray];
         
-        _topLineView = [[UIView alloc] init];
-        _topLineView.backgroundColor = YZHColorWithRGB(224, 224, 224);
+        _titleBackgroundView = [[UIView alloc] init];
+        _titleBackgroundView.backgroundColor = [UIColor yzh_colorWithHexString:@"#FFDDDEE1"];
         
-        _bottomLineView = [[UIView alloc] init];
-        _bottomLineView.backgroundColor = _topLineView.backgroundColor;
-        
+//        [_titleBackgroundView addSubview:_titleLabel];
+//        [self addSubview:_titleBackgroundView];
         [self addSubview:_titleLabel];
-        [self addSubview:_topLineView];
-        [self addSubview:_bottomLineView];
         [self.bubbleImageView removeFromSuperview];
         self.bubbleImageView = nil;
     }
@@ -61,10 +57,9 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     
+    _titleBackgroundView.center = CGPointMake(self.width / 2, self.height / 2);
+    _titleBackgroundView.size = CGSizeMake(100, 50);
     _titleLabel.center = CGPointMake(self.width / 2, self.height / 2);
-    
-    _topLineView.frame = CGRectMake(38, 0, self.width - 38 * 2, 1);
-    _bottomLineView.frame = CGRectMake(38, self.height - 1, self.width - 38 * 2, 1);
     
 }
     

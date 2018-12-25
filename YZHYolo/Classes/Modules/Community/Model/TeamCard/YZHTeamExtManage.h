@@ -13,14 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 // 用户对目标群的自定义扩展
 @interface YZHTeamExtManage : NSObject
 
-@property (nonatomic, assign) BOOL team_add_friend;
-@property (nonatomic, assign) BOOL team_p2p_chat;
-@property (nonatomic, assign) BOOL team_lock;
-@property (nonatomic, assign) BOOL team_top;
+@property (nonatomic, assign) BOOL team_add_friend;// 默认 true
+@property (nonatomic, assign) BOOL team_p2p_chat;  // 默认 true
+@property (nonatomic, assign) BOOL team_lock;      // 默认 false
+@property (nonatomic, assign) BOOL team_top;       // 默认 false
+@property (nonatomic, assign) BOOL team_hide_info; // 默认 false
 @property (nonatomic, copy) NSString* team_tagName;
 
-+ (instancetype)teamExtWithTeamId:(NSString* )teamId; 
-+ (instancetype)targetTeamExtWithTeamId:(NSString* )teamId targetId:(NSString *)targetId;
++ (instancetype)teamExtWithTeamId:(NSString* )teamId; //读自己
++ (instancetype)targetTeamExtWithTeamId:(NSString* )teamId targetId:(NSString *)targetId; //读他人
 @end
 
 NS_ASSUME_NONNULL_END

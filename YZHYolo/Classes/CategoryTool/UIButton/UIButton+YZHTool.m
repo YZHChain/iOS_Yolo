@@ -49,6 +49,14 @@
     [self setBackgroundImage:[UIImage yzh_getImageWithColor:backgroundColor withSize:self.frame.size] forState:state];
 }
 
+- (void)yzh_setupButton {
+    
+    self.layer.cornerRadius = 4;
+    self.layer.masksToBounds = YES;
+    [self.titleLabel setFont:[UIFont yzh_commonFontStyleFontSize:18]];
+    [self.titleLabel setTextColor:[UIColor whiteColor]];
+    
+}
 
 //密码按钮隐藏控制
 - (void)yzh_hiddenPwdWithFields:(NSArray *)fieldsArray

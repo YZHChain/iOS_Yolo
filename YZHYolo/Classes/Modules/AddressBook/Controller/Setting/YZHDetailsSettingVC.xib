@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SourceHanSansCN-Light.ttf">
+            <string>SourceHanSansCN-Light</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHDetailsSettingVC">
             <connections>
+                <outlet property="blackSwitch" destination="KI3-dV-V23" id="p0f-BR-rmP"/>
                 <outlet property="chatLogButton" destination="PrD-az-3Q9" id="1I3-pX-8xo"/>
                 <outlet property="removeButton" destination="h62-7V-g9G" id="y6C-m6-O95"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,8 +31,8 @@
                     <rect key="frame" x="0.0" y="10" width="375" height="55"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="清空聊天记录 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boD-ff-fgV">
-                            <rect key="frame" x="13" y="18.5" width="96" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <rect key="frame" x="13" y="6" width="94.5" height="43"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="15"/>
                             <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -35,6 +41,7 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrD-az-3Q9">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="15"/>
                             <connections>
                                 <action selector="trashliChatLog:" destination="-1" eventType="touchUpInside" id="jbN-oz-r6D"/>
                             </connections>
@@ -72,13 +79,38 @@
                         <action selector="deleteFriend:" destination="-1" eventType="touchUpInside" id="tA8-TE-E4p"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGe-Ze-RuG">
+                    <rect key="frame" x="0.0" y="75" width="375" height="55"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加入黑名单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nes-VH-6bg">
+                            <rect key="frame" x="13" y="6" width="75" height="43"/>
+                            <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="15"/>
+                            <color key="textColor" red="0.24313725489999999" green="0.2274509804" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KI3-dV-V23">
+                            <rect key="frame" x="311" y="12" width="51" height="31"/>
+                        </switch>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="nes-VH-6bg" firstAttribute="centerY" secondItem="pGe-Ze-RuG" secondAttribute="centerY" id="6qp-td-h2k"/>
+                        <constraint firstItem="nes-VH-6bg" firstAttribute="leading" secondItem="pGe-Ze-RuG" secondAttribute="leading" constant="13" id="JWa-Sa-0X2"/>
+                        <constraint firstAttribute="trailing" secondItem="KI3-dV-V23" secondAttribute="trailing" constant="15" id="h4E-eU-maK"/>
+                        <constraint firstItem="KI3-dV-V23" firstAttribute="centerY" secondItem="pGe-Ze-RuG" secondAttribute="centerY" id="pde-4S-NLe"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="h62-7V-g9G" secondAttribute="bottom" constant="122" id="0vB-zn-Zra"/>
                 <constraint firstAttribute="trailing" secondItem="TLv-np-5Zj" secondAttribute="trailing" id="BmC-B9-vZO"/>
+                <constraint firstAttribute="trailing" secondItem="pGe-Ze-RuG" secondAttribute="trailing" id="Qds-W8-fRg"/>
                 <constraint firstItem="TLv-np-5Zj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UD5-rM-gMc"/>
+                <constraint firstItem="pGe-Ze-RuG" firstAttribute="height" secondItem="TLv-np-5Zj" secondAttribute="height" id="afO-7L-9Pn"/>
                 <constraint firstItem="TLv-np-5Zj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="byb-2f-vok"/>
+                <constraint firstItem="pGe-Ze-RuG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="q6w-8G-gd3"/>
+                <constraint firstItem="pGe-Ze-RuG" firstAttribute="top" secondItem="TLv-np-5Zj" secondAttribute="bottom" constant="10" id="qzT-Ph-Jcw"/>
                 <constraint firstItem="h62-7V-g9G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uj7-9c-be5"/>
             </constraints>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>

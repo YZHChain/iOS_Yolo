@@ -504,14 +504,22 @@
     NSString* userId;
     if (message.isOutgoingMsg) {
         userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
+        //跳转用户资料.
+        NSDictionary* info = @{
+                               @"userId": userId,
+                               };
+        //这里要到我们的用户详情页里
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
     } else {
-        userId = message.session.sessionId;
+        userId = message.from;
+        //跳转用户资料.
+        NSDictionary* info = @{
+                               @"userId": userId,
+                               @"teamId": self.session.sessionId,
+                               };
+        //这里要到我们的群成员用户详情页里
+        [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
     }
-    NSDictionary* info = @{
-                           @"userId": userId
-                           };
-    //这里要到我们的用户详情页里
-    [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
     return YES;
 }
 

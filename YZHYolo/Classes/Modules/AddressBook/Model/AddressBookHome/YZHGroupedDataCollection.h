@@ -30,9 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, strong) NSMutableOrderedSet* groups;
 
 - (void)addGroupMember:(id<YZHGroupMemberProtocol>)member;
-
 - (void)removeGroupMember:(id<YZHGroupMemberProtocol>)member;
-
 - (void)addGroupAboveWithTitle:(NSString *)title members:(NSArray *)members;
 
 //- (NSString *)titleOfGroup:(NSInteger)groupIndex;

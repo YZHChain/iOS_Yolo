@@ -233,7 +233,6 @@
     }];
     [sysView layoutIfNeeded];
     [sysView.layer addSublayer:[UIColor yzh_setGradualChangingColor:sysView fromColor:@"#002E60" toColor:@"#204D75"]];
-    
 }
 
 

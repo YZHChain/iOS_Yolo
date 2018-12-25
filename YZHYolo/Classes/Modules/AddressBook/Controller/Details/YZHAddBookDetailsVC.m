@@ -112,7 +112,6 @@
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.showsVerticalScrollIndicator = NO;
     
-    
     //TODO: 计算高度.
     self.tableView.tableFooterView = self.userAskFooterView;
     [self.userAskFooterView.sendMessageButton addTarget:self action:@selector(senderMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -152,7 +151,6 @@
 // 拉取用户最新数据, 并且刷新
 - (void)fetchUserData {
     //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
-    _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
     //拉取最新
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
     @weakify(self)
@@ -271,7 +269,7 @@
 }
 
 - (void)userDeailsRefreshError:(NSError* )error {
-   
+    
     [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
     self.userAskFooterView.sendMessageButton.enabled = NO;
 }

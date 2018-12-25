@@ -117,6 +117,7 @@
     if (![pair.second count]) {
         [_groups removeObject:pair];
     }
+    [_groupTtiles removeObject:groupTitle];
     [self sort];
 }
 

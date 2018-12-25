@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,10 +16,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qYZ-iN-nxs">
-                    <rect key="frame" x="67.5" y="155" width="240" height="40"/>
+                    <rect key="frame" x="68" y="155" width="239" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="6IT-tb-cY7"/>
                         <constraint firstAttribute="height" constant="40" id="83F-Hb-HM8"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -37,6 +36,8 @@
             <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qYZ-iN-nxs" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3FY-0T-1Vm"/>
+                <constraint firstAttribute="trailing" secondItem="qYZ-iN-nxs" secondAttribute="trailing" constant="68" id="CvJ-R5-SgN"/>
+                <constraint firstItem="qYZ-iN-nxs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="PCO-aC-ULi"/>
                 <constraint firstItem="qYZ-iN-nxs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bJV-X0-7ur"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

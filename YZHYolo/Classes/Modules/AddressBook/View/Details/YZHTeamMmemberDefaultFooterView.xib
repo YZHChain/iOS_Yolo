@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YZHTeamMmemberDefaultFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjl-CZ-zR5">
+                    <rect key="frame" x="68" y="30" width="239" height="44"/>
+                    <state key="normal" title="未找到该用户" backgroundImage="button_background_disable"/>
+                    <connections>
+                        <action selector="onTouchTip:" destination="iN0-l3-epB" eventType="touchUpInside" id="bNn-Wd-ymc"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="pjl-CZ-zR5" secondAttribute="trailing" constant="68" id="CiC-Rm-0rn"/>
+                <constraint firstItem="pjl-CZ-zR5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="lJM-vd-6Df"/>
+                <constraint firstItem="pjl-CZ-zR5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="tG8-0F-LuH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="tipButton" destination="pjl-CZ-zR5" id="3vK-9p-PNn"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="button_background_disable" width="335" height="44"/>
+    </resources>
+</document>

@@ -175,11 +175,10 @@
     //跳转用户资料.
     NSDictionary* info = @{
                            @"userId": member.info.infoId,
-                           @"isTeam": @(YES),
                            @"teamId": self.viewModel.teamId,
                            };
-    [YZHRouter openURL:kYZHRouterAddressBookDetails info: info];
-    
+    //这里要到我们的群成员用户详情页里
+    [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
 }
 // 禁言和移出群按钮回调;
 - (void)onTouchBannedWithMember:(nonnull YZHContactMemberModel *)member {

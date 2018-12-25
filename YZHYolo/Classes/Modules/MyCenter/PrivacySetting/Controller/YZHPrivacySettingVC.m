@@ -82,7 +82,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -120,8 +120,12 @@
         YZHAboutYoloCell* cell = [tableView dequeueReusableCellWithIdentifier:aboutYoloCell];
         if (!cell) {
             cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
-            cell.titleLabel.text = @"设置上锁群阅读密码";
             cell.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
+            if (indexPath.section == 1) {
+               cell.titleLabel.text = @"黑名单管理";
+            } else {
+               cell.titleLabel.text = @"设置上锁群阅读密码";
+            }
         }
         return cell;
     }
@@ -149,10 +153,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.section == 1) {
+        [YZHRouter openURL:kYZHRouterAddressBookBlackList];
+        
+    } else if (indexPath.section == 2) {
         YZHUserInfoExtManage* userManage = [YZHUserInfoExtManage currentUserInfoExt];
         [YZHRouter openURL:kYZHRouterPrivacyPassword info:@{
-                                                           @"userManage": userManage
-                                                           }];
+                                                            @"userManage": userManage
+                                                            }];
     }
 }
 

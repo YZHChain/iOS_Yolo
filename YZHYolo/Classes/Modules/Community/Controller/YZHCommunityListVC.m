@@ -74,7 +74,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)viewDidLoad {
     
-    [[YZHCheckVersion shareInstance] checkoutTeamCurrentVersion];
+//    [[YZHCheckVersion shareInstance] checkoutTeamCurrentVersion];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -1037,6 +1037,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     if (!_networkView) {
         _networkView = [YZHNetworkStatusView yzh_viewWithFrame:CGRectMake(0, 0, self.tableView.width, 35)];
+        _networkView.autoresizingMask = NO;
+        _networkView.frame = CGRectMake(0, 0, self.tableView.width, 35);
     }
     return _networkView;
 }

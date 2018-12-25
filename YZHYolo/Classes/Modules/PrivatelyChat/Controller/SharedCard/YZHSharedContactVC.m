@@ -339,6 +339,9 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
                           
                     }];
                 }];
+            } else {
+                [hud hideWithText:@"邀请失败"];
+                NSLog(@"error:%@", error);
             }
         }];
     }

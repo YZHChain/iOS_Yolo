@@ -49,10 +49,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamDetailModel* memberInviteFriendModel; // 允许邀请好友加入群
 @property (nonatomic, strong) YZHTeamDetailModel* sharedModel;  // 共享群
 @property (nonatomic, strong) YZHTeamDetailModel* letSharedQRCodeModel; // 允许发送群名片
+@property (nonatomic, strong) YZHTeamDetailModel* letMemberAddChatModel; // 允许群成员相互私聊与添加好友
 @property (nonatomic, strong) YZHTeamDetailModel* informModel; // 免打扰设置
 @property (nonatomic, strong) YZHTeamDetailModel* topModel;  // 群置顶
-@property (nonatomic, strong) YZHTeamDetailModel* addFriendModel; //
-@property (nonatomic, strong) YZHTeamDetailModel* allowChatModel; //
+@property (nonatomic, strong) YZHTeamDetailModel* letMemberLookDetails; // 允许其他群成员查看个人信息.
+
 @property (nonatomic, strong) YZHTeamDetailModel* lockModel; //
 @property (nonatomic, copy) NSDictionary* teamInfos; // 修改的群信息.如果是群主则包含群名片
 @property (nonatomic, copy) NSString* teamExts; // 修改个人对群自定义信息

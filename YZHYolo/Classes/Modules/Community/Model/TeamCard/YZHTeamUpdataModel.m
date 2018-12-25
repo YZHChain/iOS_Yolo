@@ -34,7 +34,7 @@
         [mutableDic setValue:team.avatarUrl forKey:@"teamIcon"];
     }
     if (YZHIsString(_teamId)) {
-        [mutableDic setValue:[NSNumber numberWithInteger:_teamId.integerValue] forKey:@"teamId"];
+        [mutableDic setValue:_teamId ? _teamId : @"" forKey:@"teamId"];
     }
     //群标签
     if (teamInfoExt.labelArray.count) {

@@ -106,6 +106,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)refresh {
     
+    NSLog(@"刷新咯");
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.headerView refreshWithModel:self.viewModel.headerModel];
@@ -216,7 +217,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)selectedUISwitch:(UISwitch *)uiSwitch indexPath:(NSIndexPath *)indexPath {
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     if (!self.lastDate) {
         self.lastDate = [NSDate date];
         //无上一次点击事件记录,直接执行
@@ -261,7 +262,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 - (void)onTeamUpdated:(NIMTeam *)team {
     
     if ([_teamId isEqualToString:team.teamId]) {
-        [self refresh];
+//        [self refresh];
     }
 }
 
@@ -283,7 +284,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
  *  @param team 变动的群组
  */
 - (void)onTeamMemberChanged:(NIMTeam *)team {
-    
+
     if ([_teamId isEqualToString:team.teamId]) {
         [self refresh];
     }

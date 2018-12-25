@@ -119,6 +119,22 @@
     letSharedQRCodeModel.subtitle = teamInfoExtManage.sendTeamCard ? @"允许": @"不允许";
     letSharedQRCodeModel.cellClass = @"YZHTeamCardSwitchCell";
     
+    YZHTeamDetailModel* letMemberAddChatModel = [[YZHTeamDetailModel alloc] init];
+    self.letMemberAddChatModel = letMemberAddChatModel;
+    letMemberAddChatModel.title = @"允许群内成员互相私聊和加好友";
+    if (YZHIsString(teamInfoExtManage.addAndChat)) {
+        if ([teamInfoExtManage.addAndChat isEqualToString:@"0"]) {
+            letMemberAddChatModel.isOpenStatus = false;
+        } else {
+            letMemberAddChatModel.isOpenStatus = true;
+        }
+    } else {
+        letMemberAddChatModel.isOpenStatus = true;
+    }
+    
+    letMemberAddChatModel.subtitle = letMemberAddChatModel.isOpenStatus ? @"允许": @"不允许";
+    letMemberAddChatModel.cellClass = @"YZHTeamCardSwitchCell";
+    
     YZHTeamDetailModel* noticeModel = [[YZHTeamDetailModel alloc] init];
     noticeModel.title = @"群公告";
     noticeModel.cellClass = @"YZHTeamCardTextCell";
@@ -151,26 +167,17 @@
     informModel.cellClass = @"YZHTeamCardSwitchCell";
     
     YZHTeamDetailModel* topModel = [[YZHTeamDetailModel alloc] init];
-//    NIMSession* session = [NIMSession session:_teamId type:NIMSessionTypeTeam];
-//    NIMRecentSession *recent = [[NIMSDK sharedSDK].conversationManager recentSessionBySession:session];
-//    BOOL top = [NTESSessionUtil recentSessionIsMark:recent type:NTESRecentSessionMarkTypeTop];
-    BOOL top2 = teamExtManage.team_top;
+    BOOL top = teamExtManage.team_top;
     self.topModel = topModel;
     topModel.title = @"群聊置顶";
-    topModel.isOpenStatus = top2;
+    topModel.isOpenStatus = top;
     topModel.cellClass = @"YZHTeamCardSwitchCell";
     
-    YZHTeamDetailModel* addFriendModel = [[YZHTeamDetailModel alloc] init];
-    self.addFriendModel = addFriendModel;
-    addFriendModel.title = @"允许群成员加好友";
-    addFriendModel.isOpenStatus = teamExtManage.team_add_friend;
-    addFriendModel.cellClass = @"YZHTeamCardSwitchCell";
-    
-    YZHTeamDetailModel* allowChatModel = [[YZHTeamDetailModel alloc] init];
-    self.allowChatModel = allowChatModel;
-    allowChatModel.title = @"允许群成员和我私聊";
-    allowChatModel.isOpenStatus = teamExtManage.team_p2p_chat;
-    allowChatModel.cellClass = @"YZHTeamCardSwitchCell";
+    YZHTeamDetailModel* letMemberLookDetails = [[YZHTeamDetailModel alloc] init];
+    self.letMemberLookDetails = letMemberLookDetails;
+    letMemberLookDetails.title = @"对其他成员隐藏我的个人信息";
+    letMemberLookDetails.isOpenStatus = teamExtManage.team_hide_info;
+    letMemberLookDetails.cellClass = @"YZHTeamCardSwitchCell";
     
     YZHTeamDetailModel* lockModel = [[YZHTeamDetailModel alloc] init];
     self.lockModel = lockModel;
@@ -208,13 +215,13 @@
             [manageSharedArray addObject:findSharedModel];
         }
         [manageSharedQRCodeArray addObject:letSharedQRCodeModel];
+        [manageSharedQRCodeArray addObject:letMemberAddChatModel];
         [manageSharedQRCodeArray addObject:noticeModel];
         // 拼装群功能
         [teamFunctionArray addObject:nickNameModel];
         [teamFunctionArray addObject:informModel];
         [teamFunctionArray addObject:topModel];
-        [teamFunctionArray addObject:addFriendModel];
-        [teamFunctionArray addObject:allowChatModel];
+        [teamFunctionArray addObject:letMemberLookDetails];
         [teamFunctionArray addObject:lockModel];
         // 拼装其他功能
         [teamMoreArray addObject:chatDataModel];
@@ -233,8 +240,7 @@
         [teamFunctionArray addObject:nickNameModel];
         [teamFunctionArray addObject:informModel];
         [teamFunctionArray addObject:topModel];
-        [teamFunctionArray addObject:addFriendModel];
-        [teamFunctionArray addObject:allowChatModel];
+        [teamFunctionArray addObject:letMemberLookDetails];
         [teamFunctionArray addObject:lockModel];
         
         // 拼装其他功能
@@ -307,11 +313,10 @@
     YZHTeamInfoExtManage* teamInfoExt = [[YZHTeamInfoExtManage alloc] initTeamExtWithTeamId:self.teamId];
     //互享
     teamInfoExt.isShareTeam = self.sharedModel.isOpenStatus;
+    teamInfoExt.addAndChat = self.letMemberAddChatModel.isOpenStatus ? @"1" : @"0";
     //允许群里分享其他群名片
     teamInfoExt.sendTeamCard = self.letSharedQRCodeModel.isOpenStatus;
-    
-    teamExt.team_add_friend = self.addFriendModel.isOpenStatus;
-    teamExt.team_p2p_chat = self.allowChatModel.isOpenStatus;
+    teamExt.team_hide_info = self.letMemberLookDetails.isOpenStatus;
     teamExt.team_lock = self.lockModel.isOpenStatus;
     teamExt.team_top = self.topModel.isOpenStatus;
     self.teamExts = [teamExt mj_JSONString];

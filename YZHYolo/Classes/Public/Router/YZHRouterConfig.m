@@ -63,6 +63,8 @@ NSString* const kYZHRouterWKWeb                   = @"/myCenter/wkWeb";
 #pragma mark -- AddressBook
 
 NSString* const kYZHRouterAddressBookDetails   = @"/addressBook/details/";
+NSString* const kYZHRouterTeamMemberBookDetails = @"/teamMember/details/";
+NSString* const kYZHRouterAddressBookBlackList = @"/teamMember/blackList/";
 NSString* const kYZHRouterAddressBookAddFriendShow   = @"/addressBook/addFirendShow/";
 NSString* const kYZHRouterAddressBookSetNote   = @"/addressBook/details/setNote";
 NSString* const kYZHRouterAddressBookSetTag   = @"/addressBook/details/setTag";
@@ -238,6 +240,18 @@ NSString *const kYZHRouterAppConfig = @"debug/appConfig";
              kYZHRouterAddressBookDetails: @{
                      kYZHRouteViewControllerClassKey: @"YZHAddBookDetailsVC",
                      kYZHRouteViewControllerNameKey: @"详细资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterTeamMemberBookDetails: @{
+                     kYZHRouteViewControllerClassKey: @"YZHTeamMemberDetailsVC",
+                     kYZHRouteViewControllerNameKey: @"群成员详细资料",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAddressBookBlackList: @{
+                     kYZHRouteViewControllerClassKey: @"YZHAddressBookBlackListVC",
+                     kYZHRouteViewControllerNameKey: @"黑名单管理",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

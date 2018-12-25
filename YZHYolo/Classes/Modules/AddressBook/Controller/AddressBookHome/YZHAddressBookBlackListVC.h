@@ -1,8 +1,8 @@
 //
-//  YZHTeamMemberDetailsVC.h
+//  YZHAddressBookBlackListVC.h
 //  YZHYolo
 //
-//  Created by Jersey on 2018/11/29.
+//  Created by Jersey on 2018/12/25.
 //  Copyright © 2018年 YZHChain. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface YZHTeamMemberDetailsVC : YZHBaseViewController
+@interface YZHAddressBookBlackListVC : YZHBaseViewController
 
 @end
 

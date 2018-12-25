@@ -70,7 +70,7 @@
     //如何确保每次读取到的都是最新的？
     NSString* teamInfoExt = [[[NIMSDK sharedSDK] teamManager] teamById:_teamId].clientCustomInfo;
     if (YZHIsString(teamInfoExt)) {
-        return [YZHTeamInfoExtManage YZH_objectWithKeyValues:teamInfoExt];
+        return [self YZH_setKeyValues:teamInfoExt];
     } else {
         return [[YZHTeamInfoExtManage alloc] initCreatTeamWithTeamLabel:nil recruit:nil];
     }
@@ -96,6 +96,8 @@
     self.sendTeamCard = YES; // 默认可发送名片
     self.isShareTeam = NO; // 暂时设置成 NO.
     self.function = @"1"; //高级群
+    self.addAndChat = @"1"; // 允许
+    
 }
 
 @end

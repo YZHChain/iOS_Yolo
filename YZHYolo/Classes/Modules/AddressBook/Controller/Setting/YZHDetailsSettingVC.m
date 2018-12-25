@@ -13,12 +13,14 @@
 #import "UIImage+YZHTool.h"
 #import "YZHAlertManage.h"
 #import "YZHProgressHUD.h"
+#import "YZHBlackSettingCell.h"
 
 @interface YZHDetailsSettingVC ()<UITableViewDelegate, UITableViewDataSource>
 
 
 @property (weak, nonatomic) IBOutlet UIButton *removeButton;
 @property (weak, nonatomic) IBOutlet UIButton *chatLogButton;
+@property (weak, nonatomic) IBOutlet UISwitch *blackSwitch;
 
 @end
 
@@ -59,43 +61,20 @@
     [self.removeButton setBackgroundImage:[UIImage yzh_getImageWithColor:YZHColorWithRGB(227, 41, 63)] forState:UIControlStateNormal];
     self.removeButton.layer.cornerRadius = 5;
     self.removeButton.layer.masksToBounds = YES;
+    
+    BOOL onBlackList = [[NIMSDK sharedSDK].userManager isUserInBlackList:self.userId];
+    if (onBlackList) {
+        self.blackSwitch.on = true;
+    } else {
+        self.blackSwitch.on = false;
+    }
+    
+    [self.blackSwitch addTarget:self action:@selector(onTouchBlack:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - 3.Request Data
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 1;
-}
-
-- (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    YZHDetailsSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"detailsSettingCellIdentity" forIndexPath:indexPath];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return 55;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 10;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 #pragma mark - 5.Event Response
 
@@ -123,9 +102,12 @@
                 YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
                 
                 [[NIMSDK sharedSDK].userManager deleteFriend:self.userId completion:^(NSError *error) {
-                    [SVProgressHUD dismiss];
                     if (!error) {
                         [hud hideWithText:@"已删除"];
+                        //将用户从黑名单列表移除掉
+                        [[NIMSDK sharedSDK].userManager removeFromBlackBlackList:self.userId completion:^(NSError * _Nullable error) {
+                            
+                        }];
                         NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
                         option.removeSession = YES;
                         option.removeTable = YES;
@@ -146,6 +128,23 @@
         [YZHAlertManage showAlertMessage:@"对方已经不是你好友"];
     }
 
+}
+
+- (void)onTouchBlack:(UISwitch *)sender {
+    
+    if (sender.isOn) {
+        [[NIMSDK sharedSDK].userManager addToBlackList:self.userId completion:^(NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"添加成功");
+            }
+        }];
+    } else {
+        [[NIMSDK sharedSDK].userManager removeFromBlackBlackList:self.userId completion:^(NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"移除成功");
+            }
+        }];
+    }
 }
 
 #pragma mark - 6.Private Methods

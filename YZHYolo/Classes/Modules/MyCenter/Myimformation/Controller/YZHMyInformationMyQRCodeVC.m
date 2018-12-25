@@ -11,6 +11,7 @@
 #import "YZHPublic.h"
 #import "ZXingObjC.h"
 #import "YZHUserModelManage.h"
+
 @interface YZHMyInformationMyQRCodeVC ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerPhotoImageView;
@@ -58,8 +59,6 @@
 - (void)viewWillLayoutSubviews {
     
     [super viewWillLayoutSubviews];
-    
-    [self.view yzh_addGradientLayerView];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -74,6 +73,8 @@
 {
     self.view.backgroundColor = [UIColor yzh_backgroundDarkBlue];
     
+    self.view.frame = CGRectMake(0, 0, YZHScreen_Width, YZHScreen_Height - 64);
+    [self.view yzh_addGradientLayerView];
     NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo:[NIMSDK sharedSDK].loginManager.currentAccount];
     if (YZHIsString(user.userInfo.nickName)) {
         self.nickNameLabel.text = user.userInfo.nickName;

@@ -10,11 +10,11 @@
 
 @interface UIButton (YZHTool)
 
-
 @property (nonatomic, copy) YZHButtonExecuteBlock tapCallBlock;
 
 + (instancetype)yzh_setBarButtonItemWithStateNormalImageName:(NSString  *)stateNormalImageName stateSelectedImageName:(NSString *)stateSelectedImageName tapCallBlock:(YZHButtonExecuteBlock)callBlock;
 + (instancetype)yzh_setBarButtonItemWithImageName:(NSString *)imageName tapCallBlock:(YZHButtonExecuteBlock)callBlock;
+- (void)yzh_setupButton;
 
 /**
  *  设置背景颜色

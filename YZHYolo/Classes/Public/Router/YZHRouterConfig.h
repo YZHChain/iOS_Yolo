@@ -68,6 +68,8 @@ extern NSString *const kYZHRouterWKWeb;
 #pragma mark -- AddressBook
 
 extern NSString *const kYZHRouterAddressBookDetails;
+extern NSString *const kYZHRouterTeamMemberBookDetails;
+extern NSString *const kYZHRouterAddressBookBlackList;
 extern NSString *const kYZHRouterAddressBookAddFriendShow;
 extern NSString *const kYZHRouterAddressBookSetNote;
 extern NSString *const kYZHRouterAddressBookSetTag;

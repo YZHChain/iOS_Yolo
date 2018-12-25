@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YZHTeamMemberFooterView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkG-xF-Phb">
+                    <rect key="frame" x="68" y="85" width="239" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="eMh-Nl-si9"/>
+                    </constraints>
+                    <state key="normal" title="发消息" backgroundImage="button_background_optional">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onTouchSenderMessage:" destination="iN0-l3-epB" eventType="touchUpInside" id="lct-i9-Tyg"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Is-Rb-GuY">
+                    <rect key="frame" x="68" y="30" width="239" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="ciE-z6-ZWp"/>
+                    </constraints>
+                    <state key="normal" title="加为好友" backgroundImage="button_background_optional"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onTouchAddFriend:" destination="iN0-l3-epB" eventType="touchUpInside" id="M41-kq-Jcs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0Is-Rb-GuY" secondAttribute="trailing" constant="68" id="5FS-LH-mMr"/>
+                <constraint firstItem="wkG-xF-Phb" firstAttribute="top" secondItem="0Is-Rb-GuY" secondAttribute="bottom" constant="15" id="HDI-E7-lBK"/>
+                <constraint firstItem="wkG-xF-Phb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="VBO-8O-o2X"/>
+                <constraint firstItem="0Is-Rb-GuY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="W8h-IC-B8l"/>
+                <constraint firstAttribute="trailing" secondItem="wkG-xF-Phb" secondAttribute="trailing" constant="68" id="bOf-MV-6vX"/>
+                <constraint firstItem="wkG-xF-Phb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="850" constant="30" id="bSH-YE-kUi"/>
+                <constraint firstItem="0Is-Rb-GuY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="gyX-4s-xQX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="addFriendButton" destination="0Is-Rb-GuY" id="30S-h2-3XE"/>
+                <outlet property="senderMessageButton" destination="wkG-xF-Phb" id="DEB-BH-VLz"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="button_background_optional" width="335" height="44"/>
+    </resources>
+</document>
