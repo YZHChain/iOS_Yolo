@@ -10,6 +10,7 @@
 
 #import "UIViewController+YZHTool.h"
 #import "YZHCommunityChatVC.h"
+#import "YZHPublic.h"
 
 @interface YZHCreateTeamResultVC ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -71,6 +72,7 @@
 //        [self.addShareTeamButton addTarget:self action:@selector(onTouchShare:) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    [self.addFirendButton yzh_setupButton];
     [self.addFirendButton addTarget:self action:@selector(onTouchAddFirend:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.gotoTeamButton addTarget:self action:@selector(gotoTeam:) forControlEvents:UIControlEventTouchUpInside];

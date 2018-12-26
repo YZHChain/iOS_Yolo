@@ -13,21 +13,32 @@
 
 @implementation YZHAddBookUserAskFooterView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 - (void)awakeFromNib{
     
     
     [super awakeFromNib];
     
-//    [self.addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.sendMessageButton yzh_setBackgroundColor:[UIColor yzh_buttonBackgroundGreen] forState:UIControlStateNormal];
+    [self.addFriendButton yzh_setupButton];
+    [self.senderMessageBlock yzh_setupButton];
     
+    self.backgroundView = ({
+        UIView* view = [[UIView alloc] initWithFrame:self.bounds];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
+    
+}
+
+- (IBAction)onTouchAddFriend:(UIButton *)sender {
+    
+    self.addFriendBlock ? self.addFriendBlock(sender) : NULL;
+    
+}
+
+- (IBAction)onTouchSenderMessage:(UIButton *)sender {
+    
+    self.senderMessageBlock ? self.senderMessageBlock(sender) : NULL;
 }
 
 @end

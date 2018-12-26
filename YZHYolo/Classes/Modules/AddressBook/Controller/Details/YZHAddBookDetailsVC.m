@@ -25,7 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHAddBookUserAskFooterView* userAskFooterView;
-@property (nonatomic, strong) UIButton* addFriendButton;
 @property (nonatomic, strong) YZHUserInfoExtManage* userInfoExtManage;
 @property (nonatomic, assign) BOOL isMyFriend;
 @property (nonatomic, assign) BOOL needAddVerify;
@@ -42,12 +41,13 @@
     // Do any additional setup after loading the view.
     
     [self setUpNIMConfig];
-    
-    [self setupData];
+
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
     [self setupView];
+    
+    [self setupData];
     //4.设置通知
     [self setupNotification];
     
@@ -79,15 +79,7 @@
 {
     self.navigationItem.title = @"详细资料";
     // 不是自己,并且是我的好友时,才会有更多选项
-//    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
-//        UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
-//        [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-//    } else {
-//        self.navigationItem.rightBarButtonItem = nil;
-//    }
-    if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
+    if (self.isMyFriend && !self.isMySelf) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
@@ -111,24 +103,13 @@
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 13, 0, 13);
     self.tableView.showsVerticalScrollIndicator = NO;
-    
-    //TODO: 计算高度.
-    self.tableView.tableFooterView = self.userAskFooterView;
-    [self.userAskFooterView.sendMessageButton addTarget:self action:@selector(senderMessage:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //暂时不考虑, 添加好友状态.
-    //如果是自己的个人详情,则。
-    if (self.isMySelf) {
-        //清空表尾
-        self.tableView.tableFooterView = [[UIView alloc] init];
-    }
-    
-    [self.tableView reloadData];
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 - (void)reloadView
 {
-    
+     [self userDeailsRefresh];
+     [self setupNavBar];
 }
 
 #pragma mark - 3.Request Data
@@ -137,15 +118,10 @@
 {
     _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
     //从群聊进来, 并且非好友关系。
-    if (self.isTeam && !self.isMyFriend) {
-        [self fetchUserData];
-    } else { //非群聊进入
-        if (!self.isMySelf && !self.isMyFriend) {
-            //先判断此用户为自己好友.否则需要到 IM 去拉取最新状态
-            [self fetchUserData];
-        } else {
-            [self refresh];
-        }
+    if (self.isMyFriend) {
+       [self reloadView];
+    } else {
+       [self fetchUserData];
     }
 }
 // 拉取用户最新数据, 并且刷新
@@ -157,7 +133,7 @@
     [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[_userId] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
         @strongify(self)
         if (!error) {
-            [self refresh];
+            [self reloadView];
         } else {
 //            if (error.code != 408) {
             [self refreshError:error];
@@ -167,111 +143,58 @@
     }];
 }
 
-- (void)refresh {
-    
-    if (self.isTeam && !self.isMyFriend) { // 刷新从群聊页面进入的个人详情
-        [self teamMemberDeailsRefresh];
-    } else { //刷新从非群聊页面进入的个人详情
-        [self userDeailsRefresh];
-    }
-}
-
 - (void)refreshError:(NSError *)error {
     
-    if (self.isTeam && !self.isMyFriend) { // 刷新从群聊页面进入的个人详情
-        [self teamMemberDeailsRefreshError:error];
-    } else { //刷新从非群聊页面进入的个人详情
-        [self userDeailsRefreshError:error];
-    }
-}
-
-- (void)teamMemberDeailsRefresh {
-    
-    YZHTeamExtManage* teamExt = [YZHTeamExtManage targetTeamExtWithTeamId:_teamId targetId:_userId];
-    if (teamExt.team_add_friend) {
-        UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-        addFriendButton.x = self.userAskFooterView.sendMessageButton.x;
-        addFriendButton.y = self.userAskFooterView.sendMessageButton.bottom + 10;
-        addFriendButton.layer.cornerRadius = 5;
-        addFriendButton.layer.masksToBounds = YES;
-        [addFriendButton addTarget:self action:@selector(addFriendRequst:) forControlEvents:UIControlEventTouchUpInside];
-        [addFriendButton setTitle:@"加好友" forState:UIControlStateNormal];
-        [addFriendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:18]];
-        [addFriendButton setTintColor:[UIColor yzh_fontShallowBlack]];
-        [addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-        self.addFriendButton = addFriendButton;
-        
-        [self.userAskFooterView addSubview:addFriendButton];
-        self.tableView.tableFooterView = self.userAskFooterView;
-    } else {
-        [self.addFriendButton removeFromSuperview];
-    }
-    if (teamExt.team_p2p_chat) {
-        self.userAskFooterView.sendMessageButton.hidden = YES; //暂时屏蔽掉, 临时聊天
-        //区别临时聊天功能.
-    } else {
-        self.userAskFooterView.sendMessageButton.hidden = YES;
-    }
+    [self userDeailsRefreshError:error];
 }
 
 - (void)userDeailsRefresh {
     
     if (!self.isMySelf) {
-//        [self setupNavBar];
-        self.navigationItem.rightBarButtonItem = nil;
         self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+        [self.tableView setTableFooterView:self.userAskFooterView];
+        @weakify(self)
+        self.userAskFooterView.addFriendBlock = ^(UIButton *sender) {
+            @strongify(self)
+            [self addFriendRequst:sender];
+        };
+        self.userAskFooterView.senderMessageBlock = ^(UIButton *sender) {
+            @strongify(self)
+            [self senderMessage:sender];
+        };
         // 判断是否为好友,
         self.isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
         if (self.isMyFriend) {
-            if (self.addFriendButton.superview) {
-                [self.addFriendButton removeFromSuperview];
-                self.tableView.tableFooterView = self.userAskFooterView;
-            }
+            self.userAskFooterView.addFriendButton.hidden = YES;
+//            [self.userAskFooterView.addFriendButton removeFromSuperview];
             self.userAskFooterView.sendMessageButton.hidden = NO;
         } else {
+            self.navigationItem.rightBarButtonItem = nil;
             BOOL allowAdd = self.userInfoExtManage.privateSetting.allowAdd;
             //非好友时, 隐藏发消息
             self.userAskFooterView.sendMessageButton.hidden = YES;
             if (allowAdd) {
-                UIButton *addFriendButton = [UIButton buttonWithType:UIButtonTypeSystem];
-                addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-                addFriendButton.x = self.userAskFooterView.sendMessageButton.x;
-                addFriendButton.y = self.userAskFooterView.sendMessageButton.bottom + 10;
-                addFriendButton.layer.cornerRadius = 5;
-                addFriendButton.layer.masksToBounds = YES;
-                [addFriendButton addTarget:self action:@selector(addFriendRequst:) forControlEvents:UIControlEventTouchUpInside];
-                [addFriendButton setTitle:@"加好友" forState:UIControlStateNormal];
-                [addFriendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:18]];
-                [addFriendButton setTintColor:[UIColor yzh_fontShallowBlack]];
-                [addFriendButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                addFriendButton.size = self.userAskFooterView.sendMessageButton.size;
-                self.addFriendButton = addFriendButton;
-                
-                [self.userAskFooterView addSubview:addFriendButton];
-                self.tableView.tableFooterView = self.userAskFooterView;
+                self.userAskFooterView.addFriendButton.hidden = NO;
             } else {
-                [self.tableView.tableFooterView removeFromSuperview];
+                self.userAskFooterView.addFriendButton.hidden = YES;
             }
         }
         [self.tableView reloadData];
     } else {
+        self.navigationItem.rightBarButtonItem = nil;
         _userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+        [self.tableView setTableFooterView:[[UIView alloc] init]];
         [self.tableView reloadData];
     }
 }
 
-- (void)teamMemberDeailsRefreshError:(NSError* )error {
-    
-//    [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
-    [self.userAskFooterView removeFromSuperview];
-}
-
 - (void)userDeailsRefreshError:(NSError* )error {
     
+    [self.tableView setTableFooterView:self.userAskFooterView];
     [self.userAskFooterView.sendMessageButton setTitle:@"未找到该用户" forState:UIControlStateNormal];
     self.userAskFooterView.sendMessageButton.enabled = NO;
+    self.userAskFooterView.addFriendButton.hidden = YES;
+    self.userAskFooterView.sendMessageButton.hidden = NO;
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -412,9 +335,8 @@
             if (!error) {
                 //添加成功文案;
                 [hud hideWithText:successText];
-                [self refresh];
+                [self reloadView];
             }else{
-                
                 [hud hideWithText:failedText];
             }
         }];
@@ -434,14 +356,14 @@
 - (void)onFriendChanged:(NIMUser *)user {
     
     if ([self.userId isEqualToString:user.userId]) {
-        [self refresh];
+        [self reloadView];
     }
 }
 
 - (void)onUserInfoChanged:(NIMUser *)user {
     
     if ([self.userId isEqualToString:user.userId]) {
-        [self refresh];
+        [self reloadView];
     }
 }
 
@@ -451,6 +373,8 @@
     
     if (!_userAskFooterView) {
         _userAskFooterView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddBookUserAskFooterView" owner:nil options:nil].lastObject;
+        _userAskFooterView.frame = CGRectMake(0, 0, self.tableView.width, 250);
+        _userAskFooterView.autoresizingMask = NO;
     }
     return _userAskFooterView;
 }
