@@ -42,6 +42,7 @@
     urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
     NSString* teamURL = [NSString stringWithFormat:@"%@/yolo-web/html/register/community.html?teamId=%@",urlServerString , teamIdBase64String];
+    teamURL = [NSString stringWithFormat:@"%@?teamId=%@",kYZHTeamURLHostKey , teamIdBase64String];
     
     return teamURL;
 }

@@ -103,44 +103,66 @@
     
     NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
     BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
-    //群主可直接
-    if (self.teamExt.team_hide_info && !isTeamManage) {
-        self.tableView.hidden = YES;
-        [self.view addSubview:self.tipLabel];
-        [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(0);
-            make.top.mas_equalTo(80);
-        }];
-    } else {
-        self.tableView.hidden = NO;
-        [self.tipLabel removeFromSuperview];
-    }
-    //这块需要做点儿调整,专门对群组在配置一个 Model.
-    self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
-    [self refreshFooterView];
-    [self.tableView reloadData];
-}
-
-- (void)refreshFooterView {
-    
     BOOL allowAddAndChat = YES;
-    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
-    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
     if (YZHIsString(self.teamInfoExt.addAndChat)) {
         if ([self.teamInfoExt.addAndChat isEqualToString:@"0"]) {
             allowAddAndChat = NO;
         }
     }
     if (allowAddAndChat || isTeamManage) {
-        [self.tableView setTableFooterView:self.footerView];
-        BOOL isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
-        if (isMyFriend) {
-            [self.footerView.addFriendButton removeFromSuperview];
+        //群主可直接
+        if (self.teamExt.team_hide_info && !isTeamManage) {
+            self.tableView.hidden = YES;
+            [self.view addSubview:self.tipLabel];
+            [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(0);
+                make.top.mas_equalTo(80);
+            }];
         } else {
-            [self.footerView addSubview:self.footerView.addFriendButton];
+            self.tableView.hidden = NO;
+            //这块需要做点儿调整,专门对群组在配置一个 Model.
+            self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+            [self refreshFooterView];
+            [self.tableView reloadData];
+            [self.tipLabel removeFromSuperview];
         }
     } else {
-        self.tableView.tableFooterView = [[UIView alloc] init];
+        self.tableView.hidden = NO;
+        //这块需要做点儿调整,专门对群组在配置一个 Model.
+        self.userDetailsModel = [[YZHAddBookDetailsModel alloc] initDetailsModelWithUserId:self.userId];
+        [self refreshFooterView];
+        [self.tableView reloadData];
+        [self.tipLabel removeFromSuperview];
+    }
+}
+
+- (void)refreshFooterView {
+    
+//    BOOL allowAddAndChat = YES;
+//    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
+//    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
+//    if (YZHIsString(self.teamInfoExt.addAndChat)) {
+//        if ([self.teamInfoExt.addAndChat isEqualToString:@"0"]) {
+//            allowAddAndChat = NO;
+//        }
+//    }
+//    if (allowAddAndChat || isTeamManage) {
+//        [self.tableView setTableFooterView:self.footerView];
+//        BOOL isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
+//        if (isMyFriend) {
+//            [self.footerView.addFriendButton removeFromSuperview];
+//        } else {
+//            [self.footerView addSubview:self.footerView.addFriendButton];
+//        }
+//    } else {
+//        self.tableView.tableFooterView = [[UIView alloc] init];
+//    }
+    [self.tableView setTableFooterView:self.footerView];
+    BOOL isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
+    if (isMyFriend) {
+        [self.footerView.addFriendButton removeFromSuperview];
+    } else {
+        [self.footerView addSubview:self.footerView.addFriendButton];
     }
     @weakify(self)
     _footerView.addFriendBlock = ^(UIButton *sender) {

@@ -50,7 +50,7 @@
 - (void)gotoTeamCardWithTeamId:(NSString *)teamId {
     
     self.lastTeamId = teamId;
-    [YZHAlertManage showAlertTitle:@"" message:@"检测到您粘贴板中有群链接信息，是否马上查看该群？" actionButtons:@[@"跳过", @"去查看"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+    [YZHAlertManage showAlertTitle:@"" message:@"检测到您粘贴板中有群链接信息, 是否马上查看该群？" actionButtons:@[@"跳过", @"去查看"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
         if (buttonIndex == 1) {
             [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
                                                                    @"teamId": teamId ? teamId: @"",

@@ -147,9 +147,6 @@
     //群链接
     [pasterboard setString:self.teamUrl];
     [YZHProgressHUD showText:@"群链接已复制到剪切板" onView:self.view];
-    
-    YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
-    [pasteManage checkoutTeamPasteboard];
 }
 
 //原分享,暂时去掉
