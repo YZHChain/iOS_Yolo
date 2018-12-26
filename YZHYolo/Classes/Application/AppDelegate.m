@@ -192,7 +192,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     //注册自定义消息的解析器
     [NIMCustomObject registerCustomDecoder:[YZHCustomAttachmentDecoder new]];
     
-    //注册 NIMKit 自定义排版配置
+    //注册 NIMKit 自定义排
     [[NIMKit sharedKit] registerLayoutConfig:[YZHCellLayoutConfign new]];
     //定制 UI 配置器
     NIMKitConfig* config = [[NIMKitConfig alloc] init];

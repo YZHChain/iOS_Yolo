@@ -83,6 +83,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarImageView" destination="fyo-y2-VTz" id="R5n-lv-5A3"/>
+                <outlet property="nameLabel" destination="8ge-nx-dFc" id="6lc-e6-mlo"/>
                 <outlet property="titleLabel" destination="gcT-fj-9pX" id="M6k-bv-c28"/>
             </connections>
             <point key="canvasLocation" x="137.59999999999999" y="31.484257871064472"/>

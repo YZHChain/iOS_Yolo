@@ -93,6 +93,38 @@
     [self sort];
 }
 
+- (void)setTeamMembers:(NSArray *)members {
+    
+    NSMutableDictionary *tmp = [NSMutableDictionary dictionary];
+    
+    //将全体成员一次取出, 保存到以 Key 为 首字母 value 为 成员Model 的可变数组
+    for (id<YZHGroupMemberProtocol>member in members) {
+        NSString *groupTitle = [member groupTitle];
+        NSMutableArray *groupedMembers = [tmp objectForKey:groupTitle];
+        if(!groupedMembers) {
+            groupedMembers = [NSMutableArray array];
+        }
+        [groupedMembers addObject:member];
+        [tmp setObject:groupedMembers forKey:groupTitle];
+    }
+    [_groupTtiles removeAllObjects];
+    [_groups removeAllObjects];
+    // 遍历字典, 取出每个 Key, 保存到 _groupTtitles 中.
+    // Value 以 Pair 对象的形式保存到 _groups 方便后续排序
+    @weakify(self)
+    [tmp enumerateKeysAndObjectsUsingBlock:^(NSString *groupTitle, NSMutableArray *groupedMembers, BOOL *stop) {
+        @strongify(self)
+        unichar character = [groupTitle characterAtIndex:0];
+        if (character >= 'A' && character <= 'Z') {
+            [self->_groupTtiles addObject:groupTitle];
+        }else{
+            [self->_groupTtiles addObject:@"#"];
+        }
+        [self->_groups addObject:[[Pair alloc] initWithFirst:groupTitle second:groupedMembers]];
+    }];
+    [self sort];
+}
+
 - (void)addGroupMember:(id<YZHGroupMemberProtocol>)member
 {
     NSString *groupTitle = [member groupTitle];

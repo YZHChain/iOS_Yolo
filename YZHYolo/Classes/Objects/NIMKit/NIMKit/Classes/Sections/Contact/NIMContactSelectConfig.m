@@ -252,14 +252,14 @@
             for (NIMTeamMember* teamMember in members) {
                 NIMKitInfoFetchOption* infoFetchOption = [[NIMKitInfoFetchOption alloc] initWithIsAddressBook:NO];
                 //过滤掉自己
-                if (![teamMember.userId isEqualToString:self.filterIds.firstObject]) {
+//                if (![teamMember.userId isEqualToString:self.filterIds.firstObject]) {
                     NIMKitInfo* kitInfo = [[NIMKit sharedKit] infoByUser:teamMember.userId option:infoFetchOption];
                     YZHContactMemberModel* memberModel = [[YZHContactMemberModel alloc] initWithInfo:kitInfo];
                     [contacts addObject:memberModel];
-                }
+//                }
                 
             }
-            [teamMemberModel setMembers:contacts];
+            [teamMemberModel setTeamMembers:contacts];
             handle ? handle(teamMemberModel) : NULL;
         }
     }];

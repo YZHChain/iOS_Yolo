@@ -80,15 +80,16 @@
 - (void)reloadView {
     
     [self.headerView refreshWithModel:self.viewModel.headerModel];
+    self.headerView.frame = CGRectMake(0, 0, self.tableView.width, self.headerView.updateHeight);
     [self.tableView setTableHeaderView:self.headerView];
     
     [self configurationFooterView];
     [self.tableView reloadData];
     
     self.tableView.tableFooterView = self.footerView;
-    
+
     //非好友关系时, 拉取用户最新资料.
-    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner] && YZHIsString(self.viewModel.teamOwner)) {
+    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner]) {
         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
             if (!error) {
                 [self.viewModel updataTeamOwnerData];
@@ -96,6 +97,7 @@
             }
         }];
     }
+
     //不是自己的群时, 需更新.
     if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.viewModel.teamId]) {
         [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.viewModel.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
@@ -254,6 +256,8 @@
     
     if (!_headerView) {
         _headerView = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardHeaderView" owner:nil options:nil].lastObject;
+        _headerView.autoresizingMask = NO;
+        
     }
     return _headerView;
 }

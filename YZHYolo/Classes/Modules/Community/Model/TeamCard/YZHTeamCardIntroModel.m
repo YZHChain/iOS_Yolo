@@ -51,6 +51,7 @@
 - (void)updataHeaderModel {
     
     NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:_teamId];
+    self.team = team;
     YZHTeamInfoExtManage* teamInfoExtManage = [YZHTeamInfoExtManage YZH_objectWithKeyValues:team.clientCustomInfo];
     self.headerModel.teamName = team.teamName;
     self.headerModel.teamSynopsis = team.intro;

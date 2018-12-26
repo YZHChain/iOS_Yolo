@@ -34,6 +34,7 @@
 #import "YZHNetworkStatusView.h"
 #import "YZHGuideViewManage.h"
 #import "YZHCheckVersion.h"
+#import "YZHMessageRemindManage.h"
 
 typedef enum : NSUInteger {
     YZHTableViewShowTypeTags = 0,
@@ -186,8 +187,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             [self.view addSubview:self.defaultView];
             self.defaultView.titleLabel.text = @"您还没有群, 广场有很多优质的群 \n快去看一下吧";
             self.defaultView.findTeamButton.hidden = NO;
-        } else {
-            [self.defaultView removeFromSuperview];
         }
     }
 }
@@ -829,6 +828,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     //TODO:
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 //TODO:
@@ -848,6 +848,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     //TODO:
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -871,6 +872,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     }
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -880,6 +882,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -888,6 +891,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     [self setValue:[[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy] forKey:kYZHRecentSessionsKey];
     [self customSortRecents:self.recentSessions];
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -905,6 +909,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 - (void)onTeamMemberChanged:(NIMTeam *)team {
     
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
+    [self refreshTeamListView];
     [self refresh];
 }
 
@@ -929,6 +934,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     [self.recentSessionExtManage screeningAllTeamRecentSession:[self.recentSessions mutableCopy]];
     
+    [self refreshTeamListView];
     [self refresh];
 }
 

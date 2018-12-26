@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSMutableArray<YZHContactMemberModel *>*)searchFirendKeyText:(NSString *)keyText;
 - (NSMutableArray<YZHContactMemberModel *>*)searchFirendTagName:(NSString *)tagName;
 
+- (void)setTeamMembers:(NSArray *)members; //设置成员, 不用过滤自己.
+
 @end
 
 NS_ASSUME_NONNULL_END
