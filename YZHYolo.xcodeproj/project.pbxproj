@@ -248,6 +248,7 @@
 		553DE51921D2012B00BF0554 /* YZHBlackContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE51821D2012B00BF0554 /* YZHBlackContacts.m */; };
 		553DE51D21D22DE700BF0554 /* YZHPasteSkipManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE51C21D22DE700BF0554 /* YZHPasteSkipManage.m */; };
 		553DE52021D24ADE00BF0554 /* YZHChatContentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE51F21D24ADE00BF0554 /* YZHChatContentUtil.m */; };
+		553DE52321D32CDF00BF0554 /* YZHChatContentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE52221D32CDF00BF0554 /* YZHChatContentManage.m */; };
 		553E313321B26945002AF339 /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 553E313221B26944002AF339 /* SourceHanSansCN-Light.ttf */; };
 		5551B33521A55B2600AF3088 /* YZHTeamSendNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */; };
 		5551B33621A55B2600AF3088 /* YZHTeamSendNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5551B33421A55B2600AF3088 /* YZHTeamSendNoticeVC.xib */; };
@@ -1059,6 +1060,8 @@
 		553DE51C21D22DE700BF0554 /* YZHPasteSkipManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPasteSkipManage.m; sourceTree = "<group>"; };
 		553DE51E21D24ADE00BF0554 /* YZHChatContentUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHChatContentUtil.h; sourceTree = "<group>"; };
 		553DE51F21D24ADE00BF0554 /* YZHChatContentUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHChatContentUtil.m; sourceTree = "<group>"; };
+		553DE52121D32CDF00BF0554 /* YZHChatContentManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHChatContentManage.h; sourceTree = "<group>"; };
+		553DE52221D32CDF00BF0554 /* YZHChatContentManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHChatContentManage.m; sourceTree = "<group>"; };
 		553E313221B26944002AF339 /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
 		5551B33221A55B2600AF3088 /* YZHTeamSendNoticeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamSendNoticeVC.h; sourceTree = "<group>"; };
 		5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamSendNoticeVC.m; sourceTree = "<group>"; };
@@ -3753,6 +3756,8 @@
 		559754CE21B42234009AC4D1 /* ChatContent */ = {
 			isa = PBXGroup;
 			children = (
+				553DE52121D32CDF00BF0554 /* YZHChatContentManage.h */,
+				553DE52221D32CDF00BF0554 /* YZHChatContentManage.m */,
 				55FB0C1621C7CD75008C95DE /* YZHSearchChatContentModel.h */,
 				55FB0C1721C7CD75008C95DE /* YZHSearchChatContentModel.m */,
 			);
@@ -4721,7 +4726,7 @@
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Siri = {
 								enabled = 0;
@@ -5095,6 +5100,7 @@
 				553641E3217EAEC2006F77A5 /* NIMTeamCardRowItem.m in Sources */,
 				5531252E21B565A30010B4A6 /* YZHSelectedTeamTypeVC.m in Sources */,
 				55337DBF214F775700307B75 /* YZHLoginVC.m in Sources */,
+				553DE52321D32CDF00BF0554 /* YZHChatContentManage.m in Sources */,
 				559F1B1A217EED370028B0E5 /* NTESChatroomRobotContentConfig.m in Sources */,
 				556D7E7C21A52B5300533384 /* YZHTeamNoticeModel.m in Sources */,
 				5581916B21A26B8E00C74E2E /* YZHSharedContactCell.m in Sources */,
@@ -5538,6 +5544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = YZHYolo/YZHYolo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8MTV8KXWXC;
@@ -5563,6 +5570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = YZHYolo/YZHYolo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8MTV8KXWXC;

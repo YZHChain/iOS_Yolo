@@ -18,6 +18,7 @@
 #import "YZHTeamModel.h"
 #import "YZHProgressHUD.h"
 #import "YZHChatContentUtil.h"
+#import "YZHUserLoginManage.h"
 
 static NSString* kYZHSharedCellIdentifier = @"YZHSharedContactCell";
 static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewIdentifier";
@@ -264,8 +265,9 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             return;
         }
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
-        NSString* yoloId = memberModel.info.infoId;
-        self.forwardMessageToUserBlock ? self.forwardMessageToUserBlock(yoloId) : NULL;
+        
+        NSString* userId = memberModel.info.infoId;
+        self.forwardMessageToUserBlock ? self.forwardMessageToUserBlock(userId) : NULL;
     } else {
         if (!self.selectedIndexPath) {
             [YZHAlertManage showAlertMessage:@"请选择一个群名片"];
@@ -284,7 +286,8 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             return;
         }
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
-        NSString* yoloId = memberModel.info.infoId;
+        YZHUserLoginManage* loginManage = [YZHUserLoginManage sharedManager];
+        NSString* yoloId = loginManage.currentLoginData.yoloId;
         YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
         userCardAttachment.userName = memberModel.info.nickName;
         userCardAttachment.yoloID = yoloId;

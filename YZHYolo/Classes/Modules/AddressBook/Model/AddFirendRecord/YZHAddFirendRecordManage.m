@@ -65,7 +65,7 @@
 
 @end
 
-static const NSInteger MaxNotificationCount = 50;
+static const NSInteger MaxNotificationCount = 100;
 @implementation YZHAddFirendRecordManage
 
 - (instancetype)init {
@@ -83,18 +83,44 @@ static const NSInteger MaxNotificationCount = 50;
     NIMSystemNotificationFilter* fileter = [[NIMSystemNotificationFilter alloc] init];
     fileter.notificationTypes = @[[NSNumber numberWithInteger:NIMSystemNotificationTypeFriendAdd]];
     NSArray<id>* addFriendNotifications = [systemNotificationManager fetchSystemNotifications:nil limit:MaxNotificationCount filter:fileter];
-    NSMutableArray<YZHAddFriendRecordModel*>* addFirendModels = [[NSMutableArray alloc] init];
+    NSMutableArray<YZHAddFriendRecordModel*>* addFirendModels;
     for (NIMSystemNotification* notification in addFriendNotifications) {
         YZHAddFriendRecordModel* model = [[YZHAddFriendRecordModel alloc] init];
         model.addFriendNotification = notification;
+        NSDate* timeDate = [NSDate dateWithTimeIntervalSince1970:notification.timestamp];
+        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM"];
+        NSDateComponents *components = [dateFormatter.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:timeDate];
+        NSDate* currentDate = [NSDate date];
+        NSDateComponents *currentComponents = [dateFormatter.calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:currentDate];
+        NSInteger currentbillYear = [currentComponents year];
+        NSInteger currentbillMonth = [currentComponents month];
+        
+        NSInteger billYear = [components year];
+        NSInteger billMonth = [components month];
+        
+        NSString* yearAndMonth = [NSString stringWithFormat:@"%ld/%ld", billYear, billMonth];
+        if (currentbillYear == billYear && currentbillMonth == billMonth) {
+            if (!self.timerArray.count) {
+                self.timerArray = @[@"最近一个月"].mutableCopy;
+                 addFirendModels = [[NSMutableArray alloc] init];
+                //TODO: 遍历将其月份分隔开。
+                self.addFirendListModel = [[NSMutableArray alloc] init];
+                [self.addFirendListModel addObject:addFirendModels];
+            }
+        } else {
+            if (![self.timerArray containsObject:yearAndMonth]) {
+                if (!self.timerArray.count) {
+                    self.timerArray = [[NSMutableArray alloc] init];
+                    self.addFirendListModel = [[NSMutableArray alloc] init];
+                }
+                [self.timerArray addObject:yearAndMonth];
+                addFirendModels = [[NSMutableArray alloc] init];
+                [self.addFirendListModel addObject:addFirendModels];
+            }
+        }
         [addFirendModels addObject:model];
     }
-    
-    //TODO: 遍历将其月份分隔开。
-    self.addFirendListModel = [[NSMutableArray alloc] init];
-    [self.addFirendListModel addObject:addFirendModels.mutableCopy];
-    
-    self.timerArray = @[@"最近一个月"].mutableCopy;
 }
 
 - (void)removeAddFirendMessage:(NSIndexPath*)indexPath {

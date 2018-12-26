@@ -120,7 +120,7 @@
     //如果是自己的个人详情,则。
     if (self.isMySelf) {
         //清空表尾
-//        self.tableView.tableFooterView = [[UIView alloc] init];
+        self.tableView.tableFooterView = [[UIView alloc] init];
     }
     
     [self.tableView reloadData];

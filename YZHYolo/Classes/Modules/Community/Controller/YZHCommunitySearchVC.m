@@ -21,6 +21,11 @@
 #import "YZHSearchLabelSelectedView.h"
 #import "YZHUserModelManage.h"
 #import "YZHSearchTeamShowCell.h"
+#import "YZHUserCardAttachment.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHAddFirendAttachment.h"
+#import "YZHRequstAddFirendAttachment.h"
+#import "YZHSpeedyResponseAttachment.h"
 
 static int kYZHRecommendTeamPageSize = 20; // 默认每页个数
 static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionView";
@@ -561,10 +566,24 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
         case NIMMessageTypeRobot:
             //            text = [self robotMessageContent:lastMessage];
             break;
-        case NIMMessageTypeCustom:
+        case NIMMessageTypeCustom:{
             //TODO:增加自定义消息解析.识别不同自定义消息格式
-            
-            text = @"自定义消息";
+            NIMCustomObject *customObject = (NIMCustomObject*)lastMessage.messageObject;
+            YZHUserCardAttachment* attachment = (YZHUserCardAttachment *)customObject.attachment;
+            if ([attachment isKindOfClass:[YZHUserCardAttachment class]]) {
+                text = @"用户名片分享";
+            } else if ([attachment isKindOfClass:[YZHTeamCardAttachment class]]) {
+                text = @"社群名片分享";
+            } else if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
+                text = @"请求添加友好";
+            } else if ([attachment isKindOfClass:[YZHRequstAddFirendAttachment class]]) {
+                text = @"请求添加好友";
+            } else if ([attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) {
+                text = @"快捷回执消息";
+            } else {
+                text = @"自定义消息";
+            }
+        }
             break;
         default:
             text = @"[未知消息]";

@@ -21,7 +21,7 @@
 #import "YZHPasteSkipManage.h"
 
 NSString* const kYZHNotificationLogout            = @"NotificationLogout";
-@interface AppDelegate ()<NIMLoginManagerDelegate>
+@interface AppDelegate ()<NIMLoginManagerDelegate, PKPushRegistryDelegate>
 
 @end
 
@@ -35,6 +35,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     [self setupNIMSDK];
     [self setupServices];
     
+    [self registerPushService];
     [self commonInitListenEvents];
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
@@ -87,29 +88,28 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 }
 
 #pragma mark PKPushRegistryDelegate
+- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
+{
+    if ([type isEqualToString:PKPushTypeVoIP])
+    {
+        [[NIMSDK sharedSDK] updatePushKitToken:credentials.token];
+    }
+}
 
-//- (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
-//{
-//    if ([type isEqualToString:PKPushTypeVoIP])
-//    {
-//        [[NIMSDK sharedSDK] updatePushKitToken:credentials.token];
-//    }
-//}
-//
-//- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
-//{
-////    DDLogInfo(@"receive payload %@ type %@",payload.dictionaryPayload,type);
-//    NSNumber *badge = payload.dictionaryPayload[@"aps"][@"badge"];
-//    if ([badge isKindOfClass:[NSNumber class]])
-//    {
-//        [UIApplication sharedApplication].applicationIconBadgeNumber = [badge integerValue];
-//    }
-//}
-//
-//- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type
-//{
-////    DDLogInfo(@"registry %@ invalidate %@",registry,type);
-//}
+- (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
+{
+    NSLog(@"receive payload %@ type %@",payload.dictionaryPayload,type);
+    NSNumber *badge = payload.dictionaryPayload[@"aps"][@"badge"];
+    if ([badge isKindOfClass:[NSNumber class]])
+    {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = [badge integerValue];
+    }
+}
+
+- (void)pushRegistry:(PKPushRegistry *)registry didInvalidatePushTokenForType:(NSString *)type
+{
+     NSLog(@"registry %@ invalidate %@",registry,type);
+}
 
 
 #pragma mark - openURL
@@ -159,9 +159,8 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     
     //pushkit
     PKPushRegistry *pushRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
-//    pushRegistry.delegate = self;
+    pushRegistry.delegate = self;
     pushRegistry.desiredPushTypes = [NSSet setWithObject:PKPushTypeVoIP];
-    
 }
 
 

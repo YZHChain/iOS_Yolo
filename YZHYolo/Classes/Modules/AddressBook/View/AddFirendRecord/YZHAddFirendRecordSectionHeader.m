@@ -10,12 +10,15 @@
 
 @implementation YZHAddFirendRecordSectionHeader
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
+    self.backgroundView = ({
+        UIView* view = [[UIView alloc] init];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
 }
-*/
 
 @end

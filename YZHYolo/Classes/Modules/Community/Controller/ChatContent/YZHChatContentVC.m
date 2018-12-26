@@ -18,6 +18,8 @@
 #import "NSString+YZHTool.h"
 #import "VBFPopFlatButton.h"
 #import "DLRadioButton.h"
+#import "YZHAddFirendRecordSectionHeader.h"
+#import "YZHChatContentManage.h"
 
 typedef enum : NSUInteger {
     YZHChatContentTypeImage = 1,
@@ -43,6 +45,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 @property (nonatomic, strong) NSArray<NIMMessage*>* imageViewMessages;
 @property (nonatomic, strong) NSArray<NIMMessage*>* allTextMessage;
 @property (nonatomic, strong) NIMMessage* messageForMenu;
+@property (nonatomic, strong) YZHChatContentManage* chatContentManage;
 
 @end
 
@@ -139,77 +142,58 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 #pragma mark - 3.Request Data
 
 - (void)setupData {
-
-    NIMSession* session = [NIMSession session:self.targetId type:NIMSessionTypeTeam];
+    NIMSession* session;
+    if (self.isTeam) {
+       session = [NIMSession session:self.targetId type:NIMSessionTypeTeam];
+    } else {
+       session = [NIMSession session:self.targetId type:NIMSessionTypeP2P];
+    }
     
-    NIMMessageSearchOption* imageOption = [[NIMMessageSearchOption alloc] init];
-    imageOption.limit = 0;
-    imageOption.order = NIMMessageSearchOrderDesc;
-    imageOption.messageTypes = @[@(NIMMessageTypeImage)];
+    NIMMessageSearchOption* searchOption = [[NIMMessageSearchOption alloc] init];
+    searchOption.limit = 0;
+    searchOption.order = NIMMessageSearchOrderDesc;
     
-    [[[NIMSDK sharedSDK] conversationManager] searchMessages:session option:imageOption result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
-        self.imageViewMessages = messages;
+    self.chatContentManage = [[YZHChatContentManage alloc] initWithSession:session searchOption:searchOption];
+    
+    @weakify(self)
+    [self.chatContentManage searchImageViewMessagesCompletion:^{
+        @strongify(self)
         [self.imageCollectionView reloadData];
     }];
     
-    NIMMessageSearchOption* cardOption = [[NIMMessageSearchOption alloc] init];
-    cardOption.limit = 0;
-    cardOption.order = NIMMessageSearchOrderDesc;
-    cardOption.messageTypes = @[@(NIMMessageTypeCustom)];
-    
-    [[[NIMSDK sharedSDK] conversationManager] searchMessages:session option:cardOption result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
-        
-        NSMutableArray<NIMMessage*> *mutableMessages = messages.mutableCopy;
-        NSMutableArray* mutableCardMessages = [[NSMutableArray alloc] init];
-        for (NSInteger i = 0; i < mutableMessages.count; i++) {
-            NIMCustomObject *customObject = (NIMCustomObject*)mutableMessages[i].messageObject;
-            if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")] || [customObject.attachment isKindOfClass:NSClassFromString(@"YZHTeamCardAttachment")]) {
-                [mutableCardMessages addObject:mutableMessages[i]];
-            }
-        }
-        self.cardMessages = mutableCardMessages.copy;
+    [self.chatContentManage searchUserCardMessagesCompletion:^{
+        @strongify(self)
         [self.cardTableView reloadData];
     }];
     
-    NIMMessageSearchOption* option = [[NIMMessageSearchOption alloc] init];
-    option.limit = 0;
-    option.order = NIMMessageSearchOrderDesc;
-
-    [[[NIMSDK sharedSDK] conversationManager] searchMessages:session option:option result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
-        NSMutableArray<NIMMessage*> *mutableMessages = messages.mutableCopy;
-        NSMutableArray* mutableHTTPMessages = [[NSMutableArray alloc] init];
-        
-        for (NSInteger i = 0; i < mutableMessages.count; i++) {
-            if ([mutableMessages[i].text yzh_isHTTP]) {
-                [mutableHTTPMessages addObject:mutableMessages[i]];
-            }
-        }
-        self.allTextMessage = messages;
-        self.urlMessages = mutableHTTPMessages.copy;
+    [self.chatContentManage searchURLMessagesCompletion:^{
+        @strongify(self)
         [self.urlTableView reloadData];
     }];
-    
-    
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 1;
+    if ([tableView isEqual:self.urlTableView]) {
+        return self.chatContentManage.urlTimers.count;
+    } else {
+        return self.chatContentManage.cardTimers.count;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     switch (tableView.tag) {
-        case YZHChatContentTypeImage:
-            return self.imageViewMessages.count;
-            break;
+//        case YZHChatContentTypeImage:
+//            return self.imageViewMessages.count;
+//            break;
         case YZHChatContentTypeCard:
-            return self.cardMessages.count;
+            return self.chatContentManage.cardMessages[section].count;
             break;
         case YZHChatContentTypeUrl:
-            return self.urlMessages.count;
+            return self.chatContentManage.urlMessages[section].count;
             break;
         default:
             return 0;
@@ -220,9 +204,9 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     switch (tableView.tag) {
-        case YZHChatContentTypeImage:
-            return [self reloadImageTableView:tableView cellForRowAtIndexPath:indexPath];
-            break;
+//        case YZHChatContentTypeImage:
+//            return [self reloadImageTableView:tableView cellForRowAtIndexPath:indexPath];
+//            break;
         case YZHChatContentTypeCard:
             return [self reloadCardTableView:tableView cellForRowAtIndexPath:indexPath];
             break;
@@ -246,7 +230,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     
     YZHChatTextContentCell* cell =  [tableView dequeueReusableCellWithIdentifier:kUrlCellIdentifie forIndexPath:indexPath];
     
-    NIMMessage* message = self.urlMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.urlMessages[indexPath.section][indexPath.row];
     NIMMessageModel* messageModel = [[NIMMessageModel alloc] initWithMessage:message];
     
     [cell refreshData:messageModel];
@@ -256,23 +240,23 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     return cell;
 }
 
-- (UITableViewCell *)reloadImageTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    YZHChatTextContentCell* cell =  [tableView dequeueReusableCellWithIdentifier:kImageCellIdentifie forIndexPath:indexPath];
-    
-    NIMMessage* message = self.imageViewMessages[indexPath.row];
-    NIMMessageModel* messageModel = [[NIMMessageModel alloc] initWithMessage:message];
-    
-    [cell refreshData:messageModel];
-    
-    return cell;
-}
+//- (UITableViewCell *)reloadImageTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//
+//    YZHChatTextContentCell* cell =  [tableView dequeueReusableCellWithIdentifier:kImageCellIdentifie forIndexPath:indexPath];
+//
+//    NIMMessage* message = self.imageViewMessages[indexPath.row];
+//    NIMMessageModel* messageModel = [[NIMMessageModel alloc] initWithMessage:message];
+//
+//    [cell refreshData:messageModel];
+//
+//    return cell;
+//}
 
 - (UITableViewCell *)reloadCardTableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     YZHCardContentCell* cell =  [tableView dequeueReusableCellWithIdentifier:kCardCellIdentifie forIndexPath:indexPath];
     
-    NIMMessage* message = self.cardMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.cardMessages[indexPath.section][indexPath.row];
     
     [cell refreshData:message];
     
@@ -282,9 +266,9 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     switch (tableView.tag) {
-        case YZHChatContentTypeImage:
-            return 50;
-            break;
+//        case YZHChatContentTypeImage:
+//            return 50;
+//            break;
         case YZHChatContentTypeCard:
             return [self cardTableView:tableView heightForRowAtIndexPath:indexPath];
             break;
@@ -300,7 +284,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 - (CGFloat)urlTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat cellHeight = 0;
-    NIMMessage* message = self.urlMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.urlMessages[indexPath.section][indexPath.row];
     NIMMessageModel* messageModel = [[NIMMessageModel alloc] initWithMessage:message];
     //计算 Cell 高度.先计算ContentView 高度, 然后在加上Cell 内边距和 ContentView 内边距
     CGSize size = [messageModel contentSize:self.urlTableView.width];
@@ -313,7 +297,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 
 - (CGFloat)cardTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NIMMessage* message = self.cardMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.cardMessages[indexPath.section][indexPath.row];
     NIMCustomObject *customObject = (NIMCustomObject*)message.messageObject;
     CGFloat cellHeight = 0;
     if ([customObject.attachment isKindOfClass:NSClassFromString(@"YZHUserCardAttachment")]) {
@@ -326,51 +310,41 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 40;
+    return 25;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    UITableViewHeaderFooterView* headerView = [[UITableViewHeaderFooterView alloc] init];
+    YZHAddFirendRecordSectionHeader *sectionHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:kYZHCommonHeaderIdentifier];
+    NSString* dateText;
+    if ([tableView isEqual:self.cardTableView]) {
+        dateText = self.chatContentManage.cardTimers[section];
+    } else {
+        dateText = self.chatContentManage.urlTimers[section];
+    }
+    sectionHeader.dateLabel.text = dateText;
     
-    headerView.backgroundView = ({
-        UIView * view = [[UIView alloc] initWithFrame:headerView.bounds];
-        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        view;
-    });
+    return sectionHeader;
     
-    UILabel* titleLabel = [[UILabel alloc] init];
-    titleLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
-    titleLabel.textColor = [UIColor yzh_sessionCellGray];
-    titleLabel.text = @"最近一个月";
-    
-    [headerView addSubview:titleLabel];
-    
-    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
-        make.centerY.mas_equalTo(0);
-    }];
-    
-    return headerView;
 }
 
 #pragma mark - CollectionView Delegate & DataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return 1;
+    return self.chatContentManage.imageViewTimers.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return self.imageViewMessages.count;
+    return self.chatContentManage.imageViewMessages[section].count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     YZHImageContentCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kImageCellIdentifie forIndexPath:indexPath];
     
-    NIMMessage* message = self.imageViewMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.imageViewMessages[indexPath.section][indexPath.row];
     NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
     [cell refreshData: model];
     
@@ -396,7 +370,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
         UILabel* titleLabel = [[UILabel alloc] init];
         titleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:13];
         titleLabel.textColor = [UIColor yzh_sessionCellGray];
-        titleLabel.text = @"最近一个月";
+        titleLabel.text = self.chatContentManage.imageViewTimers[indexPath.row];
         
         [header addSubview:titleLabel];
         
@@ -413,7 +387,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NIMMessage* message = self.imageViewMessages[indexPath.row];
+    NIMMessage* message = self.chatContentManage.imageViewMessages[indexPath.section][indexPath.row];
     
     NIMImageObject *object = (NIMImageObject *)message.messageObject;
     NTESGalleryItem *item = [[NTESGalleryItem alloc] init];
@@ -534,27 +508,13 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     return _imageCollectionView;
 }
 
-- (UITableView *)imageTableView{
-    
-    if (_imageTableView == nil) {
-        _imageTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-        _imageTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-//        [_imageTableView registerNib:[UINib nibWithNibName:@"YZHMyCenterCell" bundle:nil] forCellReuseIdentifier: KCellIdentifier];
-        _imageTableView.delegate = self;
-        _imageTableView.dataSource = self;
-//        _imageTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
-        _imageTableView.tag = YZHChatContentTypeImage;
-        _imageTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    return _imageTableView;
-}
-
 - (UITableView *)cardTableView{
     
     if (_cardTableView == nil) {
         _cardTableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
         _cardTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         [_cardTableView registerClass:[YZHCardContentCell class] forCellReuseIdentifier:kCardCellIdentifie];
+        [_cardTableView registerNib:[UINib nibWithNibName:@"YZHAddFirendRecordSectionHeader" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHCommonHeaderIdentifier];
         _cardTableView.delegate = self;
         _cardTableView.dataSource = self;
         _cardTableView.tag = YZHChatContentTypeCard;
@@ -570,6 +530,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
         _urlTableView.backgroundColor = [UIColor yzh_backgroundThemeGray];
         
         [_urlTableView registerClass:[YZHChatTextContentCell class] forCellReuseIdentifier:kUrlCellIdentifie];
+        [_urlTableView registerNib:[UINib nibWithNibName:@"YZHAddFirendRecordSectionHeader" bundle:nil] forHeaderFooterViewReuseIdentifier:kYZHCommonHeaderIdentifier];
         _urlTableView.delegate = self;
         _urlTableView.dataSource = self;
         _urlTableView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -101,7 +101,10 @@
 
 - (void)reloadView {
     
-    if (self.teamExt.team_hide_info) {
+    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
+    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
+    //群主可直接
+    if (self.teamExt.team_hide_info && !isTeamManage) {
         self.tableView.hidden = YES;
         [self.view addSubview:self.tipLabel];
         [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -121,12 +124,14 @@
 - (void)refreshFooterView {
     
     BOOL allowAddAndChat = YES;
+    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
+    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
     if (YZHIsString(self.teamInfoExt.addAndChat)) {
         if ([self.teamInfoExt.addAndChat isEqualToString:@"0"]) {
             allowAddAndChat = NO;
         }
     }
-    if (allowAddAndChat) {
+    if (allowAddAndChat || isTeamManage) {
         [self.tableView setTableFooterView:self.footerView];
         BOOL isMyFriend = [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId];
         if (isMyFriend) {
@@ -135,8 +140,7 @@
             [self.footerView addSubview:self.footerView.addFriendButton];
         }
     } else {
-        [self.footerView removeFromSuperview];
-        self.tableView.tableFooterView = nil;
+        self.tableView.tableFooterView = [[UIView alloc] init];
     }
     @weakify(self)
     _footerView.addFriendBlock = ^(UIButton *sender) {
