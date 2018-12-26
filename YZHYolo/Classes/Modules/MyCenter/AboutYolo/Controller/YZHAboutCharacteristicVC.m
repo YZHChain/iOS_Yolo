@@ -101,7 +101,7 @@
 #else
             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
-            self.url = [NSString stringWithFormat:@"%@/yolo-web/html/about/characteristic.html?platform=ios", urlServerString];
+            self.url = [NSString stringWithFormat:@"%@%@?platform=ios", urlServerString, PATH_WEB_ABOUTYOLO_INTRODUCE];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];

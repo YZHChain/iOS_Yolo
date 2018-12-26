@@ -125,9 +125,9 @@
             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
             if (YZHIsString(userPic)) {
-               self.url = [NSString stringWithFormat:@"%@/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=%@&platform=ios",urlServerString , yolo_no, userNick, userPic];
+               self.url = [NSString stringWithFormat:@"%@%@?userId=%@&userNick=%@&userPic=%@&platform=ios",urlServerString , PATH_WEB_DISCOUNT, yolo_no, userNick, userPic];
             } else {
-                self.url = [NSString stringWithFormat:@"%@/yylm-web/entrance.html?userId=%@&userNick=%@&userPic=&platform=ios",urlServerString , yolo_no, userNick];
+                self.url = [NSString stringWithFormat:@"%@%@?userId=%@&userNick=%@&userPic=&platform=ios",urlServerString , PATH_WEB_DISCOUNT, yolo_no, userNick];
             }
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

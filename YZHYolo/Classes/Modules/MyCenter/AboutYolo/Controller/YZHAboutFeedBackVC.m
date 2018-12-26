@@ -105,7 +105,7 @@
 #else
             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
-            self.url = [NSString stringWithFormat:@"%@/yolo-web/html/about/feedback.html?yoloid=%@&username=%@&platform=ios",urlServerString , yolo_no, userNick];
+            self.url = [NSString stringWithFormat:@"%@%@?yoloid=%@&username=%@&platform=ios" ,urlServerString, PATH_WEB_ABOUTYOLO_FEEDBACK, yolo_no, userNick];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSURL* url = [[NSURL alloc] initWithString: urlStr];

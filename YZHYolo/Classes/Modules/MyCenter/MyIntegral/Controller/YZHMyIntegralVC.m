@@ -109,7 +109,7 @@
 #else
             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
-            self.url = [NSString stringWithFormat:@"%@/yolo-web/html/integral/index_page.html?userId=%@&platform=ios" ,urlServerString ,yolo_no];
+            self.url = [NSString stringWithFormat:@"%@%@?userId=%@&platform=ios" ,urlServerString ,PATH_WEB_INTEGRL ,yolo_no];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 

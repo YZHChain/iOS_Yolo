@@ -116,7 +116,7 @@
 #else
             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
-            self.url = [NSString stringWithFormat:@"%@/yolo-web/index.html?useraccout=%@&platform=ios",urlServerString ,yolo_no];
+            self.url = [NSString stringWithFormat:@"%@%@?useraccout=%@&platform=ios",urlServerString ,PATH_WEB_SQUARE, yolo_no];
         }
         NSString* urlStr = [self.url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {

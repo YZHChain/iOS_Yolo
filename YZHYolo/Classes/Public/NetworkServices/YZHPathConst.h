@@ -64,4 +64,15 @@
 // 积分
 #define PATH_INTEGRL_COLLARTASK                 @"/api/collarTaskIntegral" //搜索群列表
 
+#pragma mark -- H5 PATH
+
+#define PATH_WEB_SQUARE                         @"/yolo-web/index.html" //广场
+#define PATH_WEB_INTEGRL                        @"/yolo-web/html/integral/index_page.html" //我的积分
+#define PATH_WEB_DISCOUNT                       @"/yylm-web/entrance.html" //异业联盟
+#define PATH_WEB_ABOUTYOLO                      @"/yolo-web/html/about/new_des.html" //关于YOLO
+#define PATH_WEB_ABOUTYOLO_PROBLEM              @"/yolo-web/html/about/common_problem.html" //常见问题
+#define PATH_WEB_ABOUTYOLO_INTRODUCE            @"/yolo-web/html/about/characteristic.html" //特色介绍
+#define PATH_WEB_ABOUTYOLO_FEEDBACK             @"/yolo-web/html/about/feedback.html" //问题反馈
+
+
 #endif /* YZHPathConst_h */
