@@ -76,7 +76,8 @@
 - (void)setupNavBar {
     self.navigationItem.title = @"详情资料";
     
-    if ([[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
+//    [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES
+    if (![[NIMSDK sharedSDK].loginManager.currentAccount isEqualToString:self.userId]) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];

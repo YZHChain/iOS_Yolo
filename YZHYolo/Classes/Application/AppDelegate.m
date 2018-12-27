@@ -208,7 +208,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 #endif
     
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
-    option.apnsCername      = @"iOSDeveloperPush";
+//    option.apnsCername      = @"iOSDeveloperPush";
 //    option.apnsCername      = @"iOSProductionPush";
 //    option.pkCername        = @"developerPush06";
     [[NIMSDK sharedSDK] registerWithOption:option];

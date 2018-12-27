@@ -69,7 +69,8 @@
     self.navigationItem.title = @"详情资料";
     
     // 不是自己,并且是我的好友时,才会有更多选项
-    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
+//    && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES
+    if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
