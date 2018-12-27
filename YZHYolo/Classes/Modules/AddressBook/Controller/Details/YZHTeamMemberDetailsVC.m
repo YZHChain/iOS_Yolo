@@ -140,7 +140,7 @@
         if (self.userInfoExtManage.privateSetting.allowAdd) {
             [self.footerView addSubview:self.footerView.addFriendButton];
         } else {
-            [self.footerView removeFromSuperview];
+            [self.footerView.addFriendButton removeFromSuperview];
         }
     }
     

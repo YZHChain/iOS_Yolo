@@ -33,7 +33,7 @@
         [_groupButton addTarget:self action:@selector(executeSelected:) forControlEvents:UIControlEventTouchUpInside];
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:_groupButton];
-        
+    
     }
     return self;
 }

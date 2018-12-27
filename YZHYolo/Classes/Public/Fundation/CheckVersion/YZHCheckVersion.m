@@ -98,10 +98,10 @@ NSString* const kYZHAppID = @"1446610007";
                           @"appSource": @"1", // iOS
                           @"appVersion": currentVersion
                           };
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+//    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
     @weakify(self)
     [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUAPPUPDATE) params:dic successCompletion:^(id obj) {
-        [hud hideWithText:nil];
+//        [hud hideWithText:nil];
         YZHChekoutVersionModel* model = [YZHChekoutVersionModel YZH_objectWithKeyValues:obj];
         @strongify(self)
         // 先判断是否需要强更
@@ -125,13 +125,15 @@ NSString* const kYZHAppID = @"1446610007";
                     }
                 }];
             } else {
-                [YZHProgressHUD showLoadingOnView:YZHAppWindow text:@"当前已经是最新版本"];
+//                [hud hideWithText:@"当前已经是最新版本"];
+                [YZHProgressHUD showText:@"当前已经是最新版本" onView:YZHAppWindow completion:nil];
             }
         }
         
     } failureCompletion:^(NSError *error) {
         
-        [hud hideWithText:error.domain];
+//        [hud hideWithText:error.domain];
+        [YZHProgressHUD showText:error.domain onView:YZHAppWindow completion:nil];
     }];
 }
 

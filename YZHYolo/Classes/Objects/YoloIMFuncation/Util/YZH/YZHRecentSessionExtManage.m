@@ -29,6 +29,10 @@
         //检查本地扩展字段.
     for (NSInteger i = 0; i < allRecentSession.count; i++) {
         NIMRecentSession* recentSession = allRecentSession[i];
+        if (![[[NIMSDK sharedSDK] userManager] isMyFriend:recentSession.session.sessionId] && ![[NIMSDK sharedSDK].loginManager.currentAccount isEqualToString:recentSession.session.sessionId]) {
+            [self.tagsRecentSession.lastObject addObject:recentSession];
+            continue;
+        }
         //不比较未分类,直接存到到最后
         NSInteger tagCount = self.tagsRecentSession.count;
         // BUG
@@ -49,7 +53,8 @@
                 [self.tagsRecentSession[y] addObject:recentSession];
                 break;
             } else if(sessionTagName.length == 0 && isSessionTypeP2P) {
-                [self.tagsRecentSession.lastObject addObject:recentSession];
+                NSInteger count = self.tagsRecentSession.count;
+                [self.tagsRecentSession[count - 2] addObject:recentSession];
                 break;
             }
         }
@@ -387,7 +392,8 @@
         [tagsArray addObject:customTags.tagName];
     }
     [tagsArray insertObject:@"置顶" atIndex:0];
-    [tagsArray addObject:@"无好友标签"];
+    [tagsArray addObject:@"其他"];
+    [tagsArray addObject:@"临时聊天"];
     
     self.defaultTags = tagsArray.copy;
 }
