@@ -225,7 +225,7 @@
         
         NSDictionary* dic = @{
                               @"type": [NSNumber numberWithInteger:1],
-                              @"accid": self.teamId
+                              @"accid": self.teamId,
                               };
         
         _QRCodeResult = [dic mj_JSONString];

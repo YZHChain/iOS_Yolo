@@ -87,6 +87,30 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     return YES;
 }
 
+#pragma mark - Remote Notification
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required - 注册 DeviceToken
+    [[NIMSDK sharedSDK] updateApnsToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // IOS 7 Support Required
+    NSLog(@"%s %@ %@",__func__ ,userInfo ,@(application.applicationState));
+    
+    //从推送通知打开App时，才进行页面跳转。
+//    BOOL active = (application.applicationState == UIApplicationStateActive);
+//    [YMPushService handleRemoteNotification:userInfo route:!active];
+//
+//    completionHandler(UIBackgroundFetchResultNewData);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
 #pragma mark PKPushRegistryDelegate
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
 {
@@ -156,7 +180,6 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-    
     //pushkit
     PKPushRegistry *pushRegistry = [[PKPushRegistry alloc] initWithQueue:dispatch_get_main_queue()];
     pushRegistry.delegate = self;
@@ -185,8 +208,9 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 #endif
     
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
-//    option.apnsCername      = @"developerPush06";
-    option.pkCername        = @"developerPush06";
+    option.apnsCername      = @"iOSDeveloperPush";
+//    option.apnsCername      = @"iOSProductionPush";
+//    option.pkCername        = @"developerPush06";
     [[NIMSDK sharedSDK] registerWithOption:option];
     
     //注册自定义消息的解析器

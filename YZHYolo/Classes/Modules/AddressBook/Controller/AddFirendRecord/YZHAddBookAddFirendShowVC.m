@@ -66,7 +66,7 @@
 
 - (void)setupNavBar {
     
-    self.navigationItem.title = @"详细资料";
+    self.navigationItem.title = @"详情资料";
     
     // 不是自己,并且是我的好友时,才会有更多选项
     if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId] == NO && [[[NIMSDK sharedSDK] userManager] isMyFriend:self.userId] == YES) {
@@ -74,7 +74,7 @@
         [rightButton addTarget:self action:@selector(clickRightItemGotoSetting) forControlEvents:UIControlEventTouchUpInside];
         [rightButton setImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] forState:UIControlStateNormal];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"addBook_userDetails_rightBarButton_default"] style:UIBarButtonItemStylePlain target:self action:@selector(clickRightItemGotoSetting)];
+        [rightButton sizeToFit];
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
@@ -113,7 +113,6 @@
         } else {
            //TODO同意过,但是又被删掉了. 如何显示。 直接在外层进行处理, 不会进入到这个逻辑. 处理过的消息直接进入消息详情里.
             [self.userAskFooterView.agreeButton setTitle:@"加为好友" forState:UIControlStateNormal];
-            [self.userAskFooterView.agreeButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self.userAskFooterView.agreeButton setTitleColor:YZHColorRGBAWithRGBA(62, 58, 57, 1) forState:UIControlStateNormal];
             self.userAskFooterView.agreeButton.tag = 2;
         }
@@ -121,15 +120,15 @@
         // 当前是好友状态.
         [self isFriendButtonStatus];
     }
+    [self.tableView setTableFooterView:self.userAskFooterView];
+    [self.tableView reloadData];
     //暂时不考虑, 添加好友状态.
     //如果是自己的个人详情,则。
     if ([[[[NIMSDK sharedSDK] loginManager] currentAccount] isEqualToString:self.userId]) {
         //清空表尾
         self.tableView.tableFooterView = [[UIView alloc] init];
     }
-    //TODO: 计算高度.
-    self.tableView.tableFooterView = self.userAskFooterView;
-    [self.tableView reloadData];
+
 }
 
 #pragma mark - 3.Request Data
@@ -259,7 +258,6 @@
 - (void)notFriendButtonStatus {
     
     [self.userAskFooterView.agreeButton setTitle:@"同意" forState:UIControlStateNormal];
-    [self.userAskFooterView.agreeButton yzh_setBackgroundColor:YZHColorRGBAWithRGBA(42, 107, 250, 1) forState:UIControlStateNormal];
     self.userAskFooterView.agreeButton.tag = 0;
 }
 
@@ -289,7 +287,6 @@
 - (void)isFriendButtonStatus {
     
     [self.userAskFooterView.agreeButton setTitle:@"发消息" forState:UIControlStateNormal];
-    [self.userAskFooterView.agreeButton yzh_setBackgroundColor:YZHColorRGBAWithRGBA(42, 107, 250, 1) forState:UIControlStateNormal];
     self.userAskFooterView.agreeButton.tag = 1;
 }
 
@@ -305,8 +302,6 @@
     //按钮还需要根据对方用户的隐私设置来显示.TODO 这里直接通过这种方式读取到的 TargetUser 不是最新的.
     if (self.userInfoExtManage.privateSetting.allowAdd) {
         [self.userAskFooterView.agreeButton setTitle:@"加为好友" forState:UIControlStateNormal];
-        [self.userAskFooterView.agreeButton yzh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.userAskFooterView.agreeButton setTitleColor:YZHColorRGBAWithRGBA(62, 58, 57, 1) forState:UIControlStateNormal];
         self.userAskFooterView.agreeButton.tag = 2;
     }
 }
@@ -365,6 +360,9 @@
     
     if (!_userAskFooterView) {
         _userAskFooterView = [[NSBundle mainBundle] loadNibNamed:@"YZHAddFriendShowFooterView" owner:nil options:nil].lastObject;
+        _userAskFooterView.autoresizingMask = NO;
+        _userAskFooterView.frame = CGRectMake(0, 0, self.tableView.width, 250);
+        
     }
     return _userAskFooterView;
 }

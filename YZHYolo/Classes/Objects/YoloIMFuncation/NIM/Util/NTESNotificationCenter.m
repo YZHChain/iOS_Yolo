@@ -86,18 +86,18 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 //TODO: 收到消息时
 - (void)onRecvMessages:(NSArray *)recvMessages
 {
-//    NSArray *messages = [self filterMessages:recvMessages];
+    NSArray *messages = [self filterMessages:recvMessages];
     if (recvMessages.count)
     {
-//        static BOOL isPlaying = NO;
-//        if (isPlaying) {
-//            return;
-//        }
-//        isPlaying = YES;
+        static BOOL isPlaying = NO;
+        if (isPlaying) {
+            return;
+        }
+        isPlaying = YES;
 //        [self playMessageAudioTip];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            isPlaying = NO;
-//        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            isPlaying = NO;
+        });
         [self checkMessageAt:recvMessages];
     }
 }
@@ -144,21 +144,21 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 }
 
 
-//- (NSArray *)filterMessages:(NSArray *)messages
-//{
-//    NSMutableArray *array = [[NSMutableArray alloc] init];
-//    for (NIMMessage *message in messages)
-//    {
+- (NSArray *)filterMessages:(NSArray *)messages
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (NIMMessage *message in messages)
+    {
 //        if ([self checkRedPacketTip:message] && ![self canSaveMessageRedPacketTip:message])
 //        {
 //            [[NIMSDK  sharedSDK].conversationManager deleteMessage:message];
 //            [self.currentSessionViewController uiDeleteMessage:message];
 //            continue;
 //        }
-//        [array addObject:message];
-//    }
-//    return [NSArray arrayWithArray:array];
-//}
+        [array addObject:message];
+    }
+    return [NSArray arrayWithArray:array];
+}
 
 
 //- (BOOL)checkRedPacketTip:(NIMMessage *)message

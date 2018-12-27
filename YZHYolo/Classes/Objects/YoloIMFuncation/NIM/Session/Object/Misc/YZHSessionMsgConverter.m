@@ -96,7 +96,7 @@
     customObject.attachment           = attachment;
     message.messageObject             = customObject;
     //推送文案
-    message.apnsContent = [NSString stringWithFormat:@"%@发来了好友名片", attachment.userName];
+    message.apnsContent = [NSString stringWithFormat:@"发来了好友名片"];
     
     return message;
 }
@@ -108,7 +108,7 @@
     customObject.attachment           = attachment;
     message.messageObject             = customObject;
     //推送文案
-    message.apnsContent = [NSString stringWithFormat:@"%@发来了社群名片", attachment.groupName];
+    message.apnsContent = [NSString stringWithFormat:@"发来了社群名片"];
     return message;
 }
 
@@ -121,7 +121,7 @@
     customObject.attachment = attachment;
     message.messageObject = customObject;
     //推送文案
-    message.apnsContent = [NSString stringWithFormat:@"%@发来了快捷回应消息", attachment.teamNickName];
+    message.apnsContent = [NSString stringWithFormat:@"发来了快捷回应消息"];
     return message;
     
 }

@@ -9,15 +9,20 @@
 #import "YZHAddFriendShowFooterView.h"
 
 #import "UIButton+YZHTool.h"
+#import "YZHPublic.h"
 @implementation YZHAddFriendShowFooterView
 
 - (void)awakeFromNib {
     
     [super awakeFromNib];
     
-    [self.agreeButton yzh_setBackgroundColor:YZHColorRGBAWithRGBA(42, 107, 250, 1) forState:UIControlStateNormal];
-    self.agreeButton.layer.cornerRadius = 5;
-    self.agreeButton.layer.masksToBounds = YES;
+    [self.agreeButton yzh_setupButton];
+    
+    self.backgroundView = ({
+        UIView* view = [[UIView alloc] initWithFrame:self.bounds];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
 }
 
 @end

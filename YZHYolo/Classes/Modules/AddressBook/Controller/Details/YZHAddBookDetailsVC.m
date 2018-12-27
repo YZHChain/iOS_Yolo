@@ -77,7 +77,7 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"详细资料";
+    self.navigationItem.title = @"详情资料";
     // 不是自己,并且是我的好友时,才会有更多选项
     if (self.isMyFriend && !self.isMySelf) {
         UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];

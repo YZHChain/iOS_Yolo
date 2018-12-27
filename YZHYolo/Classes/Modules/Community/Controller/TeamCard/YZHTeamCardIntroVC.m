@@ -89,7 +89,7 @@
     self.tableView.tableFooterView = self.footerView;
 
     //非好友关系时, 拉取用户最新资料.
-    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner]) {
+    if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner] && YZHIsString(self.viewModel.teamOwner)) {
         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
             if (!error) {
                 [self.viewModel updataTeamOwnerData];
@@ -125,7 +125,7 @@
              }
              [self reloadView];
         }];
-    }else {
+    } else {
         NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
         self.viewModel = [[YZHTeamCardIntroModel alloc] initWithTeam:team];
         [self reloadView];
