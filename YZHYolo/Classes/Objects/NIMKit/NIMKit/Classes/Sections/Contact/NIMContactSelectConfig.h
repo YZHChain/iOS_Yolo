@@ -80,7 +80,7 @@ typedef void(^YZHTeamMemberDataProviderHandler)(YZHTeamMemberModel *teamMemberMo
 /**
  *  //获取群成员列表信息。 显示名为群昵称
  */
-- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle;
+- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle containsSelf:(BOOL)containsSelf;
 
 /**
  *  提供联系人id、显示名、头像等信息

@@ -541,39 +541,44 @@
     if (self.session.sessionType != NIMSessionTypeP2P) {
         return;
     }
-    BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerify;
-    NIMUserRequest *request = [[NIMUserRequest alloc] init];
-    request.userId = self.session.sessionId;
-    if (needAddVerify) {
-        //跳转至填写验证消息
-        [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                           @"userId": self.session.sessionId,
-                                                                           @"isPrivate": @(1),
-                                                                           @"session": self.session
-                                                                           }];
-        
+    BOOL allowAdd = self.userInfoExtManage.privateSetting.allowAdd;
+    if (allowAdd) {
+        BOOL needAddVerify = self.userInfoExtManage.privateSetting.addVerify;
+        NIMUserRequest *request = [[NIMUserRequest alloc] init];
+        request.userId = self.session.sessionId;
+        if (needAddVerify) {
+            //跳转至填写验证消息
+            [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
+                                                                               @"userId": self.session.sessionId,
+                                                                               @"isPrivate": @(1),
+                                                                               @"session": self.session
+                                                                               }];
+            
+        } else {
+            request.operation = NIMUserOperationAdd;
+            NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
+            NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
+            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+            @weakify(self)
+            [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+                @strongify(self)
+                if (!error) {
+                    //添加成功文案;
+                    [hud hideWithText:successText];
+                    //发送添加请求成功,则发送一条已添加消息.
+                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                    addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
+                    //插入一条添加好友申请回话.
+                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+                    //刷新 View
+                    [self setupView];
+                }else{
+                    [hud hideWithText:failedText];
+                }
+            }];
+        }
     } else {
-        request.operation = NIMUserOperationAdd;
-        NSString *successText = request.operation == NIMUserOperationAdd ? @"添加成功" : @"请求成功";
-        NSString *failedText =  request.operation == NIMUserOperationAdd ? @"添加失败" : @"请求失败";
-        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-        @weakify(self)
-        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
-            @strongify(self)
-            if (!error) {
-                //添加成功文案;
-                [hud hideWithText:successText];
-                //发送添加请求成功,则发送一条已添加消息.
-                YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
-                addFirendAttachment.addFirendTitle = @"成功添加对方为好友";
-                //插入一条添加好友申请回话.
-                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
-                //刷新 View
-                [self setupView];
-            }else{
-                [hud hideWithText:failedText];
-            }
-        }];
+        [YZHProgressHUD showText:@"对方不允许添加好友" onView:YZHAppWindow];
     }
 }
 

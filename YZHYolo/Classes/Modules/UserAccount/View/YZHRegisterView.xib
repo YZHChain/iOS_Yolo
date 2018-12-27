@@ -262,7 +262,7 @@
                             </constraints>
                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             <connections>
                                 <outlet property="delegate" destination="HvH-OP-0qG" id="Alp-kI-PQy"/>
                             </connections>
@@ -285,7 +285,7 @@
                             <rect key="frame" x="30" y="131" width="315" height="30"/>
                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                             <connections>
                                 <outlet property="delegate" destination="HvH-OP-0qG" id="keX-d4-f23"/>
                             </connections>
@@ -418,13 +418,14 @@
                 <constraint firstItem="EWV-nj-Dhw" firstAttribute="top" secondItem="pw8-il-aa2" secondAttribute="bottom" id="ybs-bA-gBH"/>
             </constraints>
             <connections>
-                <outlet property="backButton" destination="p5z-X9-yH3" id="M4a-hJ-V1Q"/>
+                <outlet property="backButton" destination="p5z-X9-yH3" id="cUm-VM-TLe"/>
                 <outlet property="backIconButton" destination="WCZ-0F-GMz" id="4Ew-tN-EhX"/>
                 <outlet property="backTextButton" destination="RsH-Tk-7iC" id="MYd-ep-6vo"/>
-                <outlet property="codeTextField" destination="wed-4f-kPF" id="NYh-UV-tOs"/>
+                <outlet property="codeTextField" destination="wed-4f-kPF" id="yng-2h-mEU"/>
                 <outlet property="codeTipLabel" destination="nMi-JW-AwC" id="zdI-0c-Uag"/>
-                <outlet property="contentView" destination="EWV-nj-Dhw" id="UuN-g9-4Ur"/>
-                <outlet property="phoneTextField" destination="9Hv-Hy-n0z" id="vTo-9Z-Kfk"/>
+                <outlet property="contentView" destination="EWV-nj-Dhw" id="CHU-Nw-veV"/>
+                <outlet property="loginButton" destination="Z8b-0m-epQ" id="k9z-Le-OPt"/>
+                <outlet property="phoneTextField" destination="9Hv-Hy-n0z" id="g9E-i1-7UH"/>
                 <outlet property="protocolButton" destination="RqG-33-s39" id="DN4-dT-sqA"/>
                 <outlet property="protocolSlectedButton" destination="swg-gS-1AX" id="pyA-Gh-dwS"/>
                 <outlet property="registerButton" destination="EMA-wF-DKz" id="qJx-BJ-cSv"/>
@@ -433,8 +434,8 @@
         </view>
     </objects>
     <resources>
-        <image name="button_background_disable" width="240" height="40"/>
-        <image name="button_background_optional" width="120" height="20"/>
+        <image name="button_background_disable" width="335" height="44"/>
+        <image name="button_background_optional" width="335" height="44"/>
         <image name="navigation_item_left" width="10" height="19"/>
         <image name="registered_protocol_agree" width="12" height="12"/>
         <image name="registered_protocol_notAgree" width="12" height="12"/>

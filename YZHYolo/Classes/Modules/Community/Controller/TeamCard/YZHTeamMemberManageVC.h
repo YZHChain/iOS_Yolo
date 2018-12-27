@@ -8,16 +8,28 @@
 
 #import "YZHBaseViewController.h"
 
-#import "YZHTeamMemberManageModel.h"
 #import "YZHTeamMemberModel.h"
+#import "NIMContactSelectConfig.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamMemberManageVC : YZHBaseViewController
 
-@property (nonatomic, strong) YZHTeamMemberManageModel* manageModel;
-@property (nonatomic, strong) YZHTeamMemberModel* viewModel;
+@property (nonatomic, copy) NSString* teamId;
 
-//- (instancetype)initWithmemberModel:(YZHTeamMemberModel* )memberModel;
+@property (nonatomic, strong, readonly) id<NIMContactSelectConfig> config;
+
+@property (nonatomic, assign) BOOL isManage;
+
+
+/**
+ *  初始化方法
+ *
+ *  @param config 联系人选择器配置
+ *
+ *  @return 选择器
+ */
+- (instancetype)initWithConfig:(id<NIMContactSelectConfig>) config withIsManage:(BOOL)isManage;
 
 @end
 

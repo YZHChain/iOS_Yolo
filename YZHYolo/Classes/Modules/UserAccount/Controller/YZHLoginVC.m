@@ -131,7 +131,8 @@
             [hud hideWithText:nil];
         } failureCompletion:^(NSError *error) {
             //TODO: 失败处理
-            [hud hideWithText:error.domain];
+//            [hud hideWithText:error.domain];
+            [hud hideWithText:@"登录失败, 请重试"];
         }];
     }
 }

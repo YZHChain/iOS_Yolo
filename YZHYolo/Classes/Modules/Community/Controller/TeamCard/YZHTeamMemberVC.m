@@ -13,7 +13,7 @@
 #import "UIButton+YZHTool.h"
 #import "YZHTeamMemberManageVC.h"
 
-@interface YZHTeamMemberVC()<UITableViewDataSource, UITableViewDelegate>
+@interface YZHTeamMemberVC()<UITableViewDataSource, UITableViewDelegate, NIMTeamManagerDelegate>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHTeamMemberModel* viewModel;
@@ -41,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setupNimDelegate];
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
@@ -55,6 +56,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupNimDelegate {
+    
+    [[[NIMSDK sharedSDK] teamManager] addDelegate:self];
+}
+
+- (void)dealloc {
+    
+    [[[NIMSDK sharedSDK] teamManager] removeDelegate:self];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -75,9 +86,8 @@
     
     UITableViewHeaderFooterView* footerView = [[UITableViewHeaderFooterView alloc] init];
     UIButton* inviteFirendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [inviteFirendButton yzh_setupButton];
     [inviteFirendButton setTitle:@"添加好友进群" forState:UIControlStateNormal];
-    [inviteFirendButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:14]];
-    [inviteFirendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [inviteFirendButton setBackgroundImage:[UIImage imageNamed:@"button_background_optional"] forState:UIControlStateNormal];
     [inviteFirendButton addTarget:self action:@selector(onTouchupInviteFirend:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -112,6 +122,7 @@
 
 - (void)reloadView {
     
+    [self makeData];
 }
 
 #pragma mark - 3.Request Data
@@ -152,7 +163,16 @@
                            @"userId": member.info.infoId,
                            @"teamId": _teamId,
                            };
-    [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
+    if ([member.info.infoId isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount]) {
+        //跳转用户资料.
+        NSDictionary* info = @{
+                               @"userId": member.info.infoId,
+                               };
+        //这里要到我们的用户详情页里
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
+    } else {
+       [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
+    }
 }
 
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
@@ -168,26 +188,28 @@
     return view;
 }
 
-
 #pragma mark - 5.Event Response
 
 - (void)onTouchupInviteFirend:(UIButton *)sender {
-    
+
     //邀请好友进群
     [YZHRouter openURL:kYZHRouterSessionSharedCard info:@{
                                                           @"sharedType": @(3),
                                                           kYZHRouteSegue: kYZHRouteSegueModal,
                                                           kYZHRouteSegueNewNavigation: @(YES),
-//                                                          @"sharedPersonageCardBlock": self.sharedPersonageCardHandle
                                                           @"teamId": self.teamId.length ? self.teamId : NULL
                                                           }];
 }
 
 - (void)manageMember:(UIBarButtonItem *)sender {
     
+    NIMContactTeamMemberSelectConfig *config = [[NIMContactTeamMemberSelectConfig alloc] init];
+    config.enableRobot = NO;
+    config.needMutiSelected = NO;
+    config.teamId = self.teamId;
+    config.filterIds = @[[NIMSDK sharedSDK].loginManager.currentAccount];
     //跳转到管理群成员
-    YZHTeamMemberManageVC* mamnageVC = [[YZHTeamMemberManageVC alloc] init];
-    mamnageVC.viewModel = self.viewModel;
+    YZHTeamMemberManageVC* mamnageVC = [[YZHTeamMemberManageVC alloc] initWithConfig:config withIsManage:YES];
     [self.navigationController pushViewController:mamnageVC animated:mamnageVC];
 }
 
@@ -206,7 +228,19 @@
         dispatch_async(dispatch_get_main_queue(), ^{
            [self.tableView reloadData];
         });
-    }];
+    } containsSelf:YES ];
+}
+
+/**
+ *  群组成员变动回调,包括数量增减以及成员属性变动
+ *
+ *  @param team 变动的群组
+ */
+- (void)onTeamMemberChanged:(NIMTeam *)team {
+    
+    if ([team.teamId isEqualToString:self.teamId]) {
+        [self reloadView];
+    }
 }
 
 #pragma mark - 7.GET & SET

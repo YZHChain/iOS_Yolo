@@ -320,6 +320,7 @@
         NSString *me = [[NIMKit sharedKit].provider infoByUser:[NIMSDK sharedSDK].loginManager.currentAccount option:option].showName;
         apnsOption.apnsContent = [NSString stringWithFormat:@"%@在群里@了你",me];
         message.apnsMemberOption = apnsOption;
+        [self sendMessage:message];
     } else {
         [YZHChatContentUtil checkoutContentContentTeamId:text completion:^(NIMTeam * _Nonnull team) {
             if (team) {
@@ -336,7 +337,6 @@
             }
         }];
     }
-    
 }
 
 - (void)onSendText:(NSString *)text atUsers:(NSArray *)atUsers needResponed:(BOOL)needResponed {

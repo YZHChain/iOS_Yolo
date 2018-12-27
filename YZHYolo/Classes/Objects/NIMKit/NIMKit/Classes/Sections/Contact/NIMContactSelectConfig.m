@@ -242,7 +242,7 @@
     }];
 }
 //获取群成员列表信息。 显示名为群昵称
-- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle {
+- (void)getTeamMemberData:(YZHTeamMemberDataProviderHandler)handle containsSelf:(BOOL)containsSelf{
     
     YZHTeamMemberModel* teamMemberModel = [[YZHTeamMemberModel alloc] initWithTeamId:self.teamId];
     NSString *teamID = self.teamId;
@@ -259,7 +259,11 @@
 //                }
                 
             }
-            [teamMemberModel setTeamMembers:contacts];
+            if (containsSelf) {
+               [teamMemberModel setTeamMembers:contacts];
+            } else {
+               [teamMemberModel setMembers:contacts];
+            }
             handle ? handle(teamMemberModel) : NULL;
         }
     }];

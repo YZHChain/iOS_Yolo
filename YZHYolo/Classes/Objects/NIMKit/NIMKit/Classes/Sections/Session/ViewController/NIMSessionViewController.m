@@ -476,11 +476,14 @@
                 teamCardAttachment.avatarUrl = team.avatarUrl ? team.avatarUrl : @"team_cell_photoImage_default";
                 message = [YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment];
                 [self sendMessage:message];
+                return;
             } else {
                 [self sendMessage:message];
+                return;
             }
         }];
     }
+    [self sendMessage:message];
 }
 
 - (NSString *)robotsToSend:(NSArray *)atUsers

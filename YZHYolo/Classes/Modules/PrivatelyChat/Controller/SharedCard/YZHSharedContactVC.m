@@ -340,7 +340,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
                 [hud hideWithText:@"成功邀请好友入群" completion:^{
                     @strongify(self)
                     [self dismissViewControllerAnimated:YES completion:^{
-                          
+                        self.addFriendSuccessful ? self.addFriendSuccessful() : NULL;
                     }];
                 }];
             } else {

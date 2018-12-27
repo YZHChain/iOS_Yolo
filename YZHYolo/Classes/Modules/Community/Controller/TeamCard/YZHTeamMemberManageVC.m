@@ -11,18 +11,33 @@
 #import "YZHTeamMemberManageCell.h"
 #import "YZHAlertManage.h"
 #import "YZHProgressHUD.h"
+#import "YZHPublic.h"
 
 @interface YZHTeamMemberManageVC()<UITableViewDelegate, UITableViewDataSource, YZHTeamMemberManageProtocol, NIMTeamManagerDelegate>
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) UIButton* allBannedButton;
 @property (nonatomic, assign) BOOL isAllBanned;
+@property (nonatomic, strong) YZHTeamMemberModel* viewModel;
 
 @end
 
 @implementation YZHTeamMemberManageVC
 
 #pragma mark - 1.View Controller Life Cycle
+
+- (instancetype)initWithConfig:(id<NIMContactSelectConfig>)config withIsManage:(BOOL)isManage {
+    
+    self = [super init];
+    if (self) {
+        _config = config;
+        _isManage = isManage;
+        _teamId = config.teamId;
+        _viewModel = [[YZHTeamMemberModel alloc] init];
+        [self makeData];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,8 +92,7 @@
     UIButton* allBannedButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [allBannedButton setTitle:@"全体禁言" forState:UIControlStateNormal];
     [allBannedButton setTitle:@"全体解禁" forState:UIControlStateSelected];
-    [allBannedButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:14]];
-    [allBannedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [allBannedButton yzh_setupButton];
     [allBannedButton setBackgroundImage:[UIImage imageNamed:@"button_background_optional"] forState:UIControlStateNormal];
     [allBannedButton addTarget:self action:@selector(onTouchupAllBanned:) forControlEvents:UIControlEventTouchUpInside];
     self.allBannedButton = allBannedButton;
@@ -112,17 +126,19 @@
 
 - (void)reloadView {
     
+    [self setupView];
+    [self makeData];
 }
 
 #pragma mark - 3.Request Data
 
 - (void)setupData {
     
-    [self.tableView reloadData];
     
     self.isAllBanned = [[[NIMSDK sharedSDK] teamManager] teamById:self.viewModel.teamId].inAllMuteMode;
-    
     self.allBannedButton.selected = self.isAllBanned;
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
@@ -177,8 +193,16 @@
                            @"userId": member.info.infoId,
                            @"teamId": self.viewModel.teamId,
                            };
-    //这里要到我们的群成员用户详情页里
-    [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
+    if ([member.info.infoId isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount]) {
+        //跳转用户资料.
+        NSDictionary* info = @{
+                               @"userId": member.info.infoId,
+                               };
+        //这里要到我们的用户详情页里
+        [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
+    } else {
+        [YZHRouter openURL:kYZHRouterTeamMemberBookDetails info:info];
+    }
 }
 // 禁言和移出群按钮回调;
 - (void)onTouchBannedWithMember:(nonnull YZHContactMemberModel *)member {
@@ -281,6 +305,18 @@
     
 }
 
+- (void)makeData {
+    
+    @weakify(self)
+    [self.config getTeamMemberData:^(YZHTeamMemberModel *teamMemberModel) {
+        @strongify(self)
+        self.viewModel = teamMemberModel;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    } containsSelf:NO];
+}
+
 - (void)onTeamAdded:(NIMTeam *)team {
     
     
@@ -312,7 +348,7 @@
 - (void)onTeamMemberChanged:(NIMTeam *)team {
     
     if ([self.viewModel.teamId isEqualToString:team.teamId]) {
-        [self.tableView reloadData];
+        [self reloadView];
     }
 }
 

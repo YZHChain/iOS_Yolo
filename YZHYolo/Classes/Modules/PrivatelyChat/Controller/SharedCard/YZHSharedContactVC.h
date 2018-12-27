@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^sharedTeamCardBlock)(YZHTeamCardAttachment* );
 @property (nonatomic, copy) void (^forwardMessageToUserBlock)(NSString* );
 @property (nonatomic, copy) void (^forwardMessageToTeamBlock)(NSString* );
-
+@property (nonatomic, copy) YZHVoidBlock addFriendSuccessful;
 
 @end
 
