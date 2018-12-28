@@ -112,6 +112,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 
 
 #pragma mark PKPushRegistryDelegate
+
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
 {
     if ([type isEqualToString:PKPushTypeVoIP])

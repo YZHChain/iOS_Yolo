@@ -92,7 +92,7 @@
     if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner] && YZHIsString(self.viewModel.teamOwner)) {
         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
             if (!error) {
-                [self.viewModel updataTeamOwnerData];
+                [self.viewModel updataTeamOwnerData:users.firstObject];
                 [self.tableView reloadData];
             }
         }];
@@ -102,7 +102,7 @@
     if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.viewModel.teamId]) {
         [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.viewModel.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
             if (!error) {
-                [self.viewModel updataHeaderModel];
+                [self.viewModel updataHeaderModel:team];
                 [self.tableView reloadData];
             }
         }];

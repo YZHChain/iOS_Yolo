@@ -58,9 +58,9 @@
     }
 }
 
-- (void)updataHeaderModel {
+- (void)updataHeaderModel:(NIMTeam *)team {
     
-    NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:_teamId];
+    self.team = team;
     YZHTeamInfoExtManage* teamInfoExtManage = [YZHTeamInfoExtManage YZH_objectWithKeyValues:team.clientCustomInfo];
     self.headerModel.teamName = team.teamName;
     self.headerModel.teamSynopsis = team.intro;
@@ -71,11 +71,10 @@
     self.headerModel.teamId = _teamId;
 }
 
-- (void)updataTeamOwnerData {
+- (void)updataTeamOwnerData:(NIMUser *)user {
     
-    NIMUser* teamOwner = [[[NIMSDK sharedSDK] userManager] userInfo:self.teamOwnerName];
-    self.teamOwnerName = teamOwner.userInfo.nickName;
-    self.teamOwnerAvatarUrl = teamOwner.userInfo.avatarUrl;
+    self.teamOwnerName = user.userInfo.nickName;
+    self.teamOwnerAvatarUrl = user.userInfo.avatarUrl;
 }
 
 @end

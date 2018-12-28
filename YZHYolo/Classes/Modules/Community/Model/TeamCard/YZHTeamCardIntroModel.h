@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithTeam:(NIMTeam *)team;
 
-- (void)updataTeamOwnerData;
-- (void)updataHeaderModel;
+- (void)updataTeamOwnerData:(NIMUser* )user;
+- (void)updataHeaderModel:(NIMTeam* )team;
 
 @end
 
