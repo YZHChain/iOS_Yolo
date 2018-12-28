@@ -160,7 +160,9 @@
         [UIImage yzh_readQRCodeFromImage:image successfulBlock:^(CIQRCodeFeature * _Nonnull feature) {
             @strongify(self)
             //执行二维码跳转逻辑
-            YZHScanQRCodeModel* qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:feature.messageString];
+            //先对其进行解码
+            NSString* qrCodeString = [feature.messageString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            YZHScanQRCodeModel* qrCodeModel = [YZHScanQRCodeModel YZH_objectWithKeyValues:qrCodeString];
             [self handleQRCodeModel:qrCodeModel];
         }];
         self.scanImageView.image = image;

@@ -470,7 +470,7 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     if (session) {
         [YZHRouter openURL:kYZHRouterSessionSearchChatContent info:@{
                                                                      @"session": session,
-                                                                     @"allTextMessages": self.allTextMessage.count ? self.allTextMessage : [[NSMutableArray alloc] init],
+                                                                     @"allTextMessages": self.chatContentManage.allSearchTextMessage.count ? self.chatContentManage.allSearchTextMessage : [[NSMutableArray alloc] init],
                                                                      kYZHRouteSegueNewNavigation: @(YES),
                                                                      kYZHRouteSegue: kYZHRouteSegueModal
                                                                      }];

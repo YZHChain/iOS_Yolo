@@ -188,14 +188,8 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
     if (error == nil) {
-        //        [self.view makeToast:@"图片已经保存到相册"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
         [YZHProgressHUD showText:@"图片已经保存到相册" onView:self.webView];
     }else{
-        //        [self.view makeToast:@"图片保存失败,请重试"
-        //                    duration:1
-        //                    position:CSToastPositionCenter];
         [YZHProgressHUD showText:@"图片保存失败,请重试" onView:self.webView];
     }
 }
@@ -219,7 +213,6 @@
         
         CGImageRelease(image);
     } else {
-        
         [YZHProgressHUD showText:@"二维码图像处理失败, 请重试" onView:self.webView];
     }
 }
@@ -244,7 +237,9 @@
             qrString = message.body;
         }
         if (YZHIsString(qrString)) {
-            [self creatQRCodeAndSavaToPotosWithQRString:qrString];
+            //对其进行 UTF8 编码.
+            NSString* QRcodeString = [qrString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [self creatQRCodeAndSavaToPotosWithQRString:QRcodeString];
         } else {
             [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];
         }

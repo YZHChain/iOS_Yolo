@@ -92,10 +92,25 @@
         
         _titleLabel.text = attachment.titleName;
         [_avatarImageView yzh_setImageWithString:attachment.avatarUrl placeholder:@"addBook_cover_cell_photo_default"];
-//        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
         _nickNameLabel.text = attachment.userName;
         _yoloIDLaebl.text = attachment.yoloID;
         [_avatarImageView setSize:CGSizeMake(45, 45)];
+       __block NIMUser* user = [[[NIMSDK sharedSDK] userManager] userInfo:attachment.account];
+        if (!user && YZHIsString(attachment.account)) {
+            @weakify(self)
+            [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[attachment.account] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+                @strongify(self)
+                if (!error) {
+                    user  = users.firstObject;
+                    self.nickNameLabel.text = user.userInfo.nickName;
+                    if (user.userInfo.avatarUrl) {
+                        [self.avatarImageView yzh_setImageWithString:user.userInfo.avatarUrl placeholder:@"addBook_cover_cell_photo_default"];
+                    }
+                    
+                }
+            }];
+        }
+
         [_titleLabel sizeToFit];
         [_nickNameLabel sizeToFit];
         [_yoloIDLaebl sizeToFit];
@@ -130,9 +145,8 @@
     _yoloIDLaebl.x = _nickNameLabel.x;
     _yoloIDLaebl.y = 42;
     
-    _showButton.frame = self.frame;
+    _showButton.frame = self.contentView.frame;
     
-//    self.size = contentSize;
 }
 
 - (void)onTouchCardUpInside:(id)sender

@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray<NSMutableArray <NIMMessage* >*>* allTextMessage;
 @property (nonatomic, strong) NSMutableArray* allTextTimers;
+@property (nonatomic, strong) NSArray<NIMMessage* >* allSearchTextMessage; //提供给搜索
+
 @property (nonatomic, strong) NIMSession* session;
 @property (nonatomic, strong) NIMMessageSearchOption* searchOption;
 

@@ -73,7 +73,7 @@
 
     [[[NIMSDK sharedSDK] conversationManager] searchMessages:_session option:searchOption result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
         if (messages.count) {
-            
+            self.allSearchTextMessage = messages;
             NSMutableArray<NIMMessage*> *mutableMessages = messages.mutableCopy;
             NSMutableArray* mutableHTTPMessages = [[NSMutableArray alloc] init];
             

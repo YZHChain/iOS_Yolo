@@ -286,11 +286,10 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             return;
         }
         YZHContactMemberModel* memberModel = (YZHContactMemberModel *)[_contacts sharedMemberOfIndex:self.selectedIndexPath];
-        YZHUserLoginManage* loginManage = [YZHUserLoginManage sharedManager];
-        NSString* yoloId = loginManage.currentLoginData.yoloId;
+        YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage targetUserInfoExtWithUserId:memberModel.info.infoId];
         YZHUserCardAttachment* userCardAttachment = [[YZHUserCardAttachment alloc] init];
-        userCardAttachment.userName = memberModel.info.nickName;
-        userCardAttachment.yoloID = yoloId;
+        userCardAttachment.userName = memberModel.info.showName;
+        userCardAttachment.yoloID = userInfoExt.userYolo.yoloID;
         userCardAttachment.account = memberModel.info.infoId;
         [userCardAttachment encodeAttachment];
         self.sharedPersonageCardBlock ? self.sharedPersonageCardBlock(userCardAttachment) : NULL;

@@ -242,6 +242,9 @@
             qrString = message.body;
         }
         if (YZHIsString(qrString)) {
+            //对其进行 UTF8 编码.
+            NSString* QRcodeString = [qrString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [self creatQRCodeAndSavaToPotosWithQRString:QRcodeString];
             [self creatQRCodeAndSavaToPotosWithQRString:qrString];
         } else {
             [YZHProgressHUD showText:@"未检测到二维码数据, 请稍后重试" onView:self.webView];

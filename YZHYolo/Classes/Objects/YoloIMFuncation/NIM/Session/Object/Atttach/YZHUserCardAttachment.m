@@ -19,6 +19,7 @@
                                        @"yoloID" : self.yoloID?self.yoloID : @"",
                                        @"account": self.account?
                                        self.account : @"",
+                                                      @"avatarUrl":self.avatarUrl ? self.avatarUrl : @""
                                        }
                            };
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict
@@ -55,12 +56,6 @@
 -(NSString *)avatarUrl {
     
     if (!_avatarUrl) {
-        //先读取本地,本地没有,在去服务器下拉.TODOTODO
-//        [[NIMSDK sharedSDK].userManager fetchUserInfos:@[self.account] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-//            if (!error) {
-//                self->_avatarUrl = users.firstObject.userInfo.avatarUrl ? users.firstObject.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
-//            }
-//        }];
         NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_account];
         _avatarUrl = user.userInfo.avatarUrl ? user.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
     }

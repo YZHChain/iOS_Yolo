@@ -115,7 +115,6 @@
     if ([attachment isKindOfClass:[YZHTeamCardAttachment class]]) {
         _titleLabel.text = attachment.titleName;
         [_avatarImageView yzh_setImageWithString:attachment.avatarUrl placeholder:@"team_cell_photoImage_default"];
-//        [_avatarImageView yzh_cornerRadiusAdvance:2.5f rectCornerType:UIRectCornerAllCorners];
         _teamNameLabel.text = attachment.groupName;
         _teamUrlLabel.text = attachment.groupUrl;
         _teamSynopsisLabel.text = attachment.groupSynopsis;
@@ -124,6 +123,17 @@
         [_teamNameLabel sizeToFit];
         [_teamUrlLabel sizeToFit];
         [_teamSynopsisLabel sizeToFit];
+        __block NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:attachment.groupID];
+        if (!team) {
+            @weakify(self)
+            [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:attachment.groupID completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+                @strongify(self)
+                team = team;
+                if (team.avatarUrl) {
+                    [self.avatarImageView yzh_setImageWithString:team.avatarUrl placeholder:@"team_cell_photoImage_default"];
+                }
+            }];
+        }
     }
 }
 
@@ -141,7 +151,7 @@
     _titleLabel.centerY = _titleView.height / 2;
     
     _titleSeparatorLineView.frame = CGRectMake(182, 0, 0.5, 26);
-    
+    _addTeamButton.y = 0;
     _addTeamButton.x = 182.5;
     _addTeamButton.width = 67.5;
     _addTeamButton.height = 26;
@@ -168,9 +178,7 @@
     _teamSynopsisLabel.width = contentSize.width - 25;
     [_teamSynopsisLabel sizeToFit];
     
-    _showButton.frame = _contentView.frame;
-    
-//    self.size = contentSize;
+    _showButton.frame = _contentView.bounds;
 }
 
 #pragma mark -- YZHCustom

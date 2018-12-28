@@ -32,7 +32,7 @@
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进入就发糖果," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm1-IN-YHR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进入就发糖果," lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cm1-IN-YHR">
                         <rect key="frame" x="17" y="33" width="286" height="17"/>
                         <fontDescription key="fontDescription" name="PingFangHK-Regular" family="PingFang HK" pointSize="12"/>
                         <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,6 +45,7 @@
                     <constraint firstItem="cm1-IN-YHR" firstAttribute="leading" secondItem="Xex-lU-ANu" secondAttribute="leading" id="ri8-I1-4li"/>
                     <constraint firstAttribute="trailing" secondItem="cm1-IN-YHR" secondAttribute="trailing" constant="17" id="s07-OT-cWh"/>
                     <constraint firstItem="Xex-lU-ANu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="w9c-cS-tNd"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cm1-IN-YHR" secondAttribute="bottom" constant="5" id="xjc-dP-g4I"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
