@@ -117,7 +117,7 @@
         NSLog(@"----URL %@--", url);
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                              timeoutInterval:60 * 60 * 3];
+                                                              timeoutInterval:60 * 60 * 1];
         [self.webView loadRequest:theRequest ];
         
         self.webView.UIDelegate = self;

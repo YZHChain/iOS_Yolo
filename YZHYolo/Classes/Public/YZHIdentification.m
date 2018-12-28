@@ -11,7 +11,7 @@
 NSString * const kYZHResponeCodeKey    = @"code";
 NSString * const kYZHResponeMessageKey = @"message";
 NSString * const kYZHResponeDataKey    = @"data";
-NSString * const kYZHTeamURLHostKey    = @"http://webtest.yzhchain.com/yolo-web/html/register/community.html";
+NSString * const kYZHTeamURLHostKey    = @"http://yoloserver.yzhchain.com/yolo-web/html/register/community.html";
 
 NSString * const kYZHCommonHeaderIdentifier = @"YZHCommonHeaderIdentifier";
 NSString * const kYZHCommonCellIdentifier   = @"YZHCommonCellIdentifier";

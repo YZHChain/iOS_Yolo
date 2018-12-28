@@ -47,6 +47,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if (self.navigationController.viewControllers.count == 1) {
+        [self.webView reload];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -127,7 +131,7 @@
         
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                              timeoutInterval:60 * 60 * 3];
+                                                              timeoutInterval:60 * 60 * 1];
         [self.webView loadRequest:theRequest ];
 //        [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;

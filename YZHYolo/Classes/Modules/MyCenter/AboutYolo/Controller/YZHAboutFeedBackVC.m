@@ -111,7 +111,7 @@
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
-                                                              timeoutInterval:60 * 60 * 3];
+                                                              timeoutInterval:60 * 60 * 1];
         [self.webView loadRequest:theRequest ];
         //        [self.webView loadRequest:[NSURLRequest requestWithURL:url] ];
         self.webView.UIDelegate = self;

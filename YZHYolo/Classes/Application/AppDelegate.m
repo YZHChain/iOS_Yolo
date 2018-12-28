@@ -35,7 +35,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     [self setupNIMSDK];
     [self setupServices];
     
-    [self registerPushService];
+//    [self registerPushService];
     [self commonInitListenEvents];
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
