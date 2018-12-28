@@ -13,6 +13,7 @@
 #import "YZHUserDataManage.h"
 #import <JavaScriptCore/JSContext.h>
 #import "YZHServicesConfig.h"
+#import "YZHRootTabBarViewController.h"
 
 @interface YZHDiscoverVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
@@ -28,7 +29,6 @@
 
 @implementation YZHDiscoverVC
 
-
 #pragma mark - 1.View Controller Life Cycle
 
 - (void)viewDidLoad {
@@ -43,14 +43,11 @@
     [self setupData];
     //4.设置通知
     [self setupNotification];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    if (self.navigationController.viewControllers.count == 1) {
-        [self.webView reload];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,11 +71,6 @@
     UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
     UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
     [self setStatusBarBackgroundGradientColorFromLeftToRight:startColor withEndColor:endColor];
-    
-//    self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.height, 2)];
-//    [self.view addSubview:self.progressView];
-//    self.progressView.progressTintColor = [UIColor greenColor];
-//    self.progressView.trackTintColor = [UIColor clearColor];
     
 }
 
@@ -275,7 +267,21 @@
 
 - (void)setupNotification
 {
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clickDiscouver) name:@"clickDiscouver" object:nil];
+//    }];
+}
+
+//- (void)clickDiscouver {
+//
+//    [self.webView reload];
+//}
+
+- (void)refreshView {
     
+    if (self.navigationController.viewControllers.count == 1) {
+        [self.webView reload];
+    }
 }
 
 #pragma mark - 7.GET & SET

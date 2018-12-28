@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const kYZHSelectedDiscoverNotifaction;
 @interface YZHRootTabBarViewController : UITabBarController
 
 @end

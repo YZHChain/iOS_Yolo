@@ -11,5 +11,6 @@
 @interface YZHDiscoverVC : YZHBaseViewController
 
 @property (nonatomic,strong) NSString* url;
+- (void)refreshView;
 
 @end

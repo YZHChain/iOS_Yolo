@@ -10,7 +10,9 @@
 #import "YZHTabBarModel.h"
 #import "YZHBaseNavigationController.h"
 #import "UIColor+YZHColorStyle.h"
+#import "YZHDiscoverVC.h"
 
+NSString* const kYZHSelectedDiscoverNotifaction = @"kYZHSelectedDiscoverNotifaction";
 @interface YZHRootTabBarViewController ()<UITabBarControllerDelegate>
 
 @end
@@ -74,14 +76,19 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
+    
+    if ([item.title isEqualToString:@"广场"]) {
+        YZHBaseNavigationController* baseNav = [self.viewControllers objectAtIndex:3];
+        YZHDiscoverVC* discover = (YZHDiscoverVC*)baseNav.viewControllers.firstObject;
+        if ([discover isKindOfClass:[YZHDiscoverVC class]]) {
+            [discover refreshView];
+        }
+        //TODO: https://www.jianshu.com/p/80939746e48c
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"clickDiscouver" object:nil];
+//        }];
+    }
+    
 }
-*/
-
 @end
