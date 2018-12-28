@@ -16,8 +16,11 @@
 #import "YZHUserLoginManage.h"
 #import "UIViewController+YZHTool.h"
 #import "YZHCheckVersion.h"
+#import "YZHLaunchModel.h"
 
 @interface YZHLaunchViewController ()
+
+@property (nonatomic, strong) YZHLaunchModel* viewModel;
 
 @end
 
@@ -49,11 +52,17 @@
 - (void)setupSplashScreen{
     
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+    
+    self.viewModel = [[YZHLaunchModel alloc] init];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.image = [UIImage imageNamed:self.viewModel.image];
+    [self.view addSubview:imageView];
+//    self.imageView = imageView;
 }
 
 #pragma mark -- Start
 
-- (void)startConfign{
+- (void)startConfign {
     
     __block UIViewController* rootViewController;
     

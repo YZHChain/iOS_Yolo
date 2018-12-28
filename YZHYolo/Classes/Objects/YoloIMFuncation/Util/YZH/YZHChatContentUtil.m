@@ -33,16 +33,16 @@
     
     NSData *teamIdData =  [teamId dataUsingEncoding:NSUTF8StringEncoding];
     NSString* teamIdBase64String = [teamIdData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSString* urlServerString;
+//    NSString* urlServerString;
     //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
-#if DEBUG
-    //  配置测试服,会检测是否开启、
-    urlServerString = [YZHServicesConfig debugTestServerConfig];
-#else
-    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
-#endif
-    NSString* teamURL = [NSString stringWithFormat:@"%@/yolo-web/html/register/community.html?teamId=%@",urlServerString , teamIdBase64String];
-    teamURL = [NSString stringWithFormat:@"%@?teamId=%@",kYZHTeamURLHostKey , teamIdBase64String];
+//#if DEBUG
+//    //  配置测试服,会检测是否开启、
+//    urlServerString = [YZHServicesConfig debugTestServerConfig];
+//#else
+//    urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
+//#endif
+//    NSString* teamURL = [NSString stringWithFormat:@"%@/yolo-web/html/register/community.html?teamId=%@",urlServerString , teamIdBase64String];
+    NSString* teamURL = [NSString stringWithFormat:@"%@?teamId=%@",kYZHTeamURLHostKey , teamIdBase64String];
     
     return teamURL;
 }

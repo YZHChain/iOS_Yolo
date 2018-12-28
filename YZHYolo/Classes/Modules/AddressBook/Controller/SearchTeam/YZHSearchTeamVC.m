@@ -14,6 +14,7 @@
 #import "YZHSearchRecommendSectionView.h"
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "YZHUserDataManage.h"
+#import "YZHPasteSkipManage.h"
 
 static int kYZHRecommendTeamPageSize = 20; // 默认每页个数
 static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionView";
@@ -408,6 +409,37 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     }];
 }
 
+- (void)searchTeamURLWithKeyText:(NSString *)keyText {
+    
+    NSString* teamIdBase64 = [keyText componentsSeparatedByString:@"teamId="].lastObject;
+    NSData* decodedData = [[NSData alloc] initWithBase64EncodedString:teamIdBase64 options:0];
+    NSString* teamIdString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+    YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+    [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:teamIdString completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
+        [hud hideWithText:nil];
+        if (!error) {
+            self.searchModel = [[YZHSearchListModel alloc] init];
+            YZHSearchModel* model = [[YZHSearchModel alloc] init];
+            model.teamIcon = team.avatarUrl ? team.avatarUrl : @"team_cell_photoImage_default";
+            model.teamId = team.teamId;
+            model.teamName = team.teamName;
+            self.searchModel.searchArray = [[NSMutableArray alloc] init];
+            [self.searchModel.searchArray addObject:model];
+            if (self.searchModel.searchArray.count) {
+                self.havaSearchModel = YES;
+            } else {
+                self.havaSearchModel = NO;
+            }
+            self.isSearchStatus = YES;
+            [self.tableView reloadData];
+        } else {
+            self.havaSearchModel = NO;
+            self.isSearchStatus = YES;
+            [self.tableView reloadData];
+        }
+    }];
+}
+
 
 #pragma mark - 7.GET & SET
 
@@ -478,7 +510,12 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     [searchBar endEditing:YES];
     if (YZHIsString(searchBar.text)) {
         self.isSearchStatus = YES;
-        [self searchTeamListWithKeyText:searchBar.text];
+        if ([searchBar.text containsString:kYZHTeamURLHostKey] && [searchBar.text containsString:@"teamId"]) {
+            [self searchTeamURLWithKeyText:searchBar.text];
+        } else {
+            [self searchTeamListWithKeyText:searchBar.text];
+        }
+        
     } else {
         self.isSearchStatus = NO;
     }

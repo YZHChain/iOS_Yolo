@@ -251,6 +251,7 @@
 		553DE52321D32CDF00BF0554 /* YZHChatContentManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE52221D32CDF00BF0554 /* YZHChatContentManage.m */; };
 		553E313321B26945002AF339 /* SourceHanSansCN-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 553E313221B26944002AF339 /* SourceHanSansCN-Light.ttf */; };
 		5541B79221D38E740008FA21 /* YZHMessageRemindManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541B79121D38E740008FA21 /* YZHMessageRemindManage.m */; };
+		5541B79521D6897D0008FA21 /* YZHLaunchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5541B79421D6897D0008FA21 /* YZHLaunchModel.m */; };
 		5551B33521A55B2600AF3088 /* YZHTeamSendNoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */; };
 		5551B33621A55B2600AF3088 /* YZHTeamSendNoticeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5551B33421A55B2600AF3088 /* YZHTeamSendNoticeVC.xib */; };
 		5551B33A21A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5551B33821A566BB00AF3088 /* YZHTeamNoticeSelectTeamVC.m */; };
@@ -1066,6 +1067,8 @@
 		553E313221B26944002AF339 /* SourceHanSansCN-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Light.ttf"; sourceTree = "<group>"; };
 		5541B79021D38E740008FA21 /* YZHMessageRemindManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHMessageRemindManage.h; sourceTree = "<group>"; };
 		5541B79121D38E740008FA21 /* YZHMessageRemindManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHMessageRemindManage.m; sourceTree = "<group>"; };
+		5541B79321D6897D0008FA21 /* YZHLaunchModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHLaunchModel.h; sourceTree = "<group>"; };
+		5541B79421D6897D0008FA21 /* YZHLaunchModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLaunchModel.m; sourceTree = "<group>"; };
 		5551B33221A55B2600AF3088 /* YZHTeamSendNoticeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamSendNoticeVC.h; sourceTree = "<group>"; };
 		5551B33321A55B2600AF3088 /* YZHTeamSendNoticeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamSendNoticeVC.m; sourceTree = "<group>"; };
 		5551B33421A55B2600AF3088 /* YZHTeamSendNoticeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamSendNoticeVC.xib; sourceTree = "<group>"; };
@@ -3294,6 +3297,8 @@
 			children = (
 				556F6CE9214762190048171C /* YZHTabBarModel.h */,
 				556F6CEA214762190048171C /* YZHTabBarModel.m */,
+				5541B79321D6897D0008FA21 /* YZHLaunchModel.h */,
+				5541B79421D6897D0008FA21 /* YZHLaunchModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5018,6 +5023,7 @@
 				553641E7217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.m in Sources */,
 				55D580F721635976000A8B55 /* YZHAddBookFirendModel.m in Sources */,
 				553641D7217EAEC2006F77A5 /* NIMAvatarImageView.m in Sources */,
+				5541B79521D6897D0008FA21 /* YZHLaunchModel.m in Sources */,
 				553641F0217EAEC3006F77A5 /* NIMTimestampModel.m in Sources */,
 				555DA4BC216C408F0057D434 /* YZHAddBookSearchVC.m in Sources */,
 				553641BD217EAEC2006F77A5 /* NIMKitFileLocationHelper.m in Sources */,
