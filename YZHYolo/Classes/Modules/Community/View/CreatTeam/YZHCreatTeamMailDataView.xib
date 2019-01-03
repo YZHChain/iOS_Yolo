@@ -124,41 +124,10 @@
                                 <constraint firstItem="OtW-90-sAh" firstAttribute="centerY" secondItem="9KY-Ae-kag" secondAttribute="centerY" id="krW-K5-QKN"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJG-U8-NF2">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SJG-U8-NF2" customClass="YZHImportBoxView">
                             <rect key="frame" x="0.0" y="257" width="375" height="130"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qz0-Tf-Efb">
-                                    <rect key="frame" x="323" y="102" width="36" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vM-NF-hG0">
-                                    <rect key="frame" x="312.5" y="102" width="10.5" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.24313725490196078" green="0.22745098039215686" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVv-Cq-daO">
-                                    <rect key="frame" x="288.5" y="105" width="16" height="16"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="16" id="8Qu-AX-Cbr"/>
-                                        <constraint firstAttribute="width" constant="16" id="PSQ-CC-3Cu"/>
-                                    </constraints>
-                                    <state key="normal" image="textfield_common_clearButton"/>
-                                    <connections>
-                                        <action selector="onTouchSynopsisClear:" destination="iN0-l3-epB" eventType="touchUpInside" id="Tib-6q-X0Q"/>
-                                    </connections>
-                                </button>
-                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="3vM-NF-hG0" firstAttribute="leading" secondItem="LVv-Cq-daO" secondAttribute="trailing" constant="8" id="5eF-vl-DIe"/>
-                                <constraint firstAttribute="bottom" secondItem="LVv-Cq-daO" secondAttribute="bottom" constant="9" id="5rn-4h-NVx"/>
-                                <constraint firstAttribute="bottom" secondItem="Qz0-Tf-Efb" secondAttribute="bottom" constant="7" id="8vR-ic-Pof"/>
-                                <constraint firstAttribute="trailing" secondItem="Qz0-Tf-Efb" secondAttribute="trailing" constant="16" id="PyY-Xn-8G7"/>
-                                <constraint firstItem="Qz0-Tf-Efb" firstAttribute="leading" secondItem="3vM-NF-hG0" secondAttribute="trailing" id="T32-Yi-c7q"/>
-                                <constraint firstItem="3vM-NF-hG0" firstAttribute="bottom" secondItem="Qz0-Tf-Efb" secondAttribute="bottom" id="rMn-7Z-7Ed"/>
                                 <constraint firstAttribute="height" constant="130" id="yDh-lu-2L5"/>
                             </constraints>
                         </view>
@@ -322,10 +291,9 @@
             </constraints>
             <connections>
                 <outlet property="avatarImageView" destination="j3n-dz-icr" id="N8L-ze-wtx"/>
-                <outlet property="currentTextLengthLabel" destination="3vM-NF-hG0" id="NzT-LQ-HP0"/>
                 <outlet property="scrollView" destination="s2j-0L-Axs" id="Ub7-Jt-9ee"/>
                 <outlet property="teamNameTextFiled" destination="PyL-8Z-MyY" id="nrN-Vu-bbR"/>
-                <outlet property="teamSynopsisView" destination="SJG-U8-NF2" id="5Nq-5Y-4bB"/>
+                <outlet property="teamSynopsisTextView" destination="SJG-U8-NF2" id="N0p-ZL-OZd"/>
                 <outlet property="teamTagShowView" destination="wXi-jg-jad" id="mhX-dC-W8W"/>
                 <outlet property="teamTagTitleView" destination="IzJ-Pc-aZb" id="NcI-yL-lC1"/>
                 <outlet property="teamTagView" destination="jgA-kk-3Pq" id="R71-iW-bhK"/>
@@ -341,6 +309,5 @@
         <image name="my_cover_cell_back" width="9" height="16"/>
         <image name="team_cell_photoImage_default" width="40" height="40"/>
         <image name="team_createTeam_updataPhoto_normal" width="35" height="35"/>
-        <image name="textfield_common_clearButton" width="15" height="15"/>
     </resources>
 </document>

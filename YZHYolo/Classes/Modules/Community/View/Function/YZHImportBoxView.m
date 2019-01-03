@@ -46,11 +46,13 @@
     
     UILabel* currentLengthLabel = [[UILabel alloc] init];
     currentLengthLabel.text = @"0";
+    currentLengthLabel.textColor = [UIColor yzh_fontShallowBlack];
     self.currentLengthLabel = currentLengthLabel;
     [currentLengthLabel sizeToFit];
     
     UILabel* maximumLengthLabel = [[UILabel alloc] init];
     maximumLengthLabel.text = @"/200";
+    maximumLengthLabel.textColor = [UIColor yzh_sessionCellGray];
     self.maximumLengthLabel = maximumLengthLabel;
     [maximumLengthLabel sizeToFit];
     
@@ -87,12 +89,12 @@
         make.left.mas_equalTo(17);
         make.right.mas_equalTo(-17);
         make.top.mas_equalTo(5);
-        make.bottom.mas_equalTo(-20);
+        make.bottom.mas_equalTo(-25);
     }];
     
     [self.maximumLengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-17);
-        make.bottom.mas_equalTo(-7);
+        make.bottom.mas_equalTo(-5);
     }];
     
     [self.currentLengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -102,7 +104,7 @@
     
     [self.clearButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.currentLengthLabel.mas_left).mas_offset(-7);
-        make.bottom.mas_equalTo(-9);
+        make.bottom.mas_equalTo(-7);
         make.width.height.mas_equalTo(16);
     }];
 }

@@ -76,7 +76,6 @@
         }];
     };
     
-    self.createTeamView.teamSynopsisTextView.delegate = self;
     self.createTeamView.scrollView.delegate = self;
     
     UIView* tagView = [[UIView alloc] init];
@@ -216,8 +215,8 @@
     if (YZHIsString(self.avatarUrl)) {
         teamOption.avatarUrl = self.avatarUrl;
     }
-    if (YZHIsString(self.createTeamView.teamSynopsisTextView.text)) {
-        teamOption.intro = self.createTeamView.teamSynopsisTextView.text;
+    if (YZHIsString(self.createTeamView.teamSynopsisTextView.importTextView.text)) {
+        teamOption.intro = self.createTeamView.teamSynopsisTextView.importTextView.text;
     }
     if (!self.selectedLabelArray.count) {
         self.selectedLabelArray = [[NSMutableArray alloc] init];

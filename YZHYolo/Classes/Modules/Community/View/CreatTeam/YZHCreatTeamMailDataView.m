@@ -26,20 +26,8 @@
 
 - (void)setupView {
     
-    FSTextView* textView = [FSTextView textView];
-    textView.placeholder = @"无(默认)";
-    textView.maxLength = 200; //限制 200 个字符.
-    //高度可以调整. 否则回车时,会出现遮挡情况
-    textView.frame = CGRectMake(17, 0, self.teamSynopsisView.width - 34, self.teamSynopsisView.height);
-    //TODO: 待测试,在达到最大值时,出现内存泄漏
-    @weakify(self)
-    [textView addTextDidChangeHandler:^(FSTextView *textView) {
-        @strongify(self)
-        NSString* currentStringLength = [NSString stringWithFormat:@"%ld", (long)[textView.text yzh_calculateStringLeng]];
-        self.currentTextLengthLabel.text = currentStringLength;
-    }];
-    self.teamSynopsisTextView = textView;
-    [self.teamSynopsisView insertSubview:textView atIndex:0];
+    self.teamSynopsisTextView.maximumLengthLabel.text = @"/200";
+    self.teamSynopsisTextView.importTextView.maxLength = 200;
     
     //默认是私密群
     self.teamType = YZHTeamTypePrivacy;
@@ -75,10 +63,6 @@
     
     self.teamNameTextFiled.delegate = self;
     
-}
-- (IBAction)onTouchSynopsisClear:(UIButton *)sender {
-    
-    self.teamSynopsisTextView.text = nil;
 }
 
 - (IBAction)updateAvatar:(UIButton *)sender {

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTextView.h"
 #import "YZHLabelShowView.h"
+#import "YZHImportBoxView.h"
 
 typedef enum : NSUInteger {
     YZHTeamTypePrivacy,
@@ -26,11 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UISwitch *teamTypeSwitch;
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIButton *updateAvatarButton;
-@property (weak, nonatomic) IBOutlet UIView *teamSynopsisView;
 @property (nonatomic, copy) YZHButtonExecuteBlock updataBlock;
 @property (nonatomic, assign) YZHCreateTeamType teamType;
-@property (nonatomic, strong) FSTextView* teamSynopsisTextView;
-@property (weak, nonatomic) IBOutlet UILabel *currentTextLengthLabel;
+@property (weak, nonatomic) IBOutlet YZHImportBoxView *teamSynopsisTextView;
 @property (weak, nonatomic) IBOutlet UIView *teamTagView;
 @property (weak, nonatomic) IBOutlet UIView *teamTagTitleView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *teamTagViewLayoutConstraint;
