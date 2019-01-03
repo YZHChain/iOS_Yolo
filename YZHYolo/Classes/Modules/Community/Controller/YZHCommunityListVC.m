@@ -75,7 +75,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)viewDidLoad {
     
-//    [[YZHCheckVersion shareInstance] checkoutTeamCurrentVersion];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     

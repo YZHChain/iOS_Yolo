@@ -205,7 +205,6 @@ static NSString* kYZHUserAccountKey   = @"userAccount";
     NSDictionary* parameter = @{@"account"  :account,
                                 @"password" :password
                                 };
-
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_LOGIN_LOGINVERIFY) params:parameter successCompletion:^(id obj) {
         @strongify(self)
