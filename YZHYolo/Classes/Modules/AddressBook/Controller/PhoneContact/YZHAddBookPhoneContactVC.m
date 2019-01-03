@@ -195,7 +195,7 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
     }
 }
 
-- (void)onSelectedCellButtonWithModel:(id)model {
+- (void)onSelectedCellAddFirendButtonWithModel:(id)model {
     
     //TODO:
     YZHAddBookPhoneContactModel* contactModel = model;
@@ -206,8 +206,12 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         //TODO:这里读取的需要验证,并不是最新的,需要和产品确认.
         if (contactModel.needVerfy) {
             //TODO:快速添加文案.
-            request.message = @"通过手机联系人,请求添加好友";
-            request.operation = NIMUserOperationRequest;
+//            request.message = @"通过手机联系人,请求添加好友";
+//            request.operation = NIMUserOperationRequest;
+            [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
+                                                                               @"userId": request.userId ? request.userId : @""
+                                                                               }];
+            return;
         } else {
             request.operation = NIMUserOperationAdd;
         }

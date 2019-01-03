@@ -21,7 +21,7 @@ typedef enum : NSUInteger {
 
 @protocol YZHPhoneContactCellProtocol <NSObject>
 
-- (void)onSelectedCellButtonWithModel:(id)model;
+- (void)onSelectedCellAddFirendButtonWithModel:(id)model;
 
 @end
 

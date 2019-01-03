@@ -155,17 +155,21 @@
     [YZHRouter openURL:kYZHRouterAddressBookDetails info:info];
 }
 
-- (void)onSelectedCellButtonWithModel:(id)model {
+- (void)onSelectedCellAddFirendButtonWithModel:(id)model {
     
     YZHAddFirendSearchModel* contactModel = model;
     if (contactModel.allowAdd) {
         NIMUserRequest *request = [[NIMUserRequest alloc] init];
         request.userId = contactModel.userId;
         if (contactModel.needVerfy) {
-            request.operation = NIMUserOperationRequest;
-            //快速添加文案.
-            request.message = @"通过手机号或Yolo号搜索,请求添加好友";
-            request.operation = NIMUserOperationRequest;
+//            request.operation = NIMUserOperationRequest;
+//            //快速添加文案.
+//            request.message = @"通过手机号或Yolo号搜索,请求添加好友";
+//            request.operation = NIMUserOperationRequest;
+            [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
+                                                                               @"userId": request.userId ? request.userId : @""
+                                                                               }];
+            return;
         } else {
             request.operation = NIMUserOperationAdd;
         }

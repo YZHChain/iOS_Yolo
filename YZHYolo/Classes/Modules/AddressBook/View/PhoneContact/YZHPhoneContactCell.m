@@ -110,11 +110,11 @@ static NSString* kPhoneContactCellReview = @"phoneContactCellReview";
 
 - (IBAction)clickRequestButton:(UIButton *)sender {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(onSelectedCellButtonWithModel:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(onSelectedCellAddFirendButtonWithModel:)]) {
         if (_contactModel) {
-            [self.delegate onSelectedCellButtonWithModel:_contactModel];
+            [self.delegate onSelectedCellAddFirendButtonWithModel:_contactModel];
         } else {
-            [self.delegate onSelectedCellButtonWithModel:_searchModel];
+            [self.delegate onSelectedCellAddFirendButtonWithModel:_searchModel];
         }
     }
     
