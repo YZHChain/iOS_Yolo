@@ -87,9 +87,10 @@
     } else {
         self.nickNameLabel.text = @"Yolo群聊";
     }
+    self.headerPhotoImageView.layer.cornerRadius = 4;
+    self.headerPhotoImageView.layer.masksToBounds = YES;
     if (YZHIsString(team.avatarUrl)) {
         [self.headerPhotoImageView yzh_setImageWithString:team.avatarUrl placeholder:@"team_cell_photoImage_default"];
-        [self.headerPhotoImageView yzh_cornerRadiusAdvance:self.headerPhotoImageView.size.height / 2 rectCornerType: UIRectCornerAllCorners];
     } else {
         self.headerPhotoImageView.image = [UIImage imageNamed:@"team_cell_photoImage_default"];
     }

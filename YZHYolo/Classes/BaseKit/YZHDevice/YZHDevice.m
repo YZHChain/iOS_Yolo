@@ -62,6 +62,7 @@ static id instance;
                            };
     NSData *data = [NSJSONSerialization dataWithJSONObject:info options:0 error:nil];
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
     return string;
 }
 

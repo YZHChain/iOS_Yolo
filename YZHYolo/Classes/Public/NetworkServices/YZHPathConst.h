@@ -9,7 +9,7 @@
 #ifndef YZHPathConst_h
 #define YZHPathConst_h
 
-#define PATH_YOLOIP   @"https://yolotest.yzhchain.com/"
+#define PATH_YOLOIP   @"https://yoloserver.yzhchain.com/"
 
 #define SERVER_LOGIN(PATH)     ([@"/yolo-login" stringByAppendingString: PATH])
 #define SERVER_PERSON(PATH)    ([@"/yolo-person" stringByAppendingString: PATH])
@@ -73,6 +73,7 @@
 #define PATH_WEB_ABOUTYOLO_PROBLEM              @"/yolo-web/html/about/common_problem.html" //常见问题
 #define PATH_WEB_ABOUTYOLO_INTRODUCE            @"/yolo-web/html/about/characteristic.html" //特色介绍
 #define PATH_WEB_ABOUTYOLO_FEEDBACK             @"/yolo-web/html/about/feedback.html" //问题反馈
+#define PATH_WEB_YYLM_PAPMENT                   @"/yylm-web/html/payment.html" //异业联盟支付
 
 
 #endif /* YZHPathConst_h */

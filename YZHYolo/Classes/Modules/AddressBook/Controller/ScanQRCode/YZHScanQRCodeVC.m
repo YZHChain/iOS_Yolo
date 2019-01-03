@@ -17,6 +17,7 @@
 #import "YZHScanQRCodeModel.h"
 #import "YZHDiscountVC.h"
 #import "UIViewController+YZHTool.h"
+#import "YZHServicesConfig.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -212,7 +213,15 @@
                         self.isSkip = YES;
                         YZHVoidBlock complection = ^ {
                             YZHDiscountVC* discountVC = [[YZHDiscountVC alloc] init];
-                            NSString *url = [NSString stringWithFormat:@"https://yolotest.yzhchain.com/yylm-web/html/payment.html?%@", codeModel.accid];
+                            NSString* urlServerString;
+                            //只有 DEBUG 时,才会切环境,否则默认都是使用正式服务地址.
+#if DEBUG
+                            //  配置测试服,会检测是否开启、
+                            urlServerString = [YZHServicesConfig debugTestServerConfig];
+#else
+                            urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
+#endif
+                            NSString *url = [NSString stringWithFormat:@"%@%@?%@", urlServerString, PATH_WEB_YYLM_PAPMENT, codeModel.accid];
                             discountVC.url = url;
                             [[UIViewController yzh_findTopViewController].navigationController pushViewController:discountVC animated:YES];
                         };
