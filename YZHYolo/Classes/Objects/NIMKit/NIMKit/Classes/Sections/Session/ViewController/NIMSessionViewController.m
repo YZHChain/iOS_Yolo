@@ -564,8 +564,9 @@
         [[[NIMSDK sharedSDK] chatManager] fetchMessageAttachment:message
                                                            error:nil];
     }else{
+        NSError* error;
         [[[NIMSDK sharedSDK] chatManager] resendMessage:message
-                                                  error:nil];
+                                                  error:&error];
     }
 }
 

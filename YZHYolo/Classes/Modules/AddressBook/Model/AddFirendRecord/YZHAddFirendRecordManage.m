@@ -83,8 +83,25 @@ static const NSInteger MaxNotificationCount = 100;
     NIMSystemNotificationFilter* fileter = [[NIMSystemNotificationFilter alloc] init];
     fileter.notificationTypes = @[[NSNumber numberWithInteger:NIMSystemNotificationTypeFriendAdd]];
     NSArray<id>* addFriendNotifications = [systemNotificationManager fetchSystemNotifications:nil limit:MaxNotificationCount filter:fileter];
+    // 去重取最新的一条消息
+    NSMutableArray* addFirends = addFriendNotifications.mutableCopy;
+    for (NSInteger i = 0 ; i < addFirends.count; i++) {
+        NIMSystemNotification* notification = addFirends[i];
+        for (NSInteger y = i + 1; y < addFirends.count; y++) {
+            NIMSystemNotification* notification2 = addFirends[y];
+            if ([notification.targetID isEqualToString:notification2.targetID] && [notification.sourceID isEqualToString:notification2.sourceID]) {
+                if (notification.timestamp <= notification2.timestamp) {
+                    [addFirends removeObject:notification];
+                } else {
+                    [addFirends removeObject:notification2];
+                }
+                y --;
+                i --;
+            }
+        }
+    }
     NSMutableArray<YZHAddFriendRecordModel*>* addFirendModels;
-    for (NIMSystemNotification* notification in addFriendNotifications) {
+    for (NIMSystemNotification* notification in addFirends) {
         YZHAddFriendRecordModel* model = [[YZHAddFriendRecordModel alloc] init];
         model.addFriendNotification = notification;
         NSDate* timeDate = [NSDate dateWithTimeIntervalSince1970:notification.timestamp];
