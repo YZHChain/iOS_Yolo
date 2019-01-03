@@ -234,10 +234,11 @@
                     if (!self.isSkip) {
                         self.isSkip = YES;
                         [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
-                        //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
-                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                            self.isSkip = NO;
-                        });
+//                        //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
+//                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                            self.isSkip = NO;
+//                        });
+                        [self closeQRCodeCompletion:nil];
                     }
                         break;
         }
@@ -246,10 +247,11 @@
         if (!self.isSkip) {
             self.isSkip = YES;
             [YZHAlertManage showAlertMessage:@"暂无法识别此类型二维码"];
-            //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.isSkip = NO;
-            });
+//            //防止多次弹框, 过 5S 之后将值修改回来. 否则无法进行其他跳转
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                self.isSkip = NO;
+//            });
+            [self closeQRCodeCompletion:nil];
         }
     }
 }

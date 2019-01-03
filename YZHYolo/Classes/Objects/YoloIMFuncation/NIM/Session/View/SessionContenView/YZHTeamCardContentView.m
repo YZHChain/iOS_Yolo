@@ -222,6 +222,8 @@
         [[[NIMSDK sharedSDK] teamManager] addUsers:@[userId] toTeam:self.attachment.groupID postscript:@"通过群名片分享加入" completion:^(NSError * _Nullable error, NSArray<NIMTeamMember *> * _Nullable members) {
             if (!error) {
                 [YZHProgressHUD showText:@"您已成功加入社群" onView:YZHAppWindow];
+            } else {
+                [YZHProgressHUD showText:@"该群未公开，无法直接加入" onView:YZHAppWindow];
             }
         }];
     } else {

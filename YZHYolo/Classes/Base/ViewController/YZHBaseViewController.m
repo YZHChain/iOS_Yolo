@@ -19,9 +19,11 @@
     // Do any additional setup after loading the view.
     // 修改状态栏
 //    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
+    
+    // 设置导航栏
+    [self setupNav];
     // 设置通知
     [self setupNotification];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +82,15 @@
 }
 
 #pragma mark -- Setting View
+
+- (void)setupNav {
+    
+    if (!self.navigationItem.backBarButtonItem && !YZHIsString(self.navigationItem.title)) {
+        UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] init];
+        backBtn.title = @"返回";
+        self.navigationItem.backBarButtonItem = backBtn;
+    }
+}
 
 - (void)setStatusBarBackgroundGradientColorFromLeftToRight:(UIColor *)startColor withEndColor:(UIColor*) endColor{
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];

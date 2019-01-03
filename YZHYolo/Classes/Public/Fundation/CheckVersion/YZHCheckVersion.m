@@ -43,7 +43,6 @@ NSString* const kYZHAppID = @"1446610007";
                           };
     @weakify(self)
     [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOUAPPUPDATE) params:dic successCompletion:^(id obj) {
-        
         YZHChekoutVersionModel* model = [YZHChekoutVersionModel YZH_objectWithKeyValues:obj];
         @strongify(self)
         // 先判断是否需要强更

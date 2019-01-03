@@ -164,7 +164,6 @@ extern NSString *const NIMKitTeamInfoHasUpdatedNotification;
 
 }
 
-
 @end
 
 
