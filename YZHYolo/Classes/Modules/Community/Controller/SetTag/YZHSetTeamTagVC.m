@@ -128,7 +128,7 @@
         [cell.contentView addSubview:self.selectedImageView];
         [cell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
     } else {
-        
+
         [cell.titleLabel setTextColor:YZHColorRGBAWithRGBA(193, 193, 193, 1)];
     }
     
@@ -165,9 +165,19 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.selectedIndexPath = indexPath;
+    if (self.selectedIndexPath) {
+        if ([self.selectedIndexPath isEqual:indexPath]) {
+            self.selectedIndexPath = nil;
+        } else {
+            self.selectedIndexPath = indexPath;
+        }
+    } else {
+        self.selectedIndexPath = indexPath;
+    }
+    if (!self.selectedIndexPath) {
+        [self.selectedImageView removeFromSuperview];
+    }
 
-    
     [tableView reloadData];
 }
 
@@ -219,29 +229,45 @@
     if (self.selectedIndexPath) {
         YZHAddBookSetTagCell* cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
         NSString* selectedTag = cell.titleLabel.text;
-        if (![selectedTag isEqualToString:self.teamExt.team_tagName]) {
-            YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:_teamId];
-            teamExtManage.team_tagName = selectedTag;
-            NSString* teamExtString = [teamExtManage mj_JSONString];
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
-            @weakify(self)
-            [[[NIMSDK sharedSDK] teamManager] updateMyCustomInfo:teamExtString inTeam:_teamId completion:^(NSError * _Nullable error) {
-                @strongify(self)
-                if (!error) {
-                    [hud hideWithText:@"保存成功"];
-                    [self dismissViewControllerAnimated:YES completion:^{
-                        //TODO: 需要更新上层 Model,刷新
-                    }];
-                } else {
-                    //TODO:失败文案
-                    [hud hideWithText:error.domain];
-                }
-            }];
+        if (self.teamExt.team_tagName) {
+            if (![selectedTag isEqualToString:self.teamExt.team_tagName]) {
+                [self updateTeamTagSelectedTagName:selectedTag];
+            } else {
+                //和上次选择一样 无需更新
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            }
         } else {
-            [self dismissViewControllerAnimated:YES completion:^{
-            }];
+            [self updateTeamTagSelectedTagName:selectedTag];
+        }
+    } else {
+        //清空
+        if (self.teamExt.team_tagName) {
+            [self updateTeamTagSelectedTagName:nil];
         }
     }
+}
+
+- (void)updateTeamTagSelectedTagName:(NSString *)tagName {
+    
+    YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:_teamId];
+    teamExtManage.team_tagName = tagName;
+    NSString* teamExtString = [teamExtManage mj_JSONString];
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+    @weakify(self)
+    [[[NIMSDK sharedSDK] teamManager] updateMyCustomInfo:teamExtString inTeam:_teamId completion:^(NSError * _Nullable error) {
+        @strongify(self)
+        if (!error) {
+            [hud hideWithText:@"保存成功"];
+            [self dismissViewControllerAnimated:YES completion:^{
+                //TODO: 需要更新上层 Model,刷新
+            }];
+        } else {
+            //TODO:失败文案
+            [hud hideWithText:error.domain];
+        }
+    }];
 }
 
 - (void)clickAdditionTag:(UIButton* )sender {
@@ -329,14 +355,6 @@
     }
     
     return _selectedImageView;
-}
-
-- (NSIndexPath *)selectedIndexPath {
-    
-    if (!_selectedIndexPath) {
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    return _selectedIndexPath;
 }
 
 - (YZHTeamExtManage *)teamExt {

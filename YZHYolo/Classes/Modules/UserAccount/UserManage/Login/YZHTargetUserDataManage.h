@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHTargetUserExtManage : NSObject
 
 @property (nonatomic, copy) NSString* friend_phone;
-@property (nonatomic, copy) NSString* friend_tagName;
+@property (nonatomic, copy, nullable) NSString* friend_tagName;
 @property (nonatomic, copy) NSString* requstAddText; // 请求添加好友验证消息
 @property (nonatomic, assign) BOOL requteAddFirend; // 是否发送过好友请求.
 @property (nonatomic, copy) YZHVoidBlock updataUserExt;

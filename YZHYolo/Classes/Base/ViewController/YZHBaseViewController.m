@@ -21,7 +21,7 @@
 //    [self setStatusBarBackgroundColor:[UIColor yzh_backgroundDarkBlue]];
     
     // 设置导航栏
-    [self setupNav];
+//    [self setupNav];
     // 设置通知
     [self setupNotification];
 }

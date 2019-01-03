@@ -126,7 +126,6 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         [cell.contentView addSubview:self.selectedImageView];
         [cell.titleLabel setTextColor:[UIColor yzh_fontShallowBlack]];
     } else {
-        
         [cell.titleLabel setTextColor:YZHColorRGBAWithRGBA(193, 193, 193, 1)];
     }
     
@@ -154,7 +153,6 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         } else {
            view.titleLabel.text = [NSString stringWithFormat:@"自定义分类（0 / 5）"];
         }
-        
     }
     
     return view;
@@ -164,7 +162,18 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.selectedIndexPath = indexPath;
+    if (self.selectedIndexPath) {
+        if ([self.selectedIndexPath isEqual:indexPath]) {
+            self.selectedIndexPath = nil;
+        } else {
+            self.selectedIndexPath = indexPath;
+        }
+    } else {
+        self.selectedIndexPath = indexPath;
+    }
+    if (!self.selectedIndexPath) {
+        [self.selectedImageView removeFromSuperview];
+    }
     
     [tableView reloadData];
 }
@@ -194,7 +203,7 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
         if (editingStyle == UITableViewCellEditingStyleDelete)
         {
             @weakify(self)
-            [YZHAlertManage showAlertTitle:nil message:@"仅删除分类， 被该标签标记的好友会恢复成无分类 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
+            [YZHAlertManage showAlertTitle:nil message:@"仅删除分类, 被该标签标记的好友会恢复成无分类 " actionButtons:@[@"取消", @"确定"] actionHandler:^(UIAlertController *alertController, NSInteger buttonIndex) {
                 @strongify(self)
                 if (buttonIndex == 1) {
                     [self removeCustomTagName:indexPath.row];
@@ -232,33 +241,43 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
 
 - (void)clickRightBarItem:(UIBarButtonItem* )sender {
     
+    if (!self.selectedIndexPath && YZHIsString(self.userDetailsModel.classTagModel.subtitle)) {
+        
+        [self updateUserSelectedTagName:nil];
+        return;
+    }
     YZHAddBookSetTagCell* cell = [self.tableView cellForRowAtIndexPath:self.selectedIndexPath];
     NSString* selectedTag = cell.titleLabel.text;
     if (![selectedTag isEqualToString:self.userDetailsModel.classTagModel.title]) {
-        YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:self.userDetailsModel.userId];
-        userExtManage.friend_tagName = selectedTag;
-        NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo: self.userDetailsModel.userId];
-        user.ext = [userExtManage mj_JSONString];
-        
-        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
-        @weakify(self)
-        [[[NIMSDK sharedSDK] userManager] updateUser:user completion:^(NSError * _Nullable error) {
-            @strongify(self)
-            if (!error) {
-                [hud hideWithText:@"保存成功"];
-                [self dismissViewControllerAnimated:YES completion:^{
-                    //TODO: 需要更新上层 Model,刷新
-                }];
-            } else {
-                //TODO:失败文案
-                [hud hideWithText:error.domain];
-            }
-        }];
+        [self updateUserSelectedTagName:selectedTag];
     } else {
         [self dismissViewControllerAnimated:YES completion:^{
         }];
     }
 
+}
+
+- (void)updateUserSelectedTagName:(NSString *)tagName {
+    
+    YZHTargetUserExtManage* userExtManage = [YZHTargetUserExtManage targetUserExtWithUserId:self.userDetailsModel.userId];
+    userExtManage.friend_tagName = tagName;
+    NIMUser* user = [[NIMSDK sharedSDK].userManager userInfo: self.userDetailsModel.userId];
+    user.ext = [userExtManage mj_JSONString];
+    
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+    @weakify(self)
+    [[[NIMSDK sharedSDK] userManager] updateUser:user completion:^(NSError * _Nullable error) {
+        @strongify(self)
+        if (!error) {
+            [hud hideWithText:@"保存成功"];
+            [self dismissViewControllerAnimated:YES completion:^{
+                //TODO: 需要更新上层 Model,刷新
+            }];
+        } else {
+            //TODO:失败文案
+            [hud hideWithText:error.domain];
+        }
+    }];
 }
 
 - (void)clickAdditionTag:(UIButton* )sender {
@@ -346,14 +365,6 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
     }
 
     return _selectedImageView;
-}
-
-- (NSIndexPath *)selectedIndexPath {
-    
-    if (!_selectedIndexPath) {
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    return _selectedIndexPath;
 }
 
 @end

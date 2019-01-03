@@ -82,5 +82,7 @@
 	</array>
 	<key>View controller-based status bar appearance</key>
 	<false/>
+	<key>CFBundleAllowMixedLocalizations</key>
+	<true/>
 </dict>
 </plist>
