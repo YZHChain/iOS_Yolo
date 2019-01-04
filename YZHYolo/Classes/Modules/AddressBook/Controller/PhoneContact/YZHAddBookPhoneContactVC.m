@@ -209,7 +209,8 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 //            request.message = @"通过手机联系人,请求添加好友";
 //            request.operation = NIMUserOperationRequest;
             [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                               @"userId": request.userId ? request.userId : @""
+                                                                               @"userId": request.userId ? request.userId : @"",
+                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
                                                                                }];
             return;
         } else {

@@ -551,7 +551,8 @@
             [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
                                                                                @"userId": self.session.sessionId,
                                                                                @"isPrivate": @(1),
-                                                                               @"session": self.session
+                                                                               @"session": self.session,
+                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
                                                                                }];
             
         } else {

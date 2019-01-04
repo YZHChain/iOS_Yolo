@@ -13,6 +13,7 @@
 #import "YZHProgressHUD.h"
 #import "YZHRequstAddFirendAttachment.h"
 #import "YZHSessionMsgConverter.h"
+#import "YZHAlertManage.h"
 
 @interface YZHAddFirendSendVerifyVC ()<UITextFieldDelegate>
 
@@ -59,10 +60,9 @@
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     self.verifyMessageTextField.delegate = self;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
     
     [self.sendMessage addTarget:self action:@selector(senderVerifyMessage:) forControlEvents:UIControlEventTouchUpInside];
-    self.sendMessage.enabled = NO;
     self.sendMessage.layer.cornerRadius = 5;
     self.sendMessage.layer.masksToBounds = YES;
     
@@ -98,45 +98,39 @@
 
 - (void)senderVerifyMessage:(UIButton *)sender {
     
-    NIMUserRequest *request = [[NIMUserRequest alloc] init];
-    request.userId = self.userId;
-    request.operation = NIMUserOperationRequest;
-    request.message = self.verifyMessageTextField.text;
-    NSString *successText = @"请求成功";
-    NSString *failedText =  @"请求失败";
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
-    @weakify(self)
-    [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
-        @strongify(self)
-        if (!error) {
-            //添加成功文案;
-            [hud hideWithText:successText];
-            if (self.isPrivate) {
-                //发送添加请求成功,则发送一条已添加消息.
-                YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
-                addFirendAttachment.addFirendTitle = @"好友申请已发出";
-                //插入一条添加好友申请回话.
-                [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+    if (YZHIsString(self.verifyMessageTextField.text)) {
+        NIMUserRequest *request = [[NIMUserRequest alloc] init];
+        request.userId = self.userId;
+        request.operation = NIMUserOperationRequest;
+        request.message = self.verifyMessageTextField.text;
+        NSString *successText = @"请求成功";
+        NSString *failedText =  @"请求失败";
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
+        @weakify(self)
+        [[NIMSDK sharedSDK].userManager requestFriend:request completion:^(NSError *error) {
+            @strongify(self)
+            if (!error) {
+                //添加成功文案;
+                [hud hideWithText:successText];
+                if (self.isPrivate) {
+                    //发送添加请求成功,则发送一条已添加消息.
+                    YZHRequstAddFirendAttachment* addFirendAttachment = [[YZHRequstAddFirendAttachment alloc] init];
+                    addFirendAttachment.addFirendTitle = @"好友申请已发出";
+                    //插入一条添加好友申请回话.
+                    [[NIMSDK sharedSDK].conversationManager saveMessage:[YZHSessionMsgConverter msgWithRequstAddFirend:addFirendAttachment] forSession:self.session completion:nil];
+                }
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else{
+                [hud hideWithText:failedText];
             }
-            self.sendMessage.enabled = NO;
-        }else{
-            [hud hideWithText:failedText];
-        }
-    }];
+        }];
+    } else {
+        [YZHAlertManage showAlertMessage:@"请输入验证信息"];
+    }
+    
 }
 
 #pragma mark - 6.Private Methods
-
-- (void)textFieldEditChanged:(NSNotification* )notification{
-    
-    NSInteger stringLength = [self.verifyMessageTextField.text yzh_calculateStringLeng];
-    BOOL hasConform = stringLength >= 1 && stringLength <= 50;
-    if (hasConform) {
-        self.sendMessage.enabled = YES;
-    } else {
-        self.sendMessage.enabled = NO;
-    }
-}
 
 - (void)setupNotification {
     

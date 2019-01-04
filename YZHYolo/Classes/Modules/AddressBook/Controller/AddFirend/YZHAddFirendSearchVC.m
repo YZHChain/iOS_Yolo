@@ -167,7 +167,8 @@
 //            request.message = @"通过手机号或Yolo号搜索,请求添加好友";
 //            request.operation = NIMUserOperationRequest;
             [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                               @"userId": request.userId ? request.userId : @""
+                                                                               @"userId": request.userId ? request.userId : @"",
+                                                                               kYZHRouteSegue: kYZHRouteSegueModal,
                                                                                }];
             return;
         } else {

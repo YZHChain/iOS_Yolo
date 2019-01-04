@@ -315,8 +315,9 @@
     if (needAddVerify) {
         //跳转至填写验证消息
         [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
-                                                                           kYZHRouteSegue:kYZHRouteSegueModal,
-                                                                           @"userId": self.userId
+                                                                           
+                                                                           @"userId": self.userId,
+                                                                           kYZHRouteSegue: kYZHRouteSegueModal,
                                                                            }];
     } else {
         request.operation = NIMUserOperationAdd;
