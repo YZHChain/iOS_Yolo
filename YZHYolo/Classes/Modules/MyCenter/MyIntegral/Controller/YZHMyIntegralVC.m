@@ -54,6 +54,13 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    // 每次进入页面时,重新刷新一次.
+    [self.webView reload];
+}
+
 #pragma mark - 2.SettingView and Style
 
 - (void)setupNavBar

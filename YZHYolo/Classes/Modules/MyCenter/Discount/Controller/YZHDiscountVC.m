@@ -21,6 +21,7 @@
 @property (nonatomic, assign) CGFloat delayTime;
 @property (nonatomic, strong) YZHProgressHUD* hud;
 @property (nonatomic, strong) NSString* userId;
+
 @end
 
 @implementation YZHDiscountVC
@@ -60,6 +61,13 @@
 - (void)viewWillLayoutSubviews {
     
     [super viewWillLayoutSubviews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    // 每次进入页面时,重新刷新一次.
+    [self.webView reload];
 }
 
 #pragma mark - 2.SettingView and Style
@@ -269,6 +277,7 @@
 }
 
 -(void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+
     self.hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
 }
 
@@ -408,7 +417,7 @@
 }
 
 -(void)hideHUDError:(NSError *)error{
-    if (self.hud!=nil) {
+    if (self.hud != nil) {
         if (error) {
             [self.hud hideWithText:error.domain];
         } else {
