@@ -724,11 +724,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             headerView.tagNameLabel.text = @"置顶";
             headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
-            headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"其他分类";
+            headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
             headerView.backgroundColor = [UIColor whiteColor];
         }
     } else {
-        headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"其他分类";
+        headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
     }
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
