@@ -164,11 +164,11 @@
     _avatarImageView.y = 13;
     
     _teamNameLabel.x = _avatarImageView.right + 8;
-    _teamNameLabel.y = 13;
+    _teamNameLabel.y = 12;
     _teamNameLabel.width = 165;
     
     _teamUrlLabel.x = _teamNameLabel.x;
-    _teamUrlLabel.y = 35;
+    _teamUrlLabel.y = 33;
     _teamUrlLabel.width = contentSize.width - 75;
     _teamUrlLabel.numberOfLines = 2;
     [_teamUrlLabel sizeToFit];

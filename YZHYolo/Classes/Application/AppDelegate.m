@@ -222,6 +222,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     //定制 UI 配置器
     NIMKitConfig* config = [[NIMKitConfig alloc] init];
     config.avatarType = NIMKitAvatarTypeRadiusCorner;
+    config.inputMaxLength = 2000;
     [NIMKit sharedKit].config = config;
 }
 

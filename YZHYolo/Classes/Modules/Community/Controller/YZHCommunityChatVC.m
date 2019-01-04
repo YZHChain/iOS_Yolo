@@ -143,6 +143,10 @@
     [rightItemButton sizeToFit];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightItemButton];
+    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] init];
+    backBtn.title = @"社群";
+    self.navigationItem.backBarButtonItem = backBtn;
 }
 
 - (void)setupView

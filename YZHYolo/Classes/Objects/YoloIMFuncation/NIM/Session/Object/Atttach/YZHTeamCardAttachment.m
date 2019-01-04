@@ -62,14 +62,8 @@
 - (NSString *)avatarUrl {
     
     if (!_avatarUrl) {
-        //先读取本地,本地没有,在去服务器下拉.TODOTODO
-        //        [[NIMSDK sharedSDK].userManager fetchUserInfos:@[self.account] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
-        //            if (!error) {
-        //                self->_avatarUrl = users.firstObject.userInfo.avatarUrl ? users.firstObject.userInfo.avatarUrl : @"addBook_cover_cell_photo_default";
-        //            }
-        //        }];
-//        NIMUser *user = [[NIMSDK sharedSDK].userManager userInfo:_groupID];
-        _avatarUrl = @"team_cell_photoImage_default";
+        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:_groupID];
+        _avatarUrl = team.avatarUrl ? team.avatarUrl : @"team_cell_photoImage_default";
     }
     return _avatarUrl;
 }
