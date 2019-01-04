@@ -74,6 +74,7 @@
     self.nickNameTextField.returnKeyType = UIReturnKeyDone;
     [self.nickNameTextField becomeFirstResponder];
     
+    self.nickNameTextField.delegate = self;
     self.nickNameTextField.text = self.userInfo.nickName;
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
@@ -101,10 +102,11 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSLog(@"触发了");
     if (string.length == 0) {
         return YES;
     } else {
-       return [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:20];
+       return [NSString yzh_checkoutStringWithCurrenString:textField.text importString:string standardLength:24];
     }
     
     return YES;
@@ -134,7 +136,7 @@
     }];
 }
 
-- (void)saveNickName{
+- (void)saveNickName {
     
     if (YZHIsString(self.teamId)) {
         [self saveTeamNickName];
@@ -145,26 +147,31 @@
 
 - (void)saveUserNickName {
     
+    
     if (YZHIsString(self.nickNameTextField.text)) {
-        NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];
-        //加入用户输入名字为空格,则只计算一位。。
-        if (!YZHIsString(nickName)) {
-            nickName = @" ";
-        }
-        if (![nickName isEqualToString:_userInfo.nickName]) {
-            YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
-            @weakify(self)
-            [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagNick) : nickName} completion:^(NSError *error) {
-                @strongify(self)
-                if (!error) {
-                    [hud hideWithText:@"昵称修改成功"];
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                }else{
-                    [hud hideWithText:error.domain];
-                }
-            }];
+        if ([NSString yzh_checkoutStringWithCurrenString:self.nickNameTextField.text importString:nil standardLength:24]) {
+            NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];
+            //加入用户输入名字为空格,则只计算一位。。
+            if (!YZHIsString(nickName)) {
+                nickName = @" ";
+            }
+            if (![nickName isEqualToString:_userInfo.nickName]) {
+                YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+                @weakify(self)
+                [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagNick) : nickName} completion:^(NSError *error) {
+                    @strongify(self)
+                    if (!error) {
+                        [hud hideWithText:@"昵称修改成功"];
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }else{
+                        [hud hideWithText:error.domain];
+                    }
+                }];
+            } else {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
         } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [YZHAlertManage showAlertMessage:@"不得超过24个字符"];
         }
     } else {
         //空限制.
@@ -173,7 +180,7 @@
     
 }
 
-- (void)saveTeamNickName{
+- (void)saveTeamNickName {
     
     if (YZHIsString(self.nickNameTextField.text)) {
         NSString* nickName = [self.nickNameTextField.text yzh_clearBeforeAndAfterblankString];

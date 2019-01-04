@@ -509,22 +509,21 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             headerView.tagNameLabel.text = @"置顶";
             headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
         } else {
-            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"其他";
+            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"未分类";
             headerView.backgroundColor = [UIColor whiteColor];
-            if ([headerView.tagNameLabel.text isEqualToString:@"其他"]) {
+            if ([headerView.tagNameLabel.text isEqualToString:@"未分类"]) {
                 if (![[[NIMSDK sharedSDK] userManager] isMyFriend:session.session.sessionId]) {
                     headerView.tagNameLabel.text = @"临时聊天";
                 }
             }
         }
     } else {
-        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"其他";
-        if ([headerView.tagNameLabel.text isEqualToString:@"其他"]) {
+        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"未分类";
+        if ([headerView.tagNameLabel.text isEqualToString:@"未分类"]) {
             if (![[[NIMSDK sharedSDK] userManager] isMyFriend:session.session.sessionId]) {
                 headerView.tagNameLabel.text = @"临时聊天";
             }
         }
-        
     }
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
