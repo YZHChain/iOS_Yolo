@@ -318,7 +318,7 @@
                                                                            
                                                                            @"userId": self.userId,
                                                                            kYZHRouteSegue: kYZHRouteSegueModal,
-                                                                           }];
+                                                  kYZHRouteSegueNewNavigation: @(YES)                     }];
     } else {
         request.operation = NIMUserOperationAdd;
         NSString *successText =  @"添加成功";

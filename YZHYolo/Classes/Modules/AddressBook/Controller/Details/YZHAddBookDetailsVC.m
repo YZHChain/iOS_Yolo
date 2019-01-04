@@ -325,6 +325,7 @@
                                                                            
                                                                            @"userId": self.userId,
                                                                            kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                           kYZHRouteSegueNewNavigation: @(YES)
                                                                            }];
     } else {
         request.operation = NIMUserOperationAdd;

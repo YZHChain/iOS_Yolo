@@ -553,6 +553,7 @@
                                                                                @"isPrivate": @(1),
                                                                                @"session": self.session,
                                                                                kYZHRouteSegue: kYZHRouteSegueModal,
+                                                                               kYZHRouteSegueNewNavigation: @(YES)
                                                                                }];
             
         } else {

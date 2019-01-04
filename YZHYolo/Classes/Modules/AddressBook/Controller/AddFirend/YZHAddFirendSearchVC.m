@@ -169,7 +169,7 @@
             [YZHRouter openURL:kYZHRouterAddressBookAddFirendSendVerify info:@{
                                                                                @"userId": request.userId ? request.userId : @"",
                                                                                kYZHRouteSegue: kYZHRouteSegueModal,
-                                                                               }];
+                                                  kYZHRouteSegueNewNavigation: @(YES)                            }];
             return;
         } else {
             request.operation = NIMUserOperationAdd;

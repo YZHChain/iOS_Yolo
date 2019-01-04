@@ -18,6 +18,7 @@
 #import "YZHDiscountVC.h"
 #import "UIViewController+YZHTool.h"
 #import "YZHServicesConfig.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHScanQRCodeVC ()<AVCaptureMetadataOutputObjectsDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
@@ -221,7 +222,8 @@
 #else
                             urlServerString = [YZHServicesConfig stringForKey:kYZHAppConfigServerAddr];
 #endif
-                            NSString *url = [NSString stringWithFormat:@"%@%@?%@", urlServerString, PATH_WEB_YYLM_PAPMENT, codeModel.accid];
+                            NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.yoloId;
+                            NSString *url = [NSString stringWithFormat:@"%@%@?%@&userId=%@", urlServerString, PATH_WEB_YYLM_PAPMENT, codeModel.accid, yolo_no];
                             discountVC.url = url;
                             [[UIViewController yzh_findTopViewController].navigationController pushViewController:discountVC animated:YES];
                         };

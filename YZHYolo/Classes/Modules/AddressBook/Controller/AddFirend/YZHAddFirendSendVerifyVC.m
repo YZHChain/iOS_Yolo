@@ -93,7 +93,8 @@
 
 - (void)shutdown:(UIBarButtonItem* )sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)senderVerifyMessage:(UIButton *)sender {
