@@ -214,7 +214,9 @@
     NSMutableArray* teamMoreArray = [[NSMutableArray alloc] init];
     if (_isManage) {
         // 拼装分区0 数据
-        [teamShowArray addObject:sharedQRCodeModel];
+        if (self.publicModel.isOpenStatus) {
+            [teamShowArray addObject:sharedQRCodeModel];
+        }
         [teamShowArray addObject:memberModel];
         [teamShowArray addObject:chatContentModel];
         // 拼接群主设置数据
