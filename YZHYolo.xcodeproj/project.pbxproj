@@ -3690,12 +3690,12 @@
 		5593C523216D926B00A50533 /* AddressBookHome */ = {
 			isa = PBXGroup;
 			children = (
-				555B80662199D80500168C3C /* YZHTagContactManage.h */,
-				555B80672199D80500168C3C /* YZHTagContactManage.m */,
 				55C656AA215F141C005E997B /* YZHAddressBookModel.h */,
 				55C656AB215F141C005E997B /* YZHAddressBookModel.m */,
 				5520DE1C218EE4B10042ED56 /* YZHContactMemberModel.h */,
 				5520DE1D218EE4B10042ED56 /* YZHContactMemberModel.m */,
+				555B80662199D80500168C3C /* YZHTagContactManage.h */,
+				555B80672199D80500168C3C /* YZHTagContactManage.m */,
 				5520DE1F218EE5A90042ED56 /* YZHGroupedContacts.h */,
 				5520DE20218EE5A90042ED56 /* YZHGroupedContacts.m */,
 				553DE51721D2012B00BF0554 /* YZHBlackContacts.h */,

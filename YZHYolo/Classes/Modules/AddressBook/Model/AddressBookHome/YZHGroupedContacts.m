@@ -39,6 +39,11 @@
     
     NSMutableArray *contacts = [NSMutableArray array];
     for (NIMUser* user in [NIMSDK sharedSDK].userManager.myFriends) {
+        
+        //去除黑名单成员
+        if ([[NIMSDK sharedSDK].userManager isUserInBlackList:user.userId]) {
+            continue;
+        }
         NIMKitInfoFetchOption* infoFetchOption = [[NIMKitInfoFetchOption alloc] initWithIsAddressBook:YES];
         NIMKitInfo* kitInfo = [[NIMKit sharedKit] infoByUser:user.userId option:infoFetchOption];
         YZHContactMemberModel* memberModel = [[YZHContactMemberModel alloc] initWithInfo:kitInfo];

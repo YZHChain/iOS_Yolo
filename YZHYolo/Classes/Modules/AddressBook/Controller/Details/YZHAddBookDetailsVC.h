@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isTeam;
 @property (nonatomic, copy) NSString* teamId;
 @property (nonatomic, strong) YZHAddBookDetailsModel* userDetailsModel;
+// 通讯录直接进入 -- > 聊天 -->
+// 私聊直接进入
+// 搜索直接进入
+// 群聊
+// 打开聊天窗时, 先判断是否包含聊天窗,包含在判断是否属于同一个聊天窗,属于则POP,不属于则到顶部 Push, 不包含则直接 Push。
+
 
 @end
 

@@ -21,6 +21,7 @@
 #import "CYPhotoPreviewer.h"
 #import "YZHTeamMemberFooterView.h"
 #import "YZHTeamMmemberDefaultFooterView.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHTeamMemberDetailsVC ()<UITableViewDelegate, UITableViewDataSource, NIMUserManagerDelegate, YZHAddBookUserIDCellProtocol>
 
@@ -344,10 +345,13 @@
 
 - (void)senderMessage {
     
-    //TODO: 需要区分,是否是群进来的, 如果是群进来, 并且处于非好友状态则需要给这个回话添加一个标记, 表示其是临时会话.
     NIMSession *session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
     YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:session];
-    [self.navigationController pushViewController:privateChatVC animated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    
+    UIViewController* vc = [UIViewController yzh_findTopViewController];
+    [vc.navigationController pushViewController:privateChatVC animated:YES];
+//    [self.navigationController pushViewController:privateChatVC animated:YES];
 }
 
 - (void)clickRightItemGotoSetting {
