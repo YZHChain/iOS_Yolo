@@ -2775,22 +2775,22 @@
 		553640F2217EAEC2006F77A5 /* Team */ = {
 			isa = PBXGroup;
 			children = (
-				553640F3217EAEC2006F77A5 /* NIMTeamMemberListViewController.h */,
-				553640F4217EAEC2006F77A5 /* NIMAdvancedTeamCardViewController.h */,
-				553640F5217EAEC2006F77A5 /* NIMTeamNotifyUpdateViewController.h */,
-				553640F6217EAEC2006F77A5 /* NIMTeamMemberCardViewController.m */,
-				553640F7217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.h */,
-				553640F8217EAEC2006F77A5 /* NIMNormalTeamCardViewController.m */,
-				553640F9217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m */,
-				553640FA217EAEC2006F77A5 /* NIMTeamMemberListViewController.m */,
 				553640FB217EAEC2006F77A5 /* Model */,
-				55364107217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.m */,
-				55364108217EAEC2006F77A5 /* View */,
-				55364115217EAEC2006F77A5 /* NIMTeamNotifyUpdateViewController.m */,
-				55364116217EAEC2006F77A5 /* NIMTeamMemberCardViewController.h */,
+				553640F4217EAEC2006F77A5 /* NIMAdvancedTeamCardViewController.h */,
 				55364117217EAEC2006F77A5 /* NIMAdvancedTeamCardViewController.m */,
 				55364118217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.h */,
+				553640F9217EAEC2006F77A5 /* NIMCreateTeamAnnouncement.m */,
 				55364119217EAEC2006F77A5 /* NIMNormalTeamCardViewController.h */,
+				553640F8217EAEC2006F77A5 /* NIMNormalTeamCardViewController.m */,
+				553640F7217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.h */,
+				55364107217EAEC2006F77A5 /* NIMTeamAnnouncementListViewController.m */,
+				55364116217EAEC2006F77A5 /* NIMTeamMemberCardViewController.h */,
+				553640F6217EAEC2006F77A5 /* NIMTeamMemberCardViewController.m */,
+				553640F3217EAEC2006F77A5 /* NIMTeamMemberListViewController.h */,
+				553640FA217EAEC2006F77A5 /* NIMTeamMemberListViewController.m */,
+				553640F5217EAEC2006F77A5 /* NIMTeamNotifyUpdateViewController.h */,
+				55364115217EAEC2006F77A5 /* NIMTeamNotifyUpdateViewController.m */,
+				55364108217EAEC2006F77A5 /* View */,
 			);
 			path = Team;
 			sourceTree = "<group>";
@@ -2798,17 +2798,17 @@
 		553640FB217EAEC2006F77A5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				55364103217EAEC2006F77A5 /* NIMCardDataSourceProtocol.h */,
+				553640FF217EAEC2006F77A5 /* NIMCardMemberItem.h */,
+				55364104217EAEC2006F77A5 /* NIMCardMemberItem.m */,
+				55364101217EAEC2006F77A5 /* NIMTeamCardOperationItem.h */,
 				553640FC217EAEC2006F77A5 /* NIMTeamCardOperationItem.m */,
+				55364102217EAEC2006F77A5 /* NIMTeamCardRowItem.h */,
 				553640FD217EAEC2006F77A5 /* NIMTeamCardRowItem.m */,
 				553640FE217EAEC2006F77A5 /* NIMTeamInfoData.h */,
-				553640FF217EAEC2006F77A5 /* NIMCardMemberItem.h */,
-				55364100217EAEC2006F77A5 /* NIMUsrInfoData.m */,
-				55364101217EAEC2006F77A5 /* NIMTeamCardOperationItem.h */,
-				55364102217EAEC2006F77A5 /* NIMTeamCardRowItem.h */,
-				55364103217EAEC2006F77A5 /* NIMCardDataSourceProtocol.h */,
-				55364104217EAEC2006F77A5 /* NIMCardMemberItem.m */,
 				55364105217EAEC2006F77A5 /* NIMTeamInfoData.m */,
 				55364106217EAEC2006F77A5 /* NIMUsrInfoData.h */,
+				55364100217EAEC2006F77A5 /* NIMUsrInfoData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2816,18 +2816,18 @@
 		55364108217EAEC2006F77A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				55364109217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.m */,
-				5536410A217EAEC2006F77A5 /* NIMTeamAnnouncementListCell.h */,
 				5536410B217EAEC2006F77A5 /* NIMAdvancedTeamMemberCell.h */,
-				5536410C217EAEC2006F77A5 /* NIMTimePickerView.m */,
-				5536410D217EAEC2006F77A5 /* NIMTeamCardHeaderCell.h */,
-				5536410E217EAEC2006F77A5 /* NIMTeamMemberCardHeaderCell.h */,
 				5536410F217EAEC2006F77A5 /* NIMAdvancedTeamMemberCell.m */,
+				5536410A217EAEC2006F77A5 /* NIMTeamAnnouncementListCell.h */,
 				55364110217EAEC2006F77A5 /* NIMTeamAnnouncementListCell.m */,
-				55364111217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.h */,
-				55364112217EAEC2006F77A5 /* NIMTimePickerView.h */,
-				55364113217EAEC2006F77A5 /* NIMTeamMemberCardHeaderCell.m */,
+				5536410D217EAEC2006F77A5 /* NIMTeamCardHeaderCell.h */,
 				55364114217EAEC2006F77A5 /* NIMTeamCardHeaderCell.m */,
+				5536410E217EAEC2006F77A5 /* NIMTeamMemberCardHeaderCell.h */,
+				55364113217EAEC2006F77A5 /* NIMTeamMemberCardHeaderCell.m */,
+				55364111217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.h */,
+				55364109217EAEC2006F77A5 /* NIMTeamSwitchTableViewCell.m */,
+				55364112217EAEC2006F77A5 /* NIMTimePickerView.h */,
+				5536410C217EAEC2006F77A5 /* NIMTimePickerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -140,6 +140,11 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - 相册回调
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos
@@ -317,7 +322,8 @@
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.delegate = self;
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imagePicker.mediaTypes = self.mediaTypes;
+    self.imagePicker.allowsEditing = YES;
+//    self.imagePicker.mediaTypes = self.mediaTypes;
     return YES;
 }
 

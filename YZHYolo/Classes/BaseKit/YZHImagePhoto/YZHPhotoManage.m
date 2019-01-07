@@ -7,7 +7,7 @@
 //
 
 #import "YZHPhotoManage.h"
-
+#import "UIViewController+YZHTool.h"
 
 @interface YZHPhotoManage () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -41,7 +41,9 @@
 - (void)presentWithViewController:(UIViewController *)viewController
 {
     UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-
+//    //修复警告 Snapshotting a view that has not been rendered results in an empty snapshot. Ensure your view has been rendered at least once before snapshotting or snapshot after screen updates.
+//    UIViewController* currentVC = [UIViewController yzh_findTopViewController];
+//    currentVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     
     switch (self.sourceType) {
         case YZHImagePickerSourceTypeCamera:
