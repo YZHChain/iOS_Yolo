@@ -98,6 +98,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required - 注册 DeviceToken
     [[NIMSDK sharedSDK] updateApnsToken:deviceToken];
+    NSLog(@"远程推送送注册成功");
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -137,6 +138,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+    NSLog(@"远程同送注册失败%@", error);
 }
 
 
