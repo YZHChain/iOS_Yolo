@@ -140,6 +140,15 @@
         [[NIMSDK sharedSDK].userManager addToBlackList:self.userId completion:^(NSError * _Nullable error) {
             if (!error) {
                 NSLog(@"添加成功");
+                NIMDeleteMessagesOption* option = [[NIMDeleteMessagesOption alloc] init];
+                option.removeSession = YES;
+                option.removeTable = YES;
+                NIMSession* session = [NIMSession session:self.userId type:NIMSessionTypeP2P];
+                [[NIMSDK sharedSDK].conversationManager deleteAllmessagesInSession:session option:option];
+                NIMRecentSession* recentSesession = [[NIMSDK sharedSDK].conversationManager recentSessionBySession:session];
+                if (recentSesession) {
+                    [[NIMSDK sharedSDK].conversationManager deleteRecentSession:recentSesession];
+                }
             }
         }];
     } else {

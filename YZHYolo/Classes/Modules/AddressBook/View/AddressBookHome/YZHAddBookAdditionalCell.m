@@ -10,8 +10,6 @@
 
 @interface YZHAddBookAdditionalCell()
 
-
-
 @end
 
 @implementation YZHAddBookAdditionalCell
@@ -19,6 +17,10 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    self.badgeView = [NIMBadgeView viewWithBadgeTip:@""];
+    self.badgeView.hidden = YES;
+    [self.contentView addSubview:self.badgeView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -49,6 +51,24 @@
     return cell;
 }
 
+- (void)refreshUnreadCount:(NSInteger)unreadCount {
+    
+    if (unreadCount) {
+        self.badgeView.hidden = NO;
+        [self.badgeView setBadgeValue:@(unreadCount).stringValue];
+    } else {
+        self.badgeView.hidden = YES;
+        [self.badgeView setBadgeValue:nil];
+    }
+}
 
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    self.badgeView.right = YZHScreen_Width - 15;
+    self.badgeView.centerY = self.height / 2;
+    
+}
 
 @end

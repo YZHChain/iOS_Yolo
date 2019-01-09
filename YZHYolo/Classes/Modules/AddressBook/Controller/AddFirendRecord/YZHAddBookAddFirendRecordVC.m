@@ -157,7 +157,10 @@
     @weakify(self)
     UITableViewRowAction* removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         @strongify(self)
+        NIMSystemNotification* notification = self.addFriendManage.addFirendListModel[indexPath.section][indexPath.row].addFriendNotification;
+        [[NIMSDK sharedSDK].systemNotificationManager deleteNotification:notification];
         [self.addFriendManage removeAddFirendMessage:indexPath];
+        
         if (!self.addFriendManage.addFirendListModel.firstObject.count) {
             [self refreshView];
         }
@@ -231,7 +234,7 @@
             }
         }
     }
-    
+    [[[NIMSDK sharedSDK] systemNotificationManager] markNotificationsAsRead:model.addFriendNotification];
 }
 
 #pragma mark - 5.Event Response

@@ -109,21 +109,27 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 
 - (void)handleMessageNotifaction:(NSDictionary *)userInfo {
     
-    UIViewController* currentVC = [UIViewController yzh_findTopViewController];
+    YZHRootTabBarViewController* rootTabBarVC = [YZHRootTabBarViewController instance];
     NSString* userId = [userInfo objectForKey:@"userId"];
     if (YZHIsString(userId)) {
         
+        rootTabBarVC.selectedIndex = 1;
         NIMSession* session = [NIMSession session:userId type:NIMSessionTypeP2P];
         YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:session];
-        [currentVC.navigationController pushViewController:privateChatVC animated:YES];
+        UINavigationController* navigationVC = rootTabBarVC.selectedViewController;
+        [navigationVC popToRootViewControllerAnimated:NO];
+        [navigationVC pushViewController:privateChatVC animated:YES];
         
     } else {
         NSString* teamId = [userInfo objectForKey:@"teamId"];
         if (YZHIsString(teamId)) {
            
+            rootTabBarVC.selectedIndex = 0;
             NIMSession* session = [NIMSession session:teamId type:NIMSessionTypeTeam];
             YZHCommunityChatVC* communityVC = [[YZHCommunityChatVC alloc] initWithSession:session];
-            [currentVC.navigationController pushViewController:communityVC animated:YES];
+            UINavigationController* navigationVC = rootTabBarVC.selectedViewController;
+            [navigationVC popToRootViewControllerAnimated:NO];
+            [navigationVC pushViewController:communityVC animated:YES];
         }
     }
 }
@@ -232,9 +238,8 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 #endif
     
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
-    option.apnsCername      = @"iOSDeveloperPush";
-//    option.apnsCername      = @"iOSProductionPush";
-//    option.pkCername        = @"developerPush06";
+//    option.apnsCername      = @"iOSDeveloperPush";
+    option.apnsCername      = @"iOSProductionPush";
     [[NIMSDK sharedSDK] registerWithOption:option];
     
     //注册自定义消息的解析器

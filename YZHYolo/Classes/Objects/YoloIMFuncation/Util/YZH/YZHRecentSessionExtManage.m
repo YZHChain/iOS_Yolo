@@ -12,11 +12,157 @@
 #import "YZHUserModelManage.h"
 #import "YZHTeamExtManage.h"
 
+@implementation YZHRecentSessionBadgeExtManage
+
+- (instancetype)init {
+    
+    self = [super init];
+    if (self) {
+        self.allRecentSession = [[NIMSDK sharedSDK].conversationManager allRecentSessions].mutableCopy;
+        [self configuration];
+    }
+    return self;
+}
+
+- (void)configuration {
+    
+    [self.privatelyRecents removeAllObjects];
+    [self.communityRecents removeAllObjects];
+    for (NSInteger i = 0; i < self.allRecentSession.count; i++) {
+        NIMRecentSession* recentSession = self.allRecentSession[i];
+        if (recentSession.session.sessionType == NIMSessionTypeP2P) {
+            [self.privatelyRecents addObject:recentSession];
+        } else {
+            [self.communityRecents addObject:recentSession];
+        }
+    }
+    
+    [self refreshRecentSessionBadge];
+}
+
+- (void)refreshRecentSessionBadge {
+    
+    self.communityBadge = NO;
+    self.privatelyBadge = NO;
+    // 暂时不做个数统计
+    for (NIMRecentSession* recentSession in self.communityRecents) {
+        if (recentSession.unreadCount) {
+            self.communityBadge = YES;
+            break;
+        }
+    }
+    
+    for (NIMRecentSession* recentSession in self.privatelyRecents) {
+        if (recentSession.unreadCount) {
+            self.privatelyBadge = YES;
+            break;
+        }
+    }
+}
+
+- (void)refreshRecentSession:(NIMRecentSession *)recentSession {
+    
+    if (recentSession.session.sessionType == NIMSessionTypeP2P) {
+        self.privatelyBadge = recentSession.unreadCount;
+    } else {
+        self.communityBadge = recentSession.unreadCount;
+    }
+    if (recentSession.session.sessionType == NIMSessionTypeP2P) {
+        for (NIMRecentSession* nrecentSession in self.privatelyRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                [self.privatelyRecents removeObject:nrecentSession];
+                [self.privatelyRecents addObject:recentSession];
+                break;
+            }
+        }
+    } else {
+        for (NIMRecentSession* nrecentSession in self.communityRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                [self.communityRecents removeObject:nrecentSession];
+                [self.communityRecents addObject:recentSession];
+                break;
+            }
+        }
+
+    }
+    [self refreshRecentSessionBadge];
+}
+
+- (void)addRecentSession:(NIMRecentSession *)recentSession {
+    
+    BOOL isContain = NO;
+    if (recentSession.session.sessionType == NIMSessionTypeP2P) {
+        for (NIMRecentSession* nrecentSession in self.privatelyRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                isContain = YES;
+                break;
+            }
+        }
+        if (!isContain) {
+            [self.privatelyRecents addObject:recentSession];
+        }
+    } else {
+        for (NIMRecentSession* nrecentSession in self.communityRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                isContain = YES;
+                break;
+            }
+        }
+        if (!isContain) {
+            [self.communityRecents addObject:recentSession];
+        }
+    }
+    [self refreshRecentSessionBadge];
+}
+//未确认
+- (void)removeRecentSession:(NIMRecentSession *)recentSession {
+    
+    BOOL isContain = NO;
+    if (recentSession.session.sessionType == NIMSessionTypeP2P) {
+        for (NIMRecentSession* nrecentSession in self.privatelyRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                isContain = YES;
+                [self.privatelyRecents removeObject:nrecentSession];
+                break;
+            }
+        }
+    } else {
+        for (NIMRecentSession* nrecentSession in self.communityRecents) {
+            if ([nrecentSession.session.sessionId isEqual:recentSession.session.sessionId]) {
+                isContain = YES;
+                [self.communityRecents removeObject:nrecentSession];
+                break;
+            }
+        }
+    }
+    [self refreshRecentSessionBadge];
+}
+
+- (NSMutableArray<NIMRecentSession *> *)communityRecents {
+    
+    if (!_communityRecents) {
+        _communityRecents = [[NSMutableArray alloc] init];
+    }
+    return _communityRecents;
+}
+
+- (NSMutableArray<NIMRecentSession *> *)privatelyRecents {
+    
+    if (!_privatelyRecents) {
+        _privatelyRecents = [[NSMutableArray alloc] init];
+    }
+    return _privatelyRecents;
+}
+
+@end
+
 @implementation YZHRecentSeesionExtModel
 
 @end
 
 @implementation YZHRecentSessionExtManage
+
+
 
 #pragma mark -- Sort
 
@@ -392,7 +538,7 @@
         [tagsArray addObject:customTags.tagName];
     }
     [tagsArray insertObject:@"置顶" atIndex:0];
-    [tagsArray addObject:@"其他"];
+    [tagsArray addObject:@"未分类"];
     [tagsArray addObject:@"临时聊天"];
     
     self.defaultTags = tagsArray.copy;
@@ -407,7 +553,7 @@
     }
     [tagsArray insertObject:@"置顶" atIndex:0];
     [tagsArray insertObject:@"上锁群" atIndex:1];
-    [tagsArray addObject:@"无分类群"];
+    [tagsArray addObject:@"未分类"];
     
     self.teamDefaultTags = tagsArray.copy;
 }

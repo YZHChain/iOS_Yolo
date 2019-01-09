@@ -44,6 +44,7 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
 @property (nonatomic, strong) YZHTagContactManage* tagContactManage;
 @property (nonatomic, assign) YZHAddressBookShowType currentType;
 
+
 @end
 
 @implementation YZHAddressBookVC
@@ -175,6 +176,10 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     
     if (indexPath.section == 0) {
         YZHAddBookAdditionalCell* cell = [YZHAddBookAdditionalCell tempTableViewCellWithTableView:tableView indexPath:indexPath];
+        if (indexPath.row == 1) {
+            NSInteger unreadCount = [[NIMSDK sharedSDK] systemNotificationManager].allUnreadCount;
+            [cell refreshUnreadCount:unreadCount];
+        }
         return cell;
     }
     
@@ -357,10 +362,18 @@ static NSString* const kYZHAdditionalCellIdentifier = @"additionalCellIdentifier
     self.tagContactManage = [[YZHTagContactManage alloc] init];
     [self refresh];
 }
-//收到系统消息
-- (void)onReceiveSystemNotification:(NIMSystemNotification *)notification {
+
+- (void)onBlackListChanged {
     
+    self.contacts = [[YZHGroupedContacts alloc] init];
+    self.tagContactManage = [[YZHTagContactManage alloc] init];
+    [self refresh];
+}
+
+- (void)onSystemNotificationCountChanged:(NSInteger)unreadCount {
     
+    [self.tagTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    [self.defaultTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark - 7.GET & SET

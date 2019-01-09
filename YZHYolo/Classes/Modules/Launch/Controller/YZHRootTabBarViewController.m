@@ -11,19 +11,71 @@
 #import "YZHBaseNavigationController.h"
 #import "UIColor+YZHColorStyle.h"
 #import "YZHDiscoverVC.h"
+#import "AppDelegate.h"
+#import "UITabBar+YZHBadge.h"
+#import "YZHRecentSessionExtManage.h"
 
 NSString* const kYZHSelectedDiscoverNotifaction = @"kYZHSelectedDiscoverNotifaction";
-@interface YZHRootTabBarViewController ()<UITabBarControllerDelegate>
+typedef NS_ENUM(NSInteger, YZHRootTabBarType) {
+    
+    YZHRootTabBarTypeCommunity = 0,
+    YZHRootTabBarTypePrivately,
+    YZHRootTabBarTypeAddressBook,
+    YZHRootTabBarTypeDiscover,
+    YZHRootTabBarTypeMycenter,
+};
+
+@interface YZHRootTabBarViewController ()<UITabBarControllerDelegate, NIMSystemNotificationManagerDelegate, NIMConversationManagerDelegate>
+
+@property (nonatomic, assign) NSInteger communityUnreadCount;
+@property (nonatomic, assign) NSInteger privatelyUnreadCount;
+@property (nonatomic, assign) NSInteger addressBookUnreadCount;
+@property (nonatomic, strong) YZHRecentSessionBadgeExtManage* recentsExtManage;
 
 @end
 
 @implementation YZHRootTabBarViewController
+
++ (instancetype)instance {
+    
+    UIViewController* rootVC = YZHAppWindow.rootViewController;
+    if ([rootVC isKindOfClass:[YZHRootTabBarViewController class]]) {
+        return (YZHRootTabBarViewController *)rootVC;
+    } else {
+        return nil;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self setupView];
+    
+    [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
+    [[NIMSDK sharedSDK].conversationManager addDelegate:self];
+    
+    [self refreshCommunitySessionBadge];
+    [self refreshPrivatelySessionBadge];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //会话界面发送拍摄的视频，拍摄结束后点击发送后可能顶部会有红条，导致的界面错位。
+    self.view.frame = [UIScreen mainScreen].bounds;
+}
+
+- (void)dealloc {
+    
+    [[NIMSDK sharedSDK].systemNotificationManager removeDelegate:self];
+    [[NIMSDK sharedSDK].conversationManager removeDelegate:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,10 +128,76 @@ NSString* const kYZHSelectedDiscoverNotifaction = @"kYZHSelectedDiscoverNotifact
     
 }
 
+#pragma mark - NIMConversationManagerDelegate
+
+- (void)didAddRecentSession:(NIMRecentSession *)recentSession
+           totalUnreadCount:(NSInteger)totalUnreadCount {
+    
+    [self.recentsExtManage addRecentSession:recentSession];
+    [self refreshSessionBadge];
+    [self hideBadgeWithTotalUnreadCount:totalUnreadCount];
+}
+
+- (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
+              totalUnreadCount:(NSInteger)totalUnreadCount {
+
+    [self.recentsExtManage refreshRecentSession:recentSession];
+    [self refreshSessionBadge];
+    [self hideBadgeWithTotalUnreadCount:totalUnreadCount];
+}
+
+- (void)didRemoveRecentSession:(NIMRecentSession *)recentSession totalUnreadCount:(NSInteger)totalUnreadCount {
+    
+//    [self.recentsExtManage configuration];
+    [self.recentsExtManage removeRecentSession:recentSession];
+    [self refreshSessionBadge];
+    [self hideBadgeWithTotalUnreadCount:totalUnreadCount];
+}
+
+- (void)messagesDeletedInSession:(NIMSession *)session {
+    self.communityUnreadCount = [NIMSDK sharedSDK].conversationManager.allUnreadCount;
+    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
+    if (recentSession) {
+        [self.recentsExtManage removeRecentSession:recentSession];
+    }
+    [self refreshSessionBadge];
+}
+
+- (void)allMessagesDeleted{
+    
+    self.communityUnreadCount = 0;
+    [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypeCommunity];
+    [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypePrivately];
+}
+
+- (void)allMessagesRead
+{
+    self.communityUnreadCount = 0;
+    [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypeCommunity];
+    [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypePrivately];
+}
+
+- (void)hideBadgeWithTotalUnreadCount:(NSInteger)totalUnreadCount {
+    
+    if (!totalUnreadCount) {
+        [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypeCommunity];
+        [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypePrivately];
+    }
+}
+
+#pragma mark - NIMSystemNotificationManagerDelegate
+- (void)onSystemNotificationCountChanged:(NSInteger)unreadCount
+{
+    self.addressBookUnreadCount = unreadCount;
+    [self refreshAddressSessionBadge];
+}
+
+#pragma mark -- UITabBarControllerDelegate
+
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item {
     
     if ([item.title isEqualToString:@"广场"]) {
-        YZHBaseNavigationController* baseNav = [self.viewControllers objectAtIndex:3];
+        YZHBaseNavigationController* baseNav = [self.viewControllers objectAtIndex: YZHRootTabBarTypeDiscover];
         YZHDiscoverVC* discover = (YZHDiscoverVC*)baseNav.viewControllers.firstObject;
         if ([discover isKindOfClass:[YZHDiscoverVC class]]) {
             [discover refreshView];
@@ -91,4 +209,49 @@ NSString* const kYZHSelectedDiscoverNotifaction = @"kYZHSelectedDiscoverNotifact
     }
     
 }
+
+#pragma mark -- RefreshTabbarItemBadge
+
+- (void)refreshSessionBadge {
+
+    [self refreshCommunitySessionBadge];
+    [self refreshPrivatelySessionBadge];
+}
+
+- (void)refreshCommunitySessionBadge {
+    
+    if (self.recentsExtManage.communityBadge) {
+        [self.tabBar yzh_showBadgeOnItemIndex:YZHRootTabBarTypeCommunity];
+    } else {
+        [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypeCommunity];
+    }
+}
+
+- (void)refreshPrivatelySessionBadge {
+    
+    if (self.recentsExtManage.privatelyBadge) {
+        [self.tabBar yzh_showBadgeOnItemIndex:YZHRootTabBarTypePrivately];
+    } else {
+        [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypePrivately];
+    }
+}
+
+- (void)refreshAddressSessionBadge {
+    
+    if (self.addressBookUnreadCount) {
+        [self.tabBar yzh_showBadgeOnItemIndex:YZHRootTabBarTypeAddressBook];
+    } else {
+        [self.tabBar yzh_hideBadgeOnItemIndex:YZHRootTabBarTypeAddressBook];
+    }
+}
+
+- (YZHRecentSessionBadgeExtManage *)recentsExtManage {
+    
+    if (!_recentsExtManage) {
+        _recentsExtManage = [[YZHRecentSessionBadgeExtManage alloc] init];
+        
+    }
+    return _recentsExtManage;
+}
+
 @end

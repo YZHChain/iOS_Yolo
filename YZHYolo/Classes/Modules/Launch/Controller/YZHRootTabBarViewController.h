@@ -11,4 +11,6 @@
 extern NSString *const kYZHSelectedDiscoverNotifaction;
 @interface YZHRootTabBarViewController : UITabBarController
 
++ (instancetype)instance;
+
 @end

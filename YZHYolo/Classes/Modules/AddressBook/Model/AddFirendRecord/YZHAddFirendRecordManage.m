@@ -92,8 +92,12 @@ static const NSInteger MaxNotificationCount = 100;
             if ([notification.targetID isEqualToString:notification2.targetID] && [notification.sourceID isEqualToString:notification2.sourceID]) {
                 if (notification.timestamp <= notification2.timestamp) {
                     [addFirends removeObject:notification];
+                    [[NIMSDK sharedSDK].systemNotificationManager markNotificationsAsRead: notification];
+                    [[NIMSDK sharedSDK].systemNotificationManager deleteNotification:notification];
                 } else {
                     [addFirends removeObject:notification2];
+                    [[NIMSDK sharedSDK].systemNotificationManager markNotificationsAsRead: notification2];
+                    [[NIMSDK sharedSDK].systemNotificationManager deleteNotification:notification2];
                 }
                 y --;
                 i --;

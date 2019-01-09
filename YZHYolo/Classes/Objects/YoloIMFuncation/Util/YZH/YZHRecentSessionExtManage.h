@@ -10,6 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface YZHRecentSessionBadgeExtManage : NSObject
+
+@property (nonatomic, assign) BOOL communityBadge;
+@property (nonatomic, assign) BOOL privatelyBadge;
+
+@property (nonatomic, strong) NSMutableArray<NIMRecentSession *>* communityRecents;
+@property (nonatomic, strong) NSMutableArray<NIMRecentSession *>* privatelyRecents;
+@property (nonatomic, strong) NSMutableArray<NIMRecentSession *>* allRecentSession;
+
+- (void)refreshRecentSession:(NIMRecentSession* )recentSession;
+- (void)removeRecentSession:(NIMRecentSession* )recentSession;
+- (void)addRecentSession:(NIMRecentSession *)recentSession;
+- (void)configuration;
+
+@end
+
 @interface YZHRecentSeesionExtModel : NSObject
 
 @property (nonatomic, copy) NSString* tagName;

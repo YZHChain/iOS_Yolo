@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "NIMBadgeView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,8 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (nonatomic, strong) NIMBadgeView* badgeView;
 
 + (instancetype)tempTableViewCellWithTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
+- (void)refreshUnreadCount:(NSInteger)unreadCount;
 
 
 @end
