@@ -5600,7 +5600,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = YZHYolo/YZHYolo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 8MTV8KXWXC;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YZHYolo/Supporting Files/YZHYolo-Prefix.pch";
@@ -5612,7 +5612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yzhchain.yoloImService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = yoloProvisioningProfiles;
+				PROVISIONING_PROFILE_SPECIFIER = YoloDistribution;
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
