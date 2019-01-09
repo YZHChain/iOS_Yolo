@@ -248,7 +248,9 @@
             } failureCompletion:^(NSError *error) {
             }];
             //发布招募
-            [self postTeamRecruits:teamRecruit];
+            if (YZHIsString(recruitText)) {
+               [self postTeamRecruits:teamRecruit];
+            }
         } else {
             [hud hideWithText:@"网络异常,请重试"];
         }

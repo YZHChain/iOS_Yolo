@@ -21,6 +21,11 @@
 #import "YZHAddBookFriendsCell.h"
 #import "YZHCommandSectionView.h"
 #import "YZHCommandTipView.h"
+#import "YZHUserCardAttachment.h"
+#import "YZHTeamCardAttachment.h"
+#import "YZHAddFirendAttachment.h"
+#import "YZHRequstAddFirendAttachment.h"
+#import "YZHSpeedyResponseAttachment.h"
 
 static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
 @interface YZHPrivatelyChatSearchVC ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -366,10 +371,10 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
             text = lastMessage.text;
             break;
         case NIMMessageTypeAudio:
-            text = @"[语音]";
+            text = @"发了一段语音";
             break;
         case NIMMessageTypeImage:
-            text = @"[图片]";
+            text = @"发了一张图片";
             break;
         case NIMMessageTypeVideo:
             text = @"[视频]";
@@ -387,12 +392,26 @@ static NSString* kYZHFriendsCellIdentifier = @"YZHFriendsCellIdentifier";
             text = lastMessage.text;
             break;
         case NIMMessageTypeRobot:
-//            text = [self robotMessageContent:lastMessage];
+            //            text = [self robotMessageContent:lastMessage];
             break;
-        case NIMMessageTypeCustom:
+        case NIMMessageTypeCustom:{
             //TODO:增加自定义消息解析.识别不同自定义消息格式
-            
-            text = @"自定义消息";
+            NIMCustomObject *customObject = (NIMCustomObject*)lastMessage.messageObject;
+            YZHUserCardAttachment* attachment = (YZHUserCardAttachment *)customObject.attachment;
+            if ([attachment isKindOfClass:[YZHUserCardAttachment class]]) {
+                text = @"发了一张名片";
+            } else if ([attachment isKindOfClass:[YZHTeamCardAttachment class]]) {
+                text = @"发了一张名片";
+            } else if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
+                text = @"请求添加友好";
+            } else if ([attachment isKindOfClass:[YZHRequstAddFirendAttachment class]]) {
+                text = @"请求添加好友";
+            } else if ([attachment isKindOfClass:[YZHSpeedyResponseAttachment class]]) {
+                text = @"快捷回执消息";
+            } else {
+                text = @"自定义消息";
+            }
+        }
             break;
         default:
             text = @"[未知消息]";

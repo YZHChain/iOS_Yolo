@@ -18,10 +18,10 @@
 
 
 @interface NTESGalleryViewController : UIViewController
+
 - (instancetype)initWithItem:(NTESGalleryItem *)item session:(NIMSession *)session;
+
 @end
-
-
 
 @interface NTESGalleryViewController(SingleView)
 

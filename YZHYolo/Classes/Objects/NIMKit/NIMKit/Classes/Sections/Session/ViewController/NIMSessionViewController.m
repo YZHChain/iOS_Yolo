@@ -177,7 +177,26 @@
 #pragma mark - 消息收发接口
 - (void)sendMessage:(NIMMessage *)message
 {
+    //配置消息推送相关参数
+    [self configurationApnsPayload:message];
     [self.interactor sendMessage:message];
+}
+
+- (void)configurationApnsPayload:(NIMMessage *)message
+{
+    NSDictionary* apnsDic;
+    if (self.session.sessionType == NIMSessionTypeP2P) {
+        NSString* userId = [NIMSDK sharedSDK].loginManager.currentAccount;
+        apnsDic = @{
+                    @"userId": userId ? userId : @""
+                    };
+    } else if (self.session.sessionType == NIMSessionTypeTeam) {
+        
+        apnsDic = @{
+                    @"teamId": self.session.sessionId ? self.session.sessionId : @""
+                    };
+    }
+    message.apnsPayload = apnsDic;
 }
 
 #pragma mark - Touch Event

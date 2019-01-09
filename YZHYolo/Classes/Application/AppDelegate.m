@@ -19,6 +19,9 @@
 #import "YZHServicesConfig.h"
 #import "YZHCheckVersion.h"
 #import "YZHPasteSkipManage.h"
+#import "UIViewController+YZHTool.h"
+#import "YZHPrivateChatVC.h"
+#import "YZHCommunityChatVC.h"
 
 NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 @interface AppDelegate ()<NIMLoginManagerDelegate, PKPushRegistryDelegate>
@@ -35,7 +38,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     [self setupNIMSDK];
     [self setupServices];
     
-//    [self registerPushService];
+    [self registerPushService];
     [self commonInitListenEvents];
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
@@ -54,6 +57,9 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // 未读消息去设置红点通知
+    NSInteger count = [[[NIMSDK sharedSDK] conversationManager] allUnreadCount];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
 }
 
 
@@ -98,11 +104,28 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     // IOS 7 Support Required
     NSLog(@"%s %@ %@",__func__ ,userInfo ,@(application.applicationState));
     
-    //从推送通知打开App时，才进行页面跳转。
-//    BOOL active = (application.applicationState == UIApplicationStateActive);
-//    [YMPushService handleRemoteNotification:userInfo route:!active];
-//
-//    completionHandler(UIBackgroundFetchResultNewData);
+    [self handleMessageNotifaction:userInfo];
+}
+
+- (void)handleMessageNotifaction:(NSDictionary *)userInfo {
+    
+    UIViewController* currentVC = [UIViewController yzh_findTopViewController];
+    NSString* userId = [userInfo objectForKey:@"userId"];
+    if (YZHIsString(userId)) {
+        
+        NIMSession* session = [NIMSession session:userId type:NIMSessionTypeP2P];
+        YZHPrivateChatVC* privateChatVC = [[YZHPrivateChatVC alloc] initWithSession:session];
+        [currentVC.navigationController pushViewController:privateChatVC animated:YES];
+        
+    } else {
+        NSString* teamId = [userInfo objectForKey:@"teamId"];
+        if (YZHIsString(teamId)) {
+           
+            NIMSession* session = [NIMSession session:teamId type:NIMSessionTypeTeam];
+            YZHCommunityChatVC* communityVC = [[YZHCommunityChatVC alloc] initWithSession:session];
+            [currentVC.navigationController pushViewController:communityVC animated:YES];
+        }
+    }
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -146,7 +169,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 //
 //- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 //{
-////    [[NTESRedPacketManager sharedManager] application:app openURL:url options:options];
+//    [[NTESRedPacketManager sharedManager] application:app openURL:url options:options];
 //    return YES;
 //}
 //
@@ -209,7 +232,7 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 #endif
     
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
-//    option.apnsCername      = @"iOSDeveloperPush";
+    option.apnsCername      = @"iOSDeveloperPush";
 //    option.apnsCername      = @"iOSProductionPush";
 //    option.pkCername        = @"developerPush06";
     [[NIMSDK sharedSDK] registerWithOption:option];

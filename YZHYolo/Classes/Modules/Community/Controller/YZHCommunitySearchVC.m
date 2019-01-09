@@ -543,10 +543,10 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
             text = lastMessage.text;
             break;
         case NIMMessageTypeAudio:
-            text = @"[语音]";
+            text = @"发了一段语音";
             break;
         case NIMMessageTypeImage:
-            text = @"[图片]";
+            text = @"发了一张图片";
             break;
         case NIMMessageTypeVideo:
             text = @"[视频]";
@@ -571,9 +571,9 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
             NIMCustomObject *customObject = (NIMCustomObject*)lastMessage.messageObject;
             YZHUserCardAttachment* attachment = (YZHUserCardAttachment *)customObject.attachment;
             if ([attachment isKindOfClass:[YZHUserCardAttachment class]]) {
-                text = @"用户名片分享";
+                text = @"发了一张名片";
             } else if ([attachment isKindOfClass:[YZHTeamCardAttachment class]]) {
-                text = @"社群名片分享";
+                text = @"发了一张名片";
             } else if ([attachment isKindOfClass:[YZHAddFirendAttachment class]]) {
                 text = @"请求添加友好";
             } else if ([attachment isKindOfClass:[YZHRequstAddFirendAttachment class]]) {

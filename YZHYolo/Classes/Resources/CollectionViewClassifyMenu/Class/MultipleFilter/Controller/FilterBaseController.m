@@ -35,7 +35,7 @@
     _contentView.backgroundColor = [UIColor blackColor];
     _collectionView.showsVerticalScrollIndicator = NO;
     _collectionView.delegate = self;
-    _collectionView.dataSource = self;
+//    _collectionView.dataSource  = self;
     UICollectionViewLeftAlignedLayout *layout = [[UICollectionViewLeftAlignedLayout alloc] init];
     _collectionView.collectionViewLayout = layout;
     _collectionView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0);

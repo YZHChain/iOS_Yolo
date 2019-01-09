@@ -2681,13 +2681,13 @@
 		553640AD217EAEC2006F77A5 /* Robot */ = {
 			isa = PBXGroup;
 			children = (
-				553640AE217EAEC2006F77A5 /* NIMKitRobotTemplate.m */,
 				553640AF217EAEC2006F77A5 /* NIMKitRobotDefaultTemplateParser.h */,
-				553640B0217EAEC2006F77A5 /* NIMKitRobotTemplateParserProtocol.h */,
-				553640B1217EAEC2006F77A5 /* NIMKitRobotTemplateLayout.h */,
-				553640B2217EAEC2006F77A5 /* NIMKitRobotTemplate.h */,
 				553640B3217EAEC2006F77A5 /* NIMKitRobotDefaultTemplateParser.m */,
+				553640B2217EAEC2006F77A5 /* NIMKitRobotTemplate.h */,
+				553640AE217EAEC2006F77A5 /* NIMKitRobotTemplate.m */,
+				553640B1217EAEC2006F77A5 /* NIMKitRobotTemplateLayout.h */,
 				553640B4217EAEC2006F77A5 /* NIMKitRobotTemplateLayout.m */,
+				553640B0217EAEC2006F77A5 /* NIMKitRobotTemplateParserProtocol.h */,
 			);
 			path = Robot;
 			sourceTree = "<group>";

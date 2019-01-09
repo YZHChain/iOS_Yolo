@@ -18,6 +18,8 @@
 {
     NIMMessage *textMessage = [[NIMMessage alloc] init];
     textMessage.text        = text;
+    NSString* userId = [NIMSDK sharedSDK].loginManager.currentAccount;
+    textMessage.apnsPayload = @{@"userId": userId};
     return textMessage;
 }
 
