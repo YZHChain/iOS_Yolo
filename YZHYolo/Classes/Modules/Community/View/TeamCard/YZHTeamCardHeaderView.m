@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *synopisisLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 @property (weak, nonatomic) IBOutlet YZHLabelShowView *labelShowView;
-@property (weak, nonatomic) IBOutlet UIButton *headerButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelViewLayoutConstraint;
 
 @end
 
@@ -29,11 +27,11 @@
     [super awakeFromNib];
     self.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
     [self.avatarImageView yzh_cornerRadiusAdvance:5 rectCornerType:UIRectCornerAllCorners];
-    self.nameLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
+    self.nameLabel.font = [UIFont yzh_commonFontStyleFontSize:15];
     self.nameLabel.textColor = [UIColor yzh_fontShallowBlack];
-    self.synopisisLabel.font = [UIFont systemFontOfSize:11];
+    self.synopisisLabel.font = [UIFont yzh_commonFontStyleFontSize:11];
     self.synopisisLabel.textColor = [UIColor yzh_sessionCellGray];
-    self.synopisisLabel.numberOfLines = 2;
+    self.synopisisLabel.numberOfLines = 3;
     
     self.backgroundView = ({
         UIView* view = [[UIView alloc] initWithFrame:self.bounds];
@@ -44,6 +42,24 @@
 
 - (void)refreshWithModel:(YZHTeamHeaderModel *)model {
     
+    [self refreshModel: model];
+    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    self.updateHeight = 125 + labelAddHeight;
+    self.y = self.updateHeight;
+    [self layoutIfNeeded];
+}
+
+- (void)refreshIntroWithModel:(YZHTeamHeaderModel *)model {
+    
+    [self refreshModel: model];
+    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    self.updateHeight = 175 + labelAddHeight;
+    self.y = self.updateHeight;
+    [self layoutIfNeeded];
+}
+
+- (void)refreshModel:(YZHTeamHeaderModel *)model {
+    
     if (model.avatarImageName) {
         [self.avatarImageView yzh_setImageWithString:model.avatarImageName placeholder:@"team_teamDetails_photoImage_default"];
     } else {
@@ -51,16 +67,16 @@
     }
     
     self.nameLabel.text = model.teamName;
-    self.synopisisLabel.text = model.teamSynopsis;
+    if (YZHIsString(model.teamSynopsis)) {
+        self.synopisisLabel.text = [NSString stringWithFormat:@"简介: %@", model.teamSynopsis];
+    } else {
+        self.synopisisLabel.text = @"简介: 无";
+    }
     if (!model.canEdit) {
         [self.guideImageView removeFromSuperview];
     }
     
-    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
-    
-    self.updateHeight = 115 + labelAddHeight;
-    self.y = self.updateHeight;
-    [self layoutIfNeeded];
+
 }
 
 @end

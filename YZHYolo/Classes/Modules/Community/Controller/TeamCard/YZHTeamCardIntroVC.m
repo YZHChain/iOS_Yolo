@@ -79,7 +79,7 @@
 
 - (void)reloadView {
     
-    [self.headerView refreshWithModel:self.viewModel.headerModel];
+    [self.headerView refreshIntroWithModel:self.viewModel.headerModel];
     self.headerView.frame = CGRectMake(0, 0, self.tableView.width, self.headerView.updateHeight);
     [self.tableView setTableHeaderView:self.headerView];
     
@@ -255,7 +255,7 @@
 - (YZHTeamCardHeaderView *)headerView {
     
     if (!_headerView) {
-        _headerView = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardHeaderView" owner:nil options:nil].lastObject;
+        _headerView = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamCardIntroHeaderView" owner:nil options:nil].lastObject;
         _headerView.autoresizingMask = NO;
         
     }

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHTeamCardHeaderView : UITableViewHeaderFooterView
 
 - (void)refreshWithModel:(YZHTeamHeaderModel* )model;
+- (void)refreshIntroWithModel:(YZHTeamHeaderModel* )model;
 @property (nonatomic, copy) YZHButtonExecuteBlock headerHandle;
 @property (nonatomic, assign) CGFloat updateHeight;
 
