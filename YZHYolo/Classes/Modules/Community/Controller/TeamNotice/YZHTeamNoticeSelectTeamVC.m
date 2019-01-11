@@ -10,6 +10,7 @@
 
 #import "YZHTeamNoticeSelectTeamModel.h"
 #import "YZHTeamNoticeSelectedTeamCell.h"
+#import "YZHAlertManage.h"
 
 @interface YZHTeamNoticeSelectTeamVC ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -117,7 +118,11 @@
         if ([self.selectedIndexPathArray containsObject:indexPath]) {
             [self.selectedIndexPathArray removeObject:indexPath];
         } else {
-            [self.selectedIndexPathArray addObject:indexPath];
+            if (self.selectedIndexPathArray.count < 10) {
+               [self.selectedIndexPathArray addObject:indexPath];
+            } else {
+                [YZHAlertManage showAlertMessage:@"最多支持转发至 10 个群"];
+            }
         }
         [tableView reloadData];
     }

@@ -59,7 +59,7 @@
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
     self.titleLabel.textColor = [UIColor yzh_fontShallowBlack];
-    self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:18];
+    self.titleLabel.font = [UIFont yzh_commonFontStyleFontSize:18];
     
     self.contentLabel.textColor = [UIColor yzh_fontShallowBlack];
     self.contentLabel.font = [UIFont yzh_commonFontStyleFontSize:15];
@@ -67,7 +67,6 @@
     self.subtitleLabel.textColor = [UIColor yzh_separatorLightGray];
     self.subtitleLabel.font = [UIFont yzh_commonFontStyleFontSize:15];
     
-//    self.protocalTitleButton
     NSMutableAttributedString* attributedString = [[NSMutableAttributedString alloc] initWithString:@"密钥委托备份协议"];
     NSRange titleRange = NSMakeRange(0, attributedString.length);
     [attributedString addAttributes:@{

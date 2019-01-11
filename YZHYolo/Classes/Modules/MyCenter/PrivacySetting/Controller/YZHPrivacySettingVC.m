@@ -332,6 +332,7 @@ typedef enum : NSUInteger {
     } failureCompletion:^(NSError *error) {
         @strongify(self)
         if (error.code == 408) {
+           [hud hideWithText:nil];
            [YZHRouter openURL:kYZHRouterSecretKeyBackup];
         } else {
             self.backupType = YZHSecretKeyBackupTypeError;
