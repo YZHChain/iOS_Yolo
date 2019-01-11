@@ -14,7 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHTeamMemberCell : UITableViewCell
 
 @property (nonatomic, strong) YZHContactMemberModel* member;
+
 - (void)refresh:(YZHContactMemberModel *)member;
++ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath teamOwner:(BOOL)teamOwner;
 
 @end
 

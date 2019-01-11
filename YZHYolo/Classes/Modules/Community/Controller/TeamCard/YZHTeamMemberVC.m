@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) YZHTeamMemberModel* viewModel;
+@property (nonatomic, strong) UIImageView* teamOwnerIcon;
 
 @end
 
@@ -148,8 +149,12 @@
     YZHTeamMemberCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
     YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
     
-    [cell refresh:member];
+    if ([self.viewModel.teamOwner isEqualToString:member.info.infoId]) {
+        cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamOwnerCell" owner:nil options:nil].lastObject;
+    }
     
+    [cell refresh:member];
+
     return cell;
 }
 
@@ -259,6 +264,14 @@
         _tableView.rowHeight = 55;
     }
     return _tableView;
+}
+
+- (UIImageView *)teamOwnerIcon {
+    
+    if (!_teamOwnerIcon) {
+        _teamOwnerIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"team_teamDetails_teamOwner_icon"]];
+    }
+    return _teamOwnerIcon;
 }
 
 @end

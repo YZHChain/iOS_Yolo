@@ -34,10 +34,18 @@
 - (BOOL)isManage {
     
     NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-    NSString* teamManage = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId].owner;
-    bool isManage = [userId isEqual:teamManage];
+    bool isManage = [userId isEqual:self.teamOwner];
     
     return isManage;
+}
+
+- (NSString *)teamOwner {
+    
+    if (!_teamOwner) {
+       NSString* teamManage = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId].owner;
+        _teamOwner = teamManage;
+    }
+    return _teamOwner;
 }
 
 - (NSArray<YZHContactMemberModel *> *)memberArray {

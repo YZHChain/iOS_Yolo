@@ -363,6 +363,7 @@
 		557578762198544000EB5BDD /* YZHSetTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557578752198544000EB5BDD /* YZHSetTagModel.m */; };
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
 		557C1D5521E713E60023288F /* UILabel+YZHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 557C1D5421E713E60023288F /* UILabel+YZHTool.m */; };
+		557C1D5721E8621F0023288F /* YZHTeamOwnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 557C1D5621E8621F0023288F /* YZHTeamOwnerCell.xib */; };
 		558027C6217EF6D10009E6ED /* YZHPrivateChatConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */; };
 		5581915021A1C7FE00C74E2E /* YZHTeamCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581914F21A1C7FE00C74E2E /* YZHTeamCardVC.m */; };
 		5581915321A1C81B00C74E2E /* YZHTeamCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5581915221A1C81B00C74E2E /* YZHTeamCardModel.m */; };
@@ -1283,6 +1284,7 @@
 		557603AE215CE575007CEC60 /* YZHLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHLoginModel.m; sourceTree = "<group>"; };
 		557C1D5321E713E60023288F /* UILabel+YZHTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+YZHTool.h"; sourceTree = "<group>"; };
 		557C1D5421E713E60023288F /* UILabel+YZHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+YZHTool.m"; sourceTree = "<group>"; };
+		557C1D5621E8621F0023288F /* YZHTeamOwnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamOwnerCell.xib; sourceTree = "<group>"; };
 		558027C4217EF6D10009E6ED /* YZHPrivateChatConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivateChatConfig.h; sourceTree = "<group>"; };
 		558027C5217EF6D10009E6ED /* YZHPrivateChatConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivateChatConfig.m; sourceTree = "<group>"; };
 		5581914E21A1C7FE00C74E2E /* YZHTeamCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamCardVC.h; sourceTree = "<group>"; };
@@ -3758,6 +3760,7 @@
 				558C54DC21ACDF9800CC10D1 /* YZHTeamMemberCell.h */,
 				558C54DD21ACDF9800CC10D1 /* YZHTeamMemberCell.m */,
 				558C54DE21ACDF9800CC10D1 /* YZHTeamMemberCell.xib */,
+				557C1D5621E8621F0023288F /* YZHTeamOwnerCell.xib */,
 				558C54E721AD1F7700CC10D1 /* YZHTeamMemberManageCell.h */,
 				558C54E821AD1F7700CC10D1 /* YZHTeamMemberManageCell.m */,
 				558C54E921AD1F7700CC10D1 /* YZHTeamMemberManageCell.xib */,
@@ -4893,6 +4896,7 @@
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
 				556D7E6A21A4112100533384 /* YZHTeamQRCodeSharedVC.xib in Resources */,
+				557C1D5721E8621F0023288F /* YZHTeamOwnerCell.xib in Resources */,
 				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
 				55D580E12163240B000A8B55 /* YZHDetailsSettingVC.xib in Resources */,
 				55A0AF6121BF95DA004EAEE3 /* YZHCommandSectionView.xib in Resources */,

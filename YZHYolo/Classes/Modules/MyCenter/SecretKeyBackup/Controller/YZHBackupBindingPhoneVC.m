@@ -112,8 +112,8 @@
 - (IBAction)onTouchConfirm:(id)sender {
     
     NSDictionary* parameter = @{
-                                @"phoneNum": self.phoneNumberTextField.text ?
-                                @"type":@(1),
+                                @"phoneNum": self.phoneNumberTextField.text,
+                                @"type": @(1),
                                 @"verifyCode":self.authCodeTextField.text
                                 };
     @weakify(self)

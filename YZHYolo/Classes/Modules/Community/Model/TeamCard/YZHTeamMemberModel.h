@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YZHTeamMemberModel : YZHGroupedDataCollection
 
 @property (nonatomic, copy) NSString* teamId;
+@property (nonatomic, copy) NSString* teamOwner;
 @property (nonatomic, assign) BOOL isManage;
 @property (nonatomic, strong) NSMutableArray<YZHContactMemberModel *>* memberArray;
 

@@ -23,7 +23,7 @@
     // Configure the view for the selected state
 }
 
-+ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath{
++ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     
     NSString *cellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
     YZHAddBookSetTagCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];

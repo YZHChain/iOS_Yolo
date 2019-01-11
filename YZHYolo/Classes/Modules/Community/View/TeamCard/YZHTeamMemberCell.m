@@ -13,7 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subtitleLabel;
 
 @end
 
@@ -27,17 +26,29 @@
     
     self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:14];
     self.titleLabel.textColor = [UIColor yzh_fontShallowBlack];
-    
-    [self.subtitleLabel removeFromSuperview];
-    self.subtitleLabel = nil;
-//    self.subtitleLabel.font = [UIFont yzh_commonStyleWithFontSize:12];
-//    self.subtitleLabel.textColor = [UIColor yzh_separatorLightGray];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
++ (instancetype)tempTableViewCellWith:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath teamOwner:(BOOL)teamOwner {
+    
+    NSString *cellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)[indexPath section], (long)[indexPath row]];
+    YZHTeamMemberCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        UINib* nib = [UINib nibWithNibName:@"YZHTeamMemberCell" bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:cellIdentifier];
+        if (teamOwner) {
+            cell = [nib instantiateWithOwner:nil options:nil].lastObject;
+        } else {
+            cell = [nib instantiateWithOwner:nil options:nil].firstObject;
+        }
+    }
+    return cell;
 }
 
 - (void)refresh:(YZHContactMemberModel *)member {
