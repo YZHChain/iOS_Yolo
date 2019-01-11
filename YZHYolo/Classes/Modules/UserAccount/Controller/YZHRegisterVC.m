@@ -138,7 +138,7 @@
     
     NSString* phoneNumText = self.registerView.phoneTextField.text;
     // 检测手机号,后台请求
-    if ([phoneNumText yzh_isPhone]) {
+    if (YZHIsString(phoneNumText)) {
         NSDictionary* parameters = @{
                                      @"phoneNum":  phoneNumText,
                                      @"type":@(0),};

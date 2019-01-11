@@ -211,7 +211,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
-- (void)textFieldEditChanged:(NSNotification* )notification{
+- (void)textFieldEditChanged:(NSNotification* )notification {
     
     //确认按钮检测规则: 验证码或密码输入大于等于 4 个字符.账号与密码大于等于 6 个字符。
     //密码强度检测规则: 新密码输入超过大于等于 6 个字符。否则隐藏掉.

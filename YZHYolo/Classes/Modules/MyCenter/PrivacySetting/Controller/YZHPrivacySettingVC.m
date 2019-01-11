@@ -12,6 +12,12 @@
 #import "YZHAboutYoloCell.h"
 #import "YZHUserLoginManage.h"
 
+typedef enum : NSUInteger {
+    YZHSecretKeyBackupTypeNot = 0,
+    YZHSecretKeyBackupTypeCompletion,
+    YZHSecretKeyBackupTypeError,
+} YZHSecretKeyBackupType;
+
 @interface YZHPrivacySettingVC ()<UITableViewDelegate, UITableViewDataSource, YZHSwitchProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,6 +26,7 @@
 @property (nonatomic, strong) NSDate* lastDate;
 @property (nonatomic, assign) BOOL hasLastClick;
 @property (nonatomic, assign) BOOL executeDelayUpdate;
+@property (nonatomic, assign) YZHSecretKeyBackupType backupType;
 
 @end
 
@@ -76,13 +83,28 @@
 - (void)setupData
 {
     [self.tableView reloadData];
+    
+//    YZHIMLoginData* loginData = [YZHUserLoginManage sharedManager].currentLoginData;
+//    
+//    
+//    NSDictionary* dic = @{
+//                          @"yoloNo": loginData.yoloId.length ? loginData.yoloId : @""
+//                          };
+//    [[YZHNetworkService shareService] GETNetworkingResource:PATH_USER_CHECKOU_SECRETKEYBACKUP params:dic successCompletion:^(id obj) {
+//        
+//        self.backupType =  [obj mj_JSONString].boolValue;
+//        
+//    } failureCompletion:^(NSError *error) {
+//        
+//        self.backupType = YZHSecretKeyBackupTypeError;
+//    }];
 }
 
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -122,9 +144,11 @@
             cell = [[NSBundle mainBundle] loadNibNamed:@"YZHAboutYoloCell" owner:nil options:nil].lastObject;
             cell.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
             if (indexPath.section == 1) {
-               cell.titleLabel.text = @"黑名单管理";
+                cell.titleLabel.text = @"黑名单管理";
+            } else if (indexPath.section == 2) {
+                cell.titleLabel.text = @"设置上锁群阅读密码";
             } else {
-               cell.titleLabel.text = @"设置上锁群阅读密码";
+                cell.titleLabel.text = @"备份密钥";
             }
         }
         return cell;
@@ -160,6 +184,8 @@
         [YZHRouter openURL:kYZHRouterPrivacyPassword info:@{
                                                             @"userManage": userManage
                                                             }];
+    } else {
+        [self onTouchSecretKeyBackup];
     }
 }
 
@@ -283,6 +309,35 @@
                                                            } else {
                                                            }
                                                        }];
+}
+
+- (void)onTouchSecretKeyBackup {
+    
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.tableView text:nil];
+    YZHIMLoginData* loginData = [YZHUserLoginManage sharedManager].currentLoginData;
+    NSDictionary* dic = @{
+                          @"yoloNo": loginData.yoloId.length ? loginData.yoloId : @""
+                          };
+    @weakify(self)
+    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_CHECKOU_SECRETKEYBACKUP) params:dic successCompletion:^(NSString* obj) {
+        
+        [hud hideWithText:nil];
+    
+        BOOL isBackup = obj.boolValue;
+        if (isBackup) {
+           [YZHRouter openURL:kYZHRouterAlreadyBackup];
+        } else {
+           [YZHRouter openURL:kYZHRouterSecretKeyBackup];
+        }
+    } failureCompletion:^(NSError *error) {
+        @strongify(self)
+        if (error.code == 408) {
+           [YZHRouter openURL:kYZHRouterSecretKeyBackup];
+        } else {
+            self.backupType = YZHSecretKeyBackupTypeError;
+            [hud hideWithText:error.domain];
+        }
+    }];
 }
 
 #pragma mark - 6.Private Methods

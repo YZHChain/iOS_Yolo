@@ -55,7 +55,6 @@
     self.layer.masksToBounds = YES;
     [self.titleLabel setFont:[UIFont yzh_commonFontStyleFontSize:18]];
     [self.titleLabel setTextColor:[UIColor whiteColor]];
-    
 }
 
 //密码按钮隐藏控制

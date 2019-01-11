@@ -58,7 +58,13 @@ NSString *const kYZHRouterPrivacyPassword          = @"/myCenter/privacySetting/
 NSString* const kYZHRouterSettingCenter           = @"/myCenter/settingCenter";
 NSString* const kYZHRouterMyIntegral              = @"/myCenter/myIntegral";
 NSString* const kYZHRouterWKWeb                   = @"/myCenter/wkWeb";
-
+NSString* const kYZHRouterSecretKeyBackup         = @"/myCenter/SecretKeyBackup";
+NSString* const kYZHRouterSecretKeyBackupVerify   = @"/myCenter/SecretKeyBackupVerify";
+NSString* const kYZHRouterBackupBindingPhone      = @"/myCenter/SecretKeyBackup/BindingPhone";
+NSString* const kYZHRouterBackupCompletion        = @"/myCenter/SecretKeyBackup/Completion";
+NSString* const kYZHRouterAlreadyBackup           = @"/myCenter/AlreadyBackup";
+NSString* const kYZHRouterDelectBackup            = @"/myCenter/DelectBackup";
+NSString* const kYZHRouterPhoneGetSecretKey       = @"/myCenter/PhoneGetSecretKey";
 
 #pragma mark -- AddressBook
 
@@ -233,7 +239,49 @@ NSString *const kYZHRouterAppConfig = @"debug/appConfig";
                      },
              kYZHRouterWKWeb: @{
                      kYZHRouteViewControllerClassKey: @"YZHWKWebVC",
-                     kYZHRouteViewControllerNameKey: @"阅读密码",
+                     kYZHRouteViewControllerNameKey: @"注册协议H5",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterSecretKeyBackup: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSecretKeyBackupVC",
+                     kYZHRouteViewControllerNameKey: @"密钥备份",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterSecretKeyBackupVerify: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSecretKeyBackupVerifyVC",
+                     kYZHRouteViewControllerNameKey: @"校验秘钥",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterBackupBindingPhone: @{
+                     kYZHRouteViewControllerClassKey: @"YZHBackupBindingPhoneVC",
+                     kYZHRouteViewControllerNameKey: @"备份密钥绑定手机",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterBackupCompletion: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSecretBackupCompletionVC",
+                     kYZHRouteViewControllerNameKey: @"密钥备份完成",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterAlreadyBackup: @{
+                     kYZHRouteViewControllerClassKey: @"YZHSecretKeyAlreadyBackupVC",
+                     kYZHRouteViewControllerNameKey: @"密钥已备份",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterDelectBackup: @{
+                     kYZHRouteViewControllerClassKey: @"YZHDeleteBackupVC",
+                     kYZHRouteViewControllerNameKey: @"删除备份",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterPhoneGetSecretKey: @{
+                     kYZHRouteViewControllerClassKey: @"YZHPhoneGetSecretKeyVC",
+                     kYZHRouteViewControllerNameKey: @"手机号获取密钥",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

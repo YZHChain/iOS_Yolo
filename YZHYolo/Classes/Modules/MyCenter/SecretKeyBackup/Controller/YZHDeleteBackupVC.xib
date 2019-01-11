@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YZHDeleteBackupVC">
+            <connections>
+                <outlet property="delectButton" destination="6cL-wX-gBy" id="xMR-hL-f4j"/>
+                <outlet property="titleLabel" destination="0b2-eD-8ym" id="koR-th-2Kc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cL-wX-gBy">
+                    <rect key="frame" x="68" y="536" width="239" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="R7q-9Q-smW"/>
+                    </constraints>
+                    <state key="normal" title="确认删除备份" backgroundImage="button_background_pink_optional"/>
+                    <connections>
+                        <action selector="delectBackup:" destination="-1" eventType="touchUpInside" id="Trb-dh-GO3"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="删除备份后，平台将不再保存您的密钥信息，一旦丢失则平台也无法帮您找回，您确定要删除已备份的密钥信息么？" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b2-eD-8ym">
+                    <rect key="frame" x="38" y="41" width="299" height="81.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0b2-eD-8ym" secondAttribute="trailing" constant="38" id="5v2-p2-A2i"/>
+                <constraint firstAttribute="bottom" secondItem="6cL-wX-gBy" secondAttribute="bottom" constant="91" id="GFd-l7-F3d"/>
+                <constraint firstAttribute="trailing" secondItem="6cL-wX-gBy" secondAttribute="trailing" constant="68" id="Qv4-QZ-hI3"/>
+                <constraint firstItem="0b2-eD-8ym" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="38" id="Wru-ws-nEB"/>
+                <constraint firstItem="0b2-eD-8ym" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="41" id="oLf-ea-gZu"/>
+                <constraint firstItem="6cL-wX-gBy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="68" id="wVG-JW-RfV"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="button_background_pink_optional" width="335" height="44"/>
+    </resources>
+</document>

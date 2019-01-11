@@ -112,7 +112,7 @@
 - (void)getMessagingVerificationWithSender:(UIButton* )sender{
     
     // 检测手机号,后台请求
-    if ([self.findPasswordView.accountTextField.text yzh_isPhone]) {
+    if (YZHIsString(self.findPasswordView.accountTextField.text)) {
         //TODO:
         NSDictionary* parameter = @{
                                     @"phoneNum": self.findPasswordView.accountTextField.text,
@@ -124,9 +124,11 @@
             [hud hideWithText:@"验证码已发送至手机"];
             [sender yzh_startWithTime:60 title:sender.currentTitle countDownTitle:nil mainColor:nil countColor:nil];
         } failureCompletion:^(NSError *error) {
-            [YZHProgressHUD showAPIError:error];
+            [hud hideWithText:error.domain];
         }];
         
+    } else {
+        [YZHProgressHUD showText:@"请输入正确格式手机号" onView:self.view];
     }
 }
 

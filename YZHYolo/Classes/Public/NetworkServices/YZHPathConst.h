@@ -36,6 +36,13 @@
 #define PATH_USER_REGISTERED_SMSVERIFYCODE      @"/sms/verifySMSVerifyCode" //短信验证码校验
 #define PATH_USER_CHECKOUAPPUPDATE              @"/update/searchuser"  // 检测 App 更新
 
+#define PATH_USER_CHECKOU_SECRETKEYBACKUP            @"/user/getSecretKeyBackupFlag"  // 获取秘钥备份标示接口
+#define PATH_USER_VERIFY_SECRETKEYFORMAT             @"/user/verifySecretKeyformat"  // 获取秘钥备份标示接口
+#define PATH_USER_BACKUPSECRETKEY             @"/user/backupSecretKey" // 备份密钥
+#define PATH_USER_DELECT_BACKUPSECRETKEY             @"/user/deleteSecretKeyBackup" //删除备份密钥
+
+
+
 #pragma mark -- SERVER_PERSON
 
 #define PATH_PERSON_MOBILEFRIENDS                 @"/friendsManage/getMobileFriends" //获取通讯录好友

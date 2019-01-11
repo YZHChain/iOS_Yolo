@@ -64,6 +64,13 @@ extern NSString *const kYZHRouterPrivacySetting;
 extern NSString *const kYZHRouterPrivacyPassword;
 extern NSString *const kYZHRouterMyIntegral;
 extern NSString *const kYZHRouterWKWeb;
+extern NSString *const kYZHRouterSecretKeyBackup;
+extern NSString *const kYZHRouterSecretKeyBackupVerify;
+extern NSString *const kYZHRouterBackupBindingPhone;
+extern NSString *const kYZHRouterBackupCompletion;
+extern NSString *const kYZHRouterAlreadyBackup;
+extern NSString *const kYZHRouterDelectBackup;
+extern NSString *const kYZHRouterPhoneGetSecretKey;
 
 #pragma mark -- AddressBook
 

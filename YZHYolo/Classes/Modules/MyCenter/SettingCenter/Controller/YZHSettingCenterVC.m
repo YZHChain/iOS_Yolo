@@ -186,6 +186,7 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
                     // 跳转至登录页
                     [manage executeHandInputLogin];
                 } else {
+                    NSLog(@"退出异常原因:%@", error);
                     [YZHProgressHUD showText:@"退出失败,请重试" onView:self.view];
                 }
             }];
