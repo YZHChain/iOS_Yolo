@@ -152,7 +152,7 @@
     if ([self.viewModel.teamOwner isEqualToString:member.info.infoId]) {
         cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamOwnerCell" owner:nil options:nil].lastObject;
     }
-    
+    cell.teamId = self.viewModel.teamId;
     [cell refresh:member];
 
     return cell;

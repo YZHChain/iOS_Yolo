@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *bannedButton;
 @property (weak, nonatomic) IBOutlet UIButton *kickOutButton;
 @property (nonatomic, strong) YZHContactMemberModel* member;
+@property (nonatomic, copy) NSString* teamId;
 
 @property (nonatomic, weak) id<YZHTeamMemberManageProtocol> delegete;
 - (void)refresh:(YZHContactMemberModel *)member;

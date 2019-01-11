@@ -71,11 +71,18 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     }
 }
 
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     YZHPasteSkipManage* pasteManage = [YZHPasteSkipManage sharedInstance];
     [pasteManage checkoutTeamPasteboard];
+    
+    // 刷新界面
+    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
+    if ([communityVC isKindOfClass:[YZHCommunityListVC class]]) {
+        [communityVC refresh];
+    }
 }
 
 

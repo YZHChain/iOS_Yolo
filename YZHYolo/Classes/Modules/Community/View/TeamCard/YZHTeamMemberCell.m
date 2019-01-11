@@ -54,7 +54,12 @@
 - (void)refresh:(YZHContactMemberModel *)member {
     
     self.member = member;
-    self.titleLabel.text = member.info.showName;
+    NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:member.info.infoId inTeam:self.teamId];
+    if (YZHIsString(teamMember.nickname)) {
+        self.titleLabel.text = teamMember.nickname;
+    } else {
+        self.titleLabel.text = member.info.showName;
+    }
     if (YZHIsString(member.info.avatarUrlString)) {
         [self.avatarImageView yzh_setImageWithString:member.info.avatarUrlString placeholder:@"addBook_cover_cell_photo_default"];
     }

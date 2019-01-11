@@ -157,6 +157,8 @@
     
     YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
     YZHTeamMemberManageCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
+    
+    cell.teamId = self.viewModel.teamId;
     [cell refresh:member];
     BOOL isBanned = [[[NIMSDK sharedSDK] teamManager] teamMember:member.info.infoId inTeam:self.viewModel.teamId].isMuted;
     NSLog(@"成员名%@ iD:%@禁言状态%d", member.info.showName, member.info.infoId, isBanned);
