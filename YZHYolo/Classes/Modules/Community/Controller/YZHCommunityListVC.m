@@ -61,8 +61,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 @property (nonatomic, strong) NSMutableDictionary* headerViewDictionary;
 
-@property (nonatomic, assign) BOOL teamLock;
-
 @property (nonatomic, strong) YZHSearchView* searchView;
 @property (nonatomic, strong) YZHSearchView* tagSearchView;
 @property (nonatomic, strong) YZHNetworkStatusView* networkView;

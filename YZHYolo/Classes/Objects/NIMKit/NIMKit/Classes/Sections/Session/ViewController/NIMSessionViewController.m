@@ -303,12 +303,11 @@
         {
             return;
         }
-        
+
         [self uiAddMessages:messages];
         [self.interactor markRead];
     }
 }
-
 
 - (void)fetchMessageAttachment:(NIMMessage *)message progress:(float)progress
 {

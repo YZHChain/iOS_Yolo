@@ -22,6 +22,7 @@
 #import "UIViewController+YZHTool.h"
 #import "YZHPrivateChatVC.h"
 #import "YZHCommunityChatVC.h"
+#import "YZHCommunityListVC.h"
 
 NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 @interface AppDelegate ()<NIMLoginManagerDelegate, PKPushRegistryDelegate>
@@ -60,6 +61,14 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     // 未读消息去设置红点通知
     NSInteger count = [[[NIMSDK sharedSDK] conversationManager] allUnreadCount];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:count];
+    
+    //设置群锁
+    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
+    if ([communityVC isKindOfClass:[YZHCommunityListVC class]]) {
+        communityVC.teamLock = YES;
+    }
 }
 
 

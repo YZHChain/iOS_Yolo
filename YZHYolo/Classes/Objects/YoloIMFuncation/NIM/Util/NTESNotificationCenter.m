@@ -29,6 +29,9 @@
 #import "UIViewController+YZHTool.h"
 //#import "NIMChatManagerProtocol.h"
 //#import "NIMSystemNotificationManager.h"
+#import "YZHSessionMsgConverter.h"
+#import "YZHRootTabBarViewController.h"
+#import "YZHBaseViewController.h"
 
 NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChanged";
 
@@ -179,33 +182,33 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 //    return [attach.sendPacketId isEqualToString:me] || [attach.openPacketId isEqualToString:me];
 //}
 
-//- (void)onRecvRevokeMessageNotification:(NIMRevokeMessageNotification *)notification
-//{
-//    NIMMessage *tipMessage = [NTESSessionMsgConverter msgWithTip:[NTESSessionUtil tipOnMessageRevoked:notification]];
-//    NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
-//    setting.shouldBeCounted = NO;
-//    tipMessage.setting = setting;
-//    tipMessage.timestamp = notification.timestamp;
-//
-//    NTESMainTabController *tabVC = [NTESMainTabController instance];
-//    UINavigationController *nav = tabVC.selectedViewController;
-//
-//    for (NTESSessionViewController *vc in nav.viewControllers) {
-//        if ([vc isKindOfClass:[NTESSessionViewController class]]
-//            && [vc.session.sessionId isEqualToString:notification.session.sessionId]) {
-//            NIMMessageModel *model = [vc uiDeleteMessage:notification.message];
-//            if (model) {
-//                [vc uiInsertMessages:@[tipMessage]];
-//            }
-//            break;
-//        }
-//    }
-//
-//    // saveMessage 方法执行成功后会触发 onRecvMessages: 回调，但是这个回调上来的 NIMMessage 时间为服务器时间，和界面上的时间有一定出入，所以要提前先在界面上插入一个和被删消息的界面时间相符的 Tip, 当触发 onRecvMessages: 回调时，组件判断这条消息已经被插入过了，就会忽略掉。
-//    [[NIMSDK sharedSDK].conversationManager saveMessage:tipMessage
-//                                             forSession:notification.session
-//                                             completion:nil];
-//}
+- (void)onRecvRevokeMessageNotification:(NIMRevokeMessageNotification *)notification
+{
+    NIMMessage *tipMessage = [YZHSessionMsgConverter msgWithTip:[NTESSessionUtil tipOnMessageRevoked:notification]];
+    NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
+    setting.shouldBeCounted = NO;
+    tipMessage.setting = setting;
+    tipMessage.timestamp = notification.timestamp;
+
+    YZHRootTabBarViewController *tabVC = [YZHRootTabBarViewController instance];
+    UINavigationController *nav = tabVC.selectedViewController;
+
+    for (NIMSessionViewController *vc in nav.viewControllers) {
+        if ([vc isKindOfClass:[NIMSessionViewController class]]
+            && [vc.session.sessionId isEqualToString:notification.session.sessionId]) {
+            NIMMessageModel *model = [vc uiDeleteMessage:notification.message];
+            if (model) {
+                [vc uiInsertMessages:@[tipMessage]];
+            }
+            break;
+        }
+    }
+
+    // saveMessage 方法执行成功后会触发 onRecvMessages: 回调，但是这个回调上来的 NIMMessage 时间为服务器时间，和界面上的时间有一定出入，所以要提前先在界面上插入一个和被删消息的界面时间相符的 Tip, 当触发 onRecvMessages: 回调时，组件判断这条消息已经被插入过了，就会忽略掉。
+    [[NIMSDK sharedSDK].conversationManager saveMessage:tipMessage
+                                             forSession:notification.session
+                                             completion:nil];
+}
 
 
 #pragma mark - NIMSystemNotificationManagerDelegate

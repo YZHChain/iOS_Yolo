@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHCommunityListVC : NIMSessionListViewController
 
+@property (nonatomic, assign) BOOL teamLock;
+
 @end
 
 NS_ASSUME_NONNULL_END
