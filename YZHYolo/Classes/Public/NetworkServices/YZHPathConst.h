@@ -42,7 +42,6 @@
 #define PATH_USER_DELECT_BACKUPSECRETKEY             @"/user/deleteSecretKeyBackup" //删除备份密钥
 
 
-
 #pragma mark -- SERVER_PERSON
 
 #define PATH_PERSON_MOBILEFRIENDS                 @"/friendsManage/getMobileFriends" //获取通讯录好友
@@ -56,6 +55,8 @@
 #define PATH_TEAM_SEARCHGROUP                   @"/ymGroup/search_group" //搜索群列表
 #define PATH_TEAM_DELETEMYRECRUITS              @"/ymRecruit/deleteMyRecruits"// 删除我的招募信息
 #define PATH_TEAM_GETMYRECRUITS                 @"/ymRecruit/myRecruitInfo"// 获取我的招募信息
+#define PATH_TEAM_GETTEAMRECRUITS                 @"/ymRecruit/getGroupRecruit"// 获取群的招募信息
+
 #define PATH_TEAM_PUBLISHMYRECRUITS             @"/ymRecruit/publishMyRecruits"// 发布或编辑招募信息
 #define PATH_TEAM_SEARCH_MYRECRUITS             @"/ymRecruit/search_myRecruits"// 招募管理列表
 #define PATH_TEAM_SEARCH_RECRUITS               @"/ymRecruit/search_recruits"// 社群招募搜索列表

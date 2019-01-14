@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updataTeamOwnerData:(NIMUser* )user;
 - (void)updataHeaderModel:(NIMTeam* )team;
+- (void)updateTeamRecruitModelWithTeamId:(NSString *)teamId completion:(YZHVoidBlock )completion;
 
 @end
 

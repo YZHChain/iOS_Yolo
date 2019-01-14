@@ -7,6 +7,7 @@
 //
 
 #import "YZHTeamRecruitCardIntroModel.h"
+#import "YZHProgressHUD.h"
 
 @implementation YZHTeamRecruitCardIntroModel
 
@@ -75,6 +76,23 @@
     
     self.teamOwnerName = user.userInfo.nickName;
     self.teamOwnerAvatarUrl = user.userInfo.avatarUrl;
+}
+
+- (void)updateTeamRecruitModelWithTeamId:(NSString *)teamId completion:(YZHVoidBlock )completion {
+    
+    NSDictionary* dic = @{
+                          @"tId": teamId
+                          };
+    @weakify(self)
+    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_GETTEAMRECRUITS) params:dic successCompletion:^(NSDictionary* obj) {
+        @strongify(self)
+        self.recruitModel.content = [obj objectForKey:@"tinfo"];
+        completion ? completion() : NULL;
+        
+    } failureCompletion:^(NSError *error) {
+        
+//        [YZHProgressHUD show]
+    }];
 }
 
 @end

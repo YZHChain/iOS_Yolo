@@ -90,8 +90,10 @@
     self.tableView.tableFooterView = self.footerView;
     
     //非好友关系时, 拉取用户最新资料.
+    @weakify(self)
     if (![[[NIMSDK sharedSDK] userManager] isMyFriend:self.viewModel.teamOwner] && YZHIsString(self.viewModel.teamOwner)) {
         [[[NIMSDK sharedSDK] userManager] fetchUserInfos:@[self.viewModel.teamOwner] completion:^(NSArray<NIMUser *> * _Nullable users, NSError * _Nullable error) {
+            @strongify(self)
             if (!error) {
                 [self.viewModel updataTeamOwnerData:users.firstObject];
                 [self.tableView reloadData];
@@ -102,11 +104,17 @@
     if (![[[NIMSDK sharedSDK] teamManager] isMyTeam:self.viewModel.teamId]) {
         [[[NIMSDK sharedSDK] teamManager] fetchTeamInfo:self.viewModel.teamId completion:^(NSError * _Nullable error, NIMTeam * _Nullable team) {
             if (!error) {
+                @strongify(self)
                 [self.viewModel updataHeaderModel:team];
                 [self.tableView reloadData];
             }
         }];
     }
+    //更新群公告数据,
+    [self.viewModel updateTeamRecruitModelWithTeamId:self.teamId completion:^{
+        @strongify(self)
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - 3.Request Data
