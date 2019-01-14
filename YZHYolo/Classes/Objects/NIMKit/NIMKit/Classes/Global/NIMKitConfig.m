@@ -66,7 +66,7 @@
     _messageLimit    = 20;
     _recordMaxDuration = 60.f;
     _placeholder = @"";
-    _inputMaxLength = 1000;
+    _inputMaxLength = 2000;
     _nickFont  = [UIFont systemFontOfSize:13.0];
     _nickColor = [UIColor darkGrayColor];
     _receiptFont  = [UIFont systemFontOfSize:13.0]; 

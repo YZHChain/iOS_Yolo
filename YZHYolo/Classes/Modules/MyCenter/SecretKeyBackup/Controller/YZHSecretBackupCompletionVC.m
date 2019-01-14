@@ -50,6 +50,8 @@
     
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.leftItemsSupplementBackButton = NO;
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.backBarButtonItem = nil;
 }
 
 - (void)setupView {

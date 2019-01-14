@@ -43,6 +43,13 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self setupNavBar];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -107,6 +114,7 @@
 
 - (IBAction)onTouchBackup:(UIButton *)sender {
     
+    self.navigationItem.title = @"返回";
     [YZHRouter openURL:kYZHRouterSecretKeyBackupVerify];
 }
 

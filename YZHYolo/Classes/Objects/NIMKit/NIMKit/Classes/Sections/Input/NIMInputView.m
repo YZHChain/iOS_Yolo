@@ -22,6 +22,7 @@
 #import "NIMKitInfoFetchOption.h"
 #import "NIMKitKeyboardInfo.h"
 #import "YZHCommunityAtMemberVC.h"
+#import "YZHAlertManage.h"
 
 
 @interface NIMInputView()<NIMInputToolBarDelegate,NIMInputEmoticonProtocol,YZHContactSelectDelegate>
@@ -481,6 +482,7 @@
     NSString *str = [self.toolBar.contentText stringByAppendingString:text];
     if (str.length > self.maxTextLength)
     {
+        [YZHAlertManage showAlertMessage:@"仅支持2000字以内的输入"];
         return NO;
     }
     return YES;
@@ -557,6 +559,7 @@
 {
     [self sizeToFit];
 }
+
 
 #pragma mark - YZHContactSelectDelegate
 - (void)didFinishedSelect:(NSArray *)selectedContacts
