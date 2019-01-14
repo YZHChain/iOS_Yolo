@@ -115,6 +115,7 @@ extern NSString *const kYZHRouterCommunityAtTeamMember;
 extern NSString *const kYZHRouterPrivateChatSearch;
 extern NSString *const kYZHRouterTeamChatSearch;
 extern NSString *const kYZHRouterTeamRecruitSearch;
+extern NSString *const kYZHRouterTeamTransfer;
 
 #pragma mark -- DeBug
 

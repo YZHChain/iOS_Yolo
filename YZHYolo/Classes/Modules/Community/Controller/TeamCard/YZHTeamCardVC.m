@@ -21,6 +21,8 @@
 #import "YZHTeamMemberVC.h"
 #import "YZHAlertManage.h"
 #import "YZHTeamUpdataModel.h"
+#import "YZHTransferTeamVC.h"
+#import "YZHBaseNavigationController.h"
 
 static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 @interface YZHTeamCardVC ()<UITableViewDataSource, UITableViewDelegate, YZHSwitchProtocol, NIMTeamManagerDelegate>
@@ -34,6 +36,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 @property (nonatomic, assign) BOOL hasLastClick;
 @property (nonatomic, assign) BOOL executeDelayUpdate;
 @property (nonatomic, copy)   YZHVoidBlock headerTeamDataUpdataHandle;
+@property (nonatomic, strong) UIButton* headerViewButton;
 
 @end
 
@@ -100,12 +103,13 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     [self.tableView setTableHeaderView:self.headerView];
     [self configurationFooterView];
     if (self.viewModel.isManage) {
-        UIButton* headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.headerView addSubview:headerButton];
-        [headerButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.headerView addSubview:self.headerViewButton];
+        [self.headerViewButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(0);
         }];
-        [headerButton addTarget:self action:@selector(onTouchHeaderView:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else {
+        [self.headerViewButton removeFromSuperview];
     }
     [self.tableView reloadData];
 }
@@ -216,6 +220,26 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
                 [YZHProgressHUD showText:@"聊天记录已清空" onView:YZHAppWindow completion:nil];
             }
         }];
+    } else if ([model.title isEqualToString:@"转让群"]) {
+        NIMContactTeamMemberSelectConfig *config = [[NIMContactTeamMemberSelectConfig alloc] init];
+        config.enableRobot = NO;
+        config.needMutiSelected = NO;
+        config.teamId = self.teamId;
+        config.filterIds = @[[NIMSDK sharedSDK].loginManager.currentAccount];
+        NSString* teamManage = [[[NIMSDK sharedSDK] teamManager] teamById:config.teamId].owner;
+        bool isManage = [config.filterIds.firstObject isEqual:teamManage];
+        
+        YZHTransferTeamVC* transferTeamVC = [[YZHTransferTeamVC alloc] initWithConfig:config withIsManage:isManage];
+        @weakify(self)
+        transferTeamVC.transferCompletion = ^{
+            @strongify(self)
+            self.isTeamOwner = NO;
+            [self setupData];
+            [self.tableView reloadData];
+        };
+        YZHBaseNavigationController* NavigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:transferTeamVC];
+        
+        [self presentViewController:NavigationController animated:YES completion:nil];
     } else {
         [YZHRouter openURL:model.router info:model.routetInfo];
     }
@@ -506,4 +530,13 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     }];
 }
 
+- (UIButton *)headerViewButton {
+    
+    if (!_headerViewButton) {
+        _headerViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_headerViewButton addTarget:self action:@selector(onTouchHeaderView:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _headerViewButton;
+}
 @end

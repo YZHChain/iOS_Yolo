@@ -8,15 +8,11 @@
 
 #import "YZHTeamMemberVC.h"
 
-#import "YZHTeamMemberCell.h"
-#import "YZHTeamMemberModel.h"
 #import "UIButton+YZHTool.h"
 #import "YZHTeamMemberManageVC.h"
 
 @interface YZHTeamMemberVC()<UITableViewDataSource, UITableViewDelegate, NIMTeamManagerDelegate>
 
-@property (nonatomic, strong) UITableView* tableView;
-@property (nonatomic, strong) YZHTeamMemberModel* viewModel;
 @property (nonatomic, strong) UIImageView* teamOwnerIcon;
 
 @end

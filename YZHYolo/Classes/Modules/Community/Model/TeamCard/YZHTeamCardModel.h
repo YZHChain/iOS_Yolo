@@ -53,6 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) YZHTeamDetailModel* informModel; // 免打扰设置
 @property (nonatomic, strong) YZHTeamDetailModel* topModel;  // 群置顶
 @property (nonatomic, strong) YZHTeamDetailModel* letMemberLookDetails; // 允许其他群成员查看个人信息.
+@property (nonatomic, strong) YZHTeamDetailModel* transferTeamModel; // 转让群
 
 @property (nonatomic, strong) YZHTeamDetailModel* lockModel; //
 @property (nonatomic, copy) NSDictionary* teamInfos; // 修改的群信息.如果是群主则包含群名片

@@ -10,4 +10,8 @@
 
 @implementation UILabel (YZHTool)
 
+- (void)yzh_setupView {
+    
+}
+
 @end

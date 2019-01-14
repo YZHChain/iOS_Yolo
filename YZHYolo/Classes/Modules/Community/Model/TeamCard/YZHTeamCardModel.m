@@ -157,6 +157,15 @@
                                @"teamId": self.teamId
                                };
 //    noticeModel.isOpenStatus = teamExtManage.isShareTeam;
+    
+    YZHTeamDetailModel* transferTeamModel = [[YZHTeamDetailModel alloc] init];
+    self.transferTeamModel = transferTeamModel;
+    transferTeamModel.title = @"转让群";
+    transferTeamModel.cellClass = @"YZHTeamCardTextCell";
+    transferTeamModel.router = kYZHRouterTeamTransfer;
+    noticeModel.routetInfo = @{
+                               @"teamId": self.teamId
+                               };
     //群功能
     YZHTeamDetailModel* nickNameModel = [[YZHTeamDetailModel alloc] init];
     nickNameModel.title = @"群内昵称设置";
@@ -210,6 +219,7 @@
     NSMutableArray* managePublickArray = [[NSMutableArray alloc] init];
     NSMutableArray* manageSharedArray = [[NSMutableArray alloc] init];
     NSMutableArray* manageSharedQRCodeArray = [[NSMutableArray alloc] init];
+    NSMutableArray* manageTransferTeamArray = [[NSMutableArray alloc] init];
     NSMutableArray* teamFunctionArray = [[NSMutableArray alloc] init];
     NSMutableArray* teamMoreArray = [[NSMutableArray alloc] init];
     if (_isManage) {
@@ -232,6 +242,7 @@
         [manageSharedQRCodeArray addObject:letSharedQRCodeModel];
         [manageSharedQRCodeArray addObject:letMemberAddChatModel];
         [manageSharedQRCodeArray addObject:noticeModel];
+        [manageTransferTeamArray addObject:transferTeamModel];
         // 拼装群功能
         [teamFunctionArray addObject:nickNameModel];
         [teamFunctionArray addObject:informModel];
@@ -267,6 +278,7 @@
     if (self.isManage) {
         [listArray addObject:manageSharedArray];
         [listArray addObject:manageSharedQRCodeArray];
+        [listArray addObject:manageTransferTeamArray];
     }
     [listArray addObject:teamFunctionArray];
     [listArray addObject:teamMoreArray];
@@ -360,8 +372,7 @@
     
     //通知后台
     [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_ADDUPDATEGROUP) params:teamModel.params successCompletion:^(id obj) {
-        
-        
+    
     } failureCompletion:^(NSError *error) {
     }];
 }

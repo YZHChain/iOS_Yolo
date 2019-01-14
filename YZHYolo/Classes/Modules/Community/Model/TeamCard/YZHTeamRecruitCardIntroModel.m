@@ -86,12 +86,14 @@
     @weakify(self)
     [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_SQUARE(PATH_TEAM_GETTEAMRECRUITS) params:dic successCompletion:^(NSDictionary* obj) {
         @strongify(self)
-        self.recruitModel.content = [obj objectForKey:@"tinfo"];
-        completion ? completion() : NULL;
+        NSString* recruit = [obj objectForKey:@"tinfo"];
+        if (YZHIsString(recruit)) {
+            self.recruitModel.content = recruit;
+            completion ? completion() : NULL;
+        }
         
     } failureCompletion:^(NSError *error) {
         
-//        [YZHProgressHUD show]
     }];
 }
 

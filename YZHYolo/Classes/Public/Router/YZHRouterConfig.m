@@ -109,6 +109,7 @@ NSString *const kYZHRouterCommunityAtTeamMember = @"/community/AtMember/";
 NSString *const kYZHRouterPrivateChatSearch = @"/privateChat/search";
 NSString *const kYZHRouterTeamChatSearch  = @"/teamChat/search";
 NSString *const kYZHRouterTeamRecruitSearch = @"/teamRecruit/search";
+NSString *const kYZHRouterTeamTransfer = @"team/teamTransfer";
 
 NSString *const kYZHRouterAppConfig = @"debug/appConfig";
 
@@ -512,6 +513,12 @@ NSString *const kYZHRouterAppConfig = @"debug/appConfig";
              kYZHRouterTeamRecruitSearch: @{
                      kYZHRouteViewControllerClassKey: @"YZHTeamRecruitSearch",
                      kYZHRouteViewControllerNameKey: @"招募搜索",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterTeamTransfer: @{
+                     kYZHRouteViewControllerClassKey: @"YZHTransferTeamVC",
+                     kYZHRouteViewControllerNameKey: @"转让群",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",
                      },

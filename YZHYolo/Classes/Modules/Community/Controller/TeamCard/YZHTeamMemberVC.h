@@ -8,7 +8,10 @@
 
 #import "YZHBaseViewController.h"
 
+#import "YZHTeamMemberModel.h"
 #import "NIMContactSelectConfig.h"
+#import "YZHTeamMemberCell.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHTeamMemberVC : YZHBaseViewController
@@ -18,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) id<NIMContactSelectConfig> config;
 
 @property (nonatomic, assign) BOOL isManage;
+
+@property (nonatomic, strong) UITableView* tableView;
+
+@property (nonatomic, strong) YZHTeamMemberModel* viewModel;
 /**
  *  初始化方法
  *
