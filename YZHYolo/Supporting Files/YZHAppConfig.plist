@@ -13,7 +13,7 @@
 	<key>NIMKey</key>
 	<string>14f11c236ed7c56d576d251bbbad67cb</string>
 	<key>NIMServerTest</key>
-	<false/>
+	<true/>
 	<key>logToFile</key>
 	<false/>
 	<key>apiDebug</key>

@@ -71,6 +71,7 @@ extern NSString *const kYZHRouterBackupCompletion;
 extern NSString *const kYZHRouterAlreadyBackup;
 extern NSString *const kYZHRouterDelectBackup;
 extern NSString *const kYZHRouterPhoneGetSecretKey;
+extern NSString *const kYZHRouterPhoneAndAppGetSecretKey;
 
 #pragma mark -- AddressBook
 

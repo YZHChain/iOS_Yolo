@@ -8,6 +8,7 @@
 
 #import "YZHGetSecreKeyVC.h"
 
+#import "YZHProgressHUD.h"
 @interface YZHGetSecreKeyVC ()
 
 @property (weak, nonatomic) IBOutlet UIButton *appGetButton;
@@ -45,8 +46,7 @@
 - (void)setupNavBar {
     
     self.navigationItem.title = @"手机号获取密钥";
-    
-    
+
 }
 
 - (void)setupView {
@@ -78,12 +78,44 @@
 
 - (IBAction)onTouchApp:(UIButton *)sender {
     
-    
+    NSDictionary* dic = @{
+                          @"phone": self.phoneNumber,
+                          @"receiveType": @(0)
+                          };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_GETECRETKEY) params:dic successCompletion:^(NSString* obj) {
+        [hud hideWithText:nil];
+        if ([obj isKindOfClass:[NSString class]]) {
+            NSString* secretKey = obj;
+            [YZHRouter openURL:kYZHRouterFindPassword info:@{
+                                                             @"secretKey": secretKey,
+                                                             kYZHRouteBackIndex: @(3)
+                                                             }];
+        }
+
+
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
 }
 
 - (IBAction)onTouchPhone:(UIButton *)sender {
     
-    
+    NSDictionary* dic = @{
+                          @"phone": self.phoneNumber,
+                          @"receiveType": @(1)
+                          };
+    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_GETECRETKEY) params:dic successCompletion:^(id obj) {
+        [hud hideWithText:@"密钥已发送到您的手机" completion:^{
+            [YZHRouter openURL:kYZHRouterFindPassword info:@{
+                                                             
+                                                kYZHRouteBackIndex: @(3)
+                                                             }];
+        }];
+    } failureCompletion:^(NSError *error) {
+        [hud hideWithText:error.domain];
+    }];
 }
 
 #pragma mark - 6.Private Methods

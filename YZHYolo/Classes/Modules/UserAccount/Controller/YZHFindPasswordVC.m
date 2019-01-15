@@ -12,7 +12,6 @@
 #import "YZHPublic.h"
 #import "UIButton+YZHCountDown.h"
 #import "NSString+YZHTool.h"
-#import "YZHPhoneFindPasswordVC.h"
 
 @interface YZHFindPasswordVC ()<UIGestureRecognizerDelegate>
 
@@ -49,6 +48,11 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
+    
+    if (self.secretKey) {
+        self.findPasswordView.passwordTextView.text = self.secretKey;
+        self.findPasswordView.nextButton.enabled = YES;
+    }
 }
 
 #pragma mark - 2.SettingView and Style
@@ -67,7 +71,7 @@
     self.findPasswordView.frame = self.view.bounds;
     self.findPasswordView.accountTextField.text = self.phoneNumberString;
     [self.findPasswordView.confirmButton addTarget:self action:@selector(requestRetrievePassword:) forControlEvents:UIControlEventTouchUpInside];
-    [self.findPasswordView.getSMSCodeButton addTarget:self action:@selector(getMessagingVerificationWithSender:) forControlEvents:UIControlEventTouchUpInside];
+    
     //新版本
     [self.findPasswordView.nextButton addTarget:self action:@selector(onTouchNext:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -77,7 +81,6 @@
     
     [self.findPasswordView.passwordTextView becomeFirstResponder];
     
-    self.findPasswordView.tipButton.hidden = YES;
 }
 
 - (void)reloadView
@@ -160,8 +163,9 @@
 // 手机号码获取密钥
 - (void)onTouchPhone:(UIButton *)sender {
     
-    YZHPhoneFindPasswordVC* findVC = [[YZHPhoneFindPasswordVC alloc] init];
-    [self.navigationController pushViewController:findVC animated:YES];
+    [YZHRouter openURL:kYZHRouterPhoneGetSecretKey info:@{
+                                                          @"forgetPassword": @(YES)
+                                                          }];
     
 }
 

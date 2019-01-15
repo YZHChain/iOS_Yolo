@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YZHPhoneGetSecretKeyVC : YZHBaseViewController
 
+@property (nonatomic, assign) BOOL forgetPassword;
+
 @end
 
 NS_ASSUME_NONNULL_END

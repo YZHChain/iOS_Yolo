@@ -121,7 +121,8 @@
 - (IBAction)onTouchProtocalTitle:(id)sender {
     
     [YZHRouter openURL:kYZHRouterWKWeb info:@{
-                                              @"navTitle": @"注册协议"
+                                              @"navTitle": @"注册协议",
+                                              @"url":@"https://yolotest.yzhchain.com/yolo-web/html/about/backup_protocol.html"
                                               }];
 }
 

@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
 @property (weak, nonatomic) IBOutlet UIView *topContentView;
 
-
 @end
 
 @implementation YZHPhoneGetSecretKeyVC
@@ -53,6 +52,9 @@
 - (void)setupNavBar {
     
     self.navigationItem.title = @"手机号获取密钥";
+    if (self.forgetPassword) {
+        self.navigationItem.title = @"忘记密码";
+    }
     
     self.hideNavigationBar = YES;
 }
@@ -67,7 +69,7 @@
     
     [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"button_background_optional"] forState:UIControlStateNormal];
     [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"button_background_disable"] forState:UIControlStateDisabled];
-    self.confirmButton.enabled = YES;
+    self.confirmButton.enabled = NO;
     [self.confirmButton yzh_setupButton];
     
 }
@@ -115,22 +117,41 @@
 
 - (IBAction)onTouchComfirm:(UIButton *)sender {
     
-    NSDictionary* parameter = @{
-                                @"phoneNum": self.phontTextField.text,
-                                @"type":@(0),
-                                @"verifyCode": self.authCodeTextField.text
-                                };
-    YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:@""];
-    // 处理验证码按钮 倒计时
-    @weakify(self)
-    [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
-        @strongify(self)
-        [hud hideWithText:@"密钥已发送到您的手机" completion:^{
-            [self.navigationController popViewControllerAnimated:YES];
+
+        NSDictionary* parameter = @{
+                                    @"phoneNum": self.phontTextField.text,
+                                    @"type":@(0),
+                                    @"verifyCode": self.authCodeTextField.text
+                                    };
+        YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:@""];
+        // 处理验证码按钮 倒计时
+        @weakify(self)
+        [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SMSVERIFYCODE) params:parameter successCompletion:^(id obj) {
+            @strongify(self)
+            if (self.forgetPassword) {
+                
+                [hud hideWithText:nil];
+                [YZHRouter openURL:kYZHRouterPhoneAndAppGetSecretKey info:@{
+                                                                            @"phoneNumber": self.phontTextField.text
+                                                                            }];
+                
+            } else {
+                NSDictionary* dic = @{
+                                      @"phone": self.phontTextField.text,
+                                      @"receiveType": @(1)
+                                      };
+                [[YZHNetworkService shareService] GETNetworkingResource:SERVER_LOGIN(PATH_USER_GETECRETKEY) params:dic successCompletion:^(id obj) {
+                    [hud hideWithText:@"密钥已发送到您的手机" completion:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }];
+                } failureCompletion:^(NSError *error) {
+                    [hud hideWithText:error.domain];
+                }];
+            }
+        } failureCompletion:^(NSError *error) {
+            [hud hideWithText:error.domain];
         }];
-    } failureCompletion:^(NSError *error) {
-        [hud hideWithText:error.domain];
-    }];
+
 }
 
 

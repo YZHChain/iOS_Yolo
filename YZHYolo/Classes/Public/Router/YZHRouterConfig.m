@@ -65,6 +65,7 @@ NSString* const kYZHRouterBackupCompletion        = @"/myCenter/SecretKeyBackup/
 NSString* const kYZHRouterAlreadyBackup           = @"/myCenter/AlreadyBackup";
 NSString* const kYZHRouterDelectBackup            = @"/myCenter/DelectBackup";
 NSString* const kYZHRouterPhoneGetSecretKey       = @"/myCenter/PhoneGetSecretKey";
+NSString* const kYZHRouterPhoneAndAppGetSecretKey = @"/account/PhoneAndAppGetSecretKey";
 
 #pragma mark -- AddressBook
 
@@ -282,6 +283,12 @@ NSString *const kYZHRouterAppConfig = @"debug/appConfig";
                      },
              kYZHRouterPhoneGetSecretKey: @{
                      kYZHRouteViewControllerClassKey: @"YZHPhoneGetSecretKeyVC",
+                     kYZHRouteViewControllerNameKey: @"手机号获取密钥",
+                     kYZHRouteViewControllerNotesKey: @"",
+                     kYZHRouteViewControllerNeedLoginKey:@"1",
+                     },
+             kYZHRouterPhoneAndAppGetSecretKey: @{
+                     kYZHRouteViewControllerClassKey: @"YZHGetSecreKeyVC",
                      kYZHRouteViewControllerNameKey: @"手机号获取密钥",
                      kYZHRouteViewControllerNotesKey: @"",
                      kYZHRouteViewControllerNeedLoginKey:@"1",

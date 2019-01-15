@@ -34,26 +34,8 @@
     self.contentMode = UIViewContentModeTop;
     self.contentView.layer.cornerRadius = 5;
     
-    UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
-    UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
-    CAGradientLayer *layer = [CAGradientLayer new];
-    //存放渐变的颜色的数组
-    layer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
-    //起点和终点表示的坐标系位置，(0,0)表示左上角，(1,1)表示右下角
-    layer.startPoint = CGPointMake(0.0, 0.0);
-    layer.endPoint = CGPointMake(1, 0.0);
-    
-//    layer.frame = _topContentView.frame;
-//    CGRect rect = _topContentView.frame;
-    layer.frame = CGRectMake(0, 0, YZHScreen_Width, 135);
-    CGRect rect = CGRectMake(0, 0, YZHScreen_Width, 135);
-    UIView* view = [[UIView alloc] initWithFrame:rect];
-    [view.layer addSublayer:layer];
-    
-    [_topContentView insertSubview:view atIndex:0];
-    
+    [self.topContentView yzh_addGradientLayerView];
     //新版
-    
     self.titleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:12];
     self.titleLabel.textColor = [UIColor yzh_sessionCellGray];
     self.titleLabel.text = @"单词之间使用空格隔开";
