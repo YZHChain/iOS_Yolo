@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIImageView* selectedImageView;
 
 - (void)refreshAtmember:(YZHContactMemberModel *)member;
+@property (nonatomic, copy) NSString* teamId;
 
 @end
 

@@ -97,6 +97,10 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
 
 - (void)setupData {
     
+    
+    NSString* userId = [NIMSDK sharedSDK].loginManager.currentAccount;
+    NIMTeam* team = [[NIMSDK sharedSDK].teamManager teamById:self.teamId];
+    _isTeamOwner = [userId isEqualToString:team.owner];
     self.viewModel = [[YZHTeamCardModel alloc] initWithTeamId:_teamId isManage:_isTeamOwner];
     [self.headerView refreshWithModel:self.viewModel.headerModel];
     self.headerView.height = self.headerView.updateHeight;

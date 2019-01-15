@@ -8,9 +8,11 @@
 
 #import "YZHBaseViewController.h"
 
+#import <WebKit/WebKit.h>
 @interface YZHDiscoverVC : YZHBaseViewController
 
-@property (nonatomic,strong) NSString* url;
+@property (nonatomic, strong) NSString* url;
+@property (nonatomic, strong) WKWebView* webView;
 - (void)refreshView;
 
 @end

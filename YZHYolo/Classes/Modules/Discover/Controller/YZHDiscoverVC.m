@@ -17,7 +17,6 @@
 
 @interface YZHDiscoverVC () <WKUIDelegate,WKScriptMessageHandler,WKNavigationDelegate>
 
-@property (nonatomic, strong) WKWebView* webView;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) CGFloat delayTime;
 @property (nonatomic, strong) YZHProgressHUD* hud;
@@ -305,7 +304,20 @@
     }
     
     if ([message.name isEqualToString:@"GOBACK"]) { //返回
-        [self.navigationController popViewControllerAnimated:true];
+        NSString* bodyString = message.body;
+        NSInteger parameter = bodyString.integerValue;
+        if (parameter == 10) { // 需要刷新
+            NSInteger count = self.navigationController.viewControllers.count;
+            YZHDiscoverVC* popVC = self.navigationController.viewControllers[count - 2];
+            [self.navigationController popViewControllerAnimated:true];
+            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh()"];
+            [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                NSLog(@"%@----%@",result, error);
+            }];
+            //            [popVC.webView evaluateJavaScript:@"webViewRefresh" completionHandler:nil];
+        } else {
+            [self.navigationController popViewControllerAnimated:true];
+        }
         return;
     }
     

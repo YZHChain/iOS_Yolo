@@ -139,6 +139,7 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
             NSIndexPath* newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section - 1];
             memberModel =  (YZHContactMemberModel *)[self.atMemberModel atMemberOfIndex:newIndexPath];
             YZHAtMemberCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
+            cell.teamId = self.atMemberModel.teamId;
             [cell refreshAtmember:memberModel];
             if ([self.selectedIndexPath containsObject:indexPath]) {
                 [cell.contentView addSubview:cell.selectedImageView];
@@ -151,6 +152,7 @@ static NSString* kYZHAddBookSectionViewIdentifier = @"sectionView";
         YZHContactMemberModel* memberModel;
         memberModel = (YZHContactMemberModel *)[self.atMemberModel atMemberOfIndex:indexPath];
         YZHAtMemberCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
+        cell.teamId = self.atMemberModel.teamId;
         [cell refreshAtmember:memberModel];
         if ([self.selectedIndexPath containsObject:indexPath]) {
             [cell.contentView addSubview:cell.selectedImageView];

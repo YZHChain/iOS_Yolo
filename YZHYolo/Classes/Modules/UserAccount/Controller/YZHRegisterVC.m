@@ -14,6 +14,7 @@
 #import "UIViewController+KeyboardAnimation.h"
 #import "UIButton+YZHCountDown.h"
 #import "YZHBaseNavigationController.h"
+#import "YZHUserLoginManage.h"
 
 @interface YZHRegisterVC ()<UITextFieldDelegate, UIGestureRecognizerDelegate>
 
@@ -139,9 +140,13 @@
     NSString* phoneNumText = self.registerView.phoneTextField.text;
     // 检测手机号,后台请求
     if (YZHIsString(phoneNumText)) {
+        
+        NSString* yoloNo = [YZHUserLoginManage sharedManager].currentLoginData.yoloId;
         NSDictionary* parameters = @{
                                      @"phoneNum":  phoneNumText,
-                                     @"type":@(0),};
+                                     @"type":@(0),
+                                     @"yoloNo": yoloNo ? yoloNo : @""
+                                     };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.registerView text:nil];
         [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_REGISTERED_SENDSMSCODE) params:parameters successCompletion:^(NSObject* obj) {
             if ([obj.yzh_apiCode isEqualToString:@"200"]) {

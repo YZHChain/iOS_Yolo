@@ -33,15 +33,20 @@
 
 - (void)refreshAtmember:(YZHContactMemberModel *)member {
     
-    self.titleLabel.text = member.info.showName;
+    NIMTeamMember* teamMember = [[[NIMSDK sharedSDK] teamManager] teamMember:member.info.infoId inTeam:self.teamId];
+    //有限限制群昵称,如果有则后面接用户昵称。 如果没有群昵称则单独显示用户昵称。
+    if (YZHIsString(teamMember.nickname)) {
+        self.titleLabel.text = teamMember.nickname;
+        self.subtitleLabel.text = member.info.showName;
+    } else {
+        self.titleLabel.text = member.info.showName;
+        self.subtitleLabel.text = nil;
+    }
     NSString *imageUrl = member.info.avatarUrlString ? member.info.avatarUrlString : nil;
     //TODO: 加载图片方法需优化.
     if (imageUrl) {
         [_photoImageView yzh_setImageWithString:imageUrl placeholder:@"addBook_cover_cell_photo_default"];
     }
-    NSString* showNickName = member.info.nickName ? [NSString stringWithFormat:@"(%@)", member.info.nickName] : nil;
-    self.subtitleLabel.text = showNickName;
-    
 }
 
 - (UIImageView *)selectedImageView {

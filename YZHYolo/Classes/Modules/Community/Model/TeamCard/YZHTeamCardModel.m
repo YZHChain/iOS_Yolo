@@ -73,7 +73,7 @@
     sharedQRCodeModel.cellClass = @"YZHTeamCardImageCell";
     sharedQRCodeModel.router = kYZHRouterCommunityCardQRCodeShared;
     sharedQRCodeModel.routetInfo = @{
-                                     @"teamId": self.teamId ? self.teamId : NULL
+                                     @"teamId": self.teamId ? self.teamId : @""
                                      };
     
     YZHTeamDetailModel* memberModel = [[YZHTeamDetailModel alloc] init];
@@ -163,7 +163,7 @@
     transferTeamModel.title = @"转让群";
     transferTeamModel.cellClass = @"YZHTeamCardTextCell";
     transferTeamModel.router = kYZHRouterTeamTransfer;
-    noticeModel.routetInfo = @{
+    transferTeamModel.routetInfo = @{
                                @"teamId": self.teamId
                                };
     //群功能

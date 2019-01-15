@@ -175,8 +175,10 @@
     
     NSDictionary* dic;
     if (YZHIsString(self.phoneNumber)) {
+        NSString* yoloNo = [YZHUserLoginManage sharedManager].currentLoginData.yoloId;
         dic = @{@"phoneNum": self.phoneNumber,
                 @"type":@(2),
+                @"yoloNo": yoloNo ? yoloNo : @""
                 };
     }
     YZHProgressHUD *hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];

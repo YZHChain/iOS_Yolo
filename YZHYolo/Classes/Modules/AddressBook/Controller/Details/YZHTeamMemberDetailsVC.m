@@ -104,7 +104,7 @@
 - (void)reloadView {
     
     NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
-    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount];
+    BOOL isTeamManage = [team.owner isEqualToString:self.userId];
     BOOL allowAddAndChat = YES;
     if (YZHIsString(self.teamInfoExt.addAndChat)) {
         if ([self.teamInfoExt.addAndChat isEqualToString:@"0"]) {

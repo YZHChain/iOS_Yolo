@@ -584,6 +584,8 @@
 		55F3FA0121C9D224003E05B4 /* UIScrollView+YZHScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F3FA0021C9D224003E05B4 /* UIScrollView+YZHScrollView.m */; };
 		55F3FA0421CA8052003E05B4 /* YZHChekoutVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F3FA0321CA8052003E05B4 /* YZHChekoutVersionModel.m */; };
 		55F3FA0A21CB5D5B003E05B4 /* screent_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 55F3FA0921CB5D5A003E05B4 /* screent_default.png */; };
+		55F57B2921EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F57B2821EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.m */; };
+		55F57B2B21EDAE6B007AFF7D /* YZHUnreadAtMyMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F57B2A21EDAE6B007AFF7D /* YZHUnreadAtMyMessageView.xib */; };
 		55F7F8DA21B633AC00402189 /* YZHPrivacyReadPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */; };
 		55F7F8DD21B633EE00402189 /* YZHReadPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F7F8DC21B633EE00402189 /* YZHReadPasswordView.m */; };
 		55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55F7F8DE21B633F800402189 /* YZHReadPasswordView.xib */; };
@@ -1672,6 +1674,9 @@
 		55F3FA0221CA8052003E05B4 /* YZHChekoutVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHChekoutVersionModel.h; sourceTree = "<group>"; };
 		55F3FA0321CA8052003E05B4 /* YZHChekoutVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHChekoutVersionModel.m; sourceTree = "<group>"; };
 		55F3FA0921CB5D5A003E05B4 /* screent_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screent_default.png; sourceTree = "<group>"; };
+		55F57B2721EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHUnreadAtMyMessageView.h; sourceTree = "<group>"; };
+		55F57B2821EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHUnreadAtMyMessageView.m; sourceTree = "<group>"; };
+		55F57B2A21EDAE6B007AFF7D /* YZHUnreadAtMyMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHUnreadAtMyMessageView.xib; sourceTree = "<group>"; };
 		55F7F8D821B633AC00402189 /* YZHPrivacyReadPasswordVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHPrivacyReadPasswordVC.h; sourceTree = "<group>"; };
 		55F7F8D921B633AC00402189 /* YZHPrivacyReadPasswordVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHPrivacyReadPasswordVC.m; sourceTree = "<group>"; };
 		55F7F8DB21B633EE00402189 /* YZHReadPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHReadPasswordView.h; sourceTree = "<group>"; };
@@ -2486,6 +2491,9 @@
 				5537422221A6A40100204972 /* YZHTeamListDefaultView.xib */,
 				55BD97B221AF8FC500E761F5 /* YZHUnreadMessageView.h */,
 				55BD97B321AF8FC500E761F5 /* YZHUnreadMessageView.m */,
+				55F57B2721EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.h */,
+				55F57B2821EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.m */,
+				55F57B2A21EDAE6B007AFF7D /* YZHUnreadAtMyMessageView.xib */,
 			);
 			path = TeamChatSession;
 			sourceTree = "<group>";
@@ -4946,6 +4954,7 @@
 				55BD8666215E085800D23ED1 /* YZHAddBookSectionView.xib in Resources */,
 				5537421E21A6796A00204972 /* YZHSetTeamTagVC.xib in Resources */,
 				556C3CD02165CAE1007AEA39 /* YZHScanQRCodeVC.xib in Resources */,
+				55F57B2B21EDAE6B007AFF7D /* YZHUnreadAtMyMessageView.xib in Resources */,
 				55AB6CEE219FFA8A005385A0 /* FilterBaseController.xib in Resources */,
 				55FB0C1221C797EC008C95DE /* YZHNetworkStatusView.xib in Resources */,
 				5556F67621CCAC2D00EEE4C1 /* YZHGuideView.xib in Resources */,
@@ -5309,6 +5318,7 @@
 				555B806B219ADC4300168C3C /* YZHAddFirendRecordManage.m in Sources */,
 				55AB6CE7219FFA8A005385A0 /* CYLFilterHeaderView.m in Sources */,
 				55A0AF5121BE9250004EAEE3 /* YZHSearchView.m in Sources */,
+				55F57B2921EDAE5C007AFF7D /* YZHUnreadAtMyMessageView.m in Sources */,
 				553641E5217EAEC2006F77A5 /* NIMCardMemberItem.m in Sources */,
 				555B807B219B5AC700168C3C /* YZHAddFriendShowFooterView.m in Sources */,
 				553641C4217EAEC2006F77A5 /* NIMKitDevice.m in Sources */,

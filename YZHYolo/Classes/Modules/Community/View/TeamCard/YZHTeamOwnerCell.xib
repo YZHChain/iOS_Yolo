@@ -41,7 +41,7 @@
                     <constraint firstItem="USQ-Em-uca" firstAttribute="leading" secondItem="ycd-Cd-XyY" secondAttribute="trailing" constant="13" id="QlB-7g-cyQ"/>
                     <constraint firstItem="USQ-Em-uca" firstAttribute="centerY" secondItem="vF5-1k-Vvy" secondAttribute="centerY" id="T8g-0e-aza"/>
                     <constraint firstItem="4GG-fl-Hzb" firstAttribute="centerY" secondItem="vF5-1k-Vvy" secondAttribute="centerY" id="flg-fG-yCx"/>
-                    <constraint firstItem="4GG-fl-Hzb" firstAttribute="leading" secondItem="USQ-Em-uca" secondAttribute="trailing" priority="750" constant="42" id="qnU-4f-QKD"/>
+                    <constraint firstItem="4GG-fl-Hzb" firstAttribute="leading" secondItem="USQ-Em-uca" secondAttribute="trailing" constant="42" id="zHr-GU-c8b"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

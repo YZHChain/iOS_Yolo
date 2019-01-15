@@ -256,8 +256,8 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 #endif
     
     NIMSDKOption *option    = [NIMSDKOption optionWithAppKey:appKey];
-//    option.apnsCername      = @"iOSDeveloperPush";
-    option.apnsCername      = @"iOSProductionPush";
+    option.apnsCername      = @"iOSDeveloperPush";
+//    option.apnsCername      = @"iOSProductionPush";
     [[NIMSDK sharedSDK] registerWithOption:option];
     
     //注册自定义消息的解析器

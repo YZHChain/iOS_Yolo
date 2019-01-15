@@ -342,8 +342,14 @@
                 from = object.robotId;
             }
         }
-        NSString *nickName = [NIMKitUtil showNick:from inSession:lastMessage.session];
-        return nickName.length ? [nickName stringByAppendingFormat:@" : %@",text] : @"";
+        NSString* userId = [NIMSDK sharedSDK].loginManager.currentAccount;
+        if ([userId isEqualToString:from]) {
+            return [NSString stringWithFormat:@"我:%@", text];
+        } else {
+            NSString *nickName = [NIMKitUtil showNick:from inSession:lastMessage.session];
+            return nickName.length ? [nickName stringByAppendingFormat:@" : %@",text] : @"";
+        }
+
     }
 }
 

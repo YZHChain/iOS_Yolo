@@ -57,6 +57,7 @@
 #import "YZHTeamNoticeModel.h"
 #import "YZHAlertManage.h"
 #import "YZHChatContentUtil.h"
+#import "YZHUnreadAtMyMessageView.h"
 
 @interface YZHCommunityChatVC ()<NIMInputActionDelegate, NIMTeamManagerDelegate, NIMInputDelegate>
 
@@ -65,7 +66,11 @@
 @property (nonatomic, strong) UIView *currentSingleSnapView;
 @property (nonatomic, strong) NIMKitMediaFetcher *mediaFetcher;
 @property (nonatomic, assign) NSInteger unreadNumber;
+@property (nonatomic, assign) NSInteger atMyMessageCount;
+@property (nonatomic, assign) NSArray<NIMMessage* >* unreadMessages;
+@property (nonatomic, strong) NIMMessage* firstAtMessage; //最前面一条At 我的未读消息
 @property (nonatomic, strong) YZHUnreadMessageView* unreadMessageView;
+@property (nonatomic, strong) YZHUnreadAtMyMessageView* atUnreadMessageView;
 @property (nonatomic, strong) YZHTeamNoticeShowView* noticeView;
 
 @end
@@ -153,9 +158,57 @@
 {
     self.view.backgroundColor = [UIColor yzh_backgroundThemeGray];
     
+    //检查 At 我的消息
+    [self refreshUnreadMessageAtMy];
     //删除最近会话列表中有人@你的标记
     [NTESSessionUtil removeRecentSessionMark:self.session type:NTESRecentSessionMarkTypeAt];
     [self refreshTeamNoticeAndUnMessage];
+}
+
+- (void)refreshUnreadMessageAtMy {
+    
+    if (!self.unreadNumber) {
+        return;
+    }
+    self.unreadMessages = [[NIMSDK sharedSDK].conversationManager messagesInSession:self.session
+                                                                            message:nil limit:_unreadNumber];
+    self.atMyMessageCount = 0;
+    self.firstAtMessage = nil;
+    for (NIMMessage* message in self.unreadMessages) {
+        NSString* userId = [NIMSDK sharedSDK].loginManager.currentAccount;
+        NIMMessageApnsMemberOption* apnsOption = message.apnsMemberOption;
+        BOOL apnsContainMy = NO;
+        if (apnsOption) {
+            if (!apnsOption.userIds) {
+                apnsContainMy = NO;
+            } else {
+                for (NSString* apnsUserId in apnsOption.userIds) {
+                    if ([userId isEqualToString:apnsUserId]) {
+                        apnsContainMy = YES;
+                        self.atMyMessageCount++;
+                        if (!self.firstAtMessage) {
+                            self.firstAtMessage = message;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    //
+    if (self.atMyMessageCount) {
+        YZHUnreadAtMyMessageView* unreadMessageView = [YZHUnreadAtMyMessageView yzh_viewWithFrame:CGRectMake(0, 0, 78, 25)];
+        [self.view addSubview:unreadMessageView];
+        [unreadMessageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(-10);
+            make.bottom.mas_equalTo(-66);
+            make.height.mas_equalTo(25);
+        }];
+        [unreadMessageView refreshAtUnreadCount:self.atMyMessageCount];
+        self.atUnreadMessageView = unreadMessageView;
+        UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTouchAtUnreadMessage)];
+        [self.atUnreadMessageView addGestureRecognizer:tapGestureRecognizer];
+    }
 }
 
 - (void)refreshTeamNoticeAndUnMessage {
@@ -333,7 +386,7 @@
                 teamCardAttachment.groupID = team.teamId;
                 teamCardAttachment.groupSynopsis = team.intro;
                 teamCardAttachment.groupUrl = [YZHChatContentUtil createTeamURLWithTeamId:team.teamId];
-                teamCardAttachment.avatarUrl = team.avatarUrl ? team.avatarUrl : @"team_cell_photoImage_default";
+                teamCardAttachment.avatarUrl = team.avatarUrl ? team.avatarUrl: @"team_cell_photoImage_default";
                 message = [YZHSessionMsgConverter msgWithTeamCard:teamCardAttachment];
                 [self sendMessage:message];
             } else {
@@ -443,6 +496,14 @@
 #pragma mark - 4.UITableViewDataSource and UITableViewDelegaten
 
 #pragma mark - 5.Event Response
+
+- (void)onTouchAtUnreadMessage {
+    
+    [self uiReadUnreadMessage: self.unreadNumber];
+    [self.interactor updateMessage:self.firstAtMessage];
+    [self.atUnreadMessageView removeFromSuperview];
+    self.atUnreadMessageView = nil;
+}
 
 - (void)onTouchReadMessage:(UIButton *)sender {
     //滚动到指定消息条数.

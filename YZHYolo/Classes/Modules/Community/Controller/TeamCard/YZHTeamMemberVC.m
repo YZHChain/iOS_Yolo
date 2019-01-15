@@ -142,12 +142,14 @@
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    YZHTeamMemberCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
+    YZHTeamMemberCell* cell;
     YZHContactMemberModel* member = self.viewModel.memberArray[indexPath.row];
-    
     if ([self.viewModel.teamOwner isEqualToString:member.info.infoId]) {
         cell = [[NSBundle mainBundle] loadNibNamed:@"YZHTeamOwnerCell" owner:nil options:nil].lastObject;
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:kYZHCommonCellIdentifier forIndexPath:indexPath];
     }
+    
     cell.teamId = self.viewModel.teamId;
     [cell refresh:member];
 

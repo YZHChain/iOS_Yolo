@@ -98,9 +98,11 @@
     // 检测手机号,后台请求
     if (YZHIsString(self.phontTextField.text)) {
         //TODO:
+        NSString* yoloNo = [YZHUserLoginManage sharedManager].currentLoginData.yoloId;
         NSDictionary* parameter = @{
                                     @"phoneNum": self.phontTextField.text,
                                     @"type":@(0),
+                                    @"yoloNo": yoloNo ? yoloNo : @""
                                     };
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:@""];
         // 处理验证码按钮 倒计时
