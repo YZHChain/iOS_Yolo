@@ -45,12 +45,11 @@
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
             make.left.equalTo(self.avatarImageView.mas_right).mas_equalTo(7);
-            make.height.mas_equalTo(17);
+            make.height.mas_equalTo(20);
         }];
         self.nameLabel.text = @"上锁群";
         
         self.lockButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        self.lockButton.imageView.contentMode = []
         [self.contentView addSubview:self.lockButton];
         [self.lockButton setImage:[UIImage imageNamed:@"team_sessionList_lockCell_closeIcon"] forState:UIControlStateSelected];
         [self.lockButton setImage:[UIImage imageNamed:@"team_sessionList_lockCell_openIcon"] forState:UIControlStateNormal];
@@ -66,7 +65,6 @@
         self.timeLabel.font = [UIFont yzh_commonStyleWithFontSize:11];
         self.timeLabel.textColor = [UIColor yzh_sessionCellGray];
         [self.contentView addSubview:self.timeLabel];
-//        self.timeLabel.text = @"08/06";
         
         [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(-20);

@@ -30,14 +30,16 @@
 //        self.nameLabel.backgroundColor = [UIColor whiteColor];
         //Jersey
         self.nameLabel.backgroundColor = [UIColor clearColor];
-        self.nameLabel.font            = [UIFont systemFontOfSize:14.f];
+        self.nameLabel.font            = [UIFont yzh_commonStyleWithFontSize:16.f];
+        self.nameLabel.height = 20.0f;
         [self.contentView addSubview:self.nameLabel];
 //
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-//        self.messageLabel.backgroundColor = [UIColor whiteColor];
+        
         //Jersey
         self.messageLabel.backgroundColor = [UIColor clearColor];
-        self.messageLabel.font            = [UIFont systemFontOfSize:12.f];
+        self.messageLabel.font            = [UIFont yzh_commonStyleWithFontSize:12.f];
+        self.messageLabel.height = 12.5f;
         self.messageLabel.textColor       = [UIColor lightGrayColor];
         [self.contentView addSubview:self.messageLabel];
 //
@@ -45,7 +47,8 @@
 //        self.timeLabel.backgroundColor = [UIColor whiteColor];
         //Jersey
         self.timeLabel.backgroundColor = [UIColor clearColor];
-        self.timeLabel.font            = [UIFont systemFontOfSize:11.f];
+        self.timeLabel.font            = [UIFont yzh_commonStyleWithFontSize:11.f];
+        self.timeLabel.height = 13.0f;
         self.timeLabel.textColor       = [UIColor grayColor];
         [self.contentView addSubview:self.timeLabel];
         
@@ -76,7 +79,6 @@
     NSInteger sessionListNameTop                = 12;
     NSInteger sessionListNameLeftToAvatar       = 7;
     NSInteger sessionListMessageLeftToAvatar    = 7;
-    NSInteger sessionListMessageBottom          = 12;
     NSInteger sessionListTimeRight              = 20;
     NSInteger sessionListTimeTop                = 12;
     NSInteger sessionBadgeTimeBottom            = 12;
@@ -86,14 +88,15 @@
     self.avatarImageView.nim_centerY = self.nim_height * .5f;
     self.nameLabel.nim_top           = sessionListNameTop;
     self.nameLabel.nim_left          = self.avatarImageView.nim_right + sessionListNameLeftToAvatar;
+    self.nameLabel.height = 20.0f;
+    self.messageLabel.height = 12.5f;
     self.messageLabel.nim_left       = self.avatarImageView.nim_right + sessionListMessageLeftToAvatar;
-    self.messageLabel.nim_bottom     = self.nim_height - sessionListMessageBottom;
+    self.messageLabel.nim_bottom     = self.avatarImageView.nim_bottom;
+    self.timeLabel.height = 13.0f;
     self.timeLabel.nim_right         = self.nim_width - sessionListTimeRight;
     self.timeLabel.nim_top           = sessionListTimeTop;
     self.badgeView.nim_right         = self.nim_width - sessionBadgeTimeRight;
     self.badgeView.nim_bottom        = self.nim_height - sessionBadgeTimeBottom;
 }
-
-
 
 @end
