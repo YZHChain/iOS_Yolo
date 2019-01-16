@@ -35,7 +35,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群简介" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1y6-LK-22j">
-                            <rect key="frame" x="18" y="94" width="327" height="17"/>
+                            <rect key="frame" x="18" y="84" width="327" height="27"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="11"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                         <constraint firstItem="E4h-Us-u2V" firstAttribute="top" secondItem="hJv-qN-yBm" secondAttribute="top" id="9eC-Y6-rJd"/>
                         <constraint firstItem="hJv-qN-yBm" firstAttribute="leading" secondItem="cNB-vq-TVw" secondAttribute="leading" constant="18" id="CYD-vj-t6J"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="115" id="Ik3-8w-WTk"/>
-                        <constraint firstItem="1y6-LK-22j" firstAttribute="top" secondItem="hJv-qN-yBm" secondAttribute="bottom" constant="15" id="MtR-y3-Jhj"/>
+                        <constraint firstItem="1y6-LK-22j" firstAttribute="top" secondItem="hJv-qN-yBm" secondAttribute="bottom" constant="5" id="MtR-y3-Jhj"/>
                         <constraint firstItem="hJv-qN-yBm" firstAttribute="top" secondItem="cNB-vq-TVw" secondAttribute="top" constant="14" id="Ouu-jP-7q8"/>
                         <constraint firstAttribute="bottom" secondItem="1y6-LK-22j" secondAttribute="bottom" constant="4" id="Zjh-4L-d6L"/>
                         <constraint firstAttribute="trailing" secondItem="E4h-Us-u2V" secondAttribute="trailing" constant="30" id="kD8-Ol-s14"/>

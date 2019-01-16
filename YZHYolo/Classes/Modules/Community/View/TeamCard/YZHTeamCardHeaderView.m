@@ -44,20 +44,34 @@
 - (void)refreshWithModel:(YZHTeamHeaderModel *)model {
     
     [self refreshModel: model];
-//    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
-//    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
-    [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+//    [self.labelShowView layoutIfNeeded];
+    
+//    if (labelAddHeight) {
+//        self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+//    } else {
+//        self.updateHeight = self.synopisisView.height;
+//    }
+    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+    self.y = self.updateHeight;
     [self layoutIfNeeded];
 }
 
 - (void)refreshIntroWithModel:(YZHTeamHeaderModel *)model {
     
     [self refreshModel: model];
-//    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
-//    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
-//    self.y = self.updateHeight;
-    [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+//    [self.labelShowView layoutIfNeeded];
+    
+//    if (labelAddHeight) {
+//        self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+//    } else {
+//        self.updateHeight = self.synopisisView.height;
+//    }
+    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+    self.y = self.updateHeight;
     [self layoutIfNeeded];
+
 }
 
 - (void)refreshModel:(YZHTeamHeaderModel *)model {
@@ -77,6 +91,8 @@
     if (!model.canEdit) {
         [self.guideImageView removeFromSuperview];
     }
+    
+    [self.synopisisView layoutIfNeeded];
 }
 
 @end
