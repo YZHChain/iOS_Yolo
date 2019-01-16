@@ -34,7 +34,7 @@
     }
     NIMBadgeView *instance = [[NIMBadgeView alloc] init];
     instance.frame = [instance frameWithStr:badgeValue];
-    instance.badgeValue = badgeValue.integerValue > 999 ? @"999" : badgeValue;
+    instance.badgeValue = badgeValue.integerValue > 999 ? @"999+" : badgeValue;
     
     return instance;
 }
@@ -76,7 +76,7 @@
     _badgeTopPadding      = 2.f;
 
     if (badgeValue.integerValue > 999) {
-        _badgeValue = @"999";
+        _badgeValue = @"999+";
     }
     self.frame = [self frameWithStr:_badgeValue];
     

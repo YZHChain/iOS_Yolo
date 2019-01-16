@@ -40,34 +40,25 @@
 //    }
     if (self.hideNavigationBar) {
         if (self.navigationController.viewControllers.count == 1) {
-            self.navigationController.navigationBar.hidden = YES;
+            [self.navigationController setNavigationBarHidden:YES animated:YES];
         } else {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
     }
-
-//    if (self.hideNavigationBarLine) {
-//        self.navigationController.navigationBarHidden = YES;
-//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
     
-//    if (self.hideNavigationBar && self.navigationController.navigationBar.hidden == YES) {
-//        [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    }
     if (self.hideNavigationBar) {
         if (self.navigationController.viewControllers.count == 1) {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
         } else {
             self.navigationController.navigationBar.hidden = NO;
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
         }
     }
-//    if (self.hideNavigationBarLine) {
-//        self.navigationController.navigationBarHidden = NO;
-//    }
     
     //关闭键盘
     [self.view endEditing:YES];
