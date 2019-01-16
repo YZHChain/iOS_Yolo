@@ -180,6 +180,8 @@
                             @(NIMTeamUpdateTagName): newTeamName
                          };
         }
+    } else {
+
     }
     //群头像
     if (YZHIsString(self.avatarUrl)) {
@@ -195,6 +197,12 @@
         if (![self.viewModel.teamSynopsis isEqualToString:newSynopsis]) {
             synopsisDic = @{
                             @(NIMTeamUpdateTagIntro):newSynopsis
+                            };
+        }
+    } else {
+        if (self.viewModel.teamSynopsis) {
+            synopsisDic = @{
+                            @(NIMTeamUpdateTagIntro):@""
                             };
         }
     }

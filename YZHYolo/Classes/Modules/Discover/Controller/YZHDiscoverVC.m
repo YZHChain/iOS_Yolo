@@ -117,12 +117,12 @@
         if (YZHIsString(urlStr) && [urlStr containsString:@"%23"]) {
             urlStr = [urlStr stringByReplacingOccurrencesOfString:@"%23" withString:@"#"];
         }
-        
         NSURL* url = [[NSURL alloc] initWithString: urlStr];
         
         NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:url
                                                                   cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                               timeoutInterval:60 * 60 * 1];
+        
         [self.webView loadRequest:theRequest ];
 //        [self.webView loadRequest:[NSURLRequest requestWithURL:url ]];
         NSKeyValueObservingOptions observingOptions = NSKeyValueObservingOptionNew;
@@ -314,7 +314,6 @@
             [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
                 NSLog(@"%@----%@",result, error);
             }];
-            //            [popVC.webView evaluateJavaScript:@"webViewRefresh" completionHandler:nil];
         } else {
             [self.navigationController popViewControllerAnimated:true];
         }
@@ -387,7 +386,7 @@
 
     NSString *callbackJs = [NSString stringWithFormat:@"iosLabel('%@')", teamLabel];
     [self.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-        NSLog(@"%@----%@",result, error);
+            NSLog(@"传入标签:%@----%@",result, error);
     }];
 }
 

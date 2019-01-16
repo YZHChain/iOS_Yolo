@@ -104,7 +104,8 @@
 - (void)reloadView {
     
     NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:self.teamId];
-    BOOL isTeamManage = [team.owner isEqualToString:self.userId];
+    BOOL isTeamManage = [team.owner isEqualToString:[NIMSDK sharedSDK].loginManager.currentAccount]; //当前账号是否为群主
+    BOOL userIdIsTeamManage = [team.owner isEqualToString:self.userId];
     BOOL allowAddAndChat = YES;
     if (YZHIsString(self.teamInfoExt.addAndChat)) {
         if ([self.teamInfoExt.addAndChat isEqualToString:@"0"]) {
@@ -119,7 +120,7 @@
             [self showTeamMemberDetails];
         }
     } else {
-        if (isTeamManage) {
+        if (userIdIsTeamManage) {
             if (self.teamExt.team_hide_info) {
                 [self hideTeamMemberDetails];
             } else {

@@ -63,6 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithTeamId:(NSString *)teamId isManage:(BOOL)ismanage;
 
 - (void)updata;
+- (void)updataTeamData;
 
 @end
 

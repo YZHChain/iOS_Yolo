@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *synopisisLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *guideImageView;
 @property (weak, nonatomic) IBOutlet YZHLabelShowView *labelShowView;
+@property (weak, nonatomic) IBOutlet UIView *synopisisView;
 
 @end
 
@@ -31,7 +32,7 @@
     self.nameLabel.textColor = [UIColor yzh_fontShallowBlack];
     self.synopisisLabel.font = [UIFont yzh_commonFontStyleFontSize:11];
     self.synopisisLabel.textColor = [UIColor yzh_sessionCellGray];
-    self.synopisisLabel.numberOfLines = 3;
+    self.synopisisLabel.numberOfLines = 0;
     
     self.backgroundView = ({
         UIView* view = [[UIView alloc] initWithFrame:self.bounds];
@@ -43,18 +44,19 @@
 - (void)refreshWithModel:(YZHTeamHeaderModel *)model {
     
     [self refreshModel: model];
-    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
-    self.updateHeight = 125 + labelAddHeight;
-    self.y = self.updateHeight;
+//    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+//    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+    [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
     [self layoutIfNeeded];
 }
 
 - (void)refreshIntroWithModel:(YZHTeamHeaderModel *)model {
     
     [self refreshModel: model];
-    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
-    self.updateHeight = 175 + labelAddHeight;
-    self.y = self.updateHeight;
+//    NSInteger labelAddHeight = [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
+//    self.updateHeight = self.synopisisView.height + 35 + labelAddHeight;
+//    self.y = self.updateHeight;
+    [self.labelShowView refreshLabelViewWithLabelArray:model.labelArray];
     [self layoutIfNeeded];
 }
 
@@ -75,8 +77,6 @@
     if (!model.canEdit) {
         [self.guideImageView removeFromSuperview];
     }
-    
-
 }
 
 @end

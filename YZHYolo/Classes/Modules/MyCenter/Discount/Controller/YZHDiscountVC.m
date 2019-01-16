@@ -231,19 +231,34 @@
     
     if ([message.name isEqualToString:@"GOBACK"]) { //返回
     
-        NSString* bodyString = message.body;
-        NSInteger parameter = bodyString.integerValue;
-        if (parameter == 1) {
-            NSInteger count = self.navigationController.viewControllers.count;
+//        NSString* bodyString = message.body;
+//        NSInteger parameter = bodyString.integerValue;
+//        if (parameter == 1) {
+//            NSInteger count = self.navigationController.viewControllers.count;
+//            YZHDiscountVC* popVC = self.navigationController.viewControllers[count - 2];
+//            [self.navigationController popViewControllerAnimated:true];
+//            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh()"];
+//            [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//                NSLog(@"%@----%@",result, error);
+//            }];
+////            [popVC.webView evaluateJavaScript:@"webViewRefresh" completionHandler:nil];
+//        } else {
+//            [self.navigationController popViewControllerAnimated:true];
+//        }
+        NSInteger count = self.navigationController.viewControllers.count;
+        if (count >= 2) {
             YZHDiscountVC* popVC = self.navigationController.viewControllers[count - 2];
             [self.navigationController popViewControllerAnimated:true];
-            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh()"];
+            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", message.body];
             [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-                NSLog(@"%@----%@",result, error);
+                if (!error) {
+                    NSLog(@"通知前端刷新成功");
+                } else {
+                    NSLog(@"通知前端刷新失败");
+                }
             }];
-//            [popVC.webView evaluateJavaScript:@"webViewRefresh" completionHandler:nil];
         } else {
-            [self.navigationController popViewControllerAnimated:true];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         return;
     }

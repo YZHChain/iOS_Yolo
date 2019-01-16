@@ -345,6 +345,13 @@
         addTeamButton.enabled = YES;
     }
     
+    _footerView.backgroundColor = [UIColor clearColor];
+    _footerView.backgroundView = ({
+        UIView* view = [[UIView alloc] initWithFrame:_footerView.bounds];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
+    
     [self.footerView addSubview:addTeamButton];
     
     [addTeamButton mas_makeConstraints:^(MASConstraintMaker *make) {

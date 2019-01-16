@@ -34,7 +34,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdM-MZ-rNR">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdM-MZ-rNR">
                             <rect key="frame" x="84" y="38.5" width="246" height="47"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <nil key="textColor"/>
@@ -50,16 +50,17 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="IdM-MZ-rNR" secondAttribute="bottom" constant="4.5" id="1Ne-RP-9EW"/>
+                        <constraint firstItem="7X1-oq-hkd" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="top" constant="19" id="4Xc-jj-ESk"/>
                         <constraint firstAttribute="trailing" secondItem="IdM-MZ-rNR" secondAttribute="trailing" constant="45" id="5wO-S6-xYd"/>
                         <constraint firstAttribute="trailing" secondItem="v2j-9O-c1O" secondAttribute="trailing" constant="17" id="8tz-ya-TEX"/>
-                        <constraint firstItem="n09-0f-szS" firstAttribute="top" secondItem="7X1-oq-hkd" secondAttribute="top" id="9fK-Ai-5Cf"/>
                         <constraint firstItem="7X1-oq-hkd" firstAttribute="leading" secondItem="Fbz-dR-YPl" secondAttribute="leading" constant="18" id="FRj-MO-aKT"/>
                         <constraint firstItem="v2j-9O-c1O" firstAttribute="centerY" secondItem="Fbz-dR-YPl" secondAttribute="centerY" id="FvS-xm-2en"/>
                         <constraint firstItem="IdM-MZ-rNR" firstAttribute="leading" secondItem="n09-0f-szS" secondAttribute="leading" id="U3X-IK-lOk"/>
                         <constraint firstAttribute="trailing" secondItem="n09-0f-szS" secondAttribute="trailing" constant="30" id="ZT2-ke-ziF"/>
-                        <constraint firstItem="7X1-oq-hkd" firstAttribute="centerY" secondItem="Fbz-dR-YPl" secondAttribute="centerY" id="bTq-it-qAn"/>
-                        <constraint firstAttribute="height" constant="90" id="gUq-ZE-CH3"/>
                         <constraint firstItem="n09-0f-szS" firstAttribute="leading" secondItem="7X1-oq-hkd" secondAttribute="trailing" constant="14" id="oW7-aT-nlB"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="p7j-LH-Wkp"/>
+                        <constraint firstItem="n09-0f-szS" firstAttribute="top" secondItem="Fbz-dR-YPl" secondAttribute="top" constant="19" id="tS4-yh-meW"/>
                         <constraint firstItem="IdM-MZ-rNR" firstAttribute="top" secondItem="n09-0f-szS" secondAttribute="bottom" constant="2.5" id="xQS-ZJ-y09"/>
                     </constraints>
                 </view>
@@ -86,6 +87,7 @@
                 <outlet property="labelShowView" destination="4eL-OI-XY8" id="Cz7-LG-SRt"/>
                 <outlet property="nameLabel" destination="n09-0f-szS" id="O6z-II-hNx"/>
                 <outlet property="synopisisLabel" destination="IdM-MZ-rNR" id="wWs-uA-dSf"/>
+                <outlet property="synopisisView" destination="Fbz-dR-YPl" id="b9R-dU-6cS"/>
             </connections>
             <point key="canvasLocation" x="-148" y="47.226386806596707"/>
         </view>

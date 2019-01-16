@@ -240,6 +240,7 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
             self.isTeamOwner = NO;
             [self setupData];
             [self.tableView reloadData];
+            [self.viewModel updataTeamData];
         };
         YZHBaseNavigationController* NavigationController = [[YZHBaseNavigationController alloc] initWithRootViewController:transferTeamVC];
         
@@ -522,6 +523,12 @@ static NSString* kYZHSectionIdentify = @"YZHAddFirendRecordSectionHeader";
     } else {
         [removeButton addTarget:self action:@selector(exitTeam:) forControlEvents:UIControlEventTouchUpInside];
     }
+    _footerView.backgroundColor = [UIColor clearColor];
+    _footerView.backgroundView = ({
+        UIView* view = [[UIView alloc] initWithFrame:_footerView.bounds];
+        view.backgroundColor = [UIColor yzh_backgroundThemeGray];
+        view;
+    });
     
     [self.tableView setTableFooterView:_footerView];
     [self.footerView addSubview:removeButton];

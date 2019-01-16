@@ -95,11 +95,13 @@
 
 - (IBAction)onTouchPhoneGetSecretKey:(UIButton *)sender {
     
+    self.navigationItem.title = @"取消";
     [YZHRouter openURL:kYZHRouterPhoneGetSecretKey];
 }
 
 - (IBAction)changeBindingPhone:(id)sender {
     
+    self.navigationItem.title = @"返回";
     [YZHRouter openURL:kYZHRouterSecretKeyBackupVerify];
 }
 

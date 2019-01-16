@@ -52,6 +52,8 @@
     
     [self keyboardNotification];
     
+    [self setupNavBar];
+    
     [self.secretKeyTextView becomeFirstResponder];
 }
 
@@ -161,8 +163,11 @@
                               };
         
         YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
+        @weakify(self)
         [[YZHNetworkService shareService] POSTNetworkingResource:SERVER_LOGIN(PATH_USER_VERIFY_SECRETKEYFORMAT) params:dic successCompletion:^(id obj) {
+            @strongify(self)
             [hud hideWithText:nil];
+            self.navigationItem.title =  @"返回";
             [YZHRouter openURL:kYZHRouterBackupBindingPhone info:@{
                                                                    @"secretKey": self.secretKeyTextView.text
                                                                    }];
