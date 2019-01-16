@@ -62,7 +62,7 @@
         }];
         
         self.timeLabel = [[UILabel alloc] init];
-        self.timeLabel.font = [UIFont yzh_commonStyleWithFontSize:11];
+        self.timeLabel.font = [UIFont yzh_commonLightStyleWithFontSize:11];
         self.timeLabel.textColor = [UIColor yzh_sessionCellGray];
         [self.contentView addSubview:self.timeLabel];
         

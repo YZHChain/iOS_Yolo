@@ -549,7 +549,8 @@
     NSString *eventName = event.eventName;
     if ([eventName isEqualToString:NIMKitEventNameTapAudio])
     {
-        [self.interactor mediaAudioPressed:event.messageModel];
+        //默认使用听筒
+        [self.interactor mediaAudioTelephonePressed:event.messageModel];
         handle = YES;
     }
     if ([eventName isEqualToString:NIMKitEventNameTapRobotBlock]) {
@@ -677,8 +678,15 @@
         copyText = !robotObject.isFromRobot;
     }
     if (message.messageType == NIMMessageTypeAudio) {
-        [items addObject:[[UIMenuItem alloc] initWithTitle:@"听筒播放"
-                                                    action:@selector(mutePlayAudio:)]];
+        if ([self.sessionConfig voiceMutePlay]) {
+            [items addObject:[[UIMenuItem alloc] initWithTitle:@"扬声器播放"
+                                                        action:@selector(publicAddressPlayAudio:)]];
+        } else {
+            [items addObject:[[UIMenuItem alloc] initWithTitle:@"听筒播放"
+                                                        action:@selector(mutePlayAudio:)]];
+        }
+        
+        
         self.audioMessage = message;
         
     }
@@ -725,6 +733,15 @@
     NIMMessageModel* audioModel = [[NIMMessageModel alloc] init];
     audioModel.message = self.audioMessage;
     [self.interactor mediaAudioTelephonePressed:audioModel];
+    [self.sessionConfig switchVoicePlayStyle];
+}
+
+- (void)publicAddressPlayAudio:(id)sender {
+    
+    NIMMessageModel* audioModel = [[NIMMessageModel alloc] init];
+    audioModel.message = self.audioMessage;
+    [self.interactor mediaAudioPressed:audioModel];
+    [self.sessionConfig switchVoicePlayStyle];
 }
 
 - (void)copyText:(id)sender

@@ -124,4 +124,10 @@
  */
 - (UIImage *)sessionBackgroundImage;
 
+/**
+ *  播放语音方式
+ */
+- (BOOL)voiceMutePlay;
+- (void)switchVoicePlayStyle;
+
 @end

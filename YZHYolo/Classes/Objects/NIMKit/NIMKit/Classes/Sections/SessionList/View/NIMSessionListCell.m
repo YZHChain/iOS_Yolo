@@ -38,7 +38,7 @@
         
         //Jersey
         self.messageLabel.backgroundColor = [UIColor clearColor];
-        self.messageLabel.font            = [UIFont yzh_commonStyleWithFontSize:12.f];
+        self.messageLabel.font            = [UIFont yzh_commonLightStyleWithFontSize:12.f];
         self.messageLabel.height = 12.5f;
         self.messageLabel.textColor       = [UIColor lightGrayColor];
         [self.contentView addSubview:self.messageLabel];
@@ -47,7 +47,7 @@
 //        self.timeLabel.backgroundColor = [UIColor whiteColor];
         //Jersey
         self.timeLabel.backgroundColor = [UIColor clearColor];
-        self.timeLabel.font            = [UIFont yzh_commonStyleWithFontSize:11.f];
+        self.timeLabel.font            = [UIFont yzh_commonLightStyleWithFontSize:11.f];
         self.timeLabel.height = 13.0f;
         self.timeLabel.textColor       = [UIColor grayColor];
         [self.contentView addSubview:self.timeLabel];

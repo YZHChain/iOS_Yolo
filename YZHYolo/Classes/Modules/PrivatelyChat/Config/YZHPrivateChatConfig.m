@@ -17,9 +17,22 @@
 
 @interface YZHPrivateChatConfig()
 
+@property (nonatomic, assign) BOOL isMutePlay;
+
 @end
 
 @implementation YZHPrivateChatConfig
+
+- (instancetype)init {
+    
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    _isMutePlay = YES; //默认使用静音播放
+ 
+    return self;
+}
 
 //- (NSArray *)mediaItems
 //{
@@ -226,6 +239,16 @@
                   selectedImage:[UIImage nim_imageInKit:@"session_media_myGroup_normal"]
                           title:@"我的社群"],
              ];
+}
+
+- (BOOL)voiceMutePlay {
+    
+    return _isMutePlay;
+}
+
+- (void)switchVoicePlayStyle {
+    
+    _isMutePlay = !_isMutePlay;
 }
 
 @end

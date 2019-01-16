@@ -481,21 +481,16 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     //发现标签有更新之后,直接不要读缓存.TODO
     YZHPrivatelyChatListHeaderView* headerView;
-    NIMRecentSession* session = [self.self.recentSessionExtManage.tagsRecentSession[section] firstObject];
+    NIMRecentSession* session = [self.recentSessionExtManage.tagsRecentSession[section] firstObject];
     if (![tableView isEqual:self.tableView]) {
         headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (!headerView)
         {
             headerView = [[YZHPrivatelyChatListHeaderView alloc] init];
             headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
-//            team_createTeam_selectedTag_show
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
             headerView.currentStatusType = YZHTableViewShowTypeDefault;
-            __weak typeof(self) weakSelf = self;
-            headerView.callBlock = ^(NSInteger currentSection) {
-                [weakSelf selectedTableViewForHeaderInSection:currentSection];
-            };
             // 缓存
             [self.headerViewDictionary setObject:headerView forKey:@(section)];
         }
@@ -525,6 +520,17 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             }
         }
     }
+    if (self.recentSessionExtManage.tagsRecentSession[section].count > 3) {
+        headerView.userInteractionEnabled = YES;
+        __weak typeof(self) weakSelf = self;
+        headerView.callBlock = ^(NSInteger currentSection) {
+            [weakSelf selectedTableViewForHeaderInSection:currentSection];
+        };
+        [headerView addSubview:headerView.guideImageView];
+    } else {
+        headerView.userInteractionEnabled = NO;
+        [headerView.guideImageView removeFromSuperview];
+    }
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
     [headerView.unReadCountLabel sizeToFit];
@@ -535,9 +541,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     
     YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
     
-    NSInteger integer = headerView.currentStatusType;
-    integer = ((++integer) > 2 ? 0 : integer);
-    headerView.currentStatusType = integer;
+    headerView.currentStatusType = !headerView.currentStatusType;
     [headerView refreshStatus];
     
     switch (headerView.currentStatusType) {
@@ -546,9 +550,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             break;
         case YZHListHeaderStatusTypeShow:
             headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
-            break;
-        case YZHListHeaderStatusTypeClose:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
             break;
         default:
             break;
