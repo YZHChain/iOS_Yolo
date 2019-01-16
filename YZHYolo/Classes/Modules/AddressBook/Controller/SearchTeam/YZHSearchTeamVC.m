@@ -510,11 +510,12 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     [searchBar endEditing:YES];
     if (YZHIsString(searchBar.text)) {
         self.isSearchStatus = YES;
-        if ([searchBar.text containsString:kYZHTeamURLHostKey] && [searchBar.text containsString:@"teamId"]) {
-            [self searchTeamURLWithKeyText:searchBar.text];
-        } else {
-            [self searchTeamListWithKeyText:searchBar.text];
-        }
+//        if ([searchBar.text containsString:kYZHTeamURLHostKey] && [searchBar.text containsString:@"teamId"]) {
+//            [self searchTeamURLWithKeyText:searchBar.text];
+//        } else {
+//            [self searchTeamListWithKeyText:searchBar.text];
+//        }
+        [self searchTeamListWithKeyText:searchBar.text];
         
     } else {
         self.isSearchStatus = NO;
