@@ -56,8 +56,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="WV9-rQ-GRX">
-                                    <rect key="frame" x="348" y="19.5" width="9" height="16"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_createTeam_selectedTag_default" translatesAutoresizingMaskIntoConstraints="NO" id="WV9-rQ-GRX">
+                                    <rect key="frame" x="348" y="20" width="9" height="15"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVH-fu-70c">
                                     <rect key="frame" x="324.5" y="9" width="13.5" height="37.5"/>
@@ -126,8 +126,8 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="dio-Qr-GTa">
-                                    <rect key="frame" x="348" y="19.5" width="9" height="16"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_createTeam_selectedTag_default" translatesAutoresizingMaskIntoConstraints="NO" id="dio-Qr-GTa">
+                                    <rect key="frame" x="348" y="20" width="9" height="15"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="只发本群" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCd-uo-biq">
                                     <rect key="frame" x="279.5" y="19.5" width="53.5" height="16"/>
@@ -196,7 +196,7 @@
         </view>
     </objects>
     <resources>
-        <image name="button_background_optional" width="120" height="20"/>
-        <image name="my_cover_cell_back" width="9" height="16"/>
+        <image name="button_background_optional" width="335" height="44"/>
+        <image name="team_createTeam_selectedTag_default" width="9" height="15"/>
     </resources>
 </document>

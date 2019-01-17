@@ -25,7 +25,7 @@
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 4;
     self.layer.borderWidth = 1;
-    self.layer.borderColor = [UIColor yzh_separatorLightGray].CGColor;
+    self.layer.borderColor = YZHColorRGBAWithRGBA(220, 221, 221, 1).CGColor;
     self.layer.masksToBounds = YES;
     
     [self sizeToFit];

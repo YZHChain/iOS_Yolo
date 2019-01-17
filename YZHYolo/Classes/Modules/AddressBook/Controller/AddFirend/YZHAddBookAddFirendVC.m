@@ -95,7 +95,7 @@ static NSString* const kaddFirendCellIdentifier = @"addFirendCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return 10;
+    return 1;
 }
 
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

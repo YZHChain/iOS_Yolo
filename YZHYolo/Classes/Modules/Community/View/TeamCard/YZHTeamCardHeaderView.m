@@ -26,7 +26,7 @@
 - (void)awakeFromNib {
     
     [super awakeFromNib];
-    self.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
+    self.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
     [self.avatarImageView yzh_cornerRadiusAdvance:5 rectCornerType:UIRectCornerAllCorners];
     self.nameLabel.font = [UIFont yzh_commonFontStyleFontSize:15];
     self.nameLabel.textColor = [UIColor yzh_fontShallowBlack];

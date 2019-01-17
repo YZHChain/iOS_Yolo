@@ -22,7 +22,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    self.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
+    self.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
     
     self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:15];
     self.titleLabel.textColor = [UIColor yzh_fontShallowBlack];

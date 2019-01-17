@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -114,8 +110,8 @@
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.5568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_cover_cell_back" translatesAutoresizingMaskIntoConstraints="NO" id="ufl-dF-DqH">
-                                            <rect key="frame" x="350" y="7" width="9" height="16"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_createTeam_selectedTag_default" translatesAutoresizingMaskIntoConstraints="NO" id="ufl-dF-DqH">
+                                            <rect key="frame" x="343" y="7" width="16" height="16"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -200,8 +196,8 @@
         </view>
     </objects>
     <resources>
-        <image name="my_cover_cell_back" width="9" height="16"/>
         <image name="team_cell_photoImage_default" width="40" height="40"/>
+        <image name="team_createTeam_selectedTag_default" width="16" height="16"/>
         <image name="team_createTeam_updataPhoto_normal" width="35" height="35"/>
     </resources>
 </document>

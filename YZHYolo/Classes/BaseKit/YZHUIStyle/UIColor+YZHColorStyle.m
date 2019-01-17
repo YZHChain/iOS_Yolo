@@ -25,6 +25,11 @@
     return [UIColor colorWithRed: 193.0/ 255.0f green: 193.0/ 255.0f blue: 193.0/ 255.0f alpha: 1.0f];
 }
 
++ (UIColor *)yzh_tableViewSeparatorLightGray {
+    
+    return [UIColor colorWithRed: 229.0/ 255.0f green: 229.0/ 255.0f blue: 229.0/ 255.0f alpha: 1.0f];
+}
+
 + (UIColor *)yzh_fontShallowBlack {
     
     return [UIColor colorWithRed: 62.0/ 255.0f green: 58.0/ 255.0f blue: 57.0/ 255.0f alpha: 1.0f];

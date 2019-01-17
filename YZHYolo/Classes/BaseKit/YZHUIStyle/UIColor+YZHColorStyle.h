@@ -13,7 +13,8 @@
 + (UIColor *)yzh_colorWithHexString:(NSString *)color; //颜色字符串转换为颜色
 + (UIColor *)yzh_backgroundDarkBlue; // 常用主题深蓝色;
 + (UIColor *)yzh_backgroundThemeGray; //  常用主题灰色;
-+ (UIColor *)yzh_separatorLightGray;  // 分割线浅灰色;
++ (UIColor *)yzh_separatorLightGray;  // 分割线深灰色;
++ (UIColor *)yzh_tableViewSeparatorLightGray;  // 分割线浅灰色;
 + (UIColor *)yzh_fontShallowBlack;   //  常用字体浅黑色;
 + (UIColor *)yzh_fontThemeBlue;       // 常用主题宝蓝
 + (UIColor *)yzh_buttonBackgroundGreen; // 常用按钮背景绿

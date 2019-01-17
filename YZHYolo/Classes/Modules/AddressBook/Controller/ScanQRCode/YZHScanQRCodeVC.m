@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSTimer* lineTimer;
 @property (nonatomic, assign) BOOL startAnimation;
 @property (nonatomic, assign) BOOL isSkip;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startLayoutConsrraint;
 
 @end
 
@@ -173,8 +174,12 @@
 
 - (IBAction)startCameraLight:(UIButton *)sender {
     
+    if (sender.selected) {
+        self.startLayoutConsrraint.constant = 36.5;
+    } else {
+        self.startLayoutConsrraint.constant = 17.5;
+    }
     [self.manage startLight];
-    
     sender.selected = !sender.isSelected;
 }
 

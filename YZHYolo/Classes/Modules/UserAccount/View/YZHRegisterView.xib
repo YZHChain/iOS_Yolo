@@ -349,7 +349,9 @@
                                 <constraint firstAttribute="height" constant="13" id="F4h-Kg-v96"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SourceHanSansCN-Light" family="Source Han Sans CN Light" pointSize="12"/>
-                            <state key="normal" title="《用户注册协议》"/>
+                            <state key="normal" title="《用户注册协议》">
+                                <color key="titleColor" red="0.0" green="0.1803921568627451" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邀请码提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMi-JW-AwC">
                             <rect key="frame" x="30" y="171" width="315" height="13"/>
@@ -367,6 +369,7 @@
                                 <constraint firstAttribute="height" constant="40" id="xFZ-lZ-QIM"/>
                             </constraints>
                             <state key="normal" title="注册" backgroundImage="button_background_optional"/>
+                            <state key="disabled" backgroundImage="button_background_disable"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -172,7 +172,7 @@ typedef enum : NSUInteger {
         }
         cell.countriesLabel.text = countrieName;
         if (hasNextLocation) {
-            cell.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
+            cell.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
         } else {
             cell.guideImageView.image = nil;
         }

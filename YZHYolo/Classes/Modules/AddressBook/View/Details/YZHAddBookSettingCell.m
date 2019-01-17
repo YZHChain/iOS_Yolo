@@ -32,7 +32,7 @@
         self.subTitleLabel.text = nil;
     }
     if (model.canSkip) {
-        self.guideImageView.image = [UIImage imageNamed:@"my_cover_cell_back"];
+        self.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
     } else {
         self.guideImageView.image = nil;
     }

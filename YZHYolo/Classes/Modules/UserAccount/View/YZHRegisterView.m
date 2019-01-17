@@ -41,6 +41,8 @@
     [self.registerButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:15]];
     [self.registerButton.titleLabel setTextColor:[UIColor whiteColor]];
     
+    
+    
     self.codeTipLabel.textColor = [UIColor yzh_buttonBackgroundPinkRed];
     self.codeTipLabel.font = [UIFont yzh_commonLightStyleWithFontSize:12];
     self.codeTipLabel.hidden = YES;
@@ -49,23 +51,8 @@
     
     self.protocolSlectedButton.selected = NO;
     [self.protocolSlectedButton yzh_setEnlargeEdgeWithTop:15 right:35 bottom:30 left:50];
-    UIColor* startColor = [UIColor yzh_colorWithHexString:@"#002E60"];
-    UIColor* endColor = [UIColor yzh_colorWithHexString:@"#204D75"];
-    CAGradientLayer *layer = [CAGradientLayer new];
-    //存放渐变的颜色的数组
-    layer.colors = @[(__bridge id)startColor.CGColor, (__bridge id)endColor.CGColor];
-    //起点和终点表示的坐标系位置，(0,0)表示左上角，(1,1)表示右下角
-    layer.startPoint = CGPointMake(0.0, 0.0);
-    layer.endPoint = CGPointMake(1, 0.0);
     
-//    layer.frame = _topContentView.frame;
-//    CGRect rect = _topContentView.frame;
-    layer.frame = CGRectMake(0, 0, YZHScreen_Width, 135);
-    CGRect rect = CGRectMake(0, 0, YZHScreen_Width, 135);
-    UIView* view = [[UIView alloc] initWithFrame:rect];
-    [view.layer addSublayer:layer];
-    
-    [_topContentView insertSubview:view atIndex:0];
+    [self.topContentView yzh_addGradientLayerView];
 }
 
 - (void)setupNotification{
