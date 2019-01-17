@@ -89,9 +89,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)setupData
 {
 //    NSString* yolo_no = [YZHUserLoginManage sharedManager].currentLoginData.userId;
-//    [[YZHNetworkService shareService] GETNetworkingResource:SERVER_YYLM_INTEGRAL(@"/balance") params:@{
-//                                                                                                                                  @"userId":yolo_no ? yolo_no : @"",
-//                                                                                                                                  } successCompletion:^(id obj) {
+//    [[YZHNetworkService shareService] GETNetworkingResource:[NSString stringWithFormat:@"%@%@",SERVER_YYLM_INTEGRAL(@"/balance/"), yolo_no] params:nil successCompletion:^(id obj) {
 //
 //                                                                                                                                      NSLog(@"成功咯");
 //                                                                                                                                  } failureCompletion:^(NSError *error) {
