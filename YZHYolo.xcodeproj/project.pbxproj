@@ -360,6 +360,8 @@
 		5574311621B81694006AAED0 /* NTESNavigationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311421B81694006AAED0 /* NTESNavigationHandler.m */; };
 		5574311921B816CE006AAED0 /* UIResponder+NTESFirstResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311821B816CD006AAED0 /* UIResponder+NTESFirstResponder.m */; };
 		5574311C21B816E7006AAED0 /* NTESNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5574311B21B816E7006AAED0 /* NTESNavigationAnimator.m */; };
+		5574C5B221F08B8000C2AB20 /* YZHEmptyStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5574C5B121F08B8000C2AB20 /* YZHEmptyStatusView.xib */; };
+		5574C5B421F08B9B00C2AB20 /* YZHErrorStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5574C5B321F08B9B00C2AB20 /* YZHErrorStatusView.xib */; };
 		5575787121980A8B00EB5BDD /* YZHTargetUserDataManage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5575787021980A8A00EB5BDD /* YZHTargetUserDataManage.m */; };
 		557578762198544000EB5BDD /* YZHSetTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557578752198544000EB5BDD /* YZHSetTagModel.m */; };
 		557603AF215CE575007CEC60 /* YZHLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 557603AE215CE575007CEC60 /* YZHLoginModel.m */; };
@@ -1280,6 +1282,8 @@
 		5574311821B816CD006AAED0 /* UIResponder+NTESFirstResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+NTESFirstResponder.m"; sourceTree = "<group>"; };
 		5574311A21B816E6006AAED0 /* NTESNavigationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESNavigationAnimator.h; sourceTree = "<group>"; };
 		5574311B21B816E7006AAED0 /* NTESNavigationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESNavigationAnimator.m; sourceTree = "<group>"; };
+		5574C5B121F08B8000C2AB20 /* YZHEmptyStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHEmptyStatusView.xib; sourceTree = "<group>"; };
+		5574C5B321F08B9B00C2AB20 /* YZHErrorStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHErrorStatusView.xib; sourceTree = "<group>"; };
 		5575786F21980A8A00EB5BDD /* YZHTargetUserDataManage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTargetUserDataManage.h; sourceTree = "<group>"; };
 		5575787021980A8A00EB5BDD /* YZHTargetUserDataManage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTargetUserDataManage.m; sourceTree = "<group>"; };
 		557578742198544000EB5BDD /* YZHSetTagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHSetTagModel.h; sourceTree = "<group>"; };
@@ -4664,6 +4668,8 @@
 				55D580FF21636CFF000A8B55 /* YZHPhoneContactDefaultView.h */,
 				55D5810021636CFF000A8B55 /* YZHPhoneContactDefaultView.m */,
 				55D5810221636D18000A8B55 /* YZHPhoneContactDefaultView.xib */,
+				5574C5B121F08B8000C2AB20 /* YZHEmptyStatusView.xib */,
+				5574C5B321F08B9B00C2AB20 /* YZHErrorStatusView.xib */,
 				55D581092163952C000A8B55 /* YZHPhoneContactCell.h */,
 				55D5810A2163952C000A8B55 /* YZHPhoneContactCell.m */,
 				55D5810B2163952C000A8B55 /* YZHPhoneContactCell.xib */,
@@ -4925,6 +4931,7 @@
 				55F7F8DF21B633F800402189 /* YZHReadPasswordView.xib in Resources */,
 				55337DCF214F8EEA00307B75 /* YZHFindPasswordView.xib in Resources */,
 				5531458621573C4600A13F96 /* YZHMyInformationMyPlaceVC.xib in Resources */,
+				5574C5B421F08B9B00C2AB20 /* YZHErrorStatusView.xib in Resources */,
 				556D7E6A21A4112100533384 /* YZHTeamQRCodeSharedVC.xib in Resources */,
 				557C1D5721E8621F0023288F /* YZHTeamOwnerCell.xib in Resources */,
 				55BD8670215E22E300D23ED1 /* YZHAddressBookFootView.xib in Resources */,
@@ -4970,6 +4977,7 @@
 				55FB0C1D21C7E0D8008C95DE /* YZHTextChatContentCell.xib in Resources */,
 				5519828521E6EECD00F40151 /* YZHSecretKeyBackupVerifyVC.xib in Resources */,
 				55A0AF8C21C0EEE8004EAEE3 /* YZHTeamRecruitCell.xib in Resources */,
+				5574C5B221F08B8000C2AB20 /* YZHEmptyStatusView.xib in Resources */,
 				558C54E021ACDF9800CC10D1 /* YZHTeamMemberCell.xib in Resources */,
 				552CC892215A698200135FDC /* YZHAboutYoloVC.xib in Resources */,
 				5531252F21B565A30010B4A6 /* YZHSelectedTeamTypeVC.xib in Resources */,

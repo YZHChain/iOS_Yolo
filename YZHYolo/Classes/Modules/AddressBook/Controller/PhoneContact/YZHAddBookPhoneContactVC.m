@@ -24,6 +24,8 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 @property (nonatomic, strong) YZHPhoneContactDefaultView* defaultView;
 @property (nonatomic, assign) BOOL hasPhonePermissions;
 @property (nonatomic, strong) YZHPhoneContactRequestModel* contactModel;
+@property (nonatomic, strong) UIView* errorView;
+@property (nonatomic, strong) UIView* emptyView;
 
 @end
 
@@ -90,10 +92,14 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
 - (void)readPhoneAddressBook {
     
     [PPGetAddressBook getOrderAddressBook:^(NSDictionary<NSString *,NSArray *> *addressBookDict, NSArray *nameKeys) {
-        [self.contactModel updataPhoneContactDataWithNameKeys:nameKeys addressBookDict:addressBookDict];
-        [self requestNetworking];
+        if (nameKeys.count) {
+            [self.contactModel updataPhoneContactDataWithNameKeys:nameKeys addressBookDict:addressBookDict];
+            [self requestNetworking];
+        } else {
+            [self.view addSubview:self.emptyView];
+        }
     } authorizationFailure:^{
-        //读取失败
+    
     }];
 }
 
@@ -112,14 +118,24 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
             if (self.defaultView.superview) {
                 [self.defaultView removeFromSuperview];
             }
+            if (self.errorView.superview) {
+                [self.errorView removeFromSuperview];
+            }
+            if (contactArray) {
+                if (self.emptyView.superview) {
+                    [self.emptyView removeFromSuperview];
+                }
+            } else {
+                [self.view addSubview:self.emptyView];
+            }
             //获取到数据之后,删除获取按钮.
             self.navigationItem.rightBarButtonItem = nil;
             [self.tableView reloadData];
             //TODO:可以在这里异步请求所有在当前平台的用户实时信息.可以防止通过手机联系人添加时跳过验证的步骤. 否则无法判断当前用户是否开启需要验证的权限.
-            
         }
     } failureCompletion:^(NSError *error) {
         
+        [self.view addSubview:self.errorView];
         [hud hideWithText:error.domain];
     }];
 }
@@ -335,6 +351,24 @@ static NSString* const kYZHAddBookSectionViewIdentifier = @"addBookSectionViewId
         _contactModel = [[YZHPhoneContactRequestModel alloc] init];
     }
     return _contactModel;
+}
+
+- (UIView *)errorView {
+    
+    if (!_errorView) {
+        _errorView = [[NSBundle mainBundle] loadNibNamed:@"YZHErrorStatusView" owner:nil options:nil].lastObject;
+        _errorView.frame = self.view.bounds;
+    }
+    return _errorView;
+}
+
+- (UIView *)emptyView {
+    
+    if (!_emptyView) {
+        _emptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
+        _emptyView.frame = self.view.bounds;
+    }
+    return _emptyView;
 }
 
 @end

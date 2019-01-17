@@ -18,6 +18,8 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) YZHTeamNoticeList* dataSource;
+@property (nonatomic, strong) UIView* errorView;
+@property (nonatomic, strong) UIView* emptyView;
 
 @end
 
@@ -89,9 +91,20 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
         [hud hideWithText:nil];
         self.dataSource = [YZHTeamNoticeList YZH_objectWithKeyValues:obj];
         [self.dataSource.noticeArray mutableCopy];
+        if (self.dataSource.noticeArray.count) {
+            if (self.errorView.superclass) {
+                [self.errorView removeFromSuperview];
+            }
+            if (self.emptyView.superclass) {
+                [self.emptyView removeFromSuperview];
+            }
+        } else {
+            [self.view addSubview:self.emptyView];
+        }
         [self.tableView reloadData];
     } failureCompletion:^(NSError *error) {
         [hud hideWithText:error.domain];
+        [self.view addSubview:self.errorView];
     }];
 }
 
@@ -226,5 +239,23 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
 }
 
 #pragma mark - 7.GET & SET
+
+- (UIView *)errorView {
+    
+    if (!_errorView) {
+        _errorView = [[NSBundle mainBundle] loadNibNamed:@"YZHErrorStatusView" owner:nil options:nil].lastObject;
+        _errorView.frame = self.view.bounds;
+    }
+    return _errorView;
+}
+
+- (UIView *)emptyView {
+    
+    if (!_emptyView) {
+        _emptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
+        _emptyView.frame = self.view.bounds;
+    }
+    return _emptyView;
+}
 
 @end
