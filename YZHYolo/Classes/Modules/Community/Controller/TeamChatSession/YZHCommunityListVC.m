@@ -736,6 +736,9 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     } else {
         headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
     }
+    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsTeamRecentSession[section].count];
+    [headerView.tagCountLabel sizeToFit];
+    
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
     [headerView.unReadCountLabel sizeToFit];

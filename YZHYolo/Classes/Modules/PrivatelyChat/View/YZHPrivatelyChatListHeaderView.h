@@ -20,6 +20,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, strong) UIImageView* guideImageView;
 @property (nonatomic, strong) UILabel* tagNameLabel;
+@property (nonatomic, strong) UILabel* tagCountLabel;
 @property (nonatomic, strong) UILabel* unReadCountLabel;
 @property (nonatomic, strong) UIButton* groupButton;
 @property (nonatomic, assign) NSInteger section;

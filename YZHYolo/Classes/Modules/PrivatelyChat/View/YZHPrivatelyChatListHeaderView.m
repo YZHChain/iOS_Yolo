@@ -17,9 +17,14 @@
     if (self) {
         
         _tagNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        _tagNameLabel.font = [UIFont systemFontOfSize:13];
+        _tagNameLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
         _tagNameLabel.textColor = [UIColor colorWithRed:142/255.0 green:142/255.0 blue:142/255.0 alpha:1];
         [self addSubview:_tagNameLabel];
+        
+        _tagCountLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _tagCountLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
+        _tagCountLabel.textColor = [UIColor colorWithRed:142/255.0 green:142/255.0 blue:142/255.0 alpha:1];
+        [self addSubview:_tagCountLabel];
         
         _unReadCountLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _unReadCountLabel.font = [UIFont systemFontOfSize:13];
@@ -51,8 +56,13 @@
     
     [super layoutSubviews];
     
+    _tagNameLabel.height = 14.5f;
     _tagNameLabel.nim_left = 12;
     _tagNameLabel.nim_centerY = self.nim_height * .5f;
+    
+    _tagCountLabel.height = 14.5f;
+    _tagCountLabel.nim_left = _tagNameLabel.nim_right + 0.5f;
+    _tagCountLabel.nim_centerY = self.nim_height * 0.5f;
     
     _unReadCountLabel.nim_left = self.tagNameLabel.nim_right + 5;
     _unReadCountLabel.nim_centerY = self.nim_height * .5f;

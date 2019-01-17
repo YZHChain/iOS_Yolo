@@ -531,6 +531,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
         headerView.userInteractionEnabled = NO;
         [headerView.guideImageView removeFromSuperview];
     }
+    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsRecentSession[section].count];
+    [headerView.tagCountLabel sizeToFit];
     [headerView.tagNameLabel sizeToFit];
     headerView.unReadCountLabel.text = @"";
     [headerView.unReadCountLabel sizeToFit];
