@@ -185,6 +185,7 @@
                     <state key="normal" title="确定" backgroundImage="button_background_optional">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <state key="disabled" backgroundImage="button_background_disable"/>
                     <connections>
                         <action selector="onTouchConfirm:" destination="-1" eventType="touchUpInside" id="mOi-Zv-kuj"/>
                     </connections>
@@ -211,7 +212,8 @@
     <resources>
         <image name="arts" width="93" height="93"/>
         <image name="block_ellipse_image" width="171" height="171"/>
-        <image name="button_background_optional" width="120" height="20"/>
+        <image name="button_background_disable" width="335" height="44"/>
+        <image name="button_background_optional" width="335" height="44"/>
         <image name="car" width="85" height="85"/>
         <image name="exercise_ellipse_image" width="127" height="127"/>
         <image name="movie" width="86" height="86"/>

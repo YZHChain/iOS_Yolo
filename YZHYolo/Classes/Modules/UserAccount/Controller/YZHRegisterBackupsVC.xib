@@ -63,6 +63,7 @@
                         <constraint firstAttribute="height" constant="40" id="KFV-Sz-LfF"/>
                     </constraints>
                     <state key="normal" title="开始使用" backgroundImage="button_background_optional"/>
+                    <state key="disabled" backgroundImage="button_background_disable"/>
                     <connections>
                         <action selector="onTouchStart:" destination="-1" eventType="touchUpInside" id="u8y-oV-8UZ"/>
                     </connections>
@@ -117,6 +118,7 @@
         </view>
     </objects>
     <resources>
+        <image name="button_background_disable" width="335" height="44"/>
         <image name="button_background_optional" width="335" height="44"/>
         <image name="registered_protocol_agree" width="12" height="12"/>
         <image name="registered_protocol_notAgree" width="12" height="12"/>

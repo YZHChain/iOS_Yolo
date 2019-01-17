@@ -223,6 +223,7 @@ static NSString* const kYZHEmptyLogAlertMessage = @"此操作不可逆,请谨慎
         UIButton* logOutButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [logOutButton setTitle:@"退出登录" forState:UIControlStateNormal];
         [logOutButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_logOutButton setBackgroundImage:[UIImage imageNamed:@"button_background_disable"] forState:UIControlStateNormal];
         _logOutButton = logOutButton;
         _logOutButton.layer.cornerRadius = 4;
         _logOutButton.layer.masksToBounds = YES;
