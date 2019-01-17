@@ -52,6 +52,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [[NIMSDK sharedSDK].teamManager addDelegate:self];
     //1.设置导航栏
     [self setupNavBar];
     //2.设置view
@@ -90,6 +91,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     [self.tableView registerClass:[YZHSessionListCell class] forCellReuseIdentifier:kYZHDefaultCellIdentifie];
     
     self.recentSessions = [self.recentSessionExtManage.lockTeamRecentSession mutableCopy];
+//    self.recentSessions = self.recentSessionExtManage.lockTeamRecentSession;
     
     [self refresh];
 }
@@ -114,7 +116,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (UITableViewCell* )tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NIMRecentSession *recent = self.recentSessionExtManage.lockTeamRecentSession[indexPath.row];
+    NIMRecentSession *recent = self.recentSessions[indexPath.row];
+    
     YZHSessionListCell* cell = [tableView dequeueReusableCellWithIdentifier:kYZHDefaultCellIdentifie forIndexPath:indexPath];
     if (!cell) {
         cell = [[YZHSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kYZHDefaultCellIdentifie];
@@ -133,8 +136,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
     cell.leftAdornImageView.hidden = NO;
     
     return cell;
-    
-//    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -144,7 +145,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    NIMRecentSession *recentSession = self.recentSessionExtManage.lockTeamRecentSession[indexPath.row];
+    NIMRecentSession *recentSession = self.recentSessions[indexPath.row];
     [self onSelectedRecent:recentSession atIndexPath:indexPath];
 }
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
@@ -237,7 +238,7 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 }
 
 - (void)refresh{
-    if (!self.recentSessionExtManage.lockTeamRecentSession.count) {
+    if (!self.recentSessions.count) {
         self.tableView.hidden = YES;
     }else{
         self.tableView.hidden = NO;

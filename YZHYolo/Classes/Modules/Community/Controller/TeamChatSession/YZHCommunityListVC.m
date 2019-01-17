@@ -399,6 +399,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)refresh
 {
+    NSLog(@"刷新咯");
     if (self.recentSessions.count) {
         [self.tableView reloadData];
         [self.tagsTableView reloadData];
