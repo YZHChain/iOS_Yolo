@@ -200,12 +200,18 @@ typedef NS_ENUM(NSInteger, YZHRootTabBarType) {
         YZHBaseNavigationController* baseNav = [self.viewControllers objectAtIndex: YZHRootTabBarTypeDiscover];
         YZHDiscoverVC* discover = (YZHDiscoverVC*)baseNav.viewControllers.firstObject;
         if ([discover isKindOfClass:[YZHDiscoverVC class]]) {
-            [discover refreshView];
+            if (![self.selectedViewController isEqual:baseNav]) {
+                [discover refreshView];
+                baseNav.navigationBar.hidden = YES;
+            }
         }
         //TODO: https://www.jianshu.com/p/80939746e48c
 //        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"clickDiscouver" object:nil];
 //        }];
+    } else if ([item.title isEqualToString:@"我的"]) {
+        YZHBaseNavigationController* baseNav = self.viewControllers.lastObject;
+        baseNav.navigationBar.hidden = YES;
     }
     
 }

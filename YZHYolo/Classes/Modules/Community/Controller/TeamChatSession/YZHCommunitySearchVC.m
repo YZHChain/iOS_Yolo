@@ -26,6 +26,9 @@
 #import "YZHAddFirendAttachment.h"
 #import "YZHRequstAddFirendAttachment.h"
 #import "YZHSpeedyResponseAttachment.h"
+#import "YZHTeamExtManage.h"
+#import "YZHRootTabBarViewController.h"
+#import "YZHCommunityListVC.h"
 
 static int kYZHRecommendTeamPageSize = 20; // 默认每页个数
 static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionView";
@@ -331,6 +334,55 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
     
     NIMTeam* team = self.searchManage.searchTeams[indexPath.row];
     NIMSession* session = [NIMSession session:team.teamId type:NIMSessionTypeTeam];
+    YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:team.teamId];
+    //设置群锁
+    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
+    if (communityVC.teamLock) {
+        if (teamExtManage.team_lock) {
+            
+        } else {
+            [self clickLockTeamSession:session];
+        }
+    } else {
+        [self skipToTeamSession:session];
+    }
+}
+
+//TODO: 封装到工具类
+- (void)clickLockTeamSession:(NIMSession *)session {
+    
+    //设置群锁
+    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
+    @weakify(self)
+    [YZHAlertManage showTextAlertTitle:@"输入阅读密码解锁查看" message:nil textFieldPlaceholder:nil  actionButtons:@[@"取消", @"确认"] actionHandler:^(UIAlertController *alertController, UITextField *textField, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            @strongify(self)
+            YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+            if (YZHIsString(textField.text)) {
+                if ([textField.text isEqual:userInfoExt.privateSetting.groupPassword]) {
+                    communityVC.teamLock = NO;
+                    [self skipToTeamSession:session];
+                } else {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
+                }
+            } else {
+                if (YZHIsString(userInfoExt.privateSetting.groupPassword)) {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
+                } else {
+                    communityVC.teamLock = NO;
+                    [self skipToTeamSession:session];
+                }
+            }
+        }
+    }];
+}
+
+- (void)skipToTeamSession:(NIMSession*)session {
+    
     //查找最近回话, 如果没有则直接使用, 会话进入聊天窗。 并且插入一条最近会话。
     NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
     if (recentSession) {
@@ -344,12 +396,9 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
         recentSession.session = session;
         [[[NIMSDK sharedSDK] conversationManager] allRecentSessions];
         [[[NIMSDK sharedSDK] conversationManager] importRecentSessions:@[recentSession] completion:^(NSError * _Nullable error, NSArray<NIMImportedRecentSession *> * _Nullable failedImportedRecentSessions) {
-    
             NSLog(@"插入会话结果%@", error);
-    
         }];
     }
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

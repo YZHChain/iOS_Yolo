@@ -35,12 +35,11 @@
     
     [super viewWillAppear:animated];
 
-//    if (self.hideNavigationBar && self.navigationController.navigationBar.hidden == NO) {
-//
-//    }
     if (self.hideNavigationBar) {
         if (self.navigationController.viewControllers.count == 1) {
-            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            if (!self.navigationController.navigationBar.hidden) {
+                            [self.navigationController setNavigationBarHidden:YES animated:YES];
+            }
         } else {
             [self.navigationController setNavigationBarHidden:YES animated:YES];
         }
@@ -52,11 +51,10 @@
     [super viewWillDisappear:animated];
     
     if (self.hideNavigationBar) {
-        if (self.navigationController.viewControllers.count == 1) {
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
-        } else {
+        //TODO: 如果未使用 动画方法隐藏, 使用动画方法显示则会出现失败。
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        if (self.navigationController.navigationBar.hidden != NO) {
             self.navigationController.navigationBar.hidden = NO;
-            [self.navigationController setNavigationBarHidden:NO animated:YES];
         }
     }
     

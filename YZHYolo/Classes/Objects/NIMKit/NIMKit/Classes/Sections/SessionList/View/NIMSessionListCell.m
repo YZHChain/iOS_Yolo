@@ -18,7 +18,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        self.avatarImageView = [[NIMAvatarImageView alloc] initWithFrame:CGRectMake(0, 0, 46, 46)];
         [self.contentView addSubview:self.avatarImageView];
 //        [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.left.mas_equalTo(15);
@@ -35,12 +35,11 @@
         [self.contentView addSubview:self.nameLabel];
 //
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        
         //Jersey
         self.messageLabel.backgroundColor = [UIColor clearColor];
-        self.messageLabel.font            = [UIFont yzh_commonLightStyleWithFontSize:12.f];
-        self.messageLabel.height = 12.5f;
-        self.messageLabel.textColor       = [UIColor lightGrayColor];
+        self.messageLabel.font            = [UIFont yzh_commonStyleWithFontSize:14.f];
+        self.messageLabel.height = 14.0f;
+        self.messageLabel.textColor       = [UIColor yzh_sessionCellGray];
         [self.contentView addSubview:self.messageLabel];
 //
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -75,12 +74,12 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     //Session List
-    NSInteger sessionListAvatarLeft             = 15;
-    NSInteger sessionListNameTop                = 12;
-    NSInteger sessionListNameLeftToAvatar       = 7;
-    NSInteger sessionListMessageLeftToAvatar    = 7;
+    NSInteger sessionListAvatarLeft             = 13;
+    NSInteger sessionListNameTop                = 11;
+    NSInteger sessionListNameLeftToAvatar       = 10;
+    NSInteger sessionListMessageLeftToAvatar    = 10;
     NSInteger sessionListTimeRight              = 20;
-    NSInteger sessionListTimeTop                = 12;
+    NSInteger sessionListTimeTop                = 13;
     NSInteger sessionBadgeTimeBottom            = 12;
     NSInteger sessionBadgeTimeRight             = 20;
     
@@ -89,9 +88,9 @@
     self.nameLabel.nim_top           = sessionListNameTop;
     self.nameLabel.nim_left          = self.avatarImageView.nim_right + sessionListNameLeftToAvatar;
     self.nameLabel.height = 20.0f;
-    self.messageLabel.height = 12.5f;
+    self.messageLabel.height = 14.0f;
     self.messageLabel.nim_left       = self.avatarImageView.nim_right + sessionListMessageLeftToAvatar;
-    self.messageLabel.nim_bottom     = self.avatarImageView.nim_bottom;
+    self.messageLabel.nim_bottom     = self.nim_height - 12;
     self.timeLabel.height = 13.0f;
     self.timeLabel.nim_right         = self.nim_width - sessionListTimeRight;
     self.timeLabel.nim_top           = sessionListTimeTop;

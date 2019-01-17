@@ -36,7 +36,7 @@
     
     [_searchButton setTitleColor:[UIColor yzh_separatorLightGray] forState:UIControlStateNormal];
     [_searchButton setTitleColor:[UIColor yzh_separatorLightGray] forState:UIControlStateSelected];
-    _searchButton.titleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:11];
+    _searchButton.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:12];
     [_searchButton setIcon:[UIImage imageNamed:@"addBook_cover_search_default"]];
     [_searchButton setIconSelected:[UIImage imageNamed:@"addBook_cover_search_default"]];
     

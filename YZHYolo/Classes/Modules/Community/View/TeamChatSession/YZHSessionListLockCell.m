@@ -34,8 +34,8 @@
         self.avatarImageView.layer.masksToBounds = YES;
         [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.left.equalTo(self.leftAdornImageView.mas_right).mas_equalTo(13);
-            make.width.height.mas_equalTo(40);
+            make.left.equalTo(self.leftAdornImageView.mas_right).mas_equalTo(10);
+            make.width.height.mas_equalTo(46);
         }];
         
         self.nameLabel = [[UILabel alloc] init];
@@ -44,7 +44,7 @@
         [self.contentView addSubview:self.nameLabel];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.left.equalTo(self.avatarImageView.mas_right).mas_equalTo(7);
+            make.left.equalTo(self.avatarImageView.mas_right).mas_equalTo(12);
             make.height.mas_equalTo(20);
         }];
         self.nameLabel.text = @"上锁群";
@@ -56,7 +56,7 @@
         self.lockButton.selected = YES;
         [self.lockButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(0);
-            make.left.equalTo(self.nameLabel.mas_right).mas_equalTo(5);
+            make.left.equalTo(self.nameLabel.mas_right).mas_equalTo(13);
 //            make.width.mas_equalTo(15);
 //            make.height.mas_equalTo(15);
         }];
