@@ -64,11 +64,16 @@
     BOOL firstLaunching = false;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *lastAppVersion = [userDefaults objectForKey:@"guideShow"];
+    NSString *guideShowAppVersion = [userDefaults objectForKey:@"guideShowAppVersion"];
     NSString *currentAppVersion = [[YZHBundle infoDictionary] objectForKey:@"CFBundleVersion"];
-    if (![currentAppVersion isEqualToString:lastAppVersion]) {
-        
-        [userDefaults setValue:currentAppVersion forKey:@"guideShow"];
+//    if (![currentAppVersion isEqualToString:lastAppVersion]) {
+//
+//        [userDefaults setValue:currentAppVersion forKey:@"guideShow"];
+//        [userDefaults synchronize];
+//        firstLaunching = true;
+//    }
+    if (!YZHIsString(guideShowAppVersion)) {
+        [userDefaults setValue:currentAppVersion forKey:@"guideShowAppVersion"];
         [userDefaults synchronize];
         firstLaunching = true;
     }

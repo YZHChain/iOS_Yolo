@@ -86,11 +86,17 @@
     BOOL firstLaunching = false;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *lastAppVersion = [userDefaults objectForKey:@"LastAppVersion"];
+    NSString *welcomeAppVersion = [userDefaults objectForKey:@"welcomeAppVersion"];
     NSString *currentAppVersion = [[YZHBundle infoDictionary] objectForKey:@"CFBundleVersion"];
-    if (![currentAppVersion isEqualToString:lastAppVersion]) {
+//    if (![currentAppVersion isEqualToString:lastAppVersion]) {
+//
+//        [userDefaults setValue:currentAppVersion forKey:@"LastAppVersion"];
+//        [userDefaults synchronize];
+//        firstLaunching = true;
+//    }
+    if (!YZHIsString(welcomeAppVersion)) {
         
-        [userDefaults setValue:currentAppVersion forKey:@"LastAppVersion"];
+        [userDefaults setValue:currentAppVersion forKey:@"welcomeAppVersion"];
         [userDefaults synchronize];
         firstLaunching = true;
     }
