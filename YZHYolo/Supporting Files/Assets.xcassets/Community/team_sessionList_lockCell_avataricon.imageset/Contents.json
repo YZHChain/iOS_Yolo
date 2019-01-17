@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "team_sessionList_lockCell_icon@2x.png",
+      "filename" : "team_sessionList_lockCell_avataricon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "team_sessionList_lockCell_icon@3x.png",
+      "filename" : "team_sessionList_lockCell_avataricon@3x.png",
       "scale" : "3x"
     }
   ],

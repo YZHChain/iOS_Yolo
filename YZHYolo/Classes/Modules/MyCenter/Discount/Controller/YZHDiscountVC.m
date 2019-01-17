@@ -100,6 +100,7 @@
         [userContentController addScriptMessageHandler:self name:@"GOBACK"];
         [userContentController addScriptMessageHandler:self name:@"SAVEQR"];
         [userContentController addScriptMessageHandler:self name:@"GOROOT"];
+        [userContentController addScriptMessageHandler:self name:@"GOWEBTOP"];
         configuration.userContentController = userContentController;
         
         WKPreferences *preferences = [WKPreferences new];
@@ -162,6 +163,8 @@
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOBACK"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"SAVEQR"];
     [self.webView.configuration.userContentController removeScriptMessageHandlerForName:@"GOROOT"];
+    [self.webView.configuration.userContentController
+     removeScriptMessageHandlerForName:@"GOWEBTOP"];
 }
 
 
@@ -245,21 +248,72 @@
 //        } else {
 //            [self.navigationController popViewControllerAnimated:true];
 //        }
-        NSInteger count = self.navigationController.viewControllers.count;
-        if (count >= 2) {
-            YZHDiscountVC* popVC = self.navigationController.viewControllers[count - 2];
-            [self.navigationController popViewControllerAnimated:true];
-            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", message.body];
-            [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
-                if (!error) {
-                    NSLog(@"通知前端刷新成功");
+//        NSInteger count = self.navigationController.viewControllers.count;
+//        if (count >= 2) {
+//            YZHDiscountVC* popVC = self.navigationController.viewControllers[count - 2];
+//            [self.navigationController popViewControllerAnimated:true];
+//            NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", message.body];
+//            [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+//                if (!error) {
+//                    NSLog(@"通知前端刷新成功");
+//                } else {
+//                    NSLog(@"通知前端刷新失败");
+//                }
+//            }];
+//        } else {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+        NSDictionary* bodyDic = message.body;
+        NSInteger viewControllerCount = self.navigationController.viewControllers.count;
+        if ([bodyDic isKindOfClass:[NSDictionary class]]) {
+            NSString* backCountString = [bodyDic objectForKey:@"backCount"];
+            NSInteger backCount = backCountString.integerValue;
+            if (viewControllerCount >= (backCount + 1)) {
+                YZHDiscountVC* popVC = self.navigationController.viewControllers[viewControllerCount - (backCount + 1)];
+                [self.navigationController popToViewController:popVC animated:YES];
+
+                NSString *callbackJs;
+                if ([bodyDic objectForKey:@"isRefresh"]) {
+                    callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", [bodyDic objectForKey:@"isRefresh"]];
                 } else {
-                    NSLog(@"通知前端刷新失败");
+                    callbackJs = [NSString stringWithFormat:@"webViewRefresh()"];
                 }
-            }];
+                [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                    if (!error) {
+                        NSLog(@"通知前端刷新成功");
+                    } else {
+                        NSLog(@"通知前端刷新失败");
+                    }
+                }];
+            } else { //如果传入的返回数量大于则回到最顶部
+                YZHDiscountVC* popVC = self.navigationController.viewControllers.firstObject;
+                [self.navigationController popToViewController:popVC animated:YES];
+                NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", message.body];
+                [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                    if (!error) {
+                        NSLog(@"通知前端刷新成功");
+                    } else {
+                        NSLog(@"通知前端刷新失败");
+                    }
+                }];
+            }
         } else {
-            [self.navigationController popViewControllerAnimated:YES];
+            if (viewControllerCount >= 2) {
+                YZHDiscountVC* popVC = self.navigationController.viewControllers[viewControllerCount - 2];
+                [self.navigationController popViewControllerAnimated:true];
+                NSString *callbackJs = [NSString stringWithFormat:@"webViewRefresh('%@')", message.body];
+                [popVC.webView evaluateJavaScript:callbackJs completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+                    if (!error) {
+                        NSLog(@"通知前端刷新成功");
+                    } else {
+                        NSLog(@"通知前端刷新失败");
+                    }
+                }];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
+        
         return;
     }
     if ([message.name isEqualToString:@"SAVEQR"]) { //邀请码界面-保存二维码
@@ -285,6 +339,12 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
         
+        return;
+    }
+    if ([message.name isEqualToString:@"GOWEBTOP"]) {
+        
+        YZHDiscountVC* popVC = self.navigationController.viewControllers.firstObject;
+        [self.navigationController popToViewController:popVC animated:YES];
         return;
     }
 }

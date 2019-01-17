@@ -372,7 +372,7 @@
 {
     if (!_defaultUserAvatar)
     {
-        _defaultUserAvatar = [UIImage nim_imageInKit:@"addBook_cover_cell_photo_default"];
+        _defaultUserAvatar = [UIImage nim_imageInKit:@"private_sessionList_cell_default"];
     }
     return _defaultUserAvatar;
 }
