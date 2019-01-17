@@ -114,7 +114,7 @@
 {
     CGFloat viewHeight = 0.0f;
     if (self.status == NIMInputStatusAudio) {
-        viewHeight = 54.5;
+        viewHeight = 64.5f;
     }else{
         //算出 TextView 的宽度
         [self adjustTextViewWidth:size.width];
@@ -321,7 +321,7 @@
 }
 
 - (CGFloat)spacing{
-    return 6.f;
+    return 12.f;
 }
 
 - (CGFloat)textViewPadding

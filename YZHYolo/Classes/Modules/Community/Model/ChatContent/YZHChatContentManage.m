@@ -34,7 +34,11 @@
             [self configurationMessageData:messages formatMessages:self.imageViewMessages formatTimers:self.imageViewTimers];
             if (self.imageViewMessages.count) {
                 completion ? completion () : NULL;
+            } else {
+                completion ? completion () : NULL;
             }
+        } else {
+            completion ? completion () : NULL;
         }
     }];
 }

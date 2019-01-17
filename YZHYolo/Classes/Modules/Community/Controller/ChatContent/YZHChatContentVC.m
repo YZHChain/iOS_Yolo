@@ -46,9 +46,8 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
 @property (nonatomic, strong) NSArray<NIMMessage*>* allTextMessage;
 @property (nonatomic, strong) NIMMessage* messageForMenu;
 @property (nonatomic, strong) YZHChatContentManage* chatContentManage;
-@property (nonatomic, strong) UIView* imageEmptyView;
-@property (nonatomic, strong) UIView* cardEmptyView;
-@property (nonatomic, strong) UIView* urlEmptyView;
+@property (nonatomic, strong) UIView* emptyView;
+
 
 @end
 
@@ -120,6 +119,12 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
         make.left.bottom.right.mas_equalTo(0);
         make.top.equalTo(self.headerView.mas_bottom).mas_equalTo(0);
     }];
+    [self.view addSubview: self.emptyView];
+    [self.emptyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.right.mas_offset(0);
+        make.top.equalTo(self.headerView.mas_bottom).mas_equalTo(0);
+    }];
+    self.emptyView.hidden = YES;
     
     _cardTableView.hidden = YES;
     _urlTableView.hidden = YES;
@@ -131,6 +136,25 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
         [self.tableViewArray enumerateObjectsUsingBlock:^(UITableView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (currentType == idx) {
                 self.tableViewArray[idx].hidden = NO;
+                if (currentType == 0) {
+                    if (!self.chatContentManage.imageViewTimers.count) {
+                        self.emptyView.hidden = NO;
+                    } else {
+                        self.emptyView.hidden = YES;
+                    }
+                } else if (currentType == 1) {
+                    if (!self.chatContentManage.cardTimers.count) {
+                        self.emptyView.hidden = NO;
+                    } else {
+                        self.emptyView.hidden = YES;
+                    }
+                } else {
+                    if (!self.chatContentManage.urlTimers.count) {
+                        self.emptyView.hidden = NO;
+                    } else {
+                        self.emptyView.hidden = YES;
+                    }
+                }
             } else {
                 obj.hidden = YES;
             }
@@ -162,21 +186,16 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     [self.chatContentManage searchImageViewMessagesCompletion:^{
         @strongify(self)
         if (self.chatContentManage.imageViewTimers.count) {
-            if (self.imageEmptyView.superclass) {
-                [self.imageEmptyView removeFromSuperview];
-            }
+            self.emptyView.hidden = YES;
             [self.imageCollectionView reloadData];
         } else {
-//            [self.imageCollectionView addSubview:self.imageEmptyView];
+            self.emptyView.hidden = NO;
         }
     }];
     
     [self.chatContentManage searchUserCardMessagesCompletion:^{
         @strongify(self)
         if (self.chatContentManage.cardTimers.count) {
-            if (self.cardEmptyView.superclass) {
-                [self.cardEmptyView removeFromSuperview];
-            }
             [self.cardTableView reloadData];
         } else {
             
@@ -186,9 +205,6 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     [self.chatContentManage searchURLMessagesCompletion:^{
         @strongify(self)
         if (self.chatContentManage.urlTimers.count) {
-            if (self.urlEmptyView.superclass) {
-                [self.urlEmptyView removeFromSuperview];
-            }
             [self.urlTableView reloadData];
         } else {
             
@@ -563,31 +579,13 @@ static NSString* kUrlCellIdentifie = @"UrlCellIdentifie";
     return _urlTableView;
 }
 
-- (UIView *)imageEmptyView {
+- (UIView *)emptyView {
     
-    if (!_imageEmptyView) {
-        _imageEmptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
-        _imageEmptyView.frame = self.view.bounds;
+    if (!_emptyView) {
+        _emptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
+        _emptyView.frame = self.view.bounds;
     }
-    return _imageEmptyView;
-}
-
-- (UIView *)urlEmptyView {
-    
-    if (!_urlEmptyView) {
-        _urlEmptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
-        _urlEmptyView.frame = self.view.bounds;
-    }
-    return _urlEmptyView;
-}
-
-- (UIView *)cardEmptyView {
-    
-    if (!_cardEmptyView) {
-        _cardEmptyView = [[NSBundle mainBundle] loadNibNamed:@"YZHEmptyStatusView" owner:nil options:nil].lastObject;
-        _cardEmptyView.frame = self.view.bounds;
-    }
-    return _cardEmptyView;
+    return _emptyView;
 }
 
 @end

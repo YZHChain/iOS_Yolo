@@ -834,16 +834,16 @@
 
 - (void)openSafari:(NSString *)link
 {
-//    NSURLComponents *components = [[NSURLComponents alloc] initWithString:link];
-//    if (components)
-//    {
-//        if (!components.scheme)
-//        {
-//            //默认添加 http
-//            components.scheme = @"http";
-//        }
-//        [[UIApplication sharedApplication] openURL:[components URL]];
-//    }
+    NSURLComponents *components = [[NSURLComponents alloc] initWithString:link];
+    if (components)
+    {
+        if (!components.scheme)
+        {
+            //默认添加 http
+            components.scheme = @"http";
+        }
+        [[UIApplication sharedApplication] openURL:[components URL]];
+    }
 }
 //TODO: 需修改.
 - (NSDictionary *)cellActions

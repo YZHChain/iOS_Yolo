@@ -29,6 +29,8 @@ NSString *const NIMTextMessageLabelLinkData = @"NIMTextMessageLabelLinkData";
         _textLabel.numberOfLines = 0;
         _textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _textLabel.backgroundColor = [UIColor clearColor];
+//        _textLabel.linkColor = YZHColorRGBAWithRGBA(118, 241, 205, 1);
+        _textLabel.linkColor = YZHColorRGBAWithRGBA(48, 145, 255, 1);
         [self addSubview:_textLabel];
     }
     return self;
