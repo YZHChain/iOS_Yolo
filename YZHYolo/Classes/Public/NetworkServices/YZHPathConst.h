@@ -16,6 +16,7 @@
 #define SERVER_SQUARE(PATH)    ([@"/yolo-square" stringByAppendingString: PATH])
 #define SERVER_CHAT(PATH)      ([@"/yolo-chat" stringByAppendingString: PATH])
 #define SERVER_INTEGRAL(PATH)  ([@"/yolo-integral" stringByAppendingString: PATH])
+#define SERVER_YYLM_INTEGRAL(PATH)  ([@"/yylmSyetem/integral" stringByAppendingString: PATH])
 
 #pragma mark -- SERVER_LOGIN
 

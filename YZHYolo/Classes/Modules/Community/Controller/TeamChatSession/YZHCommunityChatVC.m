@@ -282,7 +282,7 @@
         [self.noticeView.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(0);
             make.top.equalTo(self.noticeView.titleView.mas_bottom).mas_equalTo(0);
-            make.height.mas_equalTo(83);
+            make.height.mas_equalTo(94);
         }];
         
         [self.noticeView.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -293,8 +293,8 @@
         [self.noticeView.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(19);
             make.right.mas_equalTo(-19);
-            make.top.mas_equalTo(11);
-            make.bottom.mas_equalTo(-11);
+            make.top.mas_equalTo(15);
+            make.bottom.mas_equalTo(-13);
         }];
         self.noticeView.contentView.hidden = YES;
         self.noticeView.shadowView.hidden = YES;

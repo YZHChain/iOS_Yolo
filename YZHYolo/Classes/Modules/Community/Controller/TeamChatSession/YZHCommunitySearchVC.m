@@ -283,122 +283,33 @@ static NSString* kYZHSearchTeamShowCell = @"YZHSearchTeamShowCell";
         [self recommendTableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
-
-- (void)searchRecentTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NIMRecentSession *recentSession;
-    
-    recentSession = self.searchManage.searchRecentSession[indexPath.row];
-    [self onSelectedRecent:recentSession atIndexPath:indexPath];
-}
-
-- (void)onSelectedRecent:(NIMRecentSession *)recent atIndexPath:(NSIndexPath *)indexPath{
-    
-    //    if ([[[NIMSDK sharedSDK] teamManager] isMyTeam:recent.session.sessionId]) {
-    YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recent];
-    [self.navigationController pushViewController:teamchatVC animated:YES];
-    //    } else {
-    //        NSLog(@"不在此群");
-    //    }
-}
-
+//点击头像
 - (void)onSelectedAvatar:(NIMRecentSession *)recent
              atIndexPath:(NSIndexPath *)indexPath{
     if (recent.session.sessionType == NIMSessionTypeTeam) {
-        [self onSelectedRecent:recent atIndexPath:indexPath];
+        [self searchTableView:self.tableView didSelectRowAtIndexPath:indexPath];
     }
 }
-
+//处理推荐列表点击事件
 - (void)recommendTableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     YZHSearchModel* model = self.recommendModel.recommendArray[indexPath.row];
-    //进入群详情.
-    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:model.teamId];
-    if (isTeamMerber) {
-        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:model.teamId];
-        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
-        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
-                                                          @"isTeamOwner": @(isTeamOwner),
-                                                          @"teamId": model.teamId,
-                                                          }];
-    } else {
-        [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
-                                                               @"teamId": model.teamId,
-                                                               kYZHRouteSegue: kYZHRouteSegueModal,
-                                                               kYZHRouteSegueNewNavigation: @(YES)
-                                                               }];
-    }
+    [self skipToTeamCardIntro:model.teamId];
 }
-//点击会话, 好像不需要插入回话。即可保存到回话列表
+//处理搜索结果列表点击事件
 - (void)searchTableView:(UITableView *)tableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NIMTeam* team = self.searchManage.searchTeams[indexPath.row];
-    NIMSession* session = [NIMSession session:team.teamId type:NIMSessionTypeTeam];
-    YZHTeamExtManage* teamExtManage = [YZHTeamExtManage teamExtWithTeamId:team.teamId];
-    //设置群锁
-    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
-    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
-    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
-    if (communityVC.teamLock) {
-        if (teamExtManage.team_lock) {
-            
-        } else {
-            [self clickLockTeamSession:session];
-        }
-    } else {
-        [self skipToTeamSession:session];
-    }
+    [self skipToTeamCardIntro:team.teamId];
+    
 }
 
-//TODO: 封装到工具类
-- (void)clickLockTeamSession:(NIMSession *)session {
+- (void)skipToTeamCardIntro:(NSString* )teamId {
     
-    //设置群锁
-    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
-    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
-    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
-    @weakify(self)
-    [YZHAlertManage showTextAlertTitle:@"输入阅读密码解锁查看" message:nil textFieldPlaceholder:nil  actionButtons:@[@"取消", @"确认"] actionHandler:^(UIAlertController *alertController, UITextField *textField, NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            @strongify(self)
-            YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
-            if (YZHIsString(textField.text)) {
-                if ([textField.text isEqual:userInfoExt.privateSetting.groupPassword]) {
-                    communityVC.teamLock = NO;
-                    [self skipToTeamSession:session];
-                } else {
-                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
-                }
-            } else {
-                if (YZHIsString(userInfoExt.privateSetting.groupPassword)) {
-                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
-                } else {
-                    communityVC.teamLock = NO;
-                    [self skipToTeamSession:session];
-                }
-            }
-        }
-    }];
-}
-
-- (void)skipToTeamSession:(NIMSession*)session {
-    
-    //查找最近回话, 如果没有则直接使用, 会话进入聊天窗。 并且插入一条最近会话。
-    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
-    if (recentSession) {
-        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recentSession];
-        [self.navigationController pushViewController:teamchatVC animated:YES];
-    } else {
-        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWithSession:session];
-        [self.navigationController pushViewController:teamchatVC animated:YES];
-        
-        NIMImportedRecentSession *recentSession = [[NIMImportedRecentSession alloc] init];
-        recentSession.session = session;
-        [[[NIMSDK sharedSDK] conversationManager] allRecentSessions];
-        [[[NIMSDK sharedSDK] conversationManager] importRecentSessions:@[recentSession] completion:^(NSError * _Nullable error, NSArray<NIMImportedRecentSession *> * _Nullable failedImportedRecentSessions) {
-            NSLog(@"插入会话结果%@", error);
-        }];
-    }
+    [YZHRouter openURL:kYZHRouterCommunityCardIntro info:@{
+                                                           @"teamId": teamId ? teamId : @"",
+                                                           kYZHRouteSegue: kYZHRouteSegueModal,
+                                                           kYZHRouteSegueNewNavigation: @(YES)
+                                                           }];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

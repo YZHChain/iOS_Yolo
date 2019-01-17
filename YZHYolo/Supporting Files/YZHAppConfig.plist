@@ -19,6 +19,6 @@
 	<key>apiDebug</key>
 	<false/>
 	<key>apiLog</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

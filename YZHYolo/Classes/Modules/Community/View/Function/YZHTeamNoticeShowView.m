@@ -36,8 +36,8 @@
         [self addSubview:self.titleView];
         
         self.titleLabel = [[UILabel alloc] init];
-        self.titleLabel.textColor = [UIColor yzh_fontShallowBlack];
-        self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:12];
+        self.titleLabel.textColor = YZHColorRGBAWithRGBA(57, 59, 62, 1);
+        self.titleLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
         self.titleLabel.numberOfLines = 1;
         [self.titleView addSubview:self.titleLabel];
         
@@ -53,8 +53,8 @@
         [self.contentView addSubview:self.lineView];
         
         self.contentLabel = [[UILabel alloc] init];
-        self.contentLabel.textColor = [UIColor yzh_fontShallowBlack];
-        self.contentLabel.font = [UIFont systemFontOfSize:12];
+        self.contentLabel.textColor = YZHColorRGBAWithRGBA(57, 59, 62, 1);
+        self.contentLabel.font = [UIFont systemFontOfSize:13];
         self.contentLabel.numberOfLines = 4;
         self.contentLabel.contentMode = UIViewContentModeTopLeft;
         [self.contentView addSubview:self.contentLabel];

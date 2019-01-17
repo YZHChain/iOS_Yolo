@@ -116,7 +116,7 @@
 
 #pragma mark - 5.Event Response
 
-- (void)postRegister{
+- (void)postRegister {
     
     NSDictionary* parameter = @{
                                  @"verifyCode": self.registerView.codeTextField.text,

@@ -17,6 +17,10 @@
 #import "UIImageView+YZHImage.h"
 #import "YZHCommunityChatVC.h"
 #import "UIViewController+YZHTool.h"
+#import "YZHCommunityListVC.h"
+#import "YZHRootTabBarViewController.h"
+#import "YZHTeamExtManage.h"
+#import "YZHUserModelManage.h"
 
 @interface YZHTeamCardIntroVC()<UITableViewDelegate, UITableViewDataSource>
 
@@ -230,18 +234,77 @@
 }
 
 - (void)gotoTeam:(UIButton* )sender {
-//    [self dismissViewControllerAnimated:NO completion:nil];
-//    //销毁掉前面所有控制器.
-//    UITabBarController* topViewController = (UITabBarController *)[UIViewController yzh_rootViewController];
-//    [topViewController setSelectedIndex:0];
-//    UINavigationController* communityNav = topViewController.viewControllers.firstObject;
-//    NIMSession* teamSession = [NIMSession session:self.teamId type:NIMSessionTypeTeam];
-//    YZHCommunityChatVC* teamVC = [[YZHCommunityChatVC alloc] initWithSession:teamSession];
-//    [communityNav pushViewController:teamVC animated:YES];
 
-      NIMSession* teamSession = [NIMSession session:self.teamId type:NIMSessionTypeTeam];
-      YZHCommunityChatVC* teamVC = [[YZHCommunityChatVC alloc] initWithSession:teamSession];
-      [self.navigationController pushViewController:teamVC animated:YES];
+    NIMSession* teamSession = [NIMSession session:self.teamId type:NIMSessionTypeTeam];
+    
+    YZHRootTabBarViewController* rootTabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = rootTabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* teamListVC = navigationVC.viewControllers.firstObject;
+    if (teamListVC.teamLock) {
+        
+        YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:self.teamId];
+        if (teamExt.team_lock) {
+            [self clickLockTeamSession:teamSession];
+        } else {
+            [self gotoTeamSession:teamSession];
+        }
+    } else {
+        [self gotoTeamSession:teamSession];
+    }
+}
+
+//TODO: 封装到工具类
+- (void)clickLockTeamSession:(NIMSession *)session {
+    
+    //设置群锁
+    YZHRootTabBarViewController* tabBarVC = [YZHRootTabBarViewController instance];
+    UINavigationController* navigationVC = tabBarVC.viewControllers.firstObject;
+    YZHCommunityListVC* communityVC = navigationVC.viewControllers.firstObject;
+    @weakify(self)
+    [YZHAlertManage showTextAlertTitle:@"输入阅读密码解锁查看" message:nil textFieldPlaceholder:nil  actionButtons:@[@"取消", @"确认"] actionHandler:^(UIAlertController *alertController, UITextField *textField, NSInteger buttonIndex) {
+        if (buttonIndex == 1) {
+            @strongify(self)
+            YZHUserInfoExtManage* userInfoExt = [YZHUserInfoExtManage currentUserInfoExt];
+            if (YZHIsString(textField.text)) {
+                if ([textField.text isEqual:userInfoExt.privateSetting.groupPassword]) {
+                    communityVC.teamLock = NO;
+                    [self gotoTeamSession:session];
+                    [communityVC refresh];
+                    
+                } else {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
+                }
+            } else {
+                if (YZHIsString(userInfoExt.privateSetting.groupPassword)) {
+                    [YZHAlertManage showAlertMessage:@"阅读密码不正确, 请重新输入"];
+                } else {
+                    communityVC.teamLock = NO;
+                    [self gotoTeamSession:session];
+                    [communityVC refresh];
+                }
+            }
+        }
+    }];
+}
+
+- (void)gotoTeamSession:(NIMSession *)session {
+    
+    //查找最近回话, 如果没有则直接使用, 会话进入聊天窗。 并且插入一条最近会话。
+    NIMRecentSession* recentSession = [[[NIMSDK sharedSDK] conversationManager] recentSessionBySession:session];
+    if (recentSession) {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWitRecentSession:recentSession];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+    } else {
+        YZHCommunityChatVC* teamchatVC = [[YZHCommunityChatVC alloc] initWithSession:session];
+        [self.navigationController pushViewController:teamchatVC animated:YES];
+        
+        NIMImportedRecentSession *recentSession = [[NIMImportedRecentSession alloc] init];
+        recentSession.session = session;
+        [[[NIMSDK sharedSDK] conversationManager] allRecentSessions];
+        [[[NIMSDK sharedSDK] conversationManager] importRecentSessions:@[recentSession] completion:^(NSError * _Nullable error, NSArray<NIMImportedRecentSession *> * _Nullable failedImportedRecentSessions) {
+            NSLog(@"插入会话结果%@", error);
+        }];
+    }
 }
 
 #pragma mark - 6.Private Methods

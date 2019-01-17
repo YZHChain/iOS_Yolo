@@ -80,14 +80,15 @@
     self.sendTeamsLabel.textColor = [UIColor yzh_sessionCellGray];
     self.sendTeamsLabel.font = [UIFont yzh_commonStyleWithFontSize:13];
     
+    [self.sendNoticeButton yzh_setupButton];
+    
     [self.informAllSwitch addTarget:self action:@selector(clickInformAllSwitch:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 - (void)reloadView {
     
-    self.sendNoticeButton.layer.cornerRadius = 4;
-    self.sendNoticeButton.layer.masksToBounds = YES;
+    
 }
 
 #pragma mark - 3.Request Data

@@ -234,24 +234,13 @@ static NSString* kYZHSearchRecommendSectionView = @"YZHSearchRecommendSectionVie
     } else {
         model = self.recommendModel.recommendRecruitArray[indexPath.row];
     }
-    //进入群详情.
-    BOOL isTeamMerber = [[[NIMSDK sharedSDK] teamManager] isMyTeam:model.teamId];
-    if (isTeamMerber) {
-        NIMTeam* team = [[[NIMSDK sharedSDK] teamManager] teamById:model.teamId];
-        NSString* userId = [[[NIMSDK sharedSDK] loginManager] currentAccount];
-        BOOL isTeamOwner = [userId isEqualToString:team.owner] ? YES : NO;
-        [YZHRouter openURL:kYZHRouterCommunityCard info:@{
-                                                          @"isTeamOwner": @(isTeamOwner),
-                                                          @"teamId": model.teamId ? model.teamId : @"",
-                                                          }];
-    } else {
-        [YZHRouter openURL:kYZHRouterCommunityRecruitCardIntro info:@{
+    
+    [YZHRouter openURL:kYZHRouterCommunityRecruitCardIntro info:@{
                                                                @"teamId": model.teamId,
                                                                @"recruitInfo": model.recuitContent ? model.recuitContent : @"",
                                                                kYZHRouteSegue: kYZHRouteSegueModal,
                                                                kYZHRouteSegueNewNavigation: @(YES)
                                                                }];
-    }
     
 }
 
