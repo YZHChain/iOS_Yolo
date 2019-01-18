@@ -117,7 +117,7 @@
                                                           @"sharedType": @(3),
                                                           kYZHRouteSegue: kYZHRouteSegueModal,
                                                           kYZHRouteSegueNewNavigation: @(YES),
-                                                          @"teamId": self.teamID.length ? self.teamID : NULL
+                                                          @"teamId": self.teamID.length ? self.teamID : @""
                                                           }];
 }
 //互享

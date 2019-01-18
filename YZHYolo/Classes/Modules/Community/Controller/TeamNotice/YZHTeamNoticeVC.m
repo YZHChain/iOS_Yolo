@@ -83,7 +83,7 @@ static NSString* kYZHNoticeIdtify = @"YZHTeamNoticeView";
     
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:self.view text:nil];
     NSDictionary* params = @{
-                              @"group_id": _teamId ? _teamId : nil,
+                              @"group_id": _teamId ? _teamId : @"",
                               @"pageSize": [NSNumber numberWithInteger:100],
                               @"pn": [NSNumber numberWithInteger:0]
                            };
