@@ -73,6 +73,16 @@
 
 - (void)refreshStatus {
     
+    switch (self.currentStatusType) {
+        case YZHListHeaderStatusTypeDefault:
+            self.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
+            break;
+        case YZHListHeaderStatusTypeShow:
+            self.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
+            break;
+        default:
+            break;
+    }
 }
 
 

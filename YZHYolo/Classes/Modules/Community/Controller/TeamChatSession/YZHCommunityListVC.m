@@ -707,10 +707,10 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         if (!headerView)
         {
             headerView = [[YZHPrivatelyChatListHeaderView alloc] init];
+            headerView.currentStatusType = YZHTableViewShowTypeDefault;
             headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
-            headerView.currentStatusType = YZHTableViewShowTypeDefault;
             __weak typeof(self) weakSelf = self;
             //跳转方法可能由问题,最好直接使用 @protocol 的方式来处理.
             headerView.callBlock = ^(NSInteger currentSection) {
@@ -736,6 +736,11 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     } else {
         headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
     }
+    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+        headerView.guideImageView.hidden = NO;
+    } else {
+        headerView.guideImageView.hidden = YES;
+    }
     headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsTeamRecentSession[section].count];
     [headerView.tagCountLabel sizeToFit];
     
@@ -747,45 +752,29 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
 
 - (void)selectedTableViewForHeaderInSection:(NSInteger)section {
     
-    YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
-    
-    NSInteger integer = headerView.currentStatusType;
-    integer = ((++integer) > 2 ? 0 : integer);
-    headerView.currentStatusType = integer;
-    [headerView refreshStatus];
-    
-    switch (headerView.currentStatusType) {
-        case YZHListHeaderStatusTypeDefault:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
-            break;
-        case YZHListHeaderStatusTypeShow:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
-            break;
-        case YZHListHeaderStatusTypeClose:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
-            break;
-        default:
-            break;
-    }
-    [headerView.guideImageView sizeToFit];
-    NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
-    //暂时先这样处理, 避免崩溃:https://stackoverflow.com/questions/10134841/assertion-failure-in-uitableview-endcellanimationswithcontext
-    if (section == 0) {
-        [self.tagsTableView reloadData];
-    } else {
-        @try {
-            [self.tagsTableView beginUpdates];
-            [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
-            [self.tagsTableView endUpdates];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%s\n%@", __FUNCTION__, exception);
-        }
-        @finally {
+    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+        YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
+        headerView.currentStatusType = !headerView.currentStatusType;
+        [headerView refreshStatus];
+        
+        NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
+        //暂时先这样处理, 避免崩溃:https://stackoverflow.com/questions/10134841/assertion-failure-in-uitableview-endcellanimationswithcontext
+        if (section == 0) {
             [self.tagsTableView reloadData];
+        } else {
+            @try {
+                [self.tagsTableView beginUpdates];
+                [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
+                [self.tagsTableView endUpdates];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%s\n%@", __FUNCTION__, exception);
+            }
+            @finally {
+                [self.tagsTableView reloadData];
+            }
         }
     }
-    
 }
 // 添加分段尾,为了隐藏每个Section最后一个 Cell 分割线
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

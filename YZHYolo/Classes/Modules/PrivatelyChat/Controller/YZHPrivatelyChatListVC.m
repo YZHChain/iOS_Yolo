@@ -520,16 +520,10 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             }
         }
     }
-    if (self.recentSessionExtManage.tagsRecentSession[section].count > 3) {
-        headerView.userInteractionEnabled = YES;
-        __weak typeof(self) weakSelf = self;
-        headerView.callBlock = ^(NSInteger currentSection) {
-            [weakSelf selectedTableViewForHeaderInSection:currentSection];
-        };
-        [headerView addSubview:headerView.guideImageView];
+    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+        headerView.guideImageView.hidden = NO;
     } else {
-        headerView.userInteractionEnabled = NO;
-        [headerView.guideImageView removeFromSuperview];
+        headerView.guideImageView.hidden = YES;
     }
     headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsRecentSession[section].count];
     [headerView.tagCountLabel sizeToFit];
@@ -541,31 +535,40 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (void)selectedTableViewForHeaderInSection:(NSInteger)section {
     
-    YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
-    
-    headerView.currentStatusType = !headerView.currentStatusType;
-    [headerView refreshStatus];
-    
-    switch (headerView.currentStatusType) {
-        case YZHListHeaderStatusTypeDefault:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
-            break;
-        case YZHListHeaderStatusTypeShow:
-            headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
-            break;
-        default:
-            break;
-    }
-    [headerView.guideImageView sizeToFit];
-    //TODO: 有个异常Bug, 当进入此页面第一次点击的是分区 0 则闪退, 优先点击其他分区则不会触发.
-    NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
-    //暂时先这样处理, 避免崩溃:https://stackoverflow.com/questions/10134841/assertion-failure-in-uitableview-endcellanimationswithcontext
-    if (section == 0) {
-        [self.tagsTableView reloadData];
-    } else {
-        [self.tagsTableView beginUpdates];
-        [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
-        [self.tagsTableView endUpdates];
+    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+        YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
+        
+        headerView.currentStatusType = !headerView.currentStatusType;
+        [headerView refreshStatus];
+        switch (headerView.currentStatusType) {
+            case YZHListHeaderStatusTypeDefault:
+                headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
+                break;
+            case YZHListHeaderStatusTypeShow:
+                headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_show"];
+                break;
+            default:
+                break;
+        }
+        [headerView.guideImageView sizeToFit];
+        //TODO: 有个异常Bug, 当进入此页面第一次点击的是分区 0 则闪退, 优先点击其他分区则不会触发.
+        NSIndexSet *indexSet= [[NSIndexSet alloc] initWithIndex: section];
+        //暂时先这样处理, 避免崩溃:https://stackoverflow.com/questions/10134841/assertion-failure-in-uitableview-endcellanimationswithcontext
+        if (section == 0) {
+            [self.tagsTableView reloadData];
+        } else {
+            @try {
+                [self.tagsTableView beginUpdates];
+                [self.tagsTableView reloadSections:indexSet withRowAnimation: UITableViewRowAnimationNone];
+                [self.tagsTableView endUpdates];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"%s\n%@", __FUNCTION__, exception);
+            }
+            @finally {
+                [self.tagsTableView reloadData];
+            }
+        }
     }
 }
 
