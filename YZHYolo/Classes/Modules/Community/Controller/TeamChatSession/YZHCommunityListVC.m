@@ -503,6 +503,8 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     
     if ([tableView isEqual:self.tagsTableView] && self.recentSessionExtManage.tagsTeamRecentSession.count) {
         //TODO: 先读缓存 会出问题, 待优化
+//        NIMRecentSession* recentSession = self.recentSessionExtManage.tagsTeamRecentSession[section].firstObject;
+//        NSString* tagName = [self readTagNameCurrenRecentSession:recentSession section:section];
         YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (headerView) {
             //如果此行为上锁群则直接返回1.
@@ -512,12 +514,9 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             if (headerView.currentStatusType == YZHListHeaderStatusTypeDefault) {
                 NSInteger row = [self.recentSessionExtManage.tagsTeamRecentSession[section] count] < 3 ? [self.recentSessionExtManage.tagsTeamRecentSession[section] count] : 3;
                 return row;
-            } else if (headerView.currentStatusType == YZHListHeaderStatusTypeShow) {
+            } else {
                 NSInteger row = [self.recentSessionExtManage.tagsTeamRecentSession[section] count];
                 return row;
-            } else {
-                headerView.currentStatusType = YZHListHeaderStatusTypeClose;
-                return 0;
             }
         } else {
             // 判断是否是上锁.如果是上锁群则只返回一个.
@@ -625,10 +624,6 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     }
 }
 
--(void) swipeTableCellWillBeginSwiping:(nonnull MGSwipeTableCell *) cell {
-    
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (self.recentSessions.count) {
@@ -702,6 +697,7 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
         
         return headerView;
     }
+    NSString* tagName = [self readTagNameCurrenRecentSession:recentSession section:section];
     if (![tableView isEqual:self.tableView]) {
         headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (!headerView)
@@ -711,42 +707,40 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
             headerView.guideImageView.image = [UIImage imageNamed:@"team_createTeam_selectedTag_default"];
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
-            __weak typeof(self) weakSelf = self;
             //跳转方法可能由问题,最好直接使用 @protocol 的方式来处理.
             headerView.callBlock = ^(NSInteger currentSection) {
-                [weakSelf selectedTableViewForHeaderInSection:currentSection];
+                [self selectedTableViewForHeaderInSection:currentSection];
             };
             // 缓存
             [self.headerViewDictionary setObject:headerView forKey:@(section)];
         }
     }
-    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
-    if (section == 0)
-    {
-        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
-        BOOL isMarkTop = recentSession.localExt[markTypeTopkey];
-        //防止置顶被取消之后,分区头未清空掉.
-        if (isMarkTop) {
-            headerView.tagNameLabel.text = @"置顶";
-            headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
-        } else {
-            headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
-            headerView.backgroundColor = [UIColor whiteColor];
-        }
+    if ([tagName isEqualToString:@"置顶"]) {
+        headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
     } else {
-        headerView.tagNameLabel.text = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
+        headerView.backgroundColor = [UIColor whiteColor];
     }
+    headerView.tagNameLabel.text = tagName;
+    [headerView.tagNameLabel sizeToFit];
+    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsTeamRecentSession[section].count];
+    [headerView.tagCountLabel sizeToFit];
     if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
         headerView.guideImageView.hidden = NO;
     } else {
         headerView.guideImageView.hidden = YES;
     }
-    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsTeamRecentSession[section].count];
-    [headerView.tagCountLabel sizeToFit];
+    NSInteger unreadCount = 0;
+    for (NSInteger i = 0; i < self.recentSessionExtManage.tagsTeamRecentSession[section].count; i++) {
+        NIMRecentSession* recentSession = self.recentSessionExtManage.tagsTeamRecentSession[section][i];
+        unreadCount += recentSession.unreadCount;
+    }
+    if (unreadCount) {
+        headerView.unReadBadgeView.hidden = NO;
+        [headerView.unReadBadgeView setBadgeValue:@(unreadCount).stringValue];
+    } else {
+        headerView.unReadBadgeView.hidden = YES;
+    }
     
-    [headerView.tagNameLabel sizeToFit];
-    headerView.unReadCountLabel.text = @"";
-    [headerView.unReadCountLabel sizeToFit];
     return headerView;
 }
 
@@ -791,6 +785,32 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     UIView* view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
     return view;
+}
+
+#pragma mark -
+
+- (NSString *)readTagNameCurrenRecentSession:(NIMRecentSession *)recentSession section:(NSInteger)section {
+    
+    NSString* tagName;
+    YZHTeamExtManage* teamExt = [YZHTeamExtManage teamExtWithTeamId:recentSession.session.sessionId];
+    if (section == 0)
+    {
+        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+        BOOL isMarkTop = recentSession.localExt[markTypeTopkey];
+        //防止置顶被取消之后,分区头未清空掉.
+        if (isMarkTop) {
+            tagName = @"置顶";
+//            headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        } else {
+            tagName = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
+//            headerView.backgroundColor = [UIColor whiteColor];
+        }
+    } else {
+        tagName = teamExt.team_tagName ? teamExt.team_tagName : @"未分类";
+//        headerView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return tagName;
 }
 
 #pragma mark - UITableViewDelegate

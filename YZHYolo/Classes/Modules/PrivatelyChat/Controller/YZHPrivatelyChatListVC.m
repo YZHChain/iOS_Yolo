@@ -371,36 +371,6 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 }
 
 #pragma mark - NIMLoginManagerDelegate
-//- (void)onLogin:(NIMLoginStep)step{
-//    [super onLogin:step];
-//    switch (step) {
-//        case NIMLoginStepLinkFailed:
-//            self.titleLabel.text = [SessionListTitle stringByAppendingString:@"(未连接)"];
-//            break;
-//        case NIMLoginStepLinking:
-//            self.titleLabel.text = [SessionListTitle stringByAppendingString:@"(连接中)"];
-//            break;
-//        case NIMLoginStepLinkOK:
-//        case NIMLoginStepSyncOK:
-//            self.titleLabel.text = SessionListTitle;
-//            break;
-//        case NIMLoginStepSyncing:
-//            self.titleLabel.text = [SessionListTitle stringByAppendingString:@"(同步数据)"];
-//            break;
-//        default:
-//            break;
-//    }
-//    [self.titleLabel sizeToFit];
-//    self.titleLabel.centerX   = self.navigationItem.titleView.width * .5f;
-//    [self.header refreshWithType:ListHeaderTypeNetStauts value:@(step)];
-//    [self refreshSubview];
-//}
-
-//- (void)onMultiLoginClientsChanged
-//{
-//    [self.header refreshWithType:ListHeaderTypeLoginClients value:[NIMSDK sharedSDK].loginManager.currentLoginClients];
-//    [self refreshSubview];
-//}
 
 #pragma mark - UITableViewDataSource
 
@@ -419,15 +389,15 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([tableView isEqual:self.tagsTableView] && self.recentSessionExtManage.tagsRecentSession.count) {
+       // NIMRecentSession* recentSession = [self.recentSessionExtManage.tagsRecentSession[section] firstObject];
+       // NSString* tagName = [self readTagNameCurrenRecentSession:recentSession section:section];
         YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (headerView) {
             if (headerView.currentStatusType == YZHListHeaderStatusTypeDefault) {
                 NSInteger row = [self.recentSessionExtManage.tagsRecentSession[section] count] < 3 ? [self.recentSessionExtManage.tagsRecentSession[section] count] : 3;
                 return row;
-            } else if (headerView.currentStatusType == YZHListHeaderStatusTypeShow) {
-                return [self.recentSessionExtManage.tagsRecentSession[section] count];
             } else {
-                return 0;
+                return [self.recentSessionExtManage.tagsRecentSession[section] count];
             }
         }
         return [self.recentSessionExtManage.tagsRecentSession[section] count];
@@ -481,7 +451,8 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
 - (UIView* )tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     //发现标签有更新之后,直接不要读缓存.TODO
     YZHPrivatelyChatListHeaderView* headerView;
-    NIMRecentSession* session = [self.recentSessionExtManage.tagsRecentSession[section] firstObject];
+    NIMRecentSession* recentSession = [self.recentSessionExtManage.tagsRecentSession[section] firstObject];
+    NSString* tagName = [self readTagNameCurrenRecentSession:recentSession section:section];
     if (![tableView isEqual:self.tableView]) {
         headerView = [self.headerViewDictionary objectForKey:@(section)];
         if (!headerView)
@@ -491,51 +462,78 @@ static NSString* const kYZHRecentSessionsKey = @"recentSessions";
             [headerView.guideImageView sizeToFit];
             headerView.section = section;
             headerView.currentStatusType = YZHTableViewShowTypeDefault;
+            headerView.callBlock = ^(NSInteger currentSection) {
+                [self selectedTableViewForHeaderInSection:currentSection];
+            };
             // 缓存
             [self.headerViewDictionary setObject:headerView forKey:@(section)];
         }
     }
-    if (section == 0)
-    {
-        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
-        BOOL isMarkTop = session.localExt[markTypeTopkey];
-        //防止置顶被取消之后,分区头未清空掉.
-        if (isMarkTop) {
-            headerView.tagNameLabel.text = @"置顶";
-            headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
-        } else {
-            headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"未分类";
-            headerView.backgroundColor = [UIColor whiteColor];
-            if ([headerView.tagNameLabel.text isEqualToString:@"未分类"]) {
-                if (![[[NIMSDK sharedSDK] userManager] isMyFriend:session.session.sessionId]) {
-                    headerView.tagNameLabel.text = @"临时聊天";
-                }
-            }
-        }
+    if ([tagName isEqualToString:@"置顶"]) {
+        headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
     } else {
-        headerView.tagNameLabel.text = session.localExt[@"friend_tagName"] ? session.localExt[@"friend_tagName"] : @"未分类";
-        if ([headerView.tagNameLabel.text isEqualToString:@"未分类"]) {
-            if (![[[NIMSDK sharedSDK] userManager] isMyFriend:session.session.sessionId]) {
-                headerView.tagNameLabel.text = @"临时聊天";
-            }
-        }
+        headerView.backgroundColor = [UIColor whiteColor];
     }
-    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+    headerView.tagNameLabel.text = tagName;
+    [headerView.tagNameLabel sizeToFit];
+    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsRecentSession[section].count];
+    [headerView.tagCountLabel sizeToFit];
+    
+    if (self.recentSessionExtManage.tagsRecentSession[section].count > 3) {
         headerView.guideImageView.hidden = NO;
     } else {
         headerView.guideImageView.hidden = YES;
     }
-    headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsRecentSession[section].count];
-    [headerView.tagCountLabel sizeToFit];
-    [headerView.tagNameLabel sizeToFit];
-    headerView.unReadCountLabel.text = @"";
-    [headerView.unReadCountLabel sizeToFit];
+    
+    NSInteger unreadCount = 0;
+    for (NSInteger i = 0; i < self.recentSessionExtManage.tagsRecentSession[section].count; i++) {
+        NIMRecentSession* recentSession = self.recentSessionExtManage.tagsRecentSession[section][i];
+        unreadCount += recentSession.unreadCount;
+    }
+    if (unreadCount) {
+        headerView.unReadBadgeView.hidden = NO;
+        [headerView.unReadBadgeView setBadgeValue:@(unreadCount).stringValue];
+    } else {
+        headerView.unReadBadgeView.hidden = YES;
+    }
     return headerView;
+}
+//TODO 暂时放着
+- (NSString *)readTagNameCurrenRecentSession:(NIMRecentSession *)recentSession section:(NSInteger)section {
+    
+    NSString* tagName;
+    if (section == 0)
+    {
+        NSString *markTypeTopkey = [NTESSessionUtil keyForMarkType:NTESRecentSessionMarkTypeTop];
+        BOOL isMarkTop = recentSession.localExt[markTypeTopkey];
+        //防止置顶被取消之后,分区头未清空掉.
+        if (isMarkTop) {
+            tagName = @"置顶";
+//            headerView.backgroundColor = YZHColorWithRGB(247, 247, 247);
+        } else {
+            tagName = recentSession.localExt[@"friend_tagName"] ? recentSession.localExt[@"friend_tagName"] : @"未分类";
+//            headerView.backgroundColor = [UIColor whiteColor];
+            if ([tagName isEqualToString:@"未分类"]) {
+                if (![[[NIMSDK sharedSDK] userManager] isMyFriend:recentSession.session.sessionId]) {
+                    tagName = @"临时聊天";
+                }
+            }
+        }
+    } else {
+        tagName = recentSession.localExt[@"friend_tagName"] ? recentSession.localExt[@"friend_tagName"] : @"未分类";
+        if ([tagName isEqualToString:@"未分类"]) {
+            if (![[[NIMSDK sharedSDK] userManager] isMyFriend:recentSession.session.sessionId]) {
+                tagName = @"临时聊天";
+            }
+        }
+    }
+    
+    return tagName;
 }
 
 - (void)selectedTableViewForHeaderInSection:(NSInteger)section {
     
-    if (self.recentSessionExtManage.tagsTeamRecentSession[section].count > 3) {
+    if (self.recentSessionExtManage.tagsRecentSession[section].count > 3) {
         YZHPrivatelyChatListHeaderView* headerView = [self.headerViewDictionary objectForKey:@(section)];
         
         headerView.currentStatusType = !headerView.currentStatusType;

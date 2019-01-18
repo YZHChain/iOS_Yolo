@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NIMBadgeView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIImageView* guideImageView;
 @property (nonatomic, strong) UILabel* tagNameLabel;
 @property (nonatomic, strong) UILabel* tagCountLabel;
-@property (nonatomic, strong) UILabel* unReadCountLabel;
+@property (nonatomic, strong) NIMBadgeView* unReadBadgeView;
 @property (nonatomic, strong) UIButton* groupButton;
 @property (nonatomic, assign) NSInteger section;
 @property (nonatomic, copy) void(^callBlock)(NSInteger currentSection);
