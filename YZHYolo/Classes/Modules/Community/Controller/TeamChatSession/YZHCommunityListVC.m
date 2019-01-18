@@ -691,10 +691,12 @@ static NSString* const kYZHLockDefaultCellIdentifie = @"lockDefaultCellIdentifie
     NIMRecentSession* recentSession = [self.recentSessionExtManage.tagsTeamRecentSession[section] firstObject];
     if (![tableView isEqual:self.tableView] && [self.recentSessionExtManage checkoutContainLockTeamRecentSessions:self.recentSessionExtManage.tagsTeamRecentSession[section]]) {
         headerView = [[YZHPrivatelyChatListHeaderView alloc] init];
-        [headerView.guideImageView removeFromSuperview];
+        headerView.guideImageView.hidden = YES;
         headerView.tagNameLabel.text = @"上锁群";
         [headerView.tagNameLabel sizeToFit];
-        
+        headerView.tagCountLabel.text = [NSString stringWithFormat:@"(%ld)", self.recentSessionExtManage.tagsTeamRecentSession[section].count];
+        [headerView.tagCountLabel sizeToFit];
+        headerView.unReadBadgeView.hidden = YES;
         return headerView;
     }
     NSString* tagName = [self readTagNameCurrenRecentSession:recentSession section:section];
