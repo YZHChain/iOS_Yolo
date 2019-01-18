@@ -343,7 +343,8 @@
     }
     if ([message.name isEqualToString:@"GOWEBTOP"]) {
         
-        YZHDiscountVC* popVC = self.navigationController.viewControllers.firstObject;
+//        NSInteger count = self.navigationController.viewControllers.count;
+        YZHDiscountVC* popVC = self.navigationController.viewControllers[1];
         [self.navigationController popToViewController:popVC animated:YES];
         return;
     }
