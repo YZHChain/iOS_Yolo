@@ -7,13 +7,13 @@
 	<key>serverAddr</key>
 	<string>https://yoloserver.yzhchain.com/</string>
 	<key>serverTest</key>
-	<false/>
+	<true/>
 	<key>NIMKeyTest</key>
 	<string>8644f0b6a9ed0c9ea31537a24aef0494</string>
 	<key>NIMKey</key>
 	<string>d62461f3a67a1f9eb1d8604b9ebea576</string>
 	<key>NIMServerTest</key>
-	<false/>
+	<true/>
 	<key>logToFile</key>
 	<false/>
 	<key>apiDebug</key>

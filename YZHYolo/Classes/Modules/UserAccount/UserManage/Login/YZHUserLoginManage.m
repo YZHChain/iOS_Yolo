@@ -10,7 +10,6 @@
 
 #import "UIViewController+YZHTool.h"
 #import "NIMKitFileLocationHelper.h"
-#import "NIMLoginClient.h"
 #import "YZHStartInfo.h"
 
 static NSString* kYZHIMAccountKey     = @"account";

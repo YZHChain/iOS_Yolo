@@ -89,7 +89,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 //TODO: 收到消息时
 - (void)onRecvMessages:(NSArray *)recvMessages
 {
-    NSArray *messages = [self filterMessages:recvMessages];
+//    NSArray *messages = [self filterMessages:recvMessages];
     if (recvMessages.count)
     {
         static BOOL isPlaying = NO;

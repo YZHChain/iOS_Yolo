@@ -40,7 +40,6 @@
 #pragma mark -- NIMSDK
 
 #import <NIMSDK/NIMSDK.h>
-//#import "NIMSDK.h"
 #import "NIMKit.h"
 
 // Include any system framework and library headers here that should be included in all compilation units.

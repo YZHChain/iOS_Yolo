@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NIMUser.h"
+#import <NIMSDK/NIMUser.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

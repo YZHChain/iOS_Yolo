@@ -13,7 +13,6 @@
 #import "NIMAvatarImageView.h"
 #import "NIMKitUtil.h"
 #import "NIMKit.h"
-#import "NIMCustomObject.h"
 #import "YZHUserCardAttachment.h"
 #import "YZHTeamCardAttachment.h"
 #import "YZHAddFirendAttachment.h"
