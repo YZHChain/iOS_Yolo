@@ -41,8 +41,6 @@
     [self.registerButton.titleLabel setFont:[UIFont yzh_commonStyleWithFontSize:15]];
     [self.registerButton.titleLabel setTextColor:[UIColor whiteColor]];
     
-    
-    
     self.codeTipLabel.textColor = [UIColor yzh_buttonBackgroundPinkRed];
     self.codeTipLabel.font = [UIFont yzh_commonLightStyleWithFontSize:12];
     self.codeTipLabel.hidden = YES;
@@ -52,7 +50,7 @@
     self.protocolSlectedButton.selected = NO;
     [self.protocolSlectedButton yzh_setEnlargeEdgeWithTop:15 right:35 bottom:30 left:50];
     
-    [self.topContentView yzh_addGradientLayerView];
+    self.topContentView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setupNotification{
@@ -172,6 +170,13 @@
     } else {
         self.registerButton.enabled = NO;
     }
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    [self yzh_addGradientLayerView];
 }
 
 @end

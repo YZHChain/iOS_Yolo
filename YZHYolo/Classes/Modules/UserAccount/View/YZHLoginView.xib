@@ -79,7 +79,7 @@
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yh-CJ-1k9">
                             <rect key="frame" x="68" y="156" width="239" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="pmz-dk-zCK"/>
+                                <constraint firstAttribute="height" constant="40" id="jRz-zZ-Lfe"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN Normal" pointSize="18"/>
                             <state key="normal" title="登  录" backgroundImage="button_background_optional">
@@ -129,12 +129,14 @@
                         <constraint firstItem="8Yh-CJ-1k9" firstAttribute="top" secondItem="toh-my-ACb" secondAttribute="bottom" constant="40" id="7W9-Tz-goz"/>
                         <constraint firstItem="toh-my-ACb" firstAttribute="top" secondItem="3Vl-t9-Ll4" secondAttribute="bottom" constant="59" id="8bx-e7-CpI"/>
                         <constraint firstItem="toh-my-ACb" firstAttribute="top" secondItem="aWm-Ep-rv5" secondAttribute="bottom" constant="1" id="E62-zv-hn1"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Gqc-sJ-qhI" secondAttribute="bottom" constant="5" id="FJE-2C-kMB"/>
                         <constraint firstItem="6DG-kF-IBm" firstAttribute="width" secondItem="3Vl-t9-Ll4" secondAttribute="width" id="G75-1a-njq"/>
                         <constraint firstItem="aWm-Ep-rv5" firstAttribute="leading" secondItem="6DG-kF-IBm" secondAttribute="leading" id="JM6-xO-90N"/>
                         <constraint firstItem="Gft-34-PQq" firstAttribute="top" secondItem="8Yh-CJ-1k9" secondAttribute="bottom" constant="22.5" id="Jbp-EV-6cA"/>
                         <constraint firstItem="toh-my-ACb" firstAttribute="leading" secondItem="3Vl-t9-Ll4" secondAttribute="leading" id="NKb-oF-bvj"/>
                         <constraint firstItem="3Vl-t9-Ll4" firstAttribute="top" secondItem="wLa-SP-hLN" secondAttribute="top" constant="55" id="OAE-gW-wCF"/>
                         <constraint firstAttribute="trailing" secondItem="8Yh-CJ-1k9" secondAttribute="trailing" constant="68" id="PEE-ET-che"/>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="9A9-bR-a1H" secondAttribute="bottom" constant="5" id="PY1-Co-6F7"/>
                         <constraint firstItem="toh-my-ACb" firstAttribute="trailing" secondItem="3Vl-t9-Ll4" secondAttribute="trailing" id="Ruz-aA-hdd"/>
                         <constraint firstItem="8Yh-CJ-1k9" firstAttribute="leading" secondItem="wLa-SP-hLN" secondAttribute="leading" constant="68" id="WGD-Vq-42r"/>
                         <constraint firstItem="Gqc-sJ-qhI" firstAttribute="height" secondItem="9A9-bR-a1H" secondAttribute="height" id="fI6-d8-Oto"/>

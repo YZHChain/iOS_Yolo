@@ -34,7 +34,7 @@
     self.contentMode = UIViewContentModeTop;
     self.contentView.layer.cornerRadius = 5;
     
-    [self.topContentView yzh_addGradientLayerView];
+    [self.topContentView setBackgroundColor:[UIColor clearColor]];
     //新版
     self.titleLabel.font = [UIFont yzh_commonLightStyleWithFontSize:12];
     self.titleLabel.textColor = [UIColor yzh_sessionCellGray];
@@ -121,6 +121,13 @@
     } else {
         return YES;
     }
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    [self yzh_addGradientLayerView];
 }
 
 @end

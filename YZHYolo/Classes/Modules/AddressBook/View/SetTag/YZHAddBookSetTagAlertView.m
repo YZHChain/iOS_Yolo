@@ -10,6 +10,7 @@
 
 #import "NSString+YZHTool.h"
 #import "YZHAlertManage.h"
+#import "UIViewController+YZHTool.h"
 
 @interface YZHAddBookSetTagAlertView()<UITextFieldDelegate>
 
@@ -56,6 +57,15 @@
     } else {
         [YZHAlertManage showAlertMessage:@"没有输入分类,请重新填写"];
     }
+    
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    
+    UIViewController* currenVC = [UIViewController yzh_findTopViewController];
+    self.center = CGPointMake(currenVC.view.width / 2, currenVC.view.height / 2);
     
 }
 

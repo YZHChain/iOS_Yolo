@@ -43,7 +43,7 @@
     self.loginButtonBlock ? self.loginButtonBlock(sender) : NULL;
 }
 
-// 前往注册
+// 前往注册s
 - (IBAction)gotoRegisterViewController:(UIButton *)sender {
     
     self.regesterButtonBlock ? self.regesterButtonBlock(sender) : NULL;

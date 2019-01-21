@@ -69,7 +69,7 @@ static NSString* const kCellIdentifier = @"centerCellIdentifier";
 - (void)setupView
 {
     [self.view addSubview:self.tableView];
-    //导航栏
+    //iOS11 导航栏 适配
     if (@available(iOS 11.0, *)) {
         _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     } else {

@@ -59,6 +59,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
+    
     // 移除通知.
     [self an_unsubscribeKeyboard];
 }
@@ -67,7 +68,8 @@
 
 - (void)setupNavBar
 {
-    self.navigationItem.title = @"去登录";
+    self.navigationItem.title = nil;
+    self.navigationItem.hidesBackButton = YES;
     
     self.hideNavigationBar = YES;
 }
