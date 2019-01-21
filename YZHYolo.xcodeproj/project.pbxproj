@@ -261,6 +261,7 @@
 		553C53EE216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553C53ED216CE690007D46A9 /* YZHAddFirendRecordSectionHeader.xib */; };
 		553C53F2216CEEC9007D46A9 /* YZHAddBookAddFirendRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */; };
 		553C53F6216D030A007D46A9 /* YZHPhoneContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55D5810B2163952C000A8B55 /* YZHPhoneContactCell.xib */; };
+		553C891721F576B800D01B1C /* YZHAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 553C891621F576B800D01B1C /* YZHAnalytics.m */; };
 		553DE50F21D1EF5300BF0554 /* YZHTeamMmemberDefaultFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE50E21D1EF5300BF0554 /* YZHTeamMmemberDefaultFooterView.m */; };
 		553DE51121D1EF5C00BF0554 /* YZHTeamMmemberDefaultFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 553DE51021D1EF5C00BF0554 /* YZHTeamMmemberDefaultFooterView.xib */; };
 		553DE51521D1FB4E00BF0554 /* YZHAddressBookBlackListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 553DE51321D1FB4E00BF0554 /* YZHAddressBookBlackListVC.m */; };
@@ -1103,6 +1104,8 @@
 		553C53EF216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAddBookAddFirendRecordCell.h; sourceTree = "<group>"; };
 		553C53F0216CEEC8007D46A9 /* YZHAddBookAddFirendRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAddBookAddFirendRecordCell.m; sourceTree = "<group>"; };
 		553C53F4216CFE60007D46A9 /* YZHAddBookAddFirendRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZHAddBookAddFirendRecordCell.xib; sourceTree = "<group>"; };
+		553C891521F576B800D01B1C /* YZHAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHAnalytics.h; sourceTree = "<group>"; };
+		553C891621F576B800D01B1C /* YZHAnalytics.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHAnalytics.m; sourceTree = "<group>"; };
 		553DE50D21D1EF5300BF0554 /* YZHTeamMmemberDefaultFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YZHTeamMmemberDefaultFooterView.h; sourceTree = "<group>"; };
 		553DE50E21D1EF5300BF0554 /* YZHTeamMmemberDefaultFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YZHTeamMmemberDefaultFooterView.m; sourceTree = "<group>"; };
 		553DE51021D1EF5C00BF0554 /* YZHTeamMmemberDefaultFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZHTeamMmemberDefaultFooterView.xib; sourceTree = "<group>"; };
@@ -1906,6 +1909,7 @@
 		55128A0521463E480099CC55 /* Fundation */ = {
 			isa = PBXGroup;
 			children = (
+				553C891421F5767900D01B1C /* Analytics */,
 				55FB0BFD21C67F8A008C95DE /* AppConfig */,
 				55FB0BEE21C3D143008C95DE /* Date */,
 				55A0AF7E21C0D57E004EAEE3 /* StartInfo */,
@@ -3440,6 +3444,15 @@
 				555B807E219B5E0900168C3C /* YZHAddFriendShowFooterView.xib */,
 			);
 			path = AddFirendRecord;
+			sourceTree = "<group>";
+		};
+		553C891421F5767900D01B1C /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				553C891521F576B800D01B1C /* YZHAnalytics.h */,
+				553C891621F576B800D01B1C /* YZHAnalytics.m */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		553DE51A21D22DCF00BF0554 /* PasteSkip */ = {
@@ -5053,7 +5066,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PYSearch/PYSearch/PYSearch.bundle",
@@ -5070,7 +5083,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D7FCE16ECA241D7C47DDF848 /* [CP] Embed Pods Frameworks */ = {
@@ -5079,7 +5092,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh",
 				"${PODS_ROOT}/NIMSDK_LITE/NIMSDK/NIMSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -5088,7 +5101,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YZHYolo/Pods-YZHYolo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5508,6 +5521,7 @@
 				55BA210521763A3700F90268 /* NTESFileLocationHelper.m in Sources */,
 				5556F67921CCAFE100EEE4C1 /* YZHGuideViewManage.m in Sources */,
 				559F1B1C217EED370028B0E5 /* NTESDemoFetchChatroomTask.m in Sources */,
+				553C891721F576B800D01B1C /* YZHAnalytics.m in Sources */,
 				559754DE21B53A20009AC4D1 /* YZHRegisterBackupsVC.m in Sources */,
 				553641FD217EAEC3006F77A5 /* NIMNotificationContentConfig.m in Sources */,
 				5551B34621A58AA600AF3088 /* YZHChatContentVC.m in Sources */,

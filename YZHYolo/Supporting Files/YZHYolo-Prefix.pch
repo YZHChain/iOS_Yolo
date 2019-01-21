@@ -36,6 +36,7 @@
 #import "YZHRouter.h"
 #import "YZHRouterConfig.h"
 #import "YZHUserLoginManage.h"
+#import "YZHAnalytics.h"
 
 #pragma mark -- NIMSDK
 

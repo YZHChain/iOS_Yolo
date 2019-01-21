@@ -34,11 +34,11 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+
     //云信配置
     [self setupNIMSDK];
     [self setupServices];
-    
+
     [self registerPushService];
     [self commonInitListenEvents];
     self.window = [[UIWindow alloc] initWithFrame: [[UIScreen mainScreen] bounds]];

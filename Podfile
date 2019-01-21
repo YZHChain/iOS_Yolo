@@ -47,6 +47,8 @@ target 'YZHYolo' do
   pod 'MJExtension'
 
   #统计服务等
+
+  pod 'UMCAnalytics'
   #pod 'Bugly'
   #pod 'AliyunOSSiOS'
   #pod 'JPush'
