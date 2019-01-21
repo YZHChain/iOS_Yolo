@@ -45,6 +45,9 @@ NSString* const kYZHNotificationLogout            = @"NotificationLogout";
     self.window.rootViewController = [[YZHLaunchViewController alloc] init];
     [self.window makeKeyAndVisible];
     
+    //统计初始化
+    [YZHAnalytics stactAnalytics];
+    
     return YES;
 }
 

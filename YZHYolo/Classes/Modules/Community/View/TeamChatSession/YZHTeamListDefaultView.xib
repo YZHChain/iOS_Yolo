@@ -33,14 +33,14 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_sessionList_defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="9da-Ya-PId">
-                    <rect key="frame" x="76.5" y="150" width="222" height="201"/>
+                    <rect key="frame" x="76.5" y="216.5" width="222" height="201"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="222" id="XFL-sB-ECG"/>
                         <constraint firstAttribute="height" constant="201" id="znS-W7-WtV"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ui-br-jSb">
-                    <rect key="frame" x="187.5" y="386" width="0.0" height="0.0"/>
+                    <rect key="frame" x="187.5" y="452.5" width="0.0" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="tZh-RF-o4f"/>
                     </constraints>
@@ -51,7 +51,6 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="9da-Ya-PId" firstAttribute="top" secondItem="n6x-nU-LNH" secondAttribute="bottom" constant="100" id="0jk-Is-ocH"/>
                 <constraint firstAttribute="trailing" secondItem="MGD-BE-RAp" secondAttribute="trailing" constant="68" id="Bxv-Is-YVl"/>
                 <constraint firstItem="9da-Ya-PId" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ORH-kv-Tov"/>
                 <constraint firstItem="n6x-nU-LNH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Rdo-fT-LPB"/>
@@ -61,6 +60,7 @@
                 <constraint firstAttribute="bottom" secondItem="MGD-BE-RAp" secondAttribute="bottom" constant="66" id="my2-v0-KkV"/>
                 <constraint firstAttribute="trailing" secondItem="n6x-nU-LNH" secondAttribute="trailing" id="njc-66-bKP"/>
                 <constraint firstItem="MGD-BE-RAp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="68" id="qFF-F3-MuA"/>
+                <constraint firstItem="9da-Ya-PId" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.95" id="vX8-fO-BXs"/>
             </constraints>
             <connections>
                 <outlet property="findTeamButton" destination="MGD-BE-RAp" id="0Xn-tl-Bth"/>
@@ -72,6 +72,6 @@
         </view>
     </objects>
     <resources>
-        <image name="team_sessionList_defaultImage" width="222" height="202"/>
+        <image name="team_sessionList_defaultImage" width="155" height="151"/>
     </resources>
 </document>
