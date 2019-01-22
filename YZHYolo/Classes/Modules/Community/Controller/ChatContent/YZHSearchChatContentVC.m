@@ -450,6 +450,7 @@
         } else {
             // Fallback on earlier versions
         }
+        
         self.navigationItem.titleView = searchbar;
         
         _searchBar = searchbar;

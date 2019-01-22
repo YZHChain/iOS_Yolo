@@ -302,11 +302,10 @@ static NSString* const kSetTagCellSectionIdentifier =  @"setTagCellSectionIdenti
             //TODO:文案需产品确认
             [YZHProgressHUD showText:@"当前分类已满,请您删除无用分类" onView:self.tableView];
         }
-
     };
 }
 
-- (void)addCustomTagName:(NSString *)tagName{
+- (void)addCustomTagName:(NSString *)tagName {
     
     YZHProgressHUD* hud = [YZHProgressHUD showLoadingOnView:YZHAppWindow text:nil];
     @weakify(self)

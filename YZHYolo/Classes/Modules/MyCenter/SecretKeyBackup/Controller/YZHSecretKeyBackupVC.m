@@ -120,9 +120,17 @@
 
 - (IBAction)onTouchProtocalTitle:(id)sender {
     
+    NSString* baseUrl;
+#if DEBUG
+    baseUrl = @"https://yolotest.yzhchain.com";
+#else
+    baseUrl = @"https://yoloserver.yzhchain.com";
+#endif
+    
+    NSString* registerUrl = [NSString stringWithFormat:@"%@/yolo-web/html/about/backup_protocol.html", baseUrl];
     [YZHRouter openURL:kYZHRouterWKWeb info:@{
                                               @"navTitle": @"注册协议",
-                                              @"url":@"https://yolotest.yzhchain.com/yolo-web/html/about/backup_protocol.html"
+                                              @"url": registerUrl
                                               }];
 }
 
